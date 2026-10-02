@@ -6,6 +6,13 @@
   <YYYY-MM-DD>-pm   저녁판 (매일 18:08 정기 실행)
   <YYYY-MM-DD>-early 새벽판 (정기 외 임시판. 2026-09-29-early 한 건만 존재)
 날짜만 있는 파일(<YYYY-MM-DD>.json)은 더 이상 만들지 않는다.
+
+기사 형식(2026-10-03 아침판부터 = 새 형식, README '기사 스키마')
+  topic      : 주 주제 1개 (TOPICS 의 id: pattaya sriracha bangkok poleco society visa life travel ent weather)
+  secondary  : 보조 주제 0~3개 (예: 파타야 침수 기사 = topic "pattaya", secondary ["weather"])
+  tags       : 키워드 태그 2~6개(👍👎 취향 학습에 씀) — 반드시 넣는다
+  briefing   : [{topic, text("**굵게**" 표시 1곳 이상), story_id}] 5~6줄
+옛 형식(category 6종 + 문단 briefing)도 검증을 통과한다(화면은 assets/topics.js 매핑으로 렌더).
 """
 import json, re, pathlib, sys
 from datetime import datetime
@@ -15,8 +22,18 @@ DATA = ROOT / "data"
 EDITION_LABEL = {"am": "아침판", "pm": "저녁판", "early": "새벽판"}
 EDITION_ORDER = {"early": 0, "am": 1, "pm": 2}
 ID_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-(am|pm|early)$")
-CATS = {"politics", "economy", "society", "local", "visa", "sns"}
+CATS = {"politics", "economy", "society", "local", "visa", "sns"}          # 옛 형식(10월 2일 저녁판까지)
 CAT_ORDER = ["politics", "economy", "society", "local", "visa", "sns"]
+# 새 형식 주제 10개 (assets/topics.js 와 같은 id·순서)
+TOPICS = {
+    "pattaya": "파타야(좀티엔·방라뭉·싸따힙·나끌루아)", "sriracha": "시라차(램차방·촌부리 시내·아마타)",
+    "bangkok": "방콕", "poleco": "정치·경제", "society": "사회·사건사고", "visa": "외국인·비자",
+    "life": "생활·물가·부동산", "travel": "여행·맛집", "ent": "연예·스포츠·SNS", "weather": "날씨·교통",
+}
+TOPIC_ORDER = list(TOPICS)
+# 판마다 맞추려는 구성(경고만 — 실제 뉴스가 없으면 적게 싣는다. 절대 지어내지 않는다)
+TARGETS = dict(stories=(20, 25), visa=(2, 4), places=("pattaya", "sriracha", "bangkok"), want=("travel", "life"))
+B = lambda topic, text, story_id: dict(topic=topic, text=text, story_id=story_id)   # 브리핑 한 줄
 BLOCKLIST = ROOT / "tools" / "trend_blocklist.txt"
 _BL = None
 
@@ -56,8 +73,21 @@ def validate(data):
     assert data["date"] == m.group(1) and data["edition"] == m.group(2), "id/date/edition 불일치"
     ids = [s["id"] for s in data["stories"]]
     assert len(ids) == len(set(ids)), "기사 id 중복"
+    new = is_new_format(data)
     for s in data["stories"]:
-        assert s["category"] in CATS, (s["id"], s["category"])
+        if new:
+            assert s.get("topic") in TOPICS, (s["id"], "topic 은 %s 중 하나" % "/".join(TOPICS), s.get("topic"))
+            sec = s.get("secondary", [])
+            assert isinstance(sec, list) and len(sec) <= 3, (s["id"], "secondary 는 0~3개 목록")
+            for t in sec:
+                assert t in TOPICS and t != s["topic"], (s["id"], "secondary 오류", t)
+            tags = s.get("tags") or []
+            assert isinstance(tags, list) and 2 <= len(tags) <= 8 and all(isinstance(t, str) and t.strip() and not t.startswith("#") for t in tags), \
+                (s["id"], "tags(키워드) 2~8개 필수, '#' 없이")
+            if "category" in s:
+                assert s["category"] in CATS, (s["id"], s["category"])
+        else:
+            assert s["category"] in CATS, (s["id"], s["category"])
         for k in ("headline", "summary", "source", "url", "title_th", "published"):
             assert s.get(k), (s["id"], "필수 필드 없음: " + k)
         assert s["url"].startswith("http"), (s["id"], s["url"])
@@ -72,7 +102,7 @@ def validate(data):
         assert not hit, (s["id"], "성인·선정적 키워드(%s) — 기사를 빼거나 표현 확인 (tools/trend_blocklist.txt)" % hit)
         for k in ("image", "images", "img", "media", "video", "embed"):
             assert k not in s, (s["id"], "이미지·미디어 필드 금지: " + k)
-        if s["category"] == "visa":
+        if s.get("category") == "visa" or s.get("topic") == "visa" or "visa" in s.get("secondary", []):
             # 외국인·비자: 저볼륨이라 최대 7일 전 기사 허용(그 이상은 금지)
             age = datetime.fromisoformat(data["generated"]) - datetime.fromisoformat(s["published"])
             assert age.days < 8, (s["id"], "외국인·비자 기사는 7일 이내만")
@@ -86,7 +116,50 @@ def validate(data):
     for h in data["highlights"]:
         assert h in ids, "highlights 에 없는 id: " + h
     assert len(data["highlights"]) == 3, "highlights 는 3개"
+    br = data.get("briefing")
+    if new:
+        assert isinstance(br, list), "새 형식 briefing 은 [{topic, text, story_id}] 목록 (newslib.B 사용)"
+    if isinstance(br, list):
+        assert 4 <= len(br) <= 7, "briefing 은 5~6줄(4~7 허용)"
+        for i, b in enumerate(br):
+            assert isinstance(b, dict) and b.get("topic") in TOPICS, ("briefing", i, "topic 오류")
+            assert b.get("text") and re.search(r"\*\*[^*]+\*\*", b["text"]), ("briefing", i, "text 에 **굵게** 핵심어/숫자 1곳 이상")
+            assert len(b["text"]) <= 120, ("briefing", i, "한 줄은 짧게(120자 이하)")
+            assert b.get("story_id") in ids, ("briefing", i, "story_id 가 기사 id 가 아님", b.get("story_id"))
+            assert not blocked(b["text"]), ("briefing", i, "차단 목록 키워드")
+    else:
+        assert isinstance(br, str) and br.strip(), "briefing 없음"
 
+
+def is_new_format(data):
+    """기사에 topic 이 하나라도 있거나 briefing 이 목록이면 새 형식으로 검증."""
+    return isinstance(data.get("briefing"), list) or any("topic" in s for s in data["stories"])
+
+
+def topics_of(s):
+    """기사의 주제 목록(새 형식: topic+secondary / 옛 형식: category 를 대략 매핑 — 집계용)."""
+    if s.get("topic"):
+        return [s["topic"]] + list(s.get("secondary", []))
+    return [{"politics": "poleco", "economy": "poleco", "society": "society", "local": "pattaya",
+             "visa": "visa", "sns": "ent"}.get(s.get("category"), "society")]
+
+
+def coverage_report(data):
+    """구성 점검(경고만). 반환: 경고 문자열 목록."""
+    st, warn = data["stories"], []
+    if not is_new_format(data):
+        warn.append("옛 형식(category·문단 브리핑) — README '기사 스키마'의 새 형식(topic/secondary/tags, 브리핑 목록)을 쓰세요")
+    lo, hi = TARGETS["stories"]
+    if not lo <= len(st) <= hi:
+        warn.append("기사 %d건 (목표 %d~%d건, 실제 뉴스가 없으면 적어도 됨)" % (len(st), lo, hi))
+    any_ = lambda t: sum(1 for s in st if t in topics_of(s))
+    v = any_("visa"); lo, hi = TARGETS["visa"]
+    if v < lo or v > 8:
+        warn.append("외국인·비자 %d건 (목표 %d~%d, 최대 8)" % (v, lo, hi))
+    for t in TARGETS["places"] + TARGETS["want"]:
+        if not any_(t):
+            warn.append("%s 기사 0건 — 실제 뉴스가 있으면 1건 이상" % TOPICS[t])
+    return warn
 
 def write_edition(data):
     """data/<id>.json + data/<id>.js 저장 후 index 재생성."""
@@ -98,7 +171,9 @@ def write_edition(data):
     (DATA / (eid + ".js")).write_text(js, encoding="utf-8")
     build_index()
     print("saved", eid, "stories:", len(data["stories"]),
-          {c: sum(1 for s in data["stories"] if s["category"] == c) for c in CAT_ORDER})
+          {t: sum(1 for s in data["stories"] if t in topics_of(s)) for t in TOPIC_ORDER})
+    for w in coverage_report(data):
+        print("점검(경고):", w)
 
 
 def build_index():
@@ -122,4 +197,13 @@ def build_index():
 
 
 if __name__ == "__main__":
-    build_index()
+    if len(sys.argv) > 2 and sys.argv[1] == "check":
+        # python3 tools/newslib.py check data/<id>.json … : 저장된 판 검증 + 구성 점검
+        for f in sys.argv[2:]:
+            d = json.loads(pathlib.Path(f).read_text(encoding="utf-8"))
+            if "id" not in d:   # 2026-09-29-early 같은 초기 형식
+                print("건너뜀(초기 형식, id 없음):", f); continue
+            validate(d)
+            print("OK", f, "새 형식" if is_new_format(d) else "옛 형식", "| 경고:", coverage_report(d) or "없음")
+    else:
+        build_index()
