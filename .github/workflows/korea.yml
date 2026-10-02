@@ -1,0 +1,71 @@
+# 🇰🇷 '오늘의 한국 주요 뉴스' 10건 갱신(판과 무관) — data/korea.json + data/korea.js
+# 2시간마다(하루 12번) tools/fetch_korea.py --standalone 실행 → 바뀌었을 때만 봇 이름으로 커밋·push.
+# GitHub Pages 는 main 브랜치 루트 배포(legacy)라 push 하면 다시 배포된다(혹시 몰라 Pages 빌드도 요청).
+#
+# 시각(방콕, UTC+7): 매일 01:47 03:47 05:47 07:47 09:47 11:47 13:47 15:47 17:47 19:47 21:47 23:47
+#   = UTC '47 */2 * * *'. 정각 0~10분 혼잡 시간과 판 빌드(07:08·18:08 BKK, 커밋 금지 07:00–07:40·18:00–18:40)를 피함.
+#   GitHub 예약 실행은 수십 분 늦을 수 있어서, 시작 시각이 금지 구간이면 :41 까지 기다렸다가 실행한다.
+#   push 는 항상 pull --rebase 후(force-push 안 함).
+name: korea-news
+
+on:
+  schedule:
+    - cron: "47 */2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: korea-news
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      TZ: Asia/Bangkok
+    steps:
+      - name: 판 빌드 시간대(07:00–07:40, 18:00–18:40 BKK)면 기다리기
+        run: |
+          h=$(date +%H); m=$(date +%M); m=$((10#$m))
+          if { [ "$h" = "07" ] || [ "$h" = "18" ]; } && [ "$m" -lt 41 ]; then
+            w=$(( (41 - m) * 60 )); echo "판 빌드 시간대 $(date +%H:%M) BKK → ${w}s 대기"; sleep "$w"
+          fi
+          echo "시작: $(date '+%F %H:%M') BKK"
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성
+        run: pip install --quiet googlenewsdecoder
+
+      - name: 한국 주요 뉴스 수집(data/korea.json|js)
+        run: python3 tools/fetch_korea.py --standalone
+
+      - name: 바뀌었으면 커밋·push (pull --rebase, 재시도)
+        id: push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/korea.json data/korea.js
+          if git diff --cached --quiet; then
+            echo "변경 없음 — 커밋 안 함"; echo "pushed=0" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          git commit -q -m "korea: 한국 주요 뉴스 $(date '+%m-%d %H:%M') BKK"
+          for i in 1 2 3 4 5; do
+            git pull --rebase -X theirs -q origin main && git push -q origin HEAD:main && { echo "pushed=1" >> "$GITHUB_OUTPUT"; echo "push 완료 $(git rev-parse --short HEAD)"; exit 0; }
+            echo "push 실패($i) → $((i * 15))s 뒤 재시도"; git rebase --abort 2>/dev/null || true; sleep $((i * 15))
+          done
+          echo "push 실패" >&2; exit 1
+
+      - name: Pages 빌드 요청(보통은 push 만으로 배포됨, 실패해도 무시)
+        if: steps.push.outputs.pushed == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent || echo "Pages 빌드 요청 실패(무시)"

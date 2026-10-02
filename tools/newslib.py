@@ -132,8 +132,8 @@ def validate(data):
                 assert it.get(k), ("trends", tag, "필수: " + k)
     assert sum(1 for s in data["stories"] if s.get("discussion")) <= 15, "discussion(오늘의 질문)은 판마다 최대 15건"
     kt = data.get("korea_top")
-    if kt is not None:   # 🇰🇷 오늘의 한국 주요 뉴스(tools/fetch_korea.py) — 최대 6건, 링크 필수
-        assert isinstance(kt, list) and len(kt) <= 6, "korea_top 은 최대 6건 목록"
+    if kt is not None:   # 🇰🇷 오늘의 한국 주요 뉴스(tools/fetch_korea.py) — 최대 10건, 링크 필수
+        assert isinstance(kt, list) and len(kt) <= 10, "korea_top 은 최대 10건 목록"
         for i, k in enumerate(kt):
             assert isinstance(k, dict) and k.get("headline") and k.get("source"), ("korea_top", i, "headline·source 필수")
             assert str(k.get("url", "")).startswith("http"), ("korea_top", i, "url(원문 링크) 필수")

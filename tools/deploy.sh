@@ -21,15 +21,22 @@ if git ls-files | grep -qE '^(raw|archive|screenshots)/'; then
 fi
 
 git checkout -q main
+# 🇰🇷 data/korea.json|js 는 GitHub Actions(.github/workflows/korea.yml)가 2시간마다 갱신·커밋하는 파일 → 이 스크립트는 절대 올리지 않는다.
+# 로컬 사본(오래됐을 수 있음)은 버리고 원격 것을 받는다(pull 때 충돌·덮어쓰기 방지).
+KOREA_FILES="data/korea.json data/korea.js"
+for f in $KOREA_FILES; do
+  if git ls-files --error-unmatch "$f" >/dev/null 2>&1; then git checkout -q -- "$f"; else rm -f "$f"; fi
+done
 # 앱 셸 버전 갱신(assets 가 바뀌었으면 index.html ?v= 와 sw.js VERSION 변경 → 서비스 워커가 새 파일을 받음)
 python3 tools/stamp_assets.py
 # 사이트 파일만 스테이징 (.gitignore 가 제외 대상 차단)
 # og/(링크 미리보기 이미지)·e/(판별 미리보기 페이지)는 tools/share_kit.py 가 만듦 — 있는 경로만 추가
 PATHS=""
-for p in index.html robots.txt .nojekyll .gitignore README.md manifest.json sw.js firestore.rules assets data tools og e; do
+for p in index.html robots.txt .nojekyll .gitignore README.md manifest.json sw.js firestore.rules assets data tools og e .github; do
   [ -e "$p" ] && PATHS="$PATHS $p"
 done
 git add -A -- $PATHS
+git reset -q -- $KOREA_FILES 2>/dev/null || true   # 혹시 스테이징됐어도 빼기
 if git diff --cached --quiet; then
   echo "변경 없음 — 커밋 생략"
 else
@@ -37,12 +44,14 @@ else
   echo "커밋: $(git log -1 --oneline)"
 fi
 
-# push (force 금지). 거부되면 rebase 후 한 번 더.
-if ! git push -q origin main; then
-  echo "push 거부 → git pull --rebase 후 재시도"
-  git pull --rebase -q origin main
-  git push -q origin main
-fi
+# push (force 금지). 먼저 원격(Actions 의 korea.json 커밋 등)을 rebase 로 받은 뒤 일반 push, 거부되면 최대 4번 재시도.
+ok=""
+for i in 1 2 3 4; do
+  git pull --rebase --autostash -q origin main || { echo "git pull --rebase 실패(충돌?) — 수동 확인 필요" >&2; git rebase --abort 2>/dev/null || true; exit 3; }
+  if git push -q origin main; then ok=1; break; fi
+  echo "push 거부($i) → 잠시 뒤 pull --rebase 후 재시도"; sleep $((i * 5))
+done
+[ -n "$ok" ] || { echo "push 실패" >&2; exit 3; }
 echo "push 완료: $(git rev-parse --short HEAD)"
 
 # 라이브 검증: index.js 에 최신 id 가 반영될 때까지 대기 후 헤드리스 브라우저로 렌더 확인

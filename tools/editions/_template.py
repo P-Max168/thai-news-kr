@@ -37,7 +37,7 @@ briefing = [
   B("pattaya", "※ 파타야 **핵심 키워드** 한 줄 요약", "pt1"),
 ]
 
-# 🇰🇷 오늘의 한국 주요 뉴스 6건: python3 tools/fetch_korea.py <id> → 한국에서 지금 가장 화제인 전국 뉴스 6개를 골라
+# 🇰🇷 오늘의 한국 주요 뉴스(최대 10건, 판 대체용 — 화면은 보통 data/korea.json 을 씀): python3 tools/fetch_korea.py <id> → 한국에서 지금 가장 화제인 전국 뉴스 10개를 골라
 #   python3 tools/fetch_korea.py <id> --decode-only "제목 일부" … 로 실제 URL 을 푼 뒤 KR(제목, 매체, URL, 게재시각) 로 적는다.
 korea_top = [
   KR("※ 한국 언론 제목(살짝만 다듬기)", "※ 매체", "https://※실제 기사 URL", "2026-01-01T07:00:00+07:00"),

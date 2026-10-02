@@ -96,20 +96,63 @@
   }
   function renderAll() { renderTabs(); $("briefing").hidden = !topShown(); renderKorea(); renderTop(); renderFeed(); renderAds(); placeTrends(); }
 
-  /* 🇰🇷 오늘의 한국 주요 뉴스(판 필드 korea_top, 없으면 아무것도 안 그림). 내 피드·전체 보기에서 맨 위 */
+  /* 🇰🇷 오늘의 한국 주요 뉴스 — 내 피드·전체 보기에서 맨 위. 최대 10건, 처음 4건 + '펼치기'(나머지 6건) / '접기'
+   * ① data/korea.json(GitHub Actions 가 2시간마다 갱신, 판과 무관): 네트워크 우선(cache: no-store + ?_=시각),
+   *    file:// 에서는 data/korea.js(window.KOREA_NEWS). updated_at 이 6시간 안일 때만 사용(최신 판을 볼 때만)
+   * ② 없거나 6시간 넘게 지났으면 판의 korea_top 으로 대체(없으면 섹션 숨김) */
+  var KOREA = { live: null, at: 0, more: false, MAX_AGE: 6 * 3600 * 1000, SHOW: 4, MAX: 10 };
+  function loadKorea() {
+    KOREA.at = Date.now();
+    function done(d) {
+      if (d && Array.isArray(d.items) && d.updated_at) KOREA.live = d;
+      if (state.data) renderKorea();
+    }
+    if (!/^https?:$/.test(location.protocol)) {
+      var sc = document.createElement("script");
+      sc.src = "data/korea.js?_=" + Date.now();
+      sc.onload = function () { done(window.KOREA_NEWS); };
+      sc.onerror = function () { done(null); };
+      document.body.appendChild(sc);
+      return;
+    }
+    fetch("data/korea.json?_=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(done, function () { done(null); });
+  }
+  function isLatest() { return !EDS.length || !state.edition || state.edition.id === EDS[0].id; }
+  function koreaSource() {
+    var k = KOREA.live, t = k && new Date(k.updated_at).getTime();
+    if (k && k.items.length && isLatest() && t > 0 && Date.now() - t <= KOREA.MAX_AGE) {
+      return { at: k.updated_at, live: true, items: k.items.map(function (x) { return { headline: x.title, source: x.source, url: x.url, published: x.time }; }) };
+    }
+    var e = state.data && state.data.korea_top;
+    if (Array.isArray(e) && e.length) return { at: state.data.updated || state.data.generated, live: false, items: e };
+    return null;
+  }
+  function hhmm(iso) {
+    var o = {}; new Intl.DateTimeFormat("ko-KR", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(new Date(iso)).forEach(function (p) { o[p.type] = p.value; });
+    return o.hour + ":" + o.minute;
+  }
   function renderKorea() {
-    var el = $("korea"), k = state.data && state.data.korea_top;
+    var el = $("korea"), src = state.data && koreaSource();
     if (!el) return;
-    if (!Array.isArray(k) || !k.length || !topShown()) { el.hidden = true; return; }
+    if (!src || !topShown()) { el.hidden = true; return; }
+    var k = src.items.slice(0, KOREA.MAX);
     var closed = !!(prof().ui && prof().ui.koreaClosed);
+    var extra = Math.max(0, k.length - KOREA.SHOW);
     el.hidden = false;
     el.classList.toggle("is-closed", closed);
-    el.innerHTML = '<button type="button" class="korea__head" data-korea-toggle aria-expanded="' + !closed + '" aria-controls="koreaList"><span><span class="korea__title" id="koreaTitle">🇰🇷 오늘의 한국 주요 뉴스</span><span class="korea__sub">한국 언론 · ' + k.length + "건</span></span><span class=\"korea__chev\" aria-hidden=\"true\">▾</span></button>" +
-      '<ol class="korea__list" id="koreaList">' + k.slice(0, 6).map(function (x, i) {
-        return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener"><span class="kn">' + (i + 1) + '</span><span class="kt">' +
+    el.classList.toggle("is-more", KOREA.more);
+    el.setAttribute("data-korea-src", src.live ? "live" : "edition");
+    el.innerHTML = '<button type="button" class="korea__head" data-korea-toggle aria-expanded="' + !closed + '" aria-controls="koreaList"><span><span class="korea__title" id="koreaTitle">🇰🇷 오늘의 한국 주요 뉴스</span><span class="korea__sub">' +
+      (src.at ? '<time class="korea__upd" datetime="' + esc(src.at) + '" title="방콕 시간 기준">업데이트 ' + esc(hhmm(src.at)) + "</time> · " : "") + "한국 언론 " + k.length + "건</span></span><span class=\"korea__chev\" aria-hidden=\"true\">▾</span></button>" +
+      '<ol class="korea__list" id="koreaList">' + k.map(function (x, i) {
+        return '<li' + (i >= KOREA.SHOW ? ' class="k-extra"' : "") + '><a href="' + esc(x.url) + '" target="_blank" rel="noopener"><span class="kn">' + (i + 1) + '</span><span class="kt">' +
           (x.badge ? '<span class="kp">' + esc(x.badge) + "</span>" : "") + esc(x.headline) +
           '<span class="km">' + esc(x.source) + (x.published ? " · " + esc(fmtTime(x.published)) + " (BKK)" : "") + " ↗</span></span></a></li>";
-      }).join("") + "</ol>";
+      }).join("") + "</ol>" +
+      (extra ? '<button type="button" class="korea__more" data-korea-more aria-controls="koreaList" aria-expanded="' + KOREA.more + '">' +
+        (KOREA.more ? "접기 ▴" : "펼치기 (" + extra + "건 더) ▾") + "</button>" : "");
   }
 
   /* 브리핑: 새 형식 [{topic, text(**굵게**), story_id}] / 옛 형식(문단) → 문장별 글머리표 */
@@ -438,12 +481,12 @@
     if (Math.min(n, TR_STEPS[trStep]) >= n || trStep >= TR_STEPS.length - 1) trStep = 0; else trStep++;
     trendShow();
   });
-  // 모바일(≤980px): 트렌드 위젯을 사이드바 대신 본문으로(내 피드·전체·연예/SNS 탭: 주요 뉴스 아래 / 다른 탭: 기사 목록 아래)
+  // 트렌드 위젯: 모든 화면 크기·탭에서 페이지 맨 아래(모든 기사·사이드 위젯 다음, 푸터·푸터 광고 바로 위 #trendBottom)
   var mq = window.matchMedia("(max-width:980px)");
   function placeTrends() {
-    var w = $("trendWidget");
-    if (mq.matches) { $((state.tab === "feed" || state.tab === "all" || state.tab === "ent") ? "trendSlot" : "trendSlotEnd").appendChild(w); w.classList.add("widget--inline"); }
-    else { document.querySelector(".side-col").insertBefore(w, document.querySelector(".side-col").firstChild); w.classList.remove("widget--inline"); }
+    var w = $("trendWidget"), slot = $("trendBottom");
+    if (slot && w.parentNode !== slot) slot.appendChild(w);
+    w.classList.add("widget--inline", "widget--bottom");
   }
   placeTrends();
   if (mq.addEventListener) mq.addEventListener("change", placeTrends); else if (mq.addListener) mq.addListener(placeTrends);
@@ -452,6 +495,7 @@
     var el;
     if ((el = e.target.closest("[data-vote]"))) { doVote(el); return; }
     if ((el = e.target.closest("[data-korea-toggle]"))) { S.update(function (d) { d.ui.koreaClosed = !d.ui.koreaClosed; }); renderKorea(); return; }
+    if ((el = e.target.closest("[data-korea-more]"))) { KOREA.more = !KOREA.more; renderKorea(); if (!KOREA.more) $("korea").scrollIntoView({ block: "nearest" }); return; }
     if ((el = e.target.closest("[data-open-settings]"))) { Drawer.close(true); Onb.open("topics", true); return; }
     if ((el = e.target.closest("[data-tab]"))) { setTab(el.getAttribute("data-tab")); return; }
     if ((el = e.target.closest("[data-open]"))) { openStory(el.getAttribute("data-open")); history.replaceState(null, "", location.search + "#" + el.getAttribute("data-open")); return; }
@@ -658,6 +702,9 @@
     n.innerHTML = "지금 <b>" + esc(cur.label) + "</b>을(를) 보고 있습니다. " +
       '<a href="' + location.pathname + '?date=' + encodeURIComponent(EDS[0].id) + '">최신 ' + esc(EDS[0].label) + " 보기 →</a>";
   }
+  loadKorea();
+  // 화면으로 돌아왔을 때 10분 넘었으면 한국 뉴스 다시 받기(2시간마다 갱신됨)
+  document.addEventListener("visibilitychange", function () { if (!document.hidden && Date.now() - KOREA.at > 10 * 60 * 1000) loadKorea(); });
   if (cur) loadDate(cur.id); else $("feed").innerHTML = '<div class="empty">데이터가 없습니다.' + (navigator.onLine === false ? " 오프라인 상태입니다." : "") + "</div>";
   // 처음 방문: '어떤 분이세요?' (기사 링크(#id)로 들어온 경우에도 먼저 보여 주되 건너뛰기 가능)
   if (!prof().onboarded) Onb.open("persona", false); else Install.maybeShow();

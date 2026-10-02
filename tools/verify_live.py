@@ -61,10 +61,13 @@ async def main():
           visaStories: st.filter(s=>TNTopics.storyTopics(s).all.includes('visa')).length,
           trendItems: document.querySelectorAll('#trendList li').length,
           trendKo: document.querySelectorAll('#trendList .tr-ko').length,
-          trendInMain: !!document.querySelector('.main-col #trendWidget'),
+          trendInMain: !!document.querySelector('#trendBottom #trendWidget'),
           trendShown: [...document.querySelectorAll('#trendList li')].filter(l=>l.offsetParent!==null).length,
           loginBtn: !!document.querySelector('#acct [data-login], #acct [data-acct-menu]'),
           korea: document.querySelectorAll('#korea .korea__list li').length,
+          koreaShown: [...document.querySelectorAll('#korea .korea__list li')].filter(l=>l.offsetParent!==null).length,
+          koreaSrc: (document.getElementById('korea')||{getAttribute:()=>null}).getAttribute('data-korea-src'),
+          koreaUpd: (document.querySelector('#korea .korea__upd')||{}).textContent || null,
           ads: document.querySelectorAll('[data-ad-slot]:not([hidden]) .ad, .ad-slot--feed .ad').length,
           sw: sw, manifest: man };
         }""")
@@ -90,7 +93,7 @@ async def main():
           and info["tabs"][:1] == ["feed"] and info["tabs"][-1:] == ["all"]
           and (info["selected"] in (None, WANT)) and not errors and info["onboarding"]
           and info.get("visaCards", 0) == info["visaStories"]          # 외국인·비자 탭 렌더 확인
-          and info["trendInMain"]                                       # 모바일에서 트렌드가 본문에 보임
+          and info["trendInMain"]                                       # 트렌드가 페이지 맨 아래(#trendBottom)
           and info["trendShown"] <= 3 and info["loginBtn"] and info.get("drawer")   # 트렌드 처음 3개 · 로그인 버튼 · ☰ 서랍
           and info["sw"] is True and isinstance(info["manifest"], dict) and info["manifest"]["ok"])
     if info["trendItems"] and not info["trendKo"]:
