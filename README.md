@@ -137,3 +137,6 @@
 - 푸터 고지: '태국 언론 보도를 한국어로 요약·번역한 개인 프로젝트입니다. 원문 링크를 확인하세요.'
 - 검색 노출 방지(공유하더라도 당분간 유지): `index.html` 에 `<meta name="robots" content="noindex, nofollow">`, `robots.txt` 전부 차단.
   (프로젝트 Pages 라 `robots.txt` 는 도메인 루트가 아니어서 크롤러가 읽지 않을 수 있음 → 실제 효력은 meta 태그. 공개 저장소이므로 주소를 아는 사람은 누구나 볼 수 있음)
+
+## 번역 규칙
+반드시 `tools/TRANSLATION_RULES.md`를 읽고 모든 기사·제목·트렌드 번역에 적용할 것.
