@@ -89,11 +89,28 @@
     document.title = "태국 뉴스 한눈에 — " + (ed.label || longDate);
     $("generated").textContent = (ed.label ? ed.label + " · " : "") + "업데이트: " + fmtTime(data.updated || data.generated) + " (방콕) · 기사 " + data.stories.length + "건";
     renderBriefing(edName);
+    if (L.backfill(edId(), data.stories)) S.update(function () {});
     renderAll();
     renderSide();
     if (location.hash.length > 1) openStory(location.hash.slice(1), true);
   }
-  function renderAll() { renderTabs(); $("briefing").hidden = !topShown(); renderTop(); renderFeed(); placeTrends(); }
+  function renderAll() { renderTabs(); $("briefing").hidden = !topShown(); renderKorea(); renderTop(); renderFeed(); renderAds(); placeTrends(); }
+
+  /* 🇰🇷 오늘의 한국 주요 뉴스(판 필드 korea_top, 없으면 아무것도 안 그림). 내 피드·전체 보기에서 맨 위 */
+  function renderKorea() {
+    var el = $("korea"), k = state.data && state.data.korea_top;
+    if (!el) return;
+    if (!Array.isArray(k) || !k.length || !topShown()) { el.hidden = true; return; }
+    var closed = !!(prof().ui && prof().ui.koreaClosed);
+    el.hidden = false;
+    el.classList.toggle("is-closed", closed);
+    el.innerHTML = '<button type="button" class="korea__head" data-korea-toggle aria-expanded="' + !closed + '" aria-controls="koreaList"><span><span class="korea__title" id="koreaTitle">🇰🇷 오늘의 한국 주요 뉴스</span><span class="korea__sub">한국 언론 · ' + k.length + "건</span></span><span class=\"korea__chev\" aria-hidden=\"true\">▾</span></button>" +
+      '<ol class="korea__list" id="koreaList">' + k.slice(0, 6).map(function (x, i) {
+        return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener"><span class="kn">' + (i + 1) + '</span><span class="kt">' +
+          (x.badge ? '<span class="kp">' + esc(x.badge) + "</span>" : "") + esc(x.headline) +
+          '<span class="km">' + esc(x.source) + (x.published ? " · " + esc(fmtTime(x.published)) + " (BKK)" : "") + " ↗</span></span></a></li>";
+      }).join("") + "</ol>";
+  }
 
   /* 브리핑: 새 형식 [{topic, text(**굵게**), story_id}] / 옛 형식(문단) → 문장별 글머리표 */
   function legacyBriefing(text) {
@@ -143,21 +160,65 @@
     if (state.tab !== "feed" && state.tab !== "all" && list.indexOf(state.tab) < 0) list.push(state.tab); // 선택 밖 주제를 잠깐 보는 중
     return list.concat(["all"]);
   }
-  function renderTabs() {
-    var c = topicCounts(), sel = selected();
-    $("tabs").innerHTML = tabList().map(function (k) {
-      var label, n, cls = "tab";
-      if (k === "feed") { label = "⭐ 내 피드"; n = feedList().length + (state.data.highlights || []).length; }
-      else if (k === "all") { label = "전체 보기"; n = state.data.stories.length; }
-      else { var t = topicOf(k); label = t.emoji + " " + t.label; n = c[k] || 0; if (sel && sel.indexOf(k) < 0) cls += " tab--temp"; }
-      return '<button class="' + cls + '" role="tab" data-tab="' + k + '" aria-selected="' + (state.tab === k) + '">' + esc(label) + '<span class="n">' + (n || "–") + "</span></button>";
-    }).join("");
-    var cur = $("tabs").querySelector('[aria-selected="true"]');
-    if (cur) { // 선택된 탭이 보이도록 탭 줄만 가로 스크롤(컨테이너 기준 좌표)
-      var p = $("tabs"), pr = p.getBoundingClientRect(), cr = cur.getBoundingClientRect();
-      if (cr.left < pr.left || cr.right > pr.right) p.scrollLeft = Math.max(0, p.scrollLeft + (cr.left - pr.left) - 24);
-    }
+  /* ☰ 서랍 메뉴 안의 세로 목록(#tabs = 내 피드 + 내 주제 + 전체 보기, #tabsOther = 고르지 않은 주제) */
+  function tabBtn(k, c, sel) {
+    var label, n, cls = "tab";
+    if (k === "feed") { label = "⭐ 내 피드"; n = feedList().length + (state.data.highlights || []).length; }
+    else if (k === "all") { label = "📰 전체 보기"; n = state.data.stories.length; }
+    else { var t = topicOf(k); label = t.emoji + " " + t.label; n = c[k] || 0; if (sel && sel.indexOf(k) < 0) cls += " tab--temp"; }
+    return '<button type="button" class="' + cls + '" role="tab" data-tab="' + k + '" aria-selected="' + (state.tab === k) + '"><span class="tab__l">' + esc(label) + '</span><span class="n">' + (n || "–") + "</span></button>";
   }
+  function renderTabs() {
+    var c = topicCounts(), sel = selected(), list = tabList();
+    $("tabs").innerHTML = list.map(function (k, i) {
+      return tabBtn(k, c, sel) + (i === 0 ? '<button type="button" class="dr-item" id="myTopicsBtn" data-open-settings aria-haspopup="dialog">🧩 내 주제 설정</button>' : "");
+    }).join("");
+    var other = sel ? T.TOPICS.map(function (t) { return t.id; }).filter(function (k) { return list.indexOf(k) < 0; }) : [];
+    $("tabsOther").innerHTML = other.map(function (k) { return tabBtn(k, c, null).replace('class="tab', 'class="tab tab--other'); }).join("");
+    $("tabsOther").hidden = $("tabsOtherTitle").hidden = !other.length;
+  }
+
+  /* ---------- ☰ 서랍 ---------- */
+  var Drawer = (function () {
+    var dr = $("drawer"), ov = $("drawerOv"), btn = $("menuBtn"), last = null, x0 = null, y0 = null;
+    function items() { return [].slice.call(dr.querySelectorAll("button, a[href], input, select, textarea")).filter(function (e) { return !e.disabled && e.offsetParent !== null; }); }
+    function open() {
+      last = document.activeElement;
+      ov.hidden = false; dr.classList.add("is-open"); dr.setAttribute("aria-hidden", "false"); btn.setAttribute("aria-expanded", "true");
+      document.body.classList.add("drawer-open");
+      if (window.TNSocial && $("drawerAcct")) window.TNSocial.renderAccountBox($("drawerAcct"));
+      var cur = dr.querySelector('[aria-selected="true"]') || items()[0];
+      setTimeout(function () { if (cur) cur.focus({ preventScroll: true }); }, 30);
+    }
+    function close(noFocus) {
+      if (!dr.classList.contains("is-open")) return;
+      dr.classList.remove("is-open"); dr.setAttribute("aria-hidden", "true"); btn.setAttribute("aria-expanded", "false");
+      ov.hidden = true; document.body.classList.remove("drawer-open");
+      if (!noFocus && last && last.focus) last.focus({ preventScroll: true });
+    }
+    btn.addEventListener("click", function () { if (dr.classList.contains("is-open")) close(); else open(); });
+    ov.addEventListener("click", function () { close(); });
+    dr.addEventListener("click", function (e) { if (e.target.closest("[data-drawer-close]")) close(); });
+    document.addEventListener("keydown", function (e) {
+      if (!dr.classList.contains("is-open")) return;
+      if (e.key === "Escape") { e.preventDefault(); close(); return; }
+      if (e.key === "Tab") {   // 포커스 가두기
+        var it = items(); if (!it.length) return;
+        var f = it[0], l = it[it.length - 1];
+        if (e.shiftKey && document.activeElement === f) { e.preventDefault(); l.focus(); }
+        else if (!e.shiftKey && document.activeElement === l) { e.preventDefault(); f.focus(); }
+        else if (!dr.contains(document.activeElement)) { e.preventDefault(); f.focus(); }
+      }
+    });
+    // 왼쪽으로 밀면 닫힘
+    dr.addEventListener("touchstart", function (e) { var t = e.touches[0]; x0 = t.clientX; y0 = t.clientY; }, { passive: true });
+    dr.addEventListener("touchmove", function (e) {
+      if (x0 == null) return; var t = e.touches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+      if (dx < -60 && Math.abs(dx) > Math.abs(dy) * 1.5) { x0 = null; close(); }
+    }, { passive: true });
+    dr.addEventListener("touchend", function () { x0 = null; }, { passive: true });
+    return { open: open, close: close };
+  })();
 
   function byId(id) { return state.data.stories.filter(function (s) { return s.id === id; })[0]; }
 
@@ -180,10 +241,10 @@
 
   function voteHTML(s) {
     var v = L.voteOf(edId(), s);
-    return '<div class="card__acts" role="group" aria-label="이 기사에 대한 관심">' +
-      '<button type="button" class="vote vote--up" data-vote="1" data-id="' + esc(s.id) + '" aria-pressed="' + (v > 0) + '">👍 관심 있음</button>' +
-      '<button type="button" class="vote vote--down" data-vote="-1" data-id="' + esc(s.id) + '" aria-pressed="' + (v < 0) + '">👎 관심 없음</button>' +
-      (v < 0 ? '<span class="vote-note">비슷한 기사는 아래로 내려요</span>' : v > 0 ? '<span class="vote-note">비슷한 기사를 위로 올려요</span>' : "") + "</div>";
+    return '<div class="card__acts" role="group" aria-label="이런 소식 더 볼래요?">' +
+      '<span class="vote-q">이런 소식 더 볼래요?</span><span class="vote-btns">' +
+      '<button type="button" class="vote vote--up" data-vote="1" data-id="' + esc(s.id) + '" aria-pressed="' + (v > 0) + '">🙌 더 보여줘</button>' +
+      '<button type="button" class="vote vote--down" data-vote="-1" data-id="' + esc(s.id) + '" aria-pressed="' + (v < 0) + '">🙅 덜 보여줘</button></span></div>';
   }
 
   function cardHTML(s) {
@@ -212,7 +273,51 @@
       '<div class="card__body" id="body-' + esc(s.id) + '">' + upd + paras + ctx +
         '<div class="origin"><p class="origin__th" lang="th"><small>원문 제목</small>' + esc(s.title_th) + "</p>" +
         '<a class="btn" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.source.replace(/\s*\(.*\)$/, "")) + " 원문 보기 ↗</a>" + rel + tags + "</div>" +
+        talkHTML(s) +
       "</div>" + voteHTML(s) + "</article>";
+  }
+
+  /* 💬 오늘의 질문(판 데이터의 정적 내용, approved 일 때만) + 댓글 자리(assets/social.js 가 채움) */
+  function talkHTML(s) {
+    var d = s.discussion, q = "";
+    if (d && d.approved === true && d.question) {
+      q = '<div class="dq"><b class="dq__h">💬 오늘의 질문</b><p class="dq__q">' + esc(d.question) + "</p></div>" +
+        (d.operator_comment ? '<div class="cmt cmt--op cmt--pin"><div class="cmt__h"><b class="cmt__n">운영자</b><span class="badge-op">운영자</span><span class="cmt__pin">📌 고정</span></div><p class="cmt__t">' + esc(d.operator_comment) + "</p></div>" : "");
+    }
+    var live = /^https?:$/.test(location.protocol);
+    return '<section class="talk" aria-label="댓글">' + q + (live ? '<div class="cmts" data-cmts="' + esc(s.id) + '"><p class="cmts__empty">댓글은 기사를 펼치면 불러와요.</p></div>' : "") + "</section>";
+  }
+
+  /* ---------- 광고 자리(목업): data/ads.json → data/ads.js(window.TN_ADS). 없거나 enabled=false 면 아무것도 안 보임 ---------- */
+  function adSlot(id) {
+    var A = window.TN_ADS;
+    if (!A || A.enabled === false || !A.slots) return null;
+    var sl = A.slots.filter(function (x) { return x.id === id && x.enabled !== false && x.items && x.items.length; })[0];
+    return sl || null;
+  }
+  function adHTML(sl, n) {
+    var it = sl.items[(n || 0) % sl.items.length], lab = (window.TN_ADS.label || "광고");
+    var safe = function (u) { return u && /^https:\/\//.test(u) ? u : null; };
+    var link = safe(it.link), img = safe(it.image);
+    var inner = '<span class="ad__tag">' + esc(lab) + "</span>" + (img ? '<img class="ad__img" src="' + esc(img) + '" alt="" loading="lazy">' : "") +
+      '<span class="ad__txt">' + (it.category ? '<span class="ad__cat">' + esc(it.category) + "</span>" : "") +
+      '<b class="ad__t">' + esc(it.title || "여기에 광고하세요") + '</b><small class="ad__s">' + esc(it.subtitle || "광고 문의") + "</small></span>";
+    var cls = "ad ad--" + esc(sl.size || "medium") + " ad--t" + (it.theme || 1);
+    return link ? '<a class="' + cls + '" href="' + esc(link) + '" target="_blank" rel="noopener sponsored" aria-label="' + esc(lab) + '">' + inner + "</a>"
+      : '<div class="' + cls + '" role="note" aria-label="' + esc(lab) + ' 자리">' + inner + "</div>";
+  }
+  function renderAds() {
+    [].forEach.call(document.querySelectorAll("[data-ad-slot]"), function (el) {
+      var id = el.getAttribute("data-ad-slot"), sl = adSlot(id);
+      if (id === "mid" && !topShown()) sl = null;
+      el.hidden = !sl; el.innerHTML = sl ? adHTML(sl, 0) : "";
+    });
+  }
+  function withInfeed(cards) {
+    var sl = adSlot("infeed"); if (!sl) return cards.join("");
+    var every = Math.max(3, sl.every || 5), out = [], k = 0;
+    cards.forEach(function (c, i) { out.push(c); if ((i + 1) % every === 0 && i < cards.length - 1) out.push('<div class="ad-slot ad-slot--feed">' + adHTML(sl, k++) + "</div>"); });
+    return out.join("");
   }
 
   function feedList() {
@@ -237,26 +342,25 @@
     }
     var empty = tab === "feed" ? "이 판에는 내 주제에 해당하는 기사가 없습니다. '전체 보기'를 눌러 보세요."
       : tab === "all" ? "기사가 없습니다." : "이 판에는 " + topicOf(tab).label + " 기사가 없습니다.";
-    $("feed").innerHTML = intro + (list.length ? list.map(cardHTML).join("") : '<div class="empty">' + esc(empty) + "</div>");
+    $("feed").innerHTML = intro + (list.length ? withInfeed(list.map(cardHTML)) : '<div class="empty">' + esc(empty) + "</div>");
   }
 
   function renderSide() {
     var t = state.data.trends;
     if (t && t.items && t.items.length) {
       $("trendWidget").hidden = false;
-      $("trendList").innerHTML = t.items.map(function (x, i) {
+      var items = t.items.slice(0, TR_STEPS[TR_STEPS.length - 1]);   // 최대 10개
+      $("trendList").innerHTML = items.map(function (x, i) {
         // 옛 판: 문자열(원문 태그만) / 10월 2일 저녁판부터: {tag, ko, desc, verified}
         var o = typeof x === "string" ? { tag: x } : x;
         var q = "https://x.com/search?q=" + encodeURIComponent(o.tag);
         var unv = o.verified === false ? '<span class="tr-unv">확인 안 됨</span>' : "";
-        return '<li class="' + (i >= 5 ? "tr-more" : "") + '"><div class="tr-body">' +
+        return '<li data-i="' + i + '"><div class="tr-body">' +
           (o.ko ? '<b class="tr-ko">' + esc(o.ko) + "</b>" : "") +
           '<a class="tr-tag" lang="th" href="' + q + '" target="_blank" rel="noopener">' + esc(o.tag) + " ↗</a>" +
           (o.desc ? '<span class="tr-desc">' + unv + esc(o.desc) + "</span>" : "") + "</div></li>";
       }).join("");
-      var more = $("trendMore");
-      more.hidden = t.items.length <= 5;
-      more.textContent = "트렌드 " + t.items.length + "개 모두 보기 ▾";
+      trStep = 0; trendShow();
       $("trendWidget").classList.remove("is-expanded");
       $("trendNote").innerHTML = esc(t.note) + '<br>출처: <a href="' + esc(t.url) + '" target="_blank" rel="noopener">' + esc(t.source) + "</a> · " + esc(fmtTime(t.fetched)) + " (BKK) 수집" +
         (t.filtered != null ? " · 성인·선정적 태그 필터 적용(" + t.filtered + "개 제외)" : "");
@@ -275,6 +379,7 @@
   /* ---------- 인터랙션 ---------- */
   function setTab(tab, keepScroll) {
     state.tab = tab;
+    Drawer.close(true);
     renderAll();
     if (!keepScroll) window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -283,6 +388,7 @@
     card.classList.toggle("is-open", open);
     card.querySelector(".card__head").setAttribute("aria-expanded", String(open));
     card.querySelector(".more__t").textContent = open ? "접기" : "자세히";
+    if (open && window.TNSocial && window.TNSocial.mountComments) { var c = card.querySelector("[data-cmts]"); if (c) window.TNSocial.mountComments(c, edId(), byId(card.id)); }
   }
   function openStory(id, fromHash) {
     var s = byId(id); if (!s) return;
@@ -298,17 +404,18 @@
   }
 
   var toastTimer;
-  function toast(msg) {
+  function toast(msg, ms) {
     var el = $("toast"); el.innerHTML = msg; el.classList.add("show");
-    clearTimeout(toastTimer); toastTimer = setTimeout(function () { el.classList.remove("show"); }, 2600);
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { el.classList.remove("show"); }, ms || 2600);
   }
   function doVote(btn) {
     var s = byId(btn.getAttribute("data-id")); if (!s) return;
     var dir = +btn.getAttribute("data-vote");
     var now = L.vote(edId(), s, dir);
     var t = topicOf(tps(s).topic);
-    toast(now > 0 ? "👍 <b>" + esc(t.label) + "</b>·비슷한 키워드 기사를 위로 올릴게요"
-      : now < 0 ? "👎 비슷한 기사는 아래로 내릴게요 <small>(숨기지는 않아요)</small>" : "표시를 취소했어요");
+    void t;
+    toast(now > 0 ? "알겠어요! 비슷한 소식을 위쪽에 더 올려드릴게요"
+      : now < 0 ? "알겠어요! 비슷한 소식은 아래로 내릴게요" : "선택을 취소했어요", 2000);
     // 화면 위치는 그대로 둔 채 목록만 다시 정렬
     var y = window.pageYOffset;
     renderTabs(); renderFeed();
@@ -317,11 +424,19 @@
     if (card) { card.classList.add("flash"); setTimeout(function () { card.classList.remove("flash"); }, 900); }
   }
 
+  /* X 트렌드: 처음 3개 → '더 보기' 5개 → 10개(최대) → '접기' */
+  var TR_STEPS = [3, 5, 10], trStep = 0;
+  function trendShow() {
+    var lis = $("trendList").children, n = lis.length, show = Math.min(n, TR_STEPS[trStep]);
+    for (var i = 0; i < n; i++) lis[i].classList.toggle("tr-h", i >= show);
+    var more = $("trendMore");
+    more.hidden = n <= TR_STEPS[0];
+    more.textContent = show >= n ? "접기 ▴" : "더 보기 (" + (Math.min(n, TR_STEPS[trStep + 1] || n) - show) + "개) ▾";
+  }
   $("trendMore").addEventListener("click", function () {
-    var w = $("trendWidget"), open = !w.classList.contains("is-expanded");
-    w.classList.toggle("is-expanded", open);
-    var n = (state.data.trends.items || []).length;
-    this.textContent = open ? "접기 ▴" : "트렌드 " + n + "개 모두 보기 ▾";
+    var n = $("trendList").children.length;
+    if (Math.min(n, TR_STEPS[trStep]) >= n || trStep >= TR_STEPS.length - 1) trStep = 0; else trStep++;
+    trendShow();
   });
   // 모바일(≤980px): 트렌드 위젯을 사이드바 대신 본문으로(내 피드·전체·연예/SNS 탭: 주요 뉴스 아래 / 다른 탭: 기사 목록 아래)
   var mq = window.matchMedia("(max-width:980px)");
@@ -336,7 +451,8 @@
   document.addEventListener("click", function (e) {
     var el;
     if ((el = e.target.closest("[data-vote]"))) { doVote(el); return; }
-    if ((el = e.target.closest("[data-open-settings]"))) { Onb.open("topics", true); return; }
+    if ((el = e.target.closest("[data-korea-toggle]"))) { S.update(function (d) { d.ui.koreaClosed = !d.ui.koreaClosed; }); renderKorea(); return; }
+    if ((el = e.target.closest("[data-open-settings]"))) { Drawer.close(true); Onb.open("topics", true); return; }
     if ((el = e.target.closest("[data-tab]"))) { setTab(el.getAttribute("data-tab")); return; }
     if ((el = e.target.closest("[data-open]"))) { openStory(el.getAttribute("data-open")); history.replaceState(null, "", location.search + "#" + el.getAttribute("data-open")); return; }
     if ((el = e.target.closest(".card__head"))) toggleCard(el.parentNode);
@@ -347,7 +463,6 @@
   });
   window.addEventListener("scroll", function () { $("toTop").classList.toggle("show", window.pageYOffset > 600); }, { passive: true });
   $("toTop").addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
-  $("myTopicsBtn").addEventListener("click", function () { Onb.open("topics", true); });
 
   /* ---------- 온보딩 · 내 주제 설정 ---------- */
   var Onb = (function () {
@@ -381,7 +496,8 @@
           '<button type="button" class="setbtn" data-show-all>모든 주제 보기 <small>주제 선택 없이 전체를 내 피드로</small></button>' +
           '<button type="button" class="setbtn" data-restart>처음 질문(어떤 분이세요?) 다시 보기</button>' +
           (Install.available() ? '<button type="button" class="setbtn" data-install>📲 홈 화면에 추가</button>' : "") +
-          '<p class="sheet__note">설정과 취향은 이 기기(브라우저)에만 저장돼요.</p></div>' : "") +
+          '<div class="acct-box" id="acctBox"></div>' +
+          '<p class="sheet__note" id="storeNote">' + (window.TNSocial && window.TNSocial.signedIn() ? "구글 계정에 저장돼 다른 기기에서도 이어져요." : "설정과 취향은 이 기기(브라우저)에만 저장돼요. 구글로 로그인하면 다른 기기에서도 이어져요(선택).") + "</p></div>" : "") +
         "</div>";
     }
     function topicGridHTML() {
@@ -400,6 +516,7 @@
       sheet.innerHTML = '<div class="sheet__panel" role="document">' + (step === "persona" ? stepPersona() : stepTopics()) + "</div>";
       sheet.setAttribute("data-step", step);
       updCount();
+      if (window.TNSocial && $("acctBox")) window.TNSocial.renderAccountBox($("acctBox"));
       var f = sheet.querySelector("button"); if (f) f.focus({ preventScroll: true });
     }
     function open(step, settings) {
@@ -457,41 +574,57 @@
         }
       }
     });
-    return { open: open, close: close };
+    return { open: open, close: close, settings: function () { return settingsMode; } };
   })();
 
-  /* ---------- 홈 화면에 추가(PWA) ---------- */
+  /* ---------- 홈 화면에 추가(PWA) ----------
+   * 안드로이드(Chrome·삼성 인터넷): beforeinstallprompt 를 잡아 안내 바 [추가하기]/[나중에]
+   * iOS Safari: 설치 API 가 없음 → 2단계 그림 안내(① 아래 공유 버튼 ② '홈 화면에 추가')
+   * '나중에'/닫기 = 7일 동안 다시 안 보임(이 기기 ui.installHintUntil). 홈 화면 앱(standalone)에서는 절대 안 보임 */
   var Install = (function () {
-    var deferred = null;
+    var deferred = null, WEEK = 7 * 24 * 3600 * 1000;
     var ua = navigator.userAgent || "";
     var isIOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-    var isSafari = isIOS && /safari/i.test(ua) && !/crios|fxios|edgios|kakaotalk|naver|line\//i.test(ua);
+    var isSafari = isIOS && /safari/i.test(ua) && !/crios|fxios|edgios|kakaotalk|naver|line\/|instagram|fban|fbav/i.test(ua);
     function standalone() { return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true; }
     window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); deferred = e; maybeShow(); });
-    window.addEventListener("appinstalled", function () { deferred = null; hide(); toast("📲 홈 화면에 추가했어요"); });
-    function hide() { $("installHint").hidden = true; }
-    function dismissed() { return prof().ui && prof().ui.installHint === "dismissed"; }
+    window.addEventListener("appinstalled", function () { deferred = null; hide(); S.update(function (d) { d.ui.installed = true; }); toast("📲 홈 화면에 추가했어요"); });
+    function hide() { var el = $("installHint"); el.hidden = true; el.className = "install-hint"; }
+    function dismissed() {
+      var ui = prof().ui || {};
+      if (ui.installHint === "dismissed") return true;          // 예전(영구) 닫기 기록은 그대로 존중
+      return !!(ui.installHintUntil && Date.now() < ui.installHintUntil);
+    }
+    function snooze() { S.update(function (d) { d.ui.installHintUntil = Date.now() + WEEK; }); hide(); }
     function available() { return !standalone() && (!!deferred || isIOS); }
-    function maybeShow() {
+    function maybeShow(force) {
       var el = $("installHint");
-      if (standalone() || dismissed() || !prof().onboarded || !$("sheet").hidden) return;
+      if (standalone()) { hide(); return; }
+      if (!force && (dismissed() || !prof().onboarded || !$("sheet").hidden)) return;
       if (deferred) {
-        el.innerHTML = '<span class="ih__icon" aria-hidden="true">📲</span><span class="ih__t"><b>홈 화면에 추가</b>하면 앱처럼 바로 열려요</span>' +
-          '<button type="button" class="btn btn--primary btn--sm" data-ih-install>추가</button><button type="button" class="ih__x" data-ih-close aria-label="닫기">✕</button>';
+        el.className = "install-hint";
+        el.innerHTML = '<span class="ih__icon" aria-hidden="true"><img src="assets/icons/icon-192.png" alt="" width="36" height="36"></span>' +
+          '<span class="ih__t"><b>홈 화면에 추가할까요?</b><small>앱처럼 편하게 볼 수 있어요</small></span>' +
+          '<span class="ih__btns"><button type="button" class="btn btn--primary btn--sm" data-ih-install>추가하기</button><button type="button" class="ih__later" data-ih-close>나중에</button></span>';
         el.hidden = false;
       } else if (isIOS) {
-        el.innerHTML = '<span class="ih__icon" aria-hidden="true">📲</span><span class="ih__t">' + (isSafari ? "" : "Safari에서 열고, ") + '<b>공유</b> <span class="ios-share" aria-hidden="true">⬆︎</span> 버튼 → <b>홈 화면에 추가</b>를 누르면 앱처럼 쓸 수 있어요</span>' +
-          '<button type="button" class="ih__x" data-ih-close aria-label="닫기">✕</button>';
+        el.className = "install-hint install-hint--ios";
+        el.innerHTML = '<div class="ihi__head"><b>📲 홈 화면에 추가하면 앱처럼 열려요</b><button type="button" class="ih__x" data-ih-close aria-label="닫기">닫기</button></div>' +
+          (isSafari ? "" : '<p class="ihi__warn">먼저 이 페이지를 <b>Safari</b>에서 열어 주세요.</p>') +
+          '<ol class="ihi__steps">' +
+          '<li><span class="ihi__n">1</span><span class="ihi__ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5" fill="none" stroke="#0a84ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 10H6a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1h-2" fill="none" stroke="#0a84ff" stroke-width="2" stroke-linecap="round"/></svg></span><span>화면 아래 도구 막대의 <b>공유</b> 버튼을 누르세요</span></li>' +
+          '<li><span class="ihi__n">2</span><span class="ihi__ic ihi__ic--add" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="none" stroke="#1c1c1e" stroke-width="1.8"/><path d="M12 8v8M8 12h8" stroke="#1c1c1e" stroke-width="1.8" stroke-linecap="round"/></svg></span><span>목록을 올려 <b>홈 화면에 추가</b>를 누르세요</span></li>' +
+          "</ol>" + '<div class="ihi__arrow" aria-hidden="true">⬇︎</div>';
         el.hidden = false;
       }
     }
     function prompt() {
-      if (deferred) { deferred.prompt(); deferred.userChoice.then(function () { deferred = null; hide(); }); }
-      else if (isIOS) { S.update(function (d) { d.ui.installHint = undefined; }); maybeShow(); }
+      if (deferred) { deferred.prompt(); deferred.userChoice.then(function (c) { deferred = null; hide(); if (c && c.outcome !== "accepted") snooze(); }); }
+      else if (isIOS) { maybeShow(true); }
     }
     $("installHint").addEventListener("click", function (e) {
       if (e.target.closest("[data-ih-install]")) prompt();
-      if (e.target.closest("[data-ih-close]")) { S.update(function (d) { d.ui.installHint = "dismissed"; }); hide(); }
+      if (e.target.closest("[data-ih-close]")) snooze();
     });
     return { maybeShow: maybeShow, prompt: prompt, available: available };
   })();
@@ -535,5 +668,12 @@
       navigator.serviceWorker.register("sw.js").catch(function (e) { console.warn("SW 등록 실패", e); });
     });
   }
-  window.TNApp = { state: state, openSettings: function () { Onb.open("topics", true); } };
+  // 로그인 병합·다른 기기 변경(src="remote") → 다시 그리기. 첫 질문 창이 떠 있는데 계정에 설정이 있으면 닫기
+  S.subscribe(function (d, src) {
+    if (src !== "remote") return;
+    if (d.onboarded && !$("sheet").hidden && $("sheet").getAttribute("data-step") === "persona" && !Onb.settings()) Onb.close();
+    if (state.data) { L.backfill(edId(), state.data.stories); renderAll(); }
+  });
+  window.TNApp = { state: state, openSettings: function () { Onb.open("topics", true); }, toast: toast, edId: function () { return state.data ? edId() : null; },
+    rerender: function () { if (state.data) renderAll(); } };
 })();

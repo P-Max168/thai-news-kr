@@ -214,17 +214,6 @@ dict(id="n1", category="sns",
  published="2026-09-30T21:58:00+07:00",
  tags=["아시안게임","세팍타크로","타크로"]),
 
-dict(id="n2", category="sns",
- headline="트렌드24 태국, 아침에도 드라마·아이돌·패션 해시태그가 상단",
- summary=[
-  "trends24.in 태국 집계(아침 수집) 기준으로 #ยัวร์ทูบเบอร์Q4, #TENforYSLPFW27, #เขมจิราต้องรอดตลอดกาลSeries, #KhemjiraForeverTheSeries, #เขมจิรากลับมาอีกครั้ง, #BILLKIN27thEdition, #9Ent24thxSiamParagon, #ขยับไปกับปุยนุ่นบิ๊นท์ 등이 상단에 자주 보였다.",
-  "홍수 직접어보다 BL·드라마·파리 패션위크·팬덤 키워드가 여전히 많다. 저녁판과 같은 '연예·브랜드' 흐름이 이어진다."
- ],
- context="포털 'SNS 화제' 탭용 스냅샷. X 실시간 순위는 분 단위로 바뀐다.",
- source="trends24.in", url="https://trends24.in/thailand/",
- title_th="Thailand — X (Twitter) trending topics and hashtags today",
- published="2026-10-01T07:15:00+07:00",
- tags=["트렌드","X","드라마"]),
 ]
 
 trends = dict(

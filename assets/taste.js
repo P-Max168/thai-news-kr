@@ -39,10 +39,57 @@
     S.update(function (d) {
       var prev = d.taste.votes[k] || 0;
       if (prev) apply(s, -prev);          // 이전 표 되돌리기
-      if (prev === dir) { delete d.taste.votes[k]; now = 0; }
-      else { apply(s, dir); d.taste.votes[k] = dir; now = dir; }
+      if (prev === dir) { delete d.taste.votes[k]; delete d.taste.vf[k]; now = 0; }
+      else { apply(s, dir); d.taste.votes[k] = dir; d.taste.vf[k] = featNames(s); now = dir; }
     });
     return now;
+  }
+  /* 표마다 그 기사의 특징 이름을 같이 저장(vf) → 다른 기기와 표를 합칠 때 가중치를 다시 계산할 수 있음 */
+  function featNames(s) { return features(s).map(function (p) { return p[0]; }).slice(0, 14); }
+  /* 화면에 열린 판에서, 예전에 눌러 vf 가 없는 표를 채움(가중치는 그대로) */
+  function backfill(edition, stories) {
+    var t = S.get().taste, miss = false;
+    stories.forEach(function (s) { var k = key(edition, s); if (t.votes[k] && !t.vf[k]) { t.vf[k] = featNames(s); miss = true; } });
+    return miss;
+  }
+  function weightsFrom(votes, vf) {
+    var w = {};
+    Object.keys(votes).forEach(function (k) { (vf[k] || []).forEach(function (f) { w[f] = (w[f] || 0) + votes[k]; }); });
+    Object.keys(w).forEach(function (f) { w[f] = Math.max(-W_MAX, Math.min(W_MAX, w[f])); if (!w[f]) delete w[f]; });
+    return w;
+  }
+  var MAX_VOTES = 1200;
+  /* 로그인 때 이 기기 문서와 클라우드 문서 합치기
+   * - 👍👎 표: 합집합(같은 기사에 서로 다른 표면 더 최근에 바뀐 쪽)
+   * - 가중치: 합친 표로 다시 계산(vf 없는 옛 표의 몫은 최근 쪽 문서에서 그대로 가져옴) — 같은 표가 두 번 더해지지 않음
+   * - 설정(persona·topics·onboarded): settingsAt 이 더 최근인 쪽. 단 opts.newDevice(이 기기가 이 계정과 처음 연결)이고
+   *   클라우드에 설정이 있으면 클라우드 설정을 되살림(새 휴대폰에서 첫 질문에 답한 것보다 원래 설정이 우선) */
+  function mergeDocs(local, remote, opts) {
+    opts = opts || {};
+    if (!remote) return local;
+    var lt = local.taste || { w: {}, votes: {}, vf: {} }, rt = remote.taste || { w: {}, votes: {}, vf: {} };
+    lt.vf = lt.vf || {}; rt.vf = rt.vf || {}; lt.votes = lt.votes || {}; rt.votes = rt.votes || {};
+    var lNew = (local.updatedAt || 0) >= (remote.updatedAt || 0);
+    var newer = lNew ? lt : rt, older = lNew ? rt : lt;
+    var votes = {}, vf = {};
+    [older, newer].forEach(function (t) { Object.keys(t.votes).forEach(function (k) { if (t.votes[k]) { votes[k] = t.votes[k]; if (t.vf[k]) vf[k] = t.vf[k]; } }); });
+    var keys = Object.keys(votes).sort();          // 키 = "<판 id>/<기사 id>" → 이름순 = 날짜순
+    if (keys.length > MAX_VOTES) keys.slice(0, keys.length - MAX_VOTES).forEach(function (k) { delete votes[k]; delete vf[k]; });
+    // vf 없는 옛 표의 몫(= 최근 문서의 w − 그 문서의 vf 표로 계산한 w)
+    var nv = {}; Object.keys(newer.votes).forEach(function (k) { if (newer.vf[k]) nv[k] = newer.votes[k]; });
+    var nw = weightsFrom(nv, newer.vf), w = weightsFrom(votes, vf);
+    Object.keys(newer.w || {}).forEach(function (f) {
+      var rest = (newer.w[f] || 0) - (nw[f] || 0);
+      if (Math.abs(rest) > 1e-9) { w[f] = Math.max(-W_MAX, Math.min(W_MAX, (w[f] || 0) + rest)); if (!w[f]) delete w[f]; }
+    });
+    var lS = local.settingsAt || 0, rS = remote.settingsAt || remote.updatedAt || 0;
+    var useRemoteSettings = remote.onboarded && (opts.newDevice || rS > lS);
+    var setSrc = useRemoteSettings ? remote : local;
+    return {
+      v: 1, onboarded: !!(local.onboarded || remote.onboarded), persona: setSrc.persona == null ? null : setSrc.persona,
+      topics: setSrc.topics == null ? null : setSrc.topics, taste: { w: w, votes: votes, vf: vf }, ui: local.ui || {},
+      updatedAt: Date.now(), settingsAt: Math.max(lS, rS)
+    };
   }
   function voteOf(edition, s) { return S.get().taste.votes[key(edition, s)] || 0; }
 
@@ -66,7 +113,8 @@
       .map(function (x) { return x.s; });
   }
   function hasTaste() { var t = S.get().taste; return Object.keys(t.votes).length > 0; }
-  function reset() { return S.update(function (d) { d.taste = { w: {}, votes: {} }; }); }
+  function reset() { return S.update(function (d) { d.taste = { w: {}, votes: {}, vf: {} }; }); }
 
-  root.TNTaste = { features: features, vote: vote, voteOf: voteOf, learned: learned, score: score, sort: sort, reset: reset, hasTaste: hasTaste };
+  root.TNTaste = { features: features, vote: vote, voteOf: voteOf, learned: learned, score: score, sort: sort, reset: reset, hasTaste: hasTaste,
+    backfill: backfill, mergeDocs: mergeDocs, key: key };
 })(window);

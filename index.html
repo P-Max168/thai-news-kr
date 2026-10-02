@@ -17,13 +17,15 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://www.gstatic.com">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=715e5957">
+<link rel="stylesheet" href="assets/style.css?v=97587496">
 </head>
 <body>
 <header class="masthead">
   <div class="wrap masthead__inner">
+    <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-controls="drawer" aria-expanded="false"><span aria-hidden="true">☰</span></button>
     <a class="brand" href="./" aria-label="태국 뉴스 한눈에 홈">
       <span class="brand__mark" aria-hidden="true">TH</span>
       <span class="brand__text">
@@ -37,21 +39,33 @@
         <span class="sr">날짜·판 선택</span>
         <select id="datepick"></select>
       </label>
+      <div class="acct" id="acct" hidden></div>
     </div>
   </div>
-  <nav class="tabs" aria-label="주제">
-    <div class="wrap tabs__bar">
-      <button type="button" class="mytopics" id="myTopicsBtn" aria-haspopup="dialog">🧩 내 주제</button>
-      <div class="tabs__inner" id="tabs" role="tablist"></div>
-    </div>
-  </nav>
+  <!-- 예전 주제 탭 줄 자리: 일부러 비워 둠(운영자가 나중에 정함) -->
+  <div class="subbar" aria-hidden="true"></div>
 </header>
+
+<!-- ☰ 메뉴(왼쪽 서랍): 내 피드 · 내 주제 설정 · 주제별 · 전체 보기 · 계정 -->
+<div class="drawer-ov" id="drawerOv" hidden></div>
+<nav class="drawer" id="drawer" aria-label="메뉴" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="drawer__head"><b>메뉴</b><button type="button" class="drawer__x" data-drawer-close aria-label="메뉴 닫기">✕</button></div>
+  <div class="drawer__list" id="tabs" role="tablist" aria-orientation="vertical"></div>
+  <p class="drawer__sec" id="tabsOtherTitle">다른 주제</p>
+  <div class="drawer__list" id="tabsOther"></div>
+  <p class="drawer__sec">계정</p>
+  <div class="drawer__acct acct-box" id="drawerAcct"></div>
+  <div class="ad-slot" data-ad-slot="drawer" hidden></div>
+</nav>
 
 <main class="wrap layout">
   <div class="main-col">
+    <div class="ad-slot" data-ad-slot="top" hidden></div>
     <p class="edition-note" id="editionNote" hidden></p>
+    <section class="korea" id="korea" aria-labelledby="koreaTitle" hidden></section>
     <section class="briefing" id="briefing" aria-label="브리핑"></section>
 
+    <div class="ad-slot" data-ad-slot="mid" hidden></div>
     <section class="top" id="topSection" aria-labelledby="topTitle">
       <h2 class="section-title" id="topTitle"><span>오늘의 주요 뉴스</span></h2>
       <div class="top__grid" id="topGrid"></div>
@@ -91,6 +105,7 @@
 
 <footer class="footer">
   <div class="wrap">
+    <div class="ad-slot" data-ad-slot="footer" hidden></div>
     <p class="footer__about">태국 언론 보도를 한국어로 요약·번역한 개인 프로젝트입니다. 원문 링크를 확인하세요.</p>
     <p><strong>태국 뉴스 한눈에</strong> · 원문 저작권은 각 언론사에 있습니다. · <button type="button" class="linkbtn linkbtn--light" data-open-settings>🧩 내 주제·취향 설정</button></p>
     <p class="footer__small" id="generated"></p>
@@ -104,9 +119,12 @@
 
 <!-- 데이터: file:// 에서도 동작하도록 JS 로 로드 -->
 <script src="data/index.js"></script>
+<script src="data/ads.js" onerror="window.TN_ADS=null"></script>
 <script src="assets/topics.js?v=e598247a"></script>
-<script src="assets/prefs.js?v=6e6c94b1"></script>
-<script src="assets/taste.js?v=03c68bc8"></script>
-<script src="assets/app.js?v=cc91ce21"></script>
+<script src="assets/prefs.js?v=4c59b99b"></script>
+<script src="assets/taste.js?v=7c1f4138"></script>
+<script src="assets/app.js?v=b744506d"></script>
+<!-- 선택 기능(Google 로그인·동기화·댓글): 못 불러와도 사이트는 그대로 동작 -->
+<script src="assets/social.js?v=4fe678e6"></script>
 </body>
 </html>

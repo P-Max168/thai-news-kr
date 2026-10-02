@@ -4,12 +4,14 @@
  * - index.html(페이지 이동)·data/*: 네트워크 우선(온라인이면 항상 새로 받음, HTTP 캐시도 재검증),
  *   실패(오프라인)할 때만 마지막으로 받은 캐시를 보여 준다.
  * - 설치 때 최신 판 데이터를 미리 받아 둬서 첫 방문 뒤 바로 오프라인으로 읽을 수 있다.
+ * - Google 로그인·Firestore(firebase / googleapis / gstatic SDK / firebaseapp.com / google.com 계정 창)는
+ *   절대 가로채거나 캐시하지 않는다(그냥 브라우저가 직접 요청). 글꼴(fonts.googleapis/gstatic)만 예외로 캐시.
  */
-var VERSION = "tnk-4d2540e264";
+var VERSION = "tnk-26087dcd68";
 var SHELL = "shell-" + VERSION, DATA = "data-v1", EXT = "ext-v1";
 var SHELL_FILES = [
   "./", "index.html", "manifest.json",
-  "assets/style.css?v=715e5957", "assets/topics.js?v=e598247a", "assets/prefs.js?v=6e6c94b1", "assets/taste.js?v=03c68bc8", "assets/app.js?v=cc91ce21",
+  "assets/style.css?v=97587496", "assets/topics.js?v=e598247a", "assets/prefs.js?v=4c59b99b", "assets/taste.js?v=7c1f4138", "assets/app.js?v=b744506d", "assets/social.js?v=4fe678e6",
   "assets/icons/icon-192.png", "assets/icons/icon-512.png", "assets/icons/maskable-512.png",
   "assets/icons/apple-touch-icon.png", "assets/icons/favicon-32.png"
 ];
@@ -79,6 +81,10 @@ self.addEventListener("fetch", function (e) {
   if (req.method !== "GET") return;
   var url = new URL(req.url);
   if (url.origin !== self.location.origin) {
+    // 로그인·DB·SDK: 손대지 않음(respondWith 안 함 → 네트워크 직행)
+    if (/(^|\.)(firebaseio\.com|firebaseapp\.com|firebasestorage\.app|web\.app|google\.com|googleusercontent\.com)$/.test(url.host) ||
+        /(^|\.)googleapis\.com$/.test(url.host) && url.host !== "fonts.googleapis.com" ||
+        /(^|\.)gstatic\.com$/.test(url.host) && url.host !== "fonts.gstatic.com") return;
     // 글꼴(jsDelivr Pretendard, Google Fonts): 있으면 캐시, 뒤에서 갱신
     if (/cdn\.jsdelivr\.net|fonts\.(googleapis|gstatic)\.com/.test(url.host)) e.respondWith(staleWhileRevalidate(req));
     return;
@@ -92,5 +98,6 @@ self.addEventListener("fetch", function (e) {
   }
   if (/^data\//.test(path)) { e.respondWith(networkFirst(req, DATA, dataKey(req.url))); return; }
   if (path === "sw.js") return;
+  if (/^__\//.test(path)) return;   // (혹시 쓰게 될) Firebase 예약 경로 /__/auth 등은 가로채지 않음
   e.respondWith(cacheFirst(req));
 });

@@ -60,6 +60,14 @@ def blocked(text):
     return None
 
 
+def KR(headline, source, url, published=None, badge=None):
+    """korea_top 한 줄: KR("제목", "연합뉴스", "https://…", "2026-10-03T06:10:00+07:00")"""
+    d = dict(headline=headline, source=source, url=url)
+    if published: d["published"] = published
+    if badge: d["badge"] = badge
+    return d
+
+
 def label_for(date, edition):
     m, d = int(date[5:7]), int(date[8:10])
     return "%d월 %d일 %s" % (m, d, EDITION_LABEL[edition])
@@ -102,6 +110,15 @@ def validate(data):
         assert not hit, (s["id"], "성인·선정적 키워드(%s) — 기사를 빼거나 표현 확인 (tools/trend_blocklist.txt)" % hit)
         for k in ("image", "images", "img", "media", "video", "embed"):
             assert k not in s, (s["id"], "이미지·미디어 필드 금지: " + k)
+        # trends24 해시태그 목록을 기사 카드로 만들지 않는다(트렌드는 trends 상자에만) — TRANSLATION_RULES.md
+        assert "trends24" not in (s.get("source", "") + " " + s.get("url", "")).lower(), \
+            (s["id"], "trends24 해시태그 목록은 기사 카드 금지 — trends 상자(trends.items)에만 넣을 것")
+        dsc = s.get("discussion")
+        if dsc is not None:  # 💬 오늘의 질문(정적, tools/discussion.py apply 로만 넣음)
+            assert isinstance(dsc, dict) and dsc.get("question") and dsc.get("operator_comment") and isinstance(dsc.get("approved"), bool), \
+                (s["id"], "discussion = {question, operator_comment, approved: bool}")
+            assert len(dsc["question"]) <= 200 and len(dsc["operator_comment"]) <= 500, (s["id"], "discussion 이 너무 김")
+            assert not blocked(dsc["question"] + " " + dsc["operator_comment"]), (s["id"], "discussion 차단 목록 키워드")
         if s.get("category") == "visa" or s.get("topic") == "visa" or "visa" in s.get("secondary", []):
             # 외국인·비자: 저볼륨이라 최대 7일 전 기사 허용(그 이상은 금지)
             age = datetime.fromisoformat(data["generated"]) - datetime.fromisoformat(s["published"])
@@ -113,6 +130,19 @@ def validate(data):
         if isinstance(it, dict):
             for k in ("tag", "ko", "desc"):
                 assert it.get(k), ("trends", tag, "필수: " + k)
+    assert sum(1 for s in data["stories"] if s.get("discussion")) <= 15, "discussion(오늘의 질문)은 판마다 최대 15건"
+    kt = data.get("korea_top")
+    if kt is not None:   # 🇰🇷 오늘의 한국 주요 뉴스(tools/fetch_korea.py) — 최대 6건, 링크 필수
+        assert isinstance(kt, list) and len(kt) <= 6, "korea_top 은 최대 6건 목록"
+        for i, k in enumerate(kt):
+            assert isinstance(k, dict) and k.get("headline") and k.get("source"), ("korea_top", i, "headline·source 필수")
+            assert str(k.get("url", "")).startswith("http"), ("korea_top", i, "url(원문 링크) 필수")
+            assert "news.google.com" not in k["url"], ("korea_top", i, "Google News 중계 링크 말고 실제 기사 URL(fetch_korea.py --decode-only)")
+            assert len(k["headline"]) <= 80, ("korea_top", i, "제목은 짧게(80자 이하)")
+            if k.get("published"):
+                assert k["published"].endswith("+07:00"), ("korea_top", i, "published 는 +07:00")
+                datetime.fromisoformat(k["published"])
+            assert not blocked(k["headline"]), ("korea_top", i, "차단 목록 키워드")
     for h in data["highlights"]:
         assert h in ids, "highlights 에 없는 id: " + h
     assert len(data["highlights"]) == 3, "highlights 는 3개"
@@ -161,8 +191,16 @@ def coverage_report(data):
             warn.append("%s 기사 0건 — 실제 뉴스가 있으면 1건 이상" % TOPICS[t])
     return warn
 
-def write_edition(data):
-    """data/<id>.json + data/<id>.js 저장 후 index 재생성."""
+def write_edition(data, merge_discussions=True):
+    """data/<id>.json + data/<id>.js 저장 후 index 재생성.
+    tools/discussions/<id>.json(운영자가 승인한 💬 오늘의 질문, tools/discussion.py apply)이 있으면 다시 합친다."""
+    if merge_discussions:
+        f = pathlib.Path(__file__).resolve().parent / "discussions" / (data["id"] + ".json")
+        if f.exists():
+            by = {s["id"]: s for s in data["stories"]}
+            for x in json.loads(f.read_text(encoding="utf-8")):
+                if x["id"] in by and x.get("approved") is True:
+                    by[x["id"]]["discussion"] = dict(question=x["question"], operator_comment=x["operator_comment"], approved=True)
     validate(data)
     eid = data["id"]
     (DATA / (eid + ".json")).write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -193,7 +231,22 @@ def build_index():
     (DATA / "index.json").write_text(json.dumps(idx, ensure_ascii=False, indent=1), encoding="utf-8")
     (DATA / "index.js").write_text("window.NEWS_INDEX = %s;\n" % json.dumps(idx, ensure_ascii=False), encoding="utf-8")
     print("index:", [(e["id"], e["label"]) for e in eds])
+    build_ads()
     return idx
+
+
+def build_ads():
+    """data/ads.json(광고 자리 설정) → data/ads.js(window.TN_ADS, file:// 용). 없으면 아무것도 안 함."""
+    src = DATA / "ads.json"
+    if not src.exists():
+        return
+    ads = json.loads(src.read_text(encoding="utf-8"))
+    for sl in ads.get("slots", []):
+        assert sl.get("id") in ("top", "mid", "infeed", "drawer", "footer"), ("ads", sl.get("id"))
+        for it in sl.get("items", []):
+            for k in ("image", "link"):
+                assert not it.get(k) or str(it[k]).startswith("https://"), ("ads", sl["id"], k, "https:// 만")
+    (DATA / "ads.js").write_text("window.TN_ADS = %s;\n" % json.dumps(ads, ensure_ascii=False), encoding="utf-8")
 
 
 if __name__ == "__main__":

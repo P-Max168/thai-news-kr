@@ -62,12 +62,20 @@ async def main():
           trendItems: document.querySelectorAll('#trendList li').length,
           trendKo: document.querySelectorAll('#trendList .tr-ko').length,
           trendInMain: !!document.querySelector('.main-col #trendWidget'),
+          trendShown: [...document.querySelectorAll('#trendList li')].filter(l=>l.offsetParent!==null).length,
+          loginBtn: !!document.querySelector('#acct [data-login], #acct [data-acct-menu]'),
+          korea: document.querySelectorAll('#korea .korea__list li').length,
+          ads: document.querySelectorAll('[data-ad-slot]:not([hidden]) .ad, .ad-slot--feed .ad').length,
           sw: sw, manifest: man };
         }""")
         info["onboarding"] = onboarding
         await pg.screenshot(path=SHOT)
         await pg.screenshot(path=SHOT.replace(".png", "-full.png"), full_page=True)
         if "visa" in info["tabs"]:
+            await pg.click("#menuBtn")                 # ☰ 서랍 메뉴
+            await pg.wait_for_timeout(400)
+            info["drawer"] = await pg.evaluate("document.getElementById('drawer').classList.contains('is-open')")
+            await pg.screenshot(path=SHOT.replace(".png", "-drawer.png"))
             await pg.click('#tabs [data-tab="visa"]')
             await pg.wait_for_timeout(500)
             info["visaCards"] = await pg.evaluate("document.querySelectorAll('#feed .card').length")
@@ -83,6 +91,7 @@ async def main():
           and (info["selected"] in (None, WANT)) and not errors and info["onboarding"]
           and info.get("visaCards", 0) == info["visaStories"]          # 외국인·비자 탭 렌더 확인
           and info["trendInMain"]                                       # 모바일에서 트렌드가 본문에 보임
+          and info["trendShown"] <= 3 and info["loginBtn"] and info.get("drawer")   # 트렌드 처음 3개 · 로그인 버튼 · ☰ 서랍
           and info["sw"] is True and isinstance(info["manifest"], dict) and info["manifest"]["ok"])
     if info["trendItems"] and not info["trendKo"]:
         print("경고: 트렌드에 한국어 풀이가 없음(옛 형식 문자열 목록) — README '트렌드' 절차 확인")

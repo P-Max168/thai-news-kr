@@ -15,6 +15,13 @@ LATEST = json.loads((ROOT / "data/index.json").read_text(encoding="utf-8"))["lat
 fails = []
 
 
+async def drawer(pg):
+    """☰ 메뉴(서랍) 열기 — 주제 목록·내 주제 설정은 서랍 안에 있음"""
+    if not await pg.evaluate("document.getElementById('drawer').classList.contains('is-open')"):
+        await pg.click("#menuBtn")
+        await pg.wait_for_timeout(350)
+
+
 def check(cond, msg):
     print(("ok   " if cond else "FAIL: ") + msg)
     if not cond:
@@ -88,6 +95,7 @@ async def main():
             await m.wait_for_timeout(700)
             check(await m.evaluate("id=>{const c=document.getElementById(id);return !!c&&c.classList.contains('is-open')}", target), "브리핑 줄 → 기사 %s 펼침" % target)
             await m.evaluate("window.scrollTo(0,0)")
+            await drawer(m)
             await m.click('#tabs [data-tab="feed"]')
             await m.wait_for_timeout(400)
         # ---------- 👍👎 재정렬 ----------
@@ -112,6 +120,7 @@ async def main():
         await (m.locator("#" + last)).screenshot(path=OUT + "mobile-390-article.png")
         # ---------- 설정(🧩 내 주제) ----------
         await m.evaluate("window.scrollTo(0,0)")
+        await drawer(m)
         await m.click("#myTopicsBtn")
         await m.wait_for_timeout(400)
         check(await m.is_visible("[data-reset-taste]"), "설정에 '내 취향 초기화'")
@@ -124,10 +133,12 @@ async def main():
         await m.click("[data-close]")
         # 외국인·비자 탭
         if await m.locator('#tabs [data-tab="visa"]').count():
+            await drawer(m)
             await m.click('#tabs [data-tab="visa"]')
             await m.wait_for_timeout(500)
             await m.screenshot(path=OUT + "mobile-390-tab-visa.png")
         # 트렌드(모바일: 내 피드에서 주요 뉴스 아래)
+        await drawer(m)
         await m.click('#tabs [data-tab="feed"]')
         await m.wait_for_timeout(400)
         check(await m.evaluate("!!document.querySelector('.main-col #trendWidget')"), "모바일 트렌드 본문 안")
@@ -167,6 +178,7 @@ async def main():
         await pg.wait_for_timeout(600)
         await pg.screenshot(path=OUT + "desktop-1280-top.png")
         await pg.screenshot(path=OUT + "desktop-1280.png", full_page=True)
+        await drawer(pg)
         await pg.click('#tabs [data-tab="pattaya"]')
         await pg.wait_for_timeout(400)
         await pg.screenshot(path=OUT + "desktop-topic.png")

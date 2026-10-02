@@ -17,7 +17,7 @@ tags: 키워드 2~6개 필수(인물·장소·기관·사건 키워드, '#' 없�
 """
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
-from newslib import write_edition, B
+from newslib import write_edition, B, KR
 
 stories = [
 dict(id="pt1", topic="pattaya", secondary=["weather"], region="파타야(좀티엔)",   # ※ 예시 — 실제 기사로 교체
@@ -37,6 +37,13 @@ briefing = [
   B("pattaya", "※ 파타야 **핵심 키워드** 한 줄 요약", "pt1"),
 ]
 
+# 🇰🇷 오늘의 한국 주요 뉴스 6건: python3 tools/fetch_korea.py <id> → 한국에서 지금 가장 화제인 전국 뉴스 6개를 골라
+#   python3 tools/fetch_korea.py <id> --decode-only "제목 일부" … 로 실제 URL 을 푼 뒤 KR(제목, 매체, URL, 게재시각) 로 적는다.
+korea_top = [
+  KR("※ 한국 언론 제목(살짝만 다듬기)", "※ 매체", "https://※실제 기사 URL", "2026-01-01T07:00:00+07:00"),
+]
+
+# X 트렌드: 상자(trends.items)에만 넣는다. trends24 를 출처로 한 '기사 카드'(SNS 탭)는 만들지 않는다(검증이 막음)
 T = lambda tag, ko, desc, verified=True: dict(tag=tag, ko=ko, desc=desc, verified=verified)
 trends = dict(
   source="trends24.in (X/트위터 태국 트렌드)", url="https://trends24.in/thailand/",
@@ -53,7 +60,7 @@ data = dict(
   previous="※ 직전 판 id (data/index.json 의 latest)",
   briefing=briefing,
   highlights=["pt1", "※", "※"],   # 주요 뉴스 3건(기사 id) — 주제 선택과 관계없이 모든 사용자에게 보임
-  stories=stories, trends=trends)
+  stories=stories, trends=trends, korea_top=korea_top)
 
 if __name__ == "__main__":
     write_edition(data)

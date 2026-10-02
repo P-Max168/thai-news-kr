@@ -1,0 +1,123 @@
+# -*- coding: utf-8 -*-
+"""💬 오늘의 질문 + 운영자 첫 댓글(정적 내용, Firestore 아님) 초안·적용 도구.
+
+  python3 tools/discussion.py draft <판 id>
+      → drafts/discussion/<판 id>.json (올리지 않음, .gitignore) 에 후보 기사 15건:
+        [{id, title(한국어 제목), topic, question:"", operator_comment:"", approved:false}]
+        question·operator_comment 는 정기 실행(편집자)이 직접 채운다 — 자연스러운 한국어, 정직한 운영자 목소리,
+        tools/TRANSLATION_RULES.md 준수, 기사에 없는 사실 단정 금지, 절대 독자(사용자)인 척하지 않는다.
+        이미 채운 초안 파일이 있으면 덮어쓰지 않는다(--force 로 새로).
+  python3 tools/discussion.py show <판 id>              # 초안을 사람이 읽기 좋게 출력(채팅으로 보여 줄 때)
+  python3 tools/discussion.py apply <판 id> <approved.json>
+      → 운영자(Mingoo)가 채팅에서 OK 한 항목만 적용. approved.json = 초안과 같은 모양 목록
+        (approved 가 true 인 항목만, approved 필드가 없으면 목록 전체를 승인으로 봄).
+        tools/discussions/<판 id>.json 에 저장(판을 다시 만들어도 newslib.write_edition 이 자동으로 다시 합침)
+        + data/<판 id>.json|js 의 기사에 discussion={question, operator_comment, approved:true} 반영.
+  python3 tools/discussion.py clear <판 id>             # 그 판의 오늘의 질문 모두 빼기
+화면: approved 가 true 인 것만, 그 기사 댓글 위에 '💬 오늘의 질문' 상자 + '운영자' 배지 고정 댓글.
+"""
+import json, pathlib, sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "tools"))
+import newslib  # noqa: E402
+
+DRAFTS = ROOT / "drafts" / "discussion"
+APPLIED = ROOT / "tools" / "discussions"
+MAX = 15
+# 후보 순서: 주요 뉴스 → 외국인·비자 → 지역 → 생활·여행 → 나머지(판 순서)
+PRI = ["visa", "pattaya", "sriracha", "bangkok", "life", "travel", "weather", "society", "poleco", "ent"]
+
+
+def load(eid):
+    p = ROOT / "data" / (eid + ".json")
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
+def candidates(d):
+    hl = d.get("highlights", [])
+    st = d["stories"]
+    def rank(s):
+        t = newslib.topics_of(s)
+        return (0 if s["id"] in hl else 1, min(PRI.index(x) if x in PRI else 99 for x in t), st.index(s))
+    return sorted(st, key=rank)[:MAX]
+
+
+def draft(eid, force=False):
+    d = load(eid)
+    DRAFTS.mkdir(parents=True, exist_ok=True)
+    fn = DRAFTS / (eid + ".json")
+    if fn.exists() and not force:
+        old = json.loads(fn.read_text(encoding="utf-8"))
+        if any(x.get("question") for x in old):
+            print("이미 채운 초안이 있음(덮어쓰지 않음):", fn); return fn
+    items = [dict(id=s["id"], title=s["headline"], topic=newslib.topics_of(s)[0], question="", operator_comment="", approved=False)
+             for s in candidates(d)]
+    fn.write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8")
+    print("초안 %d건 → %s (question·operator_comment 를 채우고 approved 는 false 로 둘 것)" % (len(items), fn))
+    return fn
+
+
+def show(eid):
+    items = json.loads((DRAFTS / (eid + ".json")).read_text(encoding="utf-8"))
+    for i, x in enumerate(items, 1):
+        print("%d. [%s] %s\n   💬 질문: %s\n   🗨️ 운영자: %s\n" % (i, x["id"], x["title"], x.get("question") or "(비어 있음)", x.get("operator_comment") or "(비어 있음)"))
+
+
+def merge_into(d, items):
+    """items(승인된 것) → d["stories"][*]["discussion"]. 반환: 적용 건수"""
+    by = {s["id"]: s for s in d["stories"]}
+    n = 0
+    for x in items:
+        s = by.get(x["id"])
+        if not s:
+            print("경고: 기사 id 없음(건너뜀):", x["id"], file=sys.stderr); continue
+        q, c = (x.get("question") or "").strip(), (x.get("operator_comment") or "").strip()
+        if not q or not c:
+            print("경고: 질문/운영자 댓글이 비어 있음(건너뜀):", x["id"], file=sys.stderr); continue
+        s["discussion"] = dict(question=q, operator_comment=c, approved=True); n += 1
+    return n
+
+
+def apply(eid, approved_path):
+    items = json.loads(pathlib.Path(approved_path).read_text(encoding="utf-8"))
+    if isinstance(items, dict):
+        items = items.get("items", [])
+    ok = [x for x in items if x.get("approved", True) is True]
+    if len(ok) > MAX:
+        raise SystemExit("최대 %d건" % MAX)
+    d = load(eid)
+    for s in d["stories"]:
+        s.pop("discussion", None)
+    n = merge_into(d, ok)
+    APPLIED.mkdir(parents=True, exist_ok=True)
+    keep = [dict(id=x["id"], question=x["question"].strip(), operator_comment=x["operator_comment"].strip(), approved=True)
+            for x in ok if x.get("question") and x.get("operator_comment")]
+    (APPLIED / (eid + ".json")).write_text(json.dumps(keep, ensure_ascii=False, indent=1), encoding="utf-8")
+    newslib.write_edition(d, merge_discussions=False)
+    print("적용:", n, "건 →", eid)
+
+
+def clear(eid):
+    d = load(eid)
+    for s in d["stories"]:
+        s.pop("discussion", None)
+    f = APPLIED / (eid + ".json")
+    if f.exists():
+        f.unlink()
+    newslib.write_edition(d, merge_discussions=False)
+    print("오늘의 질문 모두 뺌:", eid)
+
+
+if __name__ == "__main__":
+    a = sys.argv[1:]
+    if len(a) >= 2 and a[0] == "draft":
+        draft(a[1], "--force" in a)
+    elif len(a) >= 2 and a[0] == "show":
+        show(a[1])
+    elif len(a) >= 3 and a[0] == "apply":
+        apply(a[1], a[2])
+    elif len(a) >= 2 and a[0] == "clear":
+        clear(a[1])
+    else:
+        sys.exit(__doc__)

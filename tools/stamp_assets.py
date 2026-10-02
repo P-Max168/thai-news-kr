@@ -6,7 +6,9 @@ deploy.sh 가 커밋 전에 자동 실행한다. data/ 는 대상 아님(네트�
 import hashlib, pathlib, re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-ASSETS = ["assets/style.css", "assets/topics.js", "assets/prefs.js", "assets/taste.js", "assets/app.js"]
+ASSETS = ["assets/style.css", "assets/topics.js", "assets/prefs.js", "assets/taste.js", "assets/app.js", "assets/social.js"]
+# social.js 가 import() 하는 모듈(index.html 에 직접 없음): social.js 안의 FB_URL ?v= 를 먼저 갱신
+MODULES = {"assets/fb.js": "assets/social.js"}
 EXTRA = ["manifest.json"] + sorted(str(p.relative_to(ROOT)) for p in (ROOT / "assets/icons").glob("*.png"))
 
 
@@ -21,15 +23,21 @@ def main():
     html_p, sw_p = ROOT / "index.html", ROOT / "sw.js"
     html = html_p.read_text(encoding="utf-8")
     sw = sw_p.read_text(encoding="utf-8")
+    changed = False
+    for mod, host in MODULES.items():
+        hp = ROOT / host
+        src = hp.read_text(encoding="utf-8")
+        new_src = re.sub(r'(%s)\?v=[0-9a-zA-Z]+' % re.escape(mod), r"\1?v=" + h([mod])[:8], src)
+        if new_src != src:
+            hp.write_text(new_src, encoding="utf-8"); changed = True
     new_html = html
     for a in ASSETS:
         v = h([a])[:8]
         new_html = re.sub(r'(%s)\?v=[0-9a-zA-Z]+' % re.escape(a), r"\1?v=" + v, new_html)
         sw = re.sub(r'("%s)\?v=[0-9a-zA-Z]+"' % re.escape(a), r'\1?v=%s"' % v, sw)
     # 앱 셸 전체 버전(index.html 의 정적 부분 포함)
-    ver = "tnk-" + hashlib.sha256((new_html + h(ASSETS + EXTRA)).encode()).hexdigest()[:10]
+    ver = "tnk-" + hashlib.sha256((new_html + h(ASSETS + list(MODULES) + EXTRA)).encode()).hexdigest()[:10]
     sw = re.sub(r'var VERSION = "[^"]*";', 'var VERSION = "%s";' % ver, sw)
-    changed = False
     if new_html != html:
         html_p.write_text(new_html, encoding="utf-8"); changed = True
     if sw != sw_p.read_text(encoding="utf-8"):

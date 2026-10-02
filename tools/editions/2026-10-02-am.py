@@ -211,18 +211,6 @@ dict(id="l3", category="local", region="차층사오(파타야 관광경찰)",
  tags=["파타야","관광경찰","차층사오","구호"]),
 
 # ───────────── SNS 화제 ─────────────
-dict(id="n1", category="sns",
- headline="트렌드24 아침권, 드라마·패션 협업 해시태그가 상단…홍수어는 상대적으로 적음",
- summary=[
-  "trends24.in 태국 집계(아침 수집) 기준으로 #SchiaparellixKENGNAMPING, #Schiaparelli, #GMMTVFANIVAL2026HappyFamily, #MCardxTeeteePor, #ยัวร์ทูบเบอร์Q5, YOURTUBER Q5 등이 상단에 자주 보였다.",
-  "이어 TTP AT THE MALL LIFESTORE, TEN AT SAINT LAURENT SUMMER27, 28th HAPPY YINYIN DAY, SHOPEE PERTHSANTA, SMILEY BESIDE CHARLOTTE02 같은 팬덤·브랜드 키워드가 이어졌다.",
-  "뉴스 본문에는 홍수·구호가 가득하지만, X 트렌드 상단은 여전히 드라마·아이돌·패션 협업 비중이 크다. 분 단위로 순위는 바뀐다."
- ],
- context="포털 'SNS 화제' 탭용 스냅샷.",
- source="trends24.in", url="https://trends24.in/thailand/",
- title_th="Thailand — X (Twitter) trending topics and hashtags today",
- published="2026-10-02T07:15:00+07:00",
- tags=["트렌드","X","드라마"]),
 ]
 
 trends = dict(

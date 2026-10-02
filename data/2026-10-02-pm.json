@@ -577,27 +577,6 @@
     "대사관",
     "외국인사업법"
    ]
-  },
-  {
-   "id": "n1",
-   "category": "sns",
-   "headline": "트렌드24 저녁권, 졸업·패션·아이돌 해시태그 상단…홍수어는 여전히 적음",
-   "summary": [
-    "trends24.in 태국 집계(저녁 수집) 기준으로 #SHEEPxTleFirstoneRainy, #WangYiboPFWSS27xLoewe, #GraduateNutdan, #นุมานัวร์, #PraewLiveXWilliamEstConcert 등이 상단에 자주 보였다.",
-    "이어 WE REIGN PRESS TOUR, CELEBRATING NUTDAN, ANTON SAINT LAURENT AMBASSADOR, KHUNPOL OFFICIALLY GRAD, KONGJIRO GRAD DAY, SMILEY BESIDE CHARLOTTE02, ENGFA ENDLESS CHARM02 같은 졸업·브랜드·팬덤 키워드가 이어졌다.",
-    "뉴스 본문은 홍수·항공·공장이지만, X 트렌드 상단은 아침과 같이 엔터·패션 비중이 크다. 분 단위로 순위는 바뀐다."
-   ],
-   "context": "포털 'SNS 화제' 탭용 스냅샷.",
-   "source": "trends24.in",
-   "url": "https://trends24.in/thailand/",
-   "title_th": "Thailand — X (Twitter) trending topics and hashtags today",
-   "published": "2026-10-02T18:10:00+07:00",
-   "tags": [
-    "트렌드",
-    "X",
-    "졸업",
-    "패션"
-   ]
   }
  ],
  "trends": {
@@ -699,5 +678,43 @@
     "verified": true
    }
   ]
- }
+ },
+ "korea_top": [
+  {
+   "headline": "[속보] 합참 \"北, 동해상으로 미상 발사체 발사\"",
+   "source": "MBC 뉴스",
+   "url": "https://imnews.imbc.com/news/2026/world/article/6855526_36925.html",
+   "published": "2026-10-03T04:47:00+07:00"
+  },
+  {
+   "headline": "트럼프 \"韓 알래스카 투자 안 하면 2배로 청구\"…관세 보복 시사",
+   "source": "다음뉴스",
+   "url": "https://v.daum.net/v/20261003054714374",
+   "published": "2026-10-03T03:47:14+07:00"
+  },
+  {
+   "headline": "특검, '여론조사비 대납 의혹' 오세훈 2심 징역 1년6개월 구형",
+   "source": "한국경제",
+   "url": "https://www.hankyung.com/article/2026100204107",
+   "published": "2026-10-02T12:41:46+07:00"
+  },
+  {
+   "headline": "이 대통령 \"상대국 국가원수 거짓말쟁이 만들어\"…우크라에 강경 발언",
+   "source": "한겨레",
+   "url": "https://www.hani.co.kr/arti/politics/bluehouse/1280703.html",
+   "published": "2026-10-02T23:22:00+07:00"
+  },
+  {
+   "headline": "청와대, 김여정 '광대극' 비판에 \"비방적 언사는 도움 안 돼\"",
+   "source": "연합뉴스TV",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261002234340PGF",
+   "published": "2026-10-02T21:43:00+07:00"
+  },
+  {
+   "headline": "하나은행도 AI 해킹 뚫렸다…89명 개인정보 유출",
+   "source": "연합뉴스",
+   "url": "https://www.yna.co.kr/view/AKR20261002160200002",
+   "published": "2026-10-02T15:41:29+07:00"
+  }
+ ]
 }

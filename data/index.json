@@ -7,7 +7,7 @@
    "edition": "pm",
    "label": "10월 2일 저녁판",
    "generated": "2026-10-02T18:25:00+07:00",
-   "stories": 24
+   "stories": 23
   },
   {
    "id": "2026-10-02-am",
@@ -15,7 +15,7 @@
    "edition": "am",
    "label": "10월 2일 아침판",
    "generated": "2026-10-02T07:25:00+07:00",
-   "stories": 16
+   "stories": 15
   },
   {
    "id": "2026-10-01-pm",
@@ -23,7 +23,7 @@
    "edition": "pm",
    "label": "10월 1일 저녁판",
    "generated": "2026-10-01T18:25:00+07:00",
-   "stories": 17
+   "stories": 16
   },
   {
    "id": "2026-10-01-am",
@@ -31,7 +31,7 @@
    "edition": "am",
    "label": "10월 1일 아침판",
    "generated": "2026-10-01T07:25:00+07:00",
-   "stories": 16
+   "stories": 15
   },
   {
    "id": "2026-09-30-pm",
@@ -39,7 +39,7 @@
    "edition": "pm",
    "label": "9월 30일 저녁판",
    "generated": "2026-09-30T18:25:00+07:00",
-   "stories": 18
+   "stories": 17
   },
   {
    "id": "2026-09-30-am",

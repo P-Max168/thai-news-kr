@@ -3,7 +3,7 @@
 모든 내용은 raw/2026-10-02-pm/ 에 저장한 RSS·원문에서 확인한 것만 사용."""
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
-from newslib import write_edition
+from newslib import write_edition, KR
 
 stories = [
 # ───────────── 정치 ─────────────
@@ -317,18 +317,6 @@ dict(id="v8", category="visa",
  tags=["노미니","DBD","대사관","외국인사업법"]),
 
 # ───────────── SNS 화제 ─────────────
-dict(id="n1", category="sns",
- headline="트렌드24 저녁권, 졸업·패션·아이돌 해시태그 상단…홍수어는 여전히 적음",
- summary=[
-  "trends24.in 태국 집계(저녁 수집) 기준으로 #SHEEPxTleFirstoneRainy, #WangYiboPFWSS27xLoewe, #GraduateNutdan, #นุมานัวร์, #PraewLiveXWilliamEstConcert 등이 상단에 자주 보였다.",
-  "이어 WE REIGN PRESS TOUR, CELEBRATING NUTDAN, ANTON SAINT LAURENT AMBASSADOR, KHUNPOL OFFICIALLY GRAD, KONGJIRO GRAD DAY, SMILEY BESIDE CHARLOTTE02, ENGFA ENDLESS CHARM02 같은 졸업·브랜드·팬덤 키워드가 이어졌다.",
-  "뉴스 본문은 홍수·항공·공장이지만, X 트렌드 상단은 아침과 같이 엔터·패션 비중이 크다. 분 단위로 순위는 바뀐다."
- ],
- context="포털 'SNS 화제' 탭용 스냅샷.",
- source="trends24.in", url="https://trends24.in/thailand/",
- title_th="Thailand — X (Twitter) trending topics and hashtags today",
- published="2026-10-02T18:10:00+07:00",
- tags=["트렌드","X","졸업","패션"]),
 ]
 
 # 트렌드: python3 tools/fetch_trends.py 2026-10-02-pm → raw/2026-10-02-pm/trends/ (10/3 04:48 재수집, 04:09 블록)
@@ -358,6 +346,16 @@ trends = dict(
   ]
 )
 
+# 🇰🇷 오늘의 한국 주요 뉴스 (2026-10-03 05:40 추가, raw/2026-10-02-pm/korea/korea.json)
+korea_top = [
+  KR("[속보] 합참 \"北, 동해상으로 미상 발사체 발사\"", "MBC 뉴스", "https://imnews.imbc.com/news/2026/world/article/6855526_36925.html", "2026-10-03T04:47:00+07:00"),
+  KR("트럼프 \"韓 알래스카 투자 안 하면 2배로 청구\"…관세 보복 시사", "다음뉴스", "https://v.daum.net/v/20261003054714374", "2026-10-03T03:47:14+07:00"),
+  KR("특검, '여론조사비 대납 의혹' 오세훈 2심 징역 1년6개월 구형", "한국경제", "https://www.hankyung.com/article/2026100204107", "2026-10-02T12:41:46+07:00"),
+  KR("이 대통령 \"상대국 국가원수 거짓말쟁이 만들어\"…우크라에 강경 발언", "한겨레", "https://www.hani.co.kr/arti/politics/bluehouse/1280703.html", "2026-10-02T23:22:00+07:00"),
+  KR("청와대, 김여정 '광대극' 비판에 \"비방적 언사는 도움 안 돼\"", "연합뉴스TV", "https://www.yonhapnewstv.co.kr/news/AKR20261002234340PGF", "2026-10-02T21:43:00+07:00"),
+  KR("하나은행도 AI 해킹 뚫렸다…89명 개인정보 유출", "연합뉴스", "https://www.yna.co.kr/view/AKR20261002160200002", "2026-10-02T15:41:29+07:00"),
+]
+
 data = dict(
   id="2026-10-02-pm", date="2026-10-02", edition="pm", edition_label="저녁판",
   weekday="금요일", timezone="Asia/Bangkok (UTC+7)",
@@ -367,7 +365,7 @@ data = dict(
   previous="2026-10-02-am",
   briefing="아누틴 총리는 5일부터 남부 중심으로 비가 다시 올 수 있다며 대피소·식량 대비를 재차 주문했고, 재난청은 31개 주+방콕에서 약 124만 가구가 침수 피해를 봤다고 집계했습니다. 타이항공 이사회는 CEO 차이를 즉시 해임해 삼릿을 대행으로 세웠고, 토요타는 5~10일 공장 휴업을 발표했습니다. 아마타 촌부리에는 산업·환경장관이 찾아 배수를 시속 4만2,500㎥로 올렸으며, 아이디어 의원은 롬 의원을 명예훼손으로 고소했습니다.",
   highlights=["p1","e1","s1"],
-  stories=stories, trends=trends)
+  stories=stories, trends=trends, korea_top=korea_top)
 
 if __name__ == "__main__":
     write_edition(data)

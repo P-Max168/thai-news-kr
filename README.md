@@ -4,6 +4,8 @@
 
 > **2026-10-03 개편(새 형식)**: 주제 10개 + 보조 주제 + 키워드 태그, 첫 방문 '어떤 분이세요?' 온보딩, 브리핑 글머리표 목록, 👍👎 취향 학습, PWA(홈 화면 앱·오프라인). **정기 실행은 아래 '기사 스키마'의 새 형식으로 판을 만든다**(템플릿: `tools/editions/_template.py`). 옛 판(10월 2일 저녁판까지)은 그대로 두고 화면에서 매핑해 렌더한다.
 
+> **2026-10-03 새벽 추가**: ☰ 왼쪽 서랍 메뉴(주제 탭 줄 대신 — 탭 줄 자리는 일부러 비워 둠), 선택 기능 **Google 로그인**(설정·취향 동기화), **댓글**(Firestore), 💬 오늘의 질문(정적, 운영자 승인 후), 🇰🇷 오늘의 한국 주요 뉴스(`korea_top`), 광고 자리 목업(`data/ads.json`), 홈 화면 추가 안내 개선, 취향 버튼 문구('이런 소식 더 볼래요?' 🙌 더 보여줘 / 🙅 덜 보여줘), X 트렌드 3→5→10개. **로그인은 선택**: 안 해도(또는 Firebase 를 못 불러와도) 모든 기능이 예전처럼 동작.
+
 ## 열어보기
 - 그냥 `index.html`을 더블클릭하면 됩니다(file:// 지원, fetch를 쓰지 않음).
 - 또는 `python3 -m http.server 8765` 실행 후 http://127.0.0.1:8765/ 접속.
@@ -11,7 +13,7 @@
 - `?date=2026-09-29-am`처럼 판 id로 지정. 예전 형식 `?date=2026-09-29`(날짜만)는 그날의 최신 판으로 연결됩니다.
 - `#p1`처럼 기사 id로 바로 열기 가능(예: `?date=2026-09-29-am#l1`). `?tab=visa`처럼 주제 탭 지정 가능(`feed`=내 피드, `all`=전체 보기).
 - 첫 방문: '어떤 분이세요?'(5개 페르소나) → 주제 5개 미리 선택 → 끄거나 3개까지 추가(최대 8개) → 저장. '건너뛰기'면 모든 주제. 나중에 헤더의 **🧩 내 주제**(또는 푸터 링크)에서 변경·'내 취향 초기화'. 설정은 브라우저 `localStorage`(`tnk.profile.v1`)에만 저장.
-- 탭 = **⭐ 내 피드**(선택 주제 기사, 취향 순) + 선택한 주제들 + **전체 보기**. 주요 뉴스 3건은 내 피드·전체 보기에서 주제 선택과 관계없이 항상 보임.
+- **☰ 메뉴(왼쪽 서랍)** = **⭐ 내 피드**(선택 주제 기사, 취향 순) + 🧩 내 주제 설정 + 선택한 주제들 + **전체 보기** + 다른 주제 + 계정(로그인) + 작은 광고 자리. 바깥 누르기·왼쪽으로 밀기·✕·Esc 로 닫힘(포커스 가둠). 헤더 아래 예전 탭 줄 자리는 비워 둠(운영자가 나중에 정함). 주요 뉴스 3건은 내 피드·전체 보기에서 주제 선택과 관계없이 항상 보임.
 - http(s)로 열면 PWA: 홈 화면에 추가(안드로이드: 안내 바의 '추가' 버튼 / iOS Safari: 공유 → 홈 화면에 추가), 한 번 열어 본 뒤엔 오프라인으로 최신 판 읽기. file:// 에서는 서비스 워커 없이 그냥 동작.
 - 판이 2개 이상이면 헤더에 **날짜·판 선택 드롭다운**('9월 29일 아침판 (최신)', '9월 29일 새벽판' …)이 나타나고, 이전 판을 보는 중엔 상단에 "최신 판 보기" 안내가 뜹니다.
 
@@ -34,7 +36,13 @@
 - `assets/app.js, style.css` : 렌더러/스타일(빌드 과정 없음)
 - `assets/topics.js` : **주제 10개·페르소나 5개 정의 + 옛 판 category→주제 매핑**(데이터 파일은 고치지 않음). 주제 id 는 `tools/newslib.py` 의 `TOPICS` 와 같아야 함
 - `assets/prefs.js` : 사용자 설정 저장소 `TNStore`(지금은 localStorage. 나중에 Firebase 어댑터를 `TNStore.attach()`로 연결)
-- `assets/taste.js` : 👍👎 취향 학습·정렬 `TNTaste`(주제·지역·키워드 가중치)
+- `assets/taste.js` : 👍👎 취향 학습·정렬 `TNTaste`(주제·지역·키워드 가중치) + 로그인 때 합치기 `mergeDocs`
+- `assets/social.js` : 선택 기능 UI — 헤더/서랍의 '구글로 로그인'·내 계정 메뉴(사진만, UID 표시)·댓글·닉네임. 필요할 때만 `assets/fb.js` 를 import()
+- `assets/fb.js` : Firebase(ES 모듈, gstatic CDN v12.4.0: app·auth·**firestore-lite**) — 로그인·`users/{uid}` 동기화·`profiles`·`comments`. 웹 설정(firebaseConfig)이 들어 있음(웹 API 키는 공개용)
+- `firestore.rules` : Firestore 보안 규칙(콘솔에 붙여 넣어 게시 — 아래 'Google 로그인·Firestore')
+- `data/ads.json` → `data/ads.js` : 광고 자리 설정(목업). `build_index`(판 저장·`python3 tools/newslib.py`)가 ads.js 를 다시 만듦
+- `tools/fetch_korea.py` : 🇰🇷 한국 주요 뉴스 후보 수집(Google News KR) / `tools/discussion.py` : 💬 오늘의 질문 초안·적용 / `tools/strip_trend_cards.py` : trends24 기사 카드 제거(이미 실행함)
+- `drafts/` : 운영자 승인 전 초안(올리지 않음, .gitignore)
 - `manifest.json`, `sw.js`, `assets/icons/` : PWA(이름·아이콘·서비스 워커). 아이콘은 `python3 tools/make_icons.py` 로 다시 만들 수 있음(헤더 국기 로고 모양)
 - `tools/stamp_assets.py` : assets 내용 해시로 `index.html` 의 `?v=` 와 `sw.js` 의 `VERSION` 갱신(서비스 워커 캐시 교체). **deploy.sh 가 자동 실행**
 - `tools/test_pwa.py` : 서비스 워커·manifest·설치 가능·오프라인 읽기 점검(헤드리스 Chrome)
@@ -78,7 +86,17 @@
 - 정렬 = 최신성(판 생성 시각 기준 12시간마다 -1, 최대 -6) + 학습 점수(±4 제한) + 직접 누른 표(👍 +1.5 / 👎 -4). **👎 기사는 아래로 내려가고 흐리게 보일 뿐 숨기지 않음.**
 - 🧩 내 주제 → '내 취향 초기화'(가중치·표 삭제, 주제 선택은 유지), '모든 주제 보기', '처음 질문 다시 보기'.
 - 저장소 인터페이스(`assets/prefs.js` `TNStore`): `get()`, `update(fn)`, `reset()`, `subscribe(fn)`, `attach(adapter)`. 어댑터 = `{name, read(): Promise<doc|null>, write(doc): Promise}`. 문서 하나(`{v, onboarded, persona, topics, taste:{w, votes}, ui, updatedAt}`)라 Firestore `users/{uid}` 문서에 그대로 저장 가능. `attach()`는 `updatedAt`이 더 최신인 쪽을 채택.
-- **Google 로그인(다음 단계, 아직 없음)**: Firebase 프로젝트 생성 → 웹 앱 등록 → `firebaseConfig`(`apiKey, authDomain, projectId, appId`, 선택 `storageBucket, messagingSenderId`) 받기 → Authentication 에서 Google 제공업체 켜기 + 승인된 도메인에 `p-max168.github.io` 추가 → Firestore 생성(규칙: `users/{uid}` 는 본인만 읽기/쓰기) → `assets/firebase-sync.js`에서 로그인 후 `TNStore.attach({name:"firebase", read, write})`.
+- 버튼 문구: '이런 소식 더 볼래요?' **🙌 더 보여줘**(= 👍) / **🙅 덜 보여줘**(= 👎). 같은 표 로직, 다시 누르면 취소.
+
+## Google 로그인 · Firestore (선택 기능)
+- Firebase 프로젝트 `thai-news-kr`(Spark 무료). 웹 설정은 `tools/firebase_config.json` 과 `assets/fb.js` 의 `CONFIG`(같은 값). Authentication → Google 사용 + 승인된 도메인 `p-max168.github.io`. Firestore(Standard, asia-southeast1).
+- **보안 규칙 게시(필수, 콘솔에서 직접)**: Firebase 콘솔 → Firestore Database → **규칙** 탭 → 저장소의 `firestore.rules` 내용을 통째로 붙여 넣고 **게시**. 게시 전에는 로그인은 되지만 저장·댓글이 거부됨(화면엔 '댓글 기능을 준비 중이에요', 계정 메뉴 '동기화 오류').
+- 동작: 헤더 오른쪽 G 버튼(모바일)/'구글로 로그인'(설정 창·서랍) → `signInWithPopup`, 팝업이 막히면·iOS 홈 화면 앱(standalone)이면 `signInWithRedirect`. 로그인한 적 없는 방문자는 페이지가 다 뜬 뒤 쉬는 시간에 로그인 모듈만 미리 받음(실패해도 무시, 버튼 숨김). file:// 에서는 로그인·댓글 없음.
+- 동기화: `users/{uid}` = `{v, onboarded, persona, topics, taste:{w, votes, vf}, updatedAt, settingsAt, serverAt, lastCommentAt}` (`ui`=설치 안내 등은 이 기기 전용이라 안 올림). 로그인 때 합치기: 👍👎 표는 **합집합**(같은 기사 표가 다르면 더 최근 문서), 가중치는 합친 표로 다시 계산(`vf`=표마다 기사 특징 이름), 설정(persona·topics)은 `settingsAt` 이 **최근인 쪽** — 단 이 기기가 그 계정과 처음 연결되면 클라우드 설정을 되살림(새 휴대폰의 첫 질문 답이 원래 설정을 덮지 않게). 이후 바뀔 때마다 1.5초 모아서 저장, 다른 기기 변경은 화면으로 돌아올 때·5분마다 다시 읽음(Firestore Lite — 실시간 연결 안 열어 둠). 로그아웃해도 이 기기 설정은 남음.
+- 공개 화면엔 구글 실명·이메일을 **절대 표시하지 않음**: 헤더엔 내 사진만, 댓글엔 닉네임만. 계정 메뉴(헤더 사진 누르기)에 **내 UID** 가 작게 보임.
+- **댓글** `comments/{id}` = `{articleId(기사 id), edition, uid, nickname, text(≤500), createdAt, isAdmin, hidden, reports, reporters[]}`: 숨김 아닌 것은 누구나 읽기, 로그인한 본인만 작성(**30초에 1번** — 같은 batch 로 `users/{uid}.lastCommentAt` 을 서버 시각으로 갱신, 규칙이 확인), 본인·운영자 삭제, 운영자 숨기기, 다른 사람 '신고' 1인 1회·**3번이면 자동 숨김**. 화면 필터: 한국어·태국어·영어 욕설·링크·광고 문구 차단. 빈 목록 = '첫 댓글을 남겨보세요'. 색인 추가 불필요(같음 조건만 쓰고 정렬은 화면에서).
+- **닉네임** `profiles/{uid}` = `{nickname(2~12자), isAdmin, updatedAt}`: 첫 댓글 때 정함(기본 '파타야 회원 ####'). '운영자·관리자·admin' 이 들어간 이름 금지.
+- **운영자 지정**: 계정 메뉴에서 내 UID 확인 → 콘솔 Firestore → 컬렉션 `config` → 문서 ID `admins` → 필드 `uids` (배열) 에 UID(문자열) 추가. 클라이언트는 이 문서를 못 고침. 운영자 댓글엔 '운영자' 배지, 다른 사람 댓글 숨기기/삭제 가능. (운영자 지정 뒤 닉네임을 한 번 다시 저장하면 프로필에도 배지 반영)
 
 ## 기사 스키마
 ### 새 형식(2026-10-03 아침판부터 — 정기 실행은 이것만)
@@ -113,15 +131,24 @@
      - `context`(💡 배경 설명)에는 **태국 거주 외국인(파타야 4년차 한국인 기준) 실용 팁**을 짧게: 무엇을 확인·준비하면 되는지. 기사에 없는 숫자·규정을 단정하지 말 것(확실하지 않으면 '확인하자'로).
      - 한국인·한국 교민 관련(한국인 사건, 대사관 공지, 한-태 관계)은 우선 싣는다.
    - **성인·선정적 기사 금지**: 성범죄·성매매·음란물 위주 기사, 노출 사진이 중심인 기사는 싣지 않는다. 이미지·영상은 어떤 기사에도 넣지 않는다. 검증이 `tools/trend_blocklist.txt` 키워드를 제목·원문 제목·태그·요약에서 찾으면 build 가 멈춤 → 그 기사를 빼거나(원칙), 일반 기사가 우연히 걸린 경우에만 차단 목록 정규식을 다듬는다.
-   - **X 트렌드(매번 새로)**: `python3 tools/fetch_trends.py <id> 15` → trends24.in 태국 최신 블록에서 상위 15개(차단 목록에 걸린 성인·선정적 태그는 자동으로 빼고 `필터됨` 개수 출력). 걸리지 않았어도 **보고 판단해 성적인 느낌의 정체불명 태그는 직접 뺀다**(뺀 수는 `filtered`에 더함).
+   - **X 트렌드(매번 새로)**: `python3 tools/fetch_trends.py <id> 10` → trends24.in 태국 최신 블록에서 상위 10개(차단 목록에 걸린 성인·선정적 태그는 자동으로 빼고 `필터됨` 개수 출력). 걸리지 않았어도 **보고 판단해 성적인 느낌의 정체불명 태그는 직접 뺀다**(뺀 수는 `filtered`에 더함).
      - 남은 태그마다 웹 검색(태그 그대로 + 'series/EP', 배우 이름, 'Paris Fashion Week' 등)으로 무엇인지 확인 → `T(tag, ko, desc)`로 적는다: `ko`=한국어 번역·음역(예: `#PlsLoveรักได้ไหมEP4` → '플리즈 러브(사랑해도 될까) 4화'), `desc`=어떤 드라마·아이돌·행사인지, 왜 뜨는지 한 줄.
+     - **trends24 해시태그 목록을 기사 카드(SNS 탭)로 만들지 않는다** — 트렌드는 트렌드 상자에만(`tools/TRANSLATION_RULES.md`, `newslib.validate` 가 막음). 화면은 처음 3개 → 더 보기 5개 → 10개(최대)라 **10개까지만** 적는다(`fetch_trends.py <id> 10`).
      - **확인이 안 되면 추측하지 말고** `T(tag, ko, "…찾지 못함", False)` → 화면에 '확인 안 됨' 표시.
      - `trends.fetched`·`block`·`filtered`는 `raw/<id>/trends/trends.json` 값 그대로.
+   - **🇰🇷 오늘의 한국 주요 뉴스(매번, 6건)**: `python3 tools/fetch_korea.py <id>` → 후보 목록(한국 언론, 36시간 이내). **지금 한국에서 가장 화제인 전국 주요 뉴스 6개**(여러 매체 공통 톱·많이 읽힌 것; 교민 관련이라고 우선하지 않음)를 골라 `python3 tools/fetch_korea.py <id> --decode-only "제목 일부" …` 로 실제 기사 URL 을 푼 뒤 편집 파일 `korea_top = [KR(제목, 매체, URL, 게재시각), …]`. 제목은 한국어 원제를 `TRANSLATION_RULES.md` 제목 규칙대로 살짝만 다듬고 지어내지 않는다. 검증: 최대 6건·실제 링크(news.google.com 중계 링크 금지). 없으면 화면에 안 나옴.
 3. `tools/editions/<id>.py` 작성: **`cp tools/editions/_template.py tools/editions/<id>.py`** 후 `id/date/edition/generated/previous/briefing/highlights/stories/trends` 를 실제 내용으로 교체(새 형식: 기사마다 `topic` + `secondary` + `tags`, 브리핑은 `B(topic, "**굵게** 한 줄", story_id)` 5~6줄). 트렌드 `T(...)` 형식·외국인·비자 기사 쓰는 법은 `tools/editions/2026-10-02-pm.py` 참고(이 파일은 옛 형식 `category`이므로 기사 형식은 따라 하지 말 것). 뉴스·인용·숫자·URL은 절대 지어내지 않는다.
    - 주제 고르기: 지역 소식은 지역(`pattaya`/`sriracha`/`bangkok`)을 주 주제로, 성격(날씨·교통·생활·사건 등)을 보조로. 지역과 무관한 전국 소식은 성격을 주 주제로. 외국인·비자 소식은 `visa` 주 주제 + 지역 보조.
 4. `python3 tools/build_data.py tools/editions/<id>.py` (검증 실패 시 예외로 멈춤. `점검(경고):` 줄은 구성 안내 — 실제 뉴스가 있는데 빠진 주제면 보강)
-5. `python3 -m http.server 8765 &` → `python3 tools/screenshot.py` (`ALL OK` 확인) → `screenshots/`의 이미지를 직접 보고 문제 수정. 특히 `mobile-390-feed.png`(브리핑 5~6줄·굵게·주제 칩), `mobile-390-tab-visa.png`(외국인·비자 탭), `mobile-390-trends.png`(모바일 트렌드: 내 피드에선 주요 뉴스 바로 아래, 처음 5개 + '모두 보기'), `desktop-1280-top.png`. 앱 코드(assets·sw.js)를 고쳤으면 `python3 tools/test_pwa.py` 도.
-6. **배포(필수)**: `bash tools/deploy.sh` — 아래 'Deploy' 참고. 07:08·18:08 정기 실행은 판을 만든 뒤 **매번** 실행할 것.
+5. `python3 -m http.server 8765 &` → `python3 tools/screenshot.py` (`ALL OK` 확인) → `screenshots/`의 이미지를 직접 보고 문제 수정. 특히 `mobile-390-feed.png`(브리핑 5~6줄·굵게·주제 칩), `mobile-390-tab-visa.png`(외국인·비자 탭), `mobile-390-trends.png`(모바일 트렌드: 내 피드에선 주요 뉴스 바로 아래, 처음 3개 + '더 보기'(5→10)), `desktop-1280-top.png`. 앱 코드(assets·sw.js)를 고쳤으면 `python3 tools/test_pwa.py` 도.
+6. **💬 오늘의 질문 초안(매번, 승인 전까지 화면에 안 나옴)**: `python3 tools/discussion.py draft <id>` → `drafts/discussion/<id>.json` 의 15건마다 `question`(독자에게 묻는 한 줄)·`operator_comment`(운영자 첫 댓글)를 채운다 — 자연스러운 한국어, 정직한 '운영자' 목소리(“운영자입니다.”), `TRANSLATION_RULES.md` 준수, 기사에 없는 사실·숫자 단정 금지, **절대 독자(사용자)인 척 쓰지 않는다**. `approved` 는 false 그대로. 보고에 `python3 tools/discussion.py show <id>` 결과를 붙여 운영자에게 보여 주고, **채팅에서 OK 받은 항목만** `approved: true` 로 바꾼 파일로 `python3 tools/discussion.py apply <id> <파일>` → 배포. (적용분은 `tools/discussions/<id>.json` 에 남아 판을 다시 만들어도 유지)
+7. **배포(필수)**: `bash tools/deploy.sh` — 아래 'Deploy' 참고. 07:08·18:08 정기 실행은 판을 만든 뒤 **매번** 실행할 것.
+
+## 광고 자리(목업)
+- `data/ads.json`: `enabled`(false = 전부 숨김), `slots[]` = `{id: top(헤더 아래 띠)|mid(한국 뉴스·브리핑과 주요 뉴스 사이 큰 배너)|infeed(기사 every 건마다 카드)|drawer(서랍 아래 작은 배너)|footer, size: strip|large|medium|small|wide, enabled, items[{category, title, subtitle, image?, link?(https 만), theme 1~5}]}`. 지금은 '여기에 광고하세요 · 광고 문의' 자리 표시만(가짜 업체명·전화·링크 없음). 고친 뒤 `python3 tools/newslib.py` 로 `data/ads.js` 재생성 → 배포.
+
+## 홈 화면 추가 안내
+- 안드로이드(Chrome·삼성 인터넷): `beforeinstallprompt` → 아래 안내 바 '홈 화면에 추가할까요? 앱처럼 편하게 볼 수 있어요' [추가하기]/[나중에]. iOS Safari: 2단계 그림 카드(① 아래 도구 막대 공유 버튼 — 아래로 튀는 화살표 ② '홈 화면에 추가') + 닫기. '나중에'/닫기 = **7일** 동안 안 보임(이 기기 `ui.installHintUntil`). 설치 후·홈 화면 앱에서는 안 보임.
 
 ## Deploy (GitHub Pages)
 - 저장소: https://github.com/P-Max168/thai-news-kr (공개 — 무료 Pages 조건)
