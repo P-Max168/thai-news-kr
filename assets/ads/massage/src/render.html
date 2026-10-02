@@ -1,0 +1,10 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../dragon-ad.css">
+<style>html,body{margin:0;background:transparent}</style></head>
+<body><div id="ad"></div>
+<script src="../dragon-ad.js"></script>
+<script>
+  var q=new URLSearchParams(location.search);
+  DragonAd.mount(document.getElementById('ad'),{variant:q.get('v'),preview:q.get('preview')!=='0',fixedHeight:+q.get('h')})
+    .then(function(){window.__ready=true});
+</script></body></html>

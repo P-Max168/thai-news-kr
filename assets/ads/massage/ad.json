@@ -1,0 +1,61 @@
+{
+  "id": "dragon-massage-pattaya",
+  "type": "sponsored",
+  "label": "광고",
+  "title": "드래곤 스웨디시 마사지 (Dragon Massage)",
+  "subtitle": "파타야 3rd Road · 영업 11:30–23:30 · Google 평점 4.5",
+  "alt": "광고: 드래곤 스웨디시 마사지 Dragon Massage – 파타야 3rd Road, 영업 11:30–23:30, Google 평점 4.5",
+  "image_large": "assets/ads/massage/dragon-massage-large-1200x600.png",
+  "image_strip": "assets/ads/massage/dragon-massage-strip-1200x300.png",
+  "image_small": "assets/ads/massage/dragon-massage-small-600x200.png",
+  "link": "https://maps.app.goo.gl/sxwzECaxPxkANutE9",
+  "tel": "tel:+66807365211",
+  "kakao_url": "",
+  "line_url": "",
+  "display": {
+    "brand_en": "DRAGON MASSAGE",
+    "name_lead": "드래곤",
+    "name_main": "스웨디시 마사지",
+    "copy": "하루의 피로를 풀어주는 편안한 휴식",
+    "copy_short": "하루의 피로를 풀어주는 편안한 휴식",
+    "hours_short": "11:30–23:30",
+    "rating_short": "Google 4.5",
+    "area_short": "파타야 3rd Road",
+    "phone_display": "080-736-5211"
+  },
+  "html": {
+    "css": "assets/ads/massage/dragon-ad.css",
+    "js": "assets/ads/massage/dragon-ad.js",
+    "art": "assets/ads/massage/dragon.svg",
+    "snippet_large": "assets/ads/massage/banner-large.html",
+    "snippet_strip": "assets/ads/massage/banner-strip.html",
+    "snippet_small": "assets/ads/massage/banner-small.html",
+    "preview": "assets/ads/massage/preview.html"
+  },
+  "rel": "sponsored noopener",
+  "facts": {
+    "name_ko": "드래곤 스웨디시 마사지",
+    "name_en": "Dragon Massage",
+    "name_th": null,
+    "google_listing_name": "드래곤 스웨디시 마사지 Dragon Massage",
+    "google_category": "스포츠 마사지 치료사 (Sports massage therapist)",
+    "address": "245 M.9, Pattaya 3rd Road, Pattaya City, ตำบลหนองปรือ (Nong Prue), Bang Lamung District, Chon Buri 20150, Thailand",
+    "area": "Pattaya 3rd Road (Pattaya Sai 3), Nong Prue, Bang Lamung, Chon Buri",
+    "plus_code": "WVPV+84 Pattaya",
+    "coordinates": [
+      12.935803,
+      100.8927853
+    ],
+    "phone": "+66 80 736 5211 (080-736-5211)",
+    "hours": "11:30–23:30 (shown by Google for Fri 2026-10-09 and Sat 2026-10-03; the full weekly schedule was not exposed in Google's limited view, so other days are unverified). Google also lists a secondary 'pickup' hours set of 11:30–21:30 (not used in the ad).",
+    "rating": "4.5 (Google Maps)",
+    "review_count": "unknown – Google shows 'engagement not allowed for this type of place per Google policy / posting disabled', so the count isn't public",
+    "services_prices": "unknown – no menu/prices published on the listing",
+    "website": "none listed",
+    "google_place_id": "ChIJPQWpMLO_AjERqu3KL9kMyEQ",
+    "google_ftid": "0x3102bfb330a9053d:0x44c80cd92fcaedaa",
+    "maps_url_canonical": "https://www.google.com/maps/place/?q=place_id:ChIJPQWpMLO_AjERqu3KL9kMyEQ",
+    "source": "Google Maps listing behind https://maps.app.goo.gl/sxwzECaxPxkANutE9 (fetched 2026-10-03 ~05:55 ICT)"
+  },
+  "source_template": "assets/ads/massage/dragon-ad.js + dragon-ad.css (PNG previews: python3 assets/ads/massage/src/render.py)"
+}
