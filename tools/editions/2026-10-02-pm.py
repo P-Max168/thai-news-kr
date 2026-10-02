@@ -204,6 +204,118 @@ dict(id="l3", category="local", region="파타야",
  published="2026-10-02T14:51:43+07:00",
  tags=["파타야","공원","시장","일상"]),
 
+# ───────────── 외국인·비자 (10/3 04:50경 추가 수집, 최대 7일 이내) ─────────────
+# 원문: raw/2026-10-02-pm/visa/ (Google News 태국어·영어 검색 + 원문 페이지에서 게재 시각 확인)
+dict(id="v1", category="visa",
+ headline="새 이민국장 노프신 취임…'외국 자본·노미니' 단속 확대, 토지 309필지·43억 바트어치 압류",
+ summary=[
+  "이민국(สตม.)이 창설 99주년을 맞은 1일, 새로 취임한 노프신 품사왓 이민국장(경찰 중장)이 불법 외국 자본과 태국인 명의를 빌린 '노미니' 토지·사업 보유를 더 강하게 단속하겠다고 밝혔다. 회사 구조, 자금 흐름, 실제 수익자까지 깊이 들여다보겠다는 방침이다.",
+  "꼬팡안에서 시작한 '꼬팡안 모델' 단속을 7단계에 걸쳐 주요 관광·경제 지역으로 넓혔고, 지금까지 불법 보유 토지 309필지(217라이 이상), 약 43억3,900만 바트어치를 압류했다고 했다. 남의 신분으로 등록하거나 신분증을 부정 발급받는 행위도 계속 잡겠다고 했다.",
+  "국장은 취임 첫날 수완나품 공항 출입국 심사장을 찾아, 인신매매·온라인 사기 연루가 의심되는 사람은 엄격히 걸러내되 정상 여행자에게는 빠르고 친절한 서비스를 하라고 지시했다. FM91은 자동출입국심사(ABC) 게이트를 쓸 수 있는 외국 국적·지역이 기존 2곳에서 31곳 더 늘었다고 전했다."
+ ],
+ context="파타야에서 땅·가게·회사를 태국인 명의로 잡아 둔 외국인이라면 지금 구조를 점검할 때다. 콘도는 건물별 외국인 쿼터(전체 면적 49%) 안에서 본인 명의로 살 수 있지만, 토지나 외국인에게 막힌 업종을 태국인 이름으로 돌려 갖는 방식이 이번 단속의 표적이다.",
+ source="MGR Online (ผู้จัดการออนไลน์)", url="https://mgronline.com/crime/detail/9690000095829",
+ title_th="ครบรอบ 99 ปี สตม. “พล.ต.ท.นพศิลป์” ประกาศเดินหน้าปราบทุนต่างชาติ-นอมินี ยึดที่ดิน 309 แปลง มูลค่า 4.3 พันล้าน",
+ published="2026-10-01T14:43:00+07:00",
+ related=[dict(source="FM91 (สวพ.FM91)", title="“พล.ต.ท.นพศิลป์” รับตำแหน่ง ผบช.สตม. วันแรก ประเดิมงานลงสุวรรณภูมิ กำชับคัดกรองเข้ม สกัดอาชญากรรมข้ามชาติ พร้อมดูแลนักท่องเที่ยว", url="https://www.fm91bkk.com/newsarticle/79757"),
+          dict(source="Bangkok Post", title="Chinese and Korean fugitives wanted for fraud arrested in Thailand", url="https://www.bangkokpost.com/thailand/general/3329645/chinese-and-korean-fugitives-wanted-for-fraud-arrested-in-thailand")],
+ tags=["이민국","노미니","토지","수완나품"]),
+
+dict(id="v2", category="visa",
+ headline="20년 넘게 도피한 한국인 전직 축구 코치, 태국서 체포…'구단 입단' 미끼 사기 혐의",
+ summary=[
+  "이민국은 1일, 서울북부지법 사기 혐의 체포영장을 피해 20년 넘게 도피해 온 한국인 리(Lee)모씨(58·전직 축구 코치)를 붙잡았다고 발표했다. 한국 축구 구단에 넣어 주겠다며 피해자 6명에게서 1인당 1,000만 원(약 25만 바트)씩 받아 챙긴 혐의다.",
+  "리씨는 2004년 태국에 들어왔고, 태국에서도 태국 축구 구단들을 상대로 비슷한 사기를 벌인 정황이 있어 수사를 넓히고 있다고 이민국은 밝혔다.",
+  "같은 자리에서 깐짜나부리 시사왓에서 소란 신고로 붙잡힌 중국인 쑨모씨(33)도 공개됐다. 체류 기한을 578일 넘긴 오버스테이였는데, 생체정보 조회로 인터폴 적색수배자(위조 서류로 부동산 담보 대출, 피해 약 4,400만 위안·2억 바트)로 확인됐다."
+ ],
+ context="이민국은 오버스테이·소란 같은 작은 단서로 붙잡은 뒤 지문·얼굴 등 생체정보로 수배 여부를 조회하는 경우가 많다. 오버스테이는 벌금으로 끝나지 않고 기간에 따라 재입국 금지까지 이어질 수 있으니, 비자·연장 만료일은 달력에 꼭 적어 두자.",
+ source="Dailynews (데일리뉴스)", url="https://www.dailynews.co.th/news/6239006/",
+ title_th="สตม. รวบ 2 ผู้ร้ายข้ามชาติรายใหญ่ หนุ่มจีนฉ้อโกง 200 ล้าน โค้ชฟุตบอลเกาหลีใต้หนีคดี 20 ปี",
+ published="2026-10-01T13:20:05+07:00",
+ related=[dict(source="Bangkok Post", title="Chinese and Korean fugitives wanted for fraud arrested in Thailand", url="https://www.bangkokpost.com/thailand/general/3329645/chinese-and-korean-fugitives-wanted-for-fraud-arrested-in-thailand")],
+ tags=["한국인","도피","오버스테이","인터폴"]),
+
+dict(id="v3", category="visa",
+ headline="'무에타이 DTV' 비자 신청 7단계 공개…인증 체육관 등록·잔고 50만 바트, 1회 최대 180일",
+ summary=[
+  "태국체육청(กกท.) 무에타이위원회가, 인증받은 무에타이 체육관에서 배우며 머물 수 있는 '무에타이 DTV(Destination Thailand Visa)' 신청 절차 7단계를 공개했다. 6월부터 시행 중이며, 앞서 무에타이 학습용 90일 Non-Immigrant ED 비자를 운영해 반응이 좋았던 데 이은 것이다.",
+  "먼저 인증 체육관에 등록하고 비자 서류 진행을 요청하면, 체육관이 협조 요청서와 함께 여권 사본, 체육관장 등록증·체육관 인증서, 수강 신청서, 등록비 납부 증빙, 50만 바트 이상 잔고가 찍힌 은행 거래내역을 위원회에 낸다.",
+  "서류가 갖춰지면 위원회가 외교부 영사국에 공문을 보내고, 약 5~21일 뒤 신청자 본국의 태국 대사관·영사관을 통해 결과가 나온다. 승인되면 1회 180일 이하로 머물 수 있고 180일을 더 연장해 출국 전 최대 360일까지 가능하다. 거절되면 체육관과 서류를 고쳐 다시 낼 수 있다."
+ ],
+ context="결과 통보가 '본국의 태국 대사관·영사관'을 통한다고 돼 있어, 이미 태국에 사는 사람이 이 비자로 바로 바꿀 수 있는지는 기사만으로는 알 수 없다. 체육관이 인증 명단에 있는지와 함께 이민국·대사관에 따로 확인하자.",
+ source="THE STANDARD (더스탠더드)", url="https://thestandard.co/sat-muaythai-dtv-visa-180-days/",
+ title_th="กกท. เปิด 7 ขั้นตอนขอวีซ่า Muaythai DTV ดึงต่างชาติเรียนมวยไทย พักได้สูงสุด 180 วัน",
+ published="2026-10-02T08:46:35+07:00",
+ tags=["DTV","무에타이","비자","체류"]),
+
+dict(id="v4", category="visa",
+ headline="이민국 공식 앱 'THIM' 정식 출시…입국카드(TDAC) 지원, 다음은 90일 신고·체류 연장",
+ summary=[
+  "이민국이 공식 앱 'THIM(Thai Immigration Application)'을 정식으로 내놨다. 지금은 디지털 입국카드(TDAC) 작성·제출과, 제휴사 혜택·쿠폰을 주는 'Explore Thailand' 기능이 있다. 8월 1일 앱스토어·구글플레이·화웨이 앱갤러리에 올라온 뒤 다운로드 60만 건, 이용자 58만 명을 넘었다.",
+  "이민국은 THIM을 출입국 업무 원스톱 창구로 키워 방문 예약(Queue Booking), 체류 증명서(Certificate of Stay), 체류 연장(Visa Extension), 90일 신고(90-Day Report), 도착비자(Visa on Arrival) 기능을 넣을 계획이라고 했다. 연말까지 다운로드 100만 건을 예상한다.",
+  "여권 정보와 전자여권 칩은 NFC로 읽고, 실제 사람인지 확인(라이브니스)·얼굴 대조로 본인을 확인한다. 데이터는 암호화하고 생체정보는 다른 개인정보와 따로 보관하며, 개인정보보호법(PDPA)에 따라 AWS 방콕 리전에서 운영한다고 했다."
+ ],
+ context="장기 체류자에게 중요한 90일 신고·체류 연장은 아직 '계획'이다. 당분간은 지금 쓰는 방식(이민국 방문·온라인 90일 신고·우편)을 그대로 쓰고, 앱은 공식 스토어에서 이름(THIM)과 개발자(이민국)를 확인하고 설치하자.",
+ source="Prachachat (프라차찻)", url="https://www.prachachat.net/tech/news-2072692",
+ title_th="สตม. เปิดตัวแอป ‘THIM’ เพิ่มความสะดวก ‘ต่างชาติ’ เข้าไทย คาดสิ้นปี’69 ยอดดาวน์โหลดทะลุ 1 ล้าน",
+ published="2026-09-28T12:23:12+07:00",
+ related=[dict(source="Khaosod English", title="Thailand launches THIM app as digital gateway for foreigners (10/2)", url="https://www.khaosodenglish.com/featured/2026/10/02/thailand-launches-thim-app-as-digital-gateway-for-foreigners/")],
+ tags=["THIM","90일신고","TDAC","앱"]),
+
+dict(id="v5", category="visa",
+ headline="8월 시행 '외국인 추방 규정'에 시민사회 우려…불법 입국·허가 외 취업·서류 위조·중범죄 대상",
+ summary=[
+  "정부가 외국인 범죄·노미니·스캠 문제에 대응해 만든 '총리실 추방 규정 2026(ระเบียบสำนักนายกรัฐมนตรีว่าด้วยการเนรเทศ)'이 8월 28일부터 시행 중이다. 쁘라차타이는 빠르게 추방할 수 있게 됐지만 허점과 인권 문제가 있다는 시민사회 목소리를 짚었다.",
+  "4조는 공서양속이나 공공의 평온을 해치는 외국인을 내무부 사무차관(또는 위임자)이 검토해 내무장관이 국외 퇴거를 명령할 수 있게 했다. 5조는 불법 입국, 허가와 다른 일·사업, 신분·국적 서류 위조, 징역 5년 이상 중범죄(공범·교사·방조 포함)를 사유로 들고, 형 확정이나 출소 뒤 추방·재입국 금지를 명령할 수 있게 했다. 시행 뒤 이스라엘인(9월 4일)·프랑스인(9월 7일) 2명이 추방 명령을 받았다.",
+  "이주노동자 네트워크(MWG) 등은 대상과 '행위' 정의가 넓어 이주노동자·난민까지 휩쓸릴 수 있다며 규정 폐지와 출입국관리법·추방법 개정을, 그게 안 되면 명령 전 심사위원회·이의신청 절차·업무 지침(SOP)을 요구했다."
+ ],
+ context="'허가와 다른 일'도 추방 사유 목록에 있다. 워크퍼밋에 적힌 직무·근무지와 실제 하는 일이 맞는지, 관광·은퇴·DTV 같은 비자로 허용되지 않는 일을 하고 있지 않은지 점검해 두자.",
+ source="Prachatai (쁘라차타이)", url="https://prachatai.com/journal/2026/10/118968",
+ title_th="ช่องโหว่ระเบียบเนรเทศใหม่ ส่งกลับต่างชาติสีเทา-สแกมเมอร์ ห่วงแรงงานข้ามชาติ-ผู้ลี้ภัยโดนหางเลข",
+ published="2026-10-02T15:49:00+07:00",
+ tags=["추방","규정","워크퍼밋","이주노동자"]),
+
+dict(id="v6", category="visa", region="차청사오 (파타야 관광경찰)",
+ headline="침수로 고립된 외국인들 '1155' 신고…파타야 관광경찰, 차청사오까지 출동해 대피·구호품",
+ summary=[
+  "차청사오 파놈사라캄에 사는 외국인들이 관광경찰 핫라인 1155로 '집이 물에 잠겨 대피하고 싶다'고 도움을 요청하자, 파타야 관광경찰(관광경찰 1국 2과 4분대)이 파놈사라캄 구조대와 연계해 구조에 나섰다.",
+  "현지는 곳곳이 깊게 잠겨 배나 차체가 높은 차량이 있어야 들어갈 수 있었다. 아피찻 짜루락 경찰 중령은 수사팀·드론팀과 함께 식수·약·건조식품을 싣고 쁠랭야오 후아쌈롱, 파놈사라캄 꼬카눈 구호소 두 곳에 전달했고, 동부 인도인 협회도 건조식품을 보탰다. 드론으로 안내 방송도 했다."
+ ],
+ context="1155는 외국인을 위한 관광경찰 핫라인으로, 관광객뿐 아니라 이번처럼 태국에 사는 외국인도 도움을 받을 수 있다. 우기 침수·고립에 대비해 휴대전화에 저장해 두자.",
+ source="Siam Rath (싸얌랏)", url="https://siamrath.co.th/regional/325607",
+ title_th="ตำรวจท่องเที่ยวพัทยาลุยน้ำฉะเชิงเทรา ส่งของช่วยผู้ประสบภัย–อพยพชาวต่างชาติ",
+ published="2026-10-01T13:00:00+07:00",
+ related=[dict(source="The Pattaya News", title="Pattaya Tourist Police and India Community Eastern Deliver Supplies to Flood-hit Residents and Foreigners in Chachoengsao", url="https://thepattayanews.com/2026/10/01/pattaya-tourist-police-and-india-community-eastern-deliver-supplies-to-flood-hit-residents-and-foreigners-in-chachoengsao/")],
+ tags=["관광경찰","1155","홍수","파타야"]),
+
+dict(id="v7", category="visa",
+ headline="아누틴 총리, 한국 국경일 리셉션 참석…\"CEPA로 투자·일자리 확대\", 박용민 대사 이임 앞두고 감사",
+ summary=[
+  "아누틴 총리 겸 내무장관이 2일 저녁 6시 30분 방콕 샹그릴라 호텔 그랜드볼룸에서 열린 2026년 대한민국 국경일 리셉션에 참석했다. 박용민 주태국 한국대사가 맞았다.",
+  "총리는 70여 년 전 태국이 아시아에서 처음으로 한국전쟁에 파병했다며, 양국 관계가 안보·경제·문화를 아우르는 '전략적 동반자 관계'로 커졌다고 했다. 태국은 여전히 한국인 관광객이 즐겨 찾는 곳이고, 한국 드라마·음식·K팝(BTS, 블랙핑크 리사)도 태국에서 인기라고 했다.",
+  "경제 면에서는 한국 투자를 더 환영한다며, 진행 중인 포괄적경제동반자협정(CEPA) 협상이 무역·투자를 키우고 태국인 일자리를 늘리길 바란다고 했다. 올해 임기를 마치는 박용민 대사에게 감사 인사도 전했다."
+ ],
+ context="주태국 한국대사관 공지 게시판(overseas.mofa.go.kr/th-ko)은 이번 수집 시점(10/3 새벽)에 접속 대기·오류 화면만 떠서 대사관 공지는 싣지 못했다. 여권·영사 업무 일정은 대사관 홈페이지와 한인회 공지로 확인하자.",
+ source="Naewna (내와나)", url="https://www.naewna.com/n/top-stories/93643/",
+ title_th="'อนุทิน' ร่วมงานวันชาติเกาหลีใต้ ย้ำสัมพันธ์ไทย-เกาหลีแน่นแฟ้น หนุนเจรจาเพิ่มโอกาสธุรกิจ-จ้างงานคนไทย",
+ published="2026-10-02T21:46:51+07:00",
+ tags=["한국","대사관","CEPA","아누틴"]),
+
+dict(id="v8", category="visa",
+ headline="상무부, 외국인 관련 회사 10만여 곳 정보 43개 대사관에 전달…\"위법 단정 아냐\", 노미니엔 징역 경고",
+ summary=[
+  "상무부 사업개발국(DBD) 푼퐁 나이야나파꼰 국장은 외국인이 이사이거나 외국 국적 주주가 있는 주식회사 10만여 곳의 정보를 주태국 대사관 43곳(48개 국적)에 보냈다고 밝혔다. 각 대사관이 자국 투자자를 돌보고 태국 법에 맞게 사업하도록 돕게 하려는 취지다.",
+  "자료는 외국인 지분율에 따라 0.01~49.99%, 50~99.99%, 100% 세 그룹으로 나눴다. 국장은 명단에 들었다고 노미니이거나 위법이라는 뜻은 전혀 아니라고 강조했다.",
+  "태국인이 외국인 대신 명의를 빌려주는 노미니는 외국인사업법(1999) 36조로 징역 3년 이하 또는 벌금 10만~100만 바트(병과 가능), 허가 없이 사업한 외국인도 37조로 같은 처벌을 받는다고 경고했다."
+ ],
+ context="Thai Examiner는 노미니가 의심되는 구조의 회사가 약 2,100곳, 추가 점검 대상이 1만 곳이라고 전했다. 한국대사관이 43곳에 들어갔는지는 기사에 나오지 않는다. 태국 법인을 가진 경우 태국인 주주의 출자금 출처 서류를 갖춰 두는 게 안전하다.",
+ source="Thairath (타이랏)", url="https://www.thairath.co.th/news/governmentpolicy/2963230",
+ title_th="พาณิชย์ดึง 43 สถานทูตในไทย สแกน 1 แสนบริษัท สกัดนอมินีต่างชาติ",
+ published="2026-09-30T16:16:00+07:00",
+ related=[dict(source="Prachachat (프라차찻)", title="พาณิชย์ส่งข้อมูลกว่า 1 แสนบริษัทให้ 43 สถานทูต ร่วมคุมต่างชาติทำธุรกิจถูกกฎหมาย-สกัดนอมินี", url="https://www.prachachat.net/economic/news-2074239"),
+          dict(source="Thai Examiner", title="Department of Business Development (DBD) contacts 43 foreign embassies on nominee shareholder firms", url="https://www.thaiexaminer.com/thai-news-foreigners/2026/09/30/department-of-business-development-dbd-contacts-43-foreign-embassies-over-nominee-shareholder-firms/")],
+ tags=["노미니","DBD","대사관","외국인사업법"]),
+
 # ───────────── SNS 화제 ─────────────
 dict(id="n1", category="sns",
  headline="트렌드24 저녁권, 졸업·패션·아이돌 해시태그 상단…홍수어는 여전히 적음",
@@ -219,18 +331,39 @@ dict(id="n1", category="sns",
  tags=["트렌드","X","졸업","패션"]),
 ]
 
+# 트렌드: python3 tools/fetch_trends.py 2026-10-02-pm → raw/2026-10-02-pm/trends/ (10/3 04:48 재수집, 04:09 블록)
+# 각 태그의 한국어 풀이는 웹 검색으로 확인한 범위만. 못 찾으면 verified=False + '확인 안 됨'.
+T = lambda tag, ko, desc, verified=True: dict(tag=tag, ko=ko, desc=desc, verified=verified)
 trends = dict(
   source="trends24.in (X/트위터 태국 트렌드)", url="https://trends24.in/thailand/",
-  fetched="2026-10-02T18:15:00+07:00",
-  note="저녁권도 졸업·아이돌·패션 협업 해시태그가 상단. SHEEP·Wang Yibo·NUTDAN·WilliamEst·Charlotte·Engfa 등. 홍수 직접어는 상단 비중이 작음.",
-  items=["#SHEEPxTleFirstoneRainy","#WangYiboPFWSS27xLoewe","#GraduateNutdan","#นุมานัวร์","#PraewLiveXWilliamEstConcert","WE REIGN PRESS TOUR","CELEBRATING NUTDAN","ANTON SAINT LAURENT AMBASSADOR","KHUNPOL OFFICIALLY GRAD","KONGJIRO GRAD DAY","HAPPY BIRTHDAY TO TOPTAP","JOONGDUNK AISITERU TOKYO","SMILEY BESIDE CHARLOTTE02","ENGFA ENDLESS CHARM02","#PoohGraduationDay"]
+  fetched="2026-10-03T04:48:15+07:00", block="2026-10-03T04:09:43+07:00",
+  filtered=0,
+  note="10월 3일 04:09(BKK) 집계 기준 상위 15개. 금요일 밤 방영한 태국 BL·GL 드라마 회차 태그와 파리 패션위크에 간 태국 스타 응원 태그가 대부분.",
+  items=[
+    T("#YohjiYamamotoXZeePruk", "요지 야마모토 × 지 프룩", "배우 지 프룩(Zee Pruk)이 파리 패션위크 요지 야마모토 2027 봄·여름 쇼(태국 시각 3일 0시)에 초청돼 참석, 팬 응원 태그"),
+    T("#PlsLoveรักได้ไหมEP4", "플리즈 러브(사랑해도 될까) 4화", "채널3 금요 드라마 'PLS Love 락다이마이' 4화(10/2 방송) 실시간 시청 태그. 레나·미우 주연 여성 로맨스(GL)"),
+    T("LENAMIU PLS LOVE EP4", "레나·미우 × 플리즈 러브 4화", "같은 드라마 주연 레나(Lena Lorena Schuett)·미우(Natsha) 커플 팬덤 태그"),
+    T("#WEIRDO101SeriesEP8", "위어도-101 8화", "GMMTV 학원 BL 드라마 'WEIRDO-101(우리 사이의 중력)' 8화. 10/2(금) 20:30 one31 방송"),
+    T("#ValentinoAntibiblioteca", "발렌티노 '안티비블리오테카'", "발렌티노 2027 봄·여름 컬렉션 이름(파리 패션위크). 태국에선 프린(사로차) 응원 태그와 함께 상위권"),
+    T("#ValentinoSS27xFreen", "발렌티노 SS27 × 프린", "배우 프린 사로차(Freen Sarocha)의 발렌티노 파리 패션위크 2027 봄·여름 일정 응원 태그(정확한 쇼 일정은 확인 안 됨)"),
+    T("WILLIAMEST WESLEY HAPPYFAM", "윌리엄·에스트 × 웨슬리 해피패밀리", "GMMTV 배우 커플 윌리엄·에스트 팬 태그. 10/2 'GMMTV FANIVAL 2026: Happy Family' 팬사인회 관련. 'Wesley'가 정확히 무엇인지는 확인 안 됨"),
+    T("SHINING LOVE IN THE HEART", "마음속에 빛나는 사랑", "어떤 팬덤·행사 태그인지 찾지 못함", False),
+    T("SAROCHA X VALENTINO PFW SS27", "사로차 × 발렌티노 파리 패션위크", "프린 사로차 팬덤의 발렌티노 SS27 응원 문구(6번과 같은 화제)"),
+    T("THE CROW CLUB EP3", "더 크로우 클럽(까마귀 협회) 3화", "one31 금요 22:30 BL 판타지 드라마 'THE CROW CLUB 이까싸마콤' 3화(10/2). #อีกาสมาคมEP3도 같은 작품"),
+    T("Happy 21st BD JISANG DICE", "DICE 지상 21번째 생일", "보이그룹 DICE 멤버 지상(Jisang Akira Kim, 2005년 10월 3일생) 생일 축하 태그"),
+    T("MYSTERIOUS SOUNDS EP3", "미스터리어스 사운즈 3화", "워크포인트 금요 21:30 BL 드라마 'Oops! Mysterious Sounds(수수께끼 소리 추적)' 3화(10/2). #OopsSeriesEP3도 같은 작품"),
+    T("BOOK X CELINE PFW27", "북 × 셀린느 파리 패션위크", "배우 북 까싯뎃(Book Kasidet)의 셀린느 파리 패션위크 2027 봄·여름 참석 응원 태그. #MichaelRider(셀린느 디렉터)도 상위"),
+    T("LIMPICHA 1ST LIVE WITH TTY", "림피차 × TTY 첫 라이브", "'TTY'는 배우 듀오 튜터·임(TutorYim)으로 보이나(#LimpichafirstdatexTutoryim 동시 상위), 'Limpicha'가 무엇인지는 확인 안 됨", False),
+    T("JOSSGAWIN MAMI LIVE", "조스·가윈 × 마미 라이브", "배우 커플 조스·가윈이 브랜드 mami 틱톡 라이브(10/2 20:00)에 출연, 팬 태그"),
+  ]
 )
 
 data = dict(
   id="2026-10-02-pm", date="2026-10-02", edition="pm", edition_label="저녁판",
   weekday="금요일", timezone="Asia/Bangkok (UTC+7)",
   generated="2026-10-02T18:25:00+07:00",
-  coverage="2026-10-02 아침판 이후 ~저녁(약 07:25–18:25) 보도 중심. 48시간 이내·원문 확인분",
+  updated="2026-10-03T05:00:00+07:00",  # 외국인·비자 8건 추가 + X 트렌드 한국어 풀이로 교체(10/3 새벽)
+  coverage="2026-10-02 아침판 이후 ~저녁(약 07:25–18:25) 보도 중심. 48시간 이내·원문 확인분. 외국인·비자는 10/3 새벽 추가 수집(최대 7일 이내, 9/28~10/2)",
   previous="2026-10-02-am",
   briefing="아누틴 총리는 5일부터 남부 중심으로 비가 다시 올 수 있다며 대피소·식량 대비를 재차 주문했고, 재난청은 31개 주+방콕에서 약 124만 가구가 침수 피해를 봤다고 집계했습니다. 타이항공 이사회는 CEO 차이를 즉시 해임해 삼릿을 대행으로 세웠고, 토요타는 5~10일 공장 휴업을 발표했습니다. 아마타 촌부리에는 산업·환경장관이 찾아 배수를 시속 4만2,500㎥로 올렸으며, 아이디어 의원은 롬 의원을 명예훼손으로 고소했습니다.",
   highlights=["p1","e1","s1"],

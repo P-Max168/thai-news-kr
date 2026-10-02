@@ -36,8 +36,20 @@ async def main():
           stories: document.querySelectorAll('#feed > *').length,
           dateline: (document.getElementById('dateline')||{}).innerText,
           fonts: Array.from(document.fonts).filter(f=>f.status=='loaded').map(f=>f.family).filter((v,i,a)=>a.indexOf(v)==i),
-          sw: [document.documentElement.scrollWidth, window.innerWidth]
+          sw: [document.documentElement.scrollWidth, window.innerWidth],
+          visaTab: !!document.querySelector('button.tab[data-cat=visa]'),
+          visaStories: ((window.NEWS_DATA||{})[(window.NEWS_INDEX||{}).latest]||{stories:[]}).stories.filter(s=>s.category==='visa').length,
+          trendItems: document.querySelectorAll('#trendList li').length,
+          trendKo: document.querySelectorAll('#trendList .tr-ko').length,
+          trendTitle: (document.getElementById('trendTitle')||{}).innerText,
+          trendInMain: !!document.querySelector('.main-col #trendWidget')
         })""")
+        # 외국인·비자 탭 화면도 저장
+        if info["visaTab"]:
+            await pg.click("button.tab[data-cat=visa]")
+            await pg.wait_for_timeout(500)
+            info["visaCards"] = await pg.evaluate("document.querySelectorAll('#feed .card--visa').length")
+            await pg.screenshot(path=SHOT.replace(".png", "-visa.png"))
         pathlib.Path(SHOT).parent.mkdir(parents=True, exist_ok=True)
         await pg.screenshot(path=SHOT)
         await pg.screenshot(path=SHOT.replace(".png", "-full.png"), full_page=True)
@@ -47,7 +59,11 @@ async def main():
     print("errors:", errors, "failed:", failed)
     print("screenshot:", SHOT)
     ok = (resp and resp.status == 200 and info["latest"] == WANT and info["hasData"] and info["stories"] > 0
-          and (info["selected"] in (None, WANT)) and not errors)
+          and (info["selected"] in (None, WANT)) and not errors
+          and info["visaTab"] and info.get("visaCards", 0) == info["visaStories"]   # 외국인·비자 탭 렌더 확인
+          and info["trendInMain"])                                                # 모바일에서 트렌드가 본문에 보임
+    if info["trendItems"] and not info["trendKo"]:
+        print("경고: 트렌드에 한국어 풀이가 없음(옛 형식 문자열 목록) — README '트렌드' 절차 확인")
     print("OK" if ok else "FAIL (want %s)" % WANT)
     return 0 if ok else 1
 

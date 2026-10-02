@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>태국 뉴스 한눈에 — 파타야에서 읽는 오늘의 태국</title>
-<meta name="description" content="태국 현지 언론을 자연스러운 한국어로. 정치·경제·사회, 파타야·촌부리 지역 소식, SNS 화제까지.">
+<meta name="description" content="태국 현지 언론을 자연스러운 한국어로. 정치·경제·사회, 파타야·촌부리 지역 소식, 외국인·비자, SNS 화제까지.">
 <meta name="theme-color" content="#0b2a4a">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,16 +47,21 @@
       <div class="top__grid" id="topGrid"></div>
     </section>
 
+    <div id="trendSlot"></div>
+
     <section class="feed" aria-labelledby="feedTitle">
       <h2 class="section-title" id="feedTitle"><span id="feedTitleText">전체 뉴스</span> <em id="feedCount"></em></h2>
       <div class="feed__list" id="feed"></div>
     </section>
+    <div id="trendSlotEnd"></div>
   </div>
 
   <aside class="side-col">
     <section class="widget" id="trendWidget" aria-labelledby="trendTitle">
-      <h3 id="trendTitle">🔥 지금 태국 X 트렌드</h3>
+      <h3 id="trendTitle">🔥 지금 태국 X(트위터) 실시간 트렌드</h3>
+      <p class="widget__sub">태국 X 이용자들이 많이 올리는 해시태그 · 한국어 풀이</p>
       <ol class="trend-list" id="trendList"></ol>
+      <button class="trend-more" id="trendMore" type="button" hidden></button>
       <p class="widget__note" id="trendNote"></p>
     </section>
     <section class="widget" aria-labelledby="catTitle">

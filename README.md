@@ -30,23 +30,52 @@
 - `tools/newslib.py`  : 판 저장(`write_edition`) + 검증 + index 재생성(`build_index`). 이름 규칙·라벨이 여기 정의돼 있음
 - `tools/build_data.py` : 진입점. `python3 tools/build_data.py tools/editions/<id>.py` → json/js 저장 + index 갱신. 인자 없이 실행하면 index만 재생성
 - `tools/editions/<id>.py` : 판별 편집 파일(기사 목록·브리핑·주요뉴스·트렌드)
+- `tools/gnews.py` : Google News RSS 검색(태국어/`en:`영어, 기본 최근 8일)·실제 기사 URL 풀기(`--decode`). 결과는 `raw/<id>/` 에 저장
+- `tools/fetch_trends.py` : trends24.in(태국) X 트렌드 수집 + 성인·선정적 태그 필터 → `raw/<id>/trends/trends.json`
+- `tools/trend_blocklist.txt` : 성인·선정적 키워드 차단 목록(한 줄 하나, `re:`=정규식, `#`=주석). 트렌드 수집과 기사 검증(`newslib.validate`)이 같이 씀. **직접 고쳐서 늘리면 됨**
 - `tools/screenshot.py` : Playwright 스크린샷(데스크톱 1280, 모바일 390, 이전 판 화면, 판 선택 목록 출력). 로컬 서버(`python3 -m http.server 8765`)를 먼저 띄울 것
 - `raw/<id>/`         : 그 판을 만들 때 수집한 RSS·원문 텍스트(출처 확인용). `raw/` 바로 아래 파일들은 새벽판 수집분, `raw/morning/`은 저장에 실패한 07:08 실행이 남긴 RSS(미검증 참고용)
 - `archive/legacy/`   : 더 이상 쓰지 않는 옛 파일(사이트에서 읽지 않음)
 
-## 기사 스키마
-`id, category(politics|economy|society|local|sns), headline, summary[문단], context(배경 설명), update(이전 판 이후 새로 나온 내용, 후속 기사일 때만), source, url, title_th, published(ISO, +07:00), related[{source,title,url}], tags[], region(지역 기사), highlight`
+## 카테고리(탭)
+| id | 탭 이름 | 내용 |
+|---|---|---|
+| `politics` | 정치 | |
+| `economy` | 경제 | |
+| `society` | 사회 | |
+| `local` | 파타야·촌부리 | 지역 기사(`region` 필드) |
+| `visa` | 외국인·비자 | **태국에 사는 외국인에게 필요한 소식**: 비자·이민 규정(TM30, 90일 신고, DTV/LTR/은퇴 비자, 오버스테이), 이민경찰 단속, 외국인 관련 법 집행·추방, 워크퍼밋, 해외소득 과세, 노미니 단속, 파타야·촌부리 외국인 사건·사기, 한국 교민·주태국 한국대사관 공지. 2026-10-02 저녁판부터 |
+| `sns` | SNS 화제 | |
 
-최상위: `id, date, edition(am|pm|early), edition_label, generated, coverage, previous(직전 판 id), briefing, highlights[id 3개], stories[], trends{items[], source, url, fetched, note}`
+- 옛 판(10월 2일 아침판까지)에는 `visa` 기사가 없음 → 탭 숫자는 `–`, 탭을 누르면 "이 판에는 외국인·비자 카테고리가 없습니다" 안내. 사이드바 통계에서는 그 줄을 숨김.
+- `visa` 카드는 날짜 칩(📅 10월 2일(금))을 함께 표시(최대 7일 전 기사까지 싣기 때문).
+
+## 기사 스키마
+`id, category(politics|economy|society|local|visa|sns), headline, summary[문단], context(배경 설명), update(이전 판 이후 새로 나온 내용, 후속 기사일 때만), source, url, title_th, published(ISO, +07:00), related[{source,title,url}], tags[], region(지역 기사), highlight`
+
+최상위: `id, date, edition(am|pm|early), edition_label, generated, updated(선택: 같은 판을 나중에 보강했을 때), coverage, previous(직전 판 id), briefing, highlights[id 3개], stories[], trends{items[], source, url, fetched, block, filtered, note}`
+- `trends.items[]` (10월 2일 저녁판부터) = `{tag: 원문 태그, ko: 한국어 번역/음역, desc: 한 줄 설명(무슨 드라마·아이돌·행사인지, 왜 뜨는지), verified: false 이면 화면에 '확인 안 됨' 표시}`. 옛 판은 문자열 목록이며 그대로 렌더됨(원문만).
+- `trends.fetched` = 수집 시각(+07:00), `block` = trends24 의 집계 블록 시각, `filtered` = 차단 목록으로 뺀 태그 수.
+- 이미지·영상 필드(`image`, `media`, `video`, `embed` 등)는 금지(검증에서 멈춤). X 미디어·이미지는 절대 넣지 않고 텍스트만.
 (※ `2026-09-29-early`는 옛 형식이라 `id/edition_label` 등이 없지만 index가 파일 이름으로 판을 알아내므로 그대로 동작)
 
 ## 정기 실행(07:08 / 18:08) 절차
 1. 수집: 태국어 원문 우선(Thairath·Matichon·Khaosod·Prachachat RSS, PPTV·TOP NEWS·MGR·Thai Ch8·The Pattaya News, Google News RSS 태국어 검색: พัทยา ศรีราชา ชลบุรี สัตหีบ แหลมฉบัง บางละมุง จอมเทียน). 원문은 `raw/<id>/`에 저장.
    - Google News 날짜는 믿지 말 것: 며칠 전 기사가 새로 뜨는 경우가 많음 → 원문 페이지의 게재 시각을 확인(최대 48시간).
 2. 직전 판(`data/index.json`의 `latest`)과 겹치는 기사는 빼고, 실제 후속 전개가 있을 때만 싣되 `update`에 무엇이 새로운지 적는다.
-3. `tools/editions/<id>.py` 작성 (기존 파일 복사 → `id/date/edition/generated/previous/briefing/highlights/stories/trends` 교체). 뉴스·인용·숫자·URL은 절대 지어내지 않는다.
+   - **외국인·비자(`visa`) 수집(매번)**: Google News RSS 태국어 검색 `ตม. ต่างชาติ`, `สตม.`, `วีซ่า`, `วีซ่า DTV`, `ตรวจคนเข้าเมือง พัทยา`, `ชาวต่างชาติ พัทยา`, `แรงงานต่างด้าว`, `ใบอนุญาตทำงาน ต่างชาติ`, `อยู่เกินกำหนด overstay`, `นอมินี ต่างชาติ`, `ชาวเกาหลี`, `เกาหลี พัทยา` + 영어 `Thailand immigration visa`, `Pattaya foreigner`, `90-day report OR TM30 OR DTV OR LTR`, `site:thethaiger.com visa OR immigration`, `site:thaiexaminer.com visa OR expat` (Bangkok Post·The Thaiger·The Pattaya News·Khaosod English·Thai Examiner). 검색은 `python3 tools/gnews.py raw/<id>/visa "สตม." "en:Pattaya foreigner" …`, URL 풀기는 `--decode`, 원문은 `raw/fetch.py` 방식으로 `raw/<id>/visa/art/`에 저장 + 주태국 한국대사관 공지 `https://overseas.mofa.go.kr/th-ko/brd/m_3133/list.do`(접속 안 되면 기사 배경 설명/보고에 '확인 못 함'이라고 적고 넘어감).
+     - **목표 2~4건**(많으면 최대 8건). 48시간 안에 없으면 **최대 7일 전 기사까지 허용**(`newslib.validate`가 8일 이상은 막음). 각 기사 `published`에 원문 게재 시각.
+     - **이전 판과 중복 금지**: `grep -l "<키워드>" data/*.json` 등으로 확인하고, 이미 실린 사건은 실제 새 전개가 있을 때만 `update`와 함께.
+     - `context`(💡 배경 설명)에는 **태국 거주 외국인(파타야 4년차 한국인 기준) 실용 팁**을 짧게: 무엇을 확인·준비하면 되는지. 기사에 없는 숫자·규정을 단정하지 말 것(확실하지 않으면 '확인하자'로).
+     - 한국인·한국 교민 관련(한국인 사건, 대사관 공지, 한-태 관계)은 우선 싣는다.
+   - **성인·선정적 기사 금지**: 성범죄·성매매·음란물 위주 기사, 노출 사진이 중심인 기사는 싣지 않는다. 이미지·영상은 어떤 기사에도 넣지 않는다. 검증이 `tools/trend_blocklist.txt` 키워드를 제목·원문 제목·태그·요약에서 찾으면 build 가 멈춤 → 그 기사를 빼거나(원칙), 일반 기사가 우연히 걸린 경우에만 차단 목록 정규식을 다듬는다.
+   - **X 트렌드(매번 새로)**: `python3 tools/fetch_trends.py <id> 15` → trends24.in 태국 최신 블록에서 상위 15개(차단 목록에 걸린 성인·선정적 태그는 자동으로 빼고 `필터됨` 개수 출력). 걸리지 않았어도 **보고 판단해 성적인 느낌의 정체불명 태그는 직접 뺀다**(뺀 수는 `filtered`에 더함).
+     - 남은 태그마다 웹 검색(태그 그대로 + 'series/EP', 배우 이름, 'Paris Fashion Week' 등)으로 무엇인지 확인 → `T(tag, ko, desc)`로 적는다: `ko`=한국어 번역·음역(예: `#PlsLoveรักได้ไหมEP4` → '플리즈 러브(사랑해도 될까) 4화'), `desc`=어떤 드라마·아이돌·행사인지, 왜 뜨는지 한 줄.
+     - **확인이 안 되면 추측하지 말고** `T(tag, ko, "…찾지 못함", False)` → 화면에 '확인 안 됨' 표시.
+     - `trends.fetched`·`block`·`filtered`는 `raw/<id>/trends/trends.json` 값 그대로.
+3. `tools/editions/<id>.py` 작성 (기존 파일 복사 → `id/date/edition/generated/previous/briefing/highlights/stories/trends` 교체. 최신 예: `tools/editions/2026-10-02-pm.py` — `visa` 기사와 `T(...)` 트렌드 형식). 뉴스·인용·숫자·URL은 절대 지어내지 않는다.
 4. `python3 tools/build_data.py tools/editions/<id>.py` (검증 실패 시 예외로 멈춤)
-5. `python3 -m http.server 8765 &` → `python3 tools/screenshot.py` → `screenshots/`의 이미지를 직접 보고 문제 수정.
+5. `python3 -m http.server 8765 &` → `python3 tools/screenshot.py` → `screenshots/`의 이미지를 직접 보고 문제 수정. 특히 `mobile-390-tab-visa.png`(외국인·비자 탭), `mobile-390-trends.png`(모바일 트렌드: 전체 탭에선 주요 뉴스 바로 아래, 처음 5개 + '모두 보기'), `desktop-tab-visa.png`.
 6. **배포(필수)**: `bash tools/deploy.sh` — 아래 'Deploy' 참고. 07:08·18:08 정기 실행은 판을 만든 뒤 **매번** 실행할 것.
 
 ## Deploy (GitHub Pages)
@@ -56,7 +85,7 @@
 - **매 정기 실행(07:08 / 18:08 방콕)은 판을 만든 뒤(위 4~5단계) 반드시 `bash tools/deploy.sh` 를 실행한다.**
   - 사이트 파일(index.html, assets/, data/, tools/, README.md 등)의 새 파일·변경분을 `edition <id>` 메시지로 커밋 → `main` 에 push
   - force-push 금지(스크립트도 하지 않음). push 가 거부되면 `git pull --rebase` 후 일반 push
-  - 라이브 `data/index.js` 에 최신 판 id 가 반영될 때까지 대기(최대 15분, `DEPLOY_TIMEOUT`) → `tools/verify_live.py` 로 390px 모바일 화면을 헤드리스 브라우저로 열어 최신 판·기사·오류 여부 확인, `screenshots/live-mobile-390.png` 저장
+  - 라이브 `data/index.js` 에 최신 판 id 가 반영되고 **라이브 `data/<최신 판>.js`·`assets/app.js` 내용이 로컬과 같아질 때까지** 대기(같은 판을 보강해 다시 올린 경우도 잡음, 최대 15분, `DEPLOY_TIMEOUT`) → `tools/verify_live.py` 로 390px 모바일 화면을 헤드리스 브라우저로 열어 최신 판·기사·오류·외국인·비자 탭 카드 수·모바일 트렌드 위치 확인, `screenshots/live-mobile-390.png`·`live-mobile-390-visa.png` 저장
   - 실패하면 0이 아닌 종료 코드로 끝남 → 원인 확인 후 다시 실행
 - **올리지 않는 것**(`.gitignore`): `raw/`(제3자 기사 원문 — 저작권), `archive/`, `screenshots/`, 캐시(`__pycache__` 등), 비밀 파일(`.env`, `*.key`, `*.pem`)
 - 검색 노출 방지: `index.html` 에 `<meta name="robots" content="noindex, nofollow">`, `robots.txt` 전부 차단.

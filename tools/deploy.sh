@@ -42,9 +42,11 @@ echo "push 완료: $(git rev-parse --short HEAD)"
 deadline=$(( $(date +%s) + TIMEOUT ))
 while :; do
   ts=$(date +%s)
+  # 최신 판 id 뿐 아니라 내용(같은 판을 고쳐 다시 올린 경우)과 앱 코드까지 로컬과 같아야 통과
   if curl -fsS "${LIVE_URL}data/index.js?_=$ts" 2>/dev/null | grep -F "\"latest\": \"$LATEST\"" >/dev/null \
-     && curl -fsS -o /dev/null "${LIVE_URL}data/$LATEST.js?_=$ts"; then
-    echo "라이브 데이터에 $LATEST 반영됨"; break
+     && [ "$(curl -fsS "${LIVE_URL}data/$LATEST.js?_=$ts" 2>/dev/null | sha256sum | cut -d' ' -f1)" = "$(sha256sum "data/$LATEST.js" | cut -d' ' -f1)" ] \
+     && [ "$(curl -fsS "${LIVE_URL}assets/app.js?_=$ts" 2>/dev/null | sha256sum | cut -d' ' -f1)" = "$(sha256sum assets/app.js | cut -d' ' -f1)" ]; then
+    echo "라이브 데이터·앱 코드에 $LATEST (현재 커밋 내용) 반영됨"; break
   fi
   [ "$ts" -ge "$deadline" ] && { echo "실패: ${TIMEOUT}s 안에 라이브에 $LATEST 가 반영되지 않음 ($LIVE_URL)" >&2; exit 2; }
   sleep 20

@@ -15,7 +15,32 @@ DATA = ROOT / "data"
 EDITION_LABEL = {"am": "아침판", "pm": "저녁판", "early": "새벽판"}
 EDITION_ORDER = {"early": 0, "am": 1, "pm": 2}
 ID_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-(am|pm|early)$")
-CATS = {"politics", "economy", "society", "local", "sns"}
+CATS = {"politics", "economy", "society", "local", "visa", "sns"}
+CAT_ORDER = ["politics", "economy", "society", "local", "visa", "sns"]
+BLOCKLIST = ROOT / "tools" / "trend_blocklist.txt"
+_BL = None
+
+
+def _blocklist():
+    """tools/trend_blocklist.txt → [(원문 줄, 컴파일된 정규식)]."""
+    global _BL
+    if _BL is None:
+        _BL = []
+        for line in BLOCKLIST.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            pat = line[3:] if line.startswith("re:") else re.escape(line)
+            _BL.append((line, re.compile(pat, re.I)))
+    return _BL
+
+
+def blocked(text):
+    """성인·선정적 키워드가 있으면 걸린 항목(문자열), 없으면 None."""
+    for raw, rx in _blocklist():
+        if rx.search(text or ""):
+            return raw
+    return None
 
 
 def label_for(date, edition):
@@ -40,6 +65,24 @@ def validate(data):
         datetime.fromisoformat(s["published"])
         for r in s.get("related", []):
             assert r["url"].startswith("http"), (s["id"], r)
+    for s in data["stories"]:
+        # 성인·선정적 기사 금지(트렌드와 같은 차단 목록). 이미지·영상은 아예 싣지 않는다.
+        txt = " ".join([s["headline"], s["title_th"], " ".join(s.get("tags", [])), " ".join(s["summary"])])
+        hit = blocked(txt)
+        assert not hit, (s["id"], "성인·선정적 키워드(%s) — 기사를 빼거나 표현 확인 (tools/trend_blocklist.txt)" % hit)
+        for k in ("image", "images", "img", "media", "video", "embed"):
+            assert k not in s, (s["id"], "이미지·미디어 필드 금지: " + k)
+        if s["category"] == "visa":
+            # 외국인·비자: 저볼륨이라 최대 7일 전 기사 허용(그 이상은 금지)
+            age = datetime.fromisoformat(data["generated"]) - datetime.fromisoformat(s["published"])
+            assert age.days < 8, (s["id"], "외국인·비자 기사는 7일 이내만")
+    t = data.get("trends") or {}
+    for it in t.get("items", []):
+        tag = it if isinstance(it, str) else it.get("tag", "")
+        assert not blocked(tag), ("trends", tag, "차단 목록에 걸린 태그")
+        if isinstance(it, dict):
+            for k in ("tag", "ko", "desc"):
+                assert it.get(k), ("trends", tag, "필수: " + k)
     for h in data["highlights"]:
         assert h in ids, "highlights 에 없는 id: " + h
     assert len(data["highlights"]) == 3, "highlights 는 3개"
@@ -55,7 +98,7 @@ def write_edition(data):
     (DATA / (eid + ".js")).write_text(js, encoding="utf-8")
     build_index()
     print("saved", eid, "stories:", len(data["stories"]),
-          {c: sum(1 for s in data["stories"] if s["category"] == c) for c in ["politics", "economy", "society", "local", "sns"]})
+          {c: sum(1 for s in data["stories"] if s["category"] == c) for c in CAT_ORDER})
 
 
 def build_index():

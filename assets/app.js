@@ -7,10 +7,11 @@
     { key: "economy", label: "경제", icon: "📈" },
     { key: "society", label: "사회", icon: "🏙" },
     { key: "local", label: "파타야·촌부리", icon: "🌊" },
+    { key: "visa", label: "외국인·비자", icon: "🛂" },
     { key: "sns", label: "SNS 화제", icon: "💬" }
   ];
-  var CAT_COLOR = { politics: "#3b5bdb", economy: "#0c8f6a", society: "#d9480f", local: "#0b7285", sns: "#c2255c" };
-  var DECO = { politics: "政", economy: "฿", society: "社", local: "〰", sns: "#" };
+  var CAT_COLOR = { politics: "#3b5bdb", economy: "#0c8f6a", society: "#d9480f", local: "#0b7285", visa: "#6741d9", sns: "#c2255c" };
+  var DECO = { politics: "政", economy: "฿", society: "社", local: "〰", visa: "✈", sns: "#" };
   var TZ = "Asia/Bangkok";
   var state = { data: null, cat: "all", edition: null };
   var $ = function (id) { return document.getElementById(id); };
@@ -27,6 +28,11 @@
     var parts = new Intl.DateTimeFormat("ko-KR", { timeZone: TZ, month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(d);
     var o = {}; parts.forEach(function (p) { o[p.type] = p.value; });
     return o.month + "/" + o.day + " " + o.hour + ":" + o.minute;
+  }
+  function fmtDay(iso) {
+    var p = new Intl.DateTimeFormat("ko-KR", { timeZone: TZ, month: "numeric", day: "numeric", weekday: "short" }).formatToParts(new Date(iso));
+    var o = {}; p.forEach(function (x) { o[x.type] = x.value; });
+    return o.month + "월 " + o.day + "일(" + o.weekday + ")";
   }
   function relTime(iso) {
     var diff = (Date.now() - new Date(iso).getTime()) / 60000;
@@ -68,7 +74,7 @@
     document.title = "태국 뉴스 한눈에 — " + (ed.label || longDate);
     var badge = { "아침판": "아침 브리핑", "저녁판": "저녁 브리핑", "새벽판": "새벽 브리핑" }[edName] || "오늘의 브리핑";
     $("briefing").innerHTML = '<span class="briefing__badge">' + esc(badge) + "</span><p>" + esc(data.briefing) + "</p>";
-    $("generated").textContent = (ed.label ? ed.label + " · " : "") + "업데이트: " + fmtTime(data.generated) + " (방콕) · 기사 " + data.stories.length + "건";
+    $("generated").textContent = (ed.label ? ed.label + " · " : "") + "업데이트: " + fmtTime(data.updated || data.generated) + " (방콕) · 기사 " + data.stories.length + "건";
     renderTabs(); renderTop(); renderFeed(); renderSide();
     if (location.hash.length > 1) openStory(location.hash.slice(1), true);
   }
@@ -82,8 +88,10 @@
   function renderTabs() {
     var c = counts();
     $("tabs").innerHTML = CATS.map(function (t) {
+      // 외국인·비자 탭은 10월 2일 저녁판부터 생김 → 그 전 판은 숫자 대신 '–' 표시
+      var n = c[t.key] || 0, nTxt = (t.key === "visa" && !n) ? "–" : n;
       return '<button class="tab" role="tab" data-cat="' + t.key + '" aria-selected="' + (state.cat === t.key) + '">' +
-        esc(t.label) + '<span class="n">' + (c[t.key] || 0) + "</span></button>";
+        esc(t.label) + '<span class="n">' + nTxt + "</span></button>";
     }).join("");
   }
 
@@ -105,6 +113,7 @@
 
   function cardHTML(s) {
     var region = s.region ? '<span class="chip chip--region">📍 ' + esc(s.region) + "</span>" : "";
+    if (s.category === "visa") region += '<span class="chip chip--date">📅 ' + esc(fmtDay(s.published)) + "</span>";
     var paras = s.summary.map(function (p) { return '<p class="para">' + esc(p) + "</p>"; }).join("");
     var ctx = s.context ? '<div class="context"><b>💡 배경 설명</b>' + esc(s.context) + "</div>" : "";
     var upd = s.update ? '<div class="update"><b>🆕 이전 판 이후 새로 나온 내용</b>' + esc(s.update) + "</div>" : "";
@@ -131,7 +140,7 @@
       var hl = state.data.highlights || [];
       list = list.slice().sort(function (a, b) {
         // 전체 탭: 주요 뉴스 제외분을 카테고리 순서 → 최신순
-        var order = ["politics", "economy", "society", "local", "sns"];
+        var order = ["politics", "economy", "society", "local", "visa", "sns"];
         var d = order.indexOf(a.category) - order.indexOf(b.category);
         return d || (new Date(b.published) - new Date(a.published));
       }).filter(function (s) { return hl.indexOf(s.id) < 0; });
@@ -140,21 +149,34 @@
     }
     $("feedTitleText").textContent = state.cat === "all" ? "전체 뉴스" : catLabel(state.cat);
     $("feedCount").textContent = list.length + "건" + (state.cat === "all" ? " (주요 뉴스 제외)" : "");
-    $("feed").innerHTML = list.length ? list.map(cardHTML).join("") : '<div class="empty">이 카테고리에는 오늘 기사가 없습니다.</div>';
+    var emptyMsg = state.cat === "visa" && !list.length ? "이 판에는 외국인·비자 카테고리가 없습니다(10월 2일 저녁판부터 제공)." : "이 카테고리에는 오늘 기사가 없습니다.";
+    $("feed").innerHTML = list.length ? list.map(cardHTML).join("") : '<div class="empty">' + emptyMsg + "</div>";
   }
 
   function renderSide() {
     var t = state.data.trends;
     if (t && t.items && t.items.length) {
-      $("trendList").innerHTML = t.items.map(function (x) {
-        var q = "https://x.com/search?q=" + encodeURIComponent(x);
-        return '<li><a href="' + q + '" target="_blank" rel="noopener">' + esc(x) + "</a></li>";
+      $("trendWidget").hidden = false;
+      $("trendList").innerHTML = t.items.map(function (x, i) {
+        // 옛 판: 문자열(원문 태그만) / 10월 2일 저녁판부터: {tag, ko, desc, verified}
+        var o = typeof x === "string" ? { tag: x } : x;
+        var q = "https://x.com/search?q=" + encodeURIComponent(o.tag);
+        var unv = o.verified === false ? '<span class="tr-unv">확인 안 됨</span>' : "";
+        return '<li class="' + (i >= 5 ? "tr-more" : "") + '"><div class="tr-body">' +
+          (o.ko ? '<b class="tr-ko">' + esc(o.ko) + "</b>" : "") +
+          '<a class="tr-tag" lang="th" href="' + q + '" target="_blank" rel="noopener">' + esc(o.tag) + " ↗</a>" +
+          (o.desc ? '<span class="tr-desc">' + unv + esc(o.desc) + "</span>" : "") + "</div></li>";
       }).join("");
-      $("trendNote").innerHTML = esc(t.note) + '<br>출처: <a href="' + esc(t.url) + '" target="_blank" rel="noopener">' + esc(t.source) + "</a> · " + esc(fmtTime(t.fetched)) + " (BKK) 기준";
+      var more = $("trendMore");
+      more.hidden = t.items.length <= 5;
+      more.textContent = "트렌드 " + t.items.length + "개 모두 보기 ▾";
+      $("trendWidget").classList.remove("is-expanded");
+      $("trendNote").innerHTML = esc(t.note) + '<br>출처: <a href="' + esc(t.url) + '" target="_blank" rel="noopener">' + esc(t.source) + "</a> · " + esc(fmtTime(t.fetched)) + " (BKK) 수집" +
+        (t.filtered != null ? " · 성인·선정적 태그 필터 적용(" + t.filtered + "개 제외)" : "");
     } else { $("trendWidget").hidden = true; }
     var c = counts(), max = 0;
     CATS.slice(1).forEach(function (k) { max = Math.max(max, c[k.key] || 0); });
-    $("catStats").innerHTML = CATS.slice(1).map(function (k) {
+    $("catStats").innerHTML = CATS.slice(1).filter(function (k) { return k.key !== "visa" || c.visa; }).map(function (k) {
       var n = c[k.key] || 0;
       return '<li><span class="lbl" data-cat="' + k.key + '">' + k.icon + " " + esc(k.label) + '</span><span class="bar"><i style="width:' + (max ? n / max * 100 : 0) + "%;background:" + CAT_COLOR[k.key] + '"></i></span><b>' + n + "</b></li>";
     }).join("");
@@ -166,7 +188,7 @@
   /* ---------- 인터랙션 ---------- */
   function setCat(cat) {
     state.cat = cat;
-    renderTabs(); renderTop(); renderFeed();
+    renderTabs(); renderTop(); renderFeed(); placeTrends();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
   function toggleCard(card, force) {
@@ -180,7 +202,7 @@
     var s = byId(id); if (!s) return;
     if (!document.getElementById(id)) {
       // 주요 뉴스로 빠진 카드 → 해당 카테고리 탭으로 이동
-      state.cat = s.category; renderTabs(); renderTop(); renderFeed();
+      state.cat = s.category; renderTabs(); renderTop(); renderFeed(); placeTrends();
     }
     var card = document.getElementById(id);
     if (!card) return;
@@ -188,6 +210,23 @@
     var y = card.getBoundingClientRect().top + window.pageYOffset - (document.querySelector(".masthead").offsetHeight + 12);
     window.scrollTo({ top: y, behavior: fromHash ? "auto" : "smooth" });
   }
+
+  $("trendMore").addEventListener("click", function () {
+    var w = $("trendWidget"), open = !w.classList.contains("is-expanded");
+    w.classList.toggle("is-expanded", open);
+    var n = (state.data.trends.items || []).length;
+    this.textContent = open ? "접기 ▴" : "트렌드 " + n + "개 모두 보기 ▾";
+  });
+  // 모바일(≤980px): 트렌드 위젯을 맨 아래 사이드바 대신 본문(주요 뉴스 아래)으로 옮겨 바로 보이게
+  var mq = window.matchMedia("(max-width:980px)");
+  function placeTrends() {
+    var w = $("trendWidget");
+    // 전체·SNS 탭: 기사 목록 위 / 다른 탭(예: 외국인·비자): 그 탭 기사를 먼저 보이도록 목록 아래
+    if (mq.matches) { $((state.cat === "all" || state.cat === "sns") ? "trendSlot" : "trendSlotEnd").appendChild(w); w.classList.add("widget--inline"); }
+    else { document.querySelector(".side-col").insertBefore(w, document.querySelector(".side-col").firstChild); w.classList.remove("widget--inline"); }
+  }
+  placeTrends();
+  if (mq.addEventListener) mq.addEventListener("change", placeTrends); else if (mq.addListener) mq.addListener(placeTrends);
 
   document.addEventListener("click", function (e) {
     var tab = e.target.closest("[data-cat]");
