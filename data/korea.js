@@ -1,6 +1,6 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-03T06:37:40+07:00",
+ "updated_at": "2026-10-03T06:40:24+07:00",
  "items": [
   {
    "title": "추미애, 김지용 두고 “언제든 국민에 등 돌릴 자를 왜 개혁 선장에 중용하나…풀리지 않는 의문”",
@@ -9,22 +9,34 @@ window.KOREA_NEWS = {
    "url": "https://www.khan.co.kr/article/202610022309001"
   },
   {
-   "title": "김여정, 이 대통령 대화 촉구에 “자작광대극…연기로 인기 많이 끌길” 조롱",
+   "title": "이 대통령 “상대국 국가원수 거짓말쟁이 만들어”…우크라에 강경 발언",
    "source": "한겨레",
-   "time": "2026-10-02T22:35:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1280695.html"
+   "time": "2026-10-02T23:22:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/bluehouse/1280703.html"
   },
   {
-   "title": "野, 우크라에 사과 요구하는 李 대통령에 \"北에는 찍소리도 못하면서\"",
-   "source": "조선일보",
-   "time": "2026-10-02T14:12:05+07:00",
-   "url": "https://www.chosun.com/politics/politics_general/2026/10/02/NPMJ7ZQUGFENBNZPQQ2RKWN5AY/"
+   "title": "트럼프 “석유 증산 사업에 11조…한국과의 거래 갈수록 좋아!”",
+   "source": "한겨레",
+   "time": "2026-10-02T22:31:00+07:00",
+   "url": "https://www.hani.co.kr/arti/international/america/1280713.html"
+  },
+  {
+   "title": "“부캉아, 조금만 더 가자”…그물로 몰았지만 바다 100m 앞에서 멈춰",
+   "source": "동아일보",
+   "time": "2026-10-02T18:48:00+07:00",
+   "url": "https://www.donga.com/news/Society/article/all/20261002/134777968/1"
   },
   {
    "title": "일본 “북한, 탄도미사일 가능성 물체 발사…EEZ 밖 낙하한 듯”",
    "source": "KBS 뉴스",
    "time": "2026-10-03T05:26:00+07:00",
    "url": "https://news.kbs.co.kr/news/view.do?ncd=8677108"
+  },
+  {
+   "title": "김여정, 이 대통령 ’군사적 긴장완화’ 표명에도 “자작광대극 2부“",
+   "source": "연합뉴스TV",
+   "time": "2026-10-02T16:17:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261002181727i3C"
   },
   {
    "title": "이정현 검찰총장 직무대행 \"공소청 존재 이유 다시 증명하고 신뢰 회복해야\"",
@@ -39,22 +51,10 @@ window.KOREA_NEWS = {
    "url": "https://www.hankyung.com/article/2026100204107"
   },
   {
-   "title": "‘대미투자’ 따지고 따졌건만…시험대 오른 ‘상업적 합리성’",
-   "source": "경향신문",
-   "time": "2026-10-02T04:00:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610020600071"
-  },
-  {
-   "title": "정동영, 북한에 대화 제의 \"군사분계선 측정으로 소통 시작해야\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-02T11:28:29+07:00",
-   "url": "https://imnews.imbc.com/news/2026/politics/article/6855401_36911.html"
-  },
-  {
-   "title": "공소청, 장윤기 ’무기징역’ 1심 판결에 불복 항소",
-   "source": "연합뉴스TV",
-   "time": "2026-10-02T22:03:00+07:00",
-   "url": "https://www.yonhapnewstv.co.kr/news/AKR202610030003404eL"
+   "title": "혹평 쏟아진 여수 섬박람회 반환점…남은 한달 '만회의 시간'",
+   "source": "다음뉴스",
+   "time": "2026-10-03T05:03:06+07:00",
+   "url": "https://v.daum.net/v/20261003070306187"
   },
   {
    "title": "아침 기온 10도 아래로 ‘외투 잘 챙겨야’…강원 산지엔 얼음",
