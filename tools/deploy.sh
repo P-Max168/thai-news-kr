@@ -42,7 +42,7 @@ echo "push 완료: $(git rev-parse --short HEAD)"
 deadline=$(( $(date +%s) + TIMEOUT ))
 while :; do
   ts=$(date +%s)
-  if curl -fsS "${LIVE_URL}data/index.js?_=$ts" 2>/dev/null | grep -q "\"latest\": \"$LATEST\"" \
+  if curl -fsS "${LIVE_URL}data/index.js?_=$ts" 2>/dev/null | grep -F "\"latest\": \"$LATEST\"" >/dev/null \
      && curl -fsS -o /dev/null "${LIVE_URL}data/$LATEST.js?_=$ts"; then
     echo "라이브 데이터에 $LATEST 반영됨"; break
   fi
