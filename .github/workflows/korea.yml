@@ -1,6 +1,6 @@
 # 🇰🇷 '오늘의 한국 주요 뉴스' 10건 갱신(판과 무관) — data/korea.json + data/korea.js
 # 2시간마다(하루 12번) tools/fetch_korea.py --standalone 실행 → 바뀌었을 때만 봇 이름으로 커밋·push.
-# GitHub Pages 는 main 브랜치 루트 배포(legacy)라 push 하면 다시 배포된다(혹시 몰라 Pages 빌드도 요청).
+# GitHub Pages 는 main 브랜치 루트 배포(legacy)라 push 하면 다시 배포된다(90초 안에 빌드가 안 보일 때만 Pages 빌드 요청).
 #
 # 시각(방콕, UTC+7): 매일 01:47 03:47 05:47 07:47 09:47 11:47 13:47 15:47 17:47 19:47 21:47 23:47
 #   = UTC '47 */2 * * *'. 정각 0~10분 혼잡 시간과 판 빌드(07:08·18:08 BKK, 커밋 금지 07:00–07:40·18:00–18:40)를 피함.
@@ -36,9 +36,9 @@ jobs:
           fi
           echo "시작: $(date '+%F %H:%M') BKK"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -64,8 +64,14 @@ jobs:
           done
           echo "push 실패" >&2; exit 1
 
-      - name: Pages 빌드 요청(보통은 push 만으로 배포됨, 실패해도 무시)
+      - name: Pages 배포 확인(push 로 자동 시작됨 — 90초 안에 이 커밋 빌드가 안 보이면 그때만 요청)
         if: steps.push.outputs.pushed == '1'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent || echo "Pages 빌드 요청 실패(무시)"
+        run: |
+          sha=$(git rev-parse HEAD)
+          for i in $(seq 1 9); do
+            sleep 10
+            if gh api "repos/${{ github.repository }}/pages/builds?per_page=5" --jq '.[].commit' | grep -q "$sha"; then echo "Pages 빌드 시작됨($sha)"; exit 0; fi
+          done
+          echo "Pages 빌드가 안 보여서 요청"; gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent || echo "Pages 빌드 요청 실패(무시)"

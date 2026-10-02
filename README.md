@@ -156,7 +156,7 @@
 
 ## 🇰🇷 한국 주요 뉴스 자동 갱신(판과 무관)
 - **워크플로** `.github/workflows/korea.yml` (`korea-news`): cron `47 */2 * * *`(UTC) = **방콕 01:47 03:47 05:47 07:47 09:47 11:47 13:47 15:47 17:47 19:47 21:47 23:47**(하루 12번) + 수동 실행(`gh workflow run korea.yml`). GitHub 예약 실행은 늦게 시작할 수 있어서, 시작 시각이 판 빌드 시간대(07:00–07:40·18:00–18:40 BKK)면 :41 까지 기다렸다 실행.
-  - 단계: `pip install googlenewsdecoder` → `python3 tools/fetch_korea.py --standalone` → `data/korea.json|js` 가 바뀌었을 때만 `github-actions[bot]` 이름으로 커밋(`korea: 한국 주요 뉴스 MM-DD HH:MM BKK`) → `git pull --rebase -X theirs` 후 일반 push(최대 5번 재시도, force 없음) → Pages 빌드 요청(legacy 브랜치 배포라 push 만으로도 다시 배포됨).
+  - 단계: `pip install googlenewsdecoder` → `python3 tools/fetch_korea.py --standalone` → `data/korea.json|js` 가 바뀌었을 때만 `github-actions[bot]` 이름으로 커밋(`korea: 한국 주요 뉴스 MM-DD HH:MM BKK`) → `git pull --rebase -X theirs` 후 일반 push(최대 5번 재시도, force 없음) → Pages 는 legacy 브랜치 배포라 **push 만으로 다시 배포됨**(봇 push 도 `pages-build-deployment` 를 시작함을 확인. 90초 안에 그 커밋 빌드가 안 보일 때만 `POST pages/builds` 요청).
   - 권한: 워크플로에 `permissions: contents: write, pages: write`(저장소 기본 권한은 read 그대로 둠).
   - 실패하면(Google News 장애 등) 기존 파일을 그대로 두고 워크플로가 빨간색으로 끝남 → 화면은 6시간이 지나면 판의 `korea_top` 으로 자동 대체.
 - **고르는 법**(LLM 없음, 같은 입력이면 같은 결과, 태국·교민 가중치 없음): Google News 한국 **'주요 뉴스'** 상위 15개 + **'대한민국' 주제** 피드 상위 50개. 점수 = 주요 뉴스 순위(50−3×순위) + 대한민국 순위(20−0.4×순위) + 둘 다면 5 + 묶음 매체 수(≤5) − 경과시간×0.5. 주요 뉴스 쪽 세계·IT 기사는 대한민국 피드와 같은 사건이거나 한국 관련 낱말(북한·국회·이 대통령·서울…)이 있을 때만. 36시간 넘은 것·칼럼/사설/포토·보도자료 매체·차단 목록(`trend_blocklist.txt`) 제외, 같은 사건(묶음 기사 id·제목 2-gram 유사도)은 하나만 → 상위 10건(6건 미만이면 실패 처리).
