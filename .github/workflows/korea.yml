@@ -12,6 +12,11 @@ on:
   schedule:
     - cron: "47 */2 * * *"
   workflow_dispatch:
+    inputs:
+      force:
+        description: "항목이 같아도 updated_at 을 새로 써서 커밋(--force)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -46,7 +51,7 @@ jobs:
         run: pip install --quiet googlenewsdecoder
 
       - name: 한국 주요 뉴스 수집(data/korea.json|js)
-        run: python3 tools/fetch_korea.py --standalone
+        run: python3 tools/fetch_korea.py --standalone ${{ inputs.force && '--force' || '' }}
 
       - name: 바뀌었으면 커밋·push (pull --rebase, 재시도)
         id: push
