@@ -21,3 +21,5 @@ Thumbs.db
 *.key
 secrets/
 drafts/
+# 카카오톡 공유 키트 출력(tools/share_kit.py)
+share/

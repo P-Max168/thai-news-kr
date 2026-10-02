@@ -143,6 +143,12 @@
 5. `python3 -m http.server 8765 &` → `python3 tools/screenshot.py` (`ALL OK` 확인) → `screenshots/`의 이미지를 직접 보고 문제 수정. 특히 `mobile-390-feed.png`(브리핑 5~6줄·굵게·주제 칩), `mobile-390-tab-visa.png`(외국인·비자 탭), `mobile-390-trends.png`(모바일 트렌드: 내 피드에선 주요 뉴스 바로 아래, 처음 3개 + '더 보기'(5→10)), `desktop-1280-top.png`. 앱 코드(assets·sw.js)를 고쳤으면 `python3 tools/test_pwa.py` 도.
 6. **💬 오늘의 질문 초안(매번, 승인 전까지 화면에 안 나옴)**: `python3 tools/discussion.py draft <id>` → `drafts/discussion/<id>.json` 의 15건마다 `question`(독자에게 묻는 한 줄)·`operator_comment`(운영자 첫 댓글)를 채운다 — 자연스러운 한국어, 정직한 '운영자' 목소리(“운영자입니다.”), `TRANSLATION_RULES.md` 준수, 기사에 없는 사실·숫자 단정 금지, **절대 독자(사용자)인 척 쓰지 않는다**. `approved` 는 false 그대로. 보고에 `python3 tools/discussion.py show <id>` 결과를 붙여 운영자에게 보여 주고, **채팅에서 OK 받은 항목만** `approved: true` 로 바꾼 파일로 `python3 tools/discussion.py apply <id> <파일>` → 배포. (적용분은 `tools/discussions/<id>.json` 에 남아 판을 다시 만들어도 유지)
 7. **배포(필수)**: `bash tools/deploy.sh` — 아래 'Deploy' 참고. 07:08·18:08 정기 실행은 판을 만든 뒤 **매번** 실행할 것.
+8. **공유 키트(매번, 배포 뒤)**: `python3 tools/share_kit.py <id>` → `share/<id>.png`(카톡 사진 카드)·`share/<id>.txt`(메시지 문구, 올리지 않음) + 사이트용 `og/<id>.png`·`og/latest.png`(링크 미리보기 이미지)·`e/<id>/index.html`(판별 미리보기 페이지 → `?ed=<id>` 로 이동). og/·e/ 가 바뀌었으니 **`bash tools/deploy.sh` 한 번 더**. 그다음 `python3 tools/discussion.py draft <id>`(6번) 초안을 채워 보고에 붙인다.
+   - 링크: 메인 `https://p-max168.github.io/thai-news-kr/`(og/latest.png), 판별 `https://p-max168.github.io/thai-news-kr/e/<id>/`. `?e=<id>`·`?ed=<id>`·`?date=<id>` 모두 그 판을 연다. 서비스 워커는 루트·index.html 만 앱 셸로 다루고 e/ 페이지는 가로채지 않는다.
+
+### 사용 환율(TRANSLATION_RULES: 한 판 = 환율 하나, 정수 반올림)
+- 판 데이터 최상위 `fx = {THB_KRW, note, source}` 에 기록하고 그 판의 모든 바트 금액에 `(약 N원)` 을 붙인다(편집 파일 `fx=dict(...)`).
+- 2026-10-02-pm: **1바트 = 40.44원** (open.er-api.com, 2026-10-02 07:02 BKK). 예: 140바트(약 5,662원), 50만 바트(약 2,022만 원).
 
 ## 광고 자리(목업)
 - `data/ads.json`: `enabled`(false = 전부 숨김), `slots[]` = `{id: top(헤더 아래 띠)|mid(한국 뉴스·브리핑과 주요 뉴스 사이 큰 배너)|infeed(기사 every 건마다 카드)|drawer(서랍 아래 작은 배너)|footer, size: strip|large|medium|small|wide, enabled, items[{category, title, subtitle, image?, link?(https 만), theme 1~5}]}`. 지금은 '여기에 광고하세요 · 광고 문의' 자리 표시만(가짜 업체명·전화·링크 없음). 고친 뒤 `python3 tools/newslib.py` 로 `data/ads.js` 재생성 → 배포.

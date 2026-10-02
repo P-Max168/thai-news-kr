@@ -640,7 +640,7 @@
     for (var j = 0; j < EDS.length; j++) if (EDS[j].date === p) return EDS[j];
     return { id: p, date: p.slice(0, 10), label: p, missing: true };
   }
-  var cur = resolve(getParam("ed") || getParam("date"));
+  var cur = resolve(getParam("e") || getParam("ed") || getParam("date"));
   state.edition = cur;
   var tabParam = getParam("tab");
   if (tabParam && (tabParam === "all" || tabParam === "feed" || T.get(tabParam))) state.tab = tabParam;

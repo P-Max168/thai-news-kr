@@ -7,11 +7,11 @@
  * - Google 로그인·Firestore(firebase / googleapis / gstatic SDK / firebaseapp.com / google.com 계정 창)는
  *   절대 가로채거나 캐시하지 않는다(그냥 브라우저가 직접 요청). 글꼴(fonts.googleapis/gstatic)만 예외로 캐시.
  */
-var VERSION = "tnk-26087dcd68";
+var VERSION = "tnk-9254802acf";
 var SHELL = "shell-" + VERSION, DATA = "data-v1", EXT = "ext-v1";
 var SHELL_FILES = [
   "./", "index.html", "manifest.json",
-  "assets/style.css?v=97587496", "assets/topics.js?v=e598247a", "assets/prefs.js?v=4c59b99b", "assets/taste.js?v=7c1f4138", "assets/app.js?v=b744506d", "assets/social.js?v=4fe678e6",
+  "assets/style.css?v=97587496", "assets/topics.js?v=e598247a", "assets/prefs.js?v=4c59b99b", "assets/taste.js?v=7c1f4138", "assets/app.js?v=88d3fd2e", "assets/social.js?v=4fe678e6",
   "assets/icons/icon-192.png", "assets/icons/icon-512.png", "assets/icons/maskable-512.png",
   "assets/icons/apple-touch-icon.png", "assets/icons/favicon-32.png"
 ];
@@ -92,6 +92,8 @@ self.addEventListener("fetch", function (e) {
   var scope = new URL(self.registration.scope);
   var path = url.pathname.slice(scope.pathname.length);
   if (req.mode === "navigate") {
+    // 앱 셸로 다루는 페이지는 루트(./)·index.html 뿐. e/<판 id>/ 같은 미리보기 페이지 등 다른 페이지는 가로채지 않음
+    if (path !== "" && path !== "index.html") return;
     // 페이지: 네트워크 우선, 오프라인이면 캐시한 index.html
     e.respondWith(networkFirst(req, SHELL, scope.href + "index.html").catch(function () { return caches.match(scope.href + "index.html"); }));
     return;

@@ -24,7 +24,12 @@ git checkout -q main
 # 앱 셸 버전 갱신(assets 가 바뀌었으면 index.html ?v= 와 sw.js VERSION 변경 → 서비스 워커가 새 파일을 받음)
 python3 tools/stamp_assets.py
 # 사이트 파일만 스테이징 (.gitignore 가 제외 대상 차단)
-git add -A -- index.html robots.txt .nojekyll .gitignore README.md manifest.json sw.js firestore.rules assets data tools
+# og/(링크 미리보기 이미지)·e/(판별 미리보기 페이지)는 tools/share_kit.py 가 만듦 — 있는 경로만 추가
+PATHS=""
+for p in index.html robots.txt .nojekyll .gitignore README.md manifest.json sw.js firestore.rules assets data tools og e; do
+  [ -e "$p" ] && PATHS="$PATHS $p"
+done
+git add -A -- $PATHS
 if git diff --cached --quiet; then
   echo "변경 없음 — 커밋 생략"
 else
