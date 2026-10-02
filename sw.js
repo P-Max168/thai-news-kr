@@ -5,11 +5,11 @@
  *   실패(오프라인)할 때만 마지막으로 받은 캐시를 보여 준다.
  * - 설치 때 최신 판 데이터를 미리 받아 둬서 첫 방문 뒤 바로 오프라인으로 읽을 수 있다.
  */
-var VERSION = "tnk-624fe87b6c";
+var VERSION = "tnk-4d2540e264";
 var SHELL = "shell-" + VERSION, DATA = "data-v1", EXT = "ext-v1";
 var SHELL_FILES = [
   "./", "index.html", "manifest.json",
-  "assets/style.css?v=715e5957", "assets/topics.js?v=e598247a", "assets/prefs.js?v=6e6c94b1", "assets/taste.js?v=03c68bc8", "assets/app.js?v=e22f41e3",
+  "assets/style.css?v=715e5957", "assets/topics.js?v=e598247a", "assets/prefs.js?v=6e6c94b1", "assets/taste.js?v=03c68bc8", "assets/app.js?v=cc91ce21",
   "assets/icons/icon-192.png", "assets/icons/icon-512.png", "assets/icons/maskable-512.png",
   "assets/icons/apple-touch-icon.png", "assets/icons/favicon-32.png"
 ];

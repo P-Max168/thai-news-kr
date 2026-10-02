@@ -93,7 +93,7 @@
     renderSide();
     if (location.hash.length > 1) openStory(location.hash.slice(1), true);
   }
-  function renderAll() { renderTabs(); renderTop(); renderFeed(); placeTrends(); }
+  function renderAll() { renderTabs(); $("briefing").hidden = !topShown(); renderTop(); renderFeed(); placeTrends(); }
 
   /* 브리핑: 새 형식 [{topic, text(**굵게**), story_id}] / 옛 형식(문단) → 문장별 글머리표 */
   function legacyBriefing(text) {
@@ -153,7 +153,10 @@
       return '<button class="' + cls + '" role="tab" data-tab="' + k + '" aria-selected="' + (state.tab === k) + '">' + esc(label) + '<span class="n">' + (n || "–") + "</span></button>";
     }).join("");
     var cur = $("tabs").querySelector('[aria-selected="true"]');
-    if (cur && cur.scrollIntoView) { var p = $("tabs"); var x = cur.offsetLeft - 40; if (x < p.scrollLeft || cur.offsetLeft + cur.offsetWidth > p.scrollLeft + p.clientWidth) p.scrollLeft = Math.max(0, x); }
+    if (cur) { // 선택된 탭이 보이도록 탭 줄만 가로 스크롤(컨테이너 기준 좌표)
+      var p = $("tabs"), pr = p.getBoundingClientRect(), cr = cur.getBoundingClientRect();
+      if (cr.left < pr.left || cr.right > pr.right) p.scrollLeft = Math.max(0, p.scrollLeft + (cr.left - pr.left) - 24);
+    }
   }
 
   function byId(id) { return state.data.stories.filter(function (s) { return s.id === id; })[0]; }
