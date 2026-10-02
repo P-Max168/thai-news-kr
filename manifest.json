@@ -1,0 +1,21 @@
+{
+  "name": "태국 뉴스 한눈에",
+  "short_name": "태국뉴스",
+  "description": "태국 현지 언론 보도를 한국어로 요약·번역한 뉴스 — 파타야·시라차·방콕, 외국인·비자, 생활·물가, 날씨·교통",
+  "lang": "ko",
+  "dir": "ltr",
+  "id": "./",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f5f7",
+  "theme_color": "#0b2a4a",
+  "categories": ["news"],
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
