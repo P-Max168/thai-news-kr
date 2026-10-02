@@ -1,0 +1,62 @@
+import asyncio, sys
+from playwright.async_api import async_playwright
+BASE = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8765/"
+OUT = "/workspace/thai-news-portal/screenshots/"
+async def main():
+    async with async_playwright() as p:
+        b = await p.chromium.launch(executable_path="/usr/bin/google-chrome", args=["--no-sandbox"])
+        # desktop
+        pg = await b.new_page(viewport={"width": 1280, "height": 900}, device_scale_factor=1, timezone_id="Asia/Bangkok", locale="ko-KR")
+        pg.on("console", lambda m: print("console:", m.type, m.text))
+        pg.on("pageerror", lambda e: print("PAGEERROR:", e))
+        await pg.goto(BASE, wait_until="networkidle")
+        await pg.evaluate("document.fonts.ready")
+        await pg.wait_for_timeout(800)
+        await pg.screenshot(path=OUT + "desktop-1280.png", full_page=True)
+        await pg.screenshot(path=OUT + "desktop-1280-top.png")
+        # expanded article (highlights are in top-grid, not #id cards on "all" tab)
+        await pg.click("button.tab[data-cat=economy]")
+        await pg.wait_for_timeout(400)
+        await pg.click("#e1 .card__head")
+        await pg.wait_for_timeout(300)
+        el = await pg.query_selector("#e1")
+        await el.screenshot(path=OUT + "desktop-article-expanded.png")
+        await pg.click("button.tab[data-cat=all]")
+        await pg.wait_for_timeout(300)
+        # local tab
+        await pg.click("button.tab[data-cat=local]")
+        await pg.wait_for_timeout(500)
+        await pg.screenshot(path=OUT + "desktop-tab-local.png")
+        fonts = await pg.evaluate("Array.from(document.fonts).filter(f=>f.status=='loaded').map(f=>f.family).filter((v,i,a)=>a.indexOf(v)==i)")
+        print("loaded fonts:", fonts)
+        # mobile
+        m = await b.new_page(viewport={"width": 390, "height": 844}, device_scale_factor=2, is_mobile=True, has_touch=True, timezone_id="Asia/Bangkok", locale="ko-KR")
+        m.on("pageerror", lambda e: print("PAGEERROR(m):", e))
+        await m.goto(BASE, wait_until="networkidle")
+        await m.evaluate("document.fonts.ready")
+        await m.wait_for_timeout(800)
+        await m.screenshot(path=OUT + "mobile-390-top.png")
+        await m.screenshot(path=OUT + "mobile-390.png", full_page=True)
+        sw = await m.evaluate("[document.documentElement.scrollWidth, window.innerWidth]")
+        print("mobile scrollWidth vs innerWidth:", sw)
+        await m.click("button.tab[data-cat=local]")
+        await m.wait_for_timeout(400)
+        await m.click("#l2 .card__head")
+        await m.wait_for_timeout(300)
+        el = await m.query_selector("#l2")
+        await el.screenshot(path=OUT + "mobile-article-expanded.png")
+        # 후속 기사(🆕 블록) 펼친 모습: 정치 탭의 p1
+        await m.goto(BASE + "?date=2026-09-29-am#p1", wait_until="networkidle")
+        await m.wait_for_timeout(600)
+        await m.screenshot(path=OUT + "mobile-article-update.png")
+        # 이전 판(새벽판) 화면 + 판 선택 목록 확인
+        opts = await m.eval_on_selector_all("#datepick option", "os=>os.map(o=>(o.selected?'*':' ')+o.value+' | '+o.textContent)")
+        print("edition picker:", opts)
+        await m.goto(BASE + "?date=2026-09-29-early", wait_until="networkidle")
+        await m.wait_for_timeout(600)
+        await m.screenshot(path=OUT + "mobile-390-early-edition.png")
+        await m.goto(BASE + "?date=2026-09-29", wait_until="networkidle")
+        await m.wait_for_timeout(400)
+        print("legacy ?date=2026-09-29 ->", await m.eval_on_selector("#datepick", "s=>s.value"), "| stories:", await m.evaluate("document.querySelectorAll('.card').length"))
+        await b.close()
+asyncio.run(main())

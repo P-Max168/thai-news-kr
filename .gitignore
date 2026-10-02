@@ -1,0 +1,22 @@
+# 공개 저장소에 올리지 않는 것 (GitHub Pages 사이트에 필요 없음)
+# 수집한 제3자 기사 원문(저작권) / 옛 파일 / 스크린샷
+raw/
+archive/
+screenshots/
+# 캐시·임시 파일
+__pycache__/
+*.py[cod]
+.cache/
+.pytest_cache/
+node_modules/
+*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+# 비밀 정보
+.env
+.env.*
+*.pem
+*.key
+secrets/
