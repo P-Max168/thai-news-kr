@@ -1,6 +1,6 @@
 {
  "_readme": "관리자 승인함(#approve) 목록 — tools/pending.py 가 PENDING_APPROVAL.md 에서 만듦. 승인은 민구님이 고르고 봇이 다음 실행에 반영(자동 승인 없음)",
- "updated_at": "2026-10-03T16:25:59+07:00",
+ "updated_at": "2026-10-03T16:32:14+07:00",
  "items": [
   {
    "id": "p1",
@@ -30,7 +30,7 @@
    "id": "p4",
    "no": 4,
    "kind": "사이트 규칙(검색 노출)",
-   "body": "**검색엔진 막기 풀기** — 지금 모든 쪽이 `noindex, nofollow` + robots.txt `Disallow: /`. 애드센스 심사는 사이트를 읽을 수 있어야 해서 신청 전에 풀어야 함(구글 검색에도 뜨기 시작). 신청 직전에 풀기를 권함",
+   "body": "**검색엔진 막기 풀기** — 지금 모든 쪽이 `noindex, nofollow` + robots.txt `Disallow: /`. 애드센스 심사는 사이트를 읽을 수 있어야 해서 신청 전에 풀어야 함(구글 검색에도 뜨기 시작). 신청 직전에 풀기를 권함. **고를 안 A/B/C + 공식 문서 링크: CHOICE_MEMO_4_5.md**",
    "where": "index.html·안내 4쪽 meta robots, robots.txt",
    "status": "대기"
   },
@@ -38,7 +38,7 @@
    "id": "p5",
    "no": 5,
    "kind": "사이트 규칙(주소)",
-   "body": "**ads.txt 를 둘 곳 정하기** — 애드센스는 도메인 맨 위 파일만 읽음. (가) GitHub 에 `p-max168.github.io` 저장소를 새로 만들어 ads.txt 하나만 두기(무료) 또는 (나) 맞춤 도메인 구입(유료, 연 약 400~600밧). 지금 저장소의 ads.txt 는 주석만 있는 자리표시",
+   "body": "**ads.txt 를 둘 곳 정하기** — 애드센스는 도메인 맨 위 파일만 읽음. (가) GitHub 에 `p-max168.github.io` 저장소를 새로 만들어 ads.txt 하나만 두기(무료) 또는 (나) 맞춤 도메인 구입(유료, 연 약 400~600밧). 지금 저장소의 ads.txt 는 주석만 있는 자리표시. **무료 (가)(나) 먼저 + 유료 .com/.net/.org 연 가격(바트·원, Porkbun·Namecheap 가격표 링크) + 애드센스 공식 문서: CHOICE_MEMO_4_5.md**",
    "where": "ads.txt",
    "status": "대기"
   },
