@@ -128,6 +128,22 @@ async def main():
           ad:!!document.querySelector('#feed .ad-slot--region .ad, #feed .ad-slot--region a, #feed .ad-slot--region img'), nat:!!document.querySelector('#feed .fsec--nat'),
           pin:document.querySelectorAll('#feed .pin--must .card').length})""")
         rec(("동부" in fs["chip"]) and fs["nat"] and fs["ad"], "내 피드: 칩·내 지역·지역 광고·전국 묶음", fs)
+        # ❤️ 하트: 카드 ♡ → ❤️ + 토스트, 헤더 '❤️ N' → 내가 하트한 기사 페이지
+        hz = {}
+        try:
+            cid = await pg.eval_on_selector("#feed .card", "c=>c.id")
+            n0 = int(re.sub(r"\D", "", await pg.inner_text("#heartBtn")) or 0)
+            await pg.click("#%s [data-heart]" % cid); await pg.wait_for_timeout(300)
+            hz["toast"] = "더 보여드릴게요" in await pg.inner_text("#toast")
+            hz["n"] = int(re.sub(r"\D", "", await pg.inner_text("#heartBtn")) or 0) - n0
+            await pg.click("#heartBtn"); await pg.wait_for_timeout(500)
+            hz["rows"] = await pg.locator("#tnPage .hp-row").count()
+            await pg.go_back(); await pg.wait_for_timeout(300)
+            hz["closed"] = await pg.evaluate("!document.getElementById('tnPage') || document.getElementById('tnPage').hidden")
+            await pg.click("#%s [data-heart]" % cid)   # 되돌려 놓기
+        except Exception as e:
+            hz["err"] = str(e)[:120]
+        rec(hz.get("toast") and hz.get("n") == 1 and hz.get("rows", 0) >= 1 and hz.get("closed"), "❤️ 하트 → 헤더 개수·내가 하트한 기사 페이지·뒤로 가기", hz)
         # 2단계 시작 화면(새 방문자)
         c2 = await b.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True, timezone_id="Asia/Bangkok", locale="ko-KR")
         p2 = await c2.new_page()

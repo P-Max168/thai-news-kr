@@ -112,9 +112,42 @@
       .sort(function (a, b) { return (b.sc - a.sc) || (b.t - a.t) || (a.i - b.i); })
       .map(function (x) { return x.s; });
   }
-  function hasTaste() { var t = S.get().taste; return Object.keys(t.votes).length > 0; }
-  function reset() { return S.update(function (d) { d.taste = { w: {}, votes: {}, vf: {} }; }); }
+  function hasTaste() { var t = S.get().taste; return Object.keys(t.votes).some(function (k) { return k.indexOf("h:") !== 0; }); }
+  /* '내 취향 초기화' = 🙌🙅 표·가중치만 지움. ❤️ 하트(h:…)는 그대로(내가 하트한 기사 목록) */
+  function reset() {
+    return S.update(function (d) {
+      var keep = {}; Object.keys(d.taste.votes || {}).forEach(function (k) { if (k.indexOf("h:") === 0) keep[k] = d.taste.votes[k]; });
+      d.taste = { w: {}, votes: keep, vf: {} };
+    });
+  }
+
+  /* ---------- ❤️ 하트(2026-10-03 운영자 승인) ----------
+   * 저장: taste.votes["h:<판 id>/<기사 id>"] = 1(하트) | -1(취소 표시 — 다른 기기와 합칠 때 되살아나지 않게). vf 가 없어 가중치 계산엔 안 들어감
+   *       → 기존 Firestore 규칙(users/{uid}.taste.votes) 그대로 로그인 동기화. 취향 반영은 하트 = 🙌 더 보여줘 표를 같이 누름.
+   * 목록용 제목·매체·주제는 이 기기 ui.hm 에(동기화 안 함 — 다른 기기 하트는 목록 화면이 판 파일을 읽어 채움) */
+  function hkey(edition, id) { return "h:" + edition + "/" + id; }
+  function heartOf(edition, s) { return S.get().taste.votes[hkey(edition, s.id)] === 1; }
+  function heart(edition, s) {
+    var k = hkey(edition, s.id), on = !heartOf(edition, s);
+    if (on && voteOf(edition, s) <= 0) vote(edition, s, 1);        // 하트 = 🙌 같이
+    else if (!on && voteOf(edition, s) > 0) vote(edition, s, 1);   // 하트 취소 = 🙌 도 취소
+    S.update(function (d) {
+      d.taste.votes[k] = on ? 1 : -1;
+      d.ui = d.ui || {}; var hm = d.ui.hm = d.ui.hm || {};
+      if (on) hm[k] = { t: String(s.headline || "").slice(0, 120), src: String(s.source || "").replace(/\s*\(.*\)$/, "").slice(0, 40), tp: T.storyTopics(s).topic, at: Date.now() };
+      else delete hm[k];
+    });
+    return on;
+  }
+  /* 하트한 기사 [{key, ed, id, meta}] — 최근 하트 먼저(시각을 모르면 판 id 역순) */
+  function hearts() {
+    var d = S.get(), hm = (d.ui && d.ui.hm) || {};
+    return Object.keys(d.taste.votes).filter(function (k) { return k.indexOf("h:") === 0 && d.taste.votes[k] === 1; }).map(function (k) {
+      var m = /^h:([^/]+)\/(.+)$/.exec(k) || [];
+      return { key: k, ed: m[1], id: m[2], meta: hm[k] || null };
+    }).sort(function (a, b) { return ((b.meta && b.meta.at) || 0) - ((a.meta && a.meta.at) || 0) || (b.ed > a.ed ? 1 : b.ed < a.ed ? -1 : 0); });
+  }
 
   root.TNTaste = { features: features, vote: vote, voteOf: voteOf, learned: learned, score: score, sort: sort, reset: reset, hasTaste: hasTaste,
-    backfill: backfill, mergeDocs: mergeDocs, key: key };
+    backfill: backfill, mergeDocs: mergeDocs, key: key, heart: heart, heartOf: heartOf, hearts: hearts };
 })(window);

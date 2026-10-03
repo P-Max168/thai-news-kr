@@ -247,6 +247,7 @@
     var c = topicCounts(), sel = selected(), list = tabList();
     $("tabs").innerHTML = list.map(function (k, i) {
       return tabBtn(k, c, sel) + (i === 0 ? '<button type="button" class="dr-item dr-item--mine" data-ob-edit aria-haspopup="dialog">✏️ 내 피드 바꾸기 <small>사는 곳·관심</small></button>' +
+        '<button type="button" class="dr-item" data-page="hearts">❤️ 내가 하트한 기사 <small id="drHeartN">' + L.hearts().length + '개</small></button>' +
         '<button type="button" class="dr-item" id="myTopicsBtn" data-open-settings aria-haspopup="dialog">🧩 세부 주제·설정 <small>주제 직접 고르기·취향 초기화</small></button>' : "");
     }).join("");
     var other = sel ? T.TOPICS.map(function (t) { return t.id; }).filter(function (k) { return list.indexOf(k) < 0; }) : [];
@@ -344,7 +345,9 @@
     }).join("") + "</ul>" : "";
     var tags = (s.tags || []).length ? '<div class="tags">' + s.tags.map(function (x) { return "<span>#" + esc(x) + "</span>"; }).join("") + "</div>" : "";
     var v = L.voteOf(edId(), s);
+    var hon = L.heartOf(edId(), s);
     return '<article class="card' + (v < 0 ? " is-down" : "") + '" style="--tc:' + t.color + '" data-topic="' + tp.topic + '" id="' + esc(s.id) + '">' +
+      '<button type="button" class="card-heart" data-heart data-id="' + esc(s.id) + '" aria-pressed="' + hon + '" aria-label="' + (hon ? "하트 취소" : "하트 — 이런 뉴스 더 보기") + '"><span aria-hidden="true">' + (hon ? "❤️" : "♡") + "</span></button>" +
       '<button class="card__head" aria-expanded="false" aria-controls="body-' + esc(s.id) + '">' +
         '<div class="card__top">' + chips + "</div>" +
         '<h3 class="card__title">' + esc(s.headline) + "</h3>" + forMe +
@@ -645,8 +648,27 @@
     if (card) { card.classList.add("flash"); setTimeout(function () { card.classList.remove("flash"); }, 900); }
   }
 
+  /* ❤️ 하트: 누르면 ❤️ + 토스트, 취향에 🙌 처럼 반영(taste.js heart). 헤더 '❤️ N' 과 ☰ 메뉴 개수도 같이 */
+  function doHeart(btn) {
+    var s = byId(btn.getAttribute("data-id")); if (!s) return;
+    var on = L.heart(edId(), s);
+    toast(on ? "❤️ 다음 판부터 이런 뉴스 더 보여드릴게요" : "하트를 취소했어요", 2200);
+    var y = window.pageYOffset;
+    renderTabs(); renderFeed(); heartCount();
+    window.scrollTo(0, y);
+    var nb = document.querySelector('#' + CSS.escape(s.id) + ' [data-heart]'); if (nb) { nb.classList.add("pop"); nb.focus({ preventScroll: true }); }
+    if (window.TNSocial && TNSocial.react) try { TNSocial.react(edId(), s, "h", on ? 1 : -1); } catch (e) {}
+  }
+  function heartCount() {
+    var n = L.hearts().length, b = $("heartBtn");
+    if (b) { b.innerHTML = '<span aria-hidden="true">' + (n ? "❤️" : "🤍") + '</span><b>' + n + "</b>"; b.setAttribute("aria-label", "내가 하트한 기사 " + n + "개 보기"); }
+    var d = $("drHeartN"); if (d) d.textContent = n + "개";
+  }
+  S.subscribe(function () { heartCount(); });
+
   document.addEventListener("click", function (e) {
     var el;
+    if ((el = e.target.closest("[data-heart]"))) { doHeart(el); return; }
     if ((el = e.target.closest("[data-vote]"))) { doVote(el); return; }
     if ((el = e.target.closest("[data-korea-item]"))) { var ki = +el.getAttribute("data-korea-item"); KOREA.open = KOREA.open === ki ? -1 : ki; renderKorea(); var nb = document.querySelector('[data-korea-item="' + ki + '"]'); if (nb) nb.focus({ preventScroll: true }); return; }
     if ((el = e.target.closest("[data-korea-toggle]"))) { S.update(function (d) { d.ui.koreaClosed = !d.ui.koreaClosed; }); renderKorea(); return; }
@@ -952,5 +974,8 @@
     if (state.data) { L.backfill(edId(), state.data.stories); renderAll(); }
   });
   window.TNApp = { state: state, openSettings: function () { Onb.open("topics", true); }, toast: toast, edId: function () { return state.data ? edId() : null; },
-    rerender: function () { if (state.data) renderAll(); } };
+    rerender: function () { if (state.data) renderAll(); },
+    openStory: function (id) { openStory(id); }, closeDrawer: function () { Drawer.close(true); }, heartCount: heartCount,
+    topicOf: function (id) { return topicOf(id); } };
+  heartCount();
 })();

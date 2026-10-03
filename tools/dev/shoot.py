@@ -27,6 +27,8 @@ async def main():
             await pg.evaluate("document.fonts.ready"); await pg.wait_for_timeout(900)
             full = False
             await pg.add_style_tag(content="html{scroll-behavior:auto!important}")
+            if name == "myfeed": await pg.evaluate("(()=>{const c=document.querySelector('#feed .mine')||document.querySelector('#feed');scrollTo(0,c.getBoundingClientRect().top+scrollY-150)})()"); await pg.wait_for_timeout(300)
+            if name == "regionad": await pg.evaluate("(()=>{const c=document.querySelector('#feed .ad-slot--region')||document.querySelector('#feed');scrollTo(0,c.getBoundingClientRect().top+scrollY-300)})()"); await pg.wait_for_timeout(300)
             if name == "feed": await pg.evaluate("(()=>{const c=document.querySelector('#feed .card:not(.pin .card)')||document.querySelector('#feed .card');scrollTo(0,c.getBoundingClientRect().top+scrollY-200)})()"); await pg.wait_for_timeout(300)
             elif name == "drawer": await pg.click("#menuBtn"); await pg.wait_for_timeout(500)
             elif name == "article":
