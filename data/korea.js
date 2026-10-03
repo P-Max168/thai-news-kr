@@ -1,6 +1,6 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-03T10:01:37+07:00",
+ "updated_at": "2026-10-03T11:53:21+07:00",
  "items": [
   {
    "title": "김여정, 이 대통령 대화 촉구에 “자작광대극…연기로 인기 많이 끌길” 조롱",
@@ -15,16 +15,10 @@ window.KOREA_NEWS = {
    "url": "https://imnews.imbc.com/news/2026/society/article/6855545_36918.html"
   },
   {
-   "title": "개천절 아침 쌀쌀…내일 밤부터 수도권에 비",
-   "source": "KBS 뉴스",
-   "time": "2026-10-03T07:10:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8677132"
-  },
-  {
-   "title": "김지용 재산 38억 신고… 분당에 아파트 두 채 보유",
+   "title": "추미애 \"언제든 등 돌릴 수 있는 자\"... 김지용 중수청장 후보자 직격",
    "source": "조선일보",
-   "time": "2026-10-02T13:40:07+07:00",
-   "url": "https://www.chosun.com/politics/politics_general/2026/10/02/OOCUPXYOXRBUDETM6T2HLF6BT4/"
+   "time": "2026-10-03T09:06:00+07:00",
+   "url": "https://www.chosun.com/national/national_general/2026/10/03/U6W6YMDGLBADTOQRMTF4LLQ5O4/"
   },
   {
    "title": "정동영 통일장관 \"대북확성기 재개 위험천만한 일\"",
@@ -33,10 +27,28 @@ window.KOREA_NEWS = {
    "url": "https://www.chosun.com/politics/diplomacy-defense/2026/10/03/2QIJROXL5FEQFPIWWTAUDL5NOE/"
   },
   {
-   "title": "청와대, 북한 탄도미사일 발사에 긴급회의‥\"즉각 중단 촉구\"",
+   "title": "[로컬의 재발견] 상어 '부캉이' 인기 전국 명소된 부산 북항 친수공원",
+   "source": "연합뉴스",
+   "time": "2026-10-03T05:11:00+07:00",
+   "url": "https://www.yna.co.kr/view/AKR20261002102100051"
+  },
+  {
+   "title": "군 “북 탄도미사일 사거리 700km 이상”…청 “즉각 중단 촉구”",
+   "source": "KBS 뉴스",
+   "time": "2026-10-03T10:29:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8677160"
+  },
+  {
+   "title": "국민의힘, 1년 만에 서울 도심 장외집회‥\"이재명 정부 규탄\"",
    "source": "MBC 뉴스",
-   "time": "2026-10-03T08:19:40+07:00",
-   "url": "https://imnews.imbc.com/news/2026/politics/article/6855552_36911.html"
+   "time": "2026-10-03T09:13:16+07:00",
+   "url": "https://imnews.imbc.com/news/2026/politics/article/6855563_36911.html"
+  },
+  {
+   "title": "‘강훈식 사의 표명’ 열흘 넘었는데 비서실장 후임은…‘적임자’ 고심 깊어지는 이 대통령",
+   "source": "경향신문",
+   "time": "2026-10-03T04:00:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610030600101"
   },
   {
    "title": "우크라 외교장관 '태세 전환'?‥\"심각한 유감\" 李 정색",
@@ -45,22 +57,10 @@ window.KOREA_NEWS = {
    "url": "https://imnews.imbc.com/news/2026/world/article/6855436_36925.html"
   },
   {
-   "title": "여야, 개천절 맞아 한 목소리…“홍익인간 뜻, 국민 삶으로”",
-   "source": "다음뉴스",
-   "time": "2026-10-03T08:33:15+07:00",
-   "url": "https://v.daum.net/v/20261003103315656"
-  },
-  {
-   "title": "이정현 검찰총장 직무대행 \"공소청 존재 이유 다시 증명하고 신뢰 회복해야\"",
-   "source": "조선일보",
-   "time": "2026-10-02T09:35:01+07:00",
-   "url": "https://www.chosun.com/national/court_law/2026/10/02/FHD6KZO4UNCTXDQNKDXTURS7ZA/"
-  },
-  {
-   "title": "\"옆집서 여성 때린다\" 허위 112 신고 40대 송치",
-   "source": "다음뉴스",
-   "time": "2026-10-02T17:06:59+07:00",
-   "url": "https://v.daum.net/v/20261002190659219"
+   "title": "한 총리 “‘AI 기본사회’로 모두를 이롭게…K-컬처로 홍익인간 실천”",
+   "source": "KBS 뉴스",
+   "time": "2026-10-03T09:32:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8677155"
   }
  ]
 };
