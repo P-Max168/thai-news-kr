@@ -181,3 +181,20 @@ export async function reportComment(id) {
     return n >= 3 ? "hidden" : "ok";
   });
 }
+
+/* ---------- 익명 반응 집계: rx/{자동 id} (2026-10-03 야간) ----------
+ * 하트·🙌·🙅 를 기사별로 모아 운영자 통계에 씀. 사람 정보 없음(uid·이름·성별·기기 정보 저장 안 함):
+ * {a:"<판 id>/<기사 id>", k:"h"|"u"|"d", v:1|-1(취소), r:사는 곳, i:[관심…], tp:주 주제, at:서버 시각}
+ * 쓰기 = 누구나 '추가'만(규칙이 모양 검사), 읽기 = 운영자만. 규칙이 아직 게시 전이면 permission-denied → 화면은 조용히 무시 */
+export async function addReactions(list) {
+  await fs();
+  const b = F.writeBatch(db);
+  list.slice(0, 20).forEach(function (x) { b.set(F.doc(F.collection(db, "rx")), Object.assign({}, x, { at: F.serverTimestamp() })); });
+  await b.commit();
+}
+export async function listReactions(sinceMs, max) {
+  await fs();
+  const q = F.query(F.collection(db, "rx"), F.where("at", ">=", F.Timestamp.fromMillis(sinceMs)), F.limit(max || 5000));
+  const snap = await F.getDocs(q);
+  return snap.docs.map(function (d) { const x = d.data(); return Object.assign({}, x, { at: x.at && x.at.toMillis ? x.at.toMillis() : 0 }); });
+}

@@ -76,7 +76,7 @@
   });
 
   function register(name, def) { pages[name] = def; if (location.hash === "#" + name) show(name); }
-  window.TNPages = { register: register, open: open, close: back, refresh: function () { if (cur) paint(); }, current: function () { return cur; }, esc: esc };
+  window.TNPages = { register: register, open: open, close: back, refresh: function () { if (cur) paint(); }, current: function () { return cur; }, has: function (n) { return !!pages[n]; }, esc: esc };
 
   /* ---------- ❤️ 내가 하트한 기사 ---------- */
   var STEPS = [5, 10, 1000], step = 0, loading = {};
@@ -91,8 +91,8 @@
     if (loading[ed] || !/^\d{4}-\d{2}-\d{2}-(am|pm|early)$/.test(ed)) return;
     loading[ed] = 1;
     var sc = document.createElement("script"); sc.src = "data/" + ed + ".js"; sc.async = true;
-    sc.onload = function () { if (cur === "hearts") paint(); };
-    sc.onerror = function () { loading[ed] = "err"; if (cur === "hearts") paint(); };
+    sc.onload = function () { if (cur === "hearts" || cur === "admin") paint(); };
+    sc.onerror = function () { loading[ed] = "err"; if (cur === "hearts" || cur === "admin") paint(); };
     document.head.appendChild(sc);
   }
   function metaOf(h) {
@@ -140,6 +140,93 @@
         else location.href = "?date=" + encodeURIComponent(q[0]) + "#" + encodeURIComponent(q[1]);
         return true;
       }
+      return false;
+    }
+  });
+
+  /* ---------- 📊 관리자: 반응 통계(운영자 UID 로 로그인했을 때만 숫자가 보임) ----------
+   * 데이터 = Firestore rx(익명: 기사·반응 종류·사는 곳·관심·주제). 취소(-1)는 빼고 셈. 읽기는 규칙상 운영자만 */
+  var AD = { days: 7, data: {}, err: null, busy: false, topN: 5 };
+  var PERIODS = [[1, "오늘"], [7, "7일"], [30, "30일"]];
+  function sinceOf(days) {
+    if (days === 1) { var d = new Date(Date.now() + 7 * 3600e3); d.setUTCHours(0, 0, 0, 0); return d.getTime() - 7 * 3600e3; }   // 방콕 자정
+    return Date.now() - days * 864e5;
+  }
+  function adLoad(force) {
+    var key = AD.days, c = AD.data[key];
+    if (AD.busy || (!force && c && Date.now() - c.t < 120e3)) return;
+    if (!window.TNSocial || !TNSocial.adminStats) { AD.err = "load"; return; }
+    AD.busy = true; AD.err = null;
+    TNSocial.adminStats(sinceOf(key)).then(function (rows) { AD.data[key] = { t: Date.now(), rows: rows }; })
+      .catch(function (e) { AD.err = /permission/i.test((e && (e.code || e.message)) || "") ? "perm" : "net"; })
+      .then(function () { AD.busy = false; if (cur === "admin") paint(); });
+  }
+  function agg(rows) {
+    var z = function () { return { h: 0, u: 0, d: 0 }; }, tot = z(), byR = {}, byI = {}, byT = {}, byA = {};
+    rows.forEach(function (x) {
+      if (!/^[hud]$/.test(x.k)) return;
+      var v = x.v === -1 ? -1 : 1;
+      tot[x.k] += v;
+      (byR[x.r || "none"] = byR[x.r || "none"] || z())[x.k] += v;
+      (Array.isArray(x.i) && x.i.length ? x.i : ["none"]).forEach(function (i) { (byI[i] = byI[i] || z())[x.k] += v; });
+      (byT[x.tp || "?"] = byT[x.tp || "?"] || z())[x.k] += v;
+      (byA[x.a] = byA[x.a] || z())[x.k] += v;
+    });
+    return { tot: tot, byR: byR, byI: byI, byT: byT, byA: byA };
+  }
+  function n0(v) { return Math.max(0, v | 0).toLocaleString("ko-KR"); }
+  function table(title, map, labelOf, order) {
+    var keys = Object.keys(map);
+    keys.sort(function (a, b) { var ia = order ? order.indexOf(a) : -1, ib = order ? order.indexOf(b) : -1; if (ia >= 0 || ib >= 0) return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); var A = map[a], B = map[b]; return (B.h + B.u + B.d) - (A.h + A.u + A.d); });
+    if (!keys.length) return "";
+    return '<section class="ad-sec"><h3 class="ad-h">' + title + '</h3><div class="ad-tb" role="table"><div class="ad-tr ad-tr--h" role="row"><span role="columnheader">구분</span><span role="columnheader">❤️</span><span role="columnheader">🙌</span><span role="columnheader">🙅</span></div>' +
+      keys.map(function (k) { var m = map[k]; return '<div class="ad-tr" role="row"><span role="cell">' + esc(labelOf(k)) + '</span><b role="cell">' + n0(m.h) + '</b><b role="cell">' + n0(m.u) + '</b><b role="cell">' + n0(m.d) + "</b></div>"; }).join("") + "</div></section>";
+  }
+  function storyTitle(a) {
+    var m = /^([^/]+)\/(.+)$/.exec(a) || [], d = (window.NEWS_DATA || {})[m[1]];
+    var s = d && (d.stories || []).filter(function (x) { return x.id === m[2]; })[0];
+    if (s) return s.headline;
+    if (m[1] && !d) fill(m[1]);
+    return (m[1] ? edLabel(m[1]) + " · " : "") + (m[2] || a);
+  }
+  register("admin", {
+    title: "📊 반응 통계 (운영자)",
+    render: function () {
+      var S2 = window.TNSocial, T = window.TNTopics;
+      if (!S2 || !S2.isAdmin || !S2.isAdmin()) {
+        return '<div class="empty hp-empty"><p class="hp-empty__e" aria-hidden="true">🔒</p><p><b>운영자만 볼 수 있어요</b></p><p>운영자 구글 계정으로 로그인하면 하트·🙌·🙅 반응을 사는 곳·관심·주제별로 볼 수 있어요.</p>' +
+          (S2 && S2.signedIn && S2.signedIn() ? "" : '<button type="button" class="cta hp-go" data-login>구글로 로그인</button>') + "</div>";
+      }
+      adLoad(false);
+      var chips = '<div class="ad-per" role="group" aria-label="기간">' + PERIODS.map(function (p) { return '<button type="button" class="ad-pbtn" data-ad-days="' + p[0] + '" aria-pressed="' + (AD.days === p[0]) + '">' + p[1] + "</button>"; }).join("") + "</div>";
+      var c = AD.data[AD.days];
+      if (AD.err === "perm") return chips + '<div class="empty">통계를 읽을 권한이 아직 없어요. Firestore 보안 규칙(저장소 firestore.rules 의 rx 부분)을 Firebase 콘솔에 게시해야 해요 — LOGIN_TODO.md 참고.</div>';
+      if (AD.err) return chips + '<div class="empty">통계를 불러오지 못했어요. 인터넷 연결을 확인하고 <button type="button" class="linkbtn" data-ad-reload>다시 시도</button></div>';
+      if (!c) return chips + '<div class="skel-list" aria-busy="true"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div><p class="hp-note">불러오는 중…</p>';
+      var g = agg(c.rows);
+      var sum = '<div class="ad-sum"><div class="ad-cell"><span>❤️ 하트</span><b>' + n0(g.tot.h) + '</b></div><div class="ad-cell"><span>🙌 더 보여줘</span><b>' + n0(g.tot.u) + '</b></div><div class="ad-cell"><span>🙅 덜 보여줘</span><b>' + n0(g.tot.d) + "</b></div></div>";
+      if (!c.rows.length) return chips + sum + '<div class="empty">이 기간에 모인 반응이 아직 없어요.</div>';
+      var arts = Object.keys(g.byA).map(function (a) { var m = g.byA[a]; return { a: a, m: m, sc: m.h * 2 + m.u - m.d }; }).filter(function (x) { return x.sc > 0 || x.m.h > 0 || x.m.u > 0; }).sort(function (x, y) { return y.sc - x.sc; });
+      var top = arts.slice(0, AD.topN).map(function (x, i) {
+        return '<li class="ad-art"><span class="ad-rank">' + (i + 1) + '</span><span class="ad-at">' + esc(storyTitle(x.a)) + '</span><span class="ad-an">❤️ <b>' + n0(x.m.h) + "</b> 🙌 <b>" + n0(x.m.u) + "</b> 🙅 <b>" + n0(x.m.d) + "</b></span></li>";
+      }).join("");
+      var more = arts.length > AD.topN && AD.topN < 10 ? '<button type="button" class="more-btn" data-ad-more>더 보기 ▾</button>' : "";
+      var rl = function (k) { var r = T && T.region(k); return r ? r.emoji + " " + r.label : k === "none" ? "미선택" : k; };
+      var il = function (k) { var r = T && T.interest(k); return r ? r.emoji + " " + r.label : k === "none" ? "미선택" : k; };
+      var tl = function (k) { var t = window.TNApp && TNApp.topicOf(k); return t && t.label ? t.emoji + " " + t.label : k; };
+      return chips + sum +
+        '<section class="ad-sec"><h3 class="ad-h">🏆 반응 많은 기사</h3><ol class="ad-arts">' + top + "</ol>" + more + "</section>" +
+        table("📍 사는 곳별 <small>페르소나·내 주제로 추정</small>", g.byR, rl, ["east", "bangkok", "north", "south", "other", "none"]) +
+        table("🎯 관심별 <small>페르소나·내 주제로 추정</small>", g.byI, il, ["life", "travel", "biz", "visa", "none"]) +
+        table("🗂️ 주제별", g.byT, tl) +
+        '<p class="hp-note">개인 정보 없이 모은 숫자예요(사는 곳·관심·주제만, 성별·이름·기기 정보 없음). 취소한 반응은 빼고 셉니다. 조회 ' +
+        new Date(c.t).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Bangkok" }) + ' · 반응 ' + c.rows.length.toLocaleString("ko-KR") + '건 <button type="button" class="linkbtn" data-ad-reload>새로고침</button></p>';
+    },
+    click: function (e, t) {
+      var el;
+      if ((el = t.closest("[data-ad-days]"))) { AD.days = +el.getAttribute("data-ad-days"); AD.topN = 5; paint(); return true; }
+      if ((el = t.closest("[data-ad-more]"))) { AD.topN = 10; paint(); return true; }
+      if ((el = t.closest("[data-ad-reload]"))) { AD.err = null; delete AD.data[AD.days]; adLoad(true); paint(); return true; }
       return false;
     }
   });

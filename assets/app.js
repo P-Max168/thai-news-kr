@@ -637,7 +637,13 @@
   function doVote(btn) {
     var s = byId(btn.getAttribute("data-id")); if (!s) return;
     var dir = +btn.getAttribute("data-vote");
+    var prev = L.voteOf(edId(), s);
     var now = L.vote(edId(), s, dir);
+    // 익명 반응 집계(운영자 통계): 이전 표 취소 → 새 표
+    if (window.TNSocial && TNSocial.react) try {
+      if (prev && prev !== now) TNSocial.react(edId(), s, prev > 0 ? "u" : "d", -1);
+      if (now && now !== prev) TNSocial.react(edId(), s, now > 0 ? "u" : "d", 1);
+    } catch (e) {}
     var t = topicOf(tps(s).topic);
     void t;
     toast(now > 0 ? "알겠어요! 비슷한 소식을 위쪽에 더 올려드릴게요"

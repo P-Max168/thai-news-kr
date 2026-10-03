@@ -4,3 +4,4 @@
 
 | 무엇을 | 어디서 | 왜 |
 |---|---|---|
+| Firestore 보안 규칙 게시(익명 반응 집계 `rx` 추가) — 저장소 `firestore.rules` 전체를 복사해 붙여 넣고 '게시' | Firebase 콘솔 → thai-news-kr → Firestore Database → 규칙 (mgisgood1919@gmail.com 로그인) | 게시하신 뒤 봇에게 '규칙 게시함'이라고만 알려 주시면 `assets/social.js` 의 `RX_ON` 을 켭니다(그 전엔 각 휴대폰에 최대 60개까지 모아 둠). 게시 전에는 하트·🙌·🙅 반응이 서버에 안 모여 📊 반응 통계(운영자)가 비어 있음. 사이트는 그대로 동작(이 기기에서 하루 쉬었다 다시 시도). 이 상자에 firebase 로그인이 없어 봇이 못 함 |

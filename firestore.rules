@@ -4,6 +4,7 @@ rules_version = '2';
 //  profiles/{uid}  : 공개 닉네임 {nickname, isAdmin, updatedAt} (누구나 읽기, 본인만 쓰기)
 //  comments/{id}   : 댓글. 숨김 아닌 것만 누구나 읽기 / 로그인한 본인만 작성(30초 1회) / 본인·운영자 삭제 / 운영자 숨김 / 신고 3회면 자동 숨김
 //  config/admins   : {uids: [...]} 운영자 목록 — 콘솔에서만 수정(클라이언트 쓰기 금지)
+//  rx/{id}         : 익명 반응(하트·🙌·🙅) — 누구나 추가만, 운영자만 읽기(2026-10-03 야간)
 //  그 밖의 모든 경로 : 거부
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -112,6 +113,25 @@ service cloud.firestore {
         || (isAdmin() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['hidden']))
       );
       allow delete: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+    }
+
+    // ---------- 익명 반응 집계 rx/{id} (2026-10-03 야간 추가) ----------
+    // 하트·🙌·🙅 를 운영자 통계용으로 모음. 사람 정보 없음(uid·이름·성별·기기 정보 저장 안 함 — 아래 키 외에는 거부).
+    // 누구나 '추가'만(로그인 불필요), 고치기·지우기 금지, 읽기는 운영자만. at 은 서버 시각만.
+    // a = "<판 id>/<기사 id>", k = h(하트)|u(더 보여줘)|d(덜 보여줘), v = 1(누름)|-1(취소), r = 사는 곳(추정), i = 관심(추정), tp = 기사 주 주제
+    function validRx(d) {
+      return d.keys().hasOnly(['a', 'k', 'v', 'r', 'i', 'tp', 'at']) && d.keys().hasAll(['a', 'k', 'v', 'at'])
+        && d.a is string && d.a.size() >= 3 && d.a.size() <= 48
+        && d.k in ['h', 'u', 'd'] && d.v in [1, -1]
+        && (!('r' in d) || d.r in ['east', 'bangkok', 'north', 'south', 'other', 'none'])
+        && (!('i' in d) || (d.i is list && d.i.size() <= 4 && d.i.hasOnly(['life', 'travel', 'biz', 'visa'])))
+        && (!('tp' in d) || (d.tp is string && d.tp.size() <= 16))
+        && d.at == request.time;
+    }
+    match /rx/{id} {
+      allow read: if isAdmin();
+      allow create: if validRx(request.resource.data);
+      allow update, delete: if false;
     }
 
     // ---------- 그 밖에는 모두 거부 ----------

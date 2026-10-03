@@ -6,7 +6,7 @@
  */
 (function () {
   "use strict";
-  var FB_URL = "assets/fb.js?v=ab458605";       // tools/stamp_assets.py 가 ?v= 갱신
+  var FB_URL = "assets/fb.js?v=1544b0bd";       // tools/stamp_assets.py 가 ?v= 갱신
   var AUTH_KEY = "tnk.auth.v1";                  // 이 기기: {uid, linked:[uid…]} (계정 정보는 저장 안 함)
   var S = window.TNStore, L = window.TNTaste;
   var live = /^https?:$/.test(location.protocol);
@@ -65,7 +65,8 @@
     if (!live || (failed && !user)) { el.hidden = true; return; }
     el.hidden = false;
     el.innerHTML = user
-      ? '<div class="acct-box__row">' + avatar("acct__av") + '<span><b>구글 계정으로 로그인됨</b><small>' + statusText() + '</small></span><button type="button" class="btn btn--sm acct-out" data-logout>로그아웃</button></div>'
+      ? '<div class="acct-box__row">' + avatar("acct__av") + '<span><b>구글 계정으로 로그인됨</b><small>' + statusText() + '</small></span><button type="button" class="btn btn--sm acct-out" data-logout>로그아웃</button></div>' +
+        (admin ? '<div class="adm-links"><button type="button" class="adm-link" data-page="admin">📊 반응 통계</button>' + (window.TNPages && TNPages.has("approve") ? '<button type="button" class="adm-link" data-page="approve">✅ 승인함</button>' : "") + '</div>' : "")
       : '<div class="acct-box__row"><span><b>다른 기기에서도 이어 보기</b><small>로그인은 선택이에요. 안 해도 모든 기능을 쓸 수 있어요.</small></span><button type="button" class="gbtn gbtn--light" data-login>' + G + '<span>구글로 로그인</span></button></div>';
   }
   function refreshUI() {
@@ -75,6 +76,7 @@
     var n = $("storeNote"); if (n) n.textContent = user ? "구글 계정에 저장돼 다른 기기에서도 이어져요." : "설정과 취향은 이 기기(브라우저)에만 저장돼요. 구글로 로그인하면 다른 기기에서도 이어져요(선택).";
     if ($("acctMenu")) $("acctMenu").innerHTML = menuHTML();
     document.querySelectorAll("[data-cmts].is-mounted").forEach(function (c) { renderComments(c); });
+    if (window.TNPages && /^(admin|approve)$/.test(TNPages.current() || "")) TNPages.refresh();
   }
 
   /* ---------- 로그인 · 동기화 ---------- */
@@ -97,6 +99,7 @@
   function start(m) {
     if (ready) return;
     ready = true;
+    setTimeout(rxFlush, 2000);   // 지난번에 못 보낸 반응
     m.onUser(onUser);
     m.redirectResult().then(function (r) {
       if (r && r.failed && !m.currentUser()) toast("로그인이 끝나지 않았어요. Safari(또는 Chrome) 브라우저에서 열어 다시 시도해 주세요.", 5000);
@@ -344,7 +347,44 @@
   });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
 
-  window.TNSocial = { warm: function () { if (live && !fbP && !failed) load().then(start).catch(function () {}); }, mountComments: mountComments, renderAccountBox: renderAccountBox, signedIn: function () { return !!user; }, _filter: badText, _nick: nickOk, _replyChips: replyChips };
+  /* ---------- 익명 반응 보내기(하트·🙌·🙅 → Firestore rx, 운영자 통계용) ----------
+   * 이 기기 대기열(localStorage tnk.rxq, 최대 60개)에 모았다가 Firebase 가 준비되면 20개씩 보냄. 개인 정보 없음.
+   * 규칙 미게시·오프라인 등으로 실패: permission-denied 면 하루 동안 보내지 않음(tnk.rxoff), 그 밖엔 다음 기회에 다시 */
+  var RXQ = "tnk.rxq", RXOFF = "tnk.rxoff", rxTimer = null, rxBusy = false;
+  // ★ 서버로 보내기 스위치: Firestore 규칙(rx)을 콘솔에 게시한 뒤 true 로(LOGIN_TODO.md). 그 전엔 이 기기 대기열에만 쌓음
+  //   (게시 전에 보내면 거부(403)되고 콘솔 오류가 남음). 미리 시험: localStorage tnk.rxon = "1"
+  var RX_ON = false;
+  try { if (localStorage.getItem("tnk.rxon") === "1") RX_ON = true; } catch (e) {}
+  function rxRead() { try { return JSON.parse(localStorage.getItem(RXQ) || "[]") || []; } catch (e) { return []; } }
+  function rxWrite(q) { try { localStorage.setItem(RXQ, JSON.stringify(q.slice(-60))); } catch (e) {} }
+  function rxOff() { try { return Date.now() - (+localStorage.getItem(RXOFF) || 0) < 864e5; } catch (e) { return true; } }
+  function react(edition, s, kind, v) {
+    if (!live || !s || !/^[hud]$/.test(kind)) return;
+    var d = S.get(), T = window.TNTopics;
+    // 사는 곳·관심: 2단계 시작 화면이 보류 중이라 대부분 비어 있음 → 페르소나·내 주제에서 추정(topics.js fromLegacy). 설정 없음 = none
+    var ri = d.region ? { region: d.region, interests: d.interests || [] } : (d.onboarded && (d.persona || (d.topics || []).length) && T && T.fromLegacy ? T.fromLegacy(d.persona, d.topics) : { region: "none", interests: [] });
+    var ev = { a: String(edition + "/" + s.id).slice(0, 48), k: kind, v: v > 0 ? 1 : -1, r: ri.region || "none",
+      i: (ri.interests || []).filter(function (x) { return /^(life|travel|biz|visa)$/.test(x); }).slice(0, 4), tp: T ? String(T.storyTopics(s).topic).slice(0, 16) : "" };
+    var q = rxRead(); q.push(ev); rxWrite(q);
+    clearTimeout(rxTimer); rxTimer = setTimeout(rxFlush, 3000);
+  }
+  function rxFlush() {
+    if (!RX_ON || rxBusy || rxOff() || !live || failed) return;
+    var q = rxRead(); if (!q.length) return;
+    if (!fb) { if (!fbP) load().then(start).then(function () { setTimeout(rxFlush, 500); }).catch(function () {}); return; }
+    if (!fb.addReactions) return;
+    var batch = q.slice(0, 20); rxBusy = true;
+    fb.addReactions(batch).then(function () {
+      rxWrite(rxRead().slice(batch.length)); rxBusy = false;
+      if (rxRead().length) setTimeout(rxFlush, 1000);
+    }).catch(function (e) {
+      rxBusy = false;
+      if (e && /permission/i.test(e.code || e.message || "")) { try { localStorage.setItem(RXOFF, String(Date.now())); } catch (x) {} }
+    });
+  }
+  function adminStats(sinceMs) { return load().then(function (m) { start(m); return m.listReactions(sinceMs, 5000); }); }
+
+  window.TNSocial = { react: react, isAdmin: function () { return !!(user && admin); }, adminStats: adminStats, warm: function () { if (live && !fbP && !failed) load().then(start).catch(function () {}); }, mountComments: mountComments, renderAccountBox: renderAccountBox, signedIn: function () { return !!user; }, _filter: badText, _nick: nickOk, _replyChips: replyChips };
 
   renderHeader();
   if (!live) return;

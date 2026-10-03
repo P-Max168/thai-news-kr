@@ -146,6 +146,14 @@ async def main():
         except Exception as e:
             hz["err"] = str(e)[:120]
         rec(hz.get("toast") and hz.get("n") == 1 and hz.get("rows", 0) >= 1 and hz.get("closed"), "❤️ 하트 → 헤더 개수·내가 하트한 기사 페이지·뒤로 가기", hz)
+        # 📊 반응 통계: 운영자가 아니면 잠금 안내
+        try:
+            await pg.evaluate("TNPages.open('admin')"); await pg.wait_for_timeout(400)
+            lock = "운영자만" in await pg.inner_text("#tnPageBody")
+            await pg.evaluate("TNPages.close()"); await pg.wait_for_timeout(300)
+        except Exception as e:
+            lock = False
+        rec(lock, "📊 반응 통계 페이지 — 운영자 아니면 잠금 안내")
         # 첫 방문 시작 화면(새 방문자): 보류 중엔 예전 '어떤 분이세요?'(페르소나 5개), 켜지면 2단계
         c2 = await b.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True, timezone_id="Asia/Bangkok", locale="ko-KR")
         p2 = await c2.new_page()
