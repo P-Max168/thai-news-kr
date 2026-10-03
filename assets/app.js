@@ -16,6 +16,7 @@
   function impOf(k) { for (var i = 0; i < IMPACT.length; i++) if (IMPACT[i].k === k) return IMPACT[i]; return null; }
   function impacts(s) { return (Array.isArray(s.impact) ? s.impact : []).filter(impOf); }
   var $ = function (id) { return document.getElementById(id); };
+  var TH_RX = /[\u0E00-\u0E3E\u0E40-\u0E7F]/;   // 태국 문자(฿ U+0E3F 제외)
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -335,7 +336,9 @@
     var ctx = s.context ? '<div class="context"><b>💡 배경 설명</b>' + esc(s.context) + "</div>" : "";
     var upd = s.update ? '<div class="update"><b>🆕 이전 판 이후 새로 나온 내용</b>' + esc(s.update) + "</div>" : "";
     var rel = (s.related && s.related.length) ? '<p class="related-label">관련 기사 · 함께 참고한 원문</p><ul class="related">' + s.related.map(function (r) {
-      return '<li><a href="' + esc(r.url) + '" target="_blank" rel="noopener"><span class="rs">' + esc(r.source) + '</span><span class="rt">' + esc(r.title) + "</span> ↗</a></li>";
+      // 태국 문자 제목은 화면에 내지 않음(운영자 기준: 태국 문자 금지, ฿ 만 허용) → '관련 보도 원문(태국어)'
+      var rt = TH_RX.test(r.title || "") ? "관련 보도 원문 (태국어 기사)" : (r.title || "관련 보도 원문");
+      return '<li><a href="' + esc(r.url) + '" target="_blank" rel="noopener"><span class="rs">' + esc(String(r.source || "").replace(/\s*\([^)]*[\u0E00-\u0E7F][^)]*\)/g, "")) + '</span><span class="rt">' + esc(rt) + "</span> ↗</a></li>";
     }).join("") + "</ul>" : "";
     var tags = (s.tags || []).length ? '<div class="tags">' + s.tags.map(function (x) { return "<span>#" + esc(x) + "</span>"; }).join("") + "</div>" : "";
     var v = L.voteOf(edId(), s);
@@ -356,7 +359,7 @@
   /* 원문 제목: 태국 글자가 있으면 작은 '원문 제목 보기' 토글 안에만(운영자·독자가 못 읽는 글자를 화면에 바로 내지 않음), 영어 등은 그대로 */
   function originTitle(t) {
     if (!t) return "";
-    if (/[\u0E00-\u0E7F]/.test(t)) return '<details class="origin__th origin__th--fold"><summary>원문 제목 보기 <small>(태국어)</small></summary><span lang="th">' + esc(t) + "</span></details>";
+    if (TH_RX.test(t)) return "";   // 태국어 원문 제목은 화면에 내지 않음(2026-10-03 — 펼쳐도 태국 문자가 보이지 않게). 원문은 '원문 보기' 버튼으로
     return '<p class="origin__th"><small>원문 제목</small>' + esc(t) + "</p>";
   }
 

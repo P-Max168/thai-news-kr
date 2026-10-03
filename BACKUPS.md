@@ -16,3 +16,4 @@ git commit -m "되돌리기: <태그> 시점 화면으로" && git push   # force
 | 태그 | 시간(BKK) | 그 시점까지 들어간 것 | 사진 | 되돌리는 법 |
 |---|---|---|---|---|
 | `backup-20261003-1316-start` | 10-03 13:16 | 야간 개발 시작 전 라이브 그대로(헤더 v5, 주제 11개, 내 주변 5개, 드래곤 배너) | (speed 폴더 before 사진과 같음) [보기](backups/backup-20261003-1322-speed/before-home.jpg) | `git checkout backup-20261003-1316-start -- .` 후 커밋 |
+| `backup-20261003-1322-speed` | 10-03 13:22 | ① 속도 개선 **직전**(= 시작 상태와 같음). 이 뒤 커밋에서 첫 기사 카드 4.0초 → 2.1초 | [after-home](backups/backup-20261003-1322-speed/after-home.jpg) [before-home](backups/backup-20261003-1322-speed/before-home.jpg) | `git checkout backup-20261003-1322-speed -- .` 후 커밋 |

@@ -72,9 +72,11 @@ async def main():
         rec(len(ads) >= 4 and not bad, "광고 자리 = 드래곤 배너 + 사진 + 📢 추천 업종", "%d자리, 문제: %s" % (len(ads), bad or "없음"))
         rec(any(a["tel"] for a in ads), "전화 링크 tel:+66807365211")
         # 태국 문자·원화
-        th = await pg.evaluate("document.body.innerText")
+        await pg.goto(URL + ("&" if "?" in URL else "?") + "tab=all&_=" + str(int(time.time())), wait_until="networkidle"); await pg.wait_for_timeout(600)
+        await pg.evaluate("document.querySelectorAll('#feed .card:not(.is-open) .card__head').forEach(b=>b.click())"); await pg.wait_for_timeout(400)
+        th = await pg.evaluate("document.body.innerText")   # 모든 기사를 펼친 상태
         found = THAI.findall(th)
-        rec(not found, "화면에 태국 문자 없음(메인)", "".join(found[:20]))
+        rec(not found, "화면에 태국 문자 없음(메인, 기사 전부 펼침)", "".join(found[:20]))
         krw = await pg.evaluate(r"""()=>{const d=(window.NEWS_DATA||{})[(window.NEWS_INDEX||{}).latest]; if(!d) return null; let miss=[], n=0;
           const txt=d.stories.map(s=>[s.headline].concat(s.summary||[], s.for_me||'', s.context||'').join(' ')).join(' \n ');
           const re=/(\d[\d,.]*\s?(?:만|억)?\s?(?:바트|฿))/g; let m; while((m=re.exec(txt))){ n++; const after=txt.slice(m.index, m.index+m[0].length+30); if(!/원/.test(after.slice(m[0].length))) miss.push(after.slice(0,40)); }
