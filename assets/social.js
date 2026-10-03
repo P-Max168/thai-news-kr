@@ -6,7 +6,7 @@
  */
 (function () {
   "use strict";
-  var FB_URL = "assets/fb.js?v=4edfd739";       // tools/stamp_assets.py 가 ?v= 갱신
+  var FB_URL = "assets/fb.js?v=ab458605";       // tools/stamp_assets.py 가 ?v= 갱신
   var AUTH_KEY = "tnk.auth.v1";                  // 이 기기: {uid, linked:[uid…]} (계정 정보는 저장 안 함)
   var S = window.TNStore, L = window.TNTaste;
   var live = /^https?:$/.test(location.protocol);
