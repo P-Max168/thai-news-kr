@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script>(function(){var u="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css";function add(){var l=document.createElement("link");l.rel="stylesheet";l.href=u;l.crossOrigin="anonymous";l.onload=function(){try{localStorage.setItem("tnk.font","1")}catch(e){}};document.head.appendChild(l)}var seen=false;try{seen=localStorage.getItem("tnk.font")==="1"}catch(e){}if(seen)add();else addEventListener("load",function(){setTimeout(add,300)})})();</script>
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"></noscript>
-<link rel="stylesheet" href="assets/style.css?v=1c0923ca">
+<link rel="stylesheet" href="assets/style.css?v=82e5fd45">
 <link rel="stylesheet" href="assets/nearby.css?v=f91ab1c4">
 <link rel="stylesheet" href="assets/ads/massage/dragon-ad.css?v=992ae706">
 </head>
@@ -87,13 +87,13 @@
     <div class="ad-slot ad-slot--mid" data-ad-slot="mid" hidden></div>
     <section class="top" id="topSection" aria-labelledby="topTitle">
       <h2 class="section-title" id="topTitle"><span>오늘의 주요 뉴스</span></h2>
-      <div class="top__grid" id="topGrid"></div>
+      <div class="top__grid" id="topGrid"><div class="skel skel--top" aria-hidden="true"></div></div>
     </section>
 
 
     <section class="feed" aria-labelledby="feedTitle">
       <h2 class="section-title" id="feedTitle"><span id="feedTitleText">전체 뉴스</span> <em id="feedCount"></em></h2>
-      <div class="feed__list" id="feed"></div>
+      <div class="feed__list" id="feed"><!-- 불러오는 동안 뼈대(첫 화면에서 빈칸 대신) — render 가 바꿈 --><div class="skel" aria-hidden="true"></div><div class="skel" aria-hidden="true"></div><div class="skel" aria-hidden="true"></div><p class="sr-only" role="status">뉴스를 불러오는 중이에요…</p></div>
     </section>
   </div>
 
@@ -135,7 +135,7 @@
 <script src="assets/topics.js?v=3e951135"></script>
 <script src="assets/prefs.js?v=280ab29a"></script>
 <script src="assets/taste.js?v=788775b8"></script>
-<script src="assets/app.js?v=7de2580f"></script>
+<script src="assets/app.js?v=e9402e3a"></script>
 <!-- 헤더 빠른 정보 칩 -->
 <script src="assets/ticker.js?v=fbc22bab"></script>
 <!-- 선택 기능(Google 로그인·동기화·댓글): 못 불러와도 사이트는 그대로 동작 -->

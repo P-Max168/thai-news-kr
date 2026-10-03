@@ -201,6 +201,13 @@ async def main():
             mf, off = {"err": str(e)[:80]}, False
         rec(isinstance(mf, dict) and "512x512/maskable" in mf.get("icons", "") and "192x192/any" in mf.get("icons", "") and mf.get("shortcuts") == 2 and off,
             "앱 포장 준비 — manifest 아이콘(192·512·maskable)·바로가기 2개, 오프라인 안내 쪽", dict(mf, offline=off) if isinstance(mf, dict) else mf)
+        # 다듬기: 없는 주소 = 한국어 404(라이브 GitHub Pages 만), 첫 화면 뼈대 자리
+        if "github.io" in URL:
+            try:
+                r404 = await pg.evaluate("u=>fetch(u,{cache:'no-store'}).then(async r=>({st:r.status,ko:(await r.text()).indexOf('찾을 수 없어요')>0}))", URL + "no-such-page-" + str(int(time.time())))
+            except Exception as e:
+                r404 = {"err": str(e)[:80]}
+            rec(r404.get("st") == 404 and r404.get("ko"), "없는 주소 = 한국어 404 쪽('페이지를 찾을 수 없어요' + 오늘의 뉴스 버튼)", r404)
         # 첫 방문 시작 화면(새 방문자): 보류 중엔 예전 '어떤 분이세요?'(페르소나 5개), 켜지면 2단계
         c2 = await b.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True, timezone_id="Asia/Bangkok", locale="ko-KR")
         p2 = await c2.new_page()

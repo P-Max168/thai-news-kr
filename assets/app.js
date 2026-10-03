@@ -89,13 +89,21 @@
     }
     loadDate2(date);
   }
+  /* 불러오기 실패 안내(한국어 + 다시 시도). 오프라인이면 그 이유도 */
+  function loadFail(msg) {
+    var off = navigator.onLine === false;
+    $("topGrid") && ($("topGrid").innerHTML = "");
+    return '<div class="empty empty--err" role="alert"><b>' + (off ? "📡 " : "⚠️ ") + msg + "</b><br>" +
+      (off ? "인터넷에 연결되어 있지 않아요. 한 번 열어 본 판은 연결 없이도 읽을 수 있어요." : "잠시 뒤 다시 시도해 주세요. 계속 안 되면 다른 판(위 날짜 선택)을 골라 보세요.") +
+      '<br><button type="button" class="btn btn--primary btn--sm empty__retry" onclick="location.reload()">다시 시도</button></div>';
+  }
   function loadDate2(date) {
     var sc = document.createElement("script");
     sc.src = "data/" + date + ".js";
     sc.onload = function () { if (window.NEWS_DATA[date]) render(window.NEWS_DATA[date]); else sc.onerror(); };
     sc.onerror = function () {
-      $("feed").innerHTML = '<div class="empty">' + esc(date) + " 데이터를 불러오지 못했습니다." +
-        (navigator.onLine === false ? "<br>오프라인 상태입니다. 한 번 열어 본 판만 오프라인으로 읽을 수 있어요." : "") + "</div>";
+      var m = /^(\d{4})-(\d\d)-(\d\d)-(am|pm)$/.exec(date), lbl = m ? (+m[2]) + "월 " + (+m[3]) + "일 " + (m[4] === "am" ? "아침판" : "저녁판") : date;
+      $("feed").innerHTML = loadFail(esc(lbl) + " 뉴스를 불러오지 못했어요.");
     };
     document.body.appendChild(sc);
   }
@@ -603,8 +611,8 @@
         ' <button type="button" class="linkbtn" data-open-settings>바꾸기</button></p>'
         : '<p class="feed-intro feed-intro--cta">지금은 모든 주제를 보여 드려요. <button type="button" class="linkbtn" data-open-settings>🧩 관심 주제 고르기</button></p>';
     }
-    var empty = tab === "feed" ? "이 판에는 내 주제에 해당하는 기사가 없습니다. '전체 보기'를 눌러 보세요."
-      : tab === "all" ? "기사가 없습니다." : "이 판에는 " + topicOf(tab).label + " 기사가 없습니다.";
+    var empty = tab === "feed" ? "이 판에는 내 주제 기사가 없어요. ☰ 메뉴의 '전체 보기'를 눌러 보세요."
+      : tab === "all" ? "이 판에는 아직 기사가 없어요." : "이 판에는 " + topicOf(tab).label + " 기사가 없어요. ☰ 메뉴에서 다른 주제를 골라 보세요.";
     // 한인 영향도 필터 칩(이 판에 impact 데이터가 있을 때만) — 누르면 그 영향 태그가 있는 기사만
     var cnt = {}, any = false;
     list.forEach(function (s) { impacts(s).forEach(function (k) { cnt[k] = (cnt[k] || 0) + 1; any = true; }); });
@@ -1009,7 +1017,7 @@
   loadIssues();
   // 화면으로 돌아왔을 때 10분 넘었으면 한국 뉴스 다시 받기(2시간마다 갱신됨)
   document.addEventListener("visibilitychange", function () { if (!document.hidden && Date.now() - KOREA.at > 10 * 60 * 1000) loadKorea(); });
-  if (cur) loadDate(cur.id); else $("feed").innerHTML = '<div class="empty">데이터가 없습니다.' + (navigator.onLine === false ? " 오프라인 상태입니다." : "") + "</div>";
+  if (cur) loadDate(cur.id); else $("feed").innerHTML = loadFail("뉴스 목록을 불러오지 못했어요.");
   // 처음 방문: '어떤 분이세요?' (기사 링크(#id)로 들어온 경우에도 먼저 보여 주되 건너뛰기 가능)
   if (!prof().onboarded) Onb.open(OB2 ? "region" : "persona", false); else Install.maybeShow();   // 첫 방문만 2단계 시작 화면(옛 사용자는 prefs.js 가 조용히 옮김)
 
