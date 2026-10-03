@@ -132,16 +132,16 @@
   function tile(k, lines, foot) {
     lines = lines.filter(Boolean); if (!lines.length) return "";
     if (foot && foot[1]) lines.push(foot.concat("tk-ln tk-ft"));
-    return '<button type="button" class="tk-chip tk-tile" data-tk="' + k + '" aria-haspopup="dialog" aria-label="' + esc(lines.map(function (l) { return l[0]; }).join(", ")) + ' (누르면 출처)">' +
-      lines.map(function (l) { return '<span class="' + (l[2] || "tk-ln") + '">' + l[1] + "</span>"; }).join("") + "</button>";
+    return '<button type="button" class="tk-chip tk-tile" data-tk="' + k + '" aria-haspopup="dialog" aria-label="' + esc(lines.map(function (l) { return l[0]; }).join(", ")) + ' (누르면 출처)"><span class="tk-in">' +
+      lines.map(function (l) { return '<span class="' + (l[2] || "tk-ln") + '">' + l[1] + "</span>"; }).join("") + "</span></button>";
   }
   function ft(list) { var c = clock(list); return c ? [c + " 조회", c + " 조회"] : null; }
   function render() {
     var f = fxOK(), u = usdtOK(), w = wxOK(), g = goldOK(), a = aqOK(), o = fuelOK(), h = [];
     h.push(tile("fx", [
       f && ["1바트 " + f.THB_KRW.toFixed(1) + "원", "1바트 = <b>" + f.THB_KRW.toFixed(1) + "원</b>"],
-      f && f.USD_THB > 0 && ["1달러 " + f.USD_THB.toFixed(1) + "바트", "1달러 = <b>" + f.USD_THB.toFixed(1) + "바트</b>"],
-      u && ["1테더(USDT) " + u.USDT_THB.toFixed(1) + "바트", "1테더 = <b>" + u.USDT_THB.toFixed(1) + "바트</b>"]
+      f && f.USD_THB > 0 && ["1달러 " + f.USD_THB.toFixed(1) + "바트", "1달러 = <b>" + f.USD_THB.toFixed(1) + '<small class="tk-u">฿</small></b>'],
+      u && ["1테더(USDT) " + u.USDT_THB.toFixed(1) + "바트", "1테더 = <b>" + u.USDT_THB.toFixed(1) + '<small class="tk-u">฿</small></b>']
     ], ft([f && ms(f.fetched_at), u && ms(u.fetched_at)])));
     var ic = w && wmo(w.code, w.day), lv = a && pmLevel(a.pm);
     h.push(tile("env", [
@@ -154,8 +154,8 @@
       return c ? [rn + " " + c + " 조회", '<span class="tk-rg">' + rn + "</span>" + c + " 조회"] : null;
     })()));
     h.push(tile("price", [
-      g && ["금시세 금괴 1바트 " + n0(g.bar_sell) + "바트", '<span class="tk-l">금</span><b>' + n0(g.bar_sell) + '<small class="tk-u">바트</small></b>'],
-      o && ["휘발유 리터당 " + n2(o.gasohol95) + "바트", '<span class="tk-l">휘발유</span><b>' + n2(o.gasohol95) + '<small class="tk-u">바트</small></b>']
+      g && ["금시세 금괴 1바트 " + n0(g.bar_sell) + "바트", '<span class="tk-l">금</span><b>' + n0(g.bar_sell) + '<small class="tk-u">฿</small></b>'],
+      o && ["휘발유(95) 리터당 " + n2(o.gasohol95) + "바트", '<span class="tk-l">휘발유<span class="tk-95">(95)</span></span><b>' + n2(o.gasohol95) + '<small class="tk-u">฿</small></b>']
     ], ft([g && ms(g.fetched_at), o && ms(o.fetched_at)])));
     var open = pop && !pop.hidden ? pop.getAttribute("data-k") : null;
     box.innerHTML = h.join("");
