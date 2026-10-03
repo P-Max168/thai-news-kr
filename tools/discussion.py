@@ -2,7 +2,7 @@
 """💬 오늘의 질문 + 운영자 첫 댓글(정적 내용, Firestore 아님) 초안·적용 도구.
 
   python3 tools/discussion.py draft <판 id>
-      → drafts/discussion/<판 id>.json (올리지 않음, .gitignore) 에 후보 기사 15건:
+      → drafts/discussion/<판 id>.json (올리지 않음, .gitignore) 에 그 판의 모든 기사(빠짐없이 전부):
         [{id, title(한국어 제목), topic, question:"", operator_comment:"", approved:false}]
         question·operator_comment 는 정기 실행(편집자)이 직접 채운다 — 자연스러운 한국어, 정직한 운영자 목소리,
         tools/TRANSLATION_RULES.md 준수, 기사에 없는 사실 단정 금지, 절대 독자(사용자)인 척하지 않는다.
@@ -11,6 +11,8 @@
   python3 tools/discussion.py apply <판 id> <approved.json>
       → 운영자(Mingoo)가 채팅에서 OK 한 항목만 적용. approved.json = 초안과 같은 모양 목록
         (approved 가 true 인 항목만, approved 필드가 없으면 목록 전체를 승인으로 봄).
+        ※ apply 는 그 판의 오늘의 질문 전체를 이 파일 내용으로 바꾼다 — 일부만 새로 승인했으면
+          이미 적용된 tools/discussions/<판 id>.json 항목도 같이 넣을 것(안 넣으면 빠짐).
         tools/discussions/<판 id>.json 에 저장(판을 다시 만들어도 newslib.write_edition 이 자동으로 다시 합침)
         + data/<판 id>.json|js 의 기사에 discussion={question, operator_comment, approved:true} 반영.
   python3 tools/discussion.py clear <판 id>             # 그 판의 오늘의 질문 모두 빼기
@@ -24,8 +26,8 @@ import newslib  # noqa: E402
 
 DRAFTS = ROOT / "drafts" / "discussion"
 APPLIED = ROOT / "tools" / "discussions"
-MAX = 15
-# 후보 순서: 주요 뉴스 → 외국인·비자 → 지역 → 생활·여행 → 나머지(판 순서)
+# 기사 수 제한 없음(2026-10-03 운영자 결정: 판의 모든 기사에 질문 + 운영자 첫 댓글).
+# 초안 순서: 주요 뉴스 → 외국인·비자 → 지역 → 생활·여행 → 나머지(판 순서)
 PRI = ["visa", "pattaya", "sriracha", "bangkok", "life", "travel", "weather", "society", "poleco", "ent"]
 
 
@@ -40,7 +42,7 @@ def candidates(d):
     def rank(s):
         t = newslib.topics_of(s)
         return (0 if s["id"] in hl else 1, min(PRI.index(x) if x in PRI else 99 for x in t), st.index(s))
-    return sorted(st, key=rank)[:MAX]
+    return sorted(st, key=rank)   # 모든 기사(자르지 않음)
 
 
 def draft(eid, force=False):
@@ -84,8 +86,6 @@ def apply(eid, approved_path):
     if isinstance(items, dict):
         items = items.get("items", [])
     ok = [x for x in items if x.get("approved", True) is True]
-    if len(ok) > MAX:
-        raise SystemExit("최대 %d건" % MAX)
     d = load(eid)
     for s in d["stories"]:
         s.pop("discussion", None)

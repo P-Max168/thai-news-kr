@@ -206,7 +206,7 @@ def validate(data):
         if isinstance(it, dict):
             for k in ("tag", "ko", "desc"):
                 assert it.get(k), ("trends", tag, "필수: " + k)
-    assert sum(1 for s in data["stories"] if s.get("discussion")) <= 15, "discussion(오늘의 질문)은 판마다 최대 15건"
+    # discussion(오늘의 질문) 건수 제한 없음 — 2026-10-03 운영자 결정: 판의 모든 기사에(승인된 것만 화면에)
     kt = data.get("korea_top")
     if kt is not None:   # 🇰🇷 오늘의 한국 주요 뉴스(tools/fetch_korea.py) — 최대 10건, 링크 필수
         assert isinstance(kt, list) and len(kt) <= 10, "korea_top 은 최대 10건 목록"
