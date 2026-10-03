@@ -28,7 +28,7 @@ DRAFTS = ROOT / "drafts" / "discussion"
 APPLIED = ROOT / "tools" / "discussions"
 # 기사 수 제한 없음(2026-10-03 운영자 결정: 판의 모든 기사에 질문 + 운영자 첫 댓글).
 # 초안 순서: 주요 뉴스 → 외국인·비자 → 지역 → 생활·여행 → 나머지(판 순서)
-PRI = ["visa", "pattaya", "sriracha", "bangkok", "life", "travel", "weather", "society", "poleco", "ent"]
+PRI = ["visa", "east", "bangkok", "north", "south", "life", "travel", "weather", "society", "poleco", "ent"]
 
 
 def load(eid):

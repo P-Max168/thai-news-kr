@@ -8,8 +8,9 @@
 날짜만 있는 파일(<YYYY-MM-DD>.json)은 더 이상 만들지 않는다.
 
 기사 형식(2026-10-03 아침판부터 = 새 형식, README '기사 스키마')
-  topic      : 주 주제 1개 (TOPICS 의 id: pattaya sriracha bangkok poleco society visa life travel ent weather)
-  secondary  : 보조 주제 0~3개 (예: 파타야 침수 기사 = topic "pattaya", secondary ["weather"])
+  topic      : 주 주제 1개 (TOPICS 의 id: east bangkok north south poleco society visa life travel ent weather)
+               2026-10-03 저녁판부터 pattaya·sriracha 는 east('동부(촌부리·라용)')로 통합 — 옛 id 는 검증에서 막힘
+  secondary  : 보조 주제 0~3개 (예: 파타야 침수 기사 = topic "east", secondary ["weather"])
   tags       : 키워드 태그 2~6개(👍👎 취향 학습에 씀) — 반드시 넣는다
   briefing   : [{topic, text("**굵게**" 표시 1곳 이상), story_id}] 5~6줄
 옛 형식(category 6종 + 문단 briefing)도 검증을 통과한다(화면은 assets/topics.js 매핑으로 렌더).
@@ -24,15 +25,18 @@ EDITION_ORDER = {"early": 0, "am": 1, "pm": 2}
 ID_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-(am|pm|early)$")
 CATS = {"politics", "economy", "society", "local", "visa", "sns"}          # 옛 형식(10월 2일 저녁판까지)
 CAT_ORDER = ["politics", "economy", "society", "local", "visa", "sns"]
-# 새 형식 주제 10개 (assets/topics.js 와 같은 id·순서)
+# 새 형식 주제 11개 (assets/topics.js 와 같은 id·순서) — 2026-10-03 운영자 결정: 파타야·시라차 → 동부(촌부리·라용), 북부·남부 추가
 TOPICS = {
-    "pattaya": "파타야(좀티엔·방라뭉·싸따힙·나끌루아)", "sriracha": "시라차(램차방·촌부리 시내·아마타)",
-    "bangkok": "방콕", "poleco": "정치·경제", "society": "사회·사건사고", "visa": "외국인·비자",
+    "east": "동부(촌부리·라용)", "bangkok": "방콕", "north": "북부", "south": "남부",
+    "poleco": "정치·경제", "society": "사회·사건사고", "visa": "외국인·비자",
     "life": "생활·물가·부동산", "travel": "여행·맛집", "ent": "연예·스포츠·SNS", "weather": "날씨·교통",
 }
 TOPIC_ORDER = list(TOPICS)
+# 옛 주제 id(2026-10-03 아침판까지 쓰임) → 새 id. 그 판까지는 별칭으로 받아 주고, 저녁판부터는 막는다.
+TOPIC_ALIAS = {"pattaya": "east", "sriracha": "east"}
+ALIAS_UNTIL = "2026-10-03-am"
 # 판마다 맞추려는 구성(경고만 — 실제 뉴스가 없으면 적게 싣는다. 절대 지어내지 않는다)
-TARGETS = dict(stories=(20, 25), visa=(2, 4), places=("pattaya", "sriracha", "bangkok"), want=("travel", "life"))
+TARGETS = dict(stories=(20, 25), visa=(2, 4), places=("east", "bangkok"), want=("travel", "life"))
 B = lambda topic, text, story_id: dict(topic=topic, text=text, story_id=story_id)   # 브리핑 한 줄
 BLOCKLIST = ROOT / "tools" / "trend_blocklist.txt"
 _BL = None
@@ -172,13 +176,19 @@ def validate(data):
     ids = [s["id"] for s in data["stories"]]
     assert len(ids) == len(set(ids)), "기사 id 중복"
     new = is_new_format(data)
+    ok_ids = topic_ids_for(eid)
     for s in data["stories"]:
         if new:
-            assert s.get("topic") in TOPICS, (s["id"], "topic 은 %s 중 하나" % "/".join(TOPICS), s.get("topic"))
+            if s.get("topic") in TOPIC_ALIAS and s["topic"] not in ok_ids:
+                raise AssertionError((s["id"], "topic '%s' 는 2026-10-03 저녁판부터 'east'(동부(촌부리·라용))로 통합됨 — east 를 쓸 것" % s["topic"]))
+            assert s.get("topic") in ok_ids, (s["id"], "topic 은 %s 중 하나" % "/".join(TOPICS), s.get("topic"))
             sec = s.get("secondary", [])
             assert isinstance(sec, list) and len(sec) <= 3, (s["id"], "secondary 는 0~3개 목록")
             for t in sec:
-                assert t in TOPICS and t != s["topic"], (s["id"], "secondary 오류", t)
+                assert t not in TOPIC_ALIAS or t in ok_ids, (s["id"], "secondary '%s' → 'east'(동부(촌부리·라용))로 통합됨" % t)
+                assert t in ok_ids and t != s["topic"], (s["id"], "secondary 오류", t)
+            canon = [TOPIC_ALIAS.get(t, t) for t in [s["topic"]] + sec]
+            assert len(canon) == len(set(canon)), (s["id"], "주제 중복(통합 뒤 같은 주제) — secondary 에서 빼기", canon)
             tags = s.get("tags") or []
             assert isinstance(tags, list) and 2 <= len(tags) <= 8 and all(isinstance(t, str) and t.strip() and not t.startswith("#") for t in tags), \
                 (s["id"], "tags(키워드) 2~8개 필수, '#' 없이")
@@ -240,13 +250,26 @@ def validate(data):
     if isinstance(br, list):
         assert 4 <= len(br) <= 7, "briefing 은 5~6줄(4~7 허용)"
         for i, b in enumerate(br):
-            assert isinstance(b, dict) and b.get("topic") in TOPICS, ("briefing", i, "topic 오류")
+            assert isinstance(b, dict) and b.get("topic") in ok_ids, ("briefing", i, "topic 오류(파타야·시라차 = east)", b.get("topic") if isinstance(b, dict) else b)
             assert b.get("text") and re.search(r"\*\*[^*]+\*\*", b["text"]), ("briefing", i, "text 에 **굵게** 핵심어/숫자 1곳 이상")
             assert len(b["text"]) <= 120, ("briefing", i, "한 줄은 짧게(120자 이하)")
             assert b.get("story_id") in ids, ("briefing", i, "story_id 가 기사 id 가 아님", b.get("story_id"))
             assert not blocked(b["text"]), ("briefing", i, "차단 목록 키워드")
     else:
         assert isinstance(br, str) and br.strip(), "briefing 없음"
+
+
+def _ed_key(eid):
+    m = ID_RE.match(eid)
+    return (m.group(1), EDITION_ORDER[m.group(2)]) if m else (eid, 9)
+
+
+def topic_ids_for(eid):
+    """그 판에서 허용하는 주제 id: 새 11개 + (2026-10-03 아침판까지만) 옛 pattaya·sriracha 별칭."""
+    ids = set(TOPICS)
+    if _ed_key(eid) <= _ed_key(ALIAS_UNTIL):
+        ids |= set(TOPIC_ALIAS)
+    return ids
 
 
 def is_new_format(data):
@@ -257,8 +280,13 @@ def is_new_format(data):
 def topics_of(s):
     """기사의 주제 목록(새 형식: topic+secondary / 옛 형식: category 를 대략 매핑 — 집계용)."""
     if s.get("topic"):
-        return [s["topic"]] + list(s.get("secondary", []))
-    return [{"politics": "poleco", "economy": "poleco", "society": "society", "local": "pattaya",
+        out = []
+        for t in [s["topic"]] + list(s.get("secondary", [])):
+            t = TOPIC_ALIAS.get(t, t)
+            if t not in out:
+                out.append(t)
+        return out
+    return [{"politics": "poleco", "economy": "poleco", "society": "society", "local": "east",
              "visa": "visa", "sns": "ent"}.get(s.get("category"), "society")]
 
 

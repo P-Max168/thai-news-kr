@@ -37,15 +37,33 @@ SOURCES = ROOT / "tools" / "sources.json"
 BKK = timezone(timedelta(hours=7))
 UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36",
       "Accept-Language": "th,en;q=0.8"}
-TOPICS = ["pattaya", "sriracha", "bangkok", "poleco", "society", "visa", "life", "travel", "ent", "weather"]
-TOPIC_KO = dict(pattaya="파타야", sriracha="시라차·촌부리", bangkok="방콕", poleco="정치·경제", society="사회·사건사고",
+TOPICS = ["east", "bangkok", "north", "south", "poleco", "society", "visa", "life", "travel", "ent", "weather"]
+# 2026-10-03: pattaya·sriracha → east(동부(촌부리·라용)) 통합, north·south 추가. sources.json 의 옛 id 는 ALIAS 로 읽음
+ALIAS = {"pattaya": "east", "sriracha": "east"}
+TOPIC_KO = dict(east="동부(촌부리·라용)", bangkok="방콕", north="북부", south="남부", poleco="정치·경제", society="사회·사건사고",
                 visa="외국인·비자", life="생활·물가·부동산", travel="여행·맛집", ent="연예·스포츠·SNS", weather="날씨·교통",
                 other="미분류")
 # 제목 키워드 → 주제 (태국어·영어). 너무 넓은 말(ชน, ร้อน, หนัง, อากาศ 단독 등)은 일부러 뺐다.
 KW = {
-    "pattaya": r"파타야|좀티엔|พัทยา|บางละมุง|จอมเทียน|นาเกลือ|สัตหีบ|หนองปรือ|ห้วยใหญ่|อู่ตะเภา|เกาะล้าน|Pattaya|Jomtien|Bang ?Lamung|Sattahip|Naklua|Walking Street|U-?Tapao|Koh Larn",
-    "sriracha": r"시라차|촌부리|ศรีราชา|แหลมฉบัง|อมตะ|ชลบุรี|บางแสน|บ้านบึง|พนัสนิคม|บ่อวิน|Sriracha|Si Racha|Laem Chabang|Chon ?Buri|Amata|Bang ?Saen|EEC|อีอีซี",
-    "bangkok": r"방콕|กทม|กรุงเทพ|ชัชชาติ|สุขุมวิท|สีลม|ลาดกระบัง|เยาวราช|Bangkok|BMA|Chadchart|Sukhumvit|Silom",
+    # 동부 = 촌부리 도 전체(파타야·좀티엔·싸따힙·시라차·램차방·방센·촌부리 시내 …) + 라용 도
+    "east": r"파타야|좀티엔|시라차|촌부리|라용|พัทยา|บางละมุง|จอมเทียน|นาเกลือ|สัตหีบ|หนองปรือ|ห้วยใหญ่|อู่ตะเภา|เกาะล้าน|"
+            r"ศรีราชา|แหลมฉบัง|อมตะ|ชลบุรี|บางแสน|บ้านบึง|พนัสนิคม|บ่อวิน|ระยอง|มาบตาพุด|เกาะเสม็ด|บ้านฉาง|แกลง|"
+            r"Pattaya|Jomtien|Bang ?Lamung|Sattahip|Naklua|Walking Street|U-?Tapao|Koh Larn|Sriracha|Si Racha|Laem Chabang|Chon ?Buri|"
+            r"Amata|Bang ?Saen|Rayong|Map Ta Phut|Koh Samet|EEC|อีอีซี",
+    "bangkok": r"방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|"
+               r"สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\.|สายสีเขียว|"
+               r"สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|"
+               r"Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT",
+    # 북부: 치앙마이·치앙라이·람빵·람푼·매홍손·난·프래·파야오·핏사눌록·수코타이·딱(매솟) 등. น่าน/แพร่/ตาก 단독은 다른 낱말에 섞여서 จ./จังหวัด 붙은 것만
+    "north": r"치앙마이|치앙라이|람빵|매홍손|핏사눌록|수코타이|매솟|เชียงใหม่|เชียงราย|ลำปาง|ลำพูน|แม่ฮ่องสอน|พะเยา|พิษณุโลก|สุโขทัย|"
+             r"อุตรดิตถ์|แม่สอด|แม่สาย|เชียงแสน|เชียงของ|ดอยสุเทพ|ดอยอินทนนท์|(?:จ\.|จังหวัด|เมือง)(?:น่าน|แพร่|ตาก)|(?<![\u0E00-\u0E7F])ปาย(?=\s|$)|"
+             r"Chiang ?Mai|Chiang ?Rai|Lampang|Lamphun|Mae Hong Son|Mae Sot|Mae Sai|Phitsanulok|Sukhothai|Phayao|Phrae|Uttaradit|"
+             r"\bNan (?:province|city)|\bTak province|\bPai\b",
+    # 남부: 푸껫·끄라비·팡아·수랏타니(사무이·팡안·따오)·송클라(핫야이)·나콘시탐마랏·뜨랑·사뚠·춤폰·라농 + 빳따니·얄라·나라티왓(남부 국경)
+    "south": r"푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|"
+             r"สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|"
+             r"Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|"
+             r"Nakhon Si Thammarat|\bTrang\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong",
     "poleco": r"총리|정부|경제|환율|증시|นายกฯ|นายกรัฐมนตรี|รัฐบาล|ครม\.|สภา|ส\.ส\.|ส\.ว\.|พรรค|รัฐมนตรี|รมว|รมช|เลือกตั้ง|กกต|ศาลรัฐธรรมนูญ|ป\.ป\.ช|เศรษฐกิจ|GDP|จีดีพี|ส่งออก|หุ้น|ตลาดหลักทรัพย์|ธปท|แบงก์ชาติ|ค่าเงินบาท|ลงทุน|IMF|ภาษี|งบประมาณ|minister|government|parliament|election|economy|economic|baht|export|stocks?|SET index|Bank of Thailand|investment|tariff|budget|cabinet",
     "society": r"사고|사망|체포|경찰|살해|사기|อุบัติเหตุ|รถชน|ชนกัน|ฆ่า|ยิง|จับกุม|รวบ|ตำรวจ|คดี|ไฟไหม้|เพลิงไหม้|จมน้ำ|ยาเสพติด|ยาบ้า|โกง|แก๊ง|คอลเซ็นเตอร์|ศพ|เสียชีวิต|ดับ|crash|killed|arrest|police|murder|fire|scam|drug|dead|death|shooting|stabb",
     "visa": r"วีซ่า|ชาวต่างชาติ|นักท่องเที่ยวต่างชาติ|ต่างด้าว|ตม\.|สตม|ตรวจคนเข้าเมือง|ชาวเกาหลี|คนเกาหลี|นักท่องเที่ยวเกาหลี|สถานทูตเกาหลี|อยู่เกินกำหนด|ใบอนุญาตทำงาน|นอมินี|visa|immigration|expats?|foreigners?|overstay|DTV|TM30|LTR|work permit|South Korean (?:man|woman|men|women|tourists?|nationals?)|Korean (?:man|woman|men|women|tourists?|nationals?)|한국인|교민|대사관|영사|비자|입국|관광객",
@@ -161,8 +179,14 @@ def topics_for(src, title):
     ts = [t for t in TOPICS if KW_RE[t].search(title)]
     if src.get("match") and not re.search(src["match"], title, re.I):
         return ts or ["other"]      # Google News 검색어가 본문에만 걸린 기사 → 제목 키워드로만 분류
-    if len(src["topics"]) == 1 and src["topics"][0] not in ts:
-        ts.append(src["topics"][0])
+    st = []
+    for t in src["topics"]:
+        t = ALIAS.get(t, t)
+        if t not in st:
+            st.append(t)
+    if len(st) == 1 and st[0] not in ts:
+        ts.append(st[0])
+        ts.sort(key=TOPICS.index)
     return ts or ["other"]
 
 

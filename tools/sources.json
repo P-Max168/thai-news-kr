@@ -110,8 +110,7 @@
    "type": "rss",
    "topics": [
     "society",
-    "pattaya",
-    "sriracha"
+    "east"
    ],
    "language": "th",
    "group": "thai-major",
@@ -251,8 +250,7 @@
    "type": "rss",
    "topics": [
     "society",
-    "pattaya",
-    "sriracha"
+    "east"
    ],
    "language": "th",
    "group": "thai-major",
@@ -361,7 +359,7 @@
    "topics": [
     "poleco",
     "life",
-    "sriracha"
+    "east"
    ],
    "language": "th",
    "group": "thai-major",
@@ -815,10 +813,10 @@
    "url": "https://thethaiger.com/news/pattaya/feed",
    "type": "rss",
    "topics": [
-    "pattaya"
+    "east"
    ],
    "language": "en",
-   "group": "pattaya-local",
+   "group": "east-local",
    "verified": "2026-10-03"
   },
   {
@@ -863,7 +861,7 @@
     "poleco",
     "society",
     "bangkok",
-    "pattaya",
+    "east",
     "visa"
    ],
    "language": "en",
@@ -875,12 +873,11 @@
    "url": "https://thepattayanews.com/feed/",
    "type": "rss",
    "topics": [
-    "pattaya",
-    "sriracha",
+    "east",
     "visa"
    ],
    "language": "en",
-   "group": "pattaya-local",
+   "group": "east-local",
    "verified": "2026-10-03"
   },
   {
@@ -888,11 +885,10 @@
    "url": "https://thepattayanews.co.th/feed/",
    "type": "rss",
    "topics": [
-    "pattaya",
-    "sriracha"
+    "east"
    ],
    "language": "th",
-   "group": "pattaya-local",
+   "group": "east-local",
    "verified": "2026-10-03"
   },
   {
@@ -900,7 +896,7 @@
    "url": "https://pattaya.go.th/feed/",
    "type": "rss",
    "topics": [
-    "pattaya"
+    "east"
    ],
    "language": "th",
    "group": "official",
@@ -911,11 +907,10 @@
    "url": "https://chonburipostonline.com/feed/",
    "type": "rss",
    "topics": [
-    "sriracha",
-    "pattaya"
+    "east"
    ],
    "language": "th",
-   "group": "pattaya-local",
+   "group": "east-local",
    "verified": "2026-10-03",
    "note": "시라차 소재 지역지 — 업데이트 드묾(10/3 확인 때 최신 항목 약 6일 전, 14시간 창엔 보통 0건)"
   },
@@ -924,7 +919,7 @@
    "url": "https://news.google.com/rss/search?q=%E0%B8%9E%E0%B8%B1%E0%B8%97%E0%B8%A2%E0%B8%B2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
    "type": "gnews",
    "topics": [
-    "pattaya"
+    "east"
    ],
    "language": "th",
    "group": "gnews",
@@ -936,7 +931,7 @@
    "url": "https://news.google.com/rss/search?q=%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B8%A5%E0%B8%B0%E0%B8%A1%E0%B8%B8%E0%B8%87%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
    "type": "gnews",
    "topics": [
-    "pattaya"
+    "east"
    ],
    "language": "th",
    "group": "gnews",
@@ -948,7 +943,7 @@
    "url": "https://news.google.com/rss/search?q=%E0%B8%88%E0%B8%AD%E0%B8%A1%E0%B9%80%E0%B8%97%E0%B8%B5%E0%B8%A2%E0%B8%99%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
    "type": "gnews",
    "topics": [
-    "pattaya"
+    "east"
    ],
    "language": "th",
    "group": "gnews",
@@ -960,7 +955,7 @@
    "url": "https://news.google.com/rss/search?q=%E0%B8%AA%E0%B8%B1%E0%B8%95%E0%B8%AB%E0%B8%B5%E0%B8%9A%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
    "type": "gnews",
    "topics": [
-    "pattaya"
+    "east"
    ],
    "language": "th",
    "group": "gnews",
@@ -972,7 +967,7 @@
    "url": "https://news.google.com/rss/search?q=%E0%B8%99%E0%B8%B2%E0%B9%80%E0%B8%81%E0%B8%A5%E0%B8%B7%E0%B8%AD%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
    "type": "gnews",
    "topics": [
-    "pattaya"
+    "east"
    ],
    "language": "th",
    "group": "gnews",
@@ -984,7 +979,7 @@
    "url": "https://news.google.com/rss/search?q=%E0%B8%A8%E0%B8%A3%E0%B8%B5%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%B2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
    "type": "gnews",
    "topics": [
-    "sriracha"
+    "east"
    ],
    "language": "th",
    "group": "gnews",
@@ -996,7 +991,7 @@
    "url": "https://news.google.com/rss/search?q=%E0%B9%81%E0%B8%AB%E0%B8%A5%E0%B8%A1%E0%B8%89%E0%B8%9A%E0%B8%B1%E0%B8%87%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
    "type": "gnews",
    "topics": [
-    "sriracha"
+    "east"
    ],
    "language": "th",
    "group": "gnews",
@@ -1008,7 +1003,7 @@
    "url": "https://news.google.com/rss/search?q=%E0%B8%AD%E0%B8%A1%E0%B8%95%E0%B8%B0%20%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
    "type": "gnews",
    "topics": [
-    "sriracha"
+    "east"
    ],
    "language": "th",
    "group": "gnews",
@@ -1020,7 +1015,7 @@
    "url": "https://news.google.com/rss/search?q=%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
    "type": "gnews",
    "topics": [
-    "sriracha"
+    "east"
    ],
    "language": "th",
    "group": "gnews",
@@ -1032,7 +1027,7 @@
    "url": "https://news.google.com/rss/search?q=%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B9%81%E0%B8%AA%E0%B8%99%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
    "type": "gnews",
    "topics": [
-    "sriracha"
+    "east"
    ],
    "language": "th",
    "group": "gnews",
@@ -1392,7 +1387,7 @@
    "url": "https://news.google.com/rss/search?q=Pattaya%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
    "type": "gnews",
    "topics": [
-    "pattaya"
+    "east"
    ],
    "language": "en",
    "group": "gnews",
@@ -1430,7 +1425,7 @@
    "url": "https://news.google.com/rss/search?q=Chonburi%20OR%20Sriracha%20OR%20%22Laem%20Chabang%22%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
    "type": "gnews",
    "topics": [
-    "sriracha"
+    "east"
    ],
    "language": "en",
    "group": "gnews",
@@ -1468,12 +1463,11 @@
    "url": "https://news.google.com/rss/search?q=site%3Apattayamail.com%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
    "type": "gnews",
    "topics": [
-    "pattaya",
-    "sriracha",
+    "east",
     "visa"
    ],
    "language": "en",
-   "group": "pattaya-local",
+   "group": "east-local",
    "verified": "2026-10-03",
    "note": "사이트 RSS 403(Cloudflare)"
   },
@@ -1482,26 +1476,26 @@
    "url": "https://news.google.com/rss/search?q=site%3Abanmuang.co.th%20%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
    "type": "gnews",
    "topics": [
-    "sriracha",
-    "pattaya"
+    "east"
    ],
    "language": "th",
-   "group": "pattaya-local",
+   "group": "east-local",
    "verified": "2026-10-03",
-   "note": "사이트맵엔 제목 없음"
+   "note": "사이트맵엔 제목 없음 · 본문에만 촌부리가 나오는 다른 지역 기사가 많아 제목에 동부 지명이 있을 때만 동부로(match)",
+   "match": "파타야|좀티엔|시라차|촌부리|라용|พัทยา|บางละมุง|จอมเทียน|นาเกลือ|สัตหีบ|หนองปรือ|ห้วยใหญ่|อู่ตะเภา|เกาะล้าน|ศรีราชา|แหลมฉบัง|อมตะ|ชลบุรี|บางแสน|บ้านบึง|พนัสนิคม|บ่อวิน|ระยอง|มาบตาพุด|เกาะเสม็ด|บ้านฉาง|แกลง|Pattaya|Jomtien|Bang ?Lamung|Sattahip|Naklua|Walking Street|U-?Tapao|Koh Larn|Sriracha|Si Racha|Laem Chabang|Chon ?Buri|Amata|Bang ?Saen|Rayong|Map Ta Phut|Koh Samet|EEC|อีอีซี"
   },
   {
    "name": "GN site: PRD Chonburi",
    "url": "https://news.google.com/rss/search?q=site%3Aprd.go.th%20%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
    "type": "gnews",
    "topics": [
-    "sriracha",
-    "pattaya"
+    "east"
    ],
    "language": "th",
    "group": "official",
    "verified": "2026-10-03",
-   "note": "chonburi.prd.go.th 는 GN 색인 없음 → prd.go.th + ชลบุรี"
+   "note": "chonburi.prd.go.th 는 GN 색인 없음 → prd.go.th + ชลบุรี · 본문에만 촌부리가 나오는 다른 지역 기사가 많아 제목에 동부 지명이 있을 때만 동부로(match)",
+   "match": "파타야|좀티엔|시라차|촌부리|라용|พัทยา|บางละมุง|จอมเทียน|นาเกลือ|สัตหีบ|หนองปรือ|ห้วยใหญ่|อู่ตะเภา|เกาะล้าน|ศรีราชา|แหลมฉบัง|อมตะ|ชลบุรี|บางแสน|บ้านบึง|พนัสนิคม|บ่อวิน|ระยอง|มาบตาพุด|เกาะเสม็ด|บ้านฉาง|แกลง|Pattaya|Jomtien|Bang ?Lamung|Sattahip|Naklua|Walking Street|U-?Tapao|Koh Larn|Sriracha|Si Racha|Laem Chabang|Chon ?Buri|Amata|Bang ?Saen|Rayong|Map Ta Phut|Koh Samet|EEC|อีอีซี"
   },
   {
    "name": "GN site: TNN",
@@ -1709,8 +1703,7 @@
    "url": "https://www.pattayamail.com/",
    "type": "html",
    "topics": [
-    "pattaya",
-    "sriracha"
+    "east"
    ],
    "language": "en",
    "group": "manual",
@@ -1722,8 +1715,7 @@
    "url": "https://chonburi.prd.go.th/th/",
    "type": "html",
    "topics": [
-    "sriracha",
-    "pattaya"
+    "east"
    ],
    "language": "th",
    "group": "manual",
@@ -1827,7 +1819,7 @@
    "url": "https://www.pattayapeople.com/",
    "type": "html",
    "topics": [
-    "pattaya"
+    "east"
    ],
    "language": "en",
    "group": "manual",
@@ -2114,7 +2106,7 @@
    "url": "https://news.google.com/rss/search?q=%ED%8C%8C%ED%83%80%EC%95%BC%20when%3A1d&hl=ko&gl=KR&ceid=KR:ko",
    "type": "gnews",
    "topics": [
-    "pattaya"
+    "east"
    ],
    "language": "ko",
    "group": "korean",
@@ -2278,6 +2270,1016 @@
    "group": "manual",
    "verified": "2026-10-03",
    "note": "RSS 없음, GN site: 0건"
+  },
+  {
+   "name": "Chiang Mai News(เชียงใหม่นิวส์)",
+   "url": "https://www.chiangmainews.co.th/feed/",
+   "type": "rss",
+   "topics": [
+    "north"
+   ],
+   "language": "th",
+   "group": "north-local",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Chiang Rai Times",
+   "url": "https://www.chiangraitimes.com/feed/",
+   "type": "rss",
+   "topics": [
+    "north",
+    "poleco",
+    "society",
+    "visa"
+   ],
+   "language": "en",
+   "group": "north-local",
+   "verified": "2026-10-03",
+   "note": "치앙라이 매체지만 태국 전국·외국인 생활 글도 많음 → 주제는 제목 키워드로만"
+  },
+  {
+   "name": "The Thaiger 치앙마이",
+   "url": "https://thethaiger.com/news/chiang-mai/feed",
+   "type": "rss",
+   "topics": [
+    "north"
+   ],
+   "language": "en",
+   "group": "north-local",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Phitsanulok Hotnews",
+   "url": "https://www.phitsanulokhotnews.com/feed",
+   "type": "rss",
+   "topics": [
+    "north"
+   ],
+   "language": "th",
+   "group": "north-local",
+   "verified": "2026-10-03",
+   "note": "핏사눌록 지역지 — 업데이트 드묾(10/3 확인 때 최신 약 38시간 전)"
+  },
+  {
+   "name": "GN: เชียงใหม่",
+   "url": "https://news.google.com/rss/search?q=%E0%B9%80%E0%B8%8A%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "north"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "치앙마이|치앙라이|람빵|매홍손|핏사눌록|수코타이|매솟|เชียงใหม่|เชียงราย|ลำปาง|ลำพูน|แม่ฮ่องสอน|พะเยา|พิษณุโลก|สุโขทัย|อุตรดิตถ์|แม่สอด|แม่สาย|เชียงแสน|เชียงของ|ดอยสุเทพ|ดอยอินทนนท์|(?:จ\\.|จังหวัด|เมือง)(?:น่าน|แพร่|ตาก)|(?<![\\u0E00-\\u0E7F])ปาย(?=\\s|$)|Chiang ?Mai|Chiang ?Rai|Lampang|Lamphun|Mae Hong Son|Mae Sot|Mae Sai|Phitsanulok|Sukhothai|Phayao|Phrae|Uttaradit|\\bNan (?:province|city)|\\bTak province|\\bPai\\b"
+  },
+  {
+   "name": "GN: เชียงราย",
+   "url": "https://news.google.com/rss/search?q=%E0%B9%80%E0%B8%8A%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B8%A3%E0%B8%B2%E0%B8%A2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "north"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "치앙마이|치앙라이|람빵|매홍손|핏사눌록|수코타이|매솟|เชียงใหม่|เชียงราย|ลำปาง|ลำพูน|แม่ฮ่องสอน|พะเยา|พิษณุโลก|สุโขทัย|อุตรดิตถ์|แม่สอด|แม่สาย|เชียงแสน|เชียงของ|ดอยสุเทพ|ดอยอินทนนท์|(?:จ\\.|จังหวัด|เมือง)(?:น่าน|แพร่|ตาก)|(?<![\\u0E00-\\u0E7F])ปาย(?=\\s|$)|Chiang ?Mai|Chiang ?Rai|Lampang|Lamphun|Mae Hong Son|Mae Sot|Mae Sai|Phitsanulok|Sukhothai|Phayao|Phrae|Uttaradit|\\bNan (?:province|city)|\\bTak province|\\bPai\\b"
+  },
+  {
+   "name": "GN: ลำปาง OR ลำพูน",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A5%E0%B8%B3%E0%B8%9B%E0%B8%B2%E0%B8%87%20OR%20%E0%B8%A5%E0%B8%B3%E0%B8%9E%E0%B8%B9%E0%B8%99%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "north"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "치앙마이|치앙라이|람빵|매홍손|핏사눌록|수코타이|매솟|เชียงใหม่|เชียงราย|ลำปาง|ลำพูน|แม่ฮ่องสอน|พะเยา|พิษณุโลก|สุโขทัย|อุตรดิตถ์|แม่สอด|แม่สาย|เชียงแสน|เชียงของ|ดอยสุเทพ|ดอยอินทนนท์|(?:จ\\.|จังหวัด|เมือง)(?:น่าน|แพร่|ตาก)|(?<![\\u0E00-\\u0E7F])ปาย(?=\\s|$)|Chiang ?Mai|Chiang ?Rai|Lampang|Lamphun|Mae Hong Son|Mae Sot|Mae Sai|Phitsanulok|Sukhothai|Phayao|Phrae|Uttaradit|\\bNan (?:province|city)|\\bTak province|\\bPai\\b"
+  },
+  {
+   "name": "GN: แม่ฮ่องสอน",
+   "url": "https://news.google.com/rss/search?q=%E0%B9%81%E0%B8%A1%E0%B9%88%E0%B8%AE%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B8%AA%E0%B8%AD%E0%B8%99%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "north"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "치앙마이|치앙라이|람빵|매홍손|핏사눌록|수코타이|매솟|เชียงใหม่|เชียงราย|ลำปาง|ลำพูน|แม่ฮ่องสอน|พะเยา|พิษณุโลก|สุโขทัย|อุตรดิตถ์|แม่สอด|แม่สาย|เชียงแสน|เชียงของ|ดอยสุเทพ|ดอยอินทนนท์|(?:จ\\.|จังหวัด|เมือง)(?:น่าน|แพร่|ตาก)|(?<![\\u0E00-\\u0E7F])ปาย(?=\\s|$)|Chiang ?Mai|Chiang ?Rai|Lampang|Lamphun|Mae Hong Son|Mae Sot|Mae Sai|Phitsanulok|Sukhothai|Phayao|Phrae|Uttaradit|\\bNan (?:province|city)|\\bTak province|\\bPai\\b"
+  },
+  {
+   "name": "GN: น่าน·แพร่·พะเยา",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%88%E0%B8%B1%E0%B8%87%E0%B8%AB%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%99%E0%B9%88%E0%B8%B2%E0%B8%99%20OR%20%E0%B8%88%E0%B8%B1%E0%B8%87%E0%B8%AB%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B9%81%E0%B8%9E%E0%B8%A3%E0%B9%88%20OR%20%E0%B8%88%E0%B8%B1%E0%B8%87%E0%B8%AB%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9E%E0%B8%B0%E0%B9%80%E0%B8%A2%E0%B8%B2%20OR%20%E0%B8%88.%E0%B8%99%E0%B9%88%E0%B8%B2%E0%B8%99%20OR%20%E0%B8%88.%E0%B9%81%E0%B8%9E%E0%B8%A3%E0%B9%88%20OR%20%E0%B8%88.%E0%B8%9E%E0%B8%B0%E0%B9%80%E0%B8%A2%E0%B8%B2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "north"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "치앙마이|치앙라이|람빵|매홍손|핏사눌록|수코타이|매솟|เชียงใหม่|เชียงราย|ลำปาง|ลำพูน|แม่ฮ่องสอน|พะเยา|พิษณุโลก|สุโขทัย|อุตรดิตถ์|แม่สอด|แม่สาย|เชียงแสน|เชียงของ|ดอยสุเทพ|ดอยอินทนนท์|(?:จ\\.|จังหวัด|เมือง)(?:น่าน|แพร่|ตาก)|(?<![\\u0E00-\\u0E7F])ปาย(?=\\s|$)|Chiang ?Mai|Chiang ?Rai|Lampang|Lamphun|Mae Hong Son|Mae Sot|Mae Sai|Phitsanulok|Sukhothai|Phayao|Phrae|Uttaradit|\\bNan (?:province|city)|\\bTak province|\\bPai\\b",
+   "note": "น่าน·แพร่ 단독 검색은 다른 낱말(เผยแพร่ 등)이 섞여 จังหวัด/จ. 를 붙임"
+  },
+  {
+   "name": "GN: พิษณุโลก OR สุโขทัย OR อุตรดิตถ์",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%9E%E0%B8%B4%E0%B8%A9%E0%B8%93%E0%B8%B8%E0%B9%82%E0%B8%A5%E0%B8%81%20OR%20%E0%B8%AA%E0%B8%B8%E0%B9%82%E0%B8%82%E0%B8%97%E0%B8%B1%E0%B8%A2%20OR%20%E0%B8%AD%E0%B8%B8%E0%B8%95%E0%B8%A3%E0%B8%94%E0%B8%B4%E0%B8%95%E0%B8%96%E0%B9%8C%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "north"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "치앙마이|치앙라이|람빵|매홍손|핏사눌록|수코타이|매솟|เชียงใหม่|เชียงราย|ลำปาง|ลำพูน|แม่ฮ่องสอน|พะเยา|พิษณุโลก|สุโขทัย|อุตรดิตถ์|แม่สอด|แม่สาย|เชียงแสน|เชียงของ|ดอยสุเทพ|ดอยอินทนนท์|(?:จ\\.|จังหวัด|เมือง)(?:น่าน|แพร่|ตาก)|(?<![\\u0E00-\\u0E7F])ปาย(?=\\s|$)|Chiang ?Mai|Chiang ?Rai|Lampang|Lamphun|Mae Hong Son|Mae Sot|Mae Sai|Phitsanulok|Sukhothai|Phayao|Phrae|Uttaradit|\\bNan (?:province|city)|\\bTak province|\\bPai\\b"
+  },
+  {
+   "name": "GN: ตาก·แม่สอด",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%88%E0%B8%B1%E0%B8%87%E0%B8%AB%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%95%E0%B8%B2%E0%B8%81%20OR%20%E0%B9%81%E0%B8%A1%E0%B9%88%E0%B8%AA%E0%B8%AD%E0%B8%94%20OR%20%E0%B8%88.%E0%B8%95%E0%B8%B2%E0%B8%81%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "north"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "치앙마이|치앙라이|람빵|매홍손|핏사눌록|수코타이|매솟|เชียงใหม่|เชียงราย|ลำปาง|ลำพูน|แม่ฮ่องสอน|พะเยา|พิษณุโลก|สุโขทัย|อุตรดิตถ์|แม่สอด|แม่สาย|เชียงแสน|เชียงของ|ดอยสุเทพ|ดอยอินทนนท์|(?:จ\\.|จังหวัด|เมือง)(?:น่าน|แพร่|ตาก)|(?<![\\u0E00-\\u0E7F])ปาย(?=\\s|$)|Chiang ?Mai|Chiang ?Rai|Lampang|Lamphun|Mae Hong Son|Mae Sot|Mae Sai|Phitsanulok|Sukhothai|Phayao|Phrae|Uttaradit|\\bNan (?:province|city)|\\bTak province|\\bPai\\b"
+  },
+  {
+   "name": "GN site: PRD 북부(เชียงใหม่)",
+   "url": "https://news.google.com/rss/search?q=site%3Aprd.go.th%20%E0%B9%80%E0%B8%8A%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "north"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "require": "치앙마이|치앙라이|람빵|매홍손|핏사눌록|수코타이|매솟|เชียงใหม่|เชียงราย|ลำปาง|ลำพูน|แม่ฮ่องสอน|พะเยา|พิษณุโลก|สุโขทัย|อุตรดิตถ์|แม่สอด|แม่สาย|เชียงแสน|เชียงของ|ดอยสุเทพ|ดอยอินทนนท์|(?:จ\\.|จังหวัด|เมือง)(?:น่าน|แพร่|ตาก)|(?<![\\u0E00-\\u0E7F])ปาย(?=\\s|$)|Chiang ?Mai|Chiang ?Rai|Lampang|Lamphun|Mae Hong Son|Mae Sot|Mae Sai|Phitsanulok|Sukhothai|Phayao|Phrae|Uttaradit|\\bNan (?:province|city)|\\bTak province|\\bPai\\b",
+   "note": "정부홍보국(PRD) 지역 사무소 보도 — chiangmai.prd.go.th 등은 GN 에서 prd.go.th 로 색인"
+  },
+  {
+   "name": "GN site: PRD 북부(เชียงราย·พิษณุโลก)",
+   "url": "https://news.google.com/rss/search?q=site%3Aprd.go.th%20%E0%B9%80%E0%B8%8A%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B8%A3%E0%B8%B2%E0%B8%A2%20OR%20%E0%B8%9E%E0%B8%B4%E0%B8%A9%E0%B8%93%E0%B8%B8%E0%B9%82%E0%B8%A5%E0%B8%81%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "north"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "require": "치앙마이|치앙라이|람빵|매홍손|핏사눌록|수코타이|매솟|เชียงใหม่|เชียงราย|ลำปาง|ลำพูน|แม่ฮ่องสอน|พะเยา|พิษณุโลก|สุโขทัย|อุตรดิตถ์|แม่สอด|แม่สาย|เชียงแสน|เชียงของ|ดอยสุเทพ|ดอยอินทนนท์|(?:จ\\.|จังหวัด|เมือง)(?:น่าน|แพร่|ตาก)|(?<![\\u0E00-\\u0E7F])ปาย(?=\\s|$)|Chiang ?Mai|Chiang ?Rai|Lampang|Lamphun|Mae Hong Son|Mae Sot|Mae Sai|Phitsanulok|Sukhothai|Phayao|Phrae|Uttaradit|\\bNan (?:province|city)|\\bTak province|\\bPai\\b"
+  },
+  {
+   "name": "GN site: Daily News 북부",
+   "url": "https://news.google.com/rss/search?q=site%3Adailynews.co.th%20%E0%B9%80%E0%B8%8A%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88%20OR%20%E0%B9%80%E0%B8%8A%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B8%A3%E0%B8%B2%E0%B8%A2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "north"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "치앙마이|치앙라이|람빵|매홍손|핏사눌록|수코타이|매솟|เชียงใหม่|เชียงราย|ลำปาง|ลำพูน|แม่ฮ่องสอน|พะเยา|พิษณุโลก|สุโขทัย|อุตรดิตถ์|แม่สอด|แม่สาย|เชียงแสน|เชียงของ|ดอยสุเทพ|ดอยอินทนนท์|(?:จ\\.|จังหวัด|เมือง)(?:น่าน|แพร่|ตาก)|(?<![\\u0E00-\\u0E7F])ปาย(?=\\s|$)|Chiang ?Mai|Chiang ?Rai|Lampang|Lamphun|Mae Hong Son|Mae Sot|Mae Sai|Phitsanulok|Sukhothai|Phayao|Phrae|Uttaradit|\\bNan (?:province|city)|\\bTak province|\\bPai\\b",
+   "note": "Daily News 지방 섹션 RSS(/regional/feed/)는 항목 0개 → GN site:"
+  },
+  {
+   "name": "GN site: Chiang Mai Citylife",
+   "url": "https://news.google.com/rss/search?q=site%3Achiangmaicitylife.com%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "north",
+    "travel"
+   ],
+   "language": "en",
+   "group": "north-local",
+   "verified": "2026-10-03",
+   "note": "사이트 RSS 는 2023년에 멈춤 → GN site:(글이 드묾, 생활·맛집 위주)"
+  },
+  {
+   "name": "GN: Chiang Mai",
+   "url": "https://news.google.com/rss/search?q=%22Chiang%20Mai%22%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "north"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "치앙마이|치앙라이|람빵|매홍손|핏사눌록|수코타이|매솟|เชียงใหม่|เชียงราย|ลำปาง|ลำพูน|แม่ฮ่องสอน|พะเยา|พิษณุโลก|สุโขทัย|อุตรดิตถ์|แม่สอด|แม่สาย|เชียงแสน|เชียงของ|ดอยสุเทพ|ดอยอินทนนท์|(?:จ\\.|จังหวัด|เมือง)(?:น่าน|แพร่|ตาก)|(?<![\\u0E00-\\u0E7F])ปาย(?=\\s|$)|Chiang ?Mai|Chiang ?Rai|Lampang|Lamphun|Mae Hong Son|Mae Sot|Mae Sai|Phitsanulok|Sukhothai|Phayao|Phrae|Uttaradit|\\bNan (?:province|city)|\\bTak province|\\bPai\\b"
+  },
+  {
+   "name": "GN: Chiang Rai",
+   "url": "https://news.google.com/rss/search?q=%22Chiang%20Rai%22%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "north"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "치앙마이|치앙라이|람빵|매홍손|핏사눌록|수코타이|매솟|เชียงใหม่|เชียงราย|ลำปาง|ลำพูน|แม่ฮ่องสอน|พะเยา|พิษณุโลก|สุโขทัย|อุตรดิตถ์|แม่สอด|แม่สาย|เชียงแสน|เชียงของ|ดอยสุเทพ|ดอยอินทนนท์|(?:จ\\.|จังหวัด|เมือง)(?:น่าน|แพร่|ตาก)|(?<![\\u0E00-\\u0E7F])ปาย(?=\\s|$)|Chiang ?Mai|Chiang ?Rai|Lampang|Lamphun|Mae Hong Son|Mae Sot|Mae Sai|Phitsanulok|Sukhothai|Phayao|Phrae|Uttaradit|\\bNan (?:province|city)|\\bTak province|\\bPai\\b"
+  },
+  {
+   "name": "GN: Lampang·Phitsanulok·Mae Sot 등",
+   "url": "https://news.google.com/rss/search?q=%22Mae%20Sot%22%20OR%20%22Mae%20Hong%20Son%22%20OR%20Lampang%20OR%20Phitsanulok%20OR%20Sukhothai%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "north"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "치앙마이|치앙라이|람빵|매홍손|핏사눌록|수코타이|매솟|เชียงใหม่|เชียงราย|ลำปาง|ลำพูน|แม่ฮ่องสอน|พะเยา|พิษณุโลก|สุโขทัย|อุตรดิตถ์|แม่สอด|แม่สาย|เชียงแสน|เชียงของ|ดอยสุเทพ|ดอยอินทนนท์|(?:จ\\.|จังหวัด|เมือง)(?:น่าน|แพร่|ตาก)|(?<![\\u0E00-\\u0E7F])ปาย(?=\\s|$)|Chiang ?Mai|Chiang ?Rai|Lampang|Lamphun|Mae Hong Son|Mae Sot|Mae Sai|Phitsanulok|Sukhothai|Phayao|Phrae|Uttaradit|\\bNan (?:province|city)|\\bTak province|\\bPai\\b"
+  },
+  {
+   "name": "GN(ko): 치앙마이",
+   "url": "https://news.google.com/rss/search?q=%EC%B9%98%EC%95%99%EB%A7%88%EC%9D%B4%20when%3A1d&hl=ko&gl=KR&ceid=KR:ko",
+   "type": "gnews",
+   "topics": [
+    "north"
+   ],
+   "language": "ko",
+   "group": "korean",
+   "verified": "2026-10-03",
+   "match": "치앙마이"
+  },
+  {
+   "name": "The Phuket News",
+   "url": "https://www.thephuketnews.com/rss-xml/news.xml",
+   "type": "rss",
+   "topics": [
+    "south"
+   ],
+   "language": "en",
+   "group": "south-local",
+   "verified": "2026-10-03",
+   "note": "사이트 RSS 목록 rss-xml/news.xml(life.xml 은 드묾)"
+  },
+  {
+   "name": "The Phuket Express",
+   "url": "https://thephuketexpress.com/feed/",
+   "type": "rss",
+   "topics": [
+    "south"
+   ],
+   "language": "en",
+   "group": "south-local",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "The Thaiger 푸껫",
+   "url": "https://thethaiger.com/news/phuket/feed",
+   "type": "rss",
+   "topics": [
+    "south"
+   ],
+   "language": "en",
+   "group": "south-local",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "The Thaiger 끄라비",
+   "url": "https://thethaiger.com/news/krabi/feed",
+   "type": "rss",
+   "topics": [
+    "south"
+   ],
+   "language": "en",
+   "group": "south-local",
+   "verified": "2026-10-03",
+   "note": "글이 드묾(10/3 최신 약 41시간 전)"
+  },
+  {
+   "name": "GN: ภูเก็ต",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A0%E0%B8%B9%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%95%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN: กระบี่ OR พังงา",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%81%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%B5%E0%B9%88%20OR%20%E0%B8%9E%E0%B8%B1%E0%B8%87%E0%B8%87%E0%B8%B2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN: สุราษฎร์ธานี",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%AA%E0%B8%B8%E0%B8%A3%E0%B8%B2%E0%B8%A9%E0%B8%8E%E0%B8%A3%E0%B9%8C%E0%B8%98%E0%B8%B2%E0%B8%99%E0%B8%B5%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN: เกาะสมุย·พะงัน·เต่า",
+   "url": "https://news.google.com/rss/search?q=%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%B0%E0%B8%AA%E0%B8%A1%E0%B8%B8%E0%B8%A2%20OR%20%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%B0%E0%B8%9E%E0%B8%B0%E0%B8%87%E0%B8%B1%E0%B8%99%20OR%20%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%B0%E0%B9%80%E0%B8%95%E0%B9%88%E0%B8%B2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN: สงขลา OR หาดใหญ่",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%AA%E0%B8%87%E0%B8%82%E0%B8%A5%E0%B8%B2%20OR%20%E0%B8%AB%E0%B8%B2%E0%B8%94%E0%B9%83%E0%B8%AB%E0%B8%8D%E0%B9%88%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN: นครศรีธรรมราช",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%99%E0%B8%84%E0%B8%A3%E0%B8%A8%E0%B8%A3%E0%B8%B5%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%A3%E0%B8%B2%E0%B8%8A%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN: ตรัง OR สตูล",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%95%E0%B8%A3%E0%B8%B1%E0%B8%87%20OR%20%E0%B8%AA%E0%B8%95%E0%B8%B9%E0%B8%A5%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN: ชุมพร OR ระนอง",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%8A%E0%B8%B8%E0%B8%A1%E0%B8%9E%E0%B8%A3%20OR%20%E0%B8%A3%E0%B8%B0%E0%B8%99%E0%B8%AD%E0%B8%87%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN: ปัตตานี·ยะลา·นราธิวาส",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%9B%E0%B8%B1%E0%B8%95%E0%B8%95%E0%B8%B2%E0%B8%99%E0%B8%B5%20OR%20%E0%B8%A2%E0%B8%B0%E0%B8%A5%E0%B8%B2%20OR%20%E0%B8%99%E0%B8%A3%E0%B8%B2%E0%B8%98%E0%B8%B4%E0%B8%A7%E0%B8%B2%E0%B8%AA%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN: ชายแดนใต้(남부 국경)",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%8A%E0%B8%B2%E0%B8%A2%E0%B9%81%E0%B8%94%E0%B8%99%E0%B9%83%E0%B8%95%E0%B9%89%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN site: PRD 남부(ภูเก็ต)",
+   "url": "https://news.google.com/rss/search?q=site%3Aprd.go.th%20%E0%B8%A0%E0%B8%B9%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%95%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN site: PRD 남부(สงขลา·สุราษฎร์)",
+   "url": "https://news.google.com/rss/search?q=site%3Aprd.go.th%20%E0%B8%AA%E0%B8%87%E0%B8%82%E0%B8%A5%E0%B8%B2%20OR%20%E0%B8%AA%E0%B8%B8%E0%B8%A3%E0%B8%B2%E0%B8%A9%E0%B8%8E%E0%B8%A3%E0%B9%8C%E0%B8%98%E0%B8%B2%E0%B8%99%E0%B8%B5%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN site: Isranews(이스라 — 남부 국경 취재)",
+   "url": "https://news.google.com/rss/search?q=site%3Aisranews.org%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "south",
+    "poleco",
+    "society"
+   ],
+   "language": "th",
+   "group": "south-local",
+   "verified": "2026-10-03",
+   "note": "사이트 RSS 없음(500/0개) → GN site:. 탐사·정치 기사도 많아 주제는 제목 키워드로"
+  },
+  {
+   "name": "GN site: Hatyai Focus",
+   "url": "https://news.google.com/rss/search?q=site%3Ahatyaifocus.com%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "th",
+   "group": "south-local",
+   "verified": "2026-10-03",
+   "require": "^(?!.*(?:หางาน|สมัครงาน)).*(?:푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong)",
+   "note": "사이트 RSS 는 날짜 없음 → GN site:. 구인 광고 글은 뺌"
+  },
+  {
+   "name": "GN: Phuket",
+   "url": "https://news.google.com/rss/search?q=Phuket%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN: Krabi OR Phang Nga",
+   "url": "https://news.google.com/rss/search?q=Krabi%20OR%20%22Phang%20Nga%22%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN: Samui·Phangan·Koh Tao",
+   "url": "https://news.google.com/rss/search?q=Samui%20OR%20Phangan%20OR%20%22Koh%20Tao%22%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN: Hat Yai OR Songkhla",
+   "url": "https://news.google.com/rss/search?q=%22Hat%20Yai%22%20OR%20Songkhla%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN: Pattani·Yala·Narathiwat(deep south)",
+   "url": "https://news.google.com/rss/search?q=Pattani%20OR%20Yala%20OR%20Narathiwat%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong"
+  },
+  {
+   "name": "GN: Surat Thani·Nakhon Si Thammarat·Trang·Satun",
+   "url": "https://news.google.com/rss/search?q=%22Surat%20Thani%22%20OR%20%22Nakhon%20Si%20Thammarat%22%20OR%20Trang%20OR%20Satun%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "(?=.*(?:Thai|Thailand|푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong))(?:푸껫|푸켓|끄라비|사무이|팡안|핫야이|송클라|ภูเก็ต|ป่าตอง|กระบี่|อ่าวนาง|เกาะพีพี|พังงา|เขาหลัก|สุราษฎร์|สมุย|พะงัน|เกาะเต่า|สงขลา|หาดใหญ่|นครศรีธรรมราช|ตรัง(?!กานู)|สตูล|ชุมพร|ระนอง|ปัตตานี|ยะลา|นราธิวาส|ชายแดนใต้|สุไหงโก-?ลก|เบตง|Phuket|Patong|Krabi|Ao Nang|Phi Phi|Phang ?Nga|Khao Lak|Surat Thani|Samui|Phangan|Koh Tao|Songkhla|Hat ?Yai|Nakhon Si Thammarat|\\bTrang\\b|Satun|Chumphon|Ranong|Pattani|Yala|Narathiwat|deep south|Betong)",
+   "note": "영어 Trang 은 다른 뉴스가 섞여 남부 지명이 제목에 있는 것만"
+  },
+  {
+   "name": "GN(ko): 푸껫",
+   "url": "https://news.google.com/rss/search?q=%ED%91%B8%EA%BB%AB%20OR%20%ED%91%B8%EC%BC%93%20when%3A1d&hl=ko&gl=KR&ceid=KR:ko",
+   "type": "gnews",
+   "topics": [
+    "south"
+   ],
+   "language": "ko",
+   "group": "korean",
+   "verified": "2026-10-03",
+   "match": "푸껫|푸켓"
+  },
+  {
+   "name": "GN: ระยอง",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A3%E0%B8%B0%E0%B8%A2%E0%B8%AD%E0%B8%87%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "east"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "파타야|좀티엔|시라차|촌부리|라용|พัทยา|บางละมุง|จอมเทียน|นาเกลือ|สัตหีบ|หนองปรือ|ห้วยใหญ่|อู่ตะเภา|เกาะล้าน|ศรีราชา|แหลมฉบัง|อมตะ|ชลบุรี|บางแสน|บ้านบึง|พนัสนิคม|บ่อวิน|ระยอง|มาบตาพุด|เกาะเสม็ด|บ้านฉาง|แกลง|Pattaya|Jomtien|Bang ?Lamung|Sattahip|Naklua|Walking Street|U-?Tapao|Koh Larn|Sriracha|Si Racha|Laem Chabang|Chon ?Buri|Amata|Bang ?Saen|Rayong|Map Ta Phut|Koh Samet|EEC|อีอีซี"
+  },
+  {
+   "name": "GN: Rayong",
+   "url": "https://news.google.com/rss/search?q=Rayong%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "east"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "Rayong|Map Ta Phut|Samet",
+   "note": "Rayong FC 경기 결과도 섞임 — 주제 판단은 편집 때"
+  },
+  {
+   "name": "Khaosod English 방콕",
+   "url": "https://www.khaosodenglish.com/category/news/bangkok/feed/",
+   "type": "rss",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "en",
+   "group": "bangkok-local",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "GN: สุขุมวิท",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%AA%E0%B8%B8%E0%B8%82%E0%B8%B8%E0%B8%A1%E0%B8%A7%E0%B8%B4%E0%B8%97%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "match": "สุขุมวิท"
+  },
+  {
+   "name": "GN: สีลม OR สาทร",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%AA%E0%B8%B5%E0%B8%A5%E0%B8%A1%20OR%20%E0%B8%AA%E0%B8%B2%E0%B8%97%E0%B8%A3%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "match": "สีลม|สาทร"
+  },
+  {
+   "name": "GN: อโศก·ทองหล่อ·เอกมัย",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%AD%E0%B9%82%E0%B8%A8%E0%B8%81%20OR%20%E0%B8%97%E0%B8%AD%E0%B8%87%E0%B8%AB%E0%B8%A5%E0%B9%88%E0%B8%AD%20OR%20%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%A1%E0%B8%B1%E0%B8%A2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "match": "อโศก|ทองหล่อ|เอกมัย"
+  },
+  {
+   "name": "GN: รัชดา·ห้วยขวาง·ดินแดง",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A3%E0%B8%B1%E0%B8%8A%E0%B8%94%E0%B8%B2%20OR%20%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%82%E0%B8%A7%E0%B8%B2%E0%B8%87%20OR%20%E0%B8%94%E0%B8%B4%E0%B8%99%E0%B9%81%E0%B8%94%E0%B8%87%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "match": "รัชดา|ห้วยขวาง|ดินแดง"
+  },
+  {
+   "name": "GN: ลาดพร้าว·บางนา·บางกะปิ",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A5%E0%B8%B2%E0%B8%94%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%A7%20OR%20%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B8%99%E0%B8%B2%20OR%20%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B8%81%E0%B8%B0%E0%B8%9B%E0%B8%B4%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "match": "ลาดพร้าว|บางนา|บางกะปิ"
+  },
+  {
+   "name": "GN: ประตูน้ำ·สยาม·ราชประสงค์",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%95%E0%B8%B9%E0%B8%99%E0%B9%89%E0%B8%B3%20OR%20%E0%B8%AA%E0%B8%A2%E0%B8%B2%E0%B8%A1%20OR%20%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%AA%E0%B8%87%E0%B8%84%E0%B9%8C%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "ประตูน้ำ|ราชประสงค์|สยามสแควร์|สยามพารากอน|ไอคอนสยาม|สยามเซ็นเตอร์|สยามดิสคัฟเวอรี่|แยกสยาม|สถานีสยาม"
+  },
+  {
+   "name": "GN: เยาวราช OR สำเพ็ง",
+   "url": "https://news.google.com/rss/search?q=%E0%B9%80%E0%B8%A2%E0%B8%B2%E0%B8%A7%E0%B8%A3%E0%B8%B2%E0%B8%8A%20OR%20%E0%B8%AA%E0%B8%B3%E0%B9%80%E0%B8%9E%E0%B9%87%E0%B8%87%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "match": "เยาวราช|สำเพ็ง"
+  },
+  {
+   "name": "GN: ข้าวสาร·จตุจักร",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%88%E0%B8%95%E0%B8%B8%E0%B8%88%E0%B8%B1%E0%B8%81%E0%B8%A3%20OR%20%22%E0%B8%96%E0%B8%99%E0%B8%99%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B8%AA%E0%B8%B2%E0%B8%A3%22%20OR%20%22%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B8%AA%E0%B8%B2%E0%B8%A3%22%20%E0%B8%81%E0%B8%97%E0%B8%A1%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT"
+  },
+  {
+   "name": "GN: สุวรรณภูมิ",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%AA%E0%B8%B8%E0%B8%A7%E0%B8%A3%E0%B8%A3%E0%B8%93%E0%B8%A0%E0%B8%B9%E0%B8%A1%E0%B8%B4%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok",
+    "travel"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "สุวรรณภูมิ"
+  },
+  {
+   "name": "GN: ดอนเมือง",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%94%E0%B8%AD%E0%B8%99%E0%B9%80%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%87%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok",
+    "travel"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "ดอนเมือง"
+  },
+  {
+   "name": "GN: รฟม.·MRT·สายสีม่วง/น้ำเงิน",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A3%E0%B8%9F%E0%B8%A1.%20OR%20%E0%B8%A3%E0%B8%96%E0%B9%84%E0%B8%9F%E0%B8%9F%E0%B9%89%E0%B8%B2%E0%B8%AA%E0%B8%B2%E0%B8%A2%E0%B8%AA%E0%B8%B5%E0%B8%A1%E0%B9%88%E0%B8%A7%E0%B8%87%20OR%20%E0%B8%AA%E0%B8%B2%E0%B8%A2%E0%B8%AA%E0%B8%B5%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B9%80%E0%B8%87%E0%B8%B4%E0%B8%99%20OR%20%E0%B8%A3%E0%B8%96%E0%B9%84%E0%B8%9F%E0%B8%9F%E0%B9%89%E0%B8%B2%E0%B9%83%E0%B8%95%E0%B9%89%E0%B8%94%E0%B8%B4%E0%B8%99%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok",
+    "weather"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "รฟม|MRT|สายสี|รถไฟฟ้า",
+   "note": "BTS 단독 검색은 K-pop 그룹 BTS 가 섞여 뺌 — 'รถไฟฟ้า'(기존)·'สายสีเขียว' 로"
+  },
+  {
+   "name": "GN: ผู้ว่าฯ กทม.",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%A7%E0%B9%88%E0%B8%B2%E0%B8%AF%20%E0%B8%81%E0%B8%97%E0%B8%A1.%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT"
+  },
+  {
+   "name": "GN: กรุงเทพมหานคร",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%A3%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT"
+  },
+  {
+   "name": "GN: สำนักงานเขต(방콕 구청)",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%AA%E0%B8%B3%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B9%80%E0%B8%82%E0%B8%95%20%E0%B8%81%E0%B8%97%E0%B8%A1.%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT"
+  },
+  {
+   "name": "GN: จราจร กรุงเทพ",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%88%E0%B8%A3%E0%B8%B2%E0%B8%88%E0%B8%A3%20%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok",
+    "weather"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT|จราจร|ถนน"
+  },
+  {
+   "name": "GN: น้ำท่วม กทม.",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%97%E0%B9%88%E0%B8%A7%E0%B8%A1%20%E0%B8%81%E0%B8%97%E0%B8%A1.%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok",
+    "weather"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT"
+  },
+  {
+   "name": "GN: บก.จร.(방콕 교통경찰)",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%9A%E0%B8%81.%E0%B8%88%E0%B8%A3.%20OR%20%E0%B8%95%E0%B8%B3%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%88%E0%B8%A3%E0%B8%B2%E0%B8%88%E0%B8%A3%20%E0%B8%81%E0%B8%97%E0%B8%A1.%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok",
+    "weather"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "GN site: BMA 방콕시(bangkok.go.th)",
+   "url": "https://news.google.com/rss/search?q=site%3Abangkok.go.th%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "note": "bangkok.go.th 는 box 에서 403 → GN site:(레이더 영상 등 잡글 섞임)"
+  },
+  {
+   "name": "GN site: JS100(교통·사건 제보)",
+   "url": "https://news.google.com/rss/search?q=site%3Ajs100.com%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok",
+    "weather",
+    "society"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "note": "사이트 RSS 없음 → GN site:. 전국 제보도 섞여 주제는 제목 키워드로"
+  },
+  {
+   "name": "GN site: FM91 교통(สวพ.91)",
+   "url": "https://news.google.com/rss/search?q=site%3Afm91bkk.com%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok",
+    "weather",
+    "society"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "note": "사이트 /feed 항목 0개 → GN site:"
+  },
+  {
+   "name": "GN site: Daily News 방콕",
+   "url": "https://news.google.com/rss/search?q=site%3Adailynews.co.th%20%E0%B8%81%E0%B8%97%E0%B8%A1.%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT",
+   "note": "Daily News /bangkok/feed/ 항목 0개 → GN site:"
+  },
+  {
+   "name": "GN site: Thairath 방콕",
+   "url": "https://news.google.com/rss/search?q=site%3Athairath.co.th%20%E0%B8%81%E0%B8%97%E0%B8%A1.%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT",
+   "note": "Thairath 지역(방콕) RSS 없음(404) → GN site:"
+  },
+  {
+   "name": "GN site: Khaosod 방콕",
+   "url": "https://news.google.com/rss/search?q=site%3Akhaosod.co.th%20%E0%B8%81%E0%B8%97%E0%B8%A1.%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT",
+   "note": "khaosod.co.th/bangkok/feed 는 403 → GN site:"
+  },
+  {
+   "name": "GN site: Bangkok Post 방콕",
+   "url": "https://news.google.com/rss/search?q=site%3Abangkokpost.com%20Bangkok%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "en",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT",
+   "note": "Bangkok Post 방콕 전용 RSS 없음(404) → GN site:"
+  },
+  {
+   "name": "GN: Sukhumvit",
+   "url": "https://news.google.com/rss/search?q=Sukhumvit%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "en",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT"
+  },
+  {
+   "name": "GN: Silom·Sathorn·Asok·Thonglor",
+   "url": "https://news.google.com/rss/search?q=Silom%20OR%20Sathorn%20OR%20Asok%20OR%20Thonglor%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "en",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT"
+  },
+  {
+   "name": "GN: Khao San·Chatuchak·Ratchada",
+   "url": "https://news.google.com/rss/search?q=%22Khao%20San%22%20OR%20Chatuchak%20OR%20Ratchada%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "en",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT"
+  },
+  {
+   "name": "GN: Suvarnabhumi OR Don Mueang",
+   "url": "https://news.google.com/rss/search?q=Suvarnabhumi%20OR%20%22Don%20Mueang%22%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "bangkok",
+    "travel"
+   ],
+   "language": "en",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "Suvarnabhumi|Don Mueang|Bangkok"
+  },
+  {
+   "name": "GN: Chadchart·Bangkok governor·BMA",
+   "url": "https://news.google.com/rss/search?q=Chadchart%20OR%20%22Bangkok%20governor%22%20OR%20%22Bangkok%20Metropolitan%20Administration%22%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "en",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT"
+  },
+  {
+   "name": "GN: Bangkok traffic·flood",
+   "url": "https://news.google.com/rss/search?q=%22Bangkok%20traffic%22%20OR%20%22Bangkok%20flood%22%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "bangkok",
+    "weather"
+   ],
+   "language": "en",
+   "group": "bangkok-local",
+   "verified": "2026-10-03",
+   "require": "방콕|수쿰빗|กทม|กรุงเทพ(?!ธุรกิจ)|ชัชชาติ|สุขุมวิท|สีลม|สาทร|อโศก|ทองหล่อ|เอกมัย|รัชดา|ห้วยขวาง|ดินแดง|ข้าวสาร|จตุจักร|สุวรรณภูมิ|ดอนเมือง|ลาดกระบัง|ลาดพร้าว|บางนา|บางกะปิ|หนองจอก|ประตูน้ำ|ราชประสงค์|เยาวราช|สำเพ็ง|บีทีเอส|รฟม\\.|สายสีเขียว|สายสีม่วง|สายสีน้ำเงิน|สายสีชมพู|สายสีเหลือง|สายสีส้ม|Bangkok|BMA|Chadchart|Sukhumvit|Silom|Sathorn|Asok|Thonglor|Khao ?San|Chatuchak|Ratchada|Suvarnabhumi|Don Mueang|Lat Krabang|BTS (?:Skytrain|line|station)|Skytrain|MRT"
+  },
+  {
+   "name": "GN(ko): 방콕",
+   "url": "https://news.google.com/rss/search?q=%EB%B0%A9%EC%BD%95%20when%3A1d&hl=ko&gl=KR&ceid=KR:ko",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "ko",
+   "group": "korean",
+   "verified": "2026-10-03",
+   "match": "방콕",
+   "require": "^(?!.*(?:바카라|카지노|토토|슬롯|아고고|먹튀)).*방콕",
+   "note": "도박 스팸 글(바카라 등)이 섞여 뺌"
+  },
+  {
+   "name": "Samui Times 홈",
+   "url": "https://www.samuitimes.com/",
+   "type": "html",
+   "topics": [
+    "south"
+   ],
+   "language": "en",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "RSS 없음(/feed 404·Joomla 피드 0개), GN 색인 0건 → 필요할 때 손으로(사무이·팡안·따오)"
+  },
+  {
+   "name": "BenarNews 태국어(남부 국경)",
+   "url": "https://www.benarnews.org/thai/",
+   "type": "html",
+   "topics": [
+    "south"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "RSS·GN 색인 없음 → 남부 국경(빳따니·얄라·나라티왓) 큰 사건 때 손으로"
+  },
+  {
+   "name": "PR Bangkok(방콕시 홍보)",
+   "url": "https://www.prbangkok.com/",
+   "type": "html",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "방콕시(BMA) 공식 보도자료 — RSS 0개·GN 색인 0건 → 손으로. bangkok.go.th 는 box 에서 403(GN site: 사용)"
+  },
+  {
+   "name": "JS100 홈",
+   "url": "https://www.js100.com/",
+   "type": "html",
+   "topics": [
+    "bangkok",
+    "weather"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "방콕 교통·사건 제보 라디오 — 피드 없음, 평소엔 GN site:js100.com"
   }
  ]
 }

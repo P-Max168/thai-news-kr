@@ -25,7 +25,7 @@ async def main():
         # 시크릿 모드에서는 설치 불가 판정('in-incognito') → 일반 프로필(임시 폴더)로 실행
         ctx = await p.chromium.launch_persistent_context(tempfile.mkdtemp(prefix="tnk-pwa-"), viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True,
                                                          timezone_id="Asia/Bangkok", locale="ko-KR", **kw)
-        await ctx.add_init_script("localStorage.setItem('tnk.profile.v1', JSON.stringify({v:1,onboarded:true,persona:'pattaya',topics:['pattaya','visa','life','weather','society'],taste:{w:{},votes:{}},ui:{},updatedAt:1}))")
+        await ctx.add_init_script("localStorage.setItem('tnk.profile.v1', JSON.stringify({v:1,onboarded:true,persona:'pattaya',topics:['east','visa','life','weather','society'],taste:{w:{},votes:{}},ui:{},updatedAt:1}))")
         pg = await ctx.new_page()
         errs = []
         pg.on("pageerror", lambda e: errs.append(str(e)))

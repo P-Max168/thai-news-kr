@@ -6,13 +6,16 @@
 ※ 뉴스·인용·숫자·URL·시각은 raw/<id>/ 원문에서 확인한 것만. 절대 지어내지 않는다.
 
 주제 id (topic = 주 주제 1개, secondary = 보조 0~3개):
-  pattaya  파타야 (좀티엔·방라뭉·싸따힙·나끌루아·농쁘루)     sriracha 시라차 (램차방·촌부리 시내·아마타·반븡)
+  east     동부(촌부리·라용) — 촌부리 도 전체(파타야·좀티엔·방라뭉·나끌루아·농쁘루·싸따힙·시라차·램차방·아마타·방센·촌부리 시내 등) + 라용 도
+           (2026-10-03 저녁판부터. 옛 pattaya·sriracha 는 검증에서 막힘)
   bangkok  방콕                                          poleco   정치·경제
+  north    북부 (치앙마이·치앙라이·람빵·람푼·매홍손·난·프래·파야오·핏사눌록·수코타이·딱/매솟 등)
+  south    남부 (푸껫·끄라비·팡아·수랏타니(사무이·팡안·따오)·송클라(핫야이)·나콘시탐마랏·뜨랑·사뚠·춤폰·라농·빳따니·얄라·나라티왓)
   society  사회·사건사고                                  visa     외국인·비자 (2~4건, 최대 8, 7일 이내)
   life     생활·물가·부동산                               travel   여행·맛집
   ent      연예·스포츠·SNS                                weather  날씨·교통
-  예) 파타야 침수 → topic="pattaya", secondary=["weather"] / 시라차 달걀값 → topic="life", secondary=["sriracha"]
-기사 id: 주제 약어+번호 권장 (pt1 sr1 bk1 pe1 so1 vi1 lf1 tr1 en1 wt1). 판 안에서만 유일하면 됨.
+  예) 파타야 침수 → topic="east", secondary=["weather"] / 시라차 달걀값 → topic="life", secondary=["east"] / 푸껫 관광 → topic="south", secondary=["travel"]
+기사 id: 주제 약어+번호 권장 (ea1 bk1 no1 st1 pe1 so1 vi1 lf1 tr1 en1 wt1). 판 안에서만 유일하면 됨.
 tags: 키워드 2~6개 필수(인물·장소·기관·사건 키워드, '#' 없이) — 👍👎 취향 학습에 쓰임.
 impact·for_me·also·issue·quick_replies: 판마다 채움(2026-10-03 저녁판부터) — README '판마다 채울 필드(2026-10-03 추가)'.
 """
@@ -21,7 +24,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 from newslib import write_edition, B, KR
 
 stories = [
-dict(id="pt1", topic="pattaya", secondary=["weather"], region="파타야(좀티엔)",   # ※ 예시 — 실제 기사로 교체
+dict(id="ea1", topic="east", secondary=["weather"], region="파타야(좀티엔)",   # ※ 예시 — 실제 기사로 교체
  headline="※ 한국어 제목",
  summary=["※ 문단 1 (원문 확인 내용만)", "※ 문단 2"],
  context="※ 💡 배경 설명(선택). 외국인·비자 기사는 파타야 거주 한국인 기준 실용 팁",
@@ -41,7 +44,7 @@ dict(id="pt1", topic="pattaya", secondary=["weather"], region="파타야(좀티�
 
 # 브리핑 5~6줄: B(주제, "짧은 한 줄 + **굵게 핵심어/숫자**", 기사 id). 한 줄 120자 이하, 각 줄은 서로 다른 기사.
 briefing = [
-  B("pattaya", "※ 파타야 **핵심 키워드** 한 줄 요약", "pt1"),
+  B("east", "※ 파타야 **핵심 키워드** 한 줄 요약", "ea1"),
 ]
 
 # 🇰🇷 오늘의 한국 주요 뉴스(최대 10건, 판 대체용 — 화면은 보통 data/korea.json 을 씀): python3 tools/fetch_korea.py <id> → 한국에서 지금 가장 화제인 전국 뉴스 10개를 골라
@@ -57,7 +60,7 @@ data = dict(
   coverage="※ 수집 범위 설명",
   previous="※ 직전 판 id (data/index.json 의 latest)",
   briefing=briefing,
-  highlights=["pt1", "※", "※"],   # 주요 뉴스 3건(기사 id) — 주제 선택과 관계없이 모든 사용자에게 보임
+  highlights=["ea1", "※", "※"],   # 주요 뉴스 3건(기사 id) — 주제 선택과 관계없이 모든 사용자에게 보임
   stories=stories, korea_top=korea_top)
 
 if __name__ == "__main__":

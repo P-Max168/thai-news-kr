@@ -10,7 +10,7 @@
   var T = root.TNTopics, S = root.TNStore;
 
   function locOf(s, tp) {
-    for (var i = 0; i < tp.all.length; i++) if (/^(pattaya|sriracha|bangkok)$/.test(tp.all[i])) return tp.all[i];
+    for (var i = 0; i < tp.all.length; i++) if (/^(east|bangkok|north|south)$/.test(tp.all[i])) return tp.all[i];
     if (s.region) return String(s.region).replace(/\s*\(.*$/, "").trim();
     return null;
   }

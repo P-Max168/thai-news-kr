@@ -7,7 +7,7 @@ from newslib import write_edition, B, KR
 
 stories = [
 # ───────────── 파타야 ─────────────
-dict(id="pt1", topic="pattaya", secondary=["society"], region="파타야(방라뭉)",
+dict(id="pt1", topic="east", secondary=["society"], region="파타야(방라뭉)",
  headline="방라뭉 적십자, 침수 가구 52곳에 구호품·생수·현금",
  summary=[
   "2일 방라뭉군 시니어 군수보좌 피쳇(Pichet)과 군 적십자 분회가 왓타끄라단·방라뭉 쪽 마을 등에서 침수 피해 가구를 찾아 구호품을 나눴다. 지난주 폭우로 여러 곳이 잠겼고, 상황은 나아졌지만 아직 물이 고인 곳이 있다.",
@@ -25,7 +25,7 @@ dict(id="pt1", topic="pattaya", secondary=["society"], region="파타야(방라�
  quick_replies=["방라뭉 쪽 지금은 물 다 빠졌나요?", "구호품 나눔 소식 반갑네요", "혹시 기부할 수 있는 곳 아시는 분 계세요?"]),
 
 # ───────────── 시라차 ─────────────
-dict(id="sr1", topic="sriracha", secondary=["weather","poleco"], region="시라차(아마타시티)",
+dict(id="sr1", topic="east", secondary=["weather","poleco"], region="시라차(아마타시티)",
  headline="아마타시티 촌부리, 배수 시간당 4만2,500㎥로 증강…8·9단지 평균 60cm 잔류",
  summary=[
   "산업장관 와라웃(Varawut)과 환경장관 수찻(Suchart)이 2일 아마타시티 촌부리 공단을 찾아 침수 상황을 살폈다. 공단 밖 수위는 줄었고 비도 멈췄지만, 단지 안은 아직 물이 고여 있다. 평균 수위는 약 10cm 낮아졌다.",
@@ -44,7 +44,7 @@ dict(id="sr1", topic="sriracha", secondary=["weather","poleco"], region="시라�
  issue=dict(id="2026-floods-amata", title="아마타시티 촌부리 공단 침수"),
  quick_replies=["8·9단지 쪽 출근 괜찮은지 아시는 분 계세요?", "아직 60cm면 꽤 오래가네요", "아마타 근처 도로 상황 공유해 주실 분 계세요?"]),
 
-dict(id="sr2", topic="sriracha", secondary=["poleco"], region="시라차(램차방)",
+dict(id="sr2", topic="east", secondary=["poleco"], region="시라차(램차방)",
  headline="교통부, 머스크와 램차방·라드끄라방 ICD 투자 확대 협의…그린 물류 강조",
  summary=[
   "교통부 차관 산펫(Sanphet)이 9월 30일 싱가포르 A.P. 몰러-머스크(Maersk) 대표 르네 필 페데르센(René Piil Pedersen) 일행을 만나 램차방 항만과 라드끄라방 내륙컨테이너기지(ICD) 투자·물류 협력을 논의했다.",
@@ -211,7 +211,7 @@ dict(id="so3", topic="society", secondary=["bangkok"], region="논타부리",
  quick_replies=["다친 분이 없어서 다행이에요", "근처 지날 때 조심해야겠네요", "점검 결과 나오면 알려 주세요"]),
 
 # ───────────── 외국인·비자 ─────────────
-dict(id="vi1", topic="visa", secondary=["pattaya"], region="파타야",
+dict(id="vi1", topic="visa", secondary=["east"], region="파타야",
  headline="파타야 시장, 관광객 금전 요구 의혹 시 직원 3명 직무정지…관련 6명 수사",
  summary=[
   "뽀라멧(Poramet) 파타야 시장이 관광객에게 영수증 없이 돈을 받았다는 의혹으로 시 단속 직원 3명을 직무정지했다고 밝혔다. 온라인에 퍼진 영상에는 흡연·개조 머플러 등을 이유로 돈을 걷는 듯한 장면이 담겼다고 한다.",
@@ -249,7 +249,7 @@ dict(id="vi2", topic="visa", secondary=["society"],
  issue=None,
  quick_replies=["이런 광고는 정말 조심해야겠어요", "한국인 피해 사례도 있었나요?", "무사히 구출돼서 다행이에요"]),
 
-dict(id="vi3", topic="visa", secondary=["pattaya","society"], region="파타야(농쁘루)",
+dict(id="vi3", topic="visa", secondary=["east","society"], region="파타야(농쁘루)",
  headline="외교부, 파타야 인근 홍수 실종 한국인 1명 사망 확인…영사 조력 제공",
  summary=[
   "외교부는 9월 28일, 주태국대사관이 태국 당국과 함께 신원 확인한 결과 파타야 인근 홍수로 실종됐던 한국인 남성 1명이 사망한 것으로 확인됐다고 밝혔다. 유가족에게 통보했고 필요한 영사 조력을 제공한다고 했다.",
@@ -305,7 +305,7 @@ dict(id="lf2", topic="life", secondary=["society"],
  quick_replies=["동네 마트 달걀값은 어떤가요?", "시라차 쪽 달걀 다시 들어왔나요?", "가격이 빨리 정상으로 돌아오면 좋겠네요"]),
 
 # ───────────── 여행·맛집 ─────────────
-dict(id="tr1", topic="travel", secondary=["pattaya","weather"], region="파타야(꼬란)",
+dict(id="tr1", topic="travel", secondary=["east","weather"], region="파타야(꼬란)",
  headline="꼬란 바다 일부 ‘초록’…폭우 뒤 플랑크톤 대증식 추정, 당국은 자연 현상",
  summary=[
   "9월 30일 파타야 앞 꼬란(Koh Larn) 일부 해역 바닷물이 평소와 달리 초록빛으로 보여 관광객이 놀랐다. 며칠간 폭우·강풍 뒤 육지에서 민물·영양염이 바다로 많이 들어온 시기와 맞물린다.",
@@ -385,7 +385,7 @@ dict(id="wt1", topic="weather", secondary=["bangkok"],
 briefing = [
   B("weather", "태국 기상청 **4~7일** 뇌우·강풍 경보, 방콕권은 **5~6일** 중심", "wt1"),
   B("poleco", "태국 정부, **11~14일** 중부·짜오프라야 비 대비…남부는 5일부터", "pe1"),
-  B("sriracha", "아마타시티 배수 **시간당 4만2,500㎥**…8·9단지 평균 60cm", "sr1"),
+  B("east", "아마타시티 배수 **시간당 4만2,500㎥**…8·9단지 평균 60cm", "sr1"),
   B("bangkok", "찻찻, 라드끄라방·롬끌라오 **고인 물** 배수·위로금 온라인", "bk2"),
   B("visa", "파타야, 관광객 금전 요구 의혹 시 직원 **3명 직무정지**", "vi1"),
   B("life", "방콕은행 **12/15**부터 아이뱅킹 종료 → 모바일앱으로", "lf1"),

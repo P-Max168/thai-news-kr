@@ -17,7 +17,7 @@
   e/<id>/index.html     판별 OG 태그를 가진 작은 정적 페이지 → ../../?ed=<id> 로 이동
 share/ 는 .gitignore(올리지 않음). og/ e/ 는 사이트에 올릴 파일(배포 스크립트에 경로 추가 필요).
 
-기사 고르기(기본): 🏖️파타야 → ⚓시라차 → 🛂외국인·비자 주제에서 1건씩(주 주제 +2, 제목·지역에 파타야/시라차 지명 +1,
+기사 고르기(기본): 🏖️동부(촌부리·라용) 2건 → 🛂외국인·비자 1건(주 주제 +2, 제목·지역에 촌부리·라용 지명 +1,
 주요 뉴스(highlights) +1, 동점이면 편집 순서) → 나머지는 주요 뉴스 순서 → 편집 순서.
 주제는 화면과 똑같이 assets/topics.js(옛 판 매핑 포함)를 node 로 돌려서 구한다(node 없으면 topic/category 로 대충).
 문장은 데이터의 headline 을 그대로 쓰고, 짧은 형태는 '…' 앞부분만 자른다(지어내지 않음).
@@ -30,20 +30,21 @@ SHORT = "p-max168.github.io/thai-news-kr"
 UPDATE_LINE = "매일 아침 7시·저녁 6시 업데이트"
 
 TOPICS = {  # assets/topics.js 와 같은 값(이모지·색)
-    "pattaya": ("파타야", "🏖️", "#0b7285"), "sriracha": ("시라차", "⚓", "#1c7ed6"),
-    "bangkok": ("방콕", "🏙️", "#495057"), "poleco": ("정치·경제", "🏛️", "#3b5bdb"),
+    "east": ("동부(촌부리·라용)", "🏖️", "#0b7285"), "bangkok": ("방콕", "🏙️", "#495057"),
+    "north": ("북부", "⛰️", "#5c940d"), "south": ("남부", "🏝️", "#1971c2"), "poleco": ("정치·경제", "🏛️", "#3b5bdb"),
     "society": ("사회·사건사고", "🚨", "#d9480f"), "visa": ("외국인·비자", "🛂", "#6741d9"),
     "life": ("생활·물가·부동산", "🛒", "#0c8f6a"), "travel": ("여행·맛집", "🍜", "#e67700"),
     "ent": ("연예·스포츠·SNS", "💬", "#c2255c"), "weather": ("날씨·교통", "🌦️", "#0ca678"),
 }
-DECO = {"pattaya": "〰", "sriracha": "⚓", "bangkok": "曼", "poleco": "政", "society": "社", "visa": "✈",
+DECO = {"east": "〰", "bangkok": "曼", "north": "⛰", "south": "☀", "poleco": "政", "society": "社", "visa": "✈",
         "life": "%", "travel": "旅", "ent": "#", "weather": "☂"}
-LEGACY = {"politics": "poleco", "economy": "poleco", "society": "society", "visa": "visa", "sns": "ent", "local": "pattaya"}
+LEGACY = {"politics": "poleco", "economy": "poleco", "society": "society", "visa": "visa", "sns": "ent", "local": "east"}
+ALIAS = {"pattaya": "east", "sriracha": "east"}   # 2026-10-03 통합(옛 판 데이터 → 동부)
 RX_PLACE = {
-    "pattaya": re.compile(r"파타야|좀티엔|쫌티엔|방라뭉|방람웅|싸따힙|사따힙|사타힙|나끌루아|농쁘루|프라탐낙|꼬란"),
-    "sriracha": re.compile(r"시라차|스리라차|씨라차|램차방|아마타|촌부리|판통|반븡"),
+    "east": re.compile(r"파타야|좀티엔|쫌티엔|방라뭉|방람웅|싸따힙|사따힙|사타힙|나끌루아|농쁘루|프라탐낙|꼬란|"
+                       r"시라차|스리라차|씨라차|램차방|아마타|촌부리|판통|반븡|방센|라용|맙따풋|꼬사멧"),
 }
-PRIORITY = ["pattaya", "sriracha", "visa"]
+PRIORITY = ["east", "east", "visa"]   # 예전 파타야·시라차 1건씩 → 통합 뒤 동부 2건
 ED_NAME = {"am": "아침판", "pm": "저녁판", "early": "새벽판"}
 BRIEF_BADGE = {"am": "아침 브리핑", "pm": "저녁 브리핑", "early": "새벽 브리핑"}
 
@@ -76,8 +77,8 @@ def story_topics(data):
             return json.loads(out)
         except Exception as ex:  # noqa
             print("경고: topics.js 실행 실패 → 간단 매핑 사용:", ex, file=sys.stderr)
-    return {s["id"]: {"topic": s.get("topic") or LEGACY.get(s.get("category"), "society"),
-                      "secondary": s.get("secondary", [])} for s in data["stories"]}
+    return {s["id"]: {"topic": ALIAS.get(s.get("topic"), s.get("topic")) or LEGACY.get(s.get("category"), "society"),
+                      "secondary": [ALIAS.get(x, x) for x in s.get("secondary", [])]} for s in data["stories"]}
 
 
 def pick(data, tp, n, manual=None):

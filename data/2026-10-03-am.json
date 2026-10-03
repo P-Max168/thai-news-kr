@@ -20,7 +20,7 @@
    "story_id": "pe1"
   },
   {
-   "topic": "sriracha",
+   "topic": "east",
    "text": "아마타시티 배수 **시간당 4만2,500㎥**…8·9단지 평균 60cm",
    "story_id": "sr1"
   },
@@ -48,7 +48,7 @@
  "stories": [
   {
    "id": "pt1",
-   "topic": "pattaya",
+   "topic": "east",
    "secondary": [
     "society"
    ],
@@ -92,7 +92,7 @@
   },
   {
    "id": "sr1",
-   "topic": "sriracha",
+   "topic": "east",
    "secondary": [
     "weather",
     "poleco"
@@ -152,7 +152,7 @@
   },
   {
    "id": "sr2",
-   "topic": "sriracha",
+   "topic": "east",
    "secondary": [
     "poleco"
    ],
@@ -672,7 +672,7 @@
    "id": "vi1",
    "topic": "visa",
    "secondary": [
-    "pattaya"
+    "east"
    ],
    "region": "파타야",
    "headline": "파타야 시장, 관광객 금전 요구 의혹 시 직원 3명 직무정지…관련 6명 수사",
@@ -779,7 +779,7 @@
    "id": "vi3",
    "topic": "visa",
    "secondary": [
-    "pattaya",
+    "east",
     "society"
    ],
    "region": "파타야(농쁘루)",
@@ -955,7 +955,7 @@
    "id": "tr1",
    "topic": "travel",
    "secondary": [
-    "pattaya",
+    "east",
     "weather"
    ],
    "region": "파타야(꼬란)",

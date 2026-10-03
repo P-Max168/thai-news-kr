@@ -6,7 +6,7 @@
   var T = window.TNTopics, S = window.TNStore, L = window.TNTaste;
   var TZ = "Asia/Bangkok";
   var MAX = T.MAX_TOPICS;
-  var DECO = { pattaya: "〰", sriracha: "⚓", bangkok: "曼", poleco: "政", society: "社", visa: "✈", life: "%", travel: "旅", ent: "#", weather: "☂" };
+  var DECO = { east: "〰", bangkok: "曼", north: "⛰", south: "☀", poleco: "政", society: "社", visa: "✈", life: "%", travel: "旅", ent: "#", weather: "☂" };
   // tab: "feed"(내 피드) | "all"(전체 보기) | 주제 id
   var state = { data: null, tab: "feed", edition: null, impact: null, dqOpen: {} };
   /* 한인 영향도 태그(판 데이터 story.impact — README '판마다 채울 필드(2026-10-03 추가)'). 순서 = 필터 칩 순서 */
@@ -58,7 +58,11 @@
 
   /* ---------- 사용자 설정 ---------- */
   function prof() { return S.get(); }
-  function selected() { var t = prof().topics; return (t && t.length) ? t.filter(function (x) { return T.get(x); }) : null; }
+  function selected() {   // 옛 주제 id(pattaya·sriracha)는 east 로 읽고 중복 제거(prefs.js 가 저장값도 옮김)
+    var t = prof().topics; if (!t || !t.length) return null;
+    var out = []; t.forEach(function (x) { x = T.canon(x); if (T.get(x) && out.indexOf(x) < 0) out.push(x); });
+    return out.length ? out : null;
+  }
   function inSelection(s) {
     var sel = selected(); if (!sel) return true;
     return tps(s).all.some(function (t) { return sel.indexOf(t) >= 0; });
@@ -697,7 +701,7 @@
       }
       if (e.target.closest("[data-save]")) {
         if (!pick.length) { msg("주제를 1개 이상 골라 주세요. 모두 보려면 '모든 주제 보기'를 누르세요.", true); return; }
-        // 주제 순서는 화면(10개 목록) 순서로 정리
+        // 주제 순서는 화면(주제 목록) 순서로 정리
         var ordered = T.TOPICS.map(function (t) { return t.id; }).filter(function (x) { return pick.indexOf(x) >= 0; });
         finish(ordered, persona); toast("🧩 내 주제 " + ordered.length + "개로 피드를 맞췄어요"); return;
       }
@@ -782,7 +786,7 @@
   var cur = resolve(getParam("e") || getParam("ed") || getParam("date"));
   state.edition = cur;
   var tabParam = getParam("tab");
-  if (tabParam && (tabParam === "all" || tabParam === "feed" || T.get(tabParam))) state.tab = tabParam;
+  if (tabParam && (tabParam === "all" || tabParam === "feed" || T.get(tabParam))) state.tab = T.canon(tabParam);   // ?tab=pattaya 같은 옛 주소도 동부로
   if (EDS.length > 1) {
     $("datepickWrap").hidden = false;
     document.body.classList.add("has-editions");

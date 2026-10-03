@@ -27,6 +27,55 @@
     clear: function () { try { root.localStorage.removeItem(KEY); } catch (e) {} return Promise.resolve(); }
   };
 
+  /* ---------- 옛 주제 id 옮기기(2026-10-03: 파타야·시라차 → 동부(촌부리·라용) 'east') ----------
+   * 이 기기·클라우드 문서 모두 읽을 때마다 조용히 바꾼다(중복 제거, 오류 없음). assets/topics.js 의 ALIAS 와 같은 표.
+   * - topics: ["pattaya","visa","sriracha"] → ["east","visa"]
+   * - taste: 특징 이름 t:/l:pattaya·sriracha → t:/l:east. 가중치는 표(vf)로 다시 세고 vf 없는 옛 몫만 더함(같은 기사가 두 번 세어지지 않게)
+   * persona(파타야/시라차 거주자 등)는 그대로 — 페르소나 이름·날씨/내 주변 지역 기본값으로 쓰임. */
+  var TOPIC_ALIAS = { pattaya: "east", sriracha: "east" };
+  var W_MAX = 6;   // assets/taste.js 와 같은 값
+  function featAlias(f) {
+    var m = /^([tl]):(.+)$/.exec(f);
+    return m && TOPIC_ALIAS[m[2]] ? m[1] + ":" + TOPIC_ALIAS[m[2]] : f;
+  }
+  function migrate(d) {
+    if (!d || typeof d !== "object") return d;
+    if (Array.isArray(d.topics)) {
+      var out = [];
+      d.topics.forEach(function (t) { t = TOPIC_ALIAS[t] || t; if (typeof t === "string" && out.indexOf(t) < 0) out.push(t); });
+      d.topics = out;
+    }
+    var ta = d.taste;
+    if (ta && typeof ta === "object") {
+      var w = ta.w || {}, vf = ta.vf || {}, votes = ta.votes || {};
+      var old = Object.keys(w).filter(function (f) { return featAlias(f) !== f; });
+      Object.keys(vf).forEach(function (k) { (vf[k] || []).forEach(function (f) { if (featAlias(f) !== f && old.indexOf(f) < 0) old.push(f); }); });
+      if (old.length) {
+        var sumVf = function (feat, table) { var n = 0; Object.keys(votes).forEach(function (k) { if ((table[k] || []).indexOf(feat) >= 0) n += votes[k] || 0; }); return n; };
+        var targets = {};
+        old.forEach(function (f) { targets[featAlias(f)] = 1; });
+        var rest = {};
+        Object.keys(targets).forEach(function (n) {
+          rest[n] = 0;
+          Object.keys(w).concat(old).forEach(function (f) {
+            if (featAlias(f) === n && rest["_" + f] === undefined) { rest["_" + f] = 1; rest[n] += (w[f] || 0) - sumVf(f, vf); }
+          });
+        });
+        var nvf = {};
+        Object.keys(vf).forEach(function (k) {
+          var o = []; (vf[k] || []).forEach(function (f) { f = featAlias(f); if (o.indexOf(f) < 0) o.push(f); }); nvf[k] = o;
+        });
+        old.forEach(function (f) { delete w[f]; });
+        Object.keys(targets).forEach(function (n) {
+          var v = Math.max(-W_MAX, Math.min(W_MAX, sumVf(n, nvf) + rest[n]));
+          if (Math.abs(v) < 1e-9) delete w[n]; else w[n] = v;
+        });
+        ta.w = w; ta.vf = nvf;
+      }
+    }
+    return d;
+  }
+
   function normalize(d) {
     var b = blank();
     if (!d || typeof d !== "object") return b;
@@ -34,11 +83,13 @@
     b.taste = b.taste || {}; b.taste.w = b.taste.w || {}; b.taste.votes = b.taste.votes || {}; b.taste.vf = b.taste.vf || {};
     b.ui = b.ui || {};
     if (!b.settingsAt && b.onboarded) b.settingsAt = b.updatedAt || 0;
-    return b;
+    return migrate(b);
   }
   function settingsSig(d) { return JSON.stringify([d.onboarded, d.persona, d.topics]); }
 
   var doc = normalize(localAdapter.readSync());
+  // 옛 주제 id 를 옮겼으면 이 기기 저장값도 바로 고쳐 둠(시각은 그대로 — 다른 기기 설정을 덮지 않게)
+  try { var raw0 = root.localStorage.getItem(KEY); if (raw0 && /"(pattaya|sriracha)"|[tl]:(pattaya|sriracha)/.test(raw0.replace(/"persona":"[^"]*"/, ""))) localAdapter.write(doc); } catch (e) {}
   var remotes = [], subs = [];
 
   function notify(src) { subs.forEach(function (fn) { try { fn(doc, src); } catch (e) { console.warn(e); } }); }
@@ -70,6 +121,7 @@
       remotes = remotes.filter(function (a) { return a.name !== adapter.name; });
       return Promise.resolve(adapter.read()).then(function (r) {
         var next;
+        if (r) r = migrate(r);   // 클라우드 문서의 옛 주제 id 도 합치기 전에 옮김
         if (merge) next = merge(doc, r);
         else next = (r && (r.updatedAt || 0) > (doc.updatedAt || 0)) ? r : doc;
         var ui = doc.ui;
@@ -88,6 +140,7 @@
       return true;
     },
     detach: function (name) { remotes = remotes.filter(function (a) { return a.name !== name; }); },
-    adapters: { local: localAdapter }
+    adapters: { local: localAdapter },
+    migrate: migrate
   };
 })(window);
