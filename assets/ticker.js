@@ -1,7 +1,7 @@
 /* 태국 뉴스 한눈에 — 헤더 둘째 줄 '빠른 정보' 칩 (☰ 오른쪽, 좁은 화면에서는 옆으로 밀기)
- * 순서(운영자 확정): ① 바트↔원 환율 ② 날씨 ③ 금시세 ④ 미세먼지 PM2.5
- *  ①③ data/ticker.json(GitHub Actions korea.yml → tools/fetch_ticker.py, 2시간마다). file:// 에서는 data/ticker.js(window.TN_TICKER)
- *  ②④ Open-Meteo(무료·키 없음·CORS 허용)를 브라우저에서 직접 — 지역 = 이 기기에서 고른 지역 > 페르소나(파타야/시라차/방콕) > 파타야
+ * 순서(운영자 확정, 10-03 07:17 수정): ① 바트↔원 환율 ② 날씨 ③ 미세먼지 PM2.5 ④ 금시세
+ *  ①④ data/ticker.json(GitHub Actions korea.yml → tools/fetch_ticker.py, 2시간마다). file:// 에서는 data/ticker.js(window.TN_TICKER)
+ *  ②③ Open-Meteo(무료·키 없음·CORS 허용)를 브라우저에서 직접 — 지역 = 이 기기에서 고른 지역 > 페르소나(파타야/시라차/방콕) > 파타야
  *     날씨 30분, 미세먼지 60분 localStorage 캐시
  * 값이 없거나 24시간 넘게 지난 칩은 숨긴다(틀린 숫자를 보여 주지 않음). 칩을 누르면 출처·업데이트 시각·링크가 있는 작은 창.
  * 템플릿 공용: index.html 하나가 모든 판을 렌더하므로 판을 새로 만들어도 그대로 유지된다(README '헤더').
@@ -110,22 +110,22 @@
   }
   function render() {
     var h = [], f = fxOK(), w = wxOK(), g = goldOK(), a = aqOK();
-    if (f) h.push(chip("fx", "바트→원 환율 1바트 " + f.THB_KRW.toFixed(1) + "원", '<span class="tk-i" aria-hidden="true">💱</span>1฿ = <b>' + f.THB_KRW.toFixed(1) + "원</b>"));
+    if (f) h.push(chip("fx", "바트→원 환율 1바트 " + f.THB_KRW.toFixed(1) + "원", '1바트 = <b>' + f.THB_KRW.toFixed(1) + "원</b>", " tk-chip--fx"));   // 아이콘 없이 글자만(운영자 요청)
     if (w) {
       var ic = wmo(w.code, w.day);
       h.push(chip("wx", REGIONS[w.rg].name + " 날씨 " + Math.round(w.t) + "도 " + ic[1] + (w.rain != null ? " 강수확률 " + w.rain + "%" : ""),
         '<span class="tk-l">' + REGIONS[w.rg].name + '</span><span class="tk-i" aria-hidden="true">' + ic[0] + "</span><b>" + Math.round(w.t) + "°</b>" +
         (w.rain != null ? '<span class="tk-rain">☔' + w.rain + "%</span>" : "")));
     }
-    if (g) {
-      var krw = f ? Math.round(g.bar_sell * f.THB_KRW) : null;
-      h.push(chip("gold", "태국 금시세 금괴 1바트 " + n0(g.bar_sell) + "바트" + (krw ? " 약 " + n0(krw) + "원" : ""),
-        '<span class="tk-i" aria-hidden="true">🪙</span><span class="tk-l">금 1바트</span><b>' + n0(g.bar_sell) + "฿</b>" + (krw ? '<span class="tk-sub">≈' + n0(krw) + "원</span>" : "")));
-    }
     if (a) {
       var lv = pmLevel(a.pm);
       h.push(chip("pm", "미세먼지 PM2.5 " + Math.round(a.pm) + " " + lv.t,
         '<span class="tk-l">PM2.5</span><b>' + Math.round(a.pm) + '</b><span class="tk-lv tk-lv--' + lv.k + '">' + lv.t + "</span>"));
+    }
+    if (g) {
+      var krw = f ? Math.round(g.bar_sell * f.THB_KRW) : null;
+      h.push(chip("gold", "태국 금시세 금괴 1바트 " + n0(g.bar_sell) + "바트" + (krw ? " 약 " + n0(krw) + "원" : ""),
+        '<span class="tk-i" aria-hidden="true">🪙</span><span class="tk-l">금 1바트</span><b>' + n0(g.bar_sell) + "฿</b>" + (krw ? '<span class="tk-sub">≈' + n0(krw) + "원</span>" : "")));
     }
     var open = pop && !pop.hidden ? pop.getAttribute("data-k") : null;
     box.innerHTML = h.join("");
@@ -143,7 +143,7 @@
   }
   function body(k) {
     var f = fxOK(), w = wxOK(), g = goldOK(), a = aqOK();
-    if (k === "fx" && f) return "<b class=\"tk-pop__t\">💱 바트 → 원 환율</b><p>1바트 = <b>" + f.THB_KRW.toFixed(2) + "원</b> · 1만 바트 ≈ " + n0(f.THB_KRW * 1e4) + "원</p>" +
+    if (k === "fx" && f) return "<b class=\"tk-pop__t\">바트 → 원 환율</b><p>1바트 = <b>" + f.THB_KRW.toFixed(2) + "원</b> · 1만 바트 ≈ " + n0(f.THB_KRW * 1e4) + "원</p>" +
       src(f.source, f.url, ["기준 시각 " + when(f.rate_time) + " (방콕)", "받아 온 시각 " + when(f.fetched_at) + " · 참고용(은행·환전소 실제 환율과 다름)"]);
     if (k === "wx" && w) {
       var ic = wmo(w.code, w.day), cur = region();
