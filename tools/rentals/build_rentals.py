@@ -3,6 +3,8 @@
 원본: tools/rentals/pattaya-fazwaz-2026-10-03.json — FazWaz 공개 목록 쪽(https://www.fazwaz.com/condo-for-rent/thailand/chon-buri/pattaya)의
       구조화 데이터(이름·방·면적·좌표·주소) + 각 매물 쪽의 가격(쪽 데이터 price/currency THB, 화면 제목의 달러 가격과 맞춰 봄)·'Date Listed'·'Updated' 글을 그대로 받음(2026-10-03 16:45~ 방콕).
 사진은 받지 않음(저작권). 게시·문의·연락 없음. 매물 링크는 원래 쪽으로.
+⛔ 2026-10-03 17:20 방콕 내림: FazWaz 이용 약관이 내용 복사·추출·모으기를 금지(https://www.lifullconnect.com/legal-notice-fazwaz/).
+   원본 파일은 지금 트리에서 지움(지난 기록은 git 안에 그대로 — 고쳐 쓰지 않음). 이 스크립트는 허락받은 출처가 생기기 전엔 돌리지 말 것.
 결과: data/rentals-pattaya.json → assets/places.js 의 #rent 쪽(사이트 메뉴에 링크 안 함 — 승인함 #9)."""
 import json, re, pathlib, datetime
 ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
@@ -16,6 +18,7 @@ def ko_rel(t):   # "2 weeks" → "2주 전"(받은 날 기준)
     n, u = t.split()
     return n + {"day": "일", "week": "주", "month": "개월", "year": "년", "hour": "시간"}[u.rstrip("s")] + " 전"
 def main():
+    raise SystemExit("⛔ 내림(약관) — 허락받은 출처 전에는 안 돌림. 위 설명 참고")
     raw = {re.search(r"-(u\d+)$", x["url"]).group(1): x for x in json.load(open(RAW, encoding="utf-8"))}
     out = []
     for k in PICK:

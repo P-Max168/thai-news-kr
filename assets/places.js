@@ -183,6 +183,7 @@
       rLoad(); loadFx();
       if (rErr) return '<div class="empty empty--err pc-empty" role="alert"><b>⚠️ 임대 목록을 불러오지 못했어요.</b><br><button type="button" class="btn btn--primary btn--sm empty__retry" data-rc-retry>다시 시도</button></div>';
       if (!RD) return '<div class="skel pc-skel" aria-hidden="true"></div><p class="sr-only" role="status">불러오는 중이에요…</p>';
+      if (RD.withdrawn) return '<div class="empty pc-empty" role="status"><b>🏠 임대 카드 시험은 내렸어요.</b><br>' + esc(RD.withdrawn.why) + ' (' + esc(RD.withdrawn.at) + ')<br><a href="' + esc(RD.withdrawn.terms) + '" target="_blank" rel="noopener nofollow">출처 사이트 이용 약관 ↗</a></div>';
       var list = RD.items.slice().sort(function (a, b) { return (a.old ? 1 : 0) - (b.old ? 1 : 0) || a.rent_thb - b.rent_thb; });
       return '<p class="pc-intro"><b>공개된 실제 매물 ' + list.length + "개</b>를 그대로 옮긴 <b>시험</b>이에요(사진 없음). 이 사이트는 중개하지 않고, 문의는 원래 매물 쪽에서 하세요. 칸마다 출처와 확인한 날을 적었고, 모르는 칸은 <b>확인 안 됨</b>이에요. 월세 싼 순.</p>" +
         '<div class="pc-list">' + list.map(rCard).join("") + "</div>" +

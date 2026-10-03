@@ -1,6 +1,6 @@
 {
  "_readme": "관리자 승인함(#approve) 목록 — tools/pending.py 가 PENDING_APPROVAL.md 에서 만듦. 승인은 민구님이 고르고 봇이 다음 실행에 반영(자동 승인 없음)",
- "updated_at": "2026-10-03T16:47:53+07:00",
+ "updated_at": "2026-10-03T17:15:20+07:00",
  "items": [
   {
    "id": "p1",
@@ -70,8 +70,8 @@
    "id": "p9",
    "no": 9,
    "kind": "공개 여부(임대 카드)",
-   "body": "**🏠 임대 카드 시험(#rent) 을 메뉴에 걸지** — 지금은 사이트 어디에도 링크 없음(운영자 확인용, 개발 도구로만 열림). 공개 매물 쪽(FazWaz)에서 본 10개(월세 바트+원·㎡+평·올린 날·칸마다 출처, 사진 없음, 게시·연락 없음). 정해 주실 것: ① 메뉴(내 주변 화면)에 걸지 ② 출처 사이트 이용 약관 확인 뒤 계속 받을지(봇은 약관 동의·연락 안 함) ③ 시라차·방콕도 할지. 사진: backups/backup-20261003-1645-rent-test/after-rent-card.jpg",
-   "where": "`data/rentals-pattaya.json`(tools/rentals/build_rentals.py) · assets/places.js `rent` 쪽",
+   "body": "**아침에 민구님이 보고 메뉴에 열지 결정** — 지금은 사이트 어디에도 링크 없음(`#rent`, 개발 도구로만 열림). ⚠️ 17:20 방콕: 출처 FazWaz 이용 약관이 내용 복사·추출·모으기를 허락 없이 금지(https://www.lifullconnect.com/legal-notice-fazwaz/)라 **매물 10개는 내림** — 쪽에는 '내렸어요' 안내 + 약관 링크만. 메뉴에 열려면 허락받은 출처(제휴·API·가게·중개인이 직접 준 매물)가 먼저 필요. 사진: backups/backup-20261003-1714-rent-takedown/",
+   "where": "`data/rentals-pattaya.json`(빈 목록) · assets/places.js `rent` 쪽",
    "status": "대기"
   }
  ]
