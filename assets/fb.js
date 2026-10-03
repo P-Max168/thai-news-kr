@@ -143,6 +143,19 @@ export async function listComments(edition, articleId) {
   const snap = await F.getDocs(q);
   return snap.docs.map(cmt).sort(function (a, b) { return a.createdAt - b.createdAt; });
 }
+/* 답글: 같은 comments 컬렉션, articleId = "<기사 id>~<부모 댓글 id>"(운영자 고정 댓글은 "~op") — 보안 규칙 변경 없이 동작(articleId ≤ 40자).
+ * 부모 여러 개를 'in'(30개씩) 한 번에 읽음. 같음/in 조건만 → 복합 색인 불필요 */
+export async function listReplies(edition, articleId, parentIds) {
+  await fs();
+  const ids = parentIds.map(function (p) { return articleId + "~" + p; }).filter(function (x) { return x.length <= 40; });
+  const out = [];
+  for (let i = 0; i < ids.length; i += 30) {
+    const q = F.query(F.collection(db, "comments"), F.where("edition", "==", edition), F.where("articleId", "in", ids.slice(i, i + 30)), F.where("hidden", "==", false), F.limit(300));
+    const snap = await F.getDocs(q);
+    snap.docs.forEach(function (d) { out.push(cmt(d)); });
+  }
+  return out.sort(function (a, b) { return a.createdAt - b.createdAt; });
+}
 export async function addComment(edition, articleId, text, profile) {
   await fs();
   const u = auth.currentUser; if (!u) throw new Error("not-signed-in");

@@ -70,6 +70,20 @@
     "파타야",
     "촌부리"
    ],
+   "impact": [
+    "날씨·재해"
+   ],
+   "for_me": "방라뭉(Bang Lamung) 일부 마을엔 아직 물이 고여 있다고 하니, 이 일대에 살거나 지나갈 일이 있다면 침수 구간을 먼저 확인하세요.",
+   "also": [],
+   "issue": {
+    "id": "2026-floods-pattaya",
+    "title": "파타야·방라뭉 침수 피해·구호"
+   },
+   "quick_replies": [
+    "방라뭉 쪽 지금은 물 다 빠졌나요?",
+    "구호품 나눔 소식 반갑네요",
+    "혹시 기부할 수 있는 곳 아시는 분 계세요?"
+   ],
    "discussion": {
     "question": "방라뭉·파타야 쪽, 아직 물이 고인 곳이 있나요? 구호가 더 필요한 동네 소식이 있으면 알려 주세요.",
     "operator_comment": "운영자입니다. 적십자가 52가구에 구호품을 나눴다는 현지 보도입니다. 직접 보신 단지·골목 상황을 남겨 주시면 다른 분들께 도움이 됩니다. 주소·연락처는 적지 말아 주세요.",
@@ -102,6 +116,33 @@
     "배수",
     "IEAT",
     "홍수"
+   ],
+   "impact": [
+    "날씨·재해"
+   ],
+   "for_me": "아마타시티 촌부리(Amata City Chonburi) 8·9단지는 아직 평균 60cm 물이 차 있어, 이 공단으로 출근하거나 거래하는 분은 단지별 상황부터 확인해야 합니다.",
+   "also": [
+    {
+     "source": "Matichon (마티촌)",
+     "url": "https://www.matichon.co.th/economy/news_5916759"
+    },
+    {
+     "source": "Thailand Plus (타일랜드 플러스)",
+     "url": "https://www.thailandplus.tv/archives/1061235"
+    },
+    {
+     "source": "Bangkok Biz News (방콕비즈뉴스)",
+     "url": "https://www.bangkokbiznews.com/economics/1254467"
+    }
+   ],
+   "issue": {
+    "id": "2026-floods-amata",
+    "title": "아마타시티 촌부리 공단 침수"
+   },
+   "quick_replies": [
+    "8·9단지 쪽 출근 괜찮은지 아시는 분 계세요?",
+    "아직 60cm면 꽤 오래가네요",
+    "아마타 근처 도로 상황 공유해 주실 분 계세요?"
    ],
    "discussion": {
     "question": "시라차·아마타 쪽 일하시는 분, 출퇴근·공장 상황은 어떤가요?",
@@ -141,6 +182,28 @@
     "물류",
     "EEC"
    ],
+   "impact": [],
+   "for_me": "",
+   "also": [
+    {
+     "source": "Money and Banking (머니앤뱅킹)",
+     "url": "https://moneyandbanking.co.th/2026/274904/"
+    },
+    {
+     "source": "Bangkok Post",
+     "url": "https://www.bangkokpost.com/business/general/3329605/thailand-and-maersk-explore-port-investment"
+    },
+    {
+     "source": "FreshPlaza",
+     "url": "https://www.freshplaza.com/north-america/article/9879314/thailand-discusses-laem-chabang-port-expansion-with-maersk/"
+    }
+   ],
+   "issue": null,
+   "quick_replies": [
+    "램차방 항만이 더 커지면 시라차도 달라질까요?",
+    "물류 일 하시는 분들 의견 궁금해요",
+    "그린 물류 이야기 흥미롭네요"
+   ],
    "discussion": {
     "question": "램차방·라드끄라방 물류 투자 확대, 주변에 체감되는 변화가 있을까요?",
     "operator_comment": "운영자입니다. 교통부가 머스크와 그린 메탄올 선박·전기 트럭·철도 연결 등을 논의했다고 합니다. 물류·무역 쪽에 계신 분의 시각이 궁금합니다.",
@@ -172,6 +235,37 @@
     "배수",
     "수찻위"
    ],
+   "impact": [
+    "날씨·재해"
+   ],
+   "for_me": "라드끄라방(Lat Krabang)·롬끌라오(Romklao) 일대는 고인 물이 느리게 빠져 수질·생활이 나빠질 수 있다고 하니, 이 동네에 사는 분은 배수 소식을 계속 챙겨 보세요.",
+   "also": [
+    {
+     "source": "Thai PBS",
+     "url": "https://www.thaipbs.or.th/news/content/559057"
+    },
+    {
+     "source": "Thairath (타이랏)",
+     "url": "https://www.thairath.co.th/news/politic/2963768"
+    },
+    {
+     "source": "Khaosod (카오솟)",
+     "url": "https://www.khaosod.co.th/politics/news_10423395"
+    },
+    {
+     "source": "The Standard (더 스탠더드)",
+     "url": "https://thestandard.co/suchatvee-chadchart-latkrabang-flood-crisis/"
+    }
+   ],
+   "issue": {
+    "id": "2026-floods-bangkok-east",
+    "title": "방콕 동부(라드끄라방·롬끌라오) 침수"
+   },
+   "quick_replies": [
+    "라드끄라방 지금 물 상황 어떤가요?",
+    "고인 물 냄새가 걱정되네요",
+    "롬끌라오 쪽 소식 아시는 분 계세요?"
+   ],
    "discussion": {
     "question": "라드끄라방·롬끌라오에 사시거나 다니시는 분, 고인 물·냄새 문제는 어떤가요?",
     "operator_comment": "운영자입니다. 시장이 현지 전문가이자 피해 당사자와 정보를 나눴다는 소식입니다. '고인 물'이 오래가면 생활이 힘들다고 하니, 배수 체감을 남겨 주시면 좋겠습니다.",
@@ -202,6 +296,29 @@
     "배수",
     "위로금",
     "예보"
+   ],
+   "impact": [
+    "날씨·재해"
+   ],
+   "for_me": "방콕시가 2일 침수 위로금 온라인 접수를 열었으니, 방콕에서 침수 피해를 입었다면 신청 대상인지 확인해 보세요.",
+   "also": [
+    {
+     "source": "Naewna (내우나)",
+     "url": "https://www.naewna.com/n/politics/92612/"
+    },
+    {
+     "source": "TOP NEWS (톱뉴스)",
+     "url": "https://www.topnews.co.th/news/1708122"
+    }
+   ],
+   "issue": {
+    "id": "2026-floods-bangkok-east",
+    "title": "방콕 동부(라드끄라방·롬끌라오) 침수"
+   },
+   "quick_replies": [
+    "위로금은 외국인도 신청되는지 아시는 분?",
+    "5~8일 비가 많이 안 오길 바라요",
+    "사판숭 쪽 배수 좀 빨라졌나요?"
    ],
    "discussion": {
     "question": "방콕 침수 위로금 온라인 접수, 신청해 보신 분 계신가요?",
@@ -246,6 +363,37 @@
     "남부",
     "예보"
    ],
+   "impact": [
+    "날씨·재해"
+   ],
+   "for_me": "11~14일 중부·짜오프라야(Chao Phraya) 유역에 다시 큰비가 예보돼, 방콕·논타부리 강변에 살거나 남부 여행을 앞둔 분은 일정을 여유 있게 잡으세요.",
+   "also": [
+    {
+     "source": "Thai PBS",
+     "url": "https://www.thaipbs.or.th/news/content/559046"
+    },
+    {
+     "source": "Manager Online (매니저)",
+     "url": "https://mgronline.com/politics/detail/9690000096178"
+    },
+    {
+     "source": "Bangkok Biz News (방콕비즈뉴스)",
+     "url": "https://www.bangkokbiznews.com/news/1254711"
+    },
+    {
+     "source": "Bangkok Post",
+     "url": "https://www.bangkokpost.com/thailand/general/3330390/more-rain-coming-from-oct-1114"
+    }
+   ],
+   "issue": {
+    "id": "2026-rain-warnings-oct",
+    "title": "10월 초 비 경보(4~7일·11~14일)"
+   },
+   "quick_replies": [
+    "11~14일에 비가 또 온다니 걱정이네요",
+    "남부 여행은 미루는 게 나을까요?",
+    "강변 쪽 사시는 분들 괜찮으세요?"
+   ],
    "discussion": {
     "question": "5일 남부 비·11~14일 중부 비, 두 번 더 온다는 예보를 어떻게 보시나요?",
     "operator_comment": "운영자입니다. 총리가 대피소 기준까지 다시 강조했다고 합니다. 물·약·간단한 비상 가방을 다시 점검해 보시는 분 계신가요? 준비 팁을 공유해 주세요.",
@@ -273,6 +421,31 @@
     "GDP",
     "홍수",
     "재정"
+   ],
+   "impact": [],
+   "for_me": "",
+   "also": [
+    {
+     "source": "Prachachat (쁘라차찻)",
+     "url": "https://www.prachachat.net/finance/news-2075698"
+    },
+    {
+     "source": "The Standard (더 스탠더드)",
+     "url": "https://thestandard.co/ekniti-flood-gdp-impact/"
+    },
+    {
+     "source": "Post Today (포스트투데이)",
+     "url": "https://www.posttoday.com/business/749819"
+    }
+   ],
+   "issue": {
+    "id": "2026-floods-economy",
+    "title": "홍수 경제 피해 추산"
+   },
+   "quick_replies": [
+    "0.1%라니 체감이랑은 좀 다르네요",
+    "IMF 총회 때 방콕 교통은 괜찮을까요?",
+    "이 숫자 어떻게 보세요?"
    ]
   },
   {
@@ -297,6 +470,31 @@
     "홍수",
     "쁘라친",
     "아유타야"
+   ],
+   "impact": [],
+   "for_me": "",
+   "also": [
+    {
+     "source": "Prachachat (쁘라차찻)",
+     "url": "https://www.prachachat.net/automotive/news-2075006"
+    },
+    {
+     "source": "Daily News (데일리뉴스)",
+     "url": "https://www.dailynews.co.th/news/6240414/"
+    },
+    {
+     "source": "Nation Thailand",
+     "url": "https://www.nationthailand.com/business/automobile/40071777"
+    }
+   ],
+   "issue": {
+    "id": "2026-floods-factories",
+    "title": "홍수로 멈춘 공장(혼다·토요타 등)"
+   },
+   "quick_replies": [
+    "협력사들도 같이 쉬는 건가요?",
+    "재가동 일정 나오면 공유 부탁드려요",
+    "자동차 공장까지 멈췄네요"
    ]
   },
   {
@@ -322,6 +520,30 @@
     "사망",
     "반쌍",
     "대피"
+   ],
+   "impact": [
+    "날씨·재해",
+    "교통·사고"
+   ],
+   "for_me": "쁘라친부리(Prachinburi) 반쌍(Ban Sang)군은 아직 전 면이 잠겨 있고 304번 도로는 일부만 통행돼, 이쪽으로 이동할 계획이면 도로 상황부터 확인하세요.",
+   "also": [
+    {
+     "source": "Khaosod (카오솟)",
+     "url": "https://www.khaosod.co.th/around-thailand/news_10423449"
+    },
+    {
+     "source": "Amarin TV (아마린TV)",
+     "url": "https://www.amarintv.com/news/social/559279"
+    }
+   ],
+   "issue": {
+    "id": "2026-floods-prachinburi",
+    "title": "쁘라친부리 침수"
+   },
+   "quick_replies": [
+    "쁘라친부리 피해가 정말 크네요",
+    "구호 물품 보낼 방법이 있을까요?",
+    "304번 도로 지금 다닐 만한가요?"
    ]
   },
   {
@@ -346,6 +568,30 @@
     "대피",
     "타따끼압",
     "홍수"
+   ],
+   "impact": [
+    "날씨·재해",
+    "교통·사고"
+   ],
+   "for_me": "차층사오(Chachoengsao) 타따끼압(Tha Takiap) 일대는 산지 급류로 차량 통행을 막은 구간이 있어, 밤에 이쪽 산길 운전은 피하세요.",
+   "also": [
+    {
+     "source": "Thairath (타이랏)",
+     "url": "https://www.thairath.co.th/video/channel/thairath_news/thairath-news-show/1193438"
+    },
+    {
+     "source": "Kapook (까뿍)",
+     "url": "https://hilight.kapook.com/video/49225"
+    }
+   ],
+   "issue": {
+    "id": "2026-floods-chachoengsao",
+    "title": "차층사오 침수"
+   },
+   "quick_replies": [
+    "밤에 대피하셨다니 다들 무사하시길 바라요",
+    "타따끼압 쪽 길은 지금 막혔나요?",
+    "산지 급류는 정말 무섭네요"
    ]
   },
   {
@@ -371,6 +617,30 @@
     "건물",
     "대피",
     "균열"
+   ],
+   "impact": [
+    "교통·사고"
+   ],
+   "for_me": "논타부리 레와디(Rewadee) 소이19 입구 일부 차로가 통제됐다고 하니, 이 근처를 지날 땐 통제선을 지키고 돌아가세요.",
+   "also": [
+    {
+     "source": "Amarin TV (아마린TV)",
+     "url": "https://www.amarintv.com/news/social/559285"
+    },
+    {
+     "source": "Manager Online (매니저)",
+     "url": "https://mgronline.com/crime/detail/9690000096308"
+    },
+    {
+     "source": "Khaosod (카오솟)",
+     "url": "https://www.khaosod.co.th/around-thailand/news_10423407"
+    }
+   ],
+   "issue": null,
+   "quick_replies": [
+    "다친 분이 없어서 다행이에요",
+    "근처 지날 때 조심해야겠네요",
+    "점검 결과 나오면 알려 주세요"
    ],
    "discussion": {
     "question": "사는 건물에서 '소리·균열'을 느낀 적 있으신가요? 어디에 신고하시나요?",
@@ -415,6 +685,29 @@
     "1337",
     "단속"
    ],
+   "impact": [
+    "치안"
+   ],
+   "for_me": "파타야에서 단속 직원이 영수증 없이 돈을 요구하는 것 같다면, 공식 영수증을 확인하고 시 핫라인 1337(다국어)에 제보할 수 있습니다.",
+   "also": [
+    {
+     "source": "Pattaya Mail",
+     "url": "https://www.pattayamail.com/news/pattaya-suspends-three-city-officers-over-alleged-tourist-money-demands-566578"
+    },
+    {
+     "source": "The Thaiger",
+     "url": "https://thethaiger.com/news/pattaya/pattaya-suspends-officers-tourist-cash-demands"
+    }
+   ],
+   "issue": {
+    "id": "2026-pattaya-officers-cash",
+    "title": "파타야 단속 직원 관광객 금전 요구 의혹"
+   },
+   "quick_replies": [
+    "1337 핫라인은 한국어도 되나요?",
+    "이런 일 당하면 어떻게 대처하면 될까요?",
+    "확실하게 처리되면 좋겠네요"
+   ],
    "discussion": {
     "question": "파타야에서 '벌금'을 영수증 없이 요구받은 적 있으신가요? 어떻게 대처하셨나요?",
     "operator_comment": "운영자입니다. 시장이 시 직원 3명을 직무정지하고, 관련 6명을 경찰에 고발한 상태라고 보도됐습니다. 의심스러우면 시 핫라인 1337로 제보할 수 있다고 합니다. 비슷한 경험이 있으면 개인정보는 빼고 상황만 나눠 주세요.",
@@ -444,6 +737,17 @@
     "인신매매",
     "구출",
     "사기"
+   ],
+   "impact": [
+    "치안"
+   ],
+   "for_me": "피해 일본인들은 SNS의 ‘고액·단기·항공권 제공’ 해외 일자리 광고에 속았다고 하니, 비슷한 제안을 받으면 대사관이나 경찰에 먼저 확인하세요.",
+   "also": [],
+   "issue": null,
+   "quick_replies": [
+    "이런 광고는 정말 조심해야겠어요",
+    "한국인 피해 사례도 있었나요?",
+    "무사히 구출돼서 다행이에요"
    ],
    "discussion": {
     "question": "'고액·단기·항공권 제공' 해외 일자리 광고, 비슷한 제안을 받아 보신 적 있나요?",
@@ -488,6 +792,37 @@
     "외교부",
     "영사"
    ],
+   "impact": [
+    "날씨·재해"
+   ],
+   "for_me": "폭우 때 침수된 길을 걷다 배수로에 빠져 한국인이 숨진 만큼, 물에 잠긴 길은 걸어서 건너지 말고 사고 땐 주태국 한국대사관에 바로 연락하세요.",
+   "also": [
+    {
+     "source": "연합뉴스",
+     "url": "https://www.yna.co.kr/view/AKR20260928161000504"
+    },
+    {
+     "source": "조선비즈",
+     "url": "https://biz.chosun.com/policy/politics/2026/09/28/DSHWRLAYMNGZ7G5FC34ZMBHXAA/"
+    },
+    {
+     "source": "한국일보",
+     "url": "https://www.hankookilbo.com/news/article/A2026092821450002117"
+    },
+    {
+     "source": "동아일보",
+     "url": "https://www.donga.com/news/Politics/article/all/20260928/134748007/1"
+    }
+   ],
+   "issue": {
+    "id": "2026-floods-korean-victim",
+    "title": "파타야 인근 홍수 한국인 실종·사망"
+   },
+   "quick_replies": [
+    "삼가 고인의 명복을 빕니다",
+    "침수된 길은 정말 조심해야겠어요",
+    "대사관 긴급 연락처 공유해 주실 분 계세요?"
+   ],
    "discussion": {
     "question": "침수 도로·배수로 근처, 평소에 어떻게 피하고 계신가요?",
     "operator_comment": "운영자입니다. 외교부가 파타야 인근 홍수 실종 한국인 1명의 사망을 확인했다고 밝혔습니다. 고인의 명복을 빕니다. 폭우 때 침수 도로 보행은 정말 위험하니, 주변에도 조심하자고 한번 더 일러 주시면 좋겠습니다.",
@@ -514,6 +849,28 @@
     "모바일뱅킹",
     "이체",
     "은행"
+   ],
+   "impact": [],
+   "for_me": "방콕은행 인터넷뱅킹(부아루앙 아이뱅킹)을 쓰는 분은 12월 15일 종료 전에 모바일 앱으로 옮기고, 예약 이체도 앱에서 다시 등록해야 합니다.",
+   "also": [
+    {
+     "source": "Manager Online (매니저)",
+     "url": "https://mgronline.com/stockmarket/detail/9690000096195"
+    },
+    {
+     "source": "Matichon (마티촌)",
+     "url": "https://www.matichon.co.th/economy/news_5916000"
+    },
+    {
+     "source": "Khaosod (카오솟)",
+     "url": "https://www.khaosod.co.th/economics/news_10422710"
+    }
+   ],
+   "issue": null,
+   "quick_replies": [
+    "앱으로 옮기는 거 어렵지 않나요?",
+    "예약 이체를 다시 해야 하는군요",
+    "외국인 계좌도 앱 가입이 바로 되나요?"
    ],
    "discussion": {
     "question": "방콕은행 아이뱅킹 쓰시는 분, 모바일앱 이전은 해 두셨나요?",
@@ -544,6 +901,29 @@
     "내무거래국",
     "홍수",
     "공급"
+   ],
+   "impact": [
+    "환율·물가"
+   ],
+   "for_me": "정부는 달걀 공급이 충분하다고 하지만 동네마다 값이 다를 수 있어, 시라차 등에서 장 볼 땐 가격을 비교해 보세요.",
+   "also": [
+    {
+     "source": "The Bangkok Insight (방콕인사이트)",
+     "url": "https://www.thebangkokinsight.com/news/business/economics/1703803/"
+    },
+    {
+     "source": "Thansettakij (탄셋따낏)",
+     "url": "https://www.thansettakij.com/economy/670541"
+    }
+   ],
+   "issue": {
+    "id": "2026-egg-supply",
+    "title": "달걀 품귀·가격"
+   },
+   "quick_replies": [
+    "동네 마트 달걀값은 어떤가요?",
+    "시라차 쪽 달걀 다시 들어왔나요?",
+    "가격이 빨리 정상으로 돌아오면 좋겠네요"
    ],
    "discussion": {
     "question": "동네 마트·시장 달걀 가격·재고, 요즘 어떠신가요?",
@@ -583,6 +963,37 @@
     "바다",
     "관광"
    ],
+   "impact": [
+    "날씨·재해"
+   ],
+   "for_me": "꼬란(Koh Larn) 일부 바다가 초록빛으로 변했다는 보도가 있어, 꼬란 해수욕을 계획했다면 현지 바다 상태를 먼저 확인하세요.",
+   "also": [
+    {
+     "source": "Bangkok Post",
+     "url": "https://www.bangkokpost.com/thailand/general/3328945/stormfed-plankton-bloom-seen-around-koh-lan"
+    },
+    {
+     "source": "Pattaya Mail",
+     "url": "https://www.pattayamail.com/latestnews/news/koh-larn-sea-turns-green-after-heavy-rain-likely-natural-plankton-bloom-566706"
+    },
+    {
+     "source": "The Thaiger",
+     "url": "https://thethaiger.com/news/pattaya/koh-larn-plankton-bloom-turns-sea-green-after-heavy-rain-in-pattaya"
+    },
+    {
+     "source": "NBT Connext",
+     "url": "https://thainews.prd.go.th/thainews/news/view/2384753/?bid=1"
+    }
+   ],
+   "issue": {
+    "id": "2026-koh-larn-green-sea",
+    "title": "꼬란 바다 초록빛(플랑크톤)"
+   },
+   "quick_replies": [
+    "꼬란에서 지금 수영해도 괜찮을까요?",
+    "바다 색이 신기하네요",
+    "요즘 꼬란 바다 상태 아시는 분 계세요?"
+   ],
    "discussion": {
     "question": "꼬란·파타야 바다 색이 이상하다는 걸 직접 보신 분 계신가요?",
     "operator_comment": "운영자입니다. 당국은 플랑크톤 대증식(자연 현상) 가능성이 있다고 설명했습니다. 입수를 피하신 분, 냄새나 물빛을 보신 분이 있으면 경험을 들려 주세요. 다만 의학적 판단은 기사에 없으니 단정하지 말아 주세요.",
@@ -613,6 +1024,21 @@
     "GDP",
     "피해",
     "관광"
+   ],
+   "impact": [
+    "환율·물가",
+    "날씨·재해"
+   ],
+   "for_me": "",
+   "also": [],
+   "issue": {
+    "id": "2026-floods-economy",
+    "title": "홍수 경제 피해 추산"
+   },
+   "quick_replies": [
+    "식당 하시는 분들 정말 힘드시겠어요",
+    "추산마다 숫자가 많이 다르네요",
+    "파타야 쪽 가게들은 어떤가요?"
    ],
    "discussion": {
     "question": "파타야·방콕 식당·가게, 홍수 기간 손님 흐름은 어떠셨나요?",
@@ -648,6 +1074,35 @@
     "필리핀",
     "인도네시아",
     "대표팀"
+   ],
+   "impact": [],
+   "for_me": "",
+   "also": [
+    {
+     "source": "Manager Online (매니저)",
+     "url": "https://mgronline.com/sport/detail/9690000096297"
+    },
+    {
+     "source": "PPTV",
+     "url": "https://www.pptvhd36.com/sport/news/284544"
+    },
+    {
+     "source": "SPIN.ph",
+     "url": "https://www.spin.ph/football/fifa/pmnt-beats-thailand-but-fails-to-advance-to-fifa-asean-cup-medal-round-a795-20261002"
+    },
+    {
+     "source": "Siamsport (시암스포츠)",
+     "url": "https://www.siamsport.co.th/football-thailand/thai-national/110190/"
+    }
+   ],
+   "issue": {
+    "id": "2026-asean-cup",
+    "title": "FIFA 아세안컵 2026 태국 대표팀"
+   },
+   "quick_replies": [
+    "5일 인도네시아와 결승 기대돼요!",
+    "결승은 어디서 볼 수 있나요?",
+    "졌지만 조 1위라 다행이네요"
    ]
   },
   {
@@ -680,6 +1135,25 @@
     "방콕",
     "4~7일",
     "재난청"
+   ],
+   "impact": [
+    "날씨·재해"
+   ],
+   "for_me": "4~7일 동부, 5~6일 방콕권까지 뇌우·강풍이 예보돼, 파타야·방콕 이동이나 야외 일정은 여유 있게 잡으세요.",
+   "also": [
+    {
+     "source": "Thai PBS",
+     "url": "https://www.thaipbs.or.th/news/content/559068"
+    }
+   ],
+   "issue": {
+    "id": "2026-rain-warnings-oct",
+    "title": "10월 초 비 경보(4~7일·11~14일)"
+   },
+   "quick_replies": [
+    "5~6일에 방콕 가는데 괜찮을까요?",
+    "파타야 쪽 비 소식도 궁금해요",
+    "또 비라니 걱정이네요"
    ],
    "discussion": {
     "question": "4~7일 비 예보, 주말·다음 주 일정은 어떻게 조정하고 계신가요?",

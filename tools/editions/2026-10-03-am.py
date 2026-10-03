@@ -17,7 +17,12 @@ dict(id="pt1", topic="pattaya", secondary=["society"], region="파타야(방라�
  source="Siam Rath (시암랏)", url="https://siamrath.co.th/regional/325868",
  title_th="บางละมุงเร่งช่วยน้ำท่วม มอบถุงยังชีพ 52 ครัวเรือน เร่งบรรเทาความเดือดร้อน",
  published="2026-10-02T12:24:00+07:00",
- tags=["방라뭉","구호품","침수","파타야","촌부리"]),
+ tags=["방라뭉","구호품","침수","파타야","촌부리"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["날씨·재해"], for_me="방라뭉(Bang Lamung) 일부 마을엔 아직 물이 고여 있다고 하니, 이 일대에 살거나 지나갈 일이 있다면 침수 구간을 먼저 확인하세요.",
+ also=[],
+ issue=dict(id="2026-floods-pattaya", title="파타야·방라뭉 침수 피해·구호"),
+ quick_replies=["방라뭉 쪽 지금은 물 다 빠졌나요?", "구호품 나눔 소식 반갑네요", "혹시 기부할 수 있는 곳 아시는 분 계세요?"]),
 
 # ───────────── 시라차 ─────────────
 dict(id="sr1", topic="sriracha", secondary=["weather","poleco"], region="시라차(아마타시티)",
@@ -32,7 +37,12 @@ dict(id="sr1", topic="sriracha", secondary=["weather","poleco"], region="시라�
  source="Prachachat (쁘라차찻)", url="https://www.prachachat.net/economic/news-2075688",
  title_th="‘อมตะซิตี้ ชลบุรี’ น้ำท่วมยังสูงเร่งสูบ 4.25 หมื่น ลบ.ม./ชม. รัฐจ่อทำแก้มลิงช่วย",
  published="2026-10-02T17:32:00+07:00",
- tags=["아마타","시라차","배수","IEAT","홍수"]),
+ tags=["아마타","시라차","배수","IEAT","홍수"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["날씨·재해"], for_me="아마타시티 촌부리(Amata City Chonburi) 8·9단지는 아직 평균 60cm 물이 차 있어, 이 공단으로 출근하거나 거래하는 분은 단지별 상황부터 확인해야 합니다.",
+ also=[{"source": "Matichon (마티촌)", "url": "https://www.matichon.co.th/economy/news_5916759"}, {"source": "Thailand Plus (타일랜드 플러스)", "url": "https://www.thailandplus.tv/archives/1061235"}, {"source": "Bangkok Biz News (방콕비즈뉴스)", "url": "https://www.bangkokbiznews.com/economics/1254467"}],
+ issue=dict(id="2026-floods-amata", title="아마타시티 촌부리 공단 침수"),
+ quick_replies=["8·9단지 쪽 출근 괜찮은지 아시는 분 계세요?", "아직 60cm면 꽤 오래가네요", "아마타 근처 도로 상황 공유해 주실 분 계세요?"]),
 
 dict(id="sr2", topic="sriracha", secondary=["poleco"], region="시라차(램차방)",
  headline="교통부, 머스크와 램차방·라드끄라방 ICD 투자 확대 협의…그린 물류 강조",
@@ -46,7 +56,12 @@ dict(id="sr2", topic="sriracha", secondary=["poleco"], region="시라차(램차�
  title_th="Maersk ขยายลงทุนแหลมฉบัง-ICD ลาดกระบัง ดันไทยสู่ Smart&Green Port",
  published="2026-10-01T12:00:00+07:00",
  related=[dict(source="Bangkok Post", title="Thailand and Maersk explore port investment", url="https://www.bangkokpost.com/business/investment/3329605/thailand-and-maersk-explore-port-investment")],
- tags=["머스크","램차방","ICD","물류","EEC"]),
+ tags=["머스크","램차방","ICD","물류","EEC"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=[], for_me="",
+ also=[{"source": "Money and Banking (머니앤뱅킹)", "url": "https://moneyandbanking.co.th/2026/274904/"}, {"source": "Bangkok Post", "url": "https://www.bangkokpost.com/business/general/3329605/thailand-and-maersk-explore-port-investment"}, {"source": "FreshPlaza", "url": "https://www.freshplaza.com/north-america/article/9879314/thailand-discusses-laem-chabang-port-expansion-with-maersk/"}],
+ issue=None,
+ quick_replies=["램차방 항만이 더 커지면 시라차도 달라질까요?", "물류 일 하시는 분들 의견 궁금해요", "그린 물류 이야기 흥미롭네요"]),
 
 # ───────────── 방콕 ─────────────
 dict(id="bk1", topic="bangkok", secondary=["weather"], region="방콕(라드끄라방)",
@@ -60,7 +75,12 @@ dict(id="bk1", topic="bangkok", secondary=["weather"], region="방콕(라드끄�
  source="Prachachat (쁘라차찻)", url="https://www.prachachat.net/news/news-2075822",
  title_th="“ชัชชาติ” พบ “ดร.เอ้” แลกข้อมูลน้ำท่วมลาดกระบัง–ร่มเกล้า เร่งแก้น้ำนิ่ง–น้ำเน่า ช่วยพื้นที่วิกฤต",
  published="2026-10-02T20:01:00+07:00",
- tags=["찻찻","라드끄라방","롬끌라오","배수","수찻위"]),
+ tags=["찻찻","라드끄라방","롬끌라오","배수","수찻위"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["날씨·재해"], for_me="라드끄라방(Lat Krabang)·롬끌라오(Romklao) 일대는 고인 물이 느리게 빠져 수질·생활이 나빠질 수 있다고 하니, 이 동네에 사는 분은 배수 소식을 계속 챙겨 보세요.",
+ also=[{"source": "Thai PBS", "url": "https://www.thaipbs.or.th/news/content/559057"}, {"source": "Thairath (타이랏)", "url": "https://www.thairath.co.th/news/politic/2963768"}, {"source": "Khaosod (카오솟)", "url": "https://www.khaosod.co.th/politics/news_10423395"}, {"source": "The Standard (더 스탠더드)", "url": "https://thestandard.co/suchatvee-chadchart-latkrabang-flood-crisis/"}],
+ issue=dict(id="2026-floods-bangkok-east", title="방콕 동부(라드끄라방·롬끌라오) 침수"),
+ quick_replies=["라드끄라방 지금 물 상황 어떤가요?", "고인 물 냄새가 걱정되네요", "롬끌라오 쪽 소식 아시는 분 계세요?"]),
 
 dict(id="bk2", topic="bangkok", secondary=["weather"], region="방콕(사판숭·라드끄라방)",
  headline="찻찻 \"5~8일 비는 간헐적\"…사판숭·롬끌라오 배수 가속, 침수 위로금 온라인 접수",
@@ -73,7 +93,12 @@ dict(id="bk2", topic="bangkok", secondary=["weather"], region="방콕(사판숭�
  source="Prachachat (쁘라차찻)", url="https://www.prachachat.net/news/news-2075674",
  title_th="ชัชชาติ เร่งกู้ ‘สะพานสูง-ลาดกระบัง’ รับมือฝน 5-8 ต.ค. เปิดระบบเยียวยาออนไลน์วันนี้",
  published="2026-10-02T17:27:00+07:00",
- tags=["찻찻","사판숭","배수","위로금","예보"]),
+ tags=["찻찻","사판숭","배수","위로금","예보"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["날씨·재해"], for_me="방콕시가 2일 침수 위로금 온라인 접수를 열었으니, 방콕에서 침수 피해를 입었다면 신청 대상인지 확인해 보세요.",
+ also=[{"source": "Naewna (내우나)", "url": "https://www.naewna.com/n/politics/92612/"}, {"source": "TOP NEWS (톱뉴스)", "url": "https://www.topnews.co.th/news/1708122"}],
+ issue=dict(id="2026-floods-bangkok-east", title="방콕 동부(라드끄라방·롬끌라오) 침수"),
+ quick_replies=["위로금은 외국인도 신청되는지 아시는 분?", "5~8일 비가 많이 안 오길 바라요", "사판숭 쪽 배수 좀 빨라졌나요?"]),
 
 # ───────────── 정치·경제 ─────────────
 dict(id="pe1", topic="poleco", secondary=["weather"],
@@ -90,7 +115,12 @@ dict(id="pe1", topic="poleco", secondary=["weather"],
  published="2026-10-03T06:20:00+07:00",
  related=[dict(source="Bangkok Post", title="More rain coming from Oct 11-14", url="https://www.bangkokpost.com/thailand/general/3330390/more-rain-coming-from-oct-1114"),
           dict(source="Prachachat (쁘라차찻)", title="นายกฯสั่งรับมือฝนถล่มซ้ำ เฝ้าระวังเขื่อนระบายน้ำเพิ่ม", url="https://www.prachachat.net/economic/news-2075671")],
- tags=["아누틴","홍수","짜오프라야","남부","예보"]),
+ tags=["아누틴","홍수","짜오프라야","남부","예보"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["날씨·재해"], for_me="11~14일 중부·짜오프라야(Chao Phraya) 유역에 다시 큰비가 예보돼, 방콕·논타부리 강변에 살거나 남부 여행을 앞둔 분은 일정을 여유 있게 잡으세요.",
+ also=[{"source": "Thai PBS", "url": "https://www.thaipbs.or.th/news/content/559046"}, {"source": "Manager Online (매니저)", "url": "https://mgronline.com/politics/detail/9690000096178"}, {"source": "Bangkok Biz News (방콕비즈뉴스)", "url": "https://www.bangkokbiznews.com/news/1254711"}, {"source": "Bangkok Post", "url": "https://www.bangkokpost.com/thailand/general/3330390/more-rain-coming-from-oct-1114"}],
+ issue=dict(id="2026-rain-warnings-oct", title="10월 초 비 경보(4~7일·11~14일)"),
+ quick_replies=["11~14일에 비가 또 온다니 걱정이네요", "남부 여행은 미루는 게 나을까요?", "강변 쪽 사시는 분들 괜찮으세요?"]),
 
 dict(id="pe2", topic="poleco", secondary=[],
  headline="재무장관 \"홍수 GDP 타격 0.1% 미만\"…IMF·세계은행 연차총회 준비 자신",
@@ -103,7 +133,12 @@ dict(id="pe2", topic="poleco", secondary=[],
  source="Matichon (마티촌)", url="https://www.matichon.co.th/economy/news_5917190",
  title_th="เอกนิติ มั่นใจพร้อมจัด IMF-World Bank ยันน้ำท่วมฉุดศก.ไม่ถึง 0.1% ย้ำความปลอดภัยปชช.ต้องมาก่อน",
  published="2026-10-03T06:00:00+07:00",
- tags=["엑니띠","IMF","GDP","홍수","재정"]),
+ tags=["엑니띠","IMF","GDP","홍수","재정"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=[], for_me="",
+ also=[{"source": "Prachachat (쁘라차찻)", "url": "https://www.prachachat.net/finance/news-2075698"}, {"source": "The Standard (더 스탠더드)", "url": "https://thestandard.co/ekniti-flood-gdp-impact/"}, {"source": "Post Today (포스트투데이)", "url": "https://www.posttoday.com/business/749819"}],
+ issue=dict(id="2026-floods-economy", title="홍수 경제 피해 추산"),
+ quick_replies=["0.1%라니 체감이랑은 좀 다르네요", "IMF 총회 때 방콕 교통은 괜찮을까요?", "이 숫자 어떻게 보세요?"]),
 
 dict(id="pe3", topic="poleco", secondary=["society"],
  headline="혼다, 쁘라친·아유타야 공장 2~6일 일시 중단…직원 침수 피해 고려",
@@ -115,7 +150,12 @@ dict(id="pe3", topic="poleco", secondary=["society"],
  source="Matichon (마티촌)", url="https://www.matichon.co.th/economy/news_5915259",
  title_th="ฮอนด้า แจ้งหยุดผลิตรถยนต์ที่โรงงานปราจีนฯ-อยุธยา 2–6 ต.ค. เนื่องจากพนง.ได้รับผลกระทบจากน้ำท่วม",
  published="2026-10-01T19:27:00+07:00",
- tags=["혼다","공장","홍수","쁘라친","아유타야"]),
+ tags=["혼다","공장","홍수","쁘라친","아유타야"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=[], for_me="",
+ also=[{"source": "Prachachat (쁘라차찻)", "url": "https://www.prachachat.net/automotive/news-2075006"}, {"source": "Daily News (데일리뉴스)", "url": "https://www.dailynews.co.th/news/6240414/"}, {"source": "Nation Thailand", "url": "https://www.nationthailand.com/business/automobile/40071777"}],
+ issue=dict(id="2026-floods-factories", title="홍수로 멈춘 공장(혼다·토요타 등)"),
+ quick_replies=["협력사들도 같이 쉬는 건가요?", "재가동 일정 나오면 공유 부탁드려요", "자동차 공장까지 멈췄네요"]),
 
 # ───────────── 사회·사건사고 ─────────────
 dict(id="so1", topic="society", secondary=["weather"],
@@ -129,7 +169,12 @@ dict(id="so1", topic="society", secondary=["weather"],
  source="Matichon (마티촌)", url="https://www.matichon.co.th/region/news_5917140",
  title_th="น้ำท่วมปราจีนบุรีเสียชีวิตแล้ว 7 ราย กระทบ 4.6 หมื่นครัวเรือน ‘บ้านสร้าง’ ยังวิกฤต น้ำท่วมทุกตำบล",
  published="2026-10-02T21:51:00+07:00",
- tags=["쁘라친부리","홍수","사망","반쌍","대피"]),
+ tags=["쁘라친부리","홍수","사망","반쌍","대피"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["날씨·재해", "교통·사고"], for_me="쁘라친부리(Prachinburi) 반쌍(Ban Sang)군은 아직 전 면이 잠겨 있고 304번 도로는 일부만 통행돼, 이쪽으로 이동할 계획이면 도로 상황부터 확인하세요.",
+ also=[{"source": "Khaosod (카오솟)", "url": "https://www.khaosod.co.th/around-thailand/news_10423449"}, {"source": "Amarin TV (아마린TV)", "url": "https://www.amarintv.com/news/social/559279"}],
+ issue=dict(id="2026-floods-prachinburi", title="쁘라친부리 침수"),
+ quick_replies=["쁘라친부리 피해가 정말 크네요", "구호 물품 보낼 방법이 있을까요?", "304번 도로 지금 다닐 만한가요?"]),
 
 dict(id="so2", topic="society", secondary=["weather"],
  headline="차층사오 타따끼압, 밤 산지 급류에 주민 이불 싸 대피…도로 통행 금지",
@@ -141,7 +186,12 @@ dict(id="so2", topic="society", secondary=["weather"],
  source="Khaosod (카오솟)", url="https://www.khaosod.co.th/around-thailand/news_10423516",
  title_th="ชาวบ้านหอบที่นอน อพยพหนีวุนกลางดึก ฝนกระหน่ำ น้ำป่าหลากทะลักหลายชุมชน ฉะเชิงเทรา",
  published="2026-10-02T23:23:00+07:00",
- tags=["차층사오","급류","대피","타따끼압","홍수"]),
+ tags=["차층사오","급류","대피","타따끼압","홍수"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["날씨·재해", "교통·사고"], for_me="차층사오(Chachoengsao) 타따끼압(Tha Takiap) 일대는 산지 급류로 차량 통행을 막은 구간이 있어, 밤에 이쪽 산길 운전은 피하세요.",
+ also=[{"source": "Thairath (타이랏)", "url": "https://www.thairath.co.th/video/channel/thairath_news/thairath-news-show/1193438"}, {"source": "Kapook (까뿍)", "url": "https://hilight.kapook.com/video/49225"}],
+ issue=dict(id="2026-floods-chachoengsao", title="차층사오 침수"),
+ quick_replies=["밤에 대피하셨다니 다들 무사하시길 바라요", "타따끼압 쪽 길은 지금 막혔나요?", "산지 급류는 정말 무섭네요"]),
 
 dict(id="so3", topic="society", secondary=["bangkok"], region="논타부리",
  headline="논타부리 레와디19 입구 3층 상가 기둥 균열…5칸 사용 중지·주민 대피",
@@ -153,7 +203,12 @@ dict(id="so3", topic="society", secondary=["bangkok"], region="논타부리",
  source="Matichon (마티촌)", url="https://www.matichon.co.th/region/news_5917163",
  title_th="อพยพคนออกจากตึกแถว 5 คูหา ปากซอยเรวดี 19 หลังเสาหัก-อาคารลั่น เทศบาลนครนนท์สั่งงดใช้ รอวิศวกรตรวจ",
  published="2026-10-02T22:30:00+07:00",
- tags=["논타부리","레와디","건물","대피","균열"]),
+ tags=["논타부리","레와디","건물","대피","균열"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["교통·사고"], for_me="논타부리 레와디(Rewadee) 소이19 입구 일부 차로가 통제됐다고 하니, 이 근처를 지날 땐 통제선을 지키고 돌아가세요.",
+ also=[{"source": "Amarin TV (아마린TV)", "url": "https://www.amarintv.com/news/social/559285"}, {"source": "Manager Online (매니저)", "url": "https://mgronline.com/crime/detail/9690000096308"}, {"source": "Khaosod (카오솟)", "url": "https://www.khaosod.co.th/around-thailand/news_10423407"}],
+ issue=None,
+ quick_replies=["다친 분이 없어서 다행이에요", "근처 지날 때 조심해야겠네요", "점검 결과 나오면 알려 주세요"]),
 
 # ───────────── 외국인·비자 ─────────────
 dict(id="vi1", topic="visa", secondary=["pattaya"], region="파타야",
@@ -169,7 +224,12 @@ dict(id="vi1", topic="visa", secondary=["pattaya"], region="파타야",
  published="2026-09-28T19:23:00+07:00",
  related=[dict(source="Pattaya Mail", title="Pattaya suspends three city officers over alleged tourist money demands", url="https://www.pattayamail.com/news/pattaya-suspends-three-city-officers-over-alleged-tourist-money-demands-566578"),
           dict(source="The Thaiger", title="Pattaya suspends 3 officers over alleged tourist cash demands", url="https://thethaiger.com/news/pattaya/pattaya-suspends-officers-tourist-cash-demands")],
- tags=["파타야","관광객","직무정지","1337","단속"]),
+ tags=["파타야","관광객","직무정지","1337","단속"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["치안"], for_me="파타야에서 단속 직원이 영수증 없이 돈을 요구하는 것 같다면, 공식 영수증을 확인하고 시 핫라인 1337(다국어)에 제보할 수 있습니다.",
+ also=[{"source": "Pattaya Mail", "url": "https://www.pattayamail.com/news/pattaya-suspends-three-city-officers-over-alleged-tourist-money-demands-566578"}, {"source": "The Thaiger", "url": "https://thethaiger.com/news/pattaya/pattaya-suspends-officers-tourist-cash-demands"}],
+ issue=dict(id="2026-pattaya-officers-cash", title="파타야 단속 직원 관광객 금전 요구 의혹"),
+ quick_replies=["1337 핫라인은 한국어도 되나요?", "이런 일 당하면 어떻게 대처하면 될까요?", "확실하게 처리되면 좋겠네요"]),
 
 dict(id="vi2", topic="visa", secondary=["society"],
  headline="태국 경찰, 콜센터 조직에 끌려간 일본인 2명 구출…인신매매 피해자로 보호",
@@ -182,7 +242,12 @@ dict(id="vi2", topic="visa", secondary=["society"],
  source="Matichon (마티촌)", url="https://www.matichon.co.th/local/crime/news_5917145",
  title_th="ตร.ไทยช่วย 2 ชาวญี่ปุ่นพ้นแก๊งคอลเซ็นเตอร์ ถูกขู่ฆ่า–บังคับโทรหลอกเหยื่อ คัดแยกเป็นผู้เสียหายค้ามนุษย์",
  published="2026-10-02T22:01:00+07:00",
- tags=["콜센터","일본인","인신매매","구출","사기"]),
+ tags=["콜센터","일본인","인신매매","구출","사기"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["치안"], for_me="피해 일본인들은 SNS의 ‘고액·단기·항공권 제공’ 해외 일자리 광고에 속았다고 하니, 비슷한 제안을 받으면 대사관이나 경찰에 먼저 확인하세요.",
+ also=[],
+ issue=None,
+ quick_replies=["이런 광고는 정말 조심해야겠어요", "한국인 피해 사례도 있었나요?", "무사히 구출돼서 다행이에요"]),
 
 dict(id="vi3", topic="visa", secondary=["pattaya","society"], region="파타야(농쁘루)",
  headline="외교부, 파타야 인근 홍수 실종 한국인 1명 사망 확인…영사 조력 제공",
@@ -196,7 +261,12 @@ dict(id="vi3", topic="visa", secondary=["pattaya","society"], region="파타야(
  published="2026-09-28T20:54:00+07:00",
  related=[dict(source="연합뉴스(영문)", title="1 S. Korean among those killed in Thailand flood: foreign ministry", url="https://en.yna.co.kr/view/AEN20260928012300315"),
           dict(source="동아일보", title='외교부 "태국 홍수로 실종된 한국인 1명 시신 신원 확인"', url="https://www.donga.com/news/Politics/article/all/20260928/134748007/1")],
- tags=["한국인","파타야","홍수","외교부","영사"]),
+ tags=["한국인","파타야","홍수","외교부","영사"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["날씨·재해"], for_me="폭우 때 침수된 길을 걷다 배수로에 빠져 한국인이 숨진 만큼, 물에 잠긴 길은 걸어서 건너지 말고 사고 땐 주태국 한국대사관에 바로 연락하세요.",
+ also=[{"source": "연합뉴스", "url": "https://www.yna.co.kr/view/AKR20260928161000504"}, {"source": "조선비즈", "url": "https://biz.chosun.com/policy/politics/2026/09/28/DSHWRLAYMNGZ7G5FC34ZMBHXAA/"}, {"source": "한국일보", "url": "https://www.hankookilbo.com/news/article/A2026092821450002117"}, {"source": "동아일보", "url": "https://www.donga.com/news/Politics/article/all/20260928/134748007/1"}],
+ issue=dict(id="2026-floods-korean-victim", title="파타야 인근 홍수 한국인 실종·사망"),
+ quick_replies=["삼가 고인의 명복을 빕니다", "침수된 길은 정말 조심해야겠어요", "대사관 긴급 연락처 공유해 주실 분 계세요?"]),
 
 # ───────────── 생활·물가·부동산 ─────────────
 dict(id="lf1", topic="life", secondary=[],
@@ -209,7 +279,12 @@ dict(id="lf1", topic="life", secondary=[],
  source="Prachachat (쁘라차찻)", url="https://www.prachachat.net/finance/news-2075601",
  title_th="แบงก์กรุงเทพ ยกเลิก “บัวหลวง ไอแบงก์กิ้ง” ตั้งแต่ 15 ธ.ค. 69 ย้ายใช้โมบายแบงก์กิ้ง",
  published="2026-10-02T16:50:00+07:00",
- tags=["방콕은행","아이뱅킹","모바일뱅킹","이체","은행"]),
+ tags=["방콕은행","아이뱅킹","모바일뱅킹","이체","은행"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=[], for_me="방콕은행 인터넷뱅킹(부아루앙 아이뱅킹)을 쓰는 분은 12월 15일 종료 전에 모바일 앱으로 옮기고, 예약 이체도 앱에서 다시 등록해야 합니다.",
+ also=[{"source": "Manager Online (매니저)", "url": "https://mgronline.com/stockmarket/detail/9690000096195"}, {"source": "Matichon (마티촌)", "url": "https://www.matichon.co.th/economy/news_5916000"}, {"source": "Khaosod (카오솟)", "url": "https://www.khaosod.co.th/economics/news_10422710"}],
+ issue=None,
+ quick_replies=["앱으로 옮기는 거 어렵지 않나요?", "예약 이체를 다시 해야 하는군요", "외국인 계좌도 앱 가입이 바로 되나요?"]),
 
 dict(id="lf2", topic="life", secondary=["society"],
  headline="내무거래국 \"달걀 공급 충분\"…마트 재고 확대·수출 축소·군 수송 지원",
@@ -222,7 +297,12 @@ dict(id="lf2", topic="life", secondary=["society"],
  source="Thai PBS", url="https://www.thaipbs.or.th/news/content/559032",
  title_th="\"ค้าภายใน\" คุมไข่ไก่ ยันไม่ขาดตลาด สั่งห้างเพิ่มสต๊อก-ผู้ส่งออกลดส่งออก",
  published="2026-10-02T12:24:00+07:00",
- tags=["달걀","물가","내무거래국","홍수","공급"]),
+ tags=["달걀","물가","내무거래국","홍수","공급"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["환율·물가"], for_me="정부는 달걀 공급이 충분하다고 하지만 동네마다 값이 다를 수 있어, 시라차 등에서 장 볼 땐 가격을 비교해 보세요.",
+ also=[{"source": "The Bangkok Insight (방콕인사이트)", "url": "https://www.thebangkokinsight.com/news/business/economics/1703803/"}, {"source": "Thansettakij (탄셋따낏)", "url": "https://www.thansettakij.com/economy/670541"}],
+ issue=dict(id="2026-egg-supply", title="달걀 품귀·가격"),
+ quick_replies=["동네 마트 달걀값은 어떤가요?", "시라차 쪽 달걀 다시 들어왔나요?", "가격이 빨리 정상으로 돌아오면 좋겠네요"]),
 
 # ───────────── 여행·맛집 ─────────────
 dict(id="tr1", topic="travel", secondary=["pattaya","weather"], region="파타야(꼬란)",
@@ -236,7 +316,12 @@ dict(id="tr1", topic="travel", secondary=["pattaya","weather"], region="파타�
  title_th="ทะเลเกาะล้านเปลี่ยนเป็นสีเขียว นักท่องเที่ยวแปลกใจ คาดแพลงก์ตอนบลูม หลังฝนถล่มพัทยา",
  published="2026-09-30T15:16:00+07:00",
  related=[dict(source="Bangkok Post", title="Storm-fed plankton bloom seen around Koh Lan", url="https://www.bangkokpost.com/thailand/general/3328945/stormfed-plankton-bloom-seen-around-koh-lan")],
- tags=["꼬란","플랑크톤","파타야","바다","관광"]),
+ tags=["꼬란","플랑크톤","파타야","바다","관광"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["날씨·재해"], for_me="꼬란(Koh Larn) 일부 바다가 초록빛으로 변했다는 보도가 있어, 꼬란 해수욕을 계획했다면 현지 바다 상태를 먼저 확인하세요.",
+ also=[{"source": "Bangkok Post", "url": "https://www.bangkokpost.com/thailand/general/3328945/stormfed-plankton-bloom-seen-around-koh-lan"}, {"source": "Pattaya Mail", "url": "https://www.pattayamail.com/latestnews/news/koh-larn-sea-turns-green-after-heavy-rain-likely-natural-plankton-bloom-566706"}, {"source": "The Thaiger", "url": "https://thethaiger.com/news/pattaya/koh-larn-plankton-bloom-turns-sea-green-after-heavy-rain-in-pattaya"}, {"source": "NBT Connext", "url": "https://thainews.prd.go.th/thainews/news/view/2384753/?bid=1"}],
+ issue=dict(id="2026-koh-larn-green-sea", title="꼬란 바다 초록빛(플랑크톤)"),
+ quick_replies=["꼬란에서 지금 수영해도 괜찮을까요?", "바다 색이 신기하네요", "요즘 꼬란 바다 상태 아시는 분 계세요?"]),
 
 dict(id="tr2", topic="travel", secondary=["life","poleco"],
  headline="홍수 경제 피해 최대 약 330억 바트(약 1조 3,345억 원) 추산…식당 매출 최대 80%↓",
@@ -249,7 +334,12 @@ dict(id="tr2", topic="travel", secondary=["life","poleco"],
  source="Thansettakij (탄셋따낏)", url="https://www.thansettakij.com/economy/trade-agriculture/670270",
  title_th="น้ำท่วมฉุดเศรษฐกิจ 3.3 หมื่นล้าน ร้านอาหารยอดวูบ 80% นิคมอุตสาหกรรมเสี่ยง",
  published="2026-09-30T11:07:00+07:00",
- tags=["홍수","식당","GDP","피해","관광"]),
+ tags=["홍수","식당","GDP","피해","관광"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["환율·물가", "날씨·재해"], for_me="",
+ also=[],
+ issue=dict(id="2026-floods-economy", title="홍수 경제 피해 추산"),
+ quick_replies=["식당 하시는 분들 정말 힘드시겠어요", "추산마다 숫자가 많이 다르네요", "파타야 쪽 가게들은 어떤가요?"]),
 
 # ───────────── 연예·스포츠·SNS ─────────────
 dict(id="en1", topic="ent", secondary=[],
@@ -264,7 +354,12 @@ dict(id="en1", topic="ent", secondary=[],
  title_th="ไทย พ่าย ฟิลิปปินส์ 1-2 ปิดท้ายรอบแบ่งกลุ่ม ฟีฟ่าอาเซียนคัพ 2026",
  published="2026-10-02T19:17:00+07:00",
  related=[dict(source="Siamsport", title="ผลบอล : ทีมชาติไทย พ่าย ฟิลิปปินส์ 1-2 รั้งแชมป์กลุ่มทะลุชิงอินโดฯ", url="https://www.siamsport.co.th/football-thailand/thai-national/110190/")],
- tags=["축구","아세안컵","필리핀","인도네시아","대표팀"]),
+ tags=["축구","아세안컵","필리핀","인도네시아","대표팀"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=[], for_me="",
+ also=[{"source": "Manager Online (매니저)", "url": "https://mgronline.com/sport/detail/9690000096297"}, {"source": "PPTV", "url": "https://www.pptvhd36.com/sport/news/284544"}, {"source": "SPIN.ph", "url": "https://www.spin.ph/football/fifa/pmnt-beats-thailand-but-fails-to-advance-to-fifa-asean-cup-medal-round-a795-20261002"}, {"source": "Siamsport (시암스포츠)", "url": "https://www.siamsport.co.th/football-thailand/thai-national/110190/"}],
+ issue=dict(id="2026-asean-cup", title="FIFA 아세안컵 2026 태국 대표팀"),
+ quick_replies=["5일 인도네시아와 결승 기대돼요!", "결승은 어디서 볼 수 있나요?", "졌지만 조 1위라 다행이네요"]),
 
 # ───────────── 날씨·교통 ─────────────
 dict(id="wt1", topic="weather", secondary=["bangkok"],
@@ -279,7 +374,12 @@ dict(id="wt1", topic="weather", secondary=["bangkok"],
  title_th="กรมอุตุฯ ประกาศฉบับที่ 4 อากาศแปรปรวน ฝนฟ้าคะนอง ลมกระโชกแรง",
  published="2026-10-03T06:44:00+07:00",
  related=[dict(source="Matichon (마티촌)", title="ปภ.เตือน 76 จังหวัด-กทม. รับมือฝนหนัก-ลมแรง 4-7 ต.ค.", url="https://www.matichon.co.th/local/news_5917038")],
- tags=["기상청","호우","방콕","4~7일","재난청"]),
+ tags=["기상청","호우","방콕","4~7일","재난청"],
+ # 판마다 채울 필드(2026-10-03 추가, README) — 한인 영향도·그래서 나는?·다른 매체·이슈·추천 댓글
+ impact=["날씨·재해"], for_me="4~7일 동부, 5~6일 방콕권까지 뇌우·강풍이 예보돼, 파타야·방콕 이동이나 야외 일정은 여유 있게 잡으세요.",
+ also=[{"source": "Thai PBS", "url": "https://www.thaipbs.or.th/news/content/559068"}],
+ issue=dict(id="2026-rain-warnings-oct", title="10월 초 비 경보(4~7일·11~14일)"),
+ quick_replies=["5~6일에 방콕 가는데 괜찮을까요?", "파타야 쪽 비 소식도 궁금해요", "또 비라니 걱정이네요"]),
 ]
 
 briefing = [

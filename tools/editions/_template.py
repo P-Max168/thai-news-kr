@@ -14,6 +14,7 @@
   예) 파타야 침수 → topic="pattaya", secondary=["weather"] / 시라차 달걀값 → topic="life", secondary=["sriracha"]
 기사 id: 주제 약어+번호 권장 (pt1 sr1 bk1 pe1 so1 vi1 lf1 tr1 en1 wt1). 판 안에서만 유일하면 됨.
 tags: 키워드 2~6개 필수(인물·장소·기관·사건 키워드, '#' 없이) — 👍👎 취향 학습에 쓰임.
+impact·for_me·also·issue·quick_replies: 판마다 채움(2026-10-03 저녁판부터) — README '판마다 채울 필드(2026-10-03 추가)'.
 """
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
@@ -29,7 +30,13 @@ dict(id="pt1", topic="pattaya", secondary=["weather"], region="파타야(좀티�
  title_th="※ 원문 제목(태국어/영어)",
  published="2026-01-01T07:00:00+07:00",   # ※ 원문 게재 시각(+07:00)
  related=[],                                # [dict(source=, title=, url=)]
- tags=["※키워드1", "※키워드2", "※키워드3"]),
+ tags=["※키워드1", "※키워드2", "※키워드3"],
+ # ↓ 판마다 채울 필드(2026-10-03 추가) — README '판마다 채울 필드(2026-10-03 추가)' 참고
+ impact=["날씨·재해"],                       # 한인 영향도 0~3개: 비자·체류 / 환율·물가 / 교통·사고 / 치안 / 날씨·재해 (해당 없으면 [])
+ for_me="※ 태국에 사는·여행하는 한국인에게 무슨 뜻인지 한 문장(기사 사실만, 추측 금지). 의미 없으면 \"\"",
+ also=[],                                   # 같은 사건 다른 매체 [dict(source="※매체", url="https://※확인한 실제 URL")] — 확인 못 하면 []
+ issue=None,                                # 이어지는 이슈면 dict(id="※tools/issues.json 의 id", title="※한국어 이슈 이름")
+ quick_replies=["※ 이거 아시는 분 계세요?", "※ 짧은 반응", "※ 팁 부탁 질문"]),   # 추천 댓글 3~4개(정직하게, 경험 지어내기 금지)
 ]
 
 # 브리핑 5~6줄: B(주제, "짧은 한 줄 + **굵게 핵심어/숫자**", 기사 id). 한 줄 120자 이하, 각 줄은 서로 다른 기사.

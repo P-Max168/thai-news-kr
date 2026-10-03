@@ -8,7 +8,13 @@
   var MAX = T.MAX_TOPICS;
   var DECO = { pattaya: "〰", sriracha: "⚓", bangkok: "曼", poleco: "政", society: "社", visa: "✈", life: "฿", travel: "旅", ent: "#", weather: "☂" };
   // tab: "feed"(내 피드) | "all"(전체 보기) | 주제 id
-  var state = { data: null, tab: "feed", edition: null };
+  var state = { data: null, tab: "feed", edition: null, impact: null };
+  /* 한인 영향도 태그(판 데이터 story.impact — README '판마다 채울 필드(2026-10-03 추가)'). 순서 = 필터 칩 순서 */
+  var IMPACT = [
+    { k: "비자·체류", e: "🛂", c: "#6741d9" }, { k: "환율·물가", e: "💱", c: "#0c8f6a" }, { k: "교통·사고", e: "🚗", c: "#d9480f" },
+    { k: "치안", e: "🚨", c: "#c92a2a" }, { k: "날씨·재해", e: "🌧️", c: "#1971c2" }];
+  function impOf(k) { for (var i = 0; i < IMPACT.length; i++) if (IMPACT[i].k === k) return IMPACT[i]; return null; }
+  function impacts(s) { return (Array.isArray(s.impact) ? s.impact : []).filter(impOf); }
   var $ = function (id) { return document.getElementById(id); };
 
   function esc(s) {
@@ -309,6 +315,8 @@
     var age = refTime() - new Date(s.published).getTime();
     if (tp.all.indexOf("visa") >= 0 || age > 36 * 3600000) chips += '<span class="chip chip--date">📅 ' + esc(fmtDay(s.published)) + "</span>";
     if (s.update) chips += '<span class="chip chip--new">후속</span>';
+    impacts(s).forEach(function (k) { var m = impOf(k); chips += '<span class="chip chip--imp" style="--ic:' + m.c + '" title="한인 영향: ' + esc(k) + '"><span aria-hidden="true">' + m.e + "</span>" + esc(k) + "</span>"; });
+    var forMe = (typeof s.for_me === "string" && s.for_me.trim()) ? '<p class="forme"><b class="forme__h">🙋 그래서 나는?</b><span class="forme__t">' + esc(s.for_me.trim()) + "</span></p>" : "";
     var paras = s.summary.map(function (p) { return '<p class="para">' + esc(p) + "</p>"; }).join("");
     var ctx = s.context ? '<div class="context"><b>💡 배경 설명</b>' + esc(s.context) + "</div>" : "";
     var upd = s.update ? '<div class="update"><b>🆕 이전 판 이후 새로 나온 내용</b>' + esc(s.update) + "</div>" : "";
@@ -320,10 +328,10 @@
     return '<article class="card' + (v < 0 ? " is-down" : "") + '" style="--tc:' + t.color + '" data-topic="' + tp.topic + '" id="' + esc(s.id) + '">' +
       '<button class="card__head" aria-expanded="false" aria-controls="body-' + esc(s.id) + '">' +
         '<div class="card__top">' + chips + "</div>" +
-        '<h3 class="card__title">' + esc(s.headline) + "</h3>" +
+        '<h3 class="card__title">' + esc(s.headline) + "</h3>" + forMe +
         '<p class="card__lead">' + esc(s.summary[0]) + "</p>" +
         '<div class="card__foot">' + metaHTML(s) + '<span class="more"><span class="more__t">자세히</span> <i>▾</i></span></div>' +
-      "</button>" +
+      "</button>" + toolsHTML(s) +
       '<div class="card__body" id="body-' + esc(s.id) + '">' + upd + paras + ctx +
         '<div class="origin"><p class="origin__th" lang="th"><small>원문 제목</small>' + esc(s.title_th) + "</p>" +
         '<a class="btn" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.source.replace(/\s*\(.*\)$/, "")) + " 원문 보기 ↗</a>" + rel + tags + "</div>" +
@@ -331,12 +339,85 @@
       "</div>" + voteHTML(s) + "</article>";
   }
 
+  /* ---------- 카드 도구 줄(접힌 카드에서도 보임): 📰 N개 매체 보도 · 🗓️ 이슈 타임라인 ---------- */
+  function alsoList(s) {
+    return (Array.isArray(s.also) ? s.also : []).filter(function (a) { return a && a.source && /^https?:\/\//.test(a.url || "") && a.url !== s.url; });
+  }
+  function toolsHTML(s) {
+    var al = alsoList(s), sid = esc(s.id);
+    var a = al.length ? '<button type="button" class="tool" data-also="' + sid + '" aria-expanded="false" aria-controls="also-' + sid + '">📰 <b>' + (al.length + 1) + '개 매체</b> 보도 <i aria-hidden="true">▾</i></button>' : "";
+    var panel = al.length ? '<div class="tool-panel also" id="also-' + sid + '" hidden><p class="tool-panel__h">같은 소식을 다룬 매체 · 누르면 새 탭</p><ul class="also__list">' +
+      [{ source: s.source, url: s.url, main: true }].concat(al).map(function (x) {
+        return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener"><span class="also__s">' + esc(String(x.source).replace(/\s*\(.*\)$/, "")) + "</span>" + (x.main ? '<span class="also__m">이 기사 원문</span>' : "") + '<span class="also__go" aria-hidden="true">↗</span></a></li>';
+      }).join("") + "</ul></div>" : "";
+    var ib = issueBtnHTML(s);
+    return '<div class="card__tools" data-tools="' + sid + '"' + (al.length || ib ? "" : " hidden") + ">" + a + '<span data-issue-slot="' + sid + '">' + ib + "</span></div>" + panel +
+      '<div class="tool-panel tl" id="tl-' + sid + '" hidden></div>';
+  }
+  /* 🗓️ 이슈 타임라인: data/issues.json(newslib.build_index 가 tools/issues.json 등록부 + 판 기사 issue 필드로 만듦) */
+  var ISS = { data: null, rev: {}, loading: false };
+  function loadIssues() {
+    if (ISS.loading || ISS.data) return; ISS.loading = true;
+    function done(d) {
+      ISS.loading = false;
+      if (!d || !d.issues) return;
+      ISS.data = d; ISS.rev = {};
+      Object.keys(d.issues).forEach(function (k) { d.issues[k].items.forEach(function (it) { ISS.rev[it.edition + "/" + it.story] = k; }); });
+      refreshIssueButtons();
+    }
+    if (!/^https?:$/.test(location.protocol)) {
+      var sc = document.createElement("script"); sc.src = "data/issues.js?_=" + Date.now();
+      sc.onload = function () { done(window.TN_ISSUES); }; sc.onerror = function () { done(null); };
+      document.body.appendChild(sc); return;
+    }
+    fetch("data/issues.json?_=" + Math.floor(Date.now() / 600000), { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : null; }).then(done, function () { done(null); });
+  }
+  function issueOf(s) {
+    var id = (s.issue && s.issue.id) || ISS.rev[edId() + "/" + s.id];
+    if (!id) return null;
+    var reg = ISS.data && ISS.data.issues[id];
+    return { id: id, title: (reg && reg.title) || (s.issue && s.issue.title) || "", items: reg ? reg.items : null };
+  }
+  function issueBtnHTML(s) {
+    var is = issueOf(s);
+    if (!is || (is.items && is.items.length < 2)) return "";   // 같은 이슈 기사가 1건뿐이면 숨김
+    return '<button type="button" class="tool tool--tl" data-issue="' + esc(is.id) + '" data-sid="' + esc(s.id) + '" aria-expanded="false" aria-controls="tl-' + esc(s.id) + '">🗓️ 이슈 타임라인' +
+      (is.items ? ' <b class="tool__n">' + is.items.length + "</b>" : "") + ' <i aria-hidden="true">▾</i></button>';
+  }
+  function refreshIssueButtons() {
+    if (!state.data) return;
+    [].forEach.call(document.querySelectorAll("[data-issue-slot]"), function (sl) {
+      var s = byId(sl.getAttribute("data-issue-slot")); if (!s) return;
+      sl.innerHTML = issueBtnHTML(s);
+      var box = sl.parentNode; box.hidden = !(box.querySelector("[data-also]") || sl.firstChild);
+    });
+  }
+  function timelineHTML(s) {
+    var is = issueOf(s);
+    if (!is || !is.items) return '<p class="tool-panel__h">타임라인을 불러오는 중…</p>';
+    var cur = edId();
+    return '<p class="tool-panel__h">🗓️ <b>' + esc(is.title) + "</b> · 판별 " + is.items.length + '건 (오래된 순)</p><ol class="tl__list">' + is.items.map(function (it) {
+      var here = it.edition === cur && it.story === s.id, same = it.edition === cur;
+      var when = esc(it.label) + (it.published ? " · " + esc(fmtTime(it.published)) : "");
+      var go = here ? '<span class="tl__here">지금 보는 기사</span>'
+        : same ? '<button type="button" class="tl__go" data-open="' + esc(it.story) + '">이 판에서 보기 ›</button>'
+        : '<a class="tl__go" href="?date=' + encodeURIComponent(it.edition) + "#" + encodeURIComponent(it.story) + '">그 판에서 보기 ›</a>';
+      return '<li class="tl__i' + (here ? " is-here" : "") + '"><span class="tl__d">' + when + '</span><span class="tl__t">' + esc(it.headline) + "</span>" + go + "</li>";
+    }).join("") + "</ol>";
+  }
+  function togglePanel(btn, panel, fill) {
+    var open = panel.hidden;
+    if (open && fill) panel.innerHTML = fill();
+    panel.hidden = !open; btn.setAttribute("aria-expanded", String(open)); btn.classList.toggle("is-on", open);
+  }
+
   /* 💬 오늘의 질문(판 데이터의 정적 내용, approved 일 때만) + 댓글 자리(assets/social.js 가 채움) */
   function talkHTML(s) {
     var d = s.discussion, q = "";
     if (d && d.approved === true && d.question) {
       q = '<div class="dq"><b class="dq__h">💬 오늘의 질문</b><p class="dq__q">' + esc(d.question) + "</p></div>" +
-        (d.operator_comment ? '<div class="cmt cmt--op cmt--pin"><div class="cmt__h"><b class="cmt__n">운영자</b><span class="badge-op">운영자</span><span class="cmt__pin">📌 고정</span></div><p class="cmt__t">' + esc(d.operator_comment) + "</p></div>" : "");
+        (d.operator_comment ? '<div class="cmt cmt--op cmt--pin"><div class="cmt__h"><b class="cmt__n">운영자</b><span class="badge-op">운영자</span><span class="cmt__pin">📌 고정</span></div><p class="cmt__t">' + esc(d.operator_comment) + "</p>" +
+          (/^https?:$/.test(location.protocol) ? '<div class="cmt__a"><button type="button" class="cbtn" data-op-reply>↳ 답글</button></div>' : "") + "</div>" : "");
     }
     var live = /^https?:$/.test(location.protocol);
     return '<section class="talk" aria-label="댓글">' + q + (live ? '<div class="cmts" data-cmts="' + esc(s.id) + '"><p class="cmts__empty">댓글은 기사를 펼치면 불러와요.</p></div>' : "") + "</section>";
@@ -396,7 +477,24 @@
     }
     var empty = tab === "feed" ? "이 판에는 내 주제에 해당하는 기사가 없습니다. '전체 보기'를 눌러 보세요."
       : tab === "all" ? "기사가 없습니다." : "이 판에는 " + topicOf(tab).label + " 기사가 없습니다.";
-    $("feed").innerHTML = intro + (list.length ? withInfeed(list.map(cardHTML)) : '<div class="empty">' + esc(empty) + "</div>");
+    // 한인 영향도 필터 칩(이 판에 impact 데이터가 있을 때만) — 누르면 그 영향 태그가 있는 기사만
+    var cnt = {}, any = false;
+    list.forEach(function (s) { impacts(s).forEach(function (k) { cnt[k] = (cnt[k] || 0) + 1; any = true; }); });
+    if (state.impact && !cnt[state.impact]) state.impact = null;
+    var imp = any ? '<div class="impf" role="group" aria-label="한인 영향도로 골라 보기"><span class="impf__l">한인 영향</span>' +
+      '<button type="button" class="impf__c" data-imp="" aria-pressed="' + !state.impact + '">전체</button>' +
+      IMPACT.filter(function (m) { return cnt[m.k]; }).map(function (m) {
+        return '<button type="button" class="impf__c" data-imp="' + esc(m.k) + '" style="--ic:' + m.c + '" aria-pressed="' + (state.impact === m.k) + '"><span aria-hidden="true">' + m.e + "</span>" + esc(m.k) + " <small>" + cnt[m.k] + "</small></button>";
+      }).join("") + "</div>" : "";
+    if (state.impact) {
+      list = list.filter(function (s) { return impacts(s).indexOf(state.impact) >= 0; });
+      $("feedCount").textContent = list.length + "건 · '" + state.impact + "' 영향만";
+    }
+    // 📌 비자 소식: 외국인·비자(주 주제) 기사는 피드 맨 위에 고정(이 판에 있을 때만, 외국인·비자 탭 자체에선 안 함)
+    var pin = [];
+    if (tab !== "visa") { pin = list.filter(function (s) { return tps(s).topic === "visa"; }); list = list.filter(function (s) { return pin.indexOf(s) < 0; }); }
+    var pinHTML = pin.length ? '<div class="pin" aria-label="비자 소식 고정"><p class="pin__h">📌 비자 소식 <small>외국인·비자 기사를 맨 위에 모았어요</small></p>' + pin.map(cardHTML).join("") + "</div>" : "";
+    $("feed").innerHTML = intro + imp + ((pin.length || list.length) ? pinHTML + withInfeed(list.map(cardHTML)) : '<div class="empty">' + esc(empty) + "</div>");
   }
 
   function renderSide() {
@@ -511,6 +609,13 @@
       var kn = $("koreaList") ? $("koreaList").children.length : 0;
       if (Math.min(kn, KOREA.STEPS[KOREA.step]) >= kn || KOREA.step >= KOREA.STEPS.length - 1) { KOREA.step = 0; if (KOREA.open >= KOREA.STEPS[0]) KOREA.open = -1; } else KOREA.step++;
       renderKorea(); if (!KOREA.step) $("korea").scrollIntoView({ block: "nearest" }); return;
+    }
+    if ((el = e.target.closest("[data-imp]"))) { var ik = el.getAttribute("data-imp") || null; state.impact = state.impact === ik ? null : ik; var fy = window.pageYOffset; renderFeed(); window.scrollTo(0, fy); return; }
+    if ((el = e.target.closest("[data-also]"))) { var ap = $("also-" + el.getAttribute("data-also")); if (ap) togglePanel(el, ap); return; }
+    if ((el = e.target.closest("[data-issue]"))) {
+      var ts = byId(el.getAttribute("data-sid")), tp = $("tl-" + el.getAttribute("data-sid"));
+      if (ts && tp) togglePanel(el, tp, function () { return timelineHTML(ts); });
+      return;
     }
     if ((el = e.target.closest("[data-open-settings]"))) { Drawer.close(true); Onb.open("topics", true); return; }
     if ((el = e.target.closest("[data-tab]"))) { setTab(el.getAttribute("data-tab")); return; }
@@ -719,6 +824,7 @@
       '<a href="' + location.pathname + '?date=' + encodeURIComponent(EDS[0].id) + '">최신 ' + esc(EDS[0].label) + " 보기 →</a>";
   }
   loadKorea();
+  loadIssues();
   // 화면으로 돌아왔을 때 10분 넘었으면 한국 뉴스 다시 받기(2시간마다 갱신됨)
   document.addEventListener("visibilitychange", function () { if (!document.hidden && Date.now() - KOREA.at > 10 * 60 * 1000) loadKorea(); });
   if (cur) loadDate(cur.id); else $("feed").innerHTML = '<div class="empty">데이터가 없습니다.' + (navigator.onLine === false ? " 오프라인 상태입니다." : "") + "</div>";

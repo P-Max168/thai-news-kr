@@ -571,3 +571,68 @@ body.drawer-open{overflow:hidden}
 }
 @media (max-width:640px){ .tk-chip.tk-tile{padding:0 5px} .ticker{gap:3px} }
 .tk-pop{overflow-y:auto;overscroll-behavior:contain}
+
+/* ===== 판마다 채울 필드(2026-10-03 추가): 한인 영향도·그래서 나는?·다른 매체·이슈 타임라인·추천 댓글 ===== */
+.chip--imp{background:#fff;color:var(--ic,#495057);border:1px solid #d7dce3;border:1px solid color-mix(in srgb,var(--ic,#495057) 45%,#fff);font-size:11.5px;padding:2px 7px;gap:3px}
+.forme{margin:2px 0 10px;padding:9px 11px 9px 12px;border-radius:10px;background:#fff8e6;border:1px solid #fde3a7;border-left:4px solid #f5b700;font-size:14.5px;line-height:1.55;color:#3d2f00}
+.forme__h{display:block;font-size:12px;font-weight:800;color:#a15c00;margin-bottom:1px;letter-spacing:-.1px}
+.forme__t{display:block;font-weight:600}
+.card__tools{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px 20px;border-left:4px solid var(--tc,transparent)}
+.card__tools[hidden]{display:none}
+.card__tools > span:empty{display:none}
+.tool{display:inline-flex;align-items:center;gap:4px;border:1px solid #d7dce3;background:#f8f9fb;color:var(--ink-2);font:inherit;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:999px;cursor:pointer;line-height:1.35;min-height:32px}
+.tool b{font-weight:800;color:var(--navy-2)}
+.tool i{font-style:normal;display:inline-block;transition:transform .2s;font-size:11px}
+.tool.is-on{background:#eef4ff;border-color:#9db7ea}
+.tool.is-on i{transform:rotate(180deg)}
+.tool__n{background:var(--navy-2);color:#fff!important;border-radius:999px;padding:0 6px;font-size:11px;line-height:1.5}
+.tool-panel{margin:0 16px 12px 20px;border:1px solid #e1e8f2;background:#f7f9fc;border-radius:12px;padding:10px 12px;font-size:14px}
+.tool-panel[hidden]{display:none}
+.tool-panel__h{margin:0 0 6px;font-size:12.5px;color:var(--muted);font-weight:700}
+.tool-panel__h b{color:var(--ink)}
+.also__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.also__list a{display:flex;align-items:center;gap:8px;text-decoration:none;background:#fff;border:1px solid #e6e8ec;border-radius:9px;padding:8px 10px;min-height:40px}
+.also__list a:hover{border-color:#b9c2d0}
+.also__s{font-weight:700;font-size:14px}
+.also__m{font-size:11px;font-weight:700;color:#0b7285;background:#e6f4f6;border-radius:999px;padding:1px 7px}
+.also__go{margin-left:auto;color:var(--muted)}
+.tl__list{list-style:none;margin:0;padding:0 0 0 14px;position:relative}
+.tl__list::before{content:"";position:absolute;left:4px;top:6px;bottom:6px;width:2px;background:#cfd8e6;border-radius:2px}
+.tl__i{position:relative;padding:4px 0 10px 10px;display:flex;flex-direction:column;gap:1px}
+.tl__i::before{content:"";position:absolute;left:-14px;top:9px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #8aa1c7}
+.tl__i.is-here::before{background:var(--accent);border-color:var(--accent)}
+.tl__d{font-size:11.5px;color:var(--muted);font-weight:700}
+.tl__t{font-size:14px;line-height:1.45;font-weight:600;color:var(--ink)}
+.tl__go{align-self:flex-start;font:inherit;font-size:12.5px;font-weight:700;color:#1d4ed8;background:none;border:0;padding:3px 0;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.tl__here{align-self:flex-start;font-size:11px;font-weight:800;color:#fff;background:var(--accent);border-radius:999px;padding:1px 8px;margin-top:2px}
+.impf{display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px 0 8px;margin:0 0 2px;-webkit-overflow-scrolling:touch}
+.impf::-webkit-scrollbar{display:none}
+.impf__l{font-size:12px;font-weight:800;color:var(--muted);white-space:nowrap}
+.impf__c{flex:0 0 auto;display:inline-flex;align-items:center;gap:3px;border:1px solid #d7dce3;background:#fff;color:var(--ic,var(--ink-2));font:inherit;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:999px;cursor:pointer;white-space:nowrap;min-height:32px}
+.impf__c small{font-size:11px;color:var(--muted);font-weight:700}
+.impf__c[aria-pressed="true"]{background:var(--ic,var(--navy-2));border-color:var(--ic,var(--navy-2));color:#fff}
+.impf__c[aria-pressed="true"] small{color:rgba(255,255,255,.85)}
+.pin{display:flex;flex-direction:column;gap:12px;padding:8px;margin:0 -8px;border-radius:16px;background:linear-gradient(180deg,#f3f0ff,rgba(243,240,255,0));}
+
+.pin__h{margin:0 0 6px 2px;font-size:13px;font-weight:800;color:#5f3dc4}
+.pin__h small{font-weight:600;color:var(--muted);margin-left:4px}
+.qr{margin:8px 0 6px}
+.qr__l{display:block;font-size:11.5px;font-weight:700;color:var(--muted);margin-bottom:5px}
+.qr__chips{display:flex;flex-wrap:wrap;gap:6px}
+.qr__c{font:inherit;font-size:13px;font-weight:600;color:#1c3d6e;background:#eef4ff;border:1px dashed #9db7ea;border-radius:999px;padding:6px 11px;cursor:pointer;line-height:1.35;text-align:left;min-height:34px}
+.qr__c:hover,.qr__c:focus-visible{background:#dfeaff;border-style:solid}
+.replies{margin:2px 0 6px 14px;padding-left:10px;border-left:2px solid #e3e7ee}
+.replies--op{margin:-2px 0 8px}
+.cmt--reply{padding:7px 0}
+.cmt--reply .cmt__t{font-size:13.5px}
+.rform{display:flex;flex-direction:column;gap:6px;margin:6px 0 4px}
+.rform textarea{font:inherit;font-size:15px;border:1px solid #cfd4dc;border-radius:10px;padding:8px 10px;width:100%;box-sizing:border-box;resize:vertical}
+.rform .cform__msg{color:#c92a2a}
+@media (max-width:640px){
+  .card__tools{padding:0 12px 10px 15px}
+  .tool-panel{margin:0 12px 12px 15px}
+  .forme{font-size:14px}
+}
+/* 영향도 필터 줄(가로 스크롤)이 좁은 화면에서 본문 칸을 넓히지 않게 */
+.main-col{min-width:0}
+.impf{max-width:100%;contain:inline-size}

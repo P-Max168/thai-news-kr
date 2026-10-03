@@ -36,6 +36,77 @@ TARGETS = dict(stories=(20, 25), visa=(2, 4), places=("pattaya", "sriracha", "ba
 B = lambda topic, text, story_id: dict(topic=topic, text=text, story_id=story_id)   # 브리핑 한 줄
 BLOCKLIST = ROOT / "tools" / "trend_blocklist.txt"
 _BL = None
+# ── 판마다 채울 필드(2026-10-03 추가, README '판마다 채울 필드') ──
+#   impact[]      : 한인 영향도 태그(아래 5개 중 0~3개)       for_me        : '그래서 나는?' 한 문장(없으면 "")
+#   also[]        : 같은 사건을 보도한 다른 매체 [{source, url}] (확인한 실제 기사 주소만)
+#   issue         : {id, title} — 이어지는 이슈(tools/issues.json 등록부의 id 만)   quick_replies[] : 추천 댓글 3~4개
+IMPACTS = ["비자·체류", "환율·물가", "교통·사고", "치안", "날씨·재해"]
+ISSUES_FILE = ROOT / "tools" / "issues.json"
+ISSUE_ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{2,60}$")
+THAI_RE = re.compile(r"[\u0E00-\u0E7F]")
+# 추천 댓글은 독자 본인이 올리는 문장 — 겪지 않은 경험을 지어내게 만드는 표현 금지
+FAKE_EXP_RE = re.compile(r"저도\s*(거기|그\s*동네|근처|여기)\s*(살|사는|살아)|제가\s*(직접|가\s*봤|가봤|겪|봤)|저도\s*(겪|당했|가\s*봤|가봤|다녀왔|봤어)|우리\s*(집|동네)도|저희\s*(집|동네|가게)")
+LINK_RE = re.compile(r"https?://|www\.|\.(com|net|org|co|th|me|ly)\b", re.I)
+_REG = None
+
+
+def issue_registry():
+    """tools/issues.json → {id: {...}} (없으면 빈 dict)."""
+    global _REG
+    if _REG is None:
+        _REG = {}
+        if ISSUES_FILE.exists():
+            for it in json.loads(ISSUES_FILE.read_text(encoding="utf-8")).get("issues", []):
+                _REG[it["id"]] = it
+    return _REG
+
+
+def baht_ok(text):
+    """바트 금액마다 바로 뒤에 '(약 N원)' 원화 환산이 있는지(TRANSLATION_RULES)."""
+    for m in re.finditer(r"\d[\d,.]*\s*(?:만|억|조)?\s*바트", text or ""):
+        if not re.match(r"\s*\(약\s*[\d,.]+\s*(?:만|억|조)?\s*(?:\d[\d,.]*\s*(?:만|억)?\s*)?원", text[m.end():]):
+            return False
+    return True
+
+
+EXTRAS_FROM = "2026-10-03-am"   # 이 판 id 보다 뒤 판은 다섯 필드 필수
+
+
+def validate_extras(s):
+    """impact / for_me / also / issue / quick_replies 형식 점검(있을 때만). 문제 있으면 예외."""
+    sid = s["id"]
+    if "impact" in s:
+        im = s["impact"]
+        assert isinstance(im, list) and len(im) <= 3 and len(set(im)) == len(im) and all(x in IMPACTS for x in im), \
+            (sid, "impact 는 %s 중 0~3개 목록" % "/".join(IMPACTS), im)
+    if "for_me" in s:
+        fm = s["for_me"]
+        assert isinstance(fm, str) and len(fm) <= 160, (sid, "for_me 는 한 문장(160자 이하) 문자열, 의미 없으면 \"\"")
+        assert not THAI_RE.search(fm), (sid, "for_me 에 태국 글자 금지")
+        assert not blocked(fm) and baht_ok(fm), (sid, "for_me 차단 키워드 또는 바트 금액에 (약 N원) 없음")
+    if "also" in s:
+        al = s["also"]
+        assert isinstance(al, list) and len(al) <= 8, (sid, "also 는 최대 8개 목록")
+        urls = set()
+        for a in al:
+            assert isinstance(a, dict) and a.get("source") and str(a.get("url", "")).startswith("http"), (sid, "also = [{source, url}]", a)
+            assert "news.google.com" not in a["url"], (sid, "also 에 Google News 중계 링크 금지 — 실제 기사 URL", a["url"])
+            assert a["url"] != s.get("url") and a["url"] not in urls, (sid, "also 에 원문·중복 URL", a["url"])
+            urls.add(a["url"])
+    if s.get("issue") is not None:
+        iss = s["issue"]
+        assert isinstance(iss, dict) and ISSUE_ID_RE.match(str(iss.get("id", ""))) and iss.get("title"), (sid, "issue = {id(영문 소문자·숫자·-), title}", iss)
+        assert not THAI_RE.search(iss["title"]) and len(iss["title"]) <= 40, (sid, "issue.title 은 한국어 40자 이하")
+        reg = issue_registry()
+        assert iss["id"] in reg, (sid, "issue id '%s' 가 tools/issues.json 에 없음 — 새 이슈면 등록부에 먼저 추가" % iss["id"])
+    if "quick_replies" in s:
+        qr = s["quick_replies"]
+        assert isinstance(qr, list) and (len(qr) == 0 or 3 <= len(qr) <= 4), (sid, "quick_replies 는 3~4개(없으면 빈 목록)")
+        for q in qr:
+            assert isinstance(q, str) and 2 <= len(q.strip()) <= 40, (sid, "quick_replies 한 줄 2~40자", q)
+            assert not THAI_RE.search(q) and not LINK_RE.search(q) and not blocked(q), (sid, "quick_replies 태국 글자·링크·차단 키워드 금지", q)
+            assert not FAKE_EXP_RE.search(q), (sid, "quick_replies 에 겪지 않은 경험을 꾸미는 표현 금지('저도 거기 살아요' 등)", q)
+            assert baht_ok(q), (sid, "quick_replies 바트 금액엔 (약 N원)", q)
 
 
 def _blocklist():
@@ -119,6 +190,11 @@ def validate(data):
                 (s["id"], "discussion = {question, operator_comment, approved: bool}")
             assert len(dsc["question"]) <= 200 and len(dsc["operator_comment"]) <= 500, (s["id"], "discussion 이 너무 김")
             assert not blocked(dsc["question"] + " " + dsc["operator_comment"]), (s["id"], "discussion 차단 목록 키워드")
+        validate_extras(s)
+        if new and eid > EXTRAS_FROM:   # 2026-10-03 저녁판부터: 다섯 필드를 판마다 반드시 채움(값은 비어도 됨, quick_replies 는 3~4개)
+            miss = [k for k in ("impact", "for_me", "also", "issue", "quick_replies") if k not in s]
+            assert not miss, (s["id"], "판마다 채울 필드 없음: %s (README '판마다 채울 필드(2026-10-03 추가)')" % ", ".join(miss))
+            assert 3 <= len(s["quick_replies"]) <= 4, (s["id"], "quick_replies 3~4개 필수")
         if s.get("category") == "visa" or s.get("topic") == "visa" or "visa" in s.get("secondary", []):
             # 외국인·비자: 저볼륨이라 최대 7일 전 기사 허용(그 이상은 금지)
             age = datetime.fromisoformat(data["generated"]) - datetime.fromisoformat(s["published"])
@@ -232,7 +308,49 @@ def build_index():
     (DATA / "index.js").write_text("window.NEWS_INDEX = %s;\n" % json.dumps(idx, ensure_ascii=False), encoding="utf-8")
     print("index:", [(e["id"], e["label"]) for e in eds])
     build_ads()
+    build_issues(eds)
     return idx
+
+
+def build_issues(eds=None):
+    """🗓️ 이슈 타임라인: tools/issues.json(등록부·옛 판 members) + 판 기사 issue 필드 → data/issues.json|js.
+    {updated, issues: {id: {title, items:[{edition, label, story, headline, published}]}}} (items 는 시간순)"""
+    reg = issue_registry()
+    if eds is None:
+        eds = json.loads((DATA / "index.json").read_text(encoding="utf-8"))["editions"]
+    labels = {e["id"]: e["label"] for e in eds}
+    out = {k: dict(title=v["title"], items=[]) for k, v in reg.items()}
+    seen = set()
+    def add(iid, eid, s):
+        if iid not in out or (eid, s["id"]) in seen:
+            return
+        seen.add((eid, s["id"]))
+        out[iid]["items"].append(dict(edition=eid, label=labels.get(eid, eid), story=s["id"], headline=s["headline"], published=s.get("published", "")))
+    cache = {}
+    def load(eid):
+        if eid not in cache:
+            p = DATA / (eid + ".json")
+            cache[eid] = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {"stories": []}
+        return cache[eid]
+    for e in eds:
+        for s in load(e["id"]).get("stories", []):
+            if isinstance(s.get("issue"), dict) and s["issue"].get("id"):
+                add(s["issue"]["id"], e["id"], s)
+    for iid, v in reg.items():
+        for m in v.get("members", []):
+            st = [s for s in load(m["edition"]).get("stories", []) if s["id"] == m["story"]]
+            if m["edition"] in labels and st:
+                add(iid, m["edition"], st[0])
+            else:
+                print("경고: issues.json members 에 없는 기사:", iid, m, file=sys.stderr)
+    order = {e["id"]: i for i, e in enumerate(reversed(eds))}
+    for v in out.values():
+        v["items"].sort(key=lambda x: (x["published"] or "", order.get(x["edition"], 0)))
+    out = {k: v for k, v in out.items() if v["items"]}
+    doc = dict(updated=max([e.get("generated", "") for e in eds] or [""]), issues=out)
+    (DATA / "issues.json").write_text(json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")
+    (DATA / "issues.js").write_text("window.TN_ISSUES = %s;\n" % json.dumps(doc, ensure_ascii=False), encoding="utf-8")
+    print("issues:", {k: len(v["items"]) for k, v in out.items()})
 
 
 def build_ads():
