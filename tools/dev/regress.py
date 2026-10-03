@@ -232,6 +232,18 @@ async def main():
             pc = {"err": str(e)[:100]}
         rec(pc.get("all", 0) >= 40 and 0 < pc.get("pet", 0) < 30 and pc.get("kr", 0) >= 10 and pc.get("krsrc") and pc.get("oldlast") and pc.get("thai") is False and pc.get("src"),
             "📇 가게 카드 — 한식·한인 10곳+(칸마다 출처·확인일)·오래된 정보 맨 뒤·종류 필터·태국 문자 없음", pc)
+        # 🏠 임대 카드 시험(#rent): 공개 매물 10개, 월세 바트+원, ㎡+평, 칸마다 출처, 메뉴 링크 없음
+        try:
+            await pg.evaluate("TNPages.open('rent')"); await pg.wait_for_timeout(1500)
+            rc = await pg.evaluate("""()=>{const c=[...document.querySelectorAll('#tnPage .rc')];return {n:c.length,
+              krw:c.filter(e=>/바트 \(약 [\d,]+원\)/.test(e.textContent)).length, py:c.filter(e=>/㎡ \(약 [\d.]+평\)/.test(e.textContent)).length,
+              src:c.every(e=>e.querySelectorAll('.pc__fs a[href^="https://www.fazwaz.com/"]').length>=4), img:document.querySelectorAll('#tnPage .rc img').length,
+              thai:/[\u0E00-\u0E7F]/.test(document.getElementById('tnPage').textContent), linked:!!document.querySelector('a[href="#rent"],[data-page="rent"]')}}""")
+            await pg.evaluate("TNPages.close()"); await pg.wait_for_timeout(300)
+        except Exception as e:
+            rc = {"err": str(e)[:100]}
+        rec(rc.get("n") == 10 and rc.get("krw") == 10 and rc.get("py") == 10 and rc.get("src") and rc.get("img") == 0 and rc.get("thai") is False and rc.get("linked") is False,
+            "🏠 임대 카드 시험 — 공개 매물 10개(월세 바트+원·㎡+평·칸마다 출처·사진 없음·메뉴 링크 없음)", rc)
         # 다듬기: 글자 대비(WCAG AA) — 첫 화면(주요 뉴스 사진 카드는 계산 불가라 뺌)
         try:
             await pg.evaluate("window.scrollTo(0,0)")

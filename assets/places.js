@@ -152,6 +152,47 @@
       return false;
     }
   });
+  /* ---- 🏠 임대 카드 시험(#rent, 2026-10-03) — data/rentals-pattaya.json(tools/rentals/build_rentals.py). 공개 매물 쪽 값만, 사진 없음, 게시·연락 없음.
+   * 사이트 메뉴에 링크 안 함(승인함 #9 결정 전). 월세 = 바트 + 원(헤더 환율), 면적 = ㎡ + 평(1평 = 3.3058㎡), 칸마다 출처·확인일. */
+  var RD = null, rLoading = false, rErr = false;
+  function rLoad() {
+    if (RD || rLoading) return; rLoading = true; rErr = false;
+    fetch("data/rentals-pattaya.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (d) { RD = d; rLoading = false; TNPages.refresh(); }, function () { rLoading = false; rErr = true; TNPages.refresh(); });
+  }
+  function rCard(x) {
+    var s = x.src, f = '<small class="pc__fs"><a href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">' + esc(s.by) + " ↗</a> · " + esc(s.at) + " 확인</small>";
+    var na = '<small class="pc__fs">확인한 출처에 없음</small>';
+    var room = x.beds === 0 ? "스튜디오(원룸)" : x.beds + "침실";
+    var krw = FX ? " (약 " + (Math.round(x.rent_thb * FX / 1000) * 1000).toLocaleString("ko-KR") + "원)" : "";
+    var map = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(x.name + " Pattaya");
+    return '<article class="pc rc" data-rc="' + esc(x.id) + '"><div class="pc__top"><span class="pc__cat">🏠 콘도 임대</span><span class="pc__open">' + esc(room) + "</span></div>" +
+      '<h3 class="pc__name">' + esc(x.name) + "</h3>" + (x.old ? '<p class="pc__warn"><span class="pc__old">🕰️ 오래된 정보</span> 2023년 전에 올라온 매물이에요.</p>' : "") +
+      '<dl class="pc__info">' +
+        "<div><dt>💰 월세</dt><dd><b>" + x.rent_thb.toLocaleString("ko-KR") + "바트</b>" + esc(krw) + f + "</dd></div>" +
+        "<div><dt>📐 면적</dt><dd>" + esc(String(x.sqm)) + "㎡ (약 " + esc(String(x.pyeong)) + "평)" + f + "</dd></div>" +
+        "<div><dt>📍 지역</dt><dd>" + esc(x.area) + f + "</dd></div>" +
+        "<div><dt>🧾 보증금·관리비·계약 기간</dt><dd class=\"pc__na\">확인 안 됨" + na + "</dd></div>" +
+        "<div><dt>✅ 올린 날 · 고친 날</dt><dd>" + esc(x.listed || "확인 안 됨") + " · " + esc(x.updated_rel ? x.checked + " 기준 " + x.updated_rel : "확인 안 됨") + f + "</dd></div>" +
+      "</dl>" +
+      '<div class="pc__btns"><a class="pc__btn pc__btn--map" href="' + esc(map) + '" target="_blank" rel="noopener">📍 지도</a><a class="pc__btn" href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">🔗 원래 매물 보기</a></div></article>';
+  }
+  TNPages.register("rent", {
+    title: "🏠 파타야 임대 카드(시험)",
+    render: function () {
+      rLoad(); loadFx();
+      if (rErr) return '<div class="empty empty--err pc-empty" role="alert"><b>⚠️ 임대 목록을 불러오지 못했어요.</b><br><button type="button" class="btn btn--primary btn--sm empty__retry" data-rc-retry>다시 시도</button></div>';
+      if (!RD) return '<div class="skel pc-skel" aria-hidden="true"></div><p class="sr-only" role="status">불러오는 중이에요…</p>';
+      var list = RD.items.slice().sort(function (a, b) { return (a.old ? 1 : 0) - (b.old ? 1 : 0) || a.rent_thb - b.rent_thb; });
+      return '<p class="pc-intro"><b>공개된 실제 매물 ' + list.length + "개</b>를 그대로 옮긴 <b>시험</b>이에요(사진 없음). 이 사이트는 중개하지 않고, 문의는 원래 매물 쪽에서 하세요. 칸마다 출처와 확인한 날을 적었고, 모르는 칸은 <b>확인 안 됨</b>이에요. 월세 싼 순.</p>" +
+        '<div class="pc-list">' + list.map(rCard).join("") + "</div>" +
+        '<p class="pc-src">출처: <a href="' + esc(RD.source_list) + '" target="_blank" rel="noopener nofollow">FazWaz 파타야 콘도 임대 목록</a> · 받은 날 ' + esc(RD.fetched) + " · 원화는 헤더 환율로 계산 · 1평 = 3.3058㎡ · 매물은 이미 나갔을 수 있어요.</p>";
+    },
+    click: function (e, t) {
+      if (t.closest("[data-rc-retry]")) { rErr = false; rLoad(); TNPages.refresh(); return true; }
+      return false;
+    }
+  });
   // 📍 내 주변 화면의 '가게 카드' 버튼: 그 종류로 미리 고르기(페이지 열기 전에)
   document.addEventListener("click", function (e) {
     var el = e.target.closest && e.target.closest("[data-pl-cat]"); if (!el) return;

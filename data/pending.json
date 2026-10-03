@@ -1,6 +1,6 @@
 {
  "_readme": "관리자 승인함(#approve) 목록 — tools/pending.py 가 PENDING_APPROVAL.md 에서 만듦. 승인은 민구님이 고르고 봇이 다음 실행에 반영(자동 승인 없음)",
- "updated_at": "2026-10-03T16:32:14+07:00",
+ "updated_at": "2026-10-03T16:47:53+07:00",
  "items": [
   {
    "id": "p1",
@@ -64,6 +64,14 @@
    "kind": "영업(가게 참여 시안)",
    "body": "**가게 주인이 가격·영업시간 알려 주기(무료)** — 시안만, 보내기·저장·결제·실제 등록 없음. 카드에 '🏪 사장님이세요? 가격·영업시간 알려 주기' 버튼 → 요일별 시간·대표 메뉴 3개 가격(바트, 원화는 자동)·증빙 사진 1장·확인 연락처 → 운영자 확인 뒤 '✔ 가게가 알려 줌 · 날짜 · 확인 방법' 표시. 정해 주실 것: ① 받는 곳(카톡 채널 / 구글 설문지 / 사이트 안 칸 = Firestore 규칙 필요) ② 확인 방법(사진 + 전화 권장) ③ 표시 문구 ④ 무료 유지(권장, #6 상단 고정과 따로). 사진: backups/backup-20261003-1624-owner-mockup/mockup-owner.jpg",
    "where": "`tools/places/mockup-owner.html`(사이트에 링크 안 됨) → OK 뒤 assets/places.js 버튼 + data 의 `srcs` 에 '가게가 알려 줌' 출처",
+   "status": "대기"
+  },
+  {
+   "id": "p9",
+   "no": 9,
+   "kind": "공개 여부(임대 카드)",
+   "body": "**🏠 임대 카드 시험(#rent) 을 메뉴에 걸지** — 지금은 사이트 어디에도 링크 없음(운영자 확인용, 개발 도구로만 열림). 공개 매물 쪽(FazWaz)에서 본 10개(월세 바트+원·㎡+평·올린 날·칸마다 출처, 사진 없음, 게시·연락 없음). 정해 주실 것: ① 메뉴(내 주변 화면)에 걸지 ② 출처 사이트 이용 약관 확인 뒤 계속 받을지(봇은 약관 동의·연락 안 함) ③ 시라차·방콕도 할지. 사진: backups/backup-20261003-1645-rent-test/after-rent-card.jpg",
+   "where": "`data/rentals-pattaya.json`(tools/rentals/build_rentals.py) · assets/places.js `rent` 쪽",
    "status": "대기"
   }
  ]
