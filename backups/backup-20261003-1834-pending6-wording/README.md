@@ -1,0 +1,3 @@
+- 바뀐 것: 승인함 #6 문구만 바꿈: '무료 기간 없이 정상가 상품 1종 — 6개월 상단 고정 + 사진 5장 + 소식 1줄', 가격 칸 비워 둠(민구님이 아침에 정함), 결제 없음
+- 왜: 검수 지시(18:18) 3번
+- 되돌리는 법: `git checkout backup-20261003-1834-pending6-wording -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)

@@ -1,0 +1,3 @@
+- 바뀐 것: 📇 가게 카드: 「🧾 가격 VAT 별도」 칸 추가(모르면 '확인 안 됨' — 지어내지 않음, 92곳 모두 지금은 확인 안 됨) + 대마·성인·도박 업종 거름망(이름·OSM 업종 태그) — 지금 카드 중 걸린 곳 0곳
+- 왜: 검수 지시(18:18) 2번
+- 되돌리는 법: `git checkout backup-20261003-1831-places-vat-exclude -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
