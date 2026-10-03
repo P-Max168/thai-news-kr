@@ -114,6 +114,7 @@
       '<dl class="pc__info">' +
         "<div><dt>🕒 영업시간</dt><dd>" + esc(hoursKo(p.hours, p._oh)) + fs(p, "hours") + "</dd></div>" +
         "<div><dt>💰 가격</dt><dd" + (p.price_thb == null ? ' class="pc__na"' : "") + ">" + esc(priceKo(p.price_thb)) + fs(p, "price") + "</dd></div>" +
+        "<div><dt>🧾 가격 VAT 별도</dt><dd" + (p.vat_extra == null ? ' class="pc__na"' : "") + ">" + (p.vat_extra === true ? "별도(가격에 VAT 안 들어 있음)" : p.vat_extra === false ? "포함" : "확인 안 됨") + fs(p, "vat") + "</dd></div>" +
         (go ? "<div><dt>📍 동네</dt><dd>" + esc(p.area) + "<small>정확한 위치·주소는 아래 '구글 지도에서 보기'</small>" + fs(p, "area") + "</dd></div>"
             : "<div><dt>📍 주소</dt><dd" + (p.address ? "" : ' class="pc__na"') + ">" + esc(p.address || "확인 안 됨(지도 버튼으로 위치 보기)") + fs(p, "address") + "</dd></div>") +
         "<div><dt>📞 전화</dt><dd" + (p.phone ? "" : ' class="pc__na"') + ">" + esc(p.phone || "확인 안 됨") + fs(p, "phone") + "</dd></div>" +

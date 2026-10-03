@@ -226,6 +226,8 @@ async def main():
             pc["gm"] = await pg.evaluate("(()=>{const g=[...document.querySelectorAll('#tnPage .pc')].filter(c=>/구글 지도에서 보기/.test(c.textContent));return {n:g.length,bad:g.filter(c=>c.querySelector('a[href^=\"tel:\"]')||/\\+66|★|평점/.test(c.textContent)).length}})()")
             await pg.click('[data-pc-cat="all"]'); await pg.wait_for_timeout(300); pc["all"] = await pg.locator("#tnPage .pc").count()
             pc["oldlast"] = await pg.evaluate("(()=>{const o=[...document.querySelectorAll('#tnPage .pc')].map(c=>!!c.querySelector('.pc__old'));const f=o.indexOf(true);return f>0&&o.slice(f).every(Boolean)})()")
+            pc["vat"] = await pg.evaluate("(()=>{const c=[...document.querySelectorAll('#tnPage .pc')];return c.length>0&&c.every(e=>/가격 VAT 별도/.test(e.textContent))})()")
+            pc["excl"] = await pg.evaluate("/cannabis|대마|casino|카지노|도박|erotic|성인용/i.test(document.getElementById('tnPage').textContent)")
             pc["thai"] = await pg.evaluate("/[\\u0E00-\\u0E7F]/.test(document.getElementById('tnPage').textContent)")
             pc["src"] = await pg.evaluate("document.getElementById('tnPage').innerText.indexOf('OpenStreetMap contributors')>=0")
             # 지역: 시라차·방콕(OSM 한식·한인만)
@@ -237,7 +239,7 @@ async def main():
             await pg.evaluate("TNPages.close()"); await pg.wait_for_timeout(400)
         except Exception as e:
             pc = {"err": str(e)[:100]}
-        rec(pc.get("all", 0) >= 40 and 0 < pc.get("pet", 0) < 30 and pc.get("kr", 0) >= 10 and pc.get("bkk", {}).get("n", 0) >= 20 and pc["bkk"].get("kr") == pc["bkk"].get("n") and pc["bkk"].get("osm") and pc["bkk"].get("thai") is False and pc.get("sri", 0) >= 1 and pc.get("gm", {}).get("n", 0) >= 20 and pc.get("gm", {}).get("bad") == 0 and pc.get("krsrc") and pc.get("oldlast") and pc.get("thai") is False and pc.get("src"),
+        rec(pc.get("vat") is True and pc.get("excl") is False and pc.get("all", 0) >= 40 and 0 < pc.get("pet", 0) < 30 and pc.get("kr", 0) >= 10 and pc.get("bkk", {}).get("n", 0) >= 20 and pc["bkk"].get("kr") == pc["bkk"].get("n") and pc["bkk"].get("osm") and pc["bkk"].get("thai") is False and pc.get("sri", 0) >= 1 and pc.get("gm", {}).get("n", 0) >= 20 and pc.get("gm", {}).get("bad") == 0 and pc.get("krsrc") and pc.get("oldlast") and pc.get("thai") is False and pc.get("src"),
             "📇 가게 카드 — 지역 3곳(파타야·시라차·방콕 OSM 한식·한인) · 한식·한인 10곳+(칸마다 출처·확인일, 구글 지도 가게는 이름·동네·링크만 — 전화·시간·평점 없음)·오래된 정보 맨 뒤·종류 필터·태국 문자 없음", pc)
         # 🧑‍💼 구인판 시안(#jobs): 주소로만 열림, 예시 6개(모두 '예시' 표시), 광고 1칸, 입력·올리기 없음, 메뉴 링크 없음
         try:

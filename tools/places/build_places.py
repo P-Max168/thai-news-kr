@@ -17,6 +17,20 @@ OLD_BEFORE = "2023-01-01"   # 이보다 오래된 정보 = '오래된 정보' �
 FETCHED = "2026-10-03"
 THAI = re.compile(r"[\u0E00-\u0E7F]")
 BAD = re.compile(r"massage|\bspa\b|go-?go|\bbar\b|club|lady|soapy|nuru|cabaret|\bshow\b", re.I)
+# 빼는 업종(검수 지시 2026-10-03 18:18): 대마·성인·도박 — 이름·업종 태그에 걸리면 카드에서 뺌(빌드 때 이유 출력)
+EXCL = re.compile(r"cannabis|marijuana|\bweed\b|\bganja\b|\bkush\b|dispensar|\bhemp\b|\bcbd\b|\bthc\b|\b420\b|대마|"
+                  r"casino|gambl|poker|baccarat|betting|bookmaker|lottery|카지노|도박|"
+                  r"\badult\b|erotic|\bsex|\bxxx\b|strip ?club|brothel|escort|hostess|love ?hotel|성인", re.I)
+EXCL_TAGS = {("shop", "cannabis"), ("shop", "erotic"), ("shop", "lottery"), ("shop", "bookmaker"), ("amenity", "casino"), ("amenity", "gambling"),
+             ("leisure", "adult_gaming_centre"), ("amenity", "stripclub"), ("amenity", "brothel"), ("amenity", "love_hotel"), ("amenity", "swingerclub")}
+def excluded(name, tags=None):
+    tags = tags or {}
+    for kv in tags.items():
+        if kv in EXCL_TAGS: return "%s=%s" % kv
+    m = EXCL.search(" ".join([name or ""] + [tags.get(k, "") for k in ("name", "name:en", "name:ko", "description", "brand", "cuisine")]))
+    return m.group(0) if m else None
+DROPPED = []
+
 CAT = {"food": "맛집", "cafe": "카페", "mart": "마트", "travel": "여행·비자", "pet": "동물병원·펫샵", "moto": "오토바이", "beauty": "피부·미용"}
 NONLATIN = re.compile(r"[\u0E00-\u0E7F\u3040-\u30FF\u4E00-\u9FFF]")   # 태국·일본·한자 → 주소에서 그 조각 뺌
 PLUS = re.compile(r"^[23456789CFGHJMPQRVWX]{4}\+[23456789CFGHJMPQRVWX]{2,3}\s*")
@@ -71,6 +85,8 @@ def korean():
         cat, cid, name, kind, kr = row[:5]
         ov = row[5] if len(row) > 5 else {}
         assert not BAD.search(name), name
+        why = excluded(name)
+        if why: DROPPED.append(("pattaya", name, why)); continue
         gurl = "https://maps.google.com/?cid=" + cid
         area = ov.get("_area")
         srcs = {"g": {"by": "Google 지도", "url": gurl, "at": at}}
@@ -79,7 +95,7 @@ def korean():
             "id": "gmap-" + cid, "cat": cat, "cat_ko": CAT[cat], "name": name, "kind": kind, "cuisine": [],
             "hours": None, "hours_partial": False, "phone": None, "website": None, "address": None,
             "area": area or "파타야(동네 확인 안 됨)", "lat": None, "lng": None,
-            "price_thb": None, "status": "확인 안 됨", "checked": at, "osm_check": None, "osm_edit": None,
+            "price_thb": None, "vat_extra": None, "status": "확인 안 됨", "checked": at, "osm_check": None, "osm_edit": None,
             "source": "Google 지도", "source_url": gurl, "gmaps_only": True,
             "korean": True, "kr": kr, "srcs": srcs, "fsrc": fsrc, "info_date": at,
         })
@@ -90,6 +106,8 @@ def osm_cards(raw, pick, region_ko):
     out = []
     for cat, typ, i, name in pick:
         e = by[(typ, i)]; t = e["tags"]
+        why = excluded(name, t)
+        if why: DROPPED.append((region_ko, name, why)); continue
         nm = ok(t.get("name:ko")) or ok(t.get("name:en")) or ok(t.get("name")) or ok(name)
         assert nm and not BAD.search(nm + " " + t.get("name", "")), (i, nm)
         kind = next((v for (k, val), v in KIND.items() if t.get(k) == val), None)
@@ -102,7 +120,7 @@ def osm_cards(raw, pick, region_ko):
             "id": "osm-%s-%d" % (typ, i), "cat": cat, "cat_ko": CAT[cat], "name": nm, "kind": kind, "cuisine": cz,
             "hours": t.get("opening_hours") or None,           # OSM 영업시간 원문(화면이 한국어로 풀고 '지금 영업 중' 계산)
             "phone": phone, "website": web, "address": addr, "lat": round(lat, 6), "lng": round(lon, 6),
-            "price_thb": None,                                 # OSM 에 가격 없음 → '확인 안 됨'(바트·원은 값이 생기면 같이 표시)
+            "price_thb": None, "vat_extra": None,              # vat_extra: 가격 VAT 별도 여부(true/false) — 가게·공식 출처 확인 전엔 null(화면 '확인 안 됨'). OSM 에 가격 없음 → '확인 안 됨'(바트·원은 값이 생기면 같이 표시)
             "status": "지도 데이터에 폐업 표시 없음",            # disused/폐업 태그 없는 것만 받음
             "checked": FETCHED,                                # 이 사이트가 데이터를 받아 확인한 날
             "osm_check": t.get("check_date:opening_hours") or t.get("check_date") or None,   # OSM 기여자가 현장 확인한 날(있을 때만)
@@ -146,6 +164,7 @@ def main():
             c["korean"] = True
             c["kr"] = "OSM 음식 종류: 한식" if "한식" in c["cuisine"] else "한글 상호"
         write(r, rraw, cards)
+    print("대마·성인·도박으로 뺀 곳: %d %s" % (len(DROPPED), DROPPED))
 
 if __name__ == "__main__":
     main()
