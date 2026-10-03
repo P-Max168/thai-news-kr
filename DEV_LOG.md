@@ -74,3 +74,6 @@
 - 17:10 · 다음 차례 고른 이유: 바깥 확인 없이 바로 고칠 수 있고, 잘못 숨긴 광고 = 광고 수입 손해 → 목표(광고 수입)에 가장 가까움
 - 문제점(② 17:10): 낮음 · '동물 이야기'는 낱말만 봄 — 사람이 다친 동물 사고(예: 코끼리에 관광객 사망)도 −2 를 받지만 그런 기사는 '사망 사고 +1' 정도라 원래도 안 숨겨짐; 사람 잔혹 사건에 동물 낱말이 섞이면 덜 숨길 수 있음 → 편집자 ad_safe:false 로 덮기
 - 17:11 · 검수 파일(16:15) 1~5번 끝 + 7번 기록 끝 → **대기** (시라차·방콕 카드·렌트 확장·제휴 링크는 검수 파일대로 안 함)
+- 17:18 · ⛔ 임대 카드 시험 내림 — 매물 10개를 데이터에서 빼고(원본 파일도 지금 트리에서 지움, 지난 기록은 안 고침) #rent 쪽은 '내렸어요' 안내 + 약관 링크만. 승인함 #9 문구: '아침에 민구님이 보고 메뉴에 열지 결정' · `backup-20261003-1714-rent-takedown` · 확인됨: 라이브 회귀 42 통과·0 실패·2 참고, 전·후 사진. 미확인: 실제 휴대폰
+- 17:20 · FazWaz 약관 확인 근거: https://www.lifullconnect.com/legal-notice-fazwaz/ (fazwaz.com 첫 쪽 아래 Legal 링크 · Last updated 2023-09-27) — "Not to reproduce, compile, copy, extract, distribute, transmit, sale or resale … any content included in our websites" · "Unless expressly authorised by us, you are not allowed to compile, modify, reproduce … all or any part of … our websites' content" → 매물 값 옮겨 싣기는 허락 없이는 안 됨 → 10개 내림(데이터 빈 목록, 원본 json 트리에서 지움, git 지난 기록은 안 고침)
+- 문제점(⛔ 17:20): 보통 · 지난 git 기록(공개 저장소)에는 원본 매물 json 이 남아 있음 — 지우려면 기록 고쳐 쓰기(강제 푸시)가 필요해 안 함, 민구님 결정 / 보통 · 같은 원칙이 구글 지도에서 옮긴 가게 칸(한식·한인 26곳)에도 걸릴 수 있음 → 다음 줄에서 확인
