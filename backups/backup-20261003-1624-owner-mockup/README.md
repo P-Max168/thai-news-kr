@@ -1,0 +1,3 @@
+- 바뀐 것: ⑨ 가게 주인 '가격·영업시간 알려 주기'(무료) 시안 + 승인함 #8 — 작동 안 함, 값 모두 [자리표시]
+- 왜: 검토자 16:15 지시 2번: 가격·영업시간 '확인 안 됨'을 지어내지 않고 채우는 길
+- 되돌리는 법: `git checkout backup-20261003-1624-owner-mockup -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
