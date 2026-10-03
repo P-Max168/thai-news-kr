@@ -178,6 +178,17 @@ async def main():
             lg[f] = await pg.evaluate("f=>fetch(f,{cache:'no-store'}).then(r=>r.ok?r.text():'').then(t=>t.length).catch(()=>-1)", f)
         links = await pg.locator(".footer__links a").count()
         rec(all(v > 100 for v in lg.values()) and links == 4, "안내 4쪽(개인정보·약관·소개·연락) + ads.txt 열림, 푸터 링크 4개", dict(lg, footerLinks=links))
+        # ③d 내 주변: 화면 안 종류 바꾸기 5칸(같은 크기) + '이렇게 찾아요' 기준, 뒤로 = 피드
+        try:
+            await pg.evaluate("window.scrollTo(0,0)")
+            await pg.click('#nearbyRow [data-nb-cat="food"]'); await pg.wait_for_timeout(600)
+            await pg.click('[data-nb-sw="moto"]'); await pg.wait_for_timeout(500)
+            sw = await pg.evaluate("({t:document.getElementById('nbTitle').textContent,h:location.hash,ws:[...new Set([...document.querySelectorAll('.nb-sw')].map(e=>Math.round(e.getBoundingClientRect().width)))].length,n:document.querySelectorAll('.nb-sw').length,how:!!document.querySelector('.nb-how summary')})")
+            await pg.go_back(wait_until="commit"); await pg.wait_for_timeout(500)
+            sw["back"] = await pg.evaluate("!document.querySelector('#nearbyPage:not([hidden])') && history.state === null")
+        except Exception as e:
+            sw = {"err": str(e)[:100]}
+        rec(sw.get("h") == "#nearby/moto" and sw.get("n") == 5 and sw.get("ws") == 1 and sw.get("how") and sw.get("back"), "📍 내 주변 — 화면 안에서 종류 바꾸기(같은 크기 5칸)·'이렇게 찾아요'·뒤로 = 피드", sw)
         # 다듬기: 글자 대비(WCAG AA) — 첫 화면(주요 뉴스 사진 카드는 계산 불가라 뺌)
         try:
             await pg.evaluate("window.scrollTo(0,0)")

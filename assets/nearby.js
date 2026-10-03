@@ -144,12 +144,21 @@
       '<div class="nb-page__bar"><button type="button" class="nb-back" data-nb-back aria-label="뒤로 — 뉴스로 돌아가기">← 뒤로</button>' +
       '<h2 class="nb-page__t" id="nbTitle"><span aria-hidden="true">' + c.emoji + "</span> 내 주변 " + esc(c.label) + "</h2></div>" +
       '<div class="nb-page__body">' +
+      // 종류 바꾸기(뒤로 가지 않고 바로, 같은 크기 5칸) — 2026-10-03 ③d
+      '<nav class="nb-switch" aria-label="가게 종류 바꾸기">' + NEARBY.categories.map(function (k) {
+        return '<button type="button" class="nb-sw" data-nb-sw="' + k.id + '"' + (k.id === c.id ? ' aria-current="page"' : "") + ' aria-label="' + esc(k.label) + '"><span class="nb-sw__e" aria-hidden="true">' + k.emoji + '</span><span class="nb-sw__t">' + esc(k.short || k.label) + "</span></button>"; }).join("") + "</nav>" +
       '<div class="ad-slot nb-ad" data-nb-ad></div>' +
       '<a class="nb-go" data-nb-q="' + esc(c.query) + '" href="' + esc(mapsUrl(c.query)) + '" target="_blank" rel="noopener">📍 내 주변 평점 좋은 곳<br>구글 지도로 보기</a>' +
       '<div class="nb-st" data-nb-st aria-live="polite">' + statusHTML() + "</div>" +
       '<p class="nb-sec">빠른 찾기</p><div class="nb-subs">' + c.subs.map(function (s) {
         return '<a class="nb-sub" data-nb-q="' + esc(s.query) + '" href="' + esc(mapsUrl(s.query)) + '" target="_blank" rel="noopener">' + esc(s.label) + "</a>"; }).join("") + "</div>" +
       '<p class="nb-note">💡 평점 좋은 곳만 보려면 구글 지도 위쪽 필터에서 <b>평점</b>을 눌러 4.0 이상 등을 고르세요.</p>' +
+      // 이 화면의 기준(운영자·이용자 모두 '무엇으로 찾는지' 알 수 있게) — 2026-10-03 ③d
+      '<details class="nb-how"><summary>🔎 이 화면은 이렇게 찾아요</summary><ul>' +
+        "<li>큰 버튼은 구글 지도에서 영어 검색어 <code>" + esc(c.query) + "</code> 로 찾아요. 빠른 찾기는 버튼마다 검색어가 달라요" + (c.subs[0] ? "(예: " + esc(c.subs[0].label) + " = <code>" + esc(c.subs[0].query) + "</code>)" : "") + ".</li>" +
+        "<li>위치: 허용하면 <b>지금 내 위치</b> 둘레, 아니면 위에서 고른 지역(파타야·시라차·방콕) 이름으로 찾아요.</li>" +
+        "<li>순서·평점·영업 여부는 <b>구글 지도</b>가 정해요. 이 사이트가 돈을 받고 순서를 바꾸지 않아요.</li>" +
+        "<li>맨 위 <b>광고</b> 칸만 이 사이트가 직접 소개하는 가게예요('광고' 표시).</li></ul></details>" +
       '<p class="nb-note nb-note--sm">구글 지도가 새 창(앱에서는 앱 안 브라우저)으로 열려요. 위치는 지도 주소를 만드는 데만 쓰고 이 사이트에 저장하지 않아요. 순위·평점은 구글 지도 기준이며 이 사이트의 추천이 아니에요.</p>' +
       "</div></div>";
   }
@@ -201,6 +210,7 @@
       if (t === root) { back(); return; }   // 데스크톱: 바깥 누르기
       var el;
       if ((el = t.closest("[data-nb-back]"))) { back(); return; }
+      if ((el = t.closest("[data-nb-sw]"))) { if (el.getAttribute("data-nb-sw") !== cur) open(el.getAttribute("data-nb-sw")); return; }
       if ((el = t.closest("[data-nb-rg]"))) { ls(LS_REGION, el.getAttribute("data-nb-rg")); refreshLinks(); return; }
       if ((el = t.closest("[data-nb-q]"))) { onGo(e, el); return; }
     });

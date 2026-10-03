@@ -73,3 +73,29 @@ body.nb-open{overflow:hidden}
 .nb-rg button{min-height:42px;font-size:14px;border-radius:12px;padding:6px 4px}
 .nb-subs{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px}
 .nb-sub{justify-content:center;min-height:46px;padding:0 6px;border-radius:12px;font-size:15px;text-align:center}
+
+/* ===== ③d 다듬기(2026-10-03): 종류 바꾸기 5칸(같은 크기) · '이렇게 찾아요' 기준 ===== */
+.nb-switch{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:0 0 14px}
+.nb-sw{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:58px;padding:6px 2px;border:1px solid var(--line,#e2e6ee);border-radius:12px;background:#fff;color:var(--ink,#16181d);font:inherit;font-size:12.5px;font-weight:700;line-height:1.2;cursor:pointer;-webkit-tap-highlight-color:transparent;word-break:keep-all;text-align:center}
+.nb-sw__e{font-size:20px;line-height:1}
+.nb-sw[aria-current]{background:var(--navy,#0b2a4a);border-color:var(--navy,#0b2a4a);color:#fff}
+.nb-sw:active{transform:scale(.97)}
+.nb-sw:focus-visible{outline:2px solid #1c7ed6;outline-offset:2px}
+.nb-how{margin:14px 0 6px;background:#fff;border:1px solid var(--line,#e2e6ee);border-radius:12px;padding:0 14px}
+.nb-how summary{min-height:46px;display:flex;align-items:center;font-weight:700;font-size:14.5px;cursor:pointer;list-style:none}
+.nb-how summary::-webkit-details-marker{display:none}
+.nb-how summary::after{content:"▾";margin-left:auto;color:var(--muted,#5f6672)}
+.nb-how[open] summary::after{content:"▴"}
+.nb-how ul{margin:0 0 12px;padding-left:1.1em;font-size:14px;line-height:1.65;color:var(--ink-2,#3a3f4a)}
+.nb-how code{font-size:12.5px;background:#f1f3f6;border-radius:5px;padding:0 4px}
+/* 글자 크기 = 뉴스 피드와 같은 크기(본문 15.5~16px, 보조 13.5px 이상) — 2026-10-03 ③d */
+.nb-page__body{font-size:16px}
+.nb-st__t{font-size:15.5px;line-height:1.6}
+.nb-sec{font-size:14.5px;color:var(--ink-2,#3a3f4a)}
+.nb-rg button{font-size:15px;min-height:46px}
+.nb-sub{font-size:16px;min-height:50px}
+.nb-note{font-size:15px;line-height:1.65}
+.nb-note--sm{font-size:13.5px;line-height:1.6;color:var(--muted,#5f6672)}
+.nb-how summary{font-size:16px;min-height:50px}
+.nb-how ul{font-size:15px}
+.nb-sw{font-size:13.5px;min-height:62px}
