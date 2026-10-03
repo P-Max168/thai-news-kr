@@ -12,7 +12,6 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 RAW = ROOT / "tools/places/pattaya-osm-2026-10-03.json"
 PICK = ROOT / "tools/places/pattaya-pick-2026-10-03.json"
 OUT = ROOT / "data/places-pattaya.json"
-GRAW = ROOT / "tools/places/pattaya-korean-gmaps-2026-10-03.json"   # 한식·한인 업소: Google 지도(로그인 없이) 원본
 GPICK = ROOT / "tools/places/pattaya-korean-pick-2026-10-03.json"
 OLD_BEFORE = "2023-01-01"   # 이보다 오래된 정보 = '오래된 정보' 표시 + 목록 뒤로
 FETCHED = "2026-10-03"
@@ -61,31 +60,27 @@ def ok(v):
     return v if v and not THAI.search(v) else None
 
 def korean():
-    """한식·한인 업소 — Google 지도(로그인 없이 보이는 화면)에서 2026-10-03 에 읽은 값만. 칸마다 출처(fsrc → srcs) 기록."""
-    g = {x["cid"]: x for x in json.load(open(GRAW, encoding="utf-8"))["items"] if x.get("cid")}
-    at = json.load(open(GRAW, encoding="utf-8"))["checked"]
+    """한식·한인 업소 — 2026-10-03 17:25 방콕부터 **가게 이름 · 큰 동네 · 구글 지도 링크만**.
+    Google 지도 추가 약관(https://www.google.com/help/terms_maps/): 내용 복사 금지, 대량 내려받기 금지,
+    'Google 지도로 업소 목록(business listings database) 만들기·늘리기' 금지 → 전화·영업시간·주소·좌표·평점·사이트는 안 씀('확인 안 됨').
+    빈칸은 OSM 이나 가게 공식 출처로 확인될 때만 채움. 원본(pattaya-korean-gmaps-*.json)은 지금 트리에서 지움(지난 git 기록은 안 고침)."""
+    pk = json.load(open(GPICK, encoding="utf-8"))
+    at = "2026-10-03"
     res = []
-    for row in json.load(open(GPICK, encoding="utf-8"))["pick"]:
+    for row in pk["pick"]:
         cat, cid, name, kind, kr = row[:5]
-        ov = row[5] if len(row) > 5 else {}   # 값이 서로 다르게 보인 칸은 여기서 null('확인 안 됨')로 — 이유는 _why
-        x = dict(g[cid]); [x.__setitem__(k2, v) for k2, v in ov.items() if not k2.startswith("_")]
-        assert not x.get("closed"), (name, "폐업 표시")
+        ov = row[5] if len(row) > 5 else {}
         assert not BAD.search(name), name
         gurl = "https://maps.google.com/?cid=" + cid
-        hours = g_hours(x.get("rows"))
-        phone = (x.get("phone") or "").replace("Phone:", "").strip() or None
-        web = clean_url(x.get("web"))
-        addr = g_addr(x.get("addr"))
+        area = ov.get("_area")
         srcs = {"g": {"by": "Google 지도", "url": gurl, "at": at}}
-        fsrc = {f: "g" for f, v in (("name", 1), ("hours", hours), ("phone", phone), ("address", addr), ("website", web), ("status", 1)) if v}
-        if web:
-            srcs["w"] = {"by": "가게 공식 " + ("페이스북" if "facebook" in web else "인스타그램" if "instagram" in web else "틱톡" if "tiktok" in web else "네이버 카페" if "naver" in web else "사이트"), "url": web, "at": at}
+        fsrc = {"name": "g", "area": "g"} if area else {"name": "g"}
         res.append({
             "id": "gmap-" + cid, "cat": cat, "cat_ko": CAT[cat], "name": name, "kind": kind, "cuisine": [],
-            "hours": hours, "hours_partial": True,     # 제한된 보기라 확인한 요일(토)만 — 다른 요일은 '확인 안 됨'
-            "phone": phone, "website": web, "address": addr, "lat": round(x["lat"], 6), "lng": round(x["lng"], 6),
-            "price_thb": None, "status": "Google 지도에 폐업 표시 없음", "checked": at, "osm_check": None, "osm_edit": None,
-            "source": "Google 지도", "source_url": gurl, "rating": x.get("rating"),
+            "hours": None, "hours_partial": False, "phone": None, "website": None, "address": None,
+            "area": area or "파타야(동네 확인 안 됨)", "lat": None, "lng": None,
+            "price_thb": None, "status": "확인 안 됨", "checked": at, "osm_check": None, "osm_edit": None,
+            "source": "Google 지도", "source_url": gurl, "gmaps_only": True,
             "korean": True, "kr": kr, "srcs": srcs, "fsrc": fsrc, "info_date": at,
         })
     return res
@@ -121,7 +116,7 @@ def main():
         })
     out += korean()
     for p in out: p["old"] = p["info_date"] < OLD_BEFORE
-    doc = {"_readme": "📇 파타야 가게 카드 시험 — tools/places/build_places.py 가 만듦. 실제 OSM 데이터만, 모르는 값 = null(화면 '확인 안 됨'). © OpenStreetMap contributors (ODbL)",
+    doc = {"_readme": "📇 파타야 가게 카드 시험 — tools/places/build_places.py 가 만듦. 실제 OSM 데이터 + 한식·한인 업소는 이름·큰 동네·Google 지도 링크만(Google 지도 약관: 내용 복사·업소 목록 만들기 금지), 모르는 값 = null(화면 '확인 안 됨'). © OpenStreetMap contributors (ODbL)",
            "region": "pattaya", "fetched": FETCHED, "osm_base": raw.get("osm3s", {}).get("timestamp_osm_base"),
            "attribution": "© OpenStreetMap contributors", "license_url": "https://www.openstreetmap.org/copyright",
            "report_kakao_url": "",   # '정보 틀림' 카톡 링크(운영자 카톡 채널 주소 — 승인함 #7). 비어 있으면 화면은 '링크 준비 중' 자리표시

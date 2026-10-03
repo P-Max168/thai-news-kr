@@ -223,6 +223,7 @@ async def main():
             await pg.click('[data-pc-cat="pet"]'); await pg.wait_for_timeout(300); pc["pet"] = await pg.locator("#tnPage .pc").count()
             await pg.click('[data-pc-cat="korean"]'); await pg.wait_for_timeout(300); pc["kr"] = await pg.locator("#tnPage .pc").count()
             pc["krsrc"] = await pg.evaluate("[...document.querySelectorAll('#tnPage .pc')].every(c=>c.querySelectorAll('.pc__fs').length>=5 && /한식·한인/.test(c.textContent))")
+            pc["gm"] = await pg.evaluate("(()=>{const g=[...document.querySelectorAll('#tnPage .pc')].filter(c=>/구글 지도에서 보기/.test(c.textContent));return {n:g.length,bad:g.filter(c=>c.querySelector('a[href^=\"tel:\"]')||/\\+66|★|평점/.test(c.textContent)).length}})()")
             await pg.click('[data-pc-cat="all"]'); await pg.wait_for_timeout(300); pc["all"] = await pg.locator("#tnPage .pc").count()
             pc["oldlast"] = await pg.evaluate("(()=>{const o=[...document.querySelectorAll('#tnPage .pc')].map(c=>!!c.querySelector('.pc__old'));const f=o.indexOf(true);return f>0&&o.slice(f).every(Boolean)})()")
             pc["thai"] = await pg.evaluate("/[\\u0E00-\\u0E7F]/.test(document.getElementById('tnPage').textContent)")
@@ -230,8 +231,8 @@ async def main():
             await pg.evaluate("TNPages.close()"); await pg.wait_for_timeout(400)
         except Exception as e:
             pc = {"err": str(e)[:100]}
-        rec(pc.get("all", 0) >= 40 and 0 < pc.get("pet", 0) < 30 and pc.get("kr", 0) >= 10 and pc.get("krsrc") and pc.get("oldlast") and pc.get("thai") is False and pc.get("src"),
-            "📇 가게 카드 — 한식·한인 10곳+(칸마다 출처·확인일)·오래된 정보 맨 뒤·종류 필터·태국 문자 없음", pc)
+        rec(pc.get("all", 0) >= 40 and 0 < pc.get("pet", 0) < 30 and pc.get("kr", 0) >= 10 and pc.get("gm", {}).get("n", 0) >= 20 and pc.get("gm", {}).get("bad") == 0 and pc.get("krsrc") and pc.get("oldlast") and pc.get("thai") is False and pc.get("src"),
+            "📇 가게 카드 — 한식·한인 10곳+(칸마다 출처·확인일, 구글 지도 가게는 이름·동네·링크만 — 전화·시간·평점 없음)·오래된 정보 맨 뒤·종류 필터·태국 문자 없음", pc)
         # 🏠 임대 카드 시험(#rent): 공개 매물 10개, 월세 바트+원, ㎡+평, 칸마다 출처, 메뉴 링크 없음
         try:
             await pg.evaluate("TNPages.open('rent')"); await pg.wait_for_timeout(1500)

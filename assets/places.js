@@ -99,7 +99,9 @@
     var kind = [p.kind].concat(p.cuisine || []).filter(Boolean).join(" · ");
     var old = p.old ? '<p class="pc__warn"><span class="pc__old">🕰️ 오래된 정보</span> ' + esc(String(p.info_date).slice(0, 4)) + "년에 마지막으로 확인된 정보예요. 지금과 다를 수 있으니 가기 전에 전화로 확인하세요.</p>" : "";
     var kr = p.korean ? '<p class="pc__kr">🇰🇷 한식·한인 업소 <small>(근거: ' + esc(p.kr || "확인 안 됨") + ")</small></p>" : "";
-    var map = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p.name + " " + p.lat + "," + p.lng);
+    // Google 지도에서 온 가게(gmaps_only): 약관 때문에 이름·동네만 — 위치·전화·시간은 구글 지도 링크로(2026-10-03 17:25)
+    var go = !!p.gmaps_only;
+    var map = go ? p.source_url : "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p.name + " " + p.lat + "," + p.lng);
     var kakao = DATA.report_kakao_url;
     return '<article class="pc" data-pc="' + esc(p.id) + '">' +
       '<div class="pc__top"><span class="pc__cat">' + c.e + " " + esc(p.cat_ko) + "</span>" + stHTML + "</div>" +
@@ -107,13 +109,14 @@
       '<dl class="pc__info">' +
         "<div><dt>🕒 영업시간</dt><dd>" + esc(hoursKo(p.hours, p._oh)) + fs(p, "hours") + "</dd></div>" +
         "<div><dt>💰 가격</dt><dd" + (p.price_thb == null ? ' class="pc__na"' : "") + ">" + esc(priceKo(p.price_thb)) + fs(p, "price") + "</dd></div>" +
-        "<div><dt>📍 주소</dt><dd" + (p.address ? "" : ' class="pc__na"') + ">" + esc(p.address || "확인 안 됨(지도 버튼으로 위치 보기)") + fs(p, "address") + "</dd></div>" +
+        (go ? "<div><dt>📍 동네</dt><dd>" + esc(p.area) + "<small>정확한 위치·주소는 아래 '구글 지도에서 보기'</small>" + fs(p, "area") + "</dd></div>"
+            : "<div><dt>📍 주소</dt><dd" + (p.address ? "" : ' class="pc__na"') + ">" + esc(p.address || "확인 안 됨(지도 버튼으로 위치 보기)") + fs(p, "address") + "</dd></div>") +
         "<div><dt>📞 전화</dt><dd" + (p.phone ? "" : ' class="pc__na"') + ">" + esc(p.phone || "확인 안 됨") + fs(p, "phone") + "</dd></div>" +
         "<div><dt>🏪 영업 상태</dt><dd>" + esc(p.status) + fs(p, "status") + "</dd></div>" +
-        "<div><dt>✅ 최종 확인</dt><dd>" + esc(p.checked) + (p.source === "Google 지도" ? " (Google 지도에서 직접 봄)" : " (지도 데이터 받아 옴)") +
-          (p.source === "Google 지도" ? "" : '<small>현장 확인: ' + esc(p.osm_check || "확인 안 됨") + " · 지도 정보 수정: " + esc(p.osm_edit) + "</small>") + "</dd></div>" +
+        "<div><dt>✅ 최종 확인</dt><dd>" + esc(p.checked) + (go ? " (가게 이름·동네만 — 전화·영업시간은 구글 지도에서 확인하세요)" : " (지도 데이터 받아 옴)") +
+          (go ? "" : '<small>현장 확인: ' + esc(p.osm_check || "확인 안 됨") + " · 지도 정보 수정: " + esc(p.osm_edit) + "</small>") + "</dd></div>" +
       "</dl>" +
-      '<div class="pc__btns"><a class="pc__btn pc__btn--map" href="' + esc(map) + '" target="_blank" rel="noopener">📍 지도</a>' +
+      '<div class="pc__btns"><a class="pc__btn pc__btn--map" href="' + esc(map) + '" target="_blank" rel="noopener">' + (go ? "🗺️ 구글 지도에서 보기" : "📍 지도") + "</a>" +
         (p.phone ? '<a class="pc__btn" href="tel:' + esc(p.phone.replace(/[^\d+]/g, "")) + '">📞 전화</a>' : '<span class="pc__btn pc__btn--off" aria-disabled="true">📞 번호 확인 안 됨</span>') + "</div>" +
       '<div class="pc__foot"><a href="' + esc(p.source_url) + '" target="_blank" rel="noopener">출처: ' + esc(p.source) + " ↗</a>" +
         (p.website ? ' · <a href="' + esc(p.website) + '" target="_blank" rel="noopener nofollow">가게 사이트 ↗</a>' : "") +
@@ -141,7 +144,7 @@
         : '<div class="empty pc-empty"><p class="pc-empty__e" aria-hidden="true">🔍</p><p><b>' + (openOnly ? "지금 영업 중인 " + esc(c.t === "전체" ? "" : c.t + " ") + "가게가 없어요" : "이 종류 가게가 아직 없어요") + "</b></p>" +
           "<p>" + (openOnly ? "영업시간이 확인된 곳만 계산해요. 위의 '지금 영업 중인 곳만 보기'를 끄면 모두 보여요." : "다른 종류를 골라 보세요.") + "</p></div>";
       return head + body +
-        '<p class="pc-src">지도 데이터 © <a href="' + esc(DATA.license_url) + '" target="_blank" rel="noopener">OpenStreetMap contributors</a> · 한식·한인 업소는 Google 지도(로그인 없이 보이는 화면)에서 본 값 · 받은 날 ' + esc(DATA.fetched) + " · '지금 영업 중'은 방콕 시간과 지도에 적힌 영업시간으로 계산해요(그 요일 시간을 모르면 '확인 안 됨'). 이 목록은 광고가 아니고 돈을 받지 않아요(시험).</p>";
+        '<p class="pc-src">지도 데이터 © <a href="' + esc(DATA.license_url) + '" target="_blank" rel="noopener">OpenStreetMap contributors</a> · 한식·한인 업소는 가게 이름·동네만 적고 나머지는 구글 지도 링크로(Google 지도 이용 약관) · 받은 날 ' + esc(DATA.fetched) + " · '지금 영업 중'은 방콕 시간과 지도에 적힌 영업시간으로 계산해요(그 요일 시간을 모르면 '확인 안 됨'). 이 목록은 광고가 아니고 돈을 받지 않아요(시험).</p>";
     },
     click: function (e, t) {
       var el;
