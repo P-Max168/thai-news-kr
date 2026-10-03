@@ -162,6 +162,23 @@ async def main():
         except Exception as e:
             lock2, pj = False, str(e)[:80]
         rec(lock2 and isinstance(pj, int) and pj >= 0, "✅ 승인함 — 운영자 아니면 잠금 안내, 목록 파일(data/pending.json) 읽힘", "항목 %s건" % pj)
+        # 🛡️ 민감 기사 기준(assets/adsafe.js): 메인 큰 배너도 TOP 1 기사로 판단, 승인함에 기준표·숨긴 목록(운영자 흉내로 확인)
+        try:
+            ms = await pg.evaluate("""async()=>{const st=TNApp.state, d=st.data, A=window.TNAdSafe; if(!A) return {err:'no TNAdSafe'};
+              const mid=()=>{const e=document.querySelector('[data-ad-slot="mid"]'); return {hidden:e.hidden, flag:e.hasAttribute('data-ad-hidden')}};
+              const risky=d.stories.filter(s=>A.score(s).hide), hl0=d.highlights[0], r={risky:risky.length, now:mid(), hl0risk:A.score(d.stories.find(s=>s.id===hl0)).hide};
+              if(risky.length){ d.highlights[0]=risky[0].id; TNApp.rerender(); r.swapped=mid(); d.highlights[0]=hl0; TNApp.rerender(); r.back=mid(); }
+              const S=window.TNSocial, o=S&&S.isAdmin; if(S) S.isAdmin=()=>true;
+              TNPages.open('approve'); await new Promise(z=>setTimeout(z,1500));
+              const sec=document.querySelector('#tnPageBody #adsafe'); r.sec=!!sec; r.rules=sec?sec.querySelectorAll('.as-rules tbody tr').length:0;
+              r.listed=sec?sec.querySelectorAll(':scope > .as-list > .as-item').length:-1; r.why=sec?/점 → 광고 숨김/.test(sec.innerText)||!risky.length:false;
+              TNPages.close(); if(S) S.isAdmin=o; return r}""")
+            await pg.wait_for_timeout(300)
+        except Exception as e:
+            ms = {"err": str(e)[:120]}
+        okm = ms.get("sec") and ms.get("rules", 0) >= 10 and ms.get("listed") == ms.get("risky") and ms.get("why") and ms.get("now", {}).get("flag") == ms.get("hl0risk")
+        if ms.get("risky"): okm = okm and ms.get("swapped") == {"hidden": True, "flag": True} and ms.get("back", {}).get("flag") is False
+        rec(okm, "🛡️ 민감 기사 점수 기준 — 메인 큰 배너도 TOP 1 기사가 걸리면 숨김(기사는 그대로), 승인함에 기준표·숨긴 목록·이유", ms)
         # 애드센스 준비: 광고 칸 표준 단위·민감 기사 옆 광고 없음·안내 4쪽·ads.txt
         try:
             au = await pg.evaluate("""()=>{const f=[...document.querySelectorAll('#feed .ad-slot--feed')];

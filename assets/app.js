@@ -190,7 +190,7 @@
           '<span class="k-card__m">' + esc(x.source) + (x.published ? " · " + esc(fmtDay(x.published)) + " " + esc(hhmm(x.published)) + " (방콕)" : "") + "</span>" +
           (d ? '<p class="k-card__d">' + esc(d) + "</p>" : "") +
           (/^https?:\/\//.test(x.url || "") ? '<a class="k-card__go" href="' + esc(x.url) + '" target="_blank" rel="noopener">기사 보러 가기 ↗</a>' : "") + "</div></li>" +
-          (i === 4 && show > 5 && kAd ? '<li class="k-ad">' + adHTML(kAd, 0) + "</li>" : "");   // 5위·6위 사이 작은 광고(6~10위가 보일 때만, data/ads.json 'korea-mid')
+          (i === 4 && show > 5 && kAd && !adRisk(x) && !adRisk(k[5]) ? '<li class="k-ad">' + adHTML(kAd, 0) + "</li>" : "");   // 5위·6위 사이 작은 광고(6~10위가 보일 때만, data/ads.json 'korea-mid')
       }).join("") + "</ol>" +
       (k.length > ST[0] ? '<button type="button" class="korea__more" data-korea-more aria-controls="koreaList" aria-expanded="' + (show >= k.length) + '">' +
         (show >= k.length ? "접기 ▴" : "펼치기 (" + (next - show) + "건 더) ▾") + "</button>" : "");
@@ -518,6 +518,8 @@
     [].forEach.call(document.querySelectorAll("[data-ad-slot]"), function (el) {
       var id = el.getAttribute("data-ad-slot"), sl = adSlot(id);
       if (id === "mid" && !topShown()) sl = null;
+      // 메인 큰 배너 바로 아래 = 주요 뉴스 TOP 1 → 그 기사가 민감 기준에 걸리면 배너를 안 보임(기사는 그대로)
+      if (id === "mid" && sl && state.data && adRisk(byId((state.data.highlights || [])[0]))) { sl = null; el.setAttribute("data-ad-hidden", "risk"); } else el.removeAttribute("data-ad-hidden");
       el.hidden = !sl; el.innerHTML = sl ? adHTML(sl, 0) : "";
       if (sl && sl.unit) el.setAttribute("data-unit", sl.unit);   // 표준 광고 단위 칸(애드센스 준비, data/ads.json unit)
     });
@@ -537,9 +539,11 @@
   /* 애드센스 정책 위험 기사 표시(광고를 옆에 두지 않음 — 기사는 그대로 보임). 판 데이터에 ad_safe:false 가 있으면 그것을 따름 */
   var AD_RISK = /성매매|매춘|성폭행|성폭력|강간|성추행|성착취|음란|포르노|나체|알몸|마약|필로폰|메스암페타민|야바|코카인|헤로인|대마|살해|살인(?!적)|시신|사체|참수|토막|자살|극단적 선택|총격|도박|카지노|불법 ?촬영/;
   function adRisk(s) {
+    if (!s) return false;
+    if (window.TNAdSafe) return TNAdSafe.score(s).hide;   // 점수 기준(assets/adsafe.js — 낱말 묶음 + 맥락, 승인함에서 기준·숨긴 목록 확인)
     if (s.ad_safe === false) return true;
     if (s.ad_safe === true) return false;
-    return AD_RISK.test([s.headline].concat(s.summary || []).join(" "));
+    return AD_RISK.test([s.headline].concat(s.summary || []).join(" "));   // adsafe.js 를 못 읽었을 때만 예전 낱말 목록
   }
 
   function feedList() {
@@ -590,6 +594,7 @@
         (g.reg.length ? g.reg.map(cardHTML).join("") : '<div class="empty empty--sm">이 판에는 ' + esc(m.region.full) + " 기사가 없어요. 아래 전국 소식을 보세요.</div>") + "</section>";
     }
     var ra = m.region && adSlot("region-" + m.region.id);
+    if (ra && (adRisk(g.reg[g.reg.length - 1]) || adRisk(g.nat[0]))) ra = null;   // 바로 앞뒤 기사가 민감 기준에 걸리면 지역 광고 안 보임
     if (ra) html += '<div class="ad-slot ad-slot--region" data-region-ad="' + esc(m.region.id) + '">' + adHTML(ra, 0) + "</div>";
     if (g.nat.length) {
       var show = Math.min(g.nat.length, NAT_STEPS[state.natStep] || g.nat.length), more = g.nat.length - show;

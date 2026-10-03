@@ -256,6 +256,34 @@
     if (!ok.length && !hold.length) return "";
     return "승인함 결정(" + new Date().toLocaleDateString("ko-KR", { month: "numeric", day: "numeric", timeZone: "Asia/Bangkok" }) + "): " + (ok.length ? "OK " + ok.join(" ") : "") + (ok.length && hold.length ? " / " : "") + (hold.length ? "보류 " + hold.join(" ") : "");
   }
+  /* 🛡️ 광고 옆 민감 기사(승인함 아래) — 기준표(assets/adsafe.js RULES) + 이 판에서 광고를 안 둔 기사 목록과 이유. 기사는 지우지 않음 */
+  function adsafeHTML() {
+    var A = window.TNAdSafe, st = window.TNApp && TNApp.state, d = st && st.data;
+    if (!A) return "";
+    var R = A.RULES, rows = [], near = [];
+    var hl = (d && d.highlights) || [];
+    ((d && d.stories) || []).forEach(function (s) {
+      var r = A.score(s); if (!r.why.length) return;
+      var where = hl[0] === s.id ? "메인 큰 배너 + 기사 사이 광고" : hl.indexOf(s.id) >= 0 ? "주요 뉴스(이 칸엔 광고 없음)" : "기사 사이 광고(앞뒤)";
+      (r.hide ? rows : near).push({ s: s, r: r, where: where });
+    });
+    var by = function (a, b) { return b.r.pts - a.r.pts; };
+    rows.sort(by); near.sort(by);
+    var li = function (x) { return '<li class="as-item"><b class="as-t">' + esc(x.s.headline) + '</b><span class="as-why">' + esc(A.explain(x.r)) + "</span>" +
+      (x.r.hide ? '<span class="as-where">🙈 안 보이는 광고: ' + esc(x.where) + "</span>" : "") + "</li>"; };
+    var mid = (document.querySelector('[data-ad-slot="mid"][data-ad-hidden]') ? "🙈 지금 숨김(주요 뉴스 TOP 1 기사가 기준에 걸림)" : "보임(TOP 1 기사가 기준 아래)");
+    var rules = '<table class="as-rules"><thead><tr><th>기준</th><th>점수</th><th>예시 낱말</th></tr></thead><tbody>' +
+      R.groups.map(function (g) { return "<tr><td>" + esc(g.label) + "</td><td>+" + g.pts + "</td><td>" + esc(g.words.slice(0, 5).join(", ")) + (g.words.length > 5 ? " 등" : "") + (g.except ? "<br><small>빼는 말: " + esc(g.except.join(", ")) + "</small>" : "") + "</td></tr>"; }).join("") +
+      R.context.map(function (c) { return "<tr><td>" + esc(c.label) + "</td><td>" + (c.pts > 0 ? "+" : "−") + Math.abs(c.pts) + "</td><td>" + esc(c.how) + "</td></tr>"; }).join("") + "</tbody></table>";
+    return '<section class="ad-sec as-sec" id="adsafe" aria-labelledby="asH"><h3 class="ad-h" id="asH">🛡️ 광고 옆 민감 기사 기준 <small>(' + esc(R.version) + ")</small></h3>" +
+      '<p class="as-sum">점수가 <b>' + R.hide_at + "점 이상</b>이면 그 기사 <b>바로 옆 광고만</b> 안 보여요. <b>기사는 지우지 않아요.</b> 메인 큰 배너는 바로 아래 주요 뉴스 TOP 1 기사로 판단해요.</p>" +
+      '<div class="ad-sum"><div class="ad-cell"><span>이 판 기사</span><b>' + (((d && d.stories) || []).length) + '</b></div><div class="ad-cell"><span>🙈 광고 숨김</span><b>' + rows.length + '</b></div><div class="ad-cell"><span>참고(기준 아래)</span><b>' + near.length + "</b></div></div>" +
+      '<p class="as-mid">📢 메인 큰 배너: ' + esc(mid) + "</p>" +
+      (rows.length ? '<ol class="as-list">' + rows.map(li).join("") + "</ol>" : '<p class="as-none">이 판에는 광고를 숨긴 기사가 없어요 🙂</p>') +
+      (near.length ? '<details class="as-near"><summary>참고: 점수는 있지만 기준 아래라 광고가 보이는 기사 ' + near.length + "건</summary><ol class=\"as-list\">" + near.map(li).join("") + "</ol></details>" : "") +
+      '<details class="as-how" open><summary>점수 매기는 법(전부)</summary>' + rules + '<p class="as-man">✍️ ' + esc(R.manual) + "</p></details>" +
+      '<p class="hp-note">기준을 바꾸려면 봇에게 \'민감 기사 기준에서 ○○ 빼 줘/넣어 줘\'라고 말해 주세요(파일: assets/adsafe.js). 편집자 점검: <code>python3 tools/adsafe.py</code></p></section>';
+  }
   register("approve", {
     title: "✅ 관리자 승인함",
     render: function () {
@@ -271,7 +299,7 @@
       var open = items.filter(function (x) { return !dec[x.id]; }).length;
       var head = '<div class="ad-sum ap-sum"><div class="ad-cell"><span>전체</span><b>' + items.length + '</b></div><div class="ad-cell"><span>안 고름</span><b>' + open + '</b></div><div class="ad-cell"><span>고름</span><b>' + (items.length - open) + "</b></div></div>" +
         '<p class="ap-note">여기서 누른 OK 는 <b>바로 올라가지 않아요</b>. 아래 \'결정 복사\'를 봇에게 보내 주시면 봇이 반영해요.</p>';
-      if (!items.length) return head + '<div class="empty">승인 기다리는 항목이 없어요 🙂</div>';
+      if (!items.length) return head + '<div class="empty">승인 기다리는 항목이 없어요 🙂</div>' + adsafeHTML();
       var all = open ? '<button type="button" class="cta ap-all" data-ap-all>✅ 남은 ' + open + "건 전부 OK</button>" : "";
       var list = items.map(function (x) {
         var d = dec[x.id];
@@ -282,7 +310,7 @@
       }).join("");
       var txt = apText(items, dec);
       var copy = txt ? '<section class="ad-sec ap-copy"><h3 class="ad-h">봇에게 보낼 결정</h3><p class="ap-txt" id="apTxt">' + esc(txt) + '</p><button type="button" class="cta" data-ap-copy>📋 결정 복사</button></section>' : "";
-      return head + all + '<ol class="ap-list">' + list + "</ol>" + copy + '<p class="hp-note">목록 기준 ' + esc(String(AP.doc.updated_at || "").replace("T", " ").slice(5, 16)) + ' (방콕) · 원본 PENDING_APPROVAL.md <button type="button" class="linkbtn" data-ap-reload>새로고침</button></p>';
+      return head + all + '<ol class="ap-list">' + list + "</ol>" + copy + '<p class="hp-note">목록 기준 ' + esc(String(AP.doc.updated_at || "").replace("T", " ").slice(5, 16)) + ' (방콕) · 원본 PENDING_APPROVAL.md <button type="button" class="linkbtn" data-ap-reload>새로고침</button></p>' + adsafeHTML();
     },
     click: function (e, t) {
       var el, dec = apDec();
