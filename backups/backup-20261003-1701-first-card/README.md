@@ -1,0 +1,3 @@
+- 바뀐 것: ② 속도: 쪽 화면 스크립트(pages.js·places.js)를 첫 기사 카드 뒤에 받기 — 라이브 첫 기사 카드 1.61 → 1.53초
+- 왜: 16:42 기록한 첫 기사 카드 0.3초 늦어짐, 원인 하나만 고치기
+- 되돌리는 법: `git checkout backup-20261003-1701-first-card -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
