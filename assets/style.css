@@ -531,3 +531,10 @@ body.drawer-open{overflow:hidden}
 .korea__list .k-card__go:hover{background:var(--navy-2)}
 .tk-chip--fx{padding:0 10px}
 @media (max-width:640px){.tk-chip{padding:0 9px;gap:3px}.tk-chip--fx{padding:0 9px}}
+/* ☰ 메뉴 버튼 크게(운영자 요청 10-03 07:20): 최소 44×44 터치 영역, 26px 굵은 세 줄 + 작은 '메뉴' 글자, 밝은 둥근 배경 */
+.masthead__row2 .menu-btn{width:54px;height:48px;min-width:44px;min-height:44px;flex-direction:column;gap:2px;border-radius:12px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.32);font-size:0}
+.masthead__row2 .menu-btn:hover{background:rgba(255,255,255,.24)}
+.masthead__row2 .menu-btn:focus-visible{outline:2px solid #74c0fc;outline-offset:2px}
+.menu-btn__ic{display:block;width:26px;height:20px}
+.menu-btn__t{display:block;font-size:10.5px;font-weight:700;line-height:1;letter-spacing:.5px;opacity:.92}
+@media (max-width:640px){.masthead__row2 .menu-btn{width:52px;height:46px}}
