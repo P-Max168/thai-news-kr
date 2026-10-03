@@ -1,6 +1,6 @@
 /* 태국 뉴스 한눈에 — 헤더 둘째 줄 '빠른 정보' 칩 (☰ 오른쪽, 좁은 화면에서는 옆으로 밀기)
  * 배치(운영자 확정 10-03 07:28 → 10-03 09시 v3): 상자 3개(☰ 버튼과 같은 높이), 맨 아래 작은 줄 = 조회 시각(방콕 'HH:MM 조회')
- *   상자1 = 1바트 = 40.4원 / 1달러 = 33.7바트 / 1테더 = 33.5바트(USDT, 구글 파이낸스 기준 — 실패 시 CoinGecko) / 조회 시각
+ *   상자1 = 1바트 = 40.2원 / 1달러 = 33.6฿ / 조회 시각   상자1b(v5) = 1USDT / 33.5฿(구글 파이낸스 기준 — 실패 시 CoinGecko→Bitkub) / 조회 시각
  *   상자2 = 날씨(아이콘·기온·강수확률) / 미세먼지 PM2.5(단계) / 지역 이름 + 조회 시각   상자3 = 금시세(금괴 판매가) / 휘발유(가소홀 95) 가격 / 조회 시각
  *  환율·금시세·휘발유 = data/ticker.json(GitHub Actions korea.yml → tools/fetch_ticker.py, 2시간마다). file:// 에서는 data/ticker.js(window.TN_TICKER)
  *  날씨·미세먼지 = Open-Meteo(무료·키 없음·CORS 허용)를 브라우저에서 직접 — 지역 = 이 기기에서 고른 지역 > 페르소나(파타야/시라차/방콕) > 파타야
@@ -140,9 +140,13 @@
     var f = fxOK(), u = usdtOK(), w = wxOK(), g = goldOK(), a = aqOK(), o = fuelOK(), h = [];
     h.push(tile("fx", [
       f && ["1바트 " + f.THB_KRW.toFixed(1) + "원", "1바트 = <b>" + f.THB_KRW.toFixed(1) + "원</b>"],
-      f && f.USD_THB > 0 && ["1달러 " + f.USD_THB.toFixed(1) + "바트", "1달러 = <b>" + f.USD_THB.toFixed(1) + '<small class="tk-u">฿</small></b>'],
-      u && ["1테더(USDT) " + u.USDT_THB.toFixed(1) + "바트", "1테더 = <b>" + u.USDT_THB.toFixed(1) + '<small class="tk-u">฿</small></b>']
-    ], ft([f && ms(f.fetched_at), u && ms(u.fetched_at)])));
+      f && f.USD_THB > 0 && ["1달러 " + f.USD_THB.toFixed(1) + "바트", "1달러 = <b>" + f.USD_THB.toFixed(1) + '<small class="tk-u">฿</small></b>']
+    ], ft([f && ms(f.fetched_at)])));
+    // v5(운영자 요청 10-03 10:25): 테더는 환율 바로 옆 자기 상자 — '1USDT' / 큰 글자 '33.5฿' / 조회 시각
+    h.push(tile("usdt", [
+      u && ["1USDT", '<span class="tk-l">1USDT</span>'],
+      u && ["테더(USDT) 1개 " + u.USDT_THB.toFixed(1) + "바트", '<b class="tk-big">' + u.USDT_THB.toFixed(1) + '<small class="tk-u">฿</small></b>']
+    ].filter(function (x, i, a) { return a[1]; }), ft([u && ms(u.fetched_at)])));
     var ic = w && wmo(w.code, w.day), lv = a && pmLevel(a.pm);
     h.push(tile("env", [
       w && [REGIONS[w.rg].name + " " + Math.round(w.t) + "도 " + ic[1] + (w.rain != null ? " 강수확률 " + w.rain + "%" : ""),
@@ -218,7 +222,7 @@
       src(o.source, o.url, ["가격 공지 " + when(o.announced_at) + (o.effective_at ? " · 적용 " + when(o.effective_at) + "부터" : ""), "받아 온 시각 " + when(o.fetched_at) + " · 주유소·지역마다 조금씩 다름"]);
     return "";
   }
-  var TILE = { fx: ["fx", "usdt"], env: ["wx", "pm"], price: ["gold", "fuel"] };
+  var TILE = { fx: ["fx"], usdt: ["usdt"], env: ["wx", "pm"], price: ["gold", "fuel"] };
   function body(k) {
     return (TILE[k] || [k]).map(part).filter(Boolean).map(function (x) { return '<div class="tk-pop__sec">' + x + "</div>"; }).join("");
   }

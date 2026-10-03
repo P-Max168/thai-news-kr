@@ -689,3 +689,30 @@ body.drawer-open{overflow:hidden}
   .tk-ft{font-size:clamp(9px,2.45vw,11px)}
 }
 @media (max-width:379px){ .tk-95{display:none} }
+/* 빠른 정보 v5(운영자 요청 10-03 10:25): ☰ + 상자 4개(환율 · 1USDT · 날씨 · 금/휘발유), 모든 상자 = 값 두 줄 + 작은 조회 줄
+   → 높이 줄임(모바일 54px·데스크톱 58px, ☰ 같은 높이), 줄 폭을 꽉 채움, 360px 은 글자·여백 조금 더 작게 */
+.masthead__row2 .menu-btn{height:58px}
+.ticker{min-height:58px}
+.tk-chip.tk-tile{height:58px}
+.tk-chip.tk-tile,.tk-chip.tk-tile[data-tk]{max-width:150px}
+.tk-tile[data-tk="fx"]{font-size:13.5px}
+.tk-tile[data-tk="usdt"] .tk-l{font-weight:600}
+.tk-big{font-size:1.14em;line-height:1.05;letter-spacing:-.2px}
+@media (max-width:640px){
+  .masthead__row2 .menu-btn{height:54px;width:clamp(46px,13.2vw,58px)}
+  .ticker{min-height:54px;gap:3px}
+  .tk-chip.tk-tile{height:54px}
+  .tk-chip.tk-tile,.tk-chip.tk-tile[data-tk]{max-width:none;padding:0 clamp(3px,1.1vw,7px);font-size:clamp(10.4px,2.8vw,12.6px)}
+  .tk-tile[data-tk="fx"]{font-size:clamp(10.4px,2.8vw,12.6px)}
+  .tk-ft{font-size:clamp(8.8px,2.35vw,10.2px)}
+}
+@media (max-width:640px){
+  .tk-chip.tk-tile{letter-spacing:-.15px}
+  .tk-tile[data-tk="env"] .tk-i{font-size:.92em}
+  .tk-tile[data-tk="env"] .tk-rain{font-size:.95em;letter-spacing:-.3px}
+}
+@media (max-width:380px){
+  .masthead__row2{padding-left:6px;padding-right:6px;gap:4px}
+  .tk-tile .tk-in .tk-ln{gap:2px}
+}
+@media (max-width:640px){ .tk-95{display:none} }   /* 4상자: 휴대폰은 '휘발유', 데스크톱만 '휘발유(95)' */
