@@ -128,23 +128,6 @@
    ]
   },
   {
-   "id": "nearby-hair",
-   "size": "medium",
-   "enabled": true,
-   "items": [
-    {
-     "category": "미용실·네일",
-     "title": "드래곤 스웨디시 (파타야)",
-     "subtitle": "파타야 3rd Road · 11:30–23:30 · ☎ 080-736-5211",
-     "link": "https://maps.app.goo.gl/sxwzECaxPxkANutE9",
-     "theme": 5,
-     "render": "dragon",
-     "variant": "small",
-     "target": "미용실·네일"
-    }
-   ]
-  },
-  {
    "id": "nearby-massage",
    "size": "medium",
    "enabled": true,
@@ -162,19 +145,53 @@
    ]
   },
   {
-   "id": "nearby-mart",
+   "id": "nearby-pet",
    "size": "medium",
    "enabled": true,
    "items": [
     {
-     "category": "한인마트",
+     "category": "동물병원·펫샵",
      "title": "드래곤 스웨디시 (파타야)",
      "subtitle": "파타야 3rd Road · 11:30–23:30 · ☎ 080-736-5211",
      "link": "https://maps.app.goo.gl/sxwzECaxPxkANutE9",
      "theme": 5,
      "render": "dragon",
      "variant": "small",
-     "target": "한인마트"
+     "target": "동물병원·펫샵"
+    }
+   ]
+  },
+  {
+   "id": "nearby-beauty",
+   "size": "medium",
+   "enabled": true,
+   "items": [
+    {
+     "category": "피부과·성형·에스테틱",
+     "title": "드래곤 스웨디시 (파타야)",
+     "subtitle": "파타야 3rd Road · 11:30–23:30 · ☎ 080-736-5211",
+     "link": "https://maps.app.goo.gl/sxwzECaxPxkANutE9",
+     "theme": 5,
+     "render": "dragon",
+     "variant": "small",
+     "target": "피부과·성형·에스테틱"
+    }
+   ]
+  },
+  {
+   "id": "nearby-moto",
+   "size": "medium",
+   "enabled": true,
+   "items": [
+    {
+     "category": "오토바이 렌탈·판매",
+     "title": "드래곤 스웨디시 (파타야)",
+     "subtitle": "파타야 3rd Road · 11:30–23:30 · ☎ 080-736-5211",
+     "link": "https://maps.app.goo.gl/sxwzECaxPxkANutE9",
+     "theme": 5,
+     "render": "dragon",
+     "variant": "small",
+     "target": "오토바이 렌탈·판매"
     }
    ]
   },

@@ -1,5 +1,6 @@
 /* 📍 내 주변 — 헤더 셋째 줄(예전 탭 줄 자리 .subbar)의 카테고리 버튼 + 카테고리 화면(#nearby/<id>)
- * - 줄: '📍 내 주변'(누를 수 없는 이름표) + 카테고리 버튼 4개(🍜 맛집 · 💇 미용실 · 💆 마사지 · 🛒 마트). 좁은 화면은 옆으로 밀기.
+ * - 줄: '📍 내 주변'(누를 수 없는 이름표) + 카테고리 버튼 5개(🍜 맛집 · 💆 마사지 · 🐶 동물병원 · 💅 피부·뷰티 · 🏍️ 오토바이, 2026-10-03 v2).
+ *   휴대폰(≤640px)은 버튼 = 그림 위·글자 아래 두 줄(390·430px 에 다 들어감), 더 좁아 넘치면 옆으로 밀기 + 오른쪽 끝 흐림(.nearby--scroll).
  * - 버튼 → 화면 #nearby/<id>(앱 안 전체 화면, 데스크톱은 가운데 창): 맨 위 광고 1개(data/ads.json 슬롯 nearby-<id>, '광고')
  *   → 큰 버튼 '📍 내 주변 평점 좋은 곳 구글 지도로 보기'(새 탭) → 빠른 찾기 작은 버튼 → 안내.
  * - 위치: 버튼을 누를 때 브라우저 위치 권한을 물음. 허용 → https://www.google.com/maps/search/<검색어>/@위도,경도,15z
@@ -16,25 +17,36 @@
       sriracha: { name: "시라차", en: "Si Racha", lat: 13.1682, lng: 100.9310 },
       bangkok:  { name: "방콕",   en: "Bangkok",  lat: 13.7563, lng: 100.5018 }
     },
+    // id = 주소 #nearby/<id> · label = 화면 제목('내 주변 <label>') · short = 헤더 줄 버튼 글자(없으면 label) · tag = 광고 '이 자리 추천 업종'(data/ads.json target)
+    // query/subs[].query = 구글 지도 검색어(영어) · places = 나중에 Places API(New) 로 바꿀 때 쓸 값(includedTypes 는 Table A 만, 없으면 textQuery)
+    // 2026-10-03 v2(운영자): 💇 미용실·🛒 마트 빼고 🐶 동물병원·펫샵 · 💅 피부과·성형·에스테틱 · 🏍️ 오토바이 렌탈·판매 추가. 옛 #nearby/hair|mart → 피드로(RETIRED)
     categories: [
       { id: "food", emoji: "🍜", label: "맛집", slot: "nearby-food", query: "restaurants",
         places: { includedTypes: ["restaurant"] },
         subs: [ { label: "한식", query: "korean restaurant", places: { includedTypes: ["korean_restaurant"] } },
                 { label: "태국음식", query: "thai restaurant", places: { includedTypes: ["thai_restaurant"] } },
                 { label: "카페", query: "cafe", places: { includedTypes: ["cafe"] } } ] },
-      { id: "hair", emoji: "💇", label: "미용실", slot: "nearby-hair", query: "hair salon",
-        places: { includedTypes: ["hair_salon", "beauty_salon"] },
-        subs: [ { label: "헤어샵", query: "hair salon", places: { includedTypes: ["hair_salon"] } },
-                { label: "네일", query: "nail salon", places: { includedTypes: ["nail_salon"] } } ] },
       { id: "massage", emoji: "💆", label: "마사지", slot: "nearby-massage", query: "massage",
         places: { includedTypes: ["massage", "spa"] },
         subs: [ { label: "타이 마사지", query: "thai massage", places: { includedTypes: ["massage"] } },
                 { label: "스파", query: "spa", places: { includedTypes: ["spa"] } } ] },
-      { id: "mart", emoji: "🛒", label: "마트", slot: "nearby-mart", query: "supermarket",
-        places: { includedTypes: ["supermarket", "grocery_store"] },
-        subs: [ { label: "마트", query: "supermarket", places: { includedTypes: ["supermarket"] } },
-                { label: "한인마트", query: "korean mart", places: { includedTypes: ["grocery_store"], textQuery: "korean mart" } } ] }
-    ]
+      { id: "pet", emoji: "🐶", label: "동물병원·펫샵", short: "동물병원", tag: "동물병원·펫샵", slot: "nearby-pet", query: "veterinary clinic",
+        places: { includedTypes: ["veterinary_care", "pet_store", "pet_care"] },
+        subs: [ { label: "동물병원", query: "veterinary clinic", places: { includedTypes: ["veterinary_care"] } },
+                { label: "펫샵", query: "pet shop", places: { includedTypes: ["pet_store"] } },
+                { label: "애견미용", query: "pet grooming", places: { includedTypes: ["pet_care"], textQuery: "pet grooming" } } ] },
+      { id: "beauty", emoji: "💅", label: "피부과·성형·에스테틱", short: "피부·뷰티", tag: "피부과·성형·에스테틱", slot: "nearby-beauty", query: "skin clinic",
+        places: { includedTypes: ["skin_care_clinic", "beauty_salon", "medical_clinic"] },
+        subs: [ { label: "피부과", query: "dermatology clinic", places: { includedTypes: ["skin_care_clinic"], textQuery: "dermatology clinic" } },
+                { label: "성형외과", query: "plastic surgery clinic", places: { includedTypes: ["medical_clinic"], textQuery: "plastic surgery clinic" } },
+                { label: "에스테틱", query: "aesthetic clinic", places: { includedTypes: ["beauty_salon", "beautician"], textQuery: "aesthetic clinic beauty salon" } } ] },
+      { id: "moto", emoji: "🏍️", label: "오토바이 렌탈·판매", short: "오토바이", tag: "오토바이 렌탈·판매", slot: "nearby-moto", query: "motorbike rental",
+        places: { textQuery: "motorbike rental" },   // Table A 에 오토바이 종류 없음 → Text Search 검색어로
+        subs: [ { label: "렌탈", query: "motorbike rental", places: { textQuery: "motorbike rental" } },
+                { label: "판매", query: "motorcycle dealer", places: { textQuery: "motorcycle dealer" } },
+                { label: "수리", query: "motorcycle repair", places: { textQuery: "motorcycle repair shop" } } ] }
+    ],
+    retired: ["hair", "mart"]   // 예전 카테고리(10-03 v1). 옛 링크 #nearby/hair|mart 는 화면 없이 피드로(주소에서 #nearby 지움)
   };
 
   var LS_REGION = "tnk.nearbyRegion", GEO_TTL = 10 * 60 * 1000;
@@ -60,14 +72,27 @@
   /* ---------- 헤더 줄 ---------- */
   function renderRow() {
     var row = document.getElementById("nearbyRow"); if (!row) return;
-    row.innerHTML = '<span class="nb-lab"><span aria-hidden="true">📍</span> 내 주변</span>' +
+    row.innerHTML = '<span class="nb-lab"><span class="nb-lab__e" aria-hidden="true">📍</span> <span class="nb-lab__t">내 주변</span></span>' +
       '<div class="nb-cats">' + NEARBY.categories.map(function (c) {
-        return '<a class="nb-cat" href="#nearby/' + c.id + '" data-nb-cat="' + c.id + '"><span class="nb-cat__e" aria-hidden="true">' + c.emoji + "</span>" + esc(c.label) + "</a>";
+        var sh = c.short || c.label;
+        return '<a class="nb-cat" href="#nearby/' + c.id + '" data-nb-cat="' + c.id + '"' + (sh !== c.label ? ' aria-label="' + esc(c.label) + '"' : "") +
+          '><span class="nb-cat__e" aria-hidden="true">' + c.emoji + '</span><span class="nb-cat__t">' + esc(sh) + "</span></a>";
       }).join("") + "</div>";
     row.addEventListener("click", function (e) {
       var a = e.target.closest && e.target.closest("[data-nb-cat]"); if (!a) return;
       e.preventDefault(); open(a.getAttribute("data-nb-cat"), true);
     });
+    // 좁은 화면에서 버튼이 넘치면 옆으로 밀기 + 오른쪽 끝 흐림(끝까지 밀면 흐림 없앰)
+    var cats = row.querySelector(".nb-cats");
+    var fit = function () {
+      var over = cats.scrollWidth - cats.clientWidth > 2;
+      row.classList.toggle("nearby--scroll", over);
+      row.classList.toggle("nearby--end", !over || cats.scrollLeft + cats.clientWidth >= cats.scrollWidth - 2);
+    };
+    cats.addEventListener("scroll", fit, { passive: true });
+    window.addEventListener("resize", fit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    fit();
   }
 
   /* ---------- 광고(data/ads.json 슬롯 nearby-<id>) — app.js adHTML 과 같은 모양. item.render === "dragon" 이면 드래곤 스웨디시 배너 ---------- */
@@ -91,6 +116,7 @@
     if (!sl) { el.hidden = true; return; }
     var it = sl.items[0];
     // render:"dragon" = 드래곤 스웨디시 배너 + '이 자리 추천 업종' 꼬리표(data/ads.js 의 TN_ADS.dragon 으로 바로 그림). 못 그리면 일반 카드
+    if (it.render === "dragon" && !it.target && c.tag) { it = Object.assign({}, it, { target: c.tag }); }   // 꼬리표 비었으면 NEARBY 의 tag
     var dg = it.render === "dragon" && window.DragonAd && window.DragonAd.slotHTML && window.DragonAd.slotHTML(it);
     el.innerHTML = dg || adHTML(sl);
     if (!dg && it.render === "dragon" && window.DragonAd) {   // 옛 ads.js(TN_ADS.dragon 없음): ad.json 을 받아 그림
@@ -224,8 +250,11 @@
     hide();
   }
   function fromHash() {
-    var m = /^#nearby\/([a-z]+)$/.exec(location.hash);
-    if (m && byId(m[1])) show(m[1]); else { pushed = false; hide(); }
+    var m = /^#nearby\/([a-z0-9_-]*)/.exec(location.hash);
+    if (m && byId(m[1])) { show(m[1]); return; }
+    pushed = false; hide();
+    // 없는·옛 카테고리(#nearby/hair · #nearby/mart 등) → 주소에서 #nearby 를 지우고 피드 그대로(헤더 줄에서 다시 고르면 됨)
+    if (m) history.replaceState(null, "", location.pathname + location.search);
   }
   window.addEventListener("popstate", fromHash);
   window.addEventListener("hashchange", fromHash);

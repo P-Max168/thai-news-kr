@@ -9,15 +9,26 @@
 .nb-cat:active{transform:scale(.97)}
 .nb-cat:focus-visible{outline:2px solid #74c0fc;outline-offset:1px}
 .nb-cat__e{font-size:15px}
+.nb-cat__t{display:inline-block}
+/* 오른쪽 끝 흐림 — JS 가 버튼이 넘칠 때만 .nearby--scroll(끝까지 밀면 .nearby--end 로 없앰) */
+.nearby{position:relative}
+.nearby.nearby--scroll:not(.nearby--end)::after{content:"";position:absolute;top:0;right:0;bottom:0;width:28px;pointer-events:none;background:linear-gradient(90deg,rgba(18,58,99,0),var(--navy-2,#123a63) 85%)}
+/* 휴대폰(2026-10-03 v2, 버튼 5개): 버튼 = 그림 위 · 글자 아래 두 줄(높이 42px, 터치 ≥34px) → 360~430px 에 5개 다 들어감. 이름표도 두 줄 */
 @media (max-width:640px){
-  .subbar.subbar--nearby{min-height:42px}
-  .nearby{padding-left:10px;padding-right:0;gap:6px}
-  .nb-lab{font-size:12.5px}
-  .nb-cats{gap:5px;padding-right:10px}
-  .nb-cat{height:34px;padding:0 10px;font-size:13px;gap:3px}
-  .nb-cat__e{font-size:14px}
+  .subbar.subbar--nearby{min-height:50px}
+  .nearby{padding:4px 8px 4px 8px;gap:6px}
+  .nb-lab{flex-direction:column;gap:1px;font-size:11px;line-height:1.1;letter-spacing:-.3px;min-width:34px;text-align:center}
+  .nb-lab__e{font-size:15px;line-height:1}
+  .nb-cats{gap:4px;flex:1 1 auto}
+  .nb-cat{flex:1 0 auto;flex-direction:column;justify-content:center;gap:2px;height:42px;min-width:46px;padding:0 6px;border-radius:12px;font-size:11.5px;letter-spacing:-.3px}
+  .nb-cat__e{font-size:16px;line-height:1}
+  .nb-cat__t{line-height:1.1}
 }
-@media (max-width:380px){ .nb-cat{padding:0 8px} }
+@media (max-width:370px){
+  .nearby{padding-left:6px;padding-right:6px;gap:4px}
+  .nb-cats{gap:3px}
+  .nb-cat{padding:0 4px;min-width:42px;font-size:11px;letter-spacing:-.4px}
+}
 
 /* 카테고리 화면: 모바일 = 앱 안 전체 화면, 데스크톱 = 가운데 창 */
 body.nb-open{overflow:hidden}
