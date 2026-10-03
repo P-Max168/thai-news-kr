@@ -441,7 +441,16 @@ def build_ads():
         for it in sl.get("items", []):
             for k in ("image", "link"):
                 assert not it.get(k) or str(it[k]).startswith("https://"), ("ads", sl["id"], k, "https:// 만")
+    # 드래곤 스웨디시 배너 데이터(assets/ads/massage/ad.json)를 같이 실어 화면이 바로(동기) 그리게 함 — item.render == "dragon"
+    dj = ROOT / "assets/ads/massage/ad.json"
+    if dj.exists():
+        dg = json.loads(dj.read_text(encoding="utf-8"))
+        ads["dragon"] = {k: dg.get(k) for k in ("id", "label", "title", "link", "tel", "kakao_url", "line_url", "display")}
+        for k in ("link", "kakao_url", "line_url"):
+            assert not ads["dragon"].get(k) or str(ads["dragon"][k]).startswith("https://"), ("ads dragon", k, "https:// 만")
+        assert str(ads["dragon"].get("tel") or "tel:").startswith("tel:"), ("ads dragon", "tel")
     (DATA / "ads.js").write_text("window.TN_ADS = %s;\n" % json.dumps(ads, ensure_ascii=False), encoding="utf-8")
+
 
 
 if __name__ == "__main__":

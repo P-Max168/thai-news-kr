@@ -1,4 +1,4 @@
-"""Render PNG previews of the Dragon Massage banner from the live HTML component.
+"""Render PNG previews of the 드래곤 스웨디시 (Dragon Swedish) banner from the live HTML component.
 Run from anywhere:  python3 assets/ads/massage/src/render.py
 Serves the portal root on a local port (fetch() needs http), mounts each variant in
 preview mode (Kakao/LINE placeholders visible) and screenshots it at the target size."""
@@ -9,7 +9,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 OUT = HERE.parent
 ROOT = OUT.parents[2]                      # /workspace/thai-news-portal
 # name: (css width, css height, device scale) -> PNG = width*scale x height*scale
-SIZES = {"large": (600, 300, 2), "strip": (1200, 300, 1), "small": (600, 200, 1)}
+SIZES = {"large": (600, 300, 2), "strip": (1200, 300, 1), "small": (600, 200, 1), "bar": (800, 76, 1), "bar-mobile": (362, 72, 2)}
 
 def serve():
     class Quiet(http.server.SimpleHTTPRequestHandler):
@@ -26,7 +26,7 @@ async def main():
         b = await p.chromium.launch(executable_path="/usr/bin/google-chrome", headless=True)
         for v, (w, h, s) in SIZES.items():
             pg = await b.new_page(viewport={"width": w, "height": h}, device_scale_factor=s)
-            await pg.goto(f"http://127.0.0.1:{port}/{rel}?v={v}&h={h}")
+            await pg.goto(f"http://127.0.0.1:{port}/{rel}?v={v.split('-')[0]}&h={h}")
             await pg.wait_for_function("window.__ready === true")
             await pg.evaluate("document.fonts.ready")
             await pg.wait_for_timeout(400)

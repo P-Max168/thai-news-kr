@@ -2,7 +2,7 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>미리보기 · 드래곤 스웨디시 마사지 광고</title>
+<title>미리보기 · 드래곤 스웨디시 광고</title>
 <link rel="stylesheet" href="dragon-ad.css">
 <style>
   body{margin:0;background:#f4f5f7;font-family:Pretendard,system-ui,sans-serif;color:#16181d}
@@ -13,10 +13,11 @@
   .row{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start}
 </style></head>
 <body><main>
-<h1>드래곤 스웨디시 마사지 · 광고 미리보기</h1>
+<h1>드래곤 스웨디시 · 광고 미리보기</h1>
 <p class="note">미리보기 모드: 카톡/라인 버튼은 링크가 아직 없어 <code>#</code> 자리표시로 보입니다.
 실제 사이트에서는 <code>ad.json</code>의 <code>kakao_url</code> / <code>line_url</code>을 입력해야만 표시됩니다.
-배너 아무 곳이나 누르면 Google 지도, '예약 문의'는 전화(tel:+66807365211)로 연결됩니다.</p>
+배너 아무 곳이나 누르면 Google 지도('📍 지도'), '📞 전화'는 tel:+66807365211(080-736-5211)로 연결됩니다.
+사이트에서는 data/ads.json 의 자리마다 variant 와 '📢 이 자리 추천 업종' 꼬리표(target)를 정합니다.</p>
 
 <h2>Large — 휴대폰 폭 360px / 390px / 430px</h2>
 <div class="row">
@@ -34,6 +35,13 @@
   <div class="frame" style="width:600px;max-width:100%"><div data-dragon-ad="small" data-preview></div></div>
   <div class="frame" style="width:360px"><div data-dragon-ad="small" data-preview></div></div>
 </div>
+<h2>Bar (얇은 띠: 상단·한국 뉴스 5·6위 사이·메뉴 서랍) — 276px / 332px / 362px / 792px, 추천 업종 꼬리표 포함</h2>
+<div class="row">
+  <div class="frame" style="width:276px"><div data-dragon-ad="bar" data-target="골프·레저"></div></div>
+  <div class="frame" style="width:332px"><div data-dragon-ad="bar" data-target="환전·송금"></div></div>
+  <div class="frame" style="width:362px"><div data-dragon-ad="bar" data-target="한식당"></div></div>
+</div>
+<div class="frame" style="width:792px;max-width:100%"><div data-dragon-ad="bar" data-target="한식당"></div></div>
 <h2>실제 사이트 모드 (kakao_url / line_url 비어 있음 → 버튼 숨김)</h2>
 <div class="row">
   <div class="frame" style="width:390px"><div data-dragon-ad="large"></div></div>

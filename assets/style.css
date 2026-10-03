@@ -418,6 +418,9 @@ body.drawer-open{overflow:hidden}
 .ad-slot[hidden]{display:none}
 .ad-slot{margin:0 0 14px}
 .ad-slot--feed{margin:0}
+@media (max-width:640px){.ad-slot--mid{margin-top:14px}}   /* 메인 큰 배너: 휴대폰에서 위 상자와 붙지 않게 */
+.korea__list li.k-ad .dm-target{margin-top:2px}
+.drawer .ad-slot{margin:14px 0 4px}
 .ad{position:relative;display:flex;align-items:center;gap:12px;border-radius:12px;color:#fff;text-decoration:none;overflow:hidden;border:1px solid rgba(255,255,255,.25);box-shadow:0 2px 10px rgba(16,24,40,.08)}
 .ad__tag{position:absolute;top:6px;right:8px;font-size:10px;font-weight:800;letter-spacing:.3px;background:rgba(0,0,0,.28);color:#fff;border-radius:4px;padding:1px 5px}
 .ad__txt{display:flex;flex-direction:column;min-width:0}

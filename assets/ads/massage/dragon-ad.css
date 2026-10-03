@@ -1,4 +1,5 @@
-/* Dragon Massage sponsored banner — self-contained, all selectors scoped to .dm-ad.
+/* 드래곤 스웨디시(Dragon Swedish) sponsored banner — self-contained, all selectors scoped to .dm-ad / .dm-target.
+   Variants: large(메인 큰 배너) | strip(하단 띠, 데스크톱 4:1) | small(카드: 내 주변·기사 사이) | bar(얇은 띠: 상단·한국 뉴스 5·6위 사이·메뉴 서랍).
    Mobile-first; layout adapts to the slot width via container queries. */
 .dm-ad{
   --dm-black:#070304;--dm-night:#140405;--dm-crimson:#5c0a11;--dm-red:#8e1420;--dm-gold:#e9c46a;--dm-gold2:#f6dfa0;--dm-cream:#fbf5e9;
@@ -28,17 +29,18 @@
 .dm-ad__cta{pointer-events:none}
 .dm-ad__art{position:absolute;z-index:0;height:auto;max-width:none;right:-22cqw;top:-4px;width:96cqw;opacity:.62;
   -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 30%,#000 62%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 30%,#000 62%)}
-.dm-ad__tag{position:absolute;z-index:2;top:14px;left:16px;font-size:12px;font-weight:700;letter-spacing:.06em;line-height:1;
+.dm-ad__tag{position:absolute;z-index:2;top:14px;left:16px;font-size:13px;font-weight:700;letter-spacing:.06em;line-height:1;
   color:var(--dm-night);background:rgba(251,245,233,.92);padding:5px 8px 4px;border-radius:5px}
 .dm-ad__body{grid-area:body;position:relative;z-index:2}
 .dm-ad__name,.dm-ad__copy,.dm-ad__en{text-shadow:0 1px 2px rgba(0,0,0,.65),0 0 14px rgba(0,0,0,.55)}
-.dm-ad__en{font-size:11px;font-weight:600;letter-spacing:.34em;color:var(--dm-gold);margin-bottom:8px}
+.dm-ad__en{font-size:13px;font-weight:600;letter-spacing:.34em;color:var(--dm-gold);margin-bottom:8px}
 .dm-ad__name{font-family:"Gowun Batang","Noto Serif KR","Noto Serif CJK KR",serif;font-weight:700;
   font-size:clamp(26px,7.6cqw,34px);line-height:1.14;letter-spacing:-.01em;color:var(--dm-cream)}
 .dm-ad__name b{display:block;color:var(--dm-gold2);font-weight:700}
+.dm-ad--small .dm-ad__name b,.dm-ad--strip .dm-ad__name b{display:inline}   /* 카드·띠: 이름 한 줄(높이 줄임) */
 .dm-ad__copy{margin-top:8px;font-size:14px;font-weight:500;line-height:1.4;color:rgba(251,245,233,.92)}
 .dm-ad__chips{grid-area:chips;position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:6px;list-style:none}
-.dm-ad__chip{display:inline-flex;align-items:center;gap:.45em;white-space:nowrap;font-size:12.5px;font-weight:600;
+.dm-ad__chip{display:inline-flex;align-items:center;gap:.45em;white-space:nowrap;font-size:13px;font-weight:600;
   padding:.45em .85em;border:1px solid rgba(233,196,106,.6);border-radius:999px;background:rgba(10,3,4,.62)}
 .dm-ad__chip svg{width:1.05em;height:1.05em;flex:none}
 
@@ -48,6 +50,7 @@
   border:1.5px solid transparent;border-radius:999px;font-size:15px;font-weight:700;line-height:1;white-space:nowrap;
   text-decoration:none;color:var(--dm-cream);background:rgba(10,3,4,.66);transition:transform .12s,filter .12s}
 .dm-btn svg{width:1.1em;height:1.1em;flex:none}
+.dm-btn__e{font-size:1.05em;line-height:1;flex:none}
 .dm-btn:hover{filter:brightness(1.08)}
 .dm-btn:active{transform:scale(.97)}
 .dm-btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
@@ -55,7 +58,7 @@
 .dm-btn--tel{border-color:rgba(251,245,233,.75)}
 .dm-btn--kakao{border-color:var(--dm-kakao)}
 .dm-btn--line{border-color:var(--dm-line)}
-.dm-ad a.dm-btn,.dm-ad a.dm-btn:visited{text-decoration:none}
+.dm-ad a.dm-btn,.dm-ad a.dm-btn:visited{text-decoration:none;display:flex;align-items:center;justify-content:center}   /* 사이트 'a' 규칙(예: .korea__list a)보다 우선 */
 .dm-ad a.dm-btn--map,.dm-ad a.dm-btn--map:visited{color:#2a1d05}
 .dm-ad a.dm-btn:not(.dm-btn--map),.dm-ad a.dm-btn:not(.dm-btn--map):visited{color:var(--dm-cream)}
 
@@ -70,12 +73,12 @@
   .dm-ad--large .dm-ad__cta{max-width:57cqw}
   .dm-ad--large .dm-ad__art{right:-6cqw;top:50%;transform:translateY(-50%);width:66cqw;opacity:.9;
     -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.25) 22%,#000 50%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.25) 22%,#000 50%)}
-  .dm-ad--large .dm-ad__tag{top:2cqw;left:2.2cqw;font-size:clamp(12px,1.8cqw,20px)}
-  .dm-ad--large .dm-ad__en{font-size:clamp(11px,1.85cqw,22px);margin-bottom:clamp(6px,1.2cqw,14px)}
+  .dm-ad--large .dm-ad__tag{top:2cqw;left:2.2cqw;font-size:clamp(13px,1.8cqw,20px)}
+  .dm-ad--large .dm-ad__en{font-size:clamp(13px,1.85cqw,22px);margin-bottom:clamp(6px,1.2cqw,14px)}
   .dm-ad--large .dm-ad__name{font-size:clamp(30px,5.6cqw,66px)}
   .dm-ad--large .dm-ad__name b{display:inline}
   .dm-ad--large .dm-ad__copy{font-size:clamp(14px,2.4cqw,28px);margin-top:clamp(6px,1cqw,12px)}
-  .dm-ad--large .dm-ad__chip{font-size:clamp(12px,2cqw,22px)}
+  .dm-ad--large .dm-ad__chip{font-size:clamp(13px,2cqw,22px)}
   .dm-ad--large .dm-ad__cta{gap:clamp(8px,1.3cqw,16px)}
   .dm-ad--large .dm-btn{font-size:clamp(14px,2.4cqw,26px);min-height:clamp(40px,6.4cqw,72px)}
 }
@@ -89,12 +92,12 @@
   .dm-ad--strip .dm-ad__body{padding-top:1.2cqw}
   .dm-ad--strip .dm-ad__art{right:2cqw;top:50%;transform:translateY(-50%);width:44cqw;opacity:.75;
     -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 40%,#000 70%,rgba(0,0,0,.45) 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 40%,#000 70%,rgba(0,0,0,.45) 100%)}
-  .dm-ad--strip .dm-ad__tag{top:1.5cqw;left:1.6cqw;font-size:clamp(12px,1.4cqw,18px)}
-  .dm-ad--strip .dm-ad__en{font-size:clamp(10px,1.3cqw,16px);margin-bottom:.8cqw}
+  .dm-ad--strip .dm-ad__tag{top:1.5cqw;left:1.6cqw;font-size:clamp(13px,1.4cqw,18px)}
+  .dm-ad--strip .dm-ad__en{font-size:clamp(13px,1.3cqw,16px);margin-bottom:.8cqw}
   .dm-ad--strip .dm-ad__name{font-size:clamp(24px,3.9cqw,48px)}
   .dm-ad--strip .dm-ad__name b{display:inline}
   .dm-ad--strip .dm-ad__copy{font-size:clamp(13px,1.7cqw,21px);margin-top:.7cqw}
-  .dm-ad--strip .dm-ad__chip{font-size:clamp(12px,1.45cqw,18px)}
+  .dm-ad--strip .dm-ad__chip{font-size:clamp(13px,1.45cqw,18px)}
   .dm-ad--strip .dm-ad__cta{gap:1cqw}
   .dm-ad--strip .dm-btn{font-size:clamp(13px,1.65cqw,20px);min-height:clamp(40px,4.6cqw,56px)}
 }
@@ -105,14 +108,48 @@
   .dm-ad--small .dm-ad__body{padding-right:0}
   .dm-ad--small .dm-ad__art{right:-3cqw;top:50%;transform:translateY(-58%);width:52cqw;opacity:.8;
     -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.3) 25%,#000 55%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.3) 25%,#000 55%)}
-  .dm-ad--small .dm-ad__tag{top:10px;left:14px;font-size:12px}
-  .dm-ad--small .dm-ad__en{font-size:11px;margin-bottom:6px}
+  .dm-ad--small .dm-ad__tag{top:10px;left:14px;font-size:13px}
+  .dm-ad--small .dm-ad__en{font-size:13px;margin-bottom:6px}
   .dm-ad--small .dm-ad__name{font-size:clamp(22px,4.6cqw,30px)}
   .dm-ad--small .dm-ad__name b{display:inline}
   .dm-ad--small .dm-ad__copy{font-size:13px;margin-top:4px}
-  .dm-ad--small .dm-ad__chip{font-size:12px}
+  .dm-ad--small .dm-ad__chip{font-size:13px}
   .dm-ad--small .dm-ad__cta{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
-  .dm-ad--small .dm-btn{font-size:13.5px;min-height:38px;padding:0 .5em}
-  .dm-ad--small .dm-ad__cta:has(> :nth-child(2):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dm-ad--small .dm-btn{font-size:14px;min-height:40px;padding:0 .5em}
+  .dm-ad--small .dm-ad__cta:has(> :nth-child(2):last-child){grid-template-columns:repeat(2,minmax(0,1fr));max-width:440px}
+}
+/* ---------- '이 자리 추천 업종' 꼬리표: 광고 바로 위 작은 알약(광고를 가리지 않음) ---------- */
+.dm-target{display:flex;align-items:center;gap:5px;width:max-content;max-width:100%;margin:0 0 6px;padding:4px 10px;
+  border:1px solid #e9c46a;border-radius:999px;background:#fff7e6;color:#5c0a11;
+  font:600 13px/1.25 Pretendard,"Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+.dm-target b{font-weight:800;color:#8e1420}
+
+/* ---------- BAR: 얇은 띠(상단·한국 뉴스 5·6위 사이·메뉴 서랍) ----------
+   좁을 때(<350px): [광고 이름 / 위치·시간] 위, 지도·전화 버튼 아래 두 칸. 넓을 때: 한 줄(글 | 버튼). */
+.dm-ad--bar{border-radius:12px}
+.dm-ad--bar .dm-ad__in{grid-template-areas:"body" "cta";row-gap:9px;padding:11px 12px 12px}
+.dm-ad--bar .dm-ad__tag{position:static;display:inline-block;vertical-align:3px;margin-right:2px;font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;font-size:13px;letter-spacing:.02em;padding:4px 6px 3px}
+.dm-ad--bar .dm-ad__name{font-size:19px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dm-ad--bar .dm-ad__name b{display:inline}
+.dm-ad--bar .dm-ad__copy{margin-top:3px;font-size:13px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dm-ad--bar .dm-ad__more{display:none}
+.dm-ad--bar .dm-ad__art{right:-14cqw;top:50%;transform:translateY(-50%);width:62cqw;opacity:.55}
+.dm-ad--bar .dm-btn{min-height:42px;font-size:14px;padding:0 .7em}
+@container dmad (min-width:350px){
+  .dm-ad--bar .dm-ad__in{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"body cta";column-gap:10px;align-items:center;padding:10px 10px 10px 12px}
+  .dm-ad--bar .dm-ad__name{font-size:18px}
+  .dm-ad--bar .dm-ad__cta{gap:6px}
+  .dm-ad--bar .dm-btn{padding:0 .7em}
+  .dm-ad--bar .dm-ad__art{right:22cqw;width:40cqw;opacity:.5}
+}
+@container dmad (min-width:640px){
+  .dm-ad--bar .dm-ad__in{padding:12px 14px 12px 18px;column-gap:16px}
+  .dm-ad--bar .dm-ad__name{font-size:22px}
+  .dm-ad--bar .dm-ad__copy{font-size:14px}
+  .dm-ad--bar .dm-ad__more{display:inline}
+  .dm-ad--bar .dm-ad__cta{gap:8px}
+  .dm-ad--bar .dm-btn{min-height:44px;font-size:15px;padding:0 1.1em}
+  .dm-ad--bar .dm-ad__art{right:24cqw;width:30cqw;opacity:.6}
 }
 @media (prefers-reduced-motion:reduce){.dm-btn{transition:none}}

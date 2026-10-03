@@ -70,7 +70,7 @@
     });
   }
 
-  /* ---------- 광고(data/ads.json 슬롯 nearby-<id>) — app.js adHTML 과 같은 모양. item.render === "dragon" 이면 드래곤 마사지 배너 ---------- */
+  /* ---------- 광고(data/ads.json 슬롯 nearby-<id>) — app.js adHTML 과 같은 모양. item.render === "dragon" 이면 드래곤 스웨디시 배너 ---------- */
   function adSlot(id) {
     var A = window.TN_ADS; if (!A || A.enabled === false || !A.slots) return null;
     return A.slots.filter(function (x) { return x.id === id && x.enabled !== false && x.items && x.items.length; })[0] || null;
@@ -90,9 +90,11 @@
     var sl = adSlot(c.slot);
     if (!sl) { el.hidden = true; return; }
     var it = sl.items[0];
-    el.innerHTML = adHTML(sl);   // 기본(드래곤 배너를 못 불러와도 이 카드가 남음)
-    if (it.render === "dragon" && window.DragonAd) {
-      window.DragonAd.mount(document.createElement("div"), { variant: it.variant || "small" }).then(function (box) {
+    // render:"dragon" = 드래곤 스웨디시 배너 + '이 자리 추천 업종' 꼬리표(data/ads.js 의 TN_ADS.dragon 으로 바로 그림). 못 그리면 일반 카드
+    var dg = it.render === "dragon" && window.DragonAd && window.DragonAd.slotHTML && window.DragonAd.slotHTML(it);
+    el.innerHTML = dg || adHTML(sl);
+    if (!dg && it.render === "dragon" && window.DragonAd) {   // 옛 ads.js(TN_ADS.dragon 없음): ad.json 을 받아 그림
+      window.DragonAd.mount(document.createElement("div"), { variant: it.variant || "small", target: it.target || "" }).then(function (box) {
         if (box && box.innerHTML && cur === c.id) el.innerHTML = box.innerHTML;
       });
     }

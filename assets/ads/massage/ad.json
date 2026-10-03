@@ -2,9 +2,9 @@
   "id": "dragon-massage-pattaya",
   "type": "sponsored",
   "label": "광고",
-  "title": "드래곤 스웨디시 마사지 (Dragon Massage)",
-  "subtitle": "파타야 3rd Road · 영업 11:30–23:30 · Google 평점 4.5",
-  "alt": "광고: 드래곤 스웨디시 마사지 Dragon Massage – 파타야 3rd Road, 영업 11:30–23:30, Google 평점 4.5",
+  "title": "드래곤 스웨디시 (파타야)",
+  "subtitle": "파타야 3rd Road · 영업 11:30–23:30 · Google 평점 4.5 · 080-736-5211",
+  "alt": "광고: 드래곤 스웨디시 – 파타야 3rd Road, 영업 11:30–23:30, Google 평점 4.5, 전화 080-736-5211",
   "image_large": "assets/ads/massage/dragon-massage-large-1200x600.png",
   "image_strip": "assets/ads/massage/dragon-massage-strip-1200x300.png",
   "image_small": "assets/ads/massage/dragon-massage-small-600x200.png",
@@ -13,14 +13,15 @@
   "kakao_url": "",
   "line_url": "",
   "display": {
-    "brand_en": "DRAGON MASSAGE",
+    "brand_en": "DRAGON SWEDISH · PATTAYA",
     "name_lead": "드래곤",
-    "name_main": "스웨디시 마사지",
-    "copy": "하루의 피로를 풀어주는 편안한 휴식",
+    "name_main": "스웨디시",
+    "copy": "파타야 스웨디시 마사지 · 하루의 피로를 풀어주는 편안한 휴식",
     "copy_short": "하루의 피로를 풀어주는 편안한 휴식",
     "hours_short": "11:30–23:30",
     "rating_short": "Google 4.5",
     "area_short": "파타야 3rd Road",
+    "area_city": "파타야",
     "phone_display": "080-736-5211"
   },
   "html": {
@@ -57,5 +58,6 @@
     "maps_url_canonical": "https://www.google.com/maps/place/?q=place_id:ChIJPQWpMLO_AjERqu3KL9kMyEQ",
     "source": "Google Maps listing behind https://maps.app.goo.gl/sxwzECaxPxkANutE9 (fetched 2026-10-03 ~05:55 ICT)"
   },
-  "source_template": "assets/ads/massage/dragon-ad.js + dragon-ad.css (PNG previews: python3 assets/ads/massage/src/render.py)"
+  "source_template": "assets/ads/massage/dragon-ad.js + dragon-ad.css (PNG previews: python3 assets/ads/massage/src/render.py)",
+  "name_note": "화면 이름은 운영자가 부르는 '드래곤 스웨디시'(2026-10-03). Google 지도 등록 이름은 facts.google_listing_name('드래곤 스웨디시 마사지 Dragon Massage') 그대로"
 }

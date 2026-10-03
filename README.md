@@ -54,7 +54,7 @@
 - `assets/social.js` : 선택 기능 UI — 헤더/서랍의 '구글로 로그인'·내 계정 메뉴(사진만, UID 표시)·댓글·닉네임. 필요할 때만 `assets/fb.js` 를 import()
 - `assets/fb.js` : Firebase(ES 모듈, gstatic CDN v12.4.0: app·auth·**firestore-lite**) — 로그인·`users/{uid}` 동기화·`profiles`·`comments`. 웹 설정(firebaseConfig)이 들어 있음(웹 API 키는 공개용)
 - `firestore.rules` : Firestore 보안 규칙(콘솔에 붙여 넣어 게시 — 아래 'Google 로그인·Firestore')
-- `data/ads.json` → `data/ads.js` : 광고 자리 설정(목업). `build_index`(판 저장·`python3 tools/newslib.py`)가 ads.js 를 다시 만듦
+- `data/ads.json` → `data/ads.js` : 광고 자리 설정(지금은 모든 자리 드래곤 스웨디시 배너 — 아래 '광고 자리'). `build_index`(판 저장·`python3 tools/newslib.py`)가 ads.js 를 다시 만듦(`assets/ads/massage/ad.json` 도 `TN_ADS.dragon` 으로 같이)
 - `tools/fetch_korea.py` : 🇰🇷 한국 주요 뉴스 — `--standalone` = 독립 파일 `data/korea.json|js` 생성(Actions 가 2시간마다), `<판 id>` = 판 `korea_top` 후보 수집(Google News KR) / `tools/discussion.py` : 💬 오늘의 질문 초안·적용 / `tools/strip_trend_cards.py` : 옛 판의 trends24 기사 카드 정리(역사 자료용)
 - `drafts/` : 운영자 승인 전 초안(올리지 않음, .gitignore)
 - `manifest.json`, `sw.js`, `assets/icons/` : PWA(이름·아이콘·서비스 워커). 아이콘은 `python3 tools/make_icons.py` 로 다시 만들 수 있음(헤더 국기 로고 모양)
@@ -79,7 +79,7 @@
 - **셋째 줄 = 📍 내 주변(2026-10-03 운영자 요청, 예전엔 빈 줄)** ★판을 새로 만들어도 유지 — `index.html` `<div class="subbar subbar--nearby"><nav id="nearbyRow">` + `assets/nearby.js`(줄·화면 렌더) + `assets/nearby.css`(스타일). 정기 실행은 이 줄을 비우거나 지우지 말 것.
   - 줄: 왼쪽 **'📍 내 주변' 이름표(링크 아님, 누를 수 없음)** + 카테고리 버튼 4개 **🍜 맛집 · 💇 미용실 · 💆 마사지 · 🛒 마트**(높이 34px, 줄 높이 약 42px, 390px 폭에 다 들어감 — 더 좁으면 옆으로 밀기).
   - 버튼 → 앱 안 화면 **`#nearby/food|hair|massage|mart`**(모바일 = 전체 화면, 데스크톱 = 가운데 창, 뉴스 피드는 뒤에 그대로). **← 뒤로**·Esc·브라우저 뒤로·데스크톱 바깥 누르기 = 피드로. 주소에 `#nearby/massage` 를 붙여 바로 열 수도 있음.
-  - 화면 구성(위→아래): **광고 1개**(`data/ads.json` 슬롯 `nearby-food|nearby-hair|nearby-massage|nearby-mart`, '광고' 표시 — 마사지는 운영자 가게 **드래곤 스웨디시 마사지** 배너(`assets/ads/massage/`, item `render: "dragon"`, `variant: "small"`), 나머지 셋은 '여기에 광고하세요' 자리 표시) → 큰 버튼 **'📍 내 주변 평점 좋은 곳 구글 지도로 보기'**(새 탭) → 기준 안내 + 지역 버튼 → **빠른 찾기**(맛집: 한식·태국음식·카페 / 미용실: 헤어샵·네일 / 마사지: 타이 마사지·스파 / 마트: 마트·한인마트) → 안내 '평점 좋은 곳만 보려면 구글 지도 위쪽 필터에서 **평점**을 눌러 4.0 이상 등을 고르세요'(구글 지도 웹 검색 결과 위 '가격·평점·영업시간' 필터 칩, 10-03 확인).
+  - 화면 구성(위→아래): **광고 1개**(`data/ads.json` 슬롯 `nearby-food|nearby-hair|nearby-massage|nearby-mart`, '광고' 표시 — 네 화면 모두 운영자 가게 **드래곤 스웨디시** 배너(`assets/ads/massage/`, item `render: "dragon"`, `variant: "small"`) + '📢 이 자리 추천 업종' 꼬리표(한식당·맛집 / 미용실·네일 / 마사지·스파 / 한인마트)) → 큰 버튼 **'📍 내 주변 평점 좋은 곳 구글 지도로 보기'**(새 탭) → 기준 안내 + 지역 버튼 → **빠른 찾기**(맛집: 한식·태국음식·카페 / 미용실: 헤어샵·네일 / 마사지: 타이 마사지·스파 / 마트: 마트·한인마트) → 안내 '평점 좋은 곳만 보려면 구글 지도 위쪽 필터에서 **평점**을 눌러 4.0 이상 등을 고르세요'(구글 지도 웹 검색 결과 위 '가격·평점·영업시간' 필터 칩, 10-03 확인).
   - 위치: 지도 버튼을 누를 때 브라우저 위치 권한을 물음 → 허용 = `https://www.google.com/maps/search/<검색어>/@위도,경도,15z`(내 위치 중심), 거절·실패·미지원 = `https://www.google.com/maps/search/?api=1&query=<검색어> in Pattaya|Si Racha|Bangkok`. 지역 = 이 화면에서 고른 지역(`localStorage tnk.nearbyRegion`) > 날씨 칩 지역(`tnk.wxRegion`) > 페르소나 > **파타야**. 이미 허용된 기기는 화면을 열 때 묻지 않고 좌표를 받아 둠. 좌표는 지도 주소를 만드는 데만 쓰고 저장하지 않음(페이지 메모리 10분). 검색어는 영어(`restaurants`·`hair salon`·`massage`·`supermarket`·`korean restaurant`·`korean mart` …), 화면 글자는 한국어만(태국 문자 없음). 위치 확인이 길어 팝업이 막히면 '버튼을 한 번 더 눌러 주세요' 안내(링크는 이미 바뀌어 있음).
   - 링크는 모두 `<a target="_blank" rel="noopener">` → 홈 화면 앱(PWA)에서는 앱 안 브라우저 시트로 열림(아래 '외부 링크는 모두 새 탭').
   - **카테고리 설정은 `assets/nearby.js` 맨 위 `NEARBY` 객체 하나**(`window.TN_NEARBY`): `{id, emoji, label, slot, query, places:{includedTypes}, subs:[{label, query, places}]}` + 지역 좌표. 카테고리·빠른 찾기를 더하거나 바꿀 때 이것만 고치면 줄·화면·링크가 같이 바뀜(새 광고 슬롯 id 는 `data/ads.json` + `tools/newslib.py` `build_ads()` 허용 목록에도). **나중에 Google Places API(New) Nearby Search 로 앱 안 순위 목록으로 바꿀 때**: `places.includedTypes` 와 좌표(`geo.pos`)를 그대로 쓰고 `renderPage()` 의 지도 버튼(`.nb-go`) 아래에 목록을 넣으면 됨(API 키는 HTTP 리퍼러 제한 필요 — 지금은 키 없음, 구글 지도 링크만).
@@ -271,8 +271,33 @@
 ## 외부 링크는 모두 새 탭
 - 사이트 밖으로 나가는 링크(한국 뉴스 '기사 보러 가기', 기사 원문·관련 기사, 시세 칩 출처, 광고 지도·카톡·라인 등)는 **모두 `target="_blank" rel="noopener"`**(광고는 `rel="sponsored noopener"`). 홈 화면 앱(PWA standalone)에서는 안드로이드·iOS 가 앱 안 브라우저 시트(닫기 ✕ → 우리 앱으로 돌아옴)로 연다. **`tel:` 전화 링크만 예외**(같은 창). 새 링크를 만들 때도 이 규칙을 지킬 것.
 
-## 광고 자리(목업)
-- `data/ads.json`: `enabled`(false = 전부 숨김), `slots[]` = `{id: top(헤더 아래 띠)|nearby-food|nearby-hair|nearby-massage|nearby-mart(📍 내 주변 카테고리 화면 맨 위 — 마사지는 드래곤 마사지 배너, item `render:"dragon"`)|mid(한국 뉴스·브리핑과 주요 뉴스 사이 큰 배너)|korea-mid(한국 주요 뉴스 TOP 10 의 5위·6위 사이 작은 띠 — 10건 펼쳤을 때만)|infeed(기사 every 건마다 카드)|drawer(서랍 아래 작은 배너)|footer, size: strip|large|medium|small|wide, enabled, items[{category, title, subtitle, image?, link?(https 만), theme 1~5}]}`. 지금은 '여기에 광고하세요 · 광고 문의' 자리 표시만(가짜 업체명·전화·링크 없음). 고친 뒤 `python3 tools/newslib.py` 로 `data/ads.js` 재생성 → 배포. 새 슬롯 id 를 만들면 `tools/newslib.py` `build_ads()` 의 허용 목록에도 넣을 것(안 넣으면 판 빌드가 멈춤).
+## 광고 자리 (2026-10-03: 모든 자리 = 운영자 가게 '드래곤 스웨디시' 배너)
+- `data/ads.json`: `enabled`(false = 전부 숨김), `slots[]` = `{id, size, enabled, items[]}`. item = `{category, title, subtitle, image?, link?(https 만), theme 1~5, target(이 자리 추천 업종), render:"dragon", variant:large|strip|small|bar, preview?}`. 고친 뒤 `python3 tools/newslib.py` 로 `data/ads.js` 재생성 → 배포. 새 슬롯 id 를 만들면 `tools/newslib.py` `build_ads()` 의 허용 목록에도 넣을 것(안 넣으면 판 빌드가 멈춤).
+- **드래곤 스웨디시 배너**(`assets/ads/massage/`): 가게 정보·문구는 `ad.json` 하나(`display`: 화면 문구, `facts`: Google 지도에서 확인한 사실). `build_ads()` 가 `ad.json` 을 **`window.TN_ADS.dragon`** 으로 `data/ads.js` 에 같이 실어, `app.js`·`nearby.js` 의 `adHTML()` 이 item `render:"dragon"` 이면 `DragonAd.slotHTML(item)`(`dragon-ad.js`)로 바로 그림(못 그리면 예전 일반 카드). `dragon-ad.css`·`dragon-ad.js` 는 `index.html` 에서 `app.js` 보다 먼저(defer 없이) 불러오고 `tools/stamp_assets.py` 가 `?v=` 관리(`dragon.svg` 는 sw.js 앱 셸 목록 + VERSION 계산에 포함).
+  - 이름: 운영자가 부르는 **'드래곤 스웨디시'**(영문 `DRAGON SWEDISH · PATTAYA`). Google 지도 등록 이름은 '드래곤 스웨디시 마사지 Dragon Massage'(`facts.google_listing_name`) — 화면엔 안 씀.
+  - 버튼: **📍 지도**(`link` = https://maps.app.goo.gl/sxwzECaxPxkANutE9, 새 탭) · **📞 전화**(`tel:+66807365211` = 080-736-5211, 같은 창). 배너 아무 곳이나 눌러도 지도. 카카오톡·LINE 주소는 **아직 없음** → `kakao_url`/`line_url` 이 비어 있으면 버튼 없음. 메인 큰 배너만 `preview:true` 라 '카톡 문의'·'라인 문의' 가 **누르면 아무 일도 없는 자리표시**(`href="#"`, `aria-disabled`, '링크 준비 중')로 보임. 주소가 생기면 `ad.json` 에 넣으면 모든 자리에 실제 버튼이 생김(얇은 띠 `bar` 는 지도·전화만).
+  - 모든 배너 왼쪽 위(띠는 이름 앞)에 **'광고'** 표시, 배너 바로 위에 작은 알약 **'📢 이 자리 추천 업종: ○○'**(`item.target`, 13px, 배너를 가리지 않음 — 이 자리를 팔 때 노리는 업종 안내). 한국어만(태국 문자 없음), 팝업·자동 움직임 없음.
+  - 변형(variant) — 모두 CSS 컨테이너 쿼리라 자리 폭에 맞춰 바뀜. 390px 휴대폰·1280px 데스크톱에서 넘침 없음, 글자 13px 이상, 버튼 높이 40px 이상(확인함):
+    - `large`(메인 큰 배너): 휴대폰 = 세로(이름·문구·칩·버튼 2×2), 560px 이상 = 글 왼쪽·용 오른쪽
+    - `strip`(하단 띠): 700px 이상 = 4:1 가로 띠(글 | 버튼), 좁으면 세로 카드
+    - `small`(카드): 480px 이상 = 낮은 카드(버튼 한 줄), 좁으면 세로 카드
+    - `bar`(얇은 띠, 새로 만듦): 350px 이상 = 한 줄 `[광고] 드래곤 스웨디시 / 파타야 · 11:30–23:30 | 📍 지도 📞 전화`(640px 이상은 평점·전화번호도), 좁으면(메뉴 서랍·한국 뉴스 목록) 글 위·버튼 아래 두 칸
+  - PNG 미리보기(사이트에선 안 씀, 다른 곳에 올릴 때용): `python3 assets/ads/massage/src/render.py` → `dragon-massage-{large-1200x600,strip-1200x300,small-600x200,bar-800x76,bar-mobile-724x144}.png`. JS 없는 HTML 조각: `python3 assets/ads/massage/src/snippets.py` → `banner-{large,strip,small,bar}.html`. 한눈에 보기: `assets/ads/massage/preview.html`. 용 그림 `dragon.svg` 는 `src/make_dragon.py` 로 만든 것.
+- **자리 → 변형 → 이 자리 추천 업종**(`data/ads.json`):
+
+  | 자리 id | 위치 | 변형 | 추천 업종(target) |
+  |---|---|---|---|
+  | `top` | 헤더 아래, 본문 맨 위 띠 | `bar` | 한식당 |
+  | `mid` | 브리핑과 '오늘의 주요 뉴스' 사이 메인 큰 배너(내 피드·전체 보기에서만). 휴대폰에서 `margin-top:14px` | `large`(+카톡·라인 자리표시) | 부동산(콘도·임대) |
+  | `korea-mid` | 🇰🇷 한국 주요 뉴스 TOP 10 의 5위·6위 사이(10건 펼쳤을 때만) | `bar` | 환전·송금 |
+  | `infeed` | 기사 5건마다 카드(돌아가며) | `small` | 비자 대행 → 여행사·투어 → 병원·약국 |
+  | `drawer` | ☰ 메뉴 서랍 맨 아래 | `bar` | 골프·레저 |
+  | `footer` | 페이지 맨 아래 푸터 | `strip` | 여행사·투어 |
+  | `nearby-food` | 📍 내 주변 맛집 화면 맨 위 | `small` | 한식당·맛집 |
+  | `nearby-hair` | 📍 내 주변 미용실 화면 맨 위 | `small` | 미용실·네일 |
+  | `nearby-massage` | 📍 내 주변 마사지 화면 맨 위 | `small` | 마사지·스파 |
+  | `nearby-mart` | 📍 내 주변 마트 화면 맨 위 | `small` | 한인마트 |
+- 다른 광고주로 바꿀 때: 그 자리 item 의 `render`·`variant` 를 지우고 `title`·`subtitle`·`link`·`image` 를 넣으면 예전 일반 카드(`.ad`)로 그려짐(꼬리표는 dragon 배너에만).
 
 ## 홈 화면 추가 안내
 - 안드로이드(Chrome·삼성 인터넷): `beforeinstallprompt` → 아래 안내 바 '홈 화면에 추가할까요? 앱처럼 편하게 볼 수 있어요' [추가하기]/[나중에]. iOS Safari: 2단계 그림 카드(① 아래 도구 막대 공유 버튼 — 아래로 튀는 화살표 ② '홈 화면에 추가') + 닫기. '나중에'/닫기 = **7일** 동안 안 보임(이 기기 `ui.installHintUntil`). 설치 후·홈 화면 앱에서는 안 보임.
