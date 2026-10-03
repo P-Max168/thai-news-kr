@@ -168,3 +168,5 @@ body.nb-open{overflow:hidden}
   .nb-sw{font-size:13px;padding:6px 1px;letter-spacing:-.3px}
 }
 @media (max-width:370px){ .nb-cat{font-size:12px;letter-spacing:-.3px} }
+/* 속도(2026-10-03 16:40): 가게 카드 50장 — 화면 밖 카드는 그리기·자리 계산을 미룸(종류 바꾸기 때 레이아웃이 가장 큰 원인이었음: CPU×4 에서 약 190ms → 약 20ms) */
+.pc{content-visibility:auto;contain-intrinsic-size:auto 560px}

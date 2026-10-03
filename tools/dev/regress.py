@@ -222,10 +222,10 @@ async def main():
             pc = {"n": await pg.locator("#tnPage .pc").count()}
             await pg.click('[data-pc-cat="pet"]'); await pg.wait_for_timeout(300); pc["pet"] = await pg.locator("#tnPage .pc").count()
             await pg.click('[data-pc-cat="korean"]'); await pg.wait_for_timeout(300); pc["kr"] = await pg.locator("#tnPage .pc").count()
-            pc["krsrc"] = await pg.evaluate("[...document.querySelectorAll('#tnPage .pc')].every(c=>c.querySelectorAll('.pc__fs').length>=5 && /한식·한인/.test(c.innerText))")
+            pc["krsrc"] = await pg.evaluate("[...document.querySelectorAll('#tnPage .pc')].every(c=>c.querySelectorAll('.pc__fs').length>=5 && /한식·한인/.test(c.textContent))")
             await pg.click('[data-pc-cat="all"]'); await pg.wait_for_timeout(300); pc["all"] = await pg.locator("#tnPage .pc").count()
             pc["oldlast"] = await pg.evaluate("(()=>{const o=[...document.querySelectorAll('#tnPage .pc')].map(c=>!!c.querySelector('.pc__old'));const f=o.indexOf(true);return f>0&&o.slice(f).every(Boolean)})()")
-            pc["thai"] = await pg.evaluate("/[\\u0E00-\\u0E7F]/.test(document.getElementById('tnPage').innerText)")
+            pc["thai"] = await pg.evaluate("/[\\u0E00-\\u0E7F]/.test(document.getElementById('tnPage').textContent)")
             pc["src"] = await pg.evaluate("document.getElementById('tnPage').innerText.indexOf('OpenStreetMap contributors')>=0")
             await pg.evaluate("TNPages.close()"); await pg.wait_for_timeout(400)
         except Exception as e:
