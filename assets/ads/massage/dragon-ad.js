@@ -68,7 +68,7 @@
       '<aside class="dm-ad dm-ad--' + v + fixed + '" aria-label="' + esc(ad.label || "광고") + ": " + esc(ad.title) + '">' +
       '<div class="dm-ad__in">' +
       '<a class="dm-ad__cover" href="' + esc(ad.link) + '"' + ext + ' aria-label="' + esc(ad.title) + ' – Google 지도 보기"></a>' +
-      '<img class="dm-ad__art" src="' + esc(base + "dragon.svg") + '" alt="" width="760" height="600" aria-hidden="true">' +
+      '<img class="dm-ad__art" src="' + esc(base + "dragon.svg") + '" alt="" width="760" height="600" loading="lazy" decoding="async" aria-hidden="true">' +
       body +
       '<div class="dm-ad__cta">' + b.join("") + "</div>" +
       "</div></aside>";

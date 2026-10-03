@@ -1,0 +1,128 @@
+# -*- coding: utf-8 -*-
+"""회귀 점검(REGRESSION_CHECKLIST.md 항목) — 라이브 사이트를 390px 휴대폰 화면으로 열어 핵심 기능을 하나씩 확인.
+  python3 tools/dev/regress.py [URL] [--json out.json]
+결과: 항목마다 '통과/실패/참고' 한 줄(한국어). 실패가 있으면 exit 1.
+뉴스 정기 실행과 무관(개발 점검용). 첫 방문 시작 화면은 저장값을 미리 넣어 건너뜀(온보딩 자체는 따로 점검)."""
+import asyncio, json, re, sys, time, pathlib
+from playwright.async_api import async_playwright
+
+URL = next((a for a in sys.argv[1:] if a.startswith("http")), "https://p-max168.github.io/thai-news-kr/")
+OUT = sys.argv[sys.argv.index("--json") + 1] if "--json" in sys.argv else None
+THAI = re.compile(r"[\u0E00-\u0E3E\u0E40-\u0E7F]")   # ฿(U+0E3F)는 허용
+SEED = """(()=>{ if(!localStorage.getItem('tnk.profile.v1')) localStorage.setItem('tnk.profile.v1', JSON.stringify({v:1,onboarded:true,persona:'pattaya',topics:['east','visa','life','weather','society'],region:'east',interests:['life'],taste:{w:{},votes:{},vf:{}},ui:{installHintUntil:Date.now()+864e5},updatedAt:1,settingsAt:1})); })()"""
+res = []
+def rec(ok, name, detail=""):
+    res.append({"ok": ok, "name": name, "detail": detail})
+    print(("통과" if ok is True else "실패" if ok is False else "참고") + " · " + name + (" — " + str(detail) if detail != "" else ""), flush=True)
+
+async def main():
+    async with async_playwright() as p:
+        kw = dict(args=["--no-sandbox"])
+        if pathlib.Path("/usr/bin/google-chrome").exists(): kw["executable_path"] = "/usr/bin/google-chrome"
+        b = await p.chromium.launch(**kw)
+        ctx = await b.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, is_mobile=True, has_touch=True,
+                                  timezone_id="Asia/Bangkok", locale="ko-KR")
+        await ctx.add_init_script(SEED)
+        pg = await ctx.new_page()
+        errs = []
+        pg.on("pageerror", lambda e: errs.append("pageerror: " + str(e)[:160]))
+        pg.on("console", lambda m: errs.append("console.error: " + m.text[:160]) if m.type == "error" else None)
+        t0 = time.time()
+        r = await pg.goto(URL + ("&" if "?" in URL else "?") + "_=" + str(int(t0)), wait_until="networkidle")
+        await pg.wait_for_timeout(1200)
+        rec(r and r.status == 200, "페이지 열림", "HTTP %s, %.1f초" % (r.status if r else None, time.time() - t0))
+        # 헤더
+        h = await pg.evaluate("""()=>{const t=document.getElementById('ticker'); const tiles=[...t.querySelectorAll('.tk-tile')].filter(e=>e.offsetParent!==null);
+          return {menu: !!document.getElementById('menuBtn') && document.getElementById('menuBtn').offsetParent!==null, n: tiles.length, txt: tiles.map(e=>e.innerText.replace(/\\s+/g,' ')),
+            over: document.documentElement.scrollWidth > innerWidth + 1, hearts: (document.getElementById('heartBtn')||{}).innerText||null}}""")
+        txt = " | ".join(h["txt"])
+        need = ["1바트", "원", "1달러", "฿", "USDT", "PM2.5", "금", "휘발유"]
+        miss = [k for k in need if k not in txt]
+        rec(h["menu"] and h["n"] == 4 and not miss and txt.count("조회") >= 4, "헤더 ☰ + 상자 4개(환율·USDT·날씨/PM2.5·금/휘발유, 조회 시각)", txt[:200] + ((" 빠짐:" + ",".join(miss)) if miss else ""))
+        rec(not h["over"], "가로 넘침 없음(390px)")
+        if h["hearts"] is not None: rec(True, "헤더 ❤️ 개수 표시", h["hearts"])
+        # 한국 뉴스
+        k = await pg.evaluate("[...document.querySelectorAll('#korea .korea__list > li:not(.k-ad)')].filter(l=>l.offsetParent!==null).length")
+        rec(k >= 3, "🇰🇷 한국 주요 뉴스", "보이는 항목 %d" % k)
+        # 브리핑 → 기사 열림
+        n_brief = await pg.locator("#briefing .brief-line[data-open]").count()
+        if n_brief:
+            await pg.locator("#briefing .brief-line[data-open]").first.click(); await pg.wait_for_timeout(900)
+            opened = await pg.locator(".card.is-open").count()
+            rec(opened > 0, "브리핑 줄 누르면 기사 펼침", "브리핑 %d줄" % n_brief)
+        else: rec(False, "브리핑 줄 누르면 기사 펼침", "브리핑 줄 없음")
+        # 오늘의 질문·댓글
+        dq = await pg.locator(".dq-line").count(); cm = await pg.locator("[data-cmts]").count()
+        rec(dq > 0 and cm > 0, "💬 오늘의 질문·댓글 자리", "질문 %d · 댓글 칸 %d" % (dq, cm))
+        if dq:
+            await pg.locator(".dq-line").first.click(); await pg.wait_for_timeout(500)
+            rec(await pg.locator(".talk.is-open").count() > 0, "오늘의 질문 펼치기")
+        # 🙌/🙅
+        up = pg.locator("#feed .card [data-vote='1']").first
+        if await up.count():
+            await up.click(); await pg.wait_for_timeout(400)
+            toast = await pg.locator("#toast").inner_text()
+            st = await pg.locator("#feed .card [data-vote='1'][aria-pressed='true']").count()
+            rec(st > 0 and bool(toast.strip()), "🙌 더 보여줘 / 🙅 덜 보여줘", toast.strip()[:40])
+            await pg.locator("#feed .card [data-vote='1'][aria-pressed='true']").first.click(); await pg.wait_for_timeout(300)   # 취소(원상복구)
+        else: rec(False, "🙌 더 보여줘 / 🙅 덜 보여줘", "버튼 없음")
+        # 광고
+        ads = await pg.evaluate("""()=>[...document.querySelectorAll('[data-ad-slot]:not([hidden]), .ad-slot--feed')].filter(e=>e.offsetParent!==null||e.closest('#drawer')).map(e=>({id:e.getAttribute('data-ad-slot')||'infeed', dm: !!e.querySelector('.dm-ad'), img: !!e.querySelector('img, picture'), tag: !!e.querySelector('.dm-target') && /이 자리 추천 업종/.test(e.querySelector('.dm-target').textContent), tel: !!e.querySelector('a[href="tel:+66807365211"]')}))""")
+        bad = [a["id"] for a in ads if not (a["dm"] and a["img"] and a["tag"])]
+        rec(len(ads) >= 4 and not bad, "광고 자리 = 드래곤 배너 + 사진 + 📢 추천 업종", "%d자리, 문제: %s" % (len(ads), bad or "없음"))
+        rec(any(a["tel"] for a in ads), "전화 링크 tel:+66807365211")
+        # 태국 문자·원화
+        th = await pg.evaluate("document.body.innerText")
+        found = THAI.findall(th)
+        rec(not found, "화면에 태국 문자 없음(메인)", "".join(found[:20]))
+        krw = await pg.evaluate(r"""()=>{const d=(window.NEWS_DATA||{})[(window.NEWS_INDEX||{}).latest]; if(!d) return null; let miss=[], n=0;
+          const txt=d.stories.map(s=>[s.headline].concat(s.summary||[], s.for_me||'', s.context||'').join(' ')).join(' \n ');
+          const re=/(\d[\d,.]*\s?(?:만|억)?\s?(?:바트|฿))/g; let m; while((m=re.exec(txt))){ n++; const after=txt.slice(m.index, m.index+m[0].length+30); if(!/원/.test(after.slice(m[0].length))) miss.push(after.slice(0,40)); }
+          return {n, miss: miss.slice(0,5), nmiss: miss.length}}""")
+        if krw: rec(krw["nmiss"] == 0 if krw["n"] else None, "바트 금액 옆 원화 병기(최신 판 기사)", "%d건 중 원화 없음 %d %s" % (krw["n"], krw["nmiss"], krw["miss"]))
+        # 서랍 + 주제 11개
+        await pg.click("#menuBtn"); await pg.wait_for_timeout(500)
+        dr = await pg.evaluate("""()=>({open: document.getElementById('drawer').classList.contains('is-open'), items: [...document.querySelectorAll('#drawer button, #drawer a')].filter(e=>e.offsetParent!==null).length, txt: document.getElementById('drawer').innerText,
+            topics: [...document.querySelectorAll('#drawer [data-tab]')].map(e=>e.dataset.tab)})""")
+        rec(dr["open"] and dr["items"] >= 8, "☰ 서랍 열림·메뉴", "보이는 버튼 %d" % dr["items"])
+        rec(not THAI.findall(dr["txt"]), "서랍에 태국 문자 없음")
+        T = ["east", "bangkok", "north", "south", "poleco", "society", "visa", "life", "travel", "ent", "weather"]
+        miss = [t for t in T if t not in dr["topics"]]
+        rec(not miss, "주제 11개 서랍에 있음", "빠짐: %s" % miss if miss else "11개")
+        fails = []
+        for t in T:
+            if not await pg.evaluate("document.getElementById('drawer').classList.contains('is-open')"):
+                await pg.click("#menuBtn"); await pg.wait_for_timeout(350)
+            await pg.locator('#drawer [data-tab="%s"]' % t).first.click(); await pg.wait_for_timeout(350)
+            ok = await pg.evaluate("""(t)=>{const title=document.getElementById('feedTitleText').innerText; const cards=[...document.querySelectorAll('#feed .card')];
+                return {title, n: cards.length, okc: cards.every(c=>{const s=(window.TNApp&&window.TNApp.state.data.stories||[]).find(x=>x.id===c.id); return !s || TNTopics.storyTopics(s).all.includes(t);})}}""", t)
+            if not ok["okc"]: fails.append(t)
+        rec(not fails, "주제 필터 11개 동작", "잘못 걸러진 주제: %s" % fails if fails else "11개 모두 해당 주제 기사만")
+        await pg.goto(URL + "?tab=feed&_=" + str(int(time.time())), wait_until="networkidle"); await pg.wait_for_timeout(800)
+        # 내 주변
+        for cid in ["food", "massage", "pet", "beauty", "moto"]:
+            await pg.evaluate("location.hash='#nearby/%s'" % cid); await pg.wait_for_timeout(700)
+            nb = await pg.evaluate("""()=>{const p=document.querySelector('.nb-page:not([hidden]), #nbPage:not([hidden])')||document.querySelector('[class*=nb-page]'); if(!p) return null;
+                return {subs: p.querySelectorAll('.nb-sub').length, go: !!p.querySelector('.nb-go'), dm: !!p.querySelector('.dm-ad'), img: !!p.querySelector('.dm-ad img'), tag: !!p.querySelector('.dm-target'), th: (p.innerText.match(/[\\u0E00-\\u0E3E\\u0E40-\\u0E7F]/g)||[]).length}}""")
+            rec(bool(nb) and nb["subs"] >= 2 and nb["go"] and nb["dm"] and nb["img"] and nb["tag"] and nb["th"] == 0, "📍 내 주변 %s 화면(빠른 찾기·지도·광고)" % cid, nb)
+            await pg.evaluate("history.back()"); await pg.wait_for_timeout(400)
+        # PWA·공유
+        pw = await pg.evaluate("""async()=>{let sw=false; try{sw=await Promise.race([navigator.serviceWorker.ready.then(r=>!!r.active), new Promise(r=>setTimeout(()=>r(false),8000))]);}catch(e){}
+            let man=null; try{const r=await fetch(document.querySelector('link[rel=manifest]').href); const j=await r.json(); man={icons:j.icons.map(i=>i.sizes+'/'+(i.purpose||'any')), display:j.display, start:j.start_url};}catch(e){man=String(e)}
+            const og=(document.querySelector('meta[property="og:image"]')||{}).content; let ogok=null; try{const r=await fetch(og,{method:'GET',cache:'no-store'}); ogok=r.ok+' '+r.headers.get('content-type');}catch(e){ogok='cors/err'}
+            return {sw, man, og, ogok, install: !!(window.TNApp)}}""")
+        rec(pw["sw"] is True, "서비스 워커(오프라인·앱)")
+        rec(isinstance(pw["man"], dict) and any("512" in i for i in pw["man"]["icons"]) and pw["man"]["display"] == "standalone", "manifest(아이콘 192/512·standalone)", pw["man"])
+        rec(None, "홈 화면 추가 안내(설치 프롬프트)", "헤드리스에서는 설치 이벤트가 안 와서 manifest·SW 조건으로 대신 확인")
+        rec(bool(pw["og"]) and ("true" in str(pw["ogok"]) or pw["ogok"] == "cors/err"), "카톡 미리보기 이미지(og:image)", "%s %s" % (pw["og"], pw["ogok"]))
+        known = [e for e in errs if "429" in e]   # Open-Meteo 날씨 API 요청 제한(같은 IP 에서 점검을 자주 돌릴 때) → 화면은 ticker.json 대체값
+        real = [e for e in errs if "favicon" not in e and e not in known]
+        rec(not real, "콘솔 오류 없음", real[:5])
+        if known: rec(None, "날씨 API 429(요청 제한) — 대체값으로 표시", len(known))
+        await b.close()
+    if OUT: pathlib.Path(OUT).write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
+    nf = sum(1 for x in res if x["ok"] is False)
+    print("== 결과: 통과 %d · 실패 %d · 참고 %d" % (sum(1 for x in res if x["ok"] is True), nf, sum(1 for x in res if x["ok"] is None)))
+    return 1 if nf else 0
+
+sys.exit(asyncio.run(main()))

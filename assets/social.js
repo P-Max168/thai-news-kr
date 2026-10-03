@@ -344,7 +344,7 @@
   });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
 
-  window.TNSocial = { mountComments: mountComments, renderAccountBox: renderAccountBox, signedIn: function () { return !!user; }, _filter: badText, _nick: nickOk, _replyChips: replyChips };
+  window.TNSocial = { warm: function () { if (live && !fbP && !failed) load().then(start).catch(function () {}); }, mountComments: mountComments, renderAccountBox: renderAccountBox, signedIn: function () { return !!user; }, _filter: badText, _nick: nickOk, _replyChips: replyChips };
 
   renderHeader();
   if (!live) return;
@@ -354,7 +354,10 @@
   function go() { load().then(start).catch(function () {}); }
   if (a.uid || pending) go();
   else window.addEventListener("load", function () {
+    // 속도(2026-10-03): 첫 화면과 겹치지 않게 4초 뒤 쉬는 시간에, 데이터 절약 모드·2G 에서는 미리 받지 않음(☰ 메뉴·설정을 열 때 받음)
+    var c = navigator.connection || {};
+    if (c.saveData || /(^|-)2g$/.test(c.effectiveType || "")) return;
     var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 2500); };
-    setTimeout(function () { idle(go); }, 1500);
+    setTimeout(function () { idle(go, { timeout: 8000 }); }, 4000);
   });
 })();

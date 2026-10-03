@@ -78,6 +78,15 @@
   function loadDate(date) {
     window.NEWS_DATA = window.NEWS_DATA || {};
     if (window.NEWS_DATA[date]) return render(window.NEWS_DATA[date]);
+    // index.html head 에서 미리 받기 시작한 판 데이터(#tnkData)가 있으면 그것이 끝나기를 기다림(같은 파일을 두 번 받지 않게)
+    var pre = document.getElementById("tnkData");
+    if (pre && pre.getAttribute("data-ed") === date && pre.getAttribute("data-done") !== "err") {
+      if (pre.getAttribute("data-done") === "1") { if (window.NEWS_DATA[date]) return render(window.NEWS_DATA[date]); }
+      else { pre.addEventListener("load", function () { if (window.NEWS_DATA[date]) render(window.NEWS_DATA[date]); else loadDate2(date); }); pre.addEventListener("error", function () { loadDate2(date); }); return; }
+    }
+    loadDate2(date);
+  }
+  function loadDate2(date) {
     var sc = document.createElement("script");
     sc.src = "data/" + date + ".js";
     sc.onload = function () { if (window.NEWS_DATA[date]) render(window.NEWS_DATA[date]); else sc.onerror(); };
@@ -251,6 +260,7 @@
       ov.hidden = false; dr.classList.add("is-open"); dr.setAttribute("aria-hidden", "false"); btn.setAttribute("aria-expanded", "true");
       document.body.classList.add("drawer-open");
       if (window.TNSocial && $("drawerAcct")) window.TNSocial.renderAccountBox($("drawerAcct"));
+      if (window.TNSocial && window.TNSocial.warm) window.TNSocial.warm();   // 로그인 모듈은 메뉴를 열 때 미리 받음
       var cur = dr.querySelector('[aria-selected="true"]') || items()[0];
       setTimeout(function () { if (cur) cur.focus({ preventScroll: true }); }, 30);
     }
