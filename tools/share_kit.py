@@ -37,7 +37,7 @@ TOPICS = {  # assets/topics.js 와 같은 값(이모지·색)
     "ent": ("연예·스포츠·SNS", "💬", "#c2255c"), "weather": ("날씨·교통", "🌦️", "#0ca678"),
 }
 DECO = {"pattaya": "〰", "sriracha": "⚓", "bangkok": "曼", "poleco": "政", "society": "社", "visa": "✈",
-        "life": "฿", "travel": "旅", "ent": "#", "weather": "☂"}
+        "life": "%", "travel": "旅", "ent": "#", "weather": "☂"}
 LEGACY = {"politics": "poleco", "economy": "poleco", "society": "society", "visa": "visa", "sns": "ent", "local": "pattaya"}
 RX_PLACE = {
     "pattaya": re.compile(r"파타야|좀티엔|쫌티엔|방라뭉|방람웅|싸따힙|사따힙|사타힙|나끌루아|농쁘루|프라탐낙|꼬란"),

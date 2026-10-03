@@ -231,6 +231,7 @@
     var rk = el.querySelector("[data-r-text]"), rdraft = rk ? rk.value : "";
     var nrep = 0; Object.keys(c.replies || {}).forEach(function (p) { nrep += c.replies[p].length; });
     var opRep = el._op && !c.loading && !c.err ? repliesHTML(el, c, "op", el._op) : "";
+    var tk = el.closest(".talk"), dn = tk && tk.querySelector("[data-dq-n]"); if (dn) dn.textContent = (c.list.length + nrep) ? "댓글 " + (c.list.length + nrep) : "";   // 접힌 '오늘의 질문' 줄에 댓글 수
     el.innerHTML = (opRep ? '<div class="replies--op">' + opRep + "</div>" : "") + '<h4 class="cmts__h">댓글 <em>' + ((c.list.length + nrep) || "") + "</em></h4>" + body + (c.err ? "" : formHTML(el));
     var ta = el.querySelector("[data-c-text]"); if (ta && draft) { ta.value = draft; }
     var ra = el.querySelector("[data-r-text]"); if (ra && rdraft) { ra.value = rdraft; }

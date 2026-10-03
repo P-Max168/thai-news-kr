@@ -129,8 +129,8 @@
       a && ["미세먼지 PM2.5 " + Math.round(a.pm) + " " + lv.t, '<span class="tk-l">PM2.5</span><b>' + Math.round(a.pm) + '</b><span class="tk-lv tk-lv--' + lv.k + '">' + lv.t + "</span>"]
     ]));
     h.push(tile("price", [
-      g && ["금시세 금괴 1바트 " + n0(g.bar_sell) + "바트", '<span class="tk-l">금</span><b>' + n0(g.bar_sell) + "฿</b>"],
-      o && ["휘발유 95 리터당 " + n2(o.gasohol95) + "바트", '<span class="tk-l">휘발유(95)</span><b>' + n2(o.gasohol95) + "฿</b>"]
+      g && ["금시세 금괴 1바트 " + n0(g.bar_sell) + "바트", '<span class="tk-l">금</span><b>' + n0(g.bar_sell) + '<small class="tk-u">바트</small></b>'],
+      o && ["휘발유 95 리터당 " + n2(o.gasohol95) + "바트", '<span class="tk-l">휘발유(95)</span><b>' + n2(o.gasohol95) + '<small class="tk-u">바트</small></b>']
     ]));
     var open = pop && !pop.hidden ? pop.getAttribute("data-k") : null;
     box.innerHTML = h.join("");

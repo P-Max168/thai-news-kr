@@ -44,6 +44,25 @@ IMPACTS = ["비자·체류", "환율·물가", "교통·사고", "치안", "날�
 ISSUES_FILE = ROOT / "tools" / "issues.json"
 ISSUE_ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{2,60}$")
 THAI_RE = re.compile(r"[\u0E00-\u0E7F]")
+# 한국어 글에 섞이면 안 되는 한자·일본 가나(번역 잔재 — 例 '追いつ었으나', '해양沿岸자원국'). 한국어 본문 필드에만 적용
+CJK_RE = re.compile(r"[\u3040-\u30FF\u31F0-\u31FF\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF\uFF66-\uFF9F]")
+KO_FIELDS = ("headline", "summary", "context", "update", "region", "for_me", "quick_replies")
+
+
+def cjk_check(data):
+    """한국어 본문 필드(기사 제목·요약·배경·후속·지역·그래서 나는?·추천 댓글·이슈 이름·오늘의 질문·브리핑)에 한자·가나가 있으면 예외."""
+    def chk(where, v):
+        for t in (v if isinstance(v, list) else [v]):
+            m = CJK_RE.search(t) if isinstance(t, str) else None
+            assert not m, (where, "한국어 글에 한자·가나 금지(번역 잔재) — 한국어로 고칠 것", t[max(0, m.start() - 12):m.end() + 8])
+    for s in data.get("stories", []):
+        for k in KO_FIELDS:
+            if k in s: chk((s["id"], k), s[k])
+        if isinstance(s.get("issue"), dict): chk((s["id"], "issue.title"), s["issue"].get("title"))
+        d = s.get("discussion")
+        if isinstance(d, dict): chk((s["id"], "discussion"), [d.get("question") or "", d.get("operator_comment") or ""])
+    br = data.get("briefing")
+    chk("briefing", [b.get("text") or "" for b in br] if isinstance(br, list) else (br or ""))
 # 추천 댓글은 독자 본인이 올리는 문장 — 겪지 않은 경험을 지어내게 만드는 표현 금지
 FAKE_EXP_RE = re.compile(r"저도\s*(거기|그\s*동네|근처|여기)\s*(살|사는|살아)|제가\s*(직접|가\s*봤|가봤|겪|봤)|저도\s*(겪|당했|가\s*봤|가봤|다녀왔|봤어)|우리\s*(집|동네)도|저희\s*(집|동네|가게)")
 LINK_RE = re.compile(r"https?://|www\.|\.(com|net|org|co|th|me|ly)\b", re.I)
@@ -222,6 +241,7 @@ def validate(data):
     for h in data["highlights"]:
         assert h in ids, "highlights 에 없는 id: " + h
     assert len(data["highlights"]) == 3, "highlights 는 3개"
+    cjk_check(data)
     br = data.get("briefing")
     if new:
         assert isinstance(br, list), "새 형식 briefing 은 [{topic, text, story_id}] 목록 (newslib.B 사용)"

@@ -6,9 +6,9 @@
   var T = window.TNTopics, S = window.TNStore, L = window.TNTaste;
   var TZ = "Asia/Bangkok";
   var MAX = T.MAX_TOPICS;
-  var DECO = { pattaya: "〰", sriracha: "⚓", bangkok: "曼", poleco: "政", society: "社", visa: "✈", life: "฿", travel: "旅", ent: "#", weather: "☂" };
+  var DECO = { pattaya: "〰", sriracha: "⚓", bangkok: "曼", poleco: "政", society: "社", visa: "✈", life: "%", travel: "旅", ent: "#", weather: "☂" };
   // tab: "feed"(내 피드) | "all"(전체 보기) | 주제 id
-  var state = { data: null, tab: "feed", edition: null, impact: null };
+  var state = { data: null, tab: "feed", edition: null, impact: null, dqOpen: {} };
   /* 한인 영향도 태그(판 데이터 story.impact — README '판마다 채울 필드(2026-10-03 추가)'). 순서 = 필터 칩 순서 */
   var IMPACT = [
     { k: "비자·체류", e: "🛂", c: "#6741d9" }, { k: "환율·물가", e: "💱", c: "#0c8f6a" }, { k: "교통·사고", e: "🚗", c: "#d9480f" },
@@ -333,10 +333,17 @@
         '<div class="card__foot">' + metaHTML(s) + '<span class="more"><span class="more__t">자세히</span> <i>▾</i></span></div>' +
       "</button>" + toolsHTML(s) +
       '<div class="card__body" id="body-' + esc(s.id) + '">' + upd + paras + ctx +
-        '<div class="origin"><p class="origin__th" lang="th"><small>원문 제목</small>' + esc(s.title_th) + "</p>" +
+        '<div class="origin">' + originTitle(s.title_th) +
         '<a class="btn" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.source.replace(/\s*\(.*\)$/, "")) + " 원문 보기 ↗</a>" + rel + tags + "</div>" +
         talkHTML(s) +
       "</div>" + voteHTML(s) + "</article>";
+  }
+
+  /* 원문 제목: 태국 글자가 있으면 작은 '원문 제목 보기' 토글 안에만(운영자·독자가 못 읽는 글자를 화면에 바로 내지 않음), 영어 등은 그대로 */
+  function originTitle(t) {
+    if (!t) return "";
+    if (/[\u0E00-\u0E7F]/.test(t)) return '<details class="origin__th origin__th--fold"><summary>원문 제목 보기 <small>(태국어)</small></summary><span lang="th">' + esc(t) + "</span></details>";
+    return '<p class="origin__th"><small>원문 제목</small>' + esc(t) + "</p>";
   }
 
   /* ---------- 카드 도구 줄(접힌 카드에서도 보임): 📰 N개 매체 보도 · 🗓️ 이슈 타임라인 ---------- */
@@ -411,16 +418,25 @@
     panel.hidden = !open; btn.setAttribute("aria-expanded", String(open)); btn.classList.toggle("is-on", open);
   }
 
-  /* 💬 오늘의 질문(판 데이터의 정적 내용, approved 일 때만) + 댓글 자리(assets/social.js 가 채움) */
+  /* 💬 오늘의 질문(판 데이터의 정적 내용, approved 일 때만) + 댓글 자리(assets/social.js 가 채움)
+   * 2026-10-03 운영자 요청: 질문 상자·고정 운영자 댓글이 기사마다 너무 커서 → 한 줄 '💬 오늘의 질문: …'(말줄임)만 보이고,
+   * 누르면 질문 전문 + 📌 운영자 댓글(배지 유지) + 💡 추천 문장 + 댓글 칸·댓글 목록이 펼쳐진다. 질문이 없는 기사는 예전처럼 댓글 칸 그대로. */
   function talkHTML(s) {
-    var d = s.discussion, q = "";
-    if (d && d.approved === true && d.question) {
-      q = '<div class="dq"><b class="dq__h">💬 오늘의 질문</b><p class="dq__q">' + esc(d.question) + "</p></div>" +
-        (d.operator_comment ? '<div class="cmt cmt--op cmt--pin"><div class="cmt__h"><b class="cmt__n">운영자</b><span class="badge-op">운영자</span><span class="cmt__pin">📌 고정</span></div><p class="cmt__t">' + esc(d.operator_comment) + "</p>" +
-          (/^https?:$/.test(location.protocol) ? '<div class="cmt__a"><button type="button" class="cbtn" data-op-reply>↳ 답글</button></div>' : "") + "</div>" : "");
-    }
-    var live = /^https?:$/.test(location.protocol);
-    return '<section class="talk" aria-label="댓글">' + q + (live ? '<div class="cmts" data-cmts="' + esc(s.id) + '"><p class="cmts__empty">댓글은 기사를 펼치면 불러와요.</p></div>' : "") + "</section>";
+    var d = s.discussion, live = /^https?:$/.test(location.protocol), sid = esc(s.id);
+    var cm = live ? '<div class="cmts" data-cmts="' + sid + '"><p class="cmts__empty">댓글은 기사를 펼치면 불러와요.</p></div>' : "";
+    if (!(d && d.approved === true && d.question)) return '<section class="talk" aria-label="댓글">' + cm + "</section>";
+    var op = d.operator_comment ? '<div class="cmt cmt--op cmt--pin"><div class="cmt__h"><b class="cmt__n">운영자</b><span class="badge-op">운영자</span><span class="cmt__pin">📌 고정</span></div><p class="cmt__t">' + esc(d.operator_comment) + "</p>" +
+      (live ? '<div class="cmt__a"><button type="button" class="cbtn" data-op-reply>↳ 답글</button></div>' : "") + "</div>" : "";
+    var open = !!state.dqOpen[s.id];
+    return '<section class="talk talk--dq' + (open ? " is-open" : "") + '" aria-label="댓글">' +
+      '<button type="button" class="dq-line" data-dq="' + sid + '" aria-expanded="' + open + '" aria-controls="dqm-' + sid + '">' +
+        '<span class="dq-line__h">💬 오늘의 질문:</span><span class="dq-line__q">' + esc(d.question) + '</span><span class="dq-line__n" data-dq-n></span><i aria-hidden="true">▾</i></button>' +
+      '<div class="talk__more" id="dqm-' + sid + '"' + (open ? "" : " hidden") + '><p class="dq__q dq__q--full">' + esc(d.question) + "</p>" + op + cm + "</div></section>";
+  }
+  function toggleTalk(btn) {
+    var id = btn.getAttribute("data-dq"), box = $("dqm-" + id); if (!box) return;
+    var open = box.hidden; box.hidden = !open; state.dqOpen[id] = open;
+    btn.setAttribute("aria-expanded", String(open)); btn.closest(".talk").classList.toggle("is-open", open);
   }
 
   /* ---------- 광고 자리(목업): data/ads.json → data/ads.js(window.TN_ADS). 없거나 enabled=false 면 아무것도 안 보임 ---------- */
@@ -611,6 +627,7 @@
       renderKorea(); if (!KOREA.step) $("korea").scrollIntoView({ block: "nearest" }); return;
     }
     if ((el = e.target.closest("[data-imp]"))) { var ik = el.getAttribute("data-imp") || null; state.impact = state.impact === ik ? null : ik; var fy = window.pageYOffset; renderFeed(); window.scrollTo(0, fy); return; }
+    if ((el = e.target.closest("[data-dq]"))) { toggleTalk(el); return; }
     if ((el = e.target.closest("[data-also]"))) { var ap = $("also-" + el.getAttribute("data-also")); if (ap) togglePanel(el, ap); return; }
     if ((el = e.target.closest("[data-issue]"))) {
       var ts = byId(el.getAttribute("data-sid")), tp = $("tl-" + el.getAttribute("data-sid"));
