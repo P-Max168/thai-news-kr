@@ -360,7 +360,7 @@ def build_ads():
         return
     ads = json.loads(src.read_text(encoding="utf-8"))
     for sl in ads.get("slots", []):
-        assert sl.get("id") in ("top", "mid", "korea-mid", "infeed", "drawer", "footer"), ("ads", sl.get("id"))
+        assert sl.get("id") in ("top", "mid", "korea-mid", "infeed", "drawer", "footer", "nearby-food", "nearby-hair", "nearby-massage", "nearby-mart"), ("ads", sl.get("id"))
         for it in sl.get("items", []):
             for k in ("image", "link"):
                 assert not it.get(k) or str(it[k]).startswith("https://"), ("ads", sl["id"], k, "https:// 만")

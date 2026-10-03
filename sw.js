@@ -9,11 +9,12 @@
  * - Google 로그인·Firestore(firebase / googleapis / gstatic SDK / firebaseapp.com / google.com 계정 창)는
  *   절대 가로채거나 캐시하지 않는다(그냥 브라우저가 직접 요청). 글꼴(fonts.googleapis/gstatic)만 예외로 캐시.
  */
-var VERSION = "tnk-b2805cb2f7";
+var VERSION = "tnk-a533a4ab38";
 var SHELL = "shell-" + VERSION, DATA = "data-v1", EXT = "ext-v1";
 var SHELL_FILES = [
   "./", "index.html", "manifest.json",
   "assets/style.css?v=77bbbbe8", "assets/topics.js?v=e598247a", "assets/prefs.js?v=4c59b99b", "assets/taste.js?v=7c1f4138", "assets/app.js?v=632a4a8f", "assets/social.js?v=6ecc81b2", "assets/ticker.js?v=bdacd163",
+  "assets/nearby.css?v=06e93e4f", "assets/nearby.js?v=217fcdac",
   "assets/icons/icon-192.png", "assets/icons/icon-512.png", "assets/icons/maskable-512.png",
   "assets/icons/apple-touch-icon.png", "assets/icons/favicon-32.png"
 ];

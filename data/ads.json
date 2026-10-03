@@ -20,6 +20,18 @@
   {"id": "drawer", "size": "small", "enabled": true, "items": [
    {"category": "한식당", "title": "여기에 광고하세요", "subtitle": "메뉴 아래 작은 배너 · 광고 문의", "theme": 1}
   ]},
+  {"id": "nearby-food", "size": "medium", "enabled": true, "items": [
+   {"category": "맛집", "title": "여기에 광고하세요", "subtitle": "📍 내 주변 맛집 화면 맨 위 자리 · 광고 문의", "theme": 1}
+  ]},
+  {"id": "nearby-hair", "size": "medium", "enabled": true, "items": [
+   {"category": "미용실", "title": "여기에 광고하세요", "subtitle": "📍 내 주변 미용실 화면 맨 위 자리 · 광고 문의", "theme": 5}
+  ]},
+  {"id": "nearby-massage", "size": "medium", "enabled": true, "items": [
+   {"category": "마사지", "title": "드래곤 스웨디시 마사지 (Dragon Massage)", "subtitle": "파타야 3rd Road · 영업 11:30–23:30 · Google 평점 4.5", "link": "https://maps.app.goo.gl/sxwzECaxPxkANutE9", "theme": 5, "render": "dragon", "variant": "small"}
+  ]},
+  {"id": "nearby-mart", "size": "medium", "enabled": true, "items": [
+   {"category": "마트", "title": "여기에 광고하세요", "subtitle": "📍 내 주변 마트 화면 맨 위 자리 · 광고 문의", "theme": 4}
+  ]},
   {"id": "footer", "size": "wide", "enabled": true, "items": [
    {"category": "여행사", "title": "여기에 광고하세요", "subtitle": "하단 배너 · 광고 문의", "theme": 4}
   ]}
