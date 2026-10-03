@@ -9,13 +9,13 @@
  * - Google 로그인·Firestore(firebase / googleapis / gstatic SDK / firebaseapp.com / google.com 계정 창)는
  *   절대 가로채거나 캐시하지 않는다(그냥 브라우저가 직접 요청). 글꼴(fonts.googleapis/gstatic)만 예외로 캐시.
  */
-var VERSION = "tnk-442cd9af1c";
+var VERSION = "tnk-e42c7edeed";
 var SHELL = "shell-" + VERSION, DATA = "data-v1", EXT = "ext-v1";
 var SHELL_FILES = [
   "./", "index.html", "manifest.json",
-  "assets/style.css?v=7fe65b08", "assets/topics.js?v=3e951135", "assets/prefs.js?v=280ab29a", "assets/taste.js?v=788775b8", "assets/app.js?v=a70eb5dd", "assets/social.js?v=4caae75d", "assets/ticker.js?v=fbc22bab",
+  "assets/style.css?v=b582e92e", "assets/topics.js?v=3e951135", "assets/prefs.js?v=280ab29a", "assets/taste.js?v=788775b8", "assets/app.js?v=1fd68d9f", "assets/social.js?v=4caae75d", "assets/ticker.js?v=fbc22bab",
   "assets/nearby.css?v=f91ab1c4", "assets/nearby.js?v=88e6a0db", "assets/pages.js?v=90e0a552",
-  "assets/ads/massage/dragon-ad.css?v=7a850b03", "assets/ads/massage/dragon-ad.js?v=1961d18e", "assets/ads/massage/dragon.svg",
+  "assets/ads/massage/dragon-ad.css?v=992ae706", "assets/ads/massage/dragon-ad.js?v=1961d18e", "assets/ads/massage/dragon.svg",
   "assets/icons/icon-192.png", "assets/icons/icon-512.png", "assets/icons/maskable-512.png",
   "assets/icons/apple-touch-icon.png", "assets/icons/favicon-32.png"
 ];

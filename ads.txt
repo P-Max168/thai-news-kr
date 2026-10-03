@@ -1,0 +1,5 @@
+# ads.txt — 자리표시(2026-10-03 애드센스 준비). 지금은 주석뿐이라 아무 효과 없음.
+# 애드센스 승인 뒤 아래 한 줄의 pub- 번호를 애드센스 계정(계정 → 계정 정보 → 게시자 ID)의 번호로 바꾸고 맨 앞 '# ' 를 지운다:
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+# 주의: 애드센스는 '도메인 맨 위'(https://p-max168.github.io/ads.txt)의 파일만 읽는다.
+#       이 저장소는 /thai-news-portal/ 아래라 여기 둔 파일은 읽히지 않음 → p-max168.github.io 저장소(사용자 사이트)나 맞춤 도메인에 같은 파일을 둬야 함(PENDING_APPROVAL.md #5).

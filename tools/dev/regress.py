@@ -162,6 +162,22 @@ async def main():
         except Exception as e:
             lock2, pj = False, str(e)[:80]
         rec(lock2 and isinstance(pj, int) and pj >= 0, "✅ 승인함 — 운영자 아니면 잠금 안내, 목록 파일(data/pending.json) 읽힘", "항목 %s건" % pj)
+        # 애드센스 준비: 광고 칸 표준 단위·민감 기사 옆 광고 없음·안내 4쪽·ads.txt
+        try:
+            au = await pg.evaluate("""()=>{const f=[...document.querySelectorAll('#feed .ad-slot--feed')];
+              const bad=f.filter(a=>[a.previousElementSibling,a.nextElementSibling].some(x=>x&&x.dataset&&x.dataset.adsafe==='0')).length;
+              const shown=[...document.querySelectorAll('.ad-slot[data-ad-slot]:not([hidden])')];
+              return {units:shown.filter(e=>e.dataset.unit).length, shown:shown.length, feedAds:f.length, nextToRisky:bad,
+                      popups:document.querySelectorAll('ins.adsbygoogle,script[src*="adsbygoogle"]').length}}""")
+        except Exception as e:
+            au = {"err": str(e)[:80]}
+        rec(au.get("shown", 0) > 0 and au.get("units") == au.get("shown") and au.get("nextToRisky") == 0 and au.get("popups") == 0,
+            "광고 칸 — 모두 표준 단위(data-unit), 민감 기사 바로 옆 광고 없음, 애드센스 코드·자동 광고 없음", au)
+        lg = {}
+        for f in ["privacy.html", "terms.html", "about.html", "contact.html", "ads.txt"]:
+            lg[f] = await pg.evaluate("f=>fetch(f,{cache:'no-store'}).then(r=>r.ok?r.text():'').then(t=>t.length).catch(()=>-1)", f)
+        links = await pg.locator(".footer__links a").count()
+        rec(all(v > 100 for v in lg.values()) and links == 4, "안내 4쪽(개인정보·약관·소개·연락) + ads.txt 열림, 푸터 링크 4개", dict(lg, footerLinks=links))
         # 첫 방문 시작 화면(새 방문자): 보류 중엔 예전 '어떤 분이세요?'(페르소나 5개), 켜지면 2단계
         c2 = await b.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True, timezone_id="Asia/Bangkok", locale="ko-KR")
         p2 = await c2.new_page()

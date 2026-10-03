@@ -126,7 +126,8 @@
 .dm-target b{font-weight:800;color:#8e1420}
 
 /* ---------- BAR: 얇은 띠(상단·한국 뉴스 5·6위 사이·메뉴 서랍) ----------
-   좁을 때(<350px): [광고 이름 / 위치·시간] 위, 지도·전화 버튼 아래 두 칸. 넓을 때: 한 줄(글 | 버튼). */
+   좁을 때(<320px): [광고 이름 / 위치·시간] 위, 지도·전화 버튼 아래 두 칸. 넓을 때: 한 줄(글 | 버튼).
+   2026-10-03 애드센스 준비: 360px 휴대폰(칸 332px)에서도 한 줄 → 표준 320x100 칸 안에 들어감(예전 350px 기준이면 두 줄 118px) */
 .dm-ad--bar{border-radius:12px}
 .dm-ad--bar .dm-ad__in{grid-template-areas:"body" "cta";row-gap:9px;padding:11px 12px 12px}
 .dm-ad--bar .dm-ad__tag{position:static;display:inline-block;vertical-align:3px;margin-right:2px;font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;font-size:13px;letter-spacing:.02em;padding:4px 6px 3px}
@@ -136,7 +137,7 @@
 .dm-ad--bar .dm-ad__more{display:none}
 .dm-ad--bar .dm-ad__art{right:-14cqw;top:50%;transform:translateY(-50%);width:62cqw;opacity:.55}
 .dm-ad--bar .dm-btn{min-height:42px;font-size:14px;padding:0 .7em}
-@container dmad (min-width:350px){
+@container dmad (min-width:320px){
   .dm-ad--bar .dm-ad__in{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"body cta";column-gap:10px;align-items:center;padding:10px 10px 10px 12px}
   .dm-ad--bar .dm-ad__name{font-size:18px}
   .dm-ad--bar .dm-ad__cta{gap:6px}
@@ -153,3 +154,11 @@
   .dm-ad--bar .dm-ad__art{right:24cqw;width:30cqw;opacity:.6}
 }
 @media (prefers-reduced-motion:reduce){.dm-btn{transition:none}}
+/* 320~349px 칸(360px 휴대폰): 한 줄을 지키면서 가게 이름이 잘리지 않게 글자·버튼만 조금 작게(2026-10-03) */
+@container dmad (min-width:320px) and (max-width:349.98px){
+  .dm-ad--bar .dm-ad__in{column-gap:8px;padding:10px 8px 10px 10px}
+  .dm-ad--bar .dm-ad__name{font-size:16px}
+  .dm-ad--bar .dm-ad__tag{font-size:12px}
+  .dm-ad--bar .dm-ad__cta{gap:5px}
+  .dm-ad--bar .dm-btn{font-size:13px;padding:0 .55em;min-height:40px}
+}

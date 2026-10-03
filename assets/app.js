@@ -357,7 +357,7 @@
     var tags = (s.tags || []).length ? '<div class="tags">' + s.tags.map(function (x) { return "<span>#" + esc(x) + "</span>"; }).join("") + "</div>" : "";
     var v = L.voteOf(edId(), s);
     var hon = L.heartOf(edId(), s);
-    return '<article class="card' + (v < 0 ? " is-down" : "") + '" style="--tc:' + t.color + '" data-topic="' + tp.topic + '" id="' + esc(s.id) + '">' +
+    return '<article class="card' + (v < 0 ? " is-down" : "") + '" style="--tc:' + t.color + '" data-topic="' + tp.topic + '"' + (adRisk(s) ? ' data-adsafe="0"' : "") + ' id="' + esc(s.id) + '">' +
       '<button type="button" class="card-heart" data-heart data-id="' + esc(s.id) + '" aria-pressed="' + hon + '" aria-label="' + (hon ? "하트 취소" : "하트 — 이런 뉴스 더 보기") + '"><span aria-hidden="true">' + (hon ? "❤️" : "♡") + "</span></button>" +
       '<button class="card__head" aria-expanded="false" aria-controls="body-' + esc(s.id) + '">' +
         '<div class="card__top">' + chips + "</div>" +
@@ -498,13 +498,27 @@
       var id = el.getAttribute("data-ad-slot"), sl = adSlot(id);
       if (id === "mid" && !topShown()) sl = null;
       el.hidden = !sl; el.innerHTML = sl ? adHTML(sl, 0) : "";
+      if (sl && sl.unit) el.setAttribute("data-unit", sl.unit);   // 표준 광고 단위 칸(애드센스 준비, data/ads.json unit)
     });
   }
+  /* 기사 사이 광고: 'every' 번째 기사 뒤마다. 광고 정책상 민감한 기사(성범죄·마약·잔혹·도박 등, adRisk) 바로 앞뒤에는 넣지 않고 다음 칸으로 미룸 */
   function withInfeed(cards) {
     var sl = adSlot("infeed"); if (!sl) return cards.join("");
-    var every = Math.max(3, sl.every || 5), out = [], k = 0;
-    cards.forEach(function (c, i) { out.push(c); if ((i + 1) % every === 0 && i < cards.length - 1) out.push('<div class="ad-slot ad-slot--feed">' + adHTML(sl, k++) + "</div>"); });
+    var every = Math.max(3, sl.every || 5), out = [], k = 0, due = false;
+    var risky = function (c) { return !!c && c.indexOf('data-adsafe="0"') >= 0; };
+    cards.forEach(function (c, i) {
+      out.push(c);
+      if ((i + 1) % every === 0) due = true;
+      if (due && i < cards.length - 1 && !risky(c) && !risky(cards[i + 1])) { out.push('<div class="ad-slot ad-slot--feed" data-unit="' + esc(sl.unit || "300x250") + '">' + adHTML(sl, k++) + "</div>"); due = false; }
+    });
     return out.join("");
+  }
+  /* 애드센스 정책 위험 기사 표시(광고를 옆에 두지 않음 — 기사는 그대로 보임). 판 데이터에 ad_safe:false 가 있으면 그것을 따름 */
+  var AD_RISK = /성매매|매춘|성폭행|성폭력|강간|성추행|성착취|음란|포르노|나체|알몸|마약|필로폰|메스암페타민|야바|코카인|헤로인|대마|살해|살인(?!적)|시신|사체|참수|토막|자살|극단적 선택|총격|도박|카지노|불법 ?촬영/;
+  function adRisk(s) {
+    if (s.ad_safe === false) return true;
+    if (s.ad_safe === true) return false;
+    return AD_RISK.test([s.headline].concat(s.summary || []).join(" "));
   }
 
   function feedList() {

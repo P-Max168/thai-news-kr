@@ -315,6 +315,13 @@
   - `nearby-hair`·`nearby-mart`(10-03 v1 미용실·마트)는 `data/ads.json` 에서 뺌(화면 없음). `tools/newslib.py` `build_ads()` 허용 목록에는 남겨 둬서 옛 설정이 돌아와도 빌드가 깨지지 않음(그려지지 않을 뿐).
 - 다른 광고주로 바꿀 때: 그 자리 item 의 `render`·`variant` 를 지우고 `title`·`subtitle`·`link`·`image` 를 넣으면 예전 일반 카드(`.ad`)로 그려짐(꼬리표는 dragon 배너에만).
 
+## 애드센스 준비(2026-10-03 — 아직 신청 전, 자동 광고·팝업 없음)
+- **광고 자리 크기 = 표준 단위**(`data/ads.json` 각 칸 `unit`, 화면 `.ad-slot[data-unit]` 이 그 높이를 미리 잡아 밀림 방지): 상단·한국 뉴스 사이·서랍 = `320x100`(모바일 큰 배너 — 드래곤 한 줄 배너 63px, 360px 휴대폰도 한 줄: `dragon-ad.css` 기준 350→320px + 320~349px 칸은 글자·버튼 조금 작게) · 기사 사이·내 주변·지역 = `300x250`(중간 직사각형) · 메인 큰 배너·푸터 = `responsive`. 드래곤 사진형 배너는 그대로(하우스 광고). 애드센스 승인 뒤 각 칸 `adsense_slot` 에 광고 단위 id 를 넣고 그 칸만 애드센스 코드로 바꿀 예정(같은 자리·같은 크기). **자동 광고(Auto ads)·전면/팝업 광고는 쓰지 않음.**
+- **민감한 기사 옆에는 광고 안 둠**: `assets/app.js` `adRisk()` — 제목·요약에 성범죄·마약·살해·시신·자살·총격·도박 등 낱말이 있으면 카드에 `data-adsafe="0"`, 기사 사이 광고(`withInfeed`)는 그 카드 바로 앞뒤를 건너뛰고 다음 칸으로 미룸(기사는 그대로 보임). 판 데이터 기사에 `"ad_safe": false|true` 를 넣으면 낱말 검사보다 우선. 판마다 `python3 tools/adsafe.py [판]` 으로 점검(민감 기사·700자 넘는 요약 = 참고, 원문 링크 없음 = 고칠 것). 저작권: 요약은 직접 쓴 글, 사진·원문 전체는 싣지 않음, 원문 링크 필수.
+- **안내 4쪽(초안)**: `privacy.html`(개인정보 처리방침 — 이 기기 저장·로그인 동기화·익명 반응 집계·위치·외부 서비스) · `terms.html`(이용약관) · `about.html`(소개) · `contact.html`(연락하기). 원본 = `tools/legal_pages.py`(PAGES 를 고치고 실행). [대괄호] 칸(운영자 이름·연락 이메일 등)은 PENDING_APPROVAL.md #3 결정 뒤 채우고 `DRAFT = False`. 들어가는 길: 푸터 링크 줄 + ☰ 메뉴 맨 아래 '안내'.
+- `ads.txt` = 주석만 있는 자리표시(형식 줄 `google.com, pub-…, DIRECT, f08c47fec0942fa0`). 애드센스는 **도메인 맨 위**(`https://p-max168.github.io/ads.txt`)만 읽으므로 둘 곳은 PENDING #5. 검색 막기(`noindex` + robots.txt) 풀기는 PENDING #4, 신청은 LOGIN_TODO.
+- 제휴(어필리에이트) 링크: 애드센스 정책 확인 전까지 보류.
+
 ## 홈 화면 추가 안내
 - 안드로이드(Chrome·삼성 인터넷): `beforeinstallprompt` → 아래 안내 바 '홈 화면에 추가할까요? 앱처럼 편하게 볼 수 있어요' [추가하기]/[나중에]. iOS Safari: 2단계 그림 카드(① 아래 도구 막대 공유 버튼 — 아래로 튀는 화살표 ② '홈 화면에 추가') + 닫기. '나중에'/닫기 = **7일** 동안 안 보임(이 기기 `ui.installHintUntil`). 설치 후·홈 화면 앱에서는 안 보임.
 
