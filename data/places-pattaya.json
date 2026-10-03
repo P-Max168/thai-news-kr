@@ -1,6 +1,7 @@
 {
  "_readme": "📇 파타야 가게 카드 시험 — tools/places/build_places.py 가 만듦. 실제 OSM 데이터 + 한식·한인 업소는 이름·큰 동네·Google 지도 링크만(Google 지도 약관: 내용 복사·업소 목록 만들기 금지), 모르는 값 = null(화면 '확인 안 됨'). © OpenStreetMap contributors (ODbL)",
  "region": "pattaya",
+ "region_ko": "파타야",
  "fetched": "2026-10-03",
  "osm_base": "2026-10-03T08:38:06Z",
  "attribution": "© OpenStreetMap contributors",

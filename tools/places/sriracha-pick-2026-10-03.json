@@ -1,0 +1,31 @@
+{
+ "_readme": "sriracha 한식·한인 업소 고른 목록(2026-10-03) — 원본 tools/places/sriracha-osm-2026-10-03.json(OpenStreetMap, Overpass). 기준: OSM 음식 종류 korean 또는 한글 상호 · 식당/카페/마트. 뺀 것 dropped(이유).",
+ "pick": [
+  [
+   "food",
+   "node",
+   6753965738,
+   "명동가"
+  ],
+  [
+   "food",
+   "node",
+   11262433606,
+   "In-Chon taebuk"
+  ]
+ ],
+ "dropped": [
+  [
+   "node",
+   6753965729,
+   "(이름 없음/태국 글자)",
+   "이름이 태국 글자뿐이거나 없음"
+  ],
+  [
+   "node",
+   6754031627,
+   "(이름 없음/태국 글자)",
+   "이름이 태국 글자뿐이거나 없음"
+  ]
+ ]
+}

@@ -85,11 +85,10 @@ def korean():
         })
     return res
 
-def main():
-    raw = json.load(open(RAW, encoding="utf-8"))
+def osm_cards(raw, pick, region_ko):
     by = {(e["type"], e["id"]): e for e in raw["elements"]}
     out = []
-    for cat, typ, i, name in json.load(open(PICK, encoding="utf-8")):
+    for cat, typ, i, name in pick:
         e = by[(typ, i)]; t = e["tags"]
         nm = ok(t.get("name:ko")) or ok(t.get("name:en")) or ok(t.get("name")) or ok(name)
         assert nm and not BAD.search(nm + " " + t.get("name", "")), (i, nm)
@@ -114,17 +113,39 @@ def main():
             "fsrc": {f: "o" for f, v in (("name", nm), ("hours", t.get("opening_hours")), ("phone", phone), ("address", addr), ("website", web), ("status", 1)) if v},
             "info_date": t.get("check_date:opening_hours") or t.get("check_date") or e["timestamp"][:10],   # 정보가 마지막으로 확인·수정된 날
         })
-    out += korean()
+    return out
+
+# 시라차·방콕(2026-10-03 18시): OSM 만(구글 지도는 약관 때문에 새로 안 씀). 고른 목록 = tools/places/<지역>-pick-2026-10-03.json(뺀 것·이유 포함)
+REGIONS = {"pattaya": "파타야", "sriracha": "시라차", "bangkok": "방콕"}
+
+def write(region, raw, out):
     for p in out: p["old"] = p["info_date"] < OLD_BEFORE
-    doc = {"_readme": "📇 파타야 가게 카드 시험 — tools/places/build_places.py 가 만듦. 실제 OSM 데이터 + 한식·한인 업소는 이름·큰 동네·Google 지도 링크만(Google 지도 약관: 내용 복사·업소 목록 만들기 금지), 모르는 값 = null(화면 '확인 안 됨'). © OpenStreetMap contributors (ODbL)",
-           "region": "pattaya", "fetched": FETCHED, "osm_base": raw.get("osm3s", {}).get("timestamp_osm_base"),
+    dst = ROOT / ("data/places-%s.json" % region)
+    doc = {"_readme": "📇 %s 가게 카드 시험 — tools/places/build_places.py 가 만듦. 실제 OSM 데이터%s, 모르는 값 = null(화면 '확인 안 됨'). © OpenStreetMap contributors (ODbL)"
+                      % (REGIONS[region], " + 한식·한인 업소는 이름·큰 동네·Google 지도 링크만(Google 지도 약관: 내용 복사·업소 목록 만들기 금지)" if region == "pattaya" else "만(OSM 음식 종류 korean 또는 한글 상호)"),
+           "region": region, "region_ko": REGIONS[region], "fetched": FETCHED, "osm_base": raw.get("osm3s", {}).get("timestamp_osm_base"),
            "attribution": "© OpenStreetMap contributors", "license_url": "https://www.openstreetmap.org/copyright",
            "report_kakao_url": "",   # '정보 틀림' 카톡 링크(운영자 카톡 채널 주소 — 승인함 #7). 비어 있으면 화면은 '링크 준비 중' 자리표시
            "old_before": OLD_BEFORE, "places": out}
-    OUT.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    print("places:", len(out), "→", OUT.relative_to(ROOT))
-    assert not THAI.search(OUT.read_text(encoding="utf-8")), "태국 문자가 남아 있음"
-    print("한식·한인:", sum(1 for p in out if p.get("korean")), "· 오래된 정보:", sum(1 for p in out if p["old"]))
+    dst.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    assert not THAI.search(dst.read_text(encoding="utf-8")), "태국 문자가 남아 있음"
+    print("%s places: %d → %s · 한식·한인 %d · 오래된 정보 %d" % (region, len(out), dst.relative_to(ROOT), sum(1 for p in out if p.get("korean")), sum(1 for p in out if p["old"])))
+
+def main():
+    raw = json.load(open(RAW, encoding="utf-8"))
+    out = osm_cards(raw, json.load(open(PICK, encoding="utf-8")), "파타야")
+    out += korean()
+    write("pattaya", raw, out)
+    for r in ("sriracha", "bangkok"):
+        rraw = json.load(open(ROOT / ("tools/places/%s-osm-2026-10-03.json" % r), encoding="utf-8"))
+        pk = json.load(open(ROOT / ("tools/places/%s-pick-2026-10-03.json" % r), encoding="utf-8"))["pick"]
+        cards = osm_cards(rraw, pk, REGIONS[r])
+        nm = {"osm-%s-%d" % (x[1], x[2]): x[3] for x in pk}
+        for c in cards:   # 이 두 지역은 한식·한인만 골랐음 → 근거 표시. 이름은 고른 목록 것(이름 안 옛 가격 표시 등 뺀 것)
+            c["name"] = nm[c["id"]]
+            c["korean"] = True
+            c["kr"] = "OSM 음식 종류: 한식" if "한식" in c["cuisine"] else "한글 상호"
+        write(r, rraw, cards)
 
 if __name__ == "__main__":
     main()

@@ -189,3 +189,6 @@
 }
 /* 속도(2026-10-03 16:40): 가게 카드 50장 — 화면 밖 카드는 그리기·자리 계산을 미룸(종류 바꾸기 때 레이아웃이 가장 큰 원인이었음: CPU×4 에서 약 190ms → 약 20ms) */
 .pc{content-visibility:auto;contain-intrinsic-size:auto 560px}
+/* 지역 고르기(파타야·시라차·방콕, 2026-10-03 18시) — 종류 버튼과 같은 모양, 아래 칸과 조금 띄움 */
+.pc-region{margin:0 0 12px}
+.pc-region .pc-f[aria-pressed="true"]{background:#0c8f6a;border-color:#0c8f6a}

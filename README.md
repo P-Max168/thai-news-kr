@@ -359,6 +359,12 @@
 반드시 `tools/TRANSLATION_RULES.md`를 읽고 모든 기사·제목 번역에 적용할 것.
 국가가 모호한 주어에는 `태국`(한국 주체는 `한국`)을 붙이는 주체 명시 규칙도 모든 번역 문구에 적용한다.
 
+### 📇 가게 카드 — 시라차·방콕 (2026-10-03 18시, OSM 만)
+- 화면: 가게 카드 맨 위 **📍 파타야 · 시라차 · 방콕** 지역 버튼(고른 지역은 이 기기에 기억 `tnk.pcRegion`). 데이터 `data/places-sriracha.json`(2곳) · `data/places-bangkok.json`(34곳).
+- 원본: `tools/places/{sriracha,bangkok}-osm-2026-10-03.json`(Overpass mail.ru 거울, 한식 cuisine 또는 한글 상호) · 고른 목록·뺀 이유: `tools/places/{sriracha,bangkok}-pick-2026-10-03.json`
+  (뺀 것: 이름이 태국 글자뿐·이름 없음, 바·루프톱·북한 식당, 음식 종류 너무 많음, 같은 체인 지점 여러 곳 → 가장 최근 1곳).
+- 구글 지도는 새로 안 씀(약관). 한국인 운영 여부는 OSM 에 없음 → 근거는 'OSM 음식 종류: 한식' 또는 '한글 상호'.
+
 ### 📇 가게 카드 — 한식·한인 업소 (2026-10-03, 17:25 방콕부터 이름·동네·구글 지도 링크만)
 - **Google 지도 이용 약관** 근거: https://www.google.com/help/terms_maps/ (Google 지도 추가 약관 — 내용 복사 금지, 대량 내려받기 금지, Google 지도로 업소 목록 만들기·늘리기 금지), https://about.google/brand-resource-center/products-and-services/geo-guidelines/ (지도 쓰는 허락 범위).
   → 카드에는 **가게 이름 · 큰 동네 · '🗺️ 구글 지도에서 보기' 링크**만. 전화·영업시간·주소·좌표·평점·사이트 = '확인 안 됨'(OSM 이나 가게 공식 출처로 확인될 때만 채움).

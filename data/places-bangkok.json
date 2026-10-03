@@ -1,0 +1,1324 @@
+{
+ "_readme": "📇 방콕 가게 카드 시험 — tools/places/build_places.py 가 만듦. 실제 OSM 데이터만(OSM 음식 종류 korean 또는 한글 상호), 모르는 값 = null(화면 '확인 안 됨'). © OpenStreetMap contributors (ODbL)",
+ "region": "bangkok",
+ "region_ko": "방콕",
+ "fetched": "2026-10-03",
+ "osm_base": "2026-10-03T10:56:11Z",
+ "attribution": "© OpenStreetMap contributors",
+ "license_url": "https://www.openstreetmap.org/copyright",
+ "report_kakao_url": "",
+ "old_before": "2023-01-01",
+ "places": [
+  {
+   "id": "osm-node-2103839980",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Kimju",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": "Mo-Su 10:30-22:00",
+   "phone": "+6621084458",
+   "website": "http://www.kimjufood.com",
+   "address": null,
+   "lat": 13.704415,
+   "lng": 100.502826,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2014-01-01",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/2103839980",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/2103839980",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2014-01-01",
+   "old": true
+  },
+  {
+   "id": "osm-node-2448242718",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Ahhnyung Korean Restaurant",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": "11:00-22:00",
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.912819,
+   "lng": 100.539946,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2013-11-07",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/2448242718",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/2448242718",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "status": "o"
+   },
+   "info_date": "2013-11-07",
+   "old": true
+  },
+  {
+   "id": "osm-node-3250076772",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Korean BBQ",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.738455,
+   "lng": 100.557948,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2017-12-26",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/3250076772",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/3250076772",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2017-12-26",
+   "old": true
+  },
+  {
+   "id": "osm-node-3388204001",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Kiani",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.726,
+   "lng": 100.580287,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2023-03-25",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/3388204001",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/3388204001",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2023-03-25",
+   "old": false
+  },
+  {
+   "id": "osm-node-3877687710",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "I The Won",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.735668,
+   "lng": 100.560662,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2015-12-05",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/3877687710",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/3877687710",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2015-12-05",
+   "old": true
+  },
+  {
+   "id": "osm-node-4401142596",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "JinSeng",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.739798,
+   "lng": 100.558152,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2016-09-14",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/4401142596",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/4401142596",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2016-09-14",
+   "old": true
+  },
+  {
+   "id": "osm-node-4473542781",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "The Bibimbab",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.737997,
+   "lng": 100.566615,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2016-10-31",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/4473542781",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/4473542781",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2016-10-31",
+   "old": true
+  },
+  {
+   "id": "osm-node-4600869491",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "동대문 식당&여행사",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.762119,
+   "lng": 100.494265,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2017-01-11",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/4600869491",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/4600869491",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2017-01-11",
+   "old": true
+  },
+  {
+   "id": "osm-node-12877254018",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Bonchon Chicken",
+   "kind": "식당",
+   "cuisine": [
+    "한식",
+    "초밥"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.830837,
+   "lng": 100.543732,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2025-05-31",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/12877254018",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/12877254018",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2025-05-31",
+   "old": false
+  },
+  {
+   "id": "osm-node-4858946579",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Ko Kung",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.724741,
+   "lng": 100.569601,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2017-05-17",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/4858946579",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/4858946579",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2017-05-17",
+   "old": true
+  },
+  {
+   "id": "osm-node-5170565122",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "참치킨",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": "Mo-Su 11:30-22:00",
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.712303,
+   "lng": 100.605215,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2019-05-31",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/5170565122",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/5170565122",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "status": "o"
+   },
+   "info_date": "2019-05-31",
+   "old": true
+  },
+  {
+   "id": "osm-node-5392791523",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "나라 식당",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": "Mo-Su 11:00-22:00",
+   "phone": "026741692",
+   "website": null,
+   "address": "narathiwat 24",
+   "lat": 13.700178,
+   "lng": 100.535344,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2018-02-06",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/5392791523",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/5392791523",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "address": "o",
+    "status": "o"
+   },
+   "info_date": "2018-02-06",
+   "old": true
+  },
+  {
+   "id": "osm-node-5392819022",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "더 한식",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": "Mo-Su 11:00-22:00",
+   "phone": "025736439",
+   "website": null,
+   "address": null,
+   "lat": 13.894994,
+   "lng": 100.557976,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2018-02-12",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/5392819022",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/5392819022",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "status": "o"
+   },
+   "info_date": "2018-02-12",
+   "old": true
+  },
+  {
+   "id": "osm-node-6557666698",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "SulBkk",
+   "kind": "식당",
+   "cuisine": [
+    "한식",
+    "바비큐"
+   ],
+   "hours": "17:00-01:00",
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.732364,
+   "lng": 100.582847,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2019-09-24",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/6557666698",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/6557666698",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "status": "o"
+   },
+   "info_date": "2019-09-24",
+   "old": true
+  },
+  {
+   "id": "osm-node-7206163285",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Sookdal Korean BBQ",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": "Mo-Su 11:30-22:00",
+   "phone": "+66 96-909-4916",
+   "website": "https://www.tripadvisor.com/Restaurant_Review-g293916-d18545142-Reviews-Sookdal_Korean_BBQ-Bangkok.html",
+   "address": "Pathum Wan Bangkok 10330 Thailand",
+   "lat": 13.74714,
+   "lng": 100.524028,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2024-02-11",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/7206163285",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/7206163285",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "address": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2024-02-11",
+   "old": false
+  },
+  {
+   "id": "osm-node-9275070125",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Nice to Meat u",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.745287,
+   "lng": 100.532999,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2021-11-22",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/9275070125",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/9275070125",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2021-11-22",
+   "old": true
+  },
+  {
+   "id": "osm-node-9587728554",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Sunbae",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.84052,
+   "lng": 100.573687,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2022-03-18",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/9587728554",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/9587728554",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2022-03-18",
+   "old": true
+  },
+  {
+   "id": "osm-node-10269131109",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Oh So-Maek",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.756722,
+   "lng": 100.533995,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2022-12-17",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/10269131109",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/10269131109",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2022-12-17",
+   "old": true
+  },
+  {
+   "id": "osm-node-11247457837",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "In the Middle",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": "Mo-Su 11:00-23:00",
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.788495,
+   "lng": 100.548219,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2023-10-08",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/11247457837",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/11247457837",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "status": "o"
+   },
+   "info_date": "2023-10-08",
+   "old": false
+  },
+  {
+   "id": "osm-node-11323335083",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "K-Streat Food",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.733746,
+   "lng": 100.527883,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2023-11-05",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/11323335083",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/11323335083",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2023-11-05",
+   "old": false
+  },
+  {
+   "id": "osm-node-11323335096",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Ssamthing Together",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.734069,
+   "lng": 100.528588,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2023-11-05",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/11323335096",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/11323335096",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2023-11-05",
+   "old": false
+  },
+  {
+   "id": "osm-node-11323335124",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Tudari",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.734245,
+   "lng": 100.528232,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2023-11-05",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/11323335124",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/11323335124",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2023-11-05",
+   "old": false
+  },
+  {
+   "id": "osm-node-11323335139",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Gogida",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.733913,
+   "lng": 100.528552,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2023-11-05",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/11323335139",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/11323335139",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2023-11-05",
+   "old": false
+  },
+  {
+   "id": "osm-node-11419961275",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Bappa",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.72598,
+   "lng": 100.538706,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2023-12-15",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/11419961275",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/11419961275",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2023-12-15",
+   "old": false
+  },
+  {
+   "id": "osm-node-11422327359",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Bapsang",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.734961,
+   "lng": 100.582258,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2023-12-16",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/11422327359",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/11422327359",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2023-12-16",
+   "old": false
+  },
+  {
+   "id": "osm-node-12438172901",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Isung",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.745863,
+   "lng": 100.562855,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2024-12-21",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/12438172901",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/12438172901",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2024-12-21",
+   "old": false
+  },
+  {
+   "id": "osm-node-12618166702",
+   "cat": "cafe",
+   "cat_ko": "카페",
+   "name": "Kao Kao",
+   "kind": "카페",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.777147,
+   "lng": 100.672733,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2025-02-25",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/12618166702",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/12618166702",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2025-02-25",
+   "old": false
+  },
+  {
+   "id": "osm-node-12648108152",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Saemaeul Sikdang",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.725805,
+   "lng": 100.547253,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2025-03-09",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/12648108152",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/12648108152",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2025-03-09",
+   "old": false
+  },
+  {
+   "id": "osm-node-13833604686",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "JUBANG Premium Aged Korean BBQ 주방",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.656358,
+   "lng": 100.678607,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2026-05-16",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/13833604686",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/13833604686",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2026-05-16",
+   "old": false
+  },
+  {
+   "id": "osm-node-13833604700",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "JJANG BBQ buffet",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.656943,
+   "lng": 100.677878,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2026-05-16",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/13833604700",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/13833604700",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2026-05-16",
+   "old": false
+  },
+  {
+   "id": "osm-way-631334160",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "드럼바베큐",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.781642,
+   "lng": 100.575417,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2026-05-22",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/way/631334160",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/way/631334160",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2026-05-22",
+   "old": false
+  },
+  {
+   "id": "osm-way-1221236805",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Kokinaemsae",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.734491,
+   "lng": 100.525906,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2025-01-07",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/way/1221236805",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/way/1221236805",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2025-01-07",
+   "old": false
+  },
+  {
+   "id": "osm-way-1223803250",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Jeju BBQ",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.741893,
+   "lng": 100.52291,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2025-01-07",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/way/1223803250",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/way/1223803250",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2025-01-07",
+   "old": false
+  },
+  {
+   "id": "osm-way-1248162681",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Hawon",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": "Mo-Su 11:00-24:00",
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.770806,
+   "lng": 100.582895,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2024-02-09",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/way/1248162681",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/way/1248162681",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "status": "o"
+   },
+   "info_date": "2024-02-09",
+   "old": false
+  }
+ ]
+}

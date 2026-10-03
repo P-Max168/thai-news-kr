@@ -6,6 +6,9 @@
   "use strict";
   if (!window.TNPages) return;
   var DATA = null, loading = false, err = false, cat = "all", openOnly = false;
+  // 지역(2026-10-03 18시): 파타야(OSM+구글 이름·동네) · 시라차·방콕(OSM 한식·한인만). 지역마다 data/places-<id>.json, 고른 지역은 이 기기에 기억
+  var REGS = [{ id: "pattaya", t: "파타야" }, { id: "sriracha", t: "시라차" }, { id: "bangkok", t: "방콕" }], CACHE = {};
+  var region = (function () { try { var r = localStorage.getItem("tnk.pcRegion"); return REGS.some(function (x) { return x.id === r; }) ? r : "pattaya"; } catch (e) { return "pattaya"; } })();
   var CATS = [{ id: "all", e: "📇", t: "전체" }, { id: "korean", e: "🇰🇷", t: "한식·한인" }, { id: "food", e: "🍜", t: "맛집" }, { id: "cafe", e: "☕", t: "카페" }, { id: "mart", e: "🛒", t: "마트" },
     { id: "travel", e: "✈️", t: "여행·비자" }, { id: "beauty", e: "💈", t: "피부·미용" }, { id: "pet", e: "🐶", t: "동물병원·펫샵" }, { id: "moto", e: "🏍️", t: "오토바이" }];
   function inCat(p, id) { return id === "all" || (id === "korean" ? !!p.korean : p.cat === id); }
@@ -79,9 +82,11 @@
   }
 
   function load() {
-    if (DATA || loading) return; loading = true; err = false;
-    fetch("data/places-pattaya.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function (d) { DATA = d; d.places.forEach(function (p) { p._oh = parseOH(p.hours); }); loading = false; TNPages.refresh(); },
+    if (CACHE[region]) { DATA = CACHE[region]; return; }
+    if (loading) return; loading = true; err = false; DATA = null;
+    var want = region;
+    fetch("data/places-" + want + ".json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (d) { d.places.forEach(function (p) { p._oh = parseOH(p.hours); }); CACHE[want] = d; if (want === region) DATA = d; loading = false; TNPages.refresh(); },
             function () { loading = false; err = true; TNPages.refresh(); });
   }
   // 칸마다 출처: p.fsrc[칸] → p.srcs[키] = { by, url, at(확인한 날) }
@@ -126,7 +131,7 @@
   }
 
   TNPages.register("places", {
-    title: "📇 파타야 가게 카드(시험)",
+    title: "📇 가게 카드(시험)",
     render: function () {
       load(); loadFx();
       if (err) return '<div class="empty empty--err pc-empty" role="alert"><b>⚠️ 가게 목록을 불러오지 못했어요.</b><br>인터넷 연결을 확인하고 다시 시도해 주세요.<br><button type="button" class="btn btn--primary btn--sm empty__retry" data-pc-retry>다시 시도</button></div>';
@@ -136,7 +141,10 @@
       // 줄 세우기: 오래된 정보(2023년 전)는 맨 뒤 → 그 안에서 영업 중 → 곧 닫음 → 닫힘 → 모름
       list.sort(function (a, b) { var r = function (p) { var s = openState(p._oh); return (p.old ? 10 : 0) + (s === "open" ? 0 : s === "soon" ? 1 : s === "closed" ? 2 : 3); }; return r(a) - r(b); });
       var c = CATS.filter(function (x) { return x.id === cat; })[0];
-      var head = '<p class="pc-intro"><b>지도(OpenStreetMap·Google 지도)에서 실제로 확인한 가게 ' + all.length + "곳</b>이에요(한식·한인 업소 " + n("korean") + "곳). 칸마다 출처와 확인한 날을 적었고, 모르는 칸은 <b>확인 안 됨</b>으로 두었어요. <b>🕰️ 오래된 정보</b>(2023년 전)는 맨 뒤에 있어요. 영업시간·가격은 바뀔 수 있으니 가기 전에 꼭 전화·지도로 확인하세요.</p>" +
+      var rg = REGS.filter(function (x) { return x.id === region; })[0];
+      var head = '<div class="pc-filter pc-region" role="group" aria-label="지역">' + REGS.map(function (x) {
+          return '<button type="button" class="pc-f" data-pc-region="' + x.id + '" aria-pressed="' + (x.id === region) + '">📍 ' + esc(x.t) + (CACHE[x.id] ? " <small>" + CACHE[x.id].places.length + "</small>" : "") + "</button>"; }).join("") + "</div>" +
+        '<p class="pc-intro"><b>' + esc(rg.t) + " — 지도(" + (region === "pattaya" ? "OpenStreetMap·Google 지도" : "OpenStreetMap") + ")에서 실제로 확인한 가게 " + all.length + "곳</b>이에요(한식·한인 업소 " + n("korean") + "곳). 칸마다 출처와 확인한 날을 적었고, 모르는 칸은 <b>확인 안 됨</b>으로 두었어요. <b>🕰️ 오래된 정보</b>(2023년 전)는 맨 뒤에 있어요. 영업시간·가격은 바뀔 수 있으니 가기 전에 꼭 전화·지도로 확인하세요.</p>" +
         '<div class="pc-filter" role="group" aria-label="가게 종류">' + CATS.map(function (x) {
           return '<button type="button" class="pc-f" data-pc-cat="' + x.id + '" aria-pressed="' + (x.id === cat) + '"><span aria-hidden="true">' + x.e + "</span> " + esc(x.t) + " <small>" + n(x.id) + "</small></button>"; }).join("") + "</div>" +
         '<button type="button" class="pc-openonly" data-pc-open aria-pressed="' + openOnly + '">' + (openOnly ? "✅" : "⬜") + " 🟢 지금 영업 중인 곳만 보기</button>";
@@ -144,10 +152,11 @@
         : '<div class="empty pc-empty"><p class="pc-empty__e" aria-hidden="true">🔍</p><p><b>' + (openOnly ? "지금 영업 중인 " + esc(c.t === "전체" ? "" : c.t + " ") + "가게가 없어요" : "이 종류 가게가 아직 없어요") + "</b></p>" +
           "<p>" + (openOnly ? "영업시간이 확인된 곳만 계산해요. 위의 '지금 영업 중인 곳만 보기'를 끄면 모두 보여요." : "다른 종류를 골라 보세요.") + "</p></div>";
       return head + body +
-        '<p class="pc-src">지도 데이터 © <a href="' + esc(DATA.license_url) + '" target="_blank" rel="noopener">OpenStreetMap contributors</a> · 한식·한인 업소는 가게 이름·동네만 적고 나머지는 구글 지도 링크로(Google 지도 이용 약관) · 받은 날 ' + esc(DATA.fetched) + " · '지금 영업 중'은 방콕 시간과 지도에 적힌 영업시간으로 계산해요(그 요일 시간을 모르면 '확인 안 됨'). 이 목록은 광고가 아니고 돈을 받지 않아요(시험).</p>";
+        '<p class="pc-src">지도 데이터 © <a href="' + esc(DATA.license_url) + '" target="_blank" rel="noopener">OpenStreetMap contributors</a> ' + (region === "pattaya" ? " · 한식·한인 업소 일부는 가게 이름·동네만 적고 나머지는 구글 지도 링크로(Google 지도 이용 약관)" : " · " + esc(rg.t) + "는 OSM 에 한식(음식 종류)이나 한글 상호로 올라온 곳만") + ' · 받은 날 ' + esc(DATA.fetched) + " · '지금 영업 중'은 방콕 시간과 지도에 적힌 영업시간으로 계산해요(그 요일 시간을 모르면 '확인 안 됨'). 이 목록은 광고가 아니고 돈을 받지 않아요(시험).</p>";
     },
     click: function (e, t) {
       var el;
+      if ((el = t.closest("[data-pc-region]"))) { region = el.getAttribute("data-pc-region"); try { localStorage.setItem("tnk.pcRegion", region); } catch (x) {} DATA = CACHE[region] || null; load(); TNPages.refresh(); return true; }
       if ((el = t.closest("[data-pc-cat]"))) { cat = el.getAttribute("data-pc-cat"); TNPages.refresh(); return true; }
       if ((el = t.closest("[data-pc-open]"))) { openOnly = !openOnly; TNPages.refresh(); return true; }
       if ((el = t.closest("[data-pc-retry]"))) { err = false; load(); TNPages.refresh(); return true; }

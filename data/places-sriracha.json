@@ -1,0 +1,92 @@
+{
+ "_readme": "📇 시라차 가게 카드 시험 — tools/places/build_places.py 가 만듦. 실제 OSM 데이터만(OSM 음식 종류 korean 또는 한글 상호), 모르는 값 = null(화면 '확인 안 됨'). © OpenStreetMap contributors (ODbL)",
+ "region": "sriracha",
+ "region_ko": "시라차",
+ "fetched": "2026-10-03",
+ "osm_base": "2026-10-03T10:56:11Z",
+ "attribution": "© OpenStreetMap contributors",
+ "license_url": "https://www.openstreetmap.org/copyright",
+ "report_kakao_url": "",
+ "old_before": "2023-01-01",
+ "places": [
+  {
+   "id": "osm-node-6753965738",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "명동가",
+   "kind": "식당",
+   "cuisine": [
+    "한식"
+   ],
+   "hours": null,
+   "phone": null,
+   "website": null,
+   "address": null,
+   "lat": 13.155795,
+   "lng": 100.975911,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2019-08-28",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/6753965738",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/6753965738",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "status": "o"
+   },
+   "info_date": "2019-08-28",
+   "old": true
+  },
+  {
+   "id": "osm-node-11262433606",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "In-Chon taebuk",
+   "kind": "식당",
+   "cuisine": [
+    "한식",
+    "태국 음식"
+   ],
+   "hours": "Mo-Su 10:30-21:30",
+   "phone": "0649691647",
+   "website": null,
+   "address": null,
+   "lat": 13.11404,
+   "lng": 100.925357,
+   "price_thb": null,
+   "status": "지도 데이터에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": "2023-10-14",
+   "source": "OpenStreetMap",
+   "source_url": "https://www.openstreetmap.org/node/11262433606",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/11262433606",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "status": "o"
+   },
+   "info_date": "2023-10-14",
+   "old": false
+  }
+ ]
+}
