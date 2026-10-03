@@ -132,7 +132,7 @@
 
 최상위: `id, date, edition(am|pm), edition_label, generated, updated(선택), coverage, previous, briefing, highlights[id 3개], stories[], trends{…}`
 - **`briefing` = 5~6줄 목록** `[{topic, text, story_id}]` — 편집 파일에서는 `B("visa", "이민국 앱 **THIM** 정식 출시…", "vi2")`. `text`는 짧은 한 줄(120자 이하)에 **`**굵게**` 핵심어/숫자 1곳 이상**, `story_id`는 그 줄의 기사(화면에서 누르면 그 기사로 이동·펼침). 서로 다른 기사 5~6개, 주제가 고르게.
-- 검증(`newslib.validate`)은 기사에 `topic`이 있거나 `briefing`이 목록이면 새 형식 규칙을 적용(주제 id, secondary, tags, 브리핑 줄 형식). 구성 점검은 경고만 출력: 기사 20~24건, 외국인·비자 2~4건, 파타야·시라차·방콕 각 1건 이상, 여행·맛집·생활·물가·부동산 1건 이상 — **실제 뉴스가 없으면 적게 싣고 절대 지어내지 않는다.** 아래 수집 쿼터는 경고가 아니라 게시 차단용 HARD 규칙이다.
+- 검증(`newslib.validate`)은 기사에 `topic`이 있거나 `briefing`이 목록이면 새 형식 규칙을 적용(주제 id, secondary, tags, 브리핑 줄 형식). 구성 점검은 경고만 출력(기사 20~25건, 외국인·비자 2~4건, 파타야·시라차·방콕·여행·생활 기사 유무) — **참고용일 뿐 최소 건수가 아니다.** 경고를 없애려고 약한 기사를 넣지 않는다. 실제 뉴스가 없으면 적게 싣고 절대 지어내지 않는다(아래 '편집 원칙').
 - 저장된 판 점검: `python3 tools/newslib.py check data/<id>.json`
 
 ### 옛 형식(10월 2일 저녁판까지 — 고치지 않음)
@@ -145,51 +145,53 @@
 (※ `2026-09-29-early`는 옛 형식이라 `id/edition_label` 등이 없지만 index가 파일 이름으로 판을 알아내므로 그대로 동작)
 
 ## 수집 소스 목록(2026-10-03 아침판부터 확대 — 운영자 승인)
+**기계가 읽는 전체 목록은 `tools/sources.json`**(2026-10-03 box 에서 curl/requests 로 200·최근 항목 확인: RSS 69 · 뉴스 사이트맵 12 · Google News 81 · 손으로 확인(html) 18 · box 에서 안 열려 건너뜀 3, 매체 도메인 약 68곳). `python3 tools/collect.py` 가 이 목록을 모두 훑는다(아래 '정기 실행' 1단계). 목록을 고치면 `python3 tools/collect.py --verify` 로 다시 확인하고 `verified` 날짜를 바꾼다. 아래 표는 사람이 보는 요약이다.
+
 정기 실행 1단계(수집)에서 기존 소스(Thairath·Matichon·Khaosod·Prachachat RSS, PPTV·TOP NEWS·MGR·Thai Ch8, Google News RSS)에 **아래를 더해** 훑는다. RSS 가 없거나 JS 화면인 곳은 섹션 페이지를 열거나 Google News 검색 `site:<도메인> <키워드>`(`python3 tools/gnews.py raw/<id>/<폴더> "site:pattayamail.com"` 처럼)로 찾는다. 주소는 2026-10-03 06:45 BKK 에 box 에서 `curl -sIL` 로 확인(★ = box 에서 접속 안 됨 → 목록엔 두되 **대체 경로**로: Google News `site:` 검색·다른 매체 보도로 확인, 막히면 보고에 '확인 못 함' 적고 넘어감).
 
 | 묶음 | 소스(확인된 주소) | 주로 쓰는 주제 |
 |---|---|---|
 | 파타야·촌부리 지역 | Pattaya Mail https://www.pattayamail.com/ · Pattaya People https://www.pattayapeople.com/ · The Pattaya News https://thepattayanews.com/ · 촌부리 도 홍보사무소(PRD Chonburi) https://chonburi.prd.go.th/ | 파타야, 시라차(촌부리 북부), 사회·사건사고, 생활·물가·부동산, 여행·맛집 |
 | 공식 기관 | 태국 기상청(TMD) 경보 https://www.tmd.go.th/ ★(box 에서 시간 초과 — 대체: Google News `กรมอุตุนิยมวิทยา ประกาศ`·`เตือนพายุ`, Thai PBS·Thairath 기상 기사) · 이민국(Immigration Bureau) 공지 https://www.immigration.go.th/ ★(box 에서 403 — 대체: Google News `สตม.`·`site:immigration.go.th`, The Pattaya News·Bangkok Post 보도) · 파타야 시청 https://pattaya.go.th/ · 주태국 한국대사관 공지 https://overseas.mofa.go.kr/th-ko/brd/m_3133/list.do ★(box 에서 307 반복 — 브라우저로 열거나 '확인 못 함') · 육상교통국(DLT) https://www.dlt.go.th/ · 도로국(DOH) 교통 안내 https://www.doh.go.th/ | 날씨·교통(TMD·DLT·DOH), 외국인·비자(이민국·대사관), 파타야(시청) |
-| TV 뉴스 | Thai PBS https://www.thaipbs.or.th/news · Ch3(Ch3Plus) https://ch3plus.com/news · Amarin TV https://www.amarintv.com/news · Ch7 https://news.ch7.com/ (box 에선 ch7.com 지역 안내로 넘어갈 수 있음 → https://www.ch7.com/th/ 또는 `site:news.ch7.com`) · one31 https://www.one31.net/news (JS 화면 → `site:one31.net`) · Workpoint https://www.workpointtoday.com/ | 정치·경제, 사회·사건사고, 방콕, 날씨·교통 |
+| TV 뉴스 | Thai PBS https://www.thaipbs.or.th/news · Ch3(Ch3Plus) https://ch3plus.com/news · Amarin TV https://www.amarintv.com/news · Ch7 https://news.ch7.com/ (box 에선 ch7.com 지역 안내로 넘어갈 수 있음 → https://www.ch7.com/th/ 또는 `site:ch7.com` — news.ch7.com 은 Google News 색인 0건) · one31 https://www.one31.net/news (JS 화면 → `site:one31.net`) · Workpoint https://www.workpointtoday.com/ | 정치·경제, 사회·사건사고, 방콕, 날씨·교통 |
 | 영어 매체 | Bangkok Post https://www.bangkokpost.com/ · The Nation https://www.nationthailand.com/ · Khaosod English https://www.khaosodenglish.com/ · Thai PBS World https://www.thaipbsworld.com/ | 정치·경제, 외국인·비자, 생활·물가·부동산, 여행·맛집 |
-| 연예 | Sanook https://www.sanook.com/news/entertain/ · Kapook https://hilight.kapook.com/ (entertain.kapook.com ★ 접속 안 됨) · TrueID https://entertainment.trueid.net/ · Thairath https://www.thairath.co.th/entertain · Khaosod https://www.khaosod.co.th/entertainment · Daily News https://www.dailynews.co.th/entertainment/ · Matichon https://www.matichon.co.th/entertainment · Ch3 https://ch3plus.com/news/entertainment · Ch7 `site:news.ch7.com บันเทิง` · one31 `site:one31.net บันเทิง` · Workpoint https://www.workpointtoday.com/category/entertainment · Amarin https://www.amarintv.com/news/entertain · Thai PBS https://www.thaipbs.or.th/news/categories/entertainment | 연예·스포츠·SNS |
-| **반응 참고 전용(사실 출처 아님)** | Pantip https://pantip.com/ (연예 게시판 https://pantip.com/forum/chalermkrung · 영화/드라마 https://pantip.com/forum/chalermthai) · Wongnai https://www.wongnai.com/ | 연예·스포츠·SNS(반응·화제), 여행·맛집(가게 정보) |
+| 연예 | Sanook https://www.sanook.com/news/entertain/ · Kapook https://hilight.kapook.com/ (entertain.kapook.com ★ 접속 안 됨) · TrueID https://entertainment.trueid.net/ · Thairath https://www.thairath.co.th/entertain · Khaosod https://www.khaosod.co.th/entertainment · Daily News https://www.dailynews.co.th/entertainment/ · Matichon https://www.matichon.co.th/entertainment · Ch3 https://ch3plus.com/news/entertainment · Ch7 `site:ch7.com บันเทิง` · one31 `site:one31.net บันเทิง` · Workpoint https://www.workpointtoday.com/category/entertainment · Amarin https://www.amarintv.com/news/entertain · Thai PBS https://www.thaipbs.or.th/news/categories/entertainment | 연예·스포츠·SNS |
+| 종합·경제(추가, 피드 확인) | RSS: Daily News `/news/feed/` · Sanook · Thai Post · INN · The Standard(종합·연예·스포츠·비즈니스) · Workpoint · one31 · The Reporters · Ejan · Kaohoon · The Matter · BBC Thai · Prachatai · Hfocus · Thairath Money/라이프 · Khaosod·Matichon 섹션별 피드 / 뉴스 사이트맵: Thai PBS · PPTV · Nation TV · Bangkok Biz News · Thansettakij · Post Today · Spring News · Komchadluek · Siam Rath · MGR / GN `site:`: TNN · Amarin · Ch3 · Ch7 · Thai Ch8 · TOP NEWS · Thairath Plus · Naewna · Nikkei Asia(태국) | 정치·경제, 사회·사건사고, 방콕, 생활·물가 |
+| 파타야·촌부리(추가) | The Pattaya News 태국어판 https://thepattayanews.co.th/feed/ · 파타야 시청 RSS https://pattaya.go.th/feed/ · The Thaiger 파타야 RSS · Chonburi Post Online(시라차, 업데이트 드묾) · GN `site:pattayamail.com`(사이트 RSS 403) · GN `site:banmuang.co.th ชลบุรี` · GN `site:prd.go.th ชลบุรี` · GN 태국어 `พัทยา` `บางละมุง` `จอมเทียน` `สัตหีบ` `นาเกลือ` `ศรีราชา` `แหลมฉบัง` `อมตะ ชลบุรี` `ชลบุรี` `บางแสน` · 영어 `Pattaya`. (Pattaya People 은 사이트 개편 중, Pattaya One·Pattaya Daily News 는 도메인 휴면/다른 사이트로 넘어감 → 제외) | 파타야, 시라차 |
+| 연예·스포츠(추가) | RSS: Thairath 연예·스포츠 · Khaosod 연예·스포츠·특집 · Matichon 연예·스포츠 · Sanook 연예 · The Standard 연예·스포츠 · Workpoint 연예 · Ballthai · Mthai 연예 · Bright TV · Bangkok Post 스포츠 · ONE Championship(태국 선수 관련만) / 사이트맵: Goal Thai / GN `site:`: Siamsport · Siamzone · Kapook · TrueID · Daily News 연예 · Dara Daily / GN: `บันเทิง` `กีฬา` `ฟุตบอลทีมชาติไทย` `มวยไทย` `มวยไทย ONE`, GN 태국 연예·스포츠 섹션 | 연예·스포츠·SNS |
+| 영어·국제(추가) | Bangkok Post(주요·태국·비즈니스·부동산·라이프·스포츠 RSS) · The Nation(뉴스 사이트맵) · Khaosod English · The Thaiger · Thai Examiner · Thai Enquirer · ThaiThuk · CNA 아시아 RSS(태국 관련 제목만) · GN `site:thaipbsworld.com` | 정치·경제, 외국인·비자 |
+| 날씨·교통·재난·물가(공식·데이터) | AOT 공항공사 RSS · TAT News RSS · GN `ปภ.`(DDPM — 사이트 403) · `GISTDA`(사이트 TLS 오류) · `รฟท`(SRT — 사이트 TLS 오류) · `ท่าอากาศยาน` · `site:tmd.go.th` · `กรมอุตุนิยมวิทยา` `น้ำท่วม` `รถไฟฟ้า` `ทางด่วน` · `แบงก์ชาติ` `ตลาดหลักทรัพย์` · `ราคาน้ำมัน` `บางจาก ราคาน้ำมัน`(방짝 사이트는 봇 차단) `ค่าไฟ` `ราคาทองคำ` `ราคาทอง สมาคมค้าทองคำ` `กรมการค้าภายใน` `คอนโด` / 손으로: Air4Thai(PM2.5, 인증서 체인 불완전) · ThaiWater · BOT 환율 · SET · EPPO · 금거래상협회 · DIT · KOTRA 해외시장뉴스(태국) · Michelin Guide Thailand · TNA(MCOT) | 날씨·교통, 생활·물가·부동산, 여행·맛집, 정치·경제 |
+| 외국인·비자·한인 관점 | GN 태국어 `ต่างชาติ วีซ่า` `วีซ่า` `สตม.` `ตม. ต่างชาติ` `ตรวจคนเข้าเมือง` `ชาวต่างชาติ พัทยา` `แรงงานต่างด้าว` `ชาวเกาหลี` `เกาหลี` · 영어 `Thailand visa` `Thailand immigration` `Korean Thailand` · **한국어 GN(hl=ko)** `태국` `파타야` `site:yna.co.kr 태국`(연합뉴스) `태국 한국인` `방콕 한국인` | 외국인·비자(한국인 관련 우선) |
+| box 에서 확인 실패(목록에서 뺌) | Coconuts Bangkok(2024년 이후 새 글 없음) · Pattaya One(pattayaone.news 휴면 도메인, pattayaone.net 피드 1년 넘게 멈춤) · Pattaya Daily News(도메인이 다른 사이트로 넘어감) · Smmsport(봇 확인 화면 202, GN 0건) · Siamdara(522 오류) · thai8tv.com(접속 안 됨 — Ch8 은 `site:thaich8.com`) · Muay Thai Authority(피드 80일 넘게 멈춤) · DDproperty(403)·Hipflat(401)·FazWaz(GN에는 매물 광고만) · Nine Entertain(휴면 도메인) · Bangchak 유가 페이지(봇 차단) | — |
+| **반응 참고 전용(사실 출처 아님)** | Pantip https://pantip.com/ (연예 게시판 https://pantip.com/forum/chalermkrung · 영화/드라마 https://pantip.com/forum/chalermthai) · Wongnai https://www.wongnai.com/ · 태사랑 https://www.thailove.net/ (한국인 여행자 커뮤니티 — 교민·여행자 반응만) | 연예·스포츠·SNS(반응·화제), 여행·맛집(가게 정보), 외국인·비자(교민 반응) |
 
-- **Pantip·SNS 글은 '사실'의 출처로 쓰지 않는다.** '온라인에서 이런 반응/화제가 있다'를 설명할 때만 쓰고, 언론·공식 기관이 확인하지 않은 내용은 **'확인 안 됨'** 이라고 밝히며 절대 사실처럼 쓰지 않는다. 기사 `source`/`url`(원문)은 언론·공식 기관 것이어야 한다(Pantip·Wongnai 는 `related` 에만).
+- **Pantip·태사랑·SNS 글은 '사실'의 출처로 쓰지 않는다.** '온라인에서 이런 반응/화제가 있다'를 설명할 때만 쓰고, 언론·공식 기관이 확인하지 않은 내용은 **'확인 안 됨'** 이라고 밝히며 절대 사실처럼 쓰지 않는다. 기사 `source`/`url`(원문)은 언론·공식 기관 것이어야 한다(Pantip·Wongnai·태사랑 은 `related` 에만).
 - Wongnai 는 여행·맛집 기사에서 가게 위치·영업 정보 같은 **보조 정보**로만(평점·후기는 '이용자 후기'로 표시). 새 가게·행사 소식 자체는 언론·공식 발표로 확인.
 - **trends24 해시태그 목록을 기사 카드로 만드는 것은 여전히 금지**(트렌드 상자에만 — 아래 X 트렌드 규칙 그대로).
-### HARD 편집 쿼터(매 판, 게시 전 반드시 충족)
-- **연예·스포츠·SNS(`ent`) 최소 3건**: Sanook·Kapook·TrueID·Thairath·Khaosod·Daily News·Matichon의 연예 섹션, TV 연예면 등에서 고른다. 태국 축구·무에타이·태국 선수 등 스포츠와 언론이 확인한 SNS 바이럴도 포함할 수 있다(트렌드 해시태그만으로 기사를 만들지 않는다).
-- **파타야+시라차 합계 최소 4건**: 그중 **최소 2건은 지역 매체** Pattaya Mail·Pattaya People·The Pattaya News·PRD Chonburi에서 가져온다.
-- **단일 소스 최대 4건**, **서로 다른 소스 최소 6곳**. `source` 표기를 정규화해 같은 매체를 한 곳으로 센다.
-- 실제 뉴스가 존재하는 경우 **10개 주제 모두 최소 1건**을 싣는다. 실제 뉴스가 없어 쿼터를 채울 수 없으면 억지로 만들지 말고 판의 `coverage`에 어느 주제·쿼터가 왜 비었는지 적는다.
-- 판 전체는 기본 20건에서 쿼터를 맞추기 위해 **최대 24건까지** 늘릴 수 있다. 위 조건은 목표가 아니라 게시 전 통과 조건이다.
-
-- **게시 전 체크리스트(편집자가 실제 수치를 세어 모두 확인)**
-  - [ ] `ent`가 3건 이상이고, 연예·스포츠·SNS의 허용된 언론/섹션에서 확인됨
-  - [ ] `pattaya`+`sriracha`가 4건 이상이고, 그중 지역 매체 2건 이상
-  - [ ] 어떤 단일 소스도 4건을 넘지 않음
-  - [ ] 소스가 6곳 이상임
-  - [ ] 실제 뉴스가 있는 10개 주제가 모두 1건 이상임(없으면 `coverage`에 사유 기록)
-  - [ ] 게시 직전에 **주제별 건수와 소스별 건수**를 출력하고, 실패하면 수정한 뒤 다시 셈
+### 편집 원칙: 최소 건수 없음 — 소스를 넓게 훑고 좋은 기사만(운영자 결정 2026-10-03)
+- **주제별·지역별·매체별 최소 건수는 없다.** 숫자를 채우려고 약하거나 부풀린 기사를 넣지 않는다(2026-10-03 07:32 에 잠깐 넣었던 HARD 쿼터 — 연예 3건·파타야+시라차 4건·매체 6곳 등 — 는 폐지).
+- 대신 **기사를 고르기 전에 목록의 모든 소스 묶음을 훑는다**(종합·TV·영어·연예·스포츠·파타야/촌부리 지역·공식 기관·한국어 검색 — `tools/collect.py` 가 한 번에). 그래야 주제마다 실제 후보가 쌓이고 좋은 기사가 자연스럽게 올라온다.
+- **뉴스 가치와 태국 거주 한국인(파타야 4년차 기준)에게 쓸모 있는지**로 고른다. 후보가 약하면 그 주제는 **비워도 된다** — 판의 `coverage` 에 '○○: 오늘은 쓸 만한 새 소식 없음'처럼 짧게 적는다.
+- **부드러운 다양성 지침**(규칙 아님): 한 매체가 판을 독차지하지 않게 하고, 같은 사건은 **가장 자세한 원 보도**를 고른다. **정치 기사는 성향이 다른 매체 2~3곳**(예: Matichon·Prachatai·BBC Thai ↔ Thairath·Daily News·Naewna ↔ Bangkok Post·The Standard·Thai PBS)을 견줘 읽고 요약하며, 한쪽 주장만 옮기지 않는다.
+- **게시 전 점검(확인용 출력 — 통과 조건 아님)**: 주제별 건수와 매체별 건수를 출력해 본다(예: `python3 -c "import json,collections as c;d=json.load(open('data/<id>.json'));print(c.Counter(s['topic'] for s in d['stories']));print(c.Counter(s['source'] for s in d['stories']))"`). 한 매체가 지나치게 많거나 훑지 않은 묶음이 있으면 다시 보되, **숫자를 맞추려고 기사를 더하지 않는다.**
 
 - **고르는 규칙**
   - 원 보도(1차 보도·공식 발표)를 우선한다.
   - 같은 사건이 여러 매체에 나오면 **가장 자세한 기사**를 골라 `url`(원문)로 연결하고, 나머지는 필요하면 `related` 에.
-  - 한 매체가 판을 독차지하지 않게 **여러 소스에 고루** 나눠 고른다.
-  - 주제 10개마다, 실제 뉴스가 있으면 **최소 1건**은 싣도록 노력한다(없으면 비워 둠 — 절대 지어내지 않음).
+  - 한 매체가 판을 독차지하지 않게 **여러 소스에 고루** 나눠 고른다(부드러운 지침).
+  - 주제를 채우려고 고르지 않는다 — 좋은 후보가 없으면 그 주제는 비우고 `coverage` 에 적는다(절대 지어내지 않음).
 
 ## 정기 실행(07:08 / 18:08) 절차
-1. 수집: 태국어 원문 우선(Thairath·Matichon·Khaosod·Prachachat RSS, PPTV·TOP NEWS·MGR·Thai Ch8·The Pattaya News, Google News RSS 태국어 검색: พัทยา ศรีราชา ชลบุรี สัตหีบ แหลมฉบัง บางละมุง จอมเทียน) + **위 '수집 소스 목록'의 지역·공식 기관·TV·영어·연예 소스**(Pantip·Wongnai 는 반응 참고 전용). 고르는 규칙(원 보도 우선·가장 자세한 기사를 원문으로·소스 고루·주제마다 1건 이상 노력)도 그 절을 따른다. 원문은 `raw/<id>/`에 저장.
-   - **HARD 쿼터(게시 차단 조건, 매 판)**: 총 20건을 기본으로 하되 쿼터를 맞추려면 **최대 24건**까지 수집한다. `ent` **최소 3건**(Sanook·Kapook·TrueID·Thairath·Khaosod·Daily News·Matichon 연예 섹션, TV 연예면 등; 태국 축구·무에타이·태국 선수 등 스포츠와 언론이 확인한 SNS 바이럴 포함), `pattaya`+`sriracha` **합계 최소 4건**(그중 **Pattaya Mail·Pattaya People·The Pattaya News·PRD Chonburi 지역 매체 최소 2건**), 단일 소스 **최대 4건**, 서로 다른 소스 **최소 6곳**. 실제 뉴스가 있는 10개 주제는 각각 **최소 1건**이다. 실제 뉴스가 없어 못 채우는 경우에만 `coverage`에 주제·쿼터와 사유를 적고 절대 지어내지 않는다.
-   - **게시 전 체크리스트(수치 확인 후 체크)**: [ ] `ent` 3건 이상(허용된 원출처/섹션) · [ ] `pattaya`+`sriracha` 4건 이상 및 지역 매체 2건 이상 · [ ] 소스별 최대 4건 · [ ] 서로 다른 소스 6곳 이상 · [ ] 실제 뉴스가 있는 10개 주제 모두 1건 이상(없으면 `coverage` 기록). 마지막으로 **주제별 건수와 소스별 건수를 출력**하고, 하나라도 실패하면 기사를 보강·교체한 뒤 다시 세어 통과시킨다.
-   - **목표 구성(약 20~24건)**: 주제 10개를 고르게. 지역은 **파타야·시라차·방콕 각 1건 이상**(실제 소식이 없으면 적게), 외국인·비자 2~4건, 실제 뉴스가 있으면 **여행·맛집**·**생활·물가·부동산**도 몇 건. 정치·경제·사회·연예/스포츠/SNS·날씨/교통은 그날 중요도대로.
+1. 수집: **먼저 `python3 tools/collect.py`** 를 실행한다(`tools/sources.json` 의 RSS·뉴스 사이트맵·Google News 검색 약 160개를 동시에 훑음, 실패한 소스는 건너뛰고 끝에 표시, 1분 안쪽). 결과 = `drafts/candidates/latest.md`(사람용)·`latest.json`(최근 14시간, 중복 합침, 주제별·매체별 건수, `also` = 같은 사건을 보도한 다른 매체). 기간은 `--hours 20` 처럼 바꾼다(저녁판은 아침판 이후 ~11시간이면 충분). `drafts/` 는 .gitignore 대상이라 커밋되지 않는다.
+   - **후보에서 고른다**: 주제마다 후보를 훑어 뉴스 가치·한국인 관련성 순으로 고르고, 같은 사건은 `also` 를 보고 가장 자세한 원 보도를 원문 `url` 로. Google News 항목(`type: gnews`)은 링크가 news.google.com 이므로 `python3 tools/gnews.py --decode` 또는 원문 검색으로 실제 기사 URL·게재 시각을 확인한다. 주제 분류는 제목 키워드 기반이라 틀릴 수 있다 — `other`(미분류)도 한 번 훑는다.
+   - **피드가 없는 곳은 손으로**: `sources.json` 의 `type: html`(Pattaya Mail 홈·PRD Chonburi·주태국 한국대사관 공지·Air4Thai·BOT·KOTRA 등)과 `disabled`(TMD·이민국·Pattaya People — 적힌 대체 경로로) 를 필요할 때 연다. 기존 방식(`python3 tools/gnews.py raw/<id>/<폴더> "검색어"`)으로 더 찾아도 된다. 원문은 `raw/<id>/`에 저장.
+   - 고르는 규칙·편집 원칙(**최소 건수 없음**, 원 보도 우선, 가장 자세한 기사, 매체 고루, 정치는 성향 다른 2~3곳 비교)은 위 '수집 소스 목록' 절을 따른다. Pantip·Wongnai·태사랑 은 반응 참고 전용.
+   - **구성(참고)**: 보통 20건 안팎. 주제별 건수는 그날 실제 뉴스대로 — 파타야·시라차·방콕, 외국인·비자, 여행·맛집, 생활·물가·부동산, 연예·스포츠·SNS 모두 **좋은 기사가 있으면** 싣고, 없으면 비운다. 정치·경제·사회·날씨/교통은 그날 중요도대로.
    - 지역 검색 추가: 시라차 `ศรีราชา` `แหลมฉบัง` `อมตะ ชลบุรี` `เมืองชลบุรี`, 방콕 `กทม.` `กรุงเทพ ชัชชาติ` `en:Bangkok`, 생활·물가 `ราคา ไข่` `ราคาน้ำมัน` `ค่าไฟ` `คอนโด` `en:Thailand condo prices`, 여행·맛집 `ท่องเที่ยว พัทยา` `ร้านอาหาร พัทยา` `en:Pattaya tourism` `en:Bangkok restaurant opening`, 날씨·교통 `กรมอุตุนิยมวิทยา` `ทางด่วน` `รถไฟฟ้า` (예: `python3 tools/gnews.py raw/<id>/local "ศรีราชา" "กทม." "en:Pattaya tourism"`).
    - Google News 날짜는 믿지 말 것: 며칠 전 기사가 새로 뜨는 경우가 많음 → 원문 페이지의 게재 시각을 확인(최대 48시간).
 2. 직전 판(`data/index.json`의 `latest`)과 겹치는 기사는 빼고, 실제 후속 전개가 있을 때만 싣되 `update`에 무엇이 새로운지 적는다.
    - **외국인·비자(`visa`) 수집(매번)**: Google News RSS 태국어 검색 `ตม. ต่างชาติ`, `สตม.`, `วีซ่า`, `วีซ่า DTV`, `ตรวจคนเข้าเมือง พัทยา`, `ชาวต่างชาติ พัทยา`, `แรงงานต่างด้าว`, `ใบอนุญาตทำงาน ต่างชาติ`, `อยู่เกินกำหนด overstay`, `นอมินี ต่างชาติ`, `ชาวเกาหลี`, `เกาหลี พัทยา` + 영어 `Thailand immigration visa`, `Pattaya foreigner`, `90-day report OR TM30 OR DTV OR LTR`, `site:thethaiger.com visa OR immigration`, `site:thaiexaminer.com visa OR expat` (Bangkok Post·The Thaiger·The Pattaya News·Khaosod English·Thai Examiner). 검색은 `python3 tools/gnews.py raw/<id>/visa "สตม." "en:Pattaya foreigner" …`, URL 풀기는 `--decode`, 원문은 `raw/fetch.py` 방식으로 `raw/<id>/visa/art/`에 저장 + 주태국 한국대사관 공지 `https://overseas.mofa.go.kr/th-ko/brd/m_3133/list.do`(접속 안 되면 기사 배경 설명/보고에 '확인 못 함'이라고 적고 넘어감).
-     - **목표 2~4건**(많으면 최대 8건). 48시간 안에 없으면 **최대 7일 전 기사까지 허용**(`newslib.validate`가 8일 이상은 막음). 각 기사 `published`에 원문 게재 시각.
+     - 보통 2~4건 정도(많으면 최대 8건) — **최소 건수는 없다**, 쓸 만한 게 없으면 비운다. 48시간 안에 없으면 **최대 7일 전 기사까지 허용**(`newslib.validate`가 8일 이상은 막음). 각 기사 `published`에 원문 게재 시각.
      - **이전 판과 중복 금지**: `grep -l "<키워드>" data/*.json` 등으로 확인하고, 이미 실린 사건은 실제 새 전개가 있을 때만 `update`와 함께.
      - `context`(💡 배경 설명)에는 **태국 거주 외국인(파타야 4년차 한국인 기준) 실용 팁**을 짧게: 무엇을 확인·준비하면 되는지. 기사에 없는 숫자·규정을 단정하지 말 것(확실하지 않으면 '확인하자'로).
      - 한국인·한국 교민 관련(한국인 사건, 대사관 공지, 한-태 관계)은 우선 싣는다.

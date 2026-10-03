@@ -1,0 +1,2283 @@
+{
+ "updated": "2026-10-03",
+ "exclude_outlets": [
+  "Vietnam\\.vn",
+  "LINE TODAY",
+  "Sortir à Paris",
+  "vive\\.click",
+  "MSN",
+  "Yahoo",
+  "Legit",
+  "iDiva",
+  "Korseries",
+  "Haver Analytics",
+  "Texas Border",
+  "Live Sail Die",
+  "Golf Digest Middle East",
+  "The Australia Today",
+  "Stuff"
+ ],
+ "note": "tools/collect.py 가 읽는 수집 소스 목록. type: rss | sitemap(Google News 사이트맵) | gnews(Google News RSS) | html(손으로 확인, collect.py 는 접속만 점검). disabled 가 있으면 collect.py 가 건너뜀(이유 참고, 대체 경로로 확인). Pantip·SNS 는 사실 출처가 아니므로 넣지 않는다(반응 참고는 README).",
+ "sources": [
+  {
+   "name": "Thairath",
+   "url": "https://www.thairath.co.th/rss/news",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Thairath 연예",
+   "url": "https://www.thairath.co.th/rss/entertain",
+   "type": "rss",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Thairath 스포츠",
+   "url": "https://www.thairath.co.th/rss/sport",
+   "type": "rss",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Thairath 라이프",
+   "url": "https://www.thairath.co.th/rss/lifestyle",
+   "type": "rss",
+   "topics": [
+    "travel",
+    "life"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Thairath Money",
+   "url": "https://www.thairath.co.th/rss/money",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "life"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Khaosod",
+   "url": "https://www.khaosod.co.th/feed",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Khaosod 속보",
+   "url": "https://www.khaosod.co.th/breaking-news/feed",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Khaosod 지방",
+   "url": "https://www.khaosod.co.th/around-thailand/feed",
+   "type": "rss",
+   "topics": [
+    "society",
+    "pattaya",
+    "sriracha"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Khaosod 정치",
+   "url": "https://www.khaosod.co.th/politics/feed",
+   "type": "rss",
+   "topics": [
+    "poleco"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Khaosod 경제",
+   "url": "https://www.khaosod.co.th/economics/feed",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "life"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Khaosod 사건",
+   "url": "https://www.khaosod.co.th/crime/feed",
+   "type": "rss",
+   "topics": [
+    "society"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Khaosod 라이프",
+   "url": "https://www.khaosod.co.th/lifestyle/feed",
+   "type": "rss",
+   "topics": [
+    "life",
+    "travel"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Khaosod 연예",
+   "url": "https://www.khaosod.co.th/entertainment/feed",
+   "type": "rss",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Khaosod 스포츠",
+   "url": "https://www.khaosod.co.th/sports/feed",
+   "type": "rss",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Khaosod 특집(화제)",
+   "url": "https://www.khaosod.co.th/special-stories/feed",
+   "type": "rss",
+   "topics": [
+    "ent",
+    "society"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Matichon",
+   "url": "https://www.matichon.co.th/feed",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Matichon 정치",
+   "url": "https://www.matichon.co.th/politics/feed",
+   "type": "rss",
+   "topics": [
+    "poleco"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Matichon 경제",
+   "url": "https://www.matichon.co.th/economy/feed",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "life"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Matichon 사회(local)",
+   "url": "https://www.matichon.co.th/local/feed",
+   "type": "rss",
+   "topics": [
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Matichon 지방",
+   "url": "https://www.matichon.co.th/region/feed",
+   "type": "rss",
+   "topics": [
+    "society",
+    "pattaya",
+    "sriracha"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Matichon 국제",
+   "url": "https://www.matichon.co.th/foreign/feed",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "visa"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Matichon 라이프",
+   "url": "https://www.matichon.co.th/lifestyle/feed",
+   "type": "rss",
+   "topics": [
+    "life",
+    "travel"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Matichon 연예",
+   "url": "https://www.matichon.co.th/entertainment/feed",
+   "type": "rss",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Matichon 스포츠",
+   "url": "https://www.matichon.co.th/sport/feed",
+   "type": "rss",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Daily News",
+   "url": "https://www.dailynews.co.th/news/feed/",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03",
+   "note": "기본 /feed/ 는 항목 0개 — /news/feed/ 사용. 연예는 gnews site: 로"
+  },
+  {
+   "name": "Sanook 뉴스",
+   "url": "https://rssfeeds.sanook.com/rss/feeds/sanook/news.index.xml",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Sanook 연예",
+   "url": "https://rssfeeds.sanook.com/rss/feeds/sanook/news.entertain.xml",
+   "type": "rss",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Prachachat",
+   "url": "https://www.prachachat.net/feed",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "life"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Prachachat 지역경제",
+   "url": "https://www.prachachat.net/local-economy/feed",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "life",
+    "sriracha"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Thai Post",
+   "url": "https://www.thaipost.net/feed/",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "INN News",
+   "url": "https://www.innnews.co.th/feed/",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "The Standard",
+   "url": "https://thestandard.co/feed/",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "The Standard 연예",
+   "url": "https://thestandard.co/category/entertainment/feed/",
+   "type": "rss",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "The Standard 스포츠",
+   "url": "https://thestandard.co/category/sport/feed/",
+   "type": "rss",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "The Standard 비즈니스",
+   "url": "https://thestandard.co/category/business/feed/",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "life"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Workpoint Today",
+   "url": "https://www.workpointtoday.com/feed/",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "tv",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Workpoint 연예",
+   "url": "https://www.workpointtoday.com/category/entertainment/feed/",
+   "type": "rss",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "one31 뉴스",
+   "url": "https://www.one31.net/rss",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "tv",
+   "verified": "2026-10-03",
+   "note": "api-backoffice.onehd.net/api/rss 로 넘어감"
+  },
+  {
+   "name": "The Reporters",
+   "url": "https://www.thereporters.co/feed/",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Ejan",
+   "url": "https://www.ejan.co/feed",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Bright TV",
+   "url": "https://www.brighttv.co.th/feed",
+   "type": "rss",
+   "topics": [
+    "ent",
+    "society"
+   ],
+   "language": "th",
+   "group": "tv",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Hfocus(보건)",
+   "url": "https://www.hfocus.org/rss.xml",
+   "type": "rss",
+   "topics": [
+    "life"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Ballthai",
+   "url": "https://www.ballthai.com/feed",
+   "type": "rss",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Mthai 연예",
+   "url": "https://www.mthai.com/entertainment/feed",
+   "type": "rss",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03",
+   "note": "www.mthai.com/feed 는 403"
+  },
+  {
+   "name": "Thai PBS",
+   "url": "https://www.thaipbs.or.th/sitemap/sitemap_news.xml",
+   "type": "sitemap",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok",
+    "weather"
+   ],
+   "language": "th",
+   "group": "tv",
+   "verified": "2026-10-03",
+   "note": "RSS 없음(/rss 404)"
+  },
+  {
+   "name": "PPTV",
+   "url": "https://www.pptvhd36.com/latest-news.xml",
+   "type": "sitemap",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "tv",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Nation TV",
+   "url": "https://www.nationtv.tv/sitemap/latest",
+   "type": "sitemap",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "tv",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Bangkok Biz News(กรุงเทพธุรกิจ)",
+   "url": "https://www.bangkokbiznews.com/sitemap/latest",
+   "type": "sitemap",
+   "topics": [
+    "poleco",
+    "life",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Thansettakij",
+   "url": "https://www.thansettakij.com/sitemap/latest",
+   "type": "sitemap",
+   "topics": [
+    "poleco",
+    "life"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Post Today",
+   "url": "https://www.posttoday.com/sitemap/latest",
+   "type": "sitemap",
+   "topics": [
+    "poleco",
+    "life"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Spring News",
+   "url": "https://www.springnews.co.th/sitemap/latest",
+   "type": "sitemap",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "tv",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Komchadluek",
+   "url": "https://www.komchadluek.net/sitemap/latest",
+   "type": "sitemap",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok",
+    "ent"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Siam Rath",
+   "url": "https://siamrath.co.th/sitemap-news.xml",
+   "type": "sitemap",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok",
+    "ent"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Manager Online(MGR)",
+   "url": "https://mgronline.com/store/sitemap/sitemap-index.xml",
+   "type": "sitemap",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok",
+    "ent"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03",
+   "note": "mgronline.com/rss 는 404"
+  },
+  {
+   "name": "Goal Thai",
+   "url": "https://www.goal.com/th/sitemap/google-news.xml",
+   "type": "sitemap",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Bangkok Post 주요",
+   "url": "https://www.bangkokpost.com/rss/data/topstories.xml",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Bangkok Post 태국",
+   "url": "https://www.bangkokpost.com/rss/data/thailand.xml",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Bangkok Post 비즈니스",
+   "url": "https://www.bangkokpost.com/rss/data/business.xml",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "life"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Bangkok Post 부동산",
+   "url": "https://www.bangkokpost.com/rss/data/property.xml",
+   "type": "rss",
+   "topics": [
+    "life"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Bangkok Post 라이프",
+   "url": "https://www.bangkokpost.com/rss/data/life.xml",
+   "type": "rss",
+   "topics": [
+    "travel",
+    "ent"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Bangkok Post 스포츠",
+   "url": "https://www.bangkokpost.com/rss/data/sports.xml",
+   "type": "rss",
+   "topics": [
+    "ent"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "The Nation",
+   "url": "https://www.nationthailand.com/sitemap/latest",
+   "type": "sitemap",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok",
+    "visa",
+    "travel"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03",
+   "note": "/rss 는 HTML"
+  },
+  {
+   "name": "Khaosod English",
+   "url": "https://www.khaosodenglish.com/feed/",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok",
+    "visa"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "The Thaiger",
+   "url": "https://thethaiger.com/feed",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok",
+    "visa"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "The Thaiger 파타야",
+   "url": "https://thethaiger.com/news/pattaya/feed",
+   "type": "rss",
+   "topics": [
+    "pattaya"
+   ],
+   "language": "en",
+   "group": "pattaya-local",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "The Thaiger 방콕",
+   "url": "https://thethaiger.com/news/bangkok/feed",
+   "type": "rss",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Thai Examiner",
+   "url": "https://www.thaiexaminer.com/feed/",
+   "type": "rss",
+   "topics": [
+    "visa",
+    "poleco"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Thai Enquirer",
+   "url": "https://www.thaienquirer.com/feed/",
+   "type": "rss",
+   "topics": [
+    "poleco"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "ThaiThuk",
+   "url": "https://thaithuk.com/feed.xml",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok",
+    "pattaya",
+    "visa"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "The Pattaya News(영문)",
+   "url": "https://thepattayanews.com/feed/",
+   "type": "rss",
+   "topics": [
+    "pattaya",
+    "sriracha",
+    "visa"
+   ],
+   "language": "en",
+   "group": "pattaya-local",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "The Pattaya News(태국어)",
+   "url": "https://thepattayanews.co.th/feed/",
+   "type": "rss",
+   "topics": [
+    "pattaya",
+    "sriracha"
+   ],
+   "language": "th",
+   "group": "pattaya-local",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "파타야 시청(Pattaya City)",
+   "url": "https://pattaya.go.th/feed/",
+   "type": "rss",
+   "topics": [
+    "pattaya"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Chonburi Post Online",
+   "url": "https://chonburipostonline.com/feed/",
+   "type": "rss",
+   "topics": [
+    "sriracha",
+    "pattaya"
+   ],
+   "language": "th",
+   "group": "pattaya-local",
+   "verified": "2026-10-03",
+   "note": "시라차 소재 지역지 — 업데이트 드묾(10/3 확인 때 최신 항목 약 6일 전, 14시간 창엔 보통 0건)"
+  },
+  {
+   "name": "GN: พัทยา",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%9E%E0%B8%B1%E0%B8%97%E0%B8%A2%E0%B8%B2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "pattaya"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "พัทยา"
+  },
+  {
+   "name": "GN: บางละมุง",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B8%A5%E0%B8%B0%E0%B8%A1%E0%B8%B8%E0%B8%87%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "pattaya"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "บางละมุง"
+  },
+  {
+   "name": "GN: จอมเทียน",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%88%E0%B8%AD%E0%B8%A1%E0%B9%80%E0%B8%97%E0%B8%B5%E0%B8%A2%E0%B8%99%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "pattaya"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "จอมเทียน"
+  },
+  {
+   "name": "GN: สัตหีบ",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%AA%E0%B8%B1%E0%B8%95%E0%B8%AB%E0%B8%B5%E0%B8%9A%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "pattaya"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "สัตหีบ"
+  },
+  {
+   "name": "GN: นาเกลือ",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%99%E0%B8%B2%E0%B9%80%E0%B8%81%E0%B8%A5%E0%B8%B7%E0%B8%AD%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "pattaya"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "นาเกลือ"
+  },
+  {
+   "name": "GN: ศรีราชา",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A8%E0%B8%A3%E0%B8%B5%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%B2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "sriracha"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ศรีราชา"
+  },
+  {
+   "name": "GN: แหลมฉบัง",
+   "url": "https://news.google.com/rss/search?q=%E0%B9%81%E0%B8%AB%E0%B8%A5%E0%B8%A1%E0%B8%89%E0%B8%9A%E0%B8%B1%E0%B8%87%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "sriracha"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "แหลมฉบัง"
+  },
+  {
+   "name": "GN: อมตะ ชลบุรี",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%AD%E0%B8%A1%E0%B8%95%E0%B8%B0%20%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "sriracha"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "อมตะ|ชลบุรี"
+  },
+  {
+   "name": "GN: ชลบุรี",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "sriracha"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ชลบุรี"
+  },
+  {
+   "name": "GN: บางแสน",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B9%81%E0%B8%AA%E0%B8%99%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "sriracha"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "บางแสน"
+  },
+  {
+   "name": "GN: กทม.",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%81%E0%B8%97%E0%B8%A1.%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "กทม\\."
+  },
+  {
+   "name": "GN: ชัชชาติ",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%8A%E0%B8%B1%E0%B8%8A%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ชัชชาติ"
+  },
+  {
+   "name": "GN: ต่างชาติ วีซ่า",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%95%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4%20%E0%B8%A7%E0%B8%B5%E0%B8%8B%E0%B9%88%E0%B8%B2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "visa"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ต่างชาติ|วีซ่า"
+  },
+  {
+   "name": "GN: วีซ่า",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A7%E0%B8%B5%E0%B8%8B%E0%B9%88%E0%B8%B2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "visa"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "วีซ่า"
+  },
+  {
+   "name": "GN: สตม.",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%AA%E0%B8%95%E0%B8%A1.%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "visa"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "สตม\\."
+  },
+  {
+   "name": "GN: ตม. ต่างชาติ",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%95%E0%B8%A1.%20%E0%B8%95%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "visa"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ตม\\.|ต่างชาติ"
+  },
+  {
+   "name": "GN: ตรวจคนเข้าเมือง",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%84%E0%B8%99%E0%B9%80%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B9%80%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%87%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "visa"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ตรวจคนเข้าเมือง"
+  },
+  {
+   "name": "GN: ชาวต่างชาติ พัทยา",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%8A%E0%B8%B2%E0%B8%A7%E0%B8%95%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4%20%E0%B8%9E%E0%B8%B1%E0%B8%97%E0%B8%A2%E0%B8%B2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "visa"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ชาวต่างชาติ|พัทยา"
+  },
+  {
+   "name": "GN: แรงงานต่างด้าว",
+   "url": "https://news.google.com/rss/search?q=%E0%B9%81%E0%B8%A3%E0%B8%87%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%95%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%94%E0%B9%89%E0%B8%B2%E0%B8%A7%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "visa"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "แรงงานต่างด้าว"
+  },
+  {
+   "name": "GN: ชาวเกาหลี",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%8A%E0%B8%B2%E0%B8%A7%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%AB%E0%B8%A5%E0%B8%B5%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "visa"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ชาวเกาหลี"
+  },
+  {
+   "name": "GN: เกาหลี",
+   "url": "https://news.google.com/rss/search?q=%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%AB%E0%B8%A5%E0%B8%B5%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "visa",
+    "ent"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "เกาหลี"
+  },
+  {
+   "name": "GN: ราคาน้ำมัน",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "life"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ราคาน้ำมัน"
+  },
+  {
+   "name": "GN: ค่าไฟ",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%84%E0%B9%88%E0%B8%B2%E0%B9%84%E0%B8%9F%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "life"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ค่าไฟ"
+  },
+  {
+   "name": "GN: ราคาทองคำ",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%97%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B8%B3%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "life"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ราคาทองคำ"
+  },
+  {
+   "name": "GN: คอนโด",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%84%E0%B8%AD%E0%B8%99%E0%B9%82%E0%B8%94%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "life"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "คอนโด"
+  },
+  {
+   "name": "GN: ท่องเที่ยว พัทยา",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%97%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%20%E0%B8%9E%E0%B8%B1%E0%B8%97%E0%B8%A2%E0%B8%B2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "travel"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ท่องเที่ยว|พัทยา"
+  },
+  {
+   "name": "GN: ร้านอาหาร เปิดใหม่",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%AD%E0%B8%B2%E0%B8%AB%E0%B8%B2%E0%B8%A3%20%E0%B9%80%E0%B8%9B%E0%B8%B4%E0%B8%94%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "travel"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ร้านอาหาร|เปิดใหม่"
+  },
+  {
+   "name": "GN: บันเทิง",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B9%80%E0%B8%97%E0%B8%B4%E0%B8%87%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "บันเทิง"
+  },
+  {
+   "name": "GN: กีฬา",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%81%E0%B8%B5%E0%B8%AC%E0%B8%B2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "กีฬา"
+  },
+  {
+   "name": "GN: ฟุตบอลทีมชาติไทย",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%9F%E0%B8%B8%E0%B8%95%E0%B8%9A%E0%B8%AD%E0%B8%A5%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4%E0%B9%84%E0%B8%97%E0%B8%A2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ฟุตบอลทีมชาติไทย"
+  },
+  {
+   "name": "GN: มวยไทย",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A1%E0%B8%A7%E0%B8%A2%E0%B9%84%E0%B8%97%E0%B8%A2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "มวยไทย"
+  },
+  {
+   "name": "GN: กรมอุตุนิยมวิทยา",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%81%E0%B8%A3%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%95%E0%B8%B8%E0%B8%99%E0%B8%B4%E0%B8%A2%E0%B8%A1%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "weather"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "กรมอุตุนิยมวิทยา"
+  },
+  {
+   "name": "GN: น้ำท่วม",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%97%E0%B9%88%E0%B8%A7%E0%B8%A1%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "weather"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "น้ำท่วม"
+  },
+  {
+   "name": "GN: รถไฟฟ้า",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A3%E0%B8%96%E0%B9%84%E0%B8%9F%E0%B8%9F%E0%B9%89%E0%B8%B2%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "weather"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "รถไฟฟ้า"
+  },
+  {
+   "name": "GN: ทางด่วน",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B8%94%E0%B9%88%E0%B8%A7%E0%B8%99%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "weather"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "ทางด่วน"
+  },
+  {
+   "name": "GN 태국 연예 섹션",
+   "url": "https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNREpxYW5RU0FuUm9HZ0pVU0NnQVAB?hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "GN 태국 스포츠 섹션",
+   "url": "https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFp1ZEdvU0FuUm9HZ0pVU0NnQVAB?hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "GN 태국 국내 섹션",
+   "url": "https://news.google.com/rss/topics/CAAqIQgKIhtDQkFTRGdvSUwyMHZNRGRtTVhnU0FuUm9LQUFQAQ?hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "GN 태국 경제 섹션",
+   "url": "https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU0FuUm9HZ0pVU0NnQVAB?hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "poleco",
+    "life"
+   ],
+   "language": "th",
+   "group": "gnews",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "GN: Pattaya",
+   "url": "https://news.google.com/rss/search?q=Pattaya%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "pattaya"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "Pattaya"
+  },
+  {
+   "name": "GN: Thailand visa",
+   "url": "https://news.google.com/rss/search?q=Thailand%20visa%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "visa"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "Thai|Thailand|Bangkok|Pattaya|Phuket|Chiang Mai|Chon ?Buri|Sriracha|Si Racha|Hua Hin|Samui|Krabi",
+   "match": "Thailand|visa"
+  },
+  {
+   "name": "GN: Thailand immigration",
+   "url": "https://news.google.com/rss/search?q=Thailand%20immigration%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "visa"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "Thai|Thailand|Bangkok|Pattaya|Phuket|Chiang Mai|Chon ?Buri|Sriracha|Si Racha|Hua Hin|Samui|Krabi",
+   "match": "Thailand|immigration"
+  },
+  {
+   "name": "GN: Chonburi OR Sriracha OR \"Laem Chabang\"",
+   "url": "https://news.google.com/rss/search?q=Chonburi%20OR%20Sriracha%20OR%20%22Laem%20Chabang%22%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "sriracha"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "Thai|Thailand|Bangkok|Pattaya|Phuket|Chiang Mai|Chon ?Buri|Sriracha|Si Racha|Hua Hin|Samui|Krabi",
+   "match": "Chonburi|Sriracha|Laem|Chabang"
+  },
+  {
+   "name": "GN: Korean Thailand",
+   "url": "https://news.google.com/rss/search?q=Korean%20Thailand%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "visa"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "require": "Thai|Thailand|Bangkok|Pattaya|Phuket|Chiang Mai|Chon ?Buri|Sriracha|Si Racha|Hua Hin|Samui|Krabi",
+   "match": "Korean|Thailand"
+  },
+  {
+   "name": "GN: Bangkok",
+   "url": "https://news.google.com/rss/search?q=Bangkok%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "bangkok"
+   ],
+   "language": "en",
+   "group": "gnews",
+   "verified": "2026-10-03",
+   "match": "Bangkok"
+  },
+  {
+   "name": "GN site: Pattaya Mail",
+   "url": "https://news.google.com/rss/search?q=site%3Apattayamail.com%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "pattaya",
+    "sriracha",
+    "visa"
+   ],
+   "language": "en",
+   "group": "pattaya-local",
+   "verified": "2026-10-03",
+   "note": "사이트 RSS 403(Cloudflare)"
+  },
+  {
+   "name": "GN site: Banmuang 촌부리",
+   "url": "https://news.google.com/rss/search?q=site%3Abanmuang.co.th%20%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "sriracha",
+    "pattaya"
+   ],
+   "language": "th",
+   "group": "pattaya-local",
+   "verified": "2026-10-03",
+   "note": "사이트맵엔 제목 없음"
+  },
+  {
+   "name": "GN site: PRD Chonburi",
+   "url": "https://news.google.com/rss/search?q=site%3Aprd.go.th%20%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "sriracha",
+    "pattaya"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "note": "chonburi.prd.go.th 는 GN 색인 없음 → prd.go.th + ชลบุรี"
+  },
+  {
+   "name": "GN site: TNN",
+   "url": "https://news.google.com/rss/search?q=site%3Atnnthailand.com%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "tv",
+   "verified": "2026-10-03",
+   "note": "사이트 403"
+  },
+  {
+   "name": "GN site: Amarin TV",
+   "url": "https://news.google.com/rss/search?q=site%3Aamarintv.com%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok",
+    "ent"
+   ],
+   "language": "th",
+   "group": "tv",
+   "verified": "2026-10-03",
+   "note": "사이트맵엔 제목 없음"
+  },
+  {
+   "name": "GN site: Ch3Plus",
+   "url": "https://news.google.com/rss/search?q=site%3Ach3plus.com%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok",
+    "ent"
+   ],
+   "language": "th",
+   "group": "tv",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "GN site: Ch7 HD",
+   "url": "https://news.google.com/rss/search?q=site%3Ach7.com%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok",
+    "ent"
+   ],
+   "language": "th",
+   "group": "tv",
+   "verified": "2026-10-03",
+   "note": "news.ch7.com 은 GN 색인 0건 → ch7.com"
+  },
+  {
+   "name": "GN site: TMD 기상청",
+   "url": "https://news.google.com/rss/search?q=site%3Atmd.go.th%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "weather"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "note": "사이트는 box 에서 SSL 오류"
+  },
+  {
+   "name": "GN site: Thai Ch8",
+   "url": "https://news.google.com/rss/search?q=site%3Athaich8.com%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok",
+    "ent"
+   ],
+   "language": "th",
+   "group": "tv",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "GN site: TOP NEWS",
+   "url": "https://news.google.com/rss/search?q=site%3Atopnews.co.th%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "tv",
+   "verified": "2026-10-03",
+   "note": "RSS 항목 0개"
+  },
+  {
+   "name": "GN site: Thairath Plus",
+   "url": "https://news.google.com/rss/search?q=site%3Aplus.thairath.co.th%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "poleco",
+    "life",
+    "society"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03",
+   "note": "RSS 없음"
+  },
+  {
+   "name": "GN site: Siamsport",
+   "url": "https://news.google.com/rss/search?q=site%3Asiamsport.co.th%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03",
+   "note": "사이트맵 갱신 늦음"
+  },
+  {
+   "name": "GN site: Siamzone",
+   "url": "https://news.google.com/rss/search?q=site%3Asiamzone.com%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03",
+   "note": "RSS 없음"
+  },
+  {
+   "name": "GN site: Kapook",
+   "url": "https://news.google.com/rss/search?q=site%3Akapook.com%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "ent",
+    "society"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03",
+   "note": "RSS 없음"
+  },
+  {
+   "name": "GN site: TrueID 연예",
+   "url": "https://news.google.com/rss/search?q=site%3Aentertainment.trueid.net%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03",
+   "note": "RSS 없음"
+  },
+  {
+   "name": "GN site: Daily News 연예",
+   "url": "https://news.google.com/rss/search?q=site%3Adailynews.co.th%20%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B9%80%E0%B8%97%E0%B8%B4%E0%B8%87%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "GN site: Thai PBS World",
+   "url": "https://news.google.com/rss/search?q=site%3Athaipbsworld.com%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok",
+    "visa"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03",
+   "note": "뉴스 사이트맵 갱신 멈춤(9/22)"
+  },
+  {
+   "name": "GN site: Naewna",
+   "url": "https://news.google.com/rss/search?q=site%3Anaewna.com%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03",
+   "note": "RSS 403"
+  },
+  {
+   "name": "Pattaya Mail 홈",
+   "url": "https://www.pattayamail.com/",
+   "type": "html",
+   "topics": [
+    "pattaya",
+    "sriracha"
+   ],
+   "language": "en",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "box 에서 홈은 200, /feed 는 403"
+  },
+  {
+   "name": "PRD Chonburi 홈",
+   "url": "https://chonburi.prd.go.th/th/",
+   "type": "html",
+   "topics": [
+    "sriracha",
+    "pattaya"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Thai Rath Plus",
+   "url": "https://plus.thairath.co.th/",
+   "type": "html",
+   "topics": [
+    "poleco",
+    "life"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Kapook Hilight",
+   "url": "https://hilight.kapook.com/",
+   "type": "html",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "TrueID Entertainment",
+   "url": "https://entertainment.trueid.net/",
+   "type": "html",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Siamzone",
+   "url": "https://www.siamzone.com/",
+   "type": "html",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Ch3Plus 뉴스",
+   "url": "https://ch3plus.com/news",
+   "type": "html",
+   "topics": [
+    "ent",
+    "society"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "주태국 한국대사관 공지",
+   "url": "https://overseas.mofa.go.kr/th-ko/brd/m_3133/list.do",
+   "type": "html",
+   "topics": [
+    "visa"
+   ],
+   "language": "ko",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "curl 은 307 반복, requests 는 200 — 목록은 브라우저로 확인"
+  },
+  {
+   "name": "TMD 기상청 홈",
+   "url": "https://www.tmd.go.th/",
+   "type": "html",
+   "topics": [
+    "weather"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": null,
+   "disabled": "box 에서 SSL 오류/시간 초과 — GN 'กรมอุตุนิยมวิทยา'·site:tmd.go.th 로 대체"
+  },
+  {
+   "name": "이민국(Immigration Bureau) 홈",
+   "url": "https://www.immigration.go.th/",
+   "type": "html",
+   "topics": [
+    "visa"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": null,
+   "disabled": "box 에서 403 — GN 'สตม.'·'ตม. ต่างชาติ'·The Pattaya News·Bangkok Post 보도로 대체"
+  },
+  {
+   "name": "Pattaya People",
+   "url": "https://www.pattayapeople.com/",
+   "type": "html",
+   "topics": [
+    "pattaya"
+   ],
+   "language": "en",
+   "group": "manual",
+   "verified": null,
+   "disabled": "2026-10 현재 사이트 개편 중(기사 없음) — 다시 열리면 확인"
+  },
+  {
+   "name": "AOT 공항공사 뉴스",
+   "url": "https://www.airportthai.co.th/feed/",
+   "type": "rss",
+   "topics": [
+    "travel",
+    "weather"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Kaohoon",
+   "url": "https://www.kaohoon.com/feed",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "life"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "The Matter",
+   "url": "https://thematter.co/feed",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "BBC Thai",
+   "url": "https://feeds.bbci.co.uk/thai/rss.xml",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "visa"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "Prachatai",
+   "url": "https://prachatai.com/rss.xml",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society"
+   ],
+   "language": "th",
+   "group": "thai-major",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "CNA 아시아",
+   "url": "https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=6511",
+   "type": "rss",
+   "topics": [
+    "poleco",
+    "society",
+    "bangkok",
+    "visa"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03",
+   "require": "Thai|Thailand|Bangkok|Pattaya|Phuket|Chiang Mai|Chon ?Buri|Sriracha|Si Racha|Hua Hin|Samui|Krabi"
+  },
+  {
+   "name": "TAT News",
+   "url": "https://www.tatnews.org/feed/",
+   "type": "rss",
+   "topics": [
+    "travel"
+   ],
+   "language": "en",
+   "group": "official",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "ONE Championship",
+   "url": "https://www.onefc.com/feed/",
+   "type": "rss",
+   "topics": [
+    "ent"
+   ],
+   "language": "en",
+   "group": "ent-sports",
+   "verified": "2026-10-03",
+   "require": "Thai|Muay|Bangkok|Lumpinee|Rodtang|Superlek|Tawanchai|Nong-O|Stamp|Fairtex"
+  },
+  {
+   "name": "GN site: Nikkei Asia(태국)",
+   "url": "https://news.google.com/rss/search?q=site%3Aasia.nikkei.com%20Thailand%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "poleco"
+   ],
+   "language": "en",
+   "group": "english",
+   "verified": "2026-10-03",
+   "require": "Thai|Thailand|Bangkok|Pattaya|Phuket|Chiang Mai|Chon ?Buri|Sriracha|Si Racha|Hua Hin|Samui|Krabi",
+   "note": "Nikkei RSS(asia.nikkei.com/rss/feed/nar)는 날짜 없음 → GN"
+  },
+  {
+   "name": "GN site: Dara Daily",
+   "url": "https://news.google.com/rss/search?q=site%3Adaradaily.com%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03",
+   "note": "사이트 RSS 404"
+  },
+  {
+   "name": "GN site: Michelin Guide Thailand",
+   "url": "https://news.google.com/rss/search?q=site%3Aguide.michelin.com%20Thailand%20when%3A1d&hl=en-US&gl=US&ceid=US:en",
+   "type": "gnews",
+   "topics": [
+    "travel"
+   ],
+   "language": "en",
+   "group": "travel",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "GN: ปภ.(DDPM 재난)",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%9B%E0%B8%A0.%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "weather",
+    "society"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "match": "ปภ\\.",
+   "note": "disaster.go.th 는 box 에서 403"
+  },
+  {
+   "name": "GN: GISTDA(위성 홍수지도)",
+   "url": "https://news.google.com/rss/search?q=GISTDA%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "weather"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "match": "GISTDA",
+   "note": "gistda.or.th TLS 인증서 체인 오류·flood.gistda.or.th 접속 실패"
+  },
+  {
+   "name": "GN: รฟท.(SRT 철도)",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A3%E0%B8%9F%E0%B8%97%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "weather",
+    "travel"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "match": "รฟท",
+   "note": "railway.co.th 는 box 에서 TLS 접속 실패"
+  },
+  {
+   "name": "GN: ท่าอากาศยาน(공항)",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%97%E0%B9%88%E0%B8%B2%E0%B8%AD%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%A2%E0%B8%B2%E0%B8%99%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "travel",
+    "weather"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "match": "ท่าอากาศยาน"
+  },
+  {
+   "name": "GN: แบงก์ชาติ(BOT)",
+   "url": "https://news.google.com/rss/search?q=%E0%B9%81%E0%B8%9A%E0%B8%87%E0%B8%81%E0%B9%8C%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "poleco"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "match": "แบงก์ชาติ"
+  },
+  {
+   "name": "GN: ตลาดหลักทรัพย์(SET)",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%95%E0%B8%A5%E0%B8%B2%E0%B8%94%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%81%E0%B8%97%E0%B8%A3%E0%B8%B1%E0%B8%9E%E0%B8%A2%E0%B9%8C%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "poleco"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "match": "ตลาดหลักทรัพย์"
+  },
+  {
+   "name": "GN: 금값(Gold Traders Assoc.)",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%97%E0%B8%AD%E0%B8%87%20%E0%B8%AA%E0%B8%A1%E0%B8%B2%E0%B8%84%E0%B8%A1%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%97%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B8%B3%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "life"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "match": "ราคาทอง|สมาคมค้าทองคำ"
+  },
+  {
+   "name": "GN: กรมการค้าภายใน(DIT)",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%81%E0%B8%A3%E0%B8%A1%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "life"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "match": "กรมการค้าภายใน"
+  },
+  {
+   "name": "GN: 방짝 유가",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B8%88%E0%B8%B2%E0%B8%81%20%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "life"
+   ],
+   "language": "th",
+   "group": "official",
+   "verified": "2026-10-03",
+   "match": "บางจาก|ราคาน้ำมัน",
+   "note": "bangchak.co.th 는 봇 차단(Radware)"
+  },
+  {
+   "name": "GN: 무에타이 ONE",
+   "url": "https://news.google.com/rss/search?q=%E0%B8%A1%E0%B8%A7%E0%B8%A2%E0%B9%84%E0%B8%97%E0%B8%A2%20ONE%20when%3A1d&hl=th&gl=TH&ceid=TH:th",
+   "type": "gnews",
+   "topics": [
+    "ent"
+   ],
+   "language": "th",
+   "group": "ent-sports",
+   "verified": "2026-10-03",
+   "match": "มวยไทย|ONE"
+  },
+  {
+   "name": "GN(ko): 태국",
+   "url": "https://news.google.com/rss/search?q=%ED%83%9C%EA%B5%AD%20when%3A1d&hl=ko&gl=KR&ceid=KR:ko",
+   "type": "gnews",
+   "topics": [
+    "visa",
+    "poleco"
+   ],
+   "language": "ko",
+   "group": "korean",
+   "verified": "2026-10-03",
+   "match": "태국"
+  },
+  {
+   "name": "GN(ko): 파타야",
+   "url": "https://news.google.com/rss/search?q=%ED%8C%8C%ED%83%80%EC%95%BC%20when%3A1d&hl=ko&gl=KR&ceid=KR:ko",
+   "type": "gnews",
+   "topics": [
+    "pattaya"
+   ],
+   "language": "ko",
+   "group": "korean",
+   "verified": "2026-10-03",
+   "match": "파타야"
+  },
+  {
+   "name": "GN(ko): site:yna.co.kr 태국",
+   "url": "https://news.google.com/rss/search?q=site%3Ayna.co.kr%20%ED%83%9C%EA%B5%AD%20when%3A1d&hl=ko&gl=KR&ceid=KR:ko",
+   "type": "gnews",
+   "topics": [
+    "visa",
+    "poleco"
+   ],
+   "language": "ko",
+   "group": "korean",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "GN(ko): 태국 한국인",
+   "url": "https://news.google.com/rss/search?q=%ED%83%9C%EA%B5%AD%20%ED%95%9C%EA%B5%AD%EC%9D%B8%20when%3A1d&hl=ko&gl=KR&ceid=KR:ko",
+   "type": "gnews",
+   "topics": [
+    "visa"
+   ],
+   "language": "ko",
+   "group": "korean",
+   "verified": "2026-10-03",
+   "match": "태국|한국인"
+  },
+  {
+   "name": "GN(ko): 방콕 한국인",
+   "url": "https://news.google.com/rss/search?q=%EB%B0%A9%EC%BD%95%20%ED%95%9C%EA%B5%AD%EC%9D%B8%20when%3A1d&hl=ko&gl=KR&ceid=KR:ko",
+   "type": "gnews",
+   "topics": [
+    "visa"
+   ],
+   "language": "ko",
+   "group": "korean",
+   "verified": "2026-10-03",
+   "match": "방콕|한국인"
+  },
+  {
+   "name": "Air4Thai(PM2.5 공식)",
+   "url": "http://air4thai.pcd.go.th/webV3/",
+   "type": "html",
+   "topics": [
+    "weather"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "TLS 인증서 체인 불완전 — curl -k 로는 200. 수치 데이터(기사 아님)",
+   "insecure_tls": true
+  },
+  {
+   "name": "ThaiWater 국가물정보",
+   "url": "https://www.thaiwater.net/",
+   "type": "html",
+   "topics": [
+    "weather"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "수위·강수 데이터(JS 화면)"
+  },
+  {
+   "name": "BOT 환율·금리",
+   "url": "https://www.bot.or.th/th/statistics/exchange-rate.html",
+   "type": "html",
+   "topics": [
+    "poleco",
+    "life"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "데이터"
+  },
+  {
+   "name": "SET 증시",
+   "url": "https://www.set.or.th/th/home",
+   "type": "html",
+   "topics": [
+    "poleco"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "데이터"
+  },
+  {
+   "name": "EPPO 에너지정책(유가 구조)",
+   "url": "https://www.eppo.go.th/",
+   "type": "html",
+   "topics": [
+    "life"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "RSS 없음, GN 색인 적음"
+  },
+  {
+   "name": "Gold Traders Association 금값",
+   "url": "https://www.goldtraders.or.th/",
+   "type": "html",
+   "topics": [
+    "life"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "공시 금값"
+  },
+  {
+   "name": "DIT 상무부 내국무역국",
+   "url": "https://www.dit.go.th/",
+   "type": "html",
+   "topics": [
+    "life"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "물가 공지"
+  },
+  {
+   "name": "KOTRA 해외시장뉴스",
+   "url": "https://dream.kotra.or.kr/",
+   "type": "html",
+   "topics": [
+    "poleco"
+   ],
+   "language": "ko",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "태국·방콕 무역관 기사 — GN 색인 없음, 사이트에서 '태국' 검색"
+  },
+  {
+   "name": "Michelin Guide Thailand",
+   "url": "https://guide.michelin.com/th/en",
+   "type": "html",
+   "topics": [
+    "travel"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03"
+  },
+  {
+   "name": "TNA 태국통신(MCOT)",
+   "url": "https://tna.mcot.net/tna/th",
+   "type": "html",
+   "topics": [
+    "poleco",
+    "society"
+   ],
+   "language": "th",
+   "group": "manual",
+   "verified": "2026-10-03",
+   "note": "RSS 없음, GN site: 0건"
+  }
+ ]
+}
