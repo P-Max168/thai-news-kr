@@ -2080,6 +2080,262 @@
    },
    "info_date": "2026-10-03",
    "old": false
+  },
+  {
+   "id": "gmap-542561700181329832",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "ISUNG PATTAYA (Terminal 21)",
+   "kind": "한식당",
+   "cuisine": [],
+   "hours": "Sa 11:00-22:00",
+   "hours_partial": true,
+   "phone": "+66 82 996 5707",
+   "website": "https://instagram.com/isung.official",
+   "address": "Terminal21 Pattaya Soi 3, Muang Pattaya, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.949987,
+   "lng": 100.889337,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=542561700181329832",
+   "rating": "4.8",
+   "korean": true,
+   "kr": "Google 지도 종류: 한식당",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=542561700181329832",
+     "at": "2026-10-03"
+    },
+    "w": {
+     "by": "가게 공식 인스타그램",
+     "url": "https://instagram.com/isung.official",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "website": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-3882311736739486459",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "수북한 돼지국밥·기장미역국 (SooBukHan)",
+   "kind": "한식당(국밥)",
+   "cuisine": [],
+   "hours": "Sa 00:00-24:00",
+   "hours_partial": true,
+   "phone": "+66 92 982 4611",
+   "website": null,
+   "address": "Central Marina Unit 78/54 Pattaya City, Bang Lamung District, Chon Buri 20260",
+   "lat": 12.945417,
+   "lng": 100.889538,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=3882311736739486459",
+   "rating": "4.8",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=3882311736739486459",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-4499056270165041817",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "유락파타야 (Yurak Pattaya)",
+   "kind": "한식당",
+   "cuisine": [],
+   "hours": "Sa 11:00-22:00",
+   "hours_partial": true,
+   "phone": "+66 83 588 0707",
+   "website": null,
+   "address": "181 Pattaya 3rd Rd, Pattaya City, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.93735,
+   "lng": 100.893269,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=4499056270165041817",
+   "rating": "4.4",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=4499056270165041817",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-17020699151944794532",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Seoul Garden Korean BBQ",
+   "kind": "한식 바비큐",
+   "cuisine": [],
+   "hours": "Sa 11:00-22:00",
+   "hours_partial": true,
+   "phone": "+66 86 341 6404",
+   "website": null,
+   "address": "4, 6, Pong, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.920797,
+   "lng": 100.970604,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=17020699151944794532",
+   "rating": "4.6",
+   "korean": true,
+   "kr": "Google 지도 종류: 한식 바비큐",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=17020699151944794532",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-14998942299812612870",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Suwon Wang Galbi Pattaya (수원왕갈비)",
+   "kind": "한식당",
+   "cuisine": [],
+   "hours": "Sa 11:30-22:00",
+   "hours_partial": true,
+   "phone": "+66 80 251 7000",
+   "website": "https://www.facebook.com/people/%E0%B8%8B%E0%B8%B9%E0%B8%A7%E0%B8%AD%E0%B8%99%E0%B8%9E%E0%B8%B1%E0%B8%97%E0%B8%A2%E0%B8%B2-Suwon-Pattaya-%EC%88%98%EC%9B%90-%EC%99%95-%EA%B0%88%EB%B9%84-%ED%8C%8C%ED%83%80%EC%95%BC/100089789553489/",
+   "address": "8, 180 Moo6, Muang Pattaya, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.947757,
+   "lng": 100.899583,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=14998942299812612870",
+   "rating": "4.5",
+   "korean": true,
+   "kr": "Google 지도 종류: 한식당",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=14998942299812612870",
+     "at": "2026-10-03"
+    },
+    "w": {
+     "by": "가게 공식 페이스북",
+     "url": "https://www.facebook.com/people/%E0%B8%8B%E0%B8%B9%E0%B8%A7%E0%B8%AD%E0%B8%99%E0%B8%9E%E0%B8%B1%E0%B8%97%E0%B8%A2%E0%B8%B2-Suwon-Pattaya-%EC%88%98%EC%9B%90-%EC%99%95-%EA%B0%88%EB%B9%84-%ED%8C%8C%ED%83%80%EC%95%BC/100089789553489/",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "website": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-3917133116565016282",
+   "cat": "mart",
+   "cat_ko": "마트",
+   "name": "Jidubang Korean Market (지두방)",
+   "kind": "한인 마트",
+   "cuisine": [],
+   "hours": null,
+   "hours_partial": true,
+   "phone": null,
+   "website": null,
+   "address": "383, 2 Sukhumvit Rd, Tambon Nong Prue, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.935076,
+   "lng": 100.901135,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=3917133116565016282",
+   "rating": "4.7",
+   "korean": true,
+   "kr": "Google 지도 이름: Korean Market",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=3917133116565016282",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "address": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
   }
  ]
 }

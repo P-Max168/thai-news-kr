@@ -51,7 +51,7 @@ def g_addr(a):
     return ", ".join(parts) or None
 
 def clean_url(u):
-    return re.sub(r"[?&](mibextid|igsh|ref|_r|_t)=[^&]*", "", u).replace("&", "?", 1) if u and "?" not in re.sub(r"[?&](mibextid|igsh|ref|_r|_t)=[^&]*", "", u) else (re.sub(r"[?&](mibextid|igsh|ref|_r|_t)=[^&]*", "", u) if u else None)
+    return re.sub(r"[?&](mibextid|igshid|igsh|ref|_r|_t)=[^&]*", "", u).replace("&", "?", 1) if u and "?" not in re.sub(r"[?&](mibextid|igshid|igsh|ref|_r|_t)=[^&]*", "", u) else (re.sub(r"[?&](mibextid|igshid|igsh|ref|_r|_t)=[^&]*", "", u) if u else None)
 CUISINE = {"korean": "한식", "thai": "태국 음식", "italian": "이탈리아", "pizza": "피자", "japanese": "일식", "sushi": "초밥", "barbecue": "바비큐",
            "norwegian": "노르웨이", "coffee_shop": "커피", "ice_cream": "아이스크림", "breakfast": "아침 식사", "international": "여러 나라", "asian": "아시아", "seafood": "해산물", "cake": "케이크", "bakery": "빵"}
 KIND = {("amenity", "veterinary"): "동물병원", ("shop", "pet"): "펫샵", ("amenity", "motorcycle_rental"): "오토바이 렌탈", ("shop", "motorcycle"): "오토바이 판매·수리",
@@ -65,8 +65,10 @@ def korean():
     g = {x["cid"]: x for x in json.load(open(GRAW, encoding="utf-8"))["items"] if x.get("cid")}
     at = json.load(open(GRAW, encoding="utf-8"))["checked"]
     res = []
-    for cat, cid, name, kind, kr in json.load(open(GPICK, encoding="utf-8"))["pick"]:
-        x = g[cid]
+    for row in json.load(open(GPICK, encoding="utf-8"))["pick"]:
+        cat, cid, name, kind, kr = row[:5]
+        ov = row[5] if len(row) > 5 else {}   # 값이 서로 다르게 보인 칸은 여기서 null('확인 안 됨')로 — 이유는 _why
+        x = dict(g[cid]); [x.__setitem__(k2, v) for k2, v in ov.items() if not k2.startswith("_")]
         assert not x.get("closed"), (name, "폐업 표시")
         assert not BAD.search(name), name
         gurl = "https://maps.google.com/?cid=" + cid

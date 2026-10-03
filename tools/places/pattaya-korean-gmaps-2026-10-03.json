@@ -1,5 +1,5 @@
 {
- "_readme": "Google 지도(로그인 없이 보이는 '제한된 보기')에서 2026-10-03 방콕 시간 15:30~16:05 에 Playwright 로 읽은 값 그대로. 검색어=q, 열린 가게 페이지=url, cid=가게 고유번호(링크 https://maps.google.com/?cid=…). rows=그날(토요일) 영업시간 줄만 보임(다른 요일은 제한된 보기에서 안 열림). price 는 못 읽음(null). 사용 목록은 pattaya-korean-pick-2026-10-03.json.",
+ "_readme": "Google 지도(로그인 없이 보이는 '제한된 보기')에서 2026-10-03 방콕 시간 15:30~16:05 에 Playwright 로 읽은 값 그대로. 검색어=q, 열린 가게 페이지=url, cid=가게 고유번호(링크 https://maps.google.com/?cid=…). rows=그날(토요일) 영업시간 줄만 보임(다른 요일은 제한된 보기에서 안 열림). price 는 못 읽음(null). 사용 목록은 pattaya-korean-pick-2026-10-03.json. / 17:00 추가 검색 9곳(kd4) 같은 방법.",
  "checked": "2026-10-03",
  "method": "tools/places/README_korean.md",
  "items": [
@@ -556,6 +556,193 @@
    "cid": "6322427907024366961",
    "lat": 12.9483533,
    "lng": 100.8883035
+  },
+  {
+   "name": "ISUNG PATTAYA",
+   "cat": "Korean restaurant",
+   "addr": "Address: Terminal21 Pattaya Soi 3, Muang Pattaya, Bang Lamung District, Chon Buri 20150, Thailand ",
+   "phone": "Phone: +66 82 996 5707 ",
+   "web": "https://instagram.com/isung.official?igshid=NGVhN2U2NjQ0Yg==",
+   "rating": "4.8",
+   "price": null,
+   "closed": null,
+   "status": null,
+   "rows": [
+    "Saturday 11 AM–10 PM "
+   ],
+   "hoursAria": null,
+   "reviews": null,
+   "q": "ISUNG PATTAYA",
+   "url": "https://www.google.com/maps/place/ISUNG+PATTAYA/@12.93,100.88,13z/data=!4m6!3m5!1s0x3102bf4d2124e4a5:0x78790fde00a47a8!8m2!3d12.9499873!4d100.889337!16s%2Fg%2F11vd9s48mv?hl=en&entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D",
+   "cid": "542561700181329832",
+   "lat": 12.9499873,
+   "lng": 100.889337
+  },
+  {
+   "name": "Results",
+   "cat": "Rice restaurant",
+   "addr": "Address: Central Marina Unit 78/54 Pattaya City, Bang Lamung District, Chon Buri 20260, Thailand ",
+   "phone": "Phone: +66 92 982 4611 ",
+   "web": null,
+   "rating": "4.8",
+   "price": null,
+   "closed": null,
+   "status": "Open 24 hours",
+   "rows": [
+    "Saturday Open 24 hours "
+   ],
+   "hoursAria": null,
+   "reviews": null,
+   "q": "SooBukHan 수북한 돼지국밥 파타야",
+   "url": "https://www.google.com/maps/place/SooBukHan+%EC%88%98%EB%B6%81%ED%95%9C+%EB%8F%BC%EC%A7%80%EA%B5%AD%EB%B0%A5%E2%96%AA%EF%B8%8E%EA%B8%B0%EC%9E%A5%EB%AF%B8%EC%97%AD%EA%B5%AD/@12.9454169,100.8174405,13z/data=!4m10!1m2!2m1!1zU29vQnVrSGFuIOyImOu2ge2VnCDrj7zsp4Dqta3rsKUg7YyM7YOA7JW8!3m6!1s0x3102bd11ead264e9:0x35e0bdf487afdafb!8m2!3d12.9454169!4d100.8895383!15sCipTb29CdWtIYW4g7IiY67aB7ZWcIOuPvOyngOq1reuwpSDtjIztg4DslbxaLiIsc29vYnVraGFuIOyImCDrtoHtlZwg64-87KeAIOq1reuwpSDtjIztg4DslbySAQ9yaWNlX3Jlc3RhdXJhbnTgAQA!16s%2Fg%2F11w9hl487j?hl=en&entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D",
+   "cid": "3882311736739486459",
+   "lat": 12.9454169,
+   "lng": 100.8895383
+  },
+  {
+   "name": "yurak pattaya 유락파타야",
+   "cat": "한식당",
+   "addr": "Address: ตำบล, 181 Pattaya 3rd Rd, Pattaya City, Bang Lamung District, Chon Buri 20150, Thailand ",
+   "phone": "Phone: +66 83 588 0707 ",
+   "web": null,
+   "rating": "4.4",
+   "price": null,
+   "closed": null,
+   "status": null,
+   "rows": [
+    "Saturday 11 AM–10 PM "
+   ],
+   "hoursAria": null,
+   "reviews": null,
+   "q": "yurak pattaya 유락파타야",
+   "url": "https://www.google.com/maps/place/yurak+pattaya+%EC%9C%A0%EB%9D%BD%ED%8C%8C%ED%83%80%EC%95%BC/@12.93,100.88,13z/data=!4m6!3m5!1s0x310295f03929265d:0x3e6fdbd737ae6299!8m2!3d12.9373502!4d100.8932692!16s%2Fg%2F11bw7fq5br?hl=en&entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D",
+   "cid": "4499056270165041817",
+   "lat": 12.9373502,
+   "lng": 100.8932692
+  },
+  {
+   "name": "Seoul Garden Korean BBQ",
+   "cat": "Korean barbecue restaurant",
+   "addr": "Address: 4, 6, Pong, Bang Lamung District, Chon Buri 20150, Thailand ",
+   "phone": "Phone: +66 86 341 6404 ",
+   "web": null,
+   "rating": "4.6",
+   "price": null,
+   "closed": null,
+   "status": null,
+   "rows": [
+    "Saturday 11 AM–10 PM "
+   ],
+   "hoursAria": null,
+   "reviews": null,
+   "q": "Seoul Garden Korean BBQ Pattaya",
+   "url": "https://www.google.com/maps/place/Seoul+Garden+Korean+BBQ/@12.93,100.88,13z/data=!4m6!3m5!1s0x31029783c18325f9:0xec35abb2fc7641a4!8m2!3d12.9207966!4d100.9706043!16s%2Fg%2F11n3pd8jq1?hl=en&entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D",
+   "cid": "17020699151944794532",
+   "lat": 12.9207966,
+   "lng": 100.9706043
+  },
+  {
+   "name": "Suwon Wang Galbi Pattaya Korean Restaurant",
+   "cat": "Korean restaurant",
+   "addr": "Address: 8, 180 Moo6, Muang Pattaya, Bang Lamung District, Chon Buri 20150, Thailand ",
+   "phone": "Phone: +66 80 251 7000 ",
+   "web": "https://www.facebook.com/people/%E0%B8%8B%E0%B8%B9%E0%B8%A7%E0%B8%AD%E0%B8%99%E0%B8%9E%E0%B8%B1%E0%B8%97%E0%B8%A2%E0%B8%B2-Suwon-Pattaya-%EC%88%98%EC%9B%90-%EC%99%95-%EA%B0%88%EB%B9%84-%ED%8C%8C%ED%83%80%EC%95%BC/100089789553489/",
+   "rating": "4.5",
+   "price": null,
+   "closed": null,
+   "status": null,
+   "rows": [
+    "Saturday 11:30 AM–10 PM "
+   ],
+   "hoursAria": null,
+   "reviews": null,
+   "q": "Suwon Wang Galbi Pattaya Korean Restaurant",
+   "url": "https://www.google.com/maps/place/Suwon+Wang+Galbi+Pattaya+Korean+Restaurant/@12.93,100.88,13z/data=!4m6!3m5!1s0x3102bfb38aebcad5:0xd026f28dcae94b06!8m2!3d12.9477565!4d100.8995828!16s%2Fg%2F11tjzpnj6n?hl=en&entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D",
+   "cid": "14998942299812612870",
+   "lat": 12.9477565,
+   "lng": 100.8995828
+  },
+  {
+   "name": "Results",
+   "cat": "Japanese restaurant",
+   "addr": "Address: 221/54 ถนนพัทยาสาย 3, ซอย 1, Pattaya City, Bang Lamung District, Chon Buri 20150, Thailand ",
+   "phone": "Phone: +66 88 648 9998 ",
+   "web": "http://www.facebook.com/harujpbuffet",
+   "rating": "4.6",
+   "price": null,
+   "closed": null,
+   "status": "Open · Closes 9 PM",
+   "rows": [
+    "Saturday 12–9 PM "
+   ],
+   "hoursAria": null,
+   "reviews": null,
+   "q": "하루한식 HARU HANSIK Pattaya",
+   "url": "https://www.google.com/maps/place/Haru+Japanese+buffet/@12.9487291,100.8220674,13z/data=!4m10!1m2!2m1!1z7ZWY66Oo7ZWc7IudIEhBUlUgSEFOU0lLIFBhdHRheWE!3m6!1s0x3102bf0c7199b44b:0xd34f9e1609ba5ce7!8m2!3d12.9487291!4d100.8941652!15sCiDtlZjro6jtlZzsi50gSEFSVSBIQU5TSUsgUGF0dGF5YVojIiHtlZjro6gg7ZWc7IudIGhhcnUgaGFuc2lrIHBhdHRheWGSARNqYXBhbmVzZV9yZXN0YXVyYW50mgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVVJvTXkxRVFXdEJSUkFC4AEA-gEECA8QDQ!16s%2Fg%2F11gnq7sbbf?hl=en&entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D",
+   "cid": "15226562682652613863",
+   "lat": 12.9487291,
+   "lng": 100.8941652
+  },
+  {
+   "name": "Results",
+   "cat": "Korean restaurant",
+   "addr": "Address: 1988 POCHA 5RD.SIRACHANAKON 5, Si Racha, Si Racha District, Chon Buri 20110, Thailand ",
+   "phone": "Phone: +66 83 153 0690 ",
+   "web": null,
+   "rating": "4.7",
+   "price": null,
+   "closed": null,
+   "status": "Open · Closes 12 AM",
+   "rows": [
+    "Saturday 2 PM–12 AM "
+   ],
+   "hoursAria": null,
+   "reviews": null,
+   "q": "1988포차 1988POCHA Pattaya",
+   "url": "https://www.google.com/maps/place/1988%ED%8F%AC%EC%B0%A8(1988POCHA)/@13.1678676,100.8567949,13z/data=!4m10!1m2!2m1!1zMTk4OO2PrOywqCAxOTg4UE9DSEEgUGF0dGF5YQ!3m6!1s0x3102b79070c03705:0x164e9ca135e7dba7!8m2!3d13.1678676!4d100.9288927!15sChwxOTg47Y-s7LCoIDE5ODhQT0NIQSBQYXR0YXlhWh8iHTE5ODgg7Y-s7LCoIDE5ODhwb2NoYSBwYXR0YXlhkgERa29yZWFuX3Jlc3RhdXJhbnSaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjB4VEZGVlJrZE5TR013WkZSVmVGRnRVbTFhU0doclVUTm9kbUV5WXhBQuABAPoBBAgAECo!16s%2Fg%2F11y8sqnlpc?hl=en&entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D",
+   "cid": "1607394333225900967",
+   "lat": 13.1678676,
+   "lng": 100.9288927
+  },
+  {
+   "name": "Results",
+   "cat": "Grocery store",
+   "addr": "Address: 9/9 Moo10, 2F The Chilled Shopping Mall, Bang Lamung District, Chon Buri 20150, Thailand ",
+   "phone": "Phone: +66 98 565 6951 ",
+   "web": "https://www.facebook.com/search/top/?q=newkoreamart",
+   "rating": "4.0",
+   "price": null,
+   "closed": "Permanently closed",
+   "status": "Open · Closes 8:30 PM · +66 98 565 6951",
+   "rows": [
+    "Saturday 10 AM–8:30 PM "
+   ],
+   "hoursAria": null,
+   "reviews": null,
+   "q": "NewKoreaMart Pattaya",
+   "url": "https://www.google.com/maps/place/NewKoreaMart/@12.9226517,100.8388547,13z/data=!4m10!1m2!2m1!1sNewKoreaMart+Pattaya!3m6!1s0x3102953ef13a83fd:0xaf6bad4f13e1f544!8m2!3d12.9226517!4d100.9109525!15sChROZXdLb3JlYU1hcnQgUGF0dGF5YVoWIhRuZXdrb3JlYW1hcnQgcGF0dGF5YZIBDWdyb2Nlcnlfc3RvcmXgAQA!16s%2Fg%2F11sy919c0h?hl=en&entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D",
+   "cid": "12640387334293026116",
+   "lat": 12.9226517,
+   "lng": 100.9109525
+  },
+  {
+   "name": "Results",
+   "cat": "Grocery store",
+   "addr": "Address: 383, 2 Sukhumvit Rd, Tambon Nong Prue, Bang Lamung District, Chon Buri 20150, Thailand ",
+   "phone": "Phone: +66 95 763 1650 ",
+   "web": null,
+   "rating": "4.7",
+   "price": null,
+   "closed": null,
+   "status": "Open · Closes 9 PM · +66 91 830 7365",
+   "rows": [],
+   "hoursAria": null,
+   "reviews": null,
+   "q": "Jidubang Korean Market Pattaya",
+   "url": "https://www.google.com/maps/place/Jidubang+Korean+Market/@12.9350762,100.829037,13z/data=!4m10!1m2!2m1!1sJidubang+Korean+Market+Pattaya!3m6!1s0x310295001e407d75:0x365c73d0cec6ceda!8m2!3d12.9350762!4d100.9011348!15sCh5KaWR1YmFuZyBLb3JlYW4gTWFya2V0IFBhdHRheWFaICIeamlkdWJhbmcga29yZWFuIG1hcmtldCBwYXR0YXlhkgENZ3JvY2VyeV9zdG9yZZoBJENoZERTVWhOTUc5blMwVlFhVkpuUzFoRU1GQk1UbTFCUlJBQuABAPoBBAgAEDU!16s%2Fg%2F11vzcdgf31?hl=en&entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D",
+   "cid": "3917133116565016282",
+   "lat": 12.9350762,
+   "lng": 100.9011348
   }
  ]
 }
