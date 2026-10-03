@@ -1,0 +1,3 @@
+- 바뀐 것: ③a 2단계 시작 화면 보류: 스위치(assets/topics.js OB2=false)로 끄고 예전 '어떤 분이세요?'·예전 내 피드로 되돌림. '✏️ 내 피드 바꾸기' 메뉴 숨김. 하트는 그대로. 새 화면을 거친 사용자는 예전 페르소나로 조용히 옮김(원래 값은 이 기기에 보관). 켜진 상태는 브랜치 feature/onboarding-2step
+- 왜: 민구님 직접 답변 '시작 화면은 아직 보류'(앞서 전달받은 승인보다 우선)
+- 되돌리는 법: `git checkout backup-20261003-1406-onboarding-hold -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
