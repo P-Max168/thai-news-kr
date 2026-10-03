@@ -1,0 +1,3 @@
+- 바뀐 것: ⑤ 앱 포장 준비 — 휴대폰 뒤로 버튼 = 서랍·설정 창·❤️/📊/✅ 페이지·📍 내 주변 닫기(앱이 바로 안 꺼짐), 오프라인 안내 offline.html, 노치 여백(헤더·맨 위로·푸터), manifest 바로가기 2개(❤️·📍), APP_PACKAGING.md(PWABuilder TWA·Capacitor·비용)
+- 왜: 앱 가게용 포장(Android TWA·Capacitor)에 필요한 뒤로 버튼·오프라인·노치·아이콘 조건을 미리 갖추려고(리뷰어 순서 6)
+- 되돌리는 법: `git checkout backup-20261003-1501-app-pack -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
