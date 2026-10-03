@@ -65,7 +65,7 @@ def gold_gta():
     at = datetime.fromisoformat(at).replace(tzinfo=BKK).isoformat(timespec="seconds")
     return dict(bar_sell=sell, bar_buy=buy, change=d.get("priceChangeFromPrevRow"), round=d.get("priceSeq") or d.get("seq"),
                 announced_at=at, unit="금괴 96.5% · 1바트(15.244 g)",
-                source="태국 금 거래상 협회 (สมาคมค้าทองคำ)", url="https://www.goldtraders.or.th/")
+                source="태국 금거래상협회(Gold Traders Association)", url="https://www.goldtraders.or.th/")
 
 
 def _be_date(dmy, hm="00:00"):  # '01/10/2569' (불기) + '21:15' → ISO(+07:00)
@@ -96,7 +96,12 @@ def fuel_bangchak():
     o = g95[0]; price = float(o["PriceToday"])
     if not (15 < price < 100):
         raise ValueError("유가 값 이상: %r" % price)
-    return dict(gasohol95=price, name=o["OilName"], yesterday=o.get("PriceYesterday"), tomorrow=o.get("PriceTomorrow"),
+    # 화면에 태국 글자를 보이지 않게(운영자 요청 10-03): name = 한국어+로마자, 원래 이름은 name_th(화면에 안 씀)
+    name = o["OilName"].replace("แก๊สโซฮอล์", "가소홀").strip()
+    name = (name if "가소홀" in name else "가소홀 95 " + name) + "(Gasohol 95)"
+    import re as _re
+    name = _re.sub(r"\s*[\u0E00-\u0E7F]+\s*", " ", name).strip()
+    return dict(gasohol95=price, name=name, name_th=o["OilName"], yesterday=o.get("PriceYesterday"), tomorrow=o.get("PriceTomorrow"),
                 feed_date=_be_date(d["OilDateNow"]), announced_at=_be_date(d["OilPriceDate"], d.get("OilPriceTime")),
                 effective=d.get("OilRemark2"), effective_at=_th_effective(d.get("OilRemark2")), note="방콕 소매가(방콕 지방세 미포함)",
                 source="방짝(Bangchak) 유가 공지", url="https://www.bangchak.co.th/th/oilprice")

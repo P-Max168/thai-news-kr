@@ -21,6 +21,13 @@
   var WX_TTL = 30 * 60e3, AQ_TTL = 60 * 60e3;
   var st = { tk: null, wx: null, aq: null };
 
+  // 화면에 태국 글자 금지(운영자 요청 10-03): 데이터에서 온 글은 알려진 이름을 한국어+로마자로 바꾸고, 남은 태국 글자(괄호째)는 지움
+  var TH_KO = [[/태국 금 거래상 협회\s*\(สมาคมค้าทองคำ\)|สมาคมค้าทองคำ/g, "태국 금거래상협회(Gold Traders Association)"],
+               [/แก๊สโซฮอล์\s*95\s*S\s*EVO/g, "가소홀 95 S EVO(Gasohol 95)"], [/แก๊สโซฮอล์/g, "가소홀"]];
+  function noTh(x) {
+    var s = String(x == null ? "" : x); TH_KO.forEach(function (r) { s = s.replace(r[0], r[1]); });
+    return s.replace(/\s*\([^)]*[\u0E00-\u0E7F][^)]*\)/g, "").replace(/[\u0E00-\u0E7F]+/g, "").replace(/\s{2,}/g, " ").trim();
+  }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function ls(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem(k) || "null"); localStorage.setItem(k, JSON.stringify(v)); } catch (e) { return null; } }
   function ms(iso) { var t = iso ? new Date(iso).getTime() : NaN; return isFinite(t) ? t : 0; }
@@ -168,7 +175,7 @@
   document.body.appendChild(pop);
   var lastBtn = null;
   function src(name, url, lines) {
-    return '<p class="tk-pop__src">' + lines.map(esc).join("<br>") + '<br>출처: <a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(name) + " ↗</a></p>";
+    return '<p class="tk-pop__src">' + lines.map(function (l) { return esc(noTh(l)); }).join("<br>") + '<br>출처: <a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(noTh(name)) + " ↗</a></p>";
   }
   function part(k) {
     var f = fxOK(), u = usdtOK(), w = wxOK(), g = goldOK(), a = aqOK(), o = fuelOK();
@@ -194,7 +201,7 @@
     }
     if (k === "gold" && g) {
       var krw = f ? Math.round(g.bar_sell * f.THB_KRW) : null;
-      return "<b class=\"tk-pop__t\">태국 금시세</b><p class=\"tk-pop__note\">" + esc(g.unit) + " 기준</p><p>판매 <b>" + n0(g.bar_sell) + "바트</b>" + (krw ? " (약 " + n0(krw) + "원)" : "") +
+      return "<b class=\"tk-pop__t\">태국 금시세</b><p class=\"tk-pop__note\">" + esc(noTh(g.unit)) + " 기준</p><p>판매 <b>" + n0(g.bar_sell) + "바트</b>" + (krw ? " (약 " + n0(krw) + "원)" : "") +
         " · 매입 " + n0(g.bar_buy) + "바트" + (typeof g.change === "number" && g.change ? " · 직전 대비 " + (g.change > 0 ? "▲" : "▼") + n0(Math.abs(g.change)) : "") + "</p>" +
         src(g.source, g.url, ["협회 발표 " + when(g.announced_at) + (g.round ? " · 그날 " + g.round + "번째 발표" : "") + " (주말·공휴일엔 발표 없음)",
           "받아 온 시각 " + when(g.fetched_at) + (krw ? " · 원화는 위 환율로 환산(정수 반올림)" : "")]);
@@ -207,7 +214,7 @@
     }
     if (k === "fuel" && o) return "<b class=\"tk-pop__t\">⛽ 휘발유 가격 — 가소홀 95</b><p>리터당 <b>" + n2(o.gasohol95) + "바트</b>" +
       (f ? " (약 " + n0(o.gasohol95 * f.THB_KRW) + "원)" : "") + (typeof o.yesterday === "number" && o.yesterday !== o.gasohol95 ? " · 어제 " + n2(o.yesterday) + "바트" : "") + "</p>" +
-      '<p class="tk-pop__note">' + esc(o.name) + " · " + esc(o.note) + "</p>" +
+      '<p class="tk-pop__note">' + esc(noTh(o.name)) + " · " + esc(noTh(o.note)) + "</p>" +
       src(o.source, o.url, ["가격 공지 " + when(o.announced_at) + (o.effective_at ? " · 적용 " + when(o.effective_at) + "부터" : ""), "받아 온 시각 " + when(o.fetched_at) + " · 주유소·지역마다 조금씩 다름"]);
     return "";
   }
