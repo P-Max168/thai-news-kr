@@ -16,16 +16,17 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="태국뉴스">
+<!-- 속도: 판 목록(작음)을 먼저 받고, 최신 판 데이터는 앱 코드와 동시에 받기 시작(app.js 가 이 태그를 그대로 씀) -->
+<script src="data/index.js"></script>
+<script>(function(){try{var m=/[?&](?:e|ed|date)=([^&#]*)/.exec(location.search),id=m?decodeURIComponent(m[1]):(window.NEWS_INDEX||{}).latest;if(!id||!/^\d{4}-\d{2}-\d{2}-(am|pm|early)$/.test(id))return;var s=document.createElement("script");s.id="tnkData";s.async=true;s.src="data/"+id+".js";s.setAttribute("data-ed",id);s.onload=function(){s.setAttribute("data-done","1")};s.onerror=function(){s.setAttribute("data-done","err")};document.head.appendChild(s)}catch(e){}})();</script>
+<!-- 속도(2026-10-03): 글꼴(Pretendard, 첫 방문 약 700KB)은 화면을 막지 않게 — 처음 오신 분은 기기 기본 글꼴로 바로 보이고 페이지가 다 뜬 뒤 받음,
+     한 번 받은 기기(tnk.font=1)는 캐시에서 바로 적용. 태국 글꼴은 화면에 태국 문자가 없어 뺌 -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<!-- 속도(2026-10-03): 글꼴 CSS 는 화면을 막지 않게 나중에 적용(먼저 기기 기본 글꼴로 바로 보이고, Pretendard 가 오면 바뀜). 태국 글꼴은 화면에 태국 문자가 없어 뺌 -->
-<link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" crossorigin onload="this.onload=null;this.rel='stylesheet'">
+<script>(function(){var u="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css";function add(){var l=document.createElement("link");l.rel="stylesheet";l.href=u;l.crossOrigin="anonymous";l.onload=function(){try{localStorage.setItem("tnk.font","1")}catch(e){}};document.head.appendChild(l)}var seen=false;try{seen=localStorage.getItem("tnk.font")==="1"}catch(e){}if(seen)add();else addEventListener("load",function(){setTimeout(add,300)})})();</script>
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"></noscript>
 <link rel="stylesheet" href="assets/style.css?v=fa4e3008">
 <link rel="stylesheet" href="assets/nearby.css?v=997305cd">
 <link rel="stylesheet" href="assets/ads/massage/dragon-ad.css?v=7a850b03">
-<!-- 속도: 판 목록(작음)을 먼저 받고, 최신 판 데이터는 앱 코드와 동시에 받기 시작(app.js 가 이 태그를 그대로 씀) -->
-<script src="data/index.js"></script>
-<script>(function(){try{var m=/[?&](?:e|ed|date)=([^&#]*)/.exec(location.search),id=m?decodeURIComponent(m[1]):(window.NEWS_INDEX||{}).latest;if(!id||!/^\d{4}-\d{2}-\d{2}-(am|pm|early)$/.test(id))return;var s=document.createElement("script");s.id="tnkData";s.async=true;s.src="data/"+id+".js";s.setAttribute("data-ed",id);s.onload=function(){s.setAttribute("data-done","1")};s.onerror=function(){s.setAttribute("data-done","err")};document.head.appendChild(s)}catch(e){}})();</script>
 </head>
 <body>
 <header class="masthead">
