@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""trends24.in(태국) X 트렌드 수집 + 성인·선정적 태그 필터.
+"""DEPRECATED: X trend collection is disabled; historical raw files are retained.
 
   python3 tools/fetch_trends.py <판 id> [개수=15]
     → raw/<판 id>/trends/trends24-<HHMM>.html 저장(원본)
@@ -28,6 +28,8 @@ def parse(h):
 
 
 def main():
+    raise SystemExit("X 트렌드 수집은 중단되었습니다. 기존 raw/<id>/trends 자료만 보존합니다.")
+
     eid = sys.argv[1]
     n = int(sys.argv[2]) if len(sys.argv) > 2 else 15
     out = newslib.ROOT / "raw" / eid / "trends"

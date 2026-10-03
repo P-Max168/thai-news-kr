@@ -2,7 +2,7 @@
 """라이브(GitHub Pages) 페이지가 최신 판을 보여주는지 헤드리스 브라우저로 확인.
 
   python3 tools/verify_live.py [URL] [기대하는 판 id] [스크린샷 경로]
-첫 방문 온보딩('어떤 분이세요?') → '파타야 거주자' 선택 → 내 피드·외국인·비자 탭·트렌드·PWA(manifest·서비스 워커) 확인.
+첫 방문 온보딩('어떤 분이세요?') → '파타야 거주자' 선택 → 내 피드·외국인·비자 탭·X 트렌드 제거·PWA(manifest·서비스 워커) 확인.
 성공 시 exit 0, 실패 시 exit 1.
 """
 import asyncio, sys, json, pathlib, time
@@ -59,10 +59,7 @@ async def main():
           robots: (document.querySelector('meta[name=robots]')||{}).content,
           scroll: [document.documentElement.scrollWidth, window.innerWidth],
           visaStories: st.filter(s=>TNTopics.storyTopics(s).all.includes('visa')).length,
-          trendItems: document.querySelectorAll('#trendList li').length,
-          trendKo: document.querySelectorAll('#trendList .tr-ko').length,
-          trendInMain: !!document.querySelector('#trendBottom #trendWidget'),
-          trendShown: [...document.querySelectorAll('#trendList li')].filter(l=>l.offsetParent!==null).length,
+          xtrendGone: !document.querySelector('#trendWidget,#trendBottom,#trendList,#trendMore,#trendNote'),
           loginBtn: !!document.querySelector('#acct [data-login], #acct [data-acct-menu]'),
           korea: document.querySelectorAll('#korea .korea__list li').length,
           koreaShown: [...document.querySelectorAll('#korea .korea__list li')].filter(l=>l.offsetParent!==null).length,
@@ -78,6 +75,7 @@ async def main():
             await pg.click("#menuBtn")                 # ☰ 서랍 메뉴
             await pg.wait_for_timeout(400)
             info["drawer"] = await pg.evaluate("document.getElementById('drawer').classList.contains('is-open')")
+            info["drawerXtrendGone"] = await pg.evaluate("!/X\\s*트렌드|실시간 트렌드/.test(document.getElementById('drawer').innerText)")
             await pg.screenshot(path=SHOT.replace(".png", "-drawer.png"))
             await pg.click('#tabs [data-tab="visa"]')
             await pg.wait_for_timeout(500)
@@ -93,11 +91,8 @@ async def main():
           and info["tabs"][:1] == ["feed"] and info["tabs"][-1:] == ["all"]
           and (info["selected"] in (None, WANT)) and not errors and info["onboarding"]
           and info.get("visaCards", 0) == info["visaStories"]          # 외국인·비자 탭 렌더 확인
-          and info["trendInMain"]                                       # 트렌드가 페이지 맨 아래(#trendBottom)
-          and info["trendShown"] <= 3 and info["loginBtn"] and info.get("drawer")   # 트렌드 처음 3개 · 로그인 버튼 · ☰ 서랍
+          and info["xtrendGone"] and info.get("drawerXtrendGone") and info["loginBtn"] and info.get("drawer")
           and info["sw"] is True and isinstance(info["manifest"], dict) and info["manifest"]["ok"])
-    if info["trendItems"] and not info["trendKo"]:
-        print("경고: 트렌드에 한국어 풀이가 없음(옛 형식 문자열 목록) — README '트렌드' 절차 확인")
     print("OK" if ok else "FAIL (want %s)" % WANT)
     return 0 if ok else 1
 

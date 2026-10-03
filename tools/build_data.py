@@ -5,7 +5,7 @@
   python3 tools/build_data.py                                   # index 만 다시 만들기
 
 새 판을 만들 때는 tools/editions/<YYYY-MM-DD>-am.py (또는 -pm.py)를 새로 만들고
-(기존 파일을 복사해 stories/briefing/highlights/trends 교체) 위 명령으로 실행한다.
+(기존 파일을 복사해 stories/briefing/highlights 교체; X 트렌드는 수집·생성하지 않음) 위 명령으로 실행한다.
 파일 이름 규칙과 검증 규칙은 tools/newslib.py 참고.
 """
 import sys, runpy, pathlib

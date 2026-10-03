@@ -404,35 +404,6 @@ korea_top = [
   KR("황인범 \"도와줄 사람이 없어요\"…한국 대표팀 중심의 호소", "연합뉴스", "https://www.yna.co.kr/view/AKR20261002185800007", "2026-10-02T21:34:49+07:00"),
 ]
 
-T = lambda tag, ko, desc, verified=True: dict(tag=tag, ko=ko, desc=desc, verified=verified)
-trends = dict(
-  source="trends24.in (X/트위터 태국 트렌드)", url="https://trends24.in/thailand/",
-  fetched="2026-10-03T07:17:13+07:00", block="2026-10-03T06:54:32+07:00", filtered=0,
-  note="10월 3일 06:54(BKK) 집계 상위 10개. GMMTV 팬 행사·BL/GL 드라마 회차·파리 패션위크 태국 배우 응원이 중심.",
-  items=[
-    T("#GMMTVFANIVAL2026HappyFamily", "GMMTV 패니발 2026 해피 패밀리",
-      "GMMTV 연례 팬 페어(10/1~13, 유니언홀). 무료 입장·팬사인·굿즈. 행사 기간 응원 태그"),
-    T("KENG NAMPING IN PARIS FW27", " conserv·남핑 파리 패션위크",
-      "배우  conserv 하릿(Keng Harit)·남핑 나팟사꼰(Namping)이 10/1 스키아파렐리(Schiaparelli) 2027 S/S 쇼 관람. 흑·백 룩으로 화제"),
-    T("#PlsLoveรักได้ไหมEP4", "플리즈 러브(사랑해도 될까) 4화",
-      "채널3 금요 드라마 'PLS Love' 4화(10/2 방송) 실시간 시청 태그. 레나·미우 주연 GL"),
-    T("LENAMIU PLS LOVE EP4", "레나·미우 × 플리즈 러브 4화",
-      "같은 드라마 주연 레나(Lena)·미우(Natsha) 커플 팬덤 태그"),
-    T("#เมคเฟรนรอเทรนด์อู่อู๋เซฟ", "메크프렌, 트렌드 기다리는 우우 세이프",
-      "정확한 드라마·행사 연결을 찾지 못함", False),
-    T("#DAY_OFF_IN_BANGKOK", "데이 오프 인 방콕",
-      "방콕 관련 팬·여행 태그로 보이나 특정 행사·드라마 확정 못 함", False),
-    T("#WEIRDO101SeriesEP8", "위어도-101 8화",
-      "GMMTV 학원 BL 'WEIRDO-101' 8화. 10/2 20:30 one31 방송"),
-    T("SHINING LOVE IN THE HEART", "마음속에 빛나는 사랑",
-      "어떤 팬덤·행사 태그인지 찾지 못함", False),
-    T("KONGJIRO GRAD DAY", "콩지로 졸업 데이",
-      "배우 콩 콩폽(Kong Kongpob) 출라롱꼰대 공학부 졸업 기념. 팬미팅은 10/18 예정 보도"),
-    T("WILLIAMEST WESLEY HAPPYFAM", "윌리엄·에스트 × 웨슬리 해피패밀리",
-      "GMMTV 배우 윌리엄·에스트 팬 태그. Fanival Happy Family 연계. 'Wesley' 정체는 확인 안 됨"),
-  ],
-)
-
 data = dict(
   id="2026-10-03-am", date="2026-10-03", edition="am", edition_label="아침판",
   weekday="토요일", timezone="Asia/Bangkok (UTC+7)",
@@ -441,7 +412,7 @@ data = dict(
   previous="2026-10-02-pm",
   briefing=briefing,
   highlights=["wt1", "pe1", "vi1"],
-  stories=stories, trends=trends, korea_top=korea_top,
+  stories=stories, korea_top=korea_top,
   fx=dict(THB_KRW=40.44, note="1바트 = 40.44원(이 판의 모든 원화 환산에 사용, 정수로 반올림)",
           source="open.er-api.com (2026-10-03 07:16 BKK 기준, 공시 40.4429 → 판 환율 40.44)"),
 )

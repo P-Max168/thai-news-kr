@@ -3,10 +3,11 @@
 태국 현지 언론(가능하면 태국어 원문)을 자연스러운 한국어로 옮겨 요약한 정적 뉴스 포털입니다. 태국에 사는 한국인(파타야·시라차·방콕)과 여행객에게 공유하는 개인 프로젝트.
 
 > **2026-10-03 개편(새 형식)**: 주제 10개 + 보조 주제 + 키워드 태그, 첫 방문 '어떤 분이세요?' 온보딩, 브리핑 글머리표 목록, 👍👎 취향 학습, PWA(홈 화면 앱·오프라인). **정기 실행은 아래 '기사 스키마'의 새 형식으로 판을 만든다**(템플릿: `tools/editions/_template.py`). 옛 판(10월 2일 저녁판까지)은 그대로 두고 화면에서 매핑해 렌더한다.
+> **2026-10-03 X 트렌드 종료**: X 트렌드 상자·메뉴/앵커·렌더링·공유 카드 출력을 모두 제거했다. 새 판은 트렌드를 수집하거나 `trends`를 만들지 않는다. 옛 판의 `trends` 필드는 호환을 위해 데이터에 남아도 검증·화면·공유 키트에서 무시한다. 전용 수집기 `tools/fetch_trends.py`는 비활성화했고 기존 `raw/` 자료는 보존한다.
 
-> **2026-10-03 새벽 추가**: ☰ 왼쪽 서랍 메뉴(주제 탭 줄 대신 — 탭 줄 자리는 일부러 비워 둠), 선택 기능 **Google 로그인**(설정·취향 동기화), **댓글**(Firestore), 💬 오늘의 질문(정적, 운영자 승인 후), 🇰🇷 오늘의 한국 주요 뉴스(`korea_top`), 광고 자리 목업(`data/ads.json`), 홈 화면 추가 안내 개선, 취향 버튼 문구('이런 소식 더 볼래요?' 🙌 더 보여줘 / 🙅 덜 보여줘), X 트렌드 3→5→10개. **로그인은 선택**: 안 해도(또는 Firebase 를 못 불러와도) 모든 기능이 예전처럼 동작.
+> **2026-10-03 새벽 추가**: ☰ 왼쪽 서랍 메뉴(주제 탭 줄 대신 — 탭 줄 자리는 일부러 비워 둠), 선택 기능 **Google 로그인**(설정·취향 동기화), **댓글**(Firestore), 💬 오늘의 질문(정적, 운영자 승인 후), 🇰🇷 오늘의 한국 주요 뉴스(`korea_top`), 광고 자리 목업(`data/ads.json`), 홈 화면 추가 안내 개선, 취향 버튼 문구('이런 소식 더 볼래요?' 🙌 더 보여줘 / 🙅 덜 보여줘). **로그인은 선택**: 안 해도(또는 Firebase 를 못 불러와도) 모든 기능이 예전처럼 동작.
 
-> **2026-10-03 아침 추가**: 🇰🇷 한국 주요 뉴스가 **판과 따로 2시간마다(하루 12번) 자동 갱신**된다 — GitHub Actions `.github/workflows/korea.yml` 이 `tools/fetch_korea.py --standalone` 으로 `data/korea.json`(+`data/korea.js`)을 만들어 커밋. 화면은 **순위 TOP 10: 3건 → '펼치기' 5건 → 10건 → '접기'**(같은 날 헤더 개편 때 4+6 에서 바꿈, 5위·6위 사이 작은 광고 `korea-mid`), 제목 옆 '업데이트 HH:MM'(방콕). 🔥 태국 X 트렌드 상자는 모든 화면에서 **페이지 맨 아래**(모든 기사 다음, 푸터 바로 위)로 옮김(3→5→10 그대로). 아래 '🇰🇷 한국 주요 뉴스 자동 갱신' 참고.
+> **2026-10-03 아침 추가**: 🇰🇷 한국 주요 뉴스가 **판과 따로 2시간마다(하루 12번) 자동 갱신**된다 — GitHub Actions `.github/workflows/korea.yml` 이 `tools/fetch_korea.py --standalone` 으로 `data/korea.json`(+`data/korea.js`)을 만들어 커밋. 화면은 **순위 TOP 10: 3건 → '펼치기' 5건 → 10건 → '접기'**(같은 날 헤더 개편 때 4+6 에서 바꿈, 5위·6위 사이 작은 광고 `korea-mid`), 제목 옆 '업데이트 HH:MM'(방콕).. 아래 '🇰🇷 한국 주요 뉴스 자동 갱신' 참고.
 
 > **2026-10-03 헤더 개편**: 첫 줄 = **🇹🇭❤️🇰🇷 태국 뉴스 한눈에**(국기·하트는 인라인 SVG — 윈도우 PC 에서도 보임), 둘째 줄 = **☰ 메뉴(왼쪽, 큰 버튼) + 두 줄짜리 빠른 정보 상자 3개**(환율 원·달러 / 날씨·PM2.5 / 금·휘발유(95)), 그 아래 빈 보조 줄은 그대로(→ 같은 날 **📍 내 주변** 줄로 채움). 아래 '헤더(국기·☰·빠른 정보 칩)' 참고.
 
@@ -52,7 +53,7 @@
 - `assets/fb.js` : Firebase(ES 모듈, gstatic CDN v12.4.0: app·auth·**firestore-lite**) — 로그인·`users/{uid}` 동기화·`profiles`·`comments`. 웹 설정(firebaseConfig)이 들어 있음(웹 API 키는 공개용)
 - `firestore.rules` : Firestore 보안 규칙(콘솔에 붙여 넣어 게시 — 아래 'Google 로그인·Firestore')
 - `data/ads.json` → `data/ads.js` : 광고 자리 설정(목업). `build_index`(판 저장·`python3 tools/newslib.py`)가 ads.js 를 다시 만듦
-- `tools/fetch_korea.py` : 🇰🇷 한국 주요 뉴스 — `--standalone` = 독립 파일 `data/korea.json|js` 생성(Actions 가 2시간마다), `<판 id>` = 판 `korea_top` 후보 수집(Google News KR) / `tools/discussion.py` : 💬 오늘의 질문 초안·적용 / `tools/strip_trend_cards.py` : trends24 기사 카드 제거(이미 실행함)
+- `tools/fetch_korea.py` : 🇰🇷 한국 주요 뉴스 — `--standalone` = 독립 파일 `data/korea.json|js` 생성(Actions 가 2시간마다), `<판 id>` = 판 `korea_top` 후보 수집(Google News KR) / `tools/discussion.py` : 💬 오늘의 질문 초안·적용 / `tools/strip_trend_cards.py` : 옛 판의 trends24 기사 카드 정리(역사 자료용)
 - `drafts/` : 운영자 승인 전 초안(올리지 않음, .gitignore)
 - `manifest.json`, `sw.js`, `assets/icons/` : PWA(이름·아이콘·서비스 워커). 아이콘은 `python3 tools/make_icons.py` 로 다시 만들 수 있음(헤더 국기 로고 모양)
 - `tools/fetch_ticker.py` : 시세 칩 데이터 수집(환율 open.er-api.com → 실패 시 frankfurter, 금시세 goldtraders.or.th, 휘발유(95) 방짝, 날씨·PM2.5 Open-Meteo 대체값) — Actions 가 2시간마다
@@ -61,10 +62,10 @@
 - `tools/editions/_template.py` : **새 형식 판 편집 템플릿**
 - `tools/newslib.py`  : 판 저장(`write_edition`) + 검증 + index 재생성(`build_index`). 이름 규칙·라벨이 여기 정의돼 있음
 - `tools/build_data.py` : 진입점. `python3 tools/build_data.py tools/editions/<id>.py` → json/js 저장 + index 갱신. 인자 없이 실행하면 index만 재생성
-- `tools/editions/<id>.py` : 판별 편집 파일(기사 목록·브리핑·주요뉴스·트렌드)
+- `tools/editions/<id>.py` : 판별 편집 파일(기사 목록·브리핑·주요뉴스)
 - `tools/gnews.py` : Google News RSS 검색(태국어/`en:`영어, 기본 최근 8일)·실제 기사 URL 풀기(`--decode`). 결과는 `raw/<id>/` 에 저장
-- `tools/fetch_trends.py` : trends24.in(태국) X 트렌드 수집 + 성인·선정적 태그 필터 → `raw/<id>/trends/trends.json`
-- `tools/trend_blocklist.txt` : 성인·선정적 키워드 차단 목록(한 줄 하나, `re:`=정규식, `#`=주석). 트렌드 수집과 기사 검증(`newslib.validate`)이 같이 씀. **직접 고쳐서 늘리면 됨**
+- `tools/fetch_trends.py` : **사용 중지**된 옛 X 트렌드 수집기(기존 원본 보존용; 새 판에서 실행하지 않음)
+- `tools/trend_blocklist.txt` : 기사 제목·요약의 성인·선정적 키워드 차단 목록(한 줄 하나, `re:`=정규식, `#`=주석). X 트렌드 수집은 중단됐고 기사 검증에만 씀. **직접 고쳐서 늘리면 됨**
 - `tools/screenshot.py` : Playwright 스크린샷 + 동작 점검(첫 방문 온보딩·페르소나·최대 8개·👍👎 재정렬·설정·옛 판 렌더·데스크톱). `FAIL:` 줄이 있으면 exit 1. 로컬 서버(`python3 -m http.server 8765`)를 먼저 띄울 것
 - `raw/<id>/`         : 그 판을 만들 때 수집한 RSS·원문 텍스트(출처 확인용). `raw/` 바로 아래 파일들은 새벽판 수집분, `raw/morning/`은 저장에 실패한 07:08 실행이 남긴 RSS(미검증 참고용)
 - `archive/legacy/`   : 더 이상 쓰지 않는 옛 파일(사이트에서 읽지 않음)
@@ -140,7 +141,7 @@
 - `tags` = 인물·장소·기관·사건 키워드(‘#’ 없이). 👍👎 학습에 쓰이므로 **모든 기사에 반드시**(검증에서 2개 미만이면 멈춤).
 - `category`는 쓰지 않는다(넣으면 옛 6종 값만 허용).
 
-최상위: `id, date, edition(am|pm), edition_label, generated, updated(선택), coverage, previous, briefing, highlights[id 3개], stories[], trends{…}`
+최상위: `id, date, edition(am|pm), edition_label, generated, updated(선택), coverage, previous, briefing, highlights[id 3개], stories[]` (옛 판의 `trends`는 선택적 레거시 필드)
 - **`briefing` = 5~6줄 목록** `[{topic, text, story_id}]` — 편집 파일에서는 `B("visa", "이민국 앱 **THIM** 정식 출시…", "vi2")`. `text`는 짧은 한 줄(120자 이하)에 **`**굵게**` 핵심어/숫자 1곳 이상**, `story_id`는 그 줄의 기사(화면에서 누르면 그 기사로 이동·펼침). 서로 다른 기사 5~6개, 주제가 고르게.
 - 검증(`newslib.validate`)은 기사에 `topic`이 있거나 `briefing`이 목록이면 새 형식 규칙을 적용(주제 id, secondary, tags, 브리핑 줄 형식). 구성 점검은 경고만 출력(기사 20~25건, 외국인·비자 2~4건, 파타야·시라차·방콕·여행·생활 기사 유무) — **참고용일 뿐 최소 건수가 아니다.** 경고를 없애려고 약한 기사를 넣지 않는다. 실제 뉴스가 없으면 적게 싣고 절대 지어내지 않는다(아래 '편집 원칙').
 - 저장된 판 점검: `python3 tools/newslib.py check data/<id>.json`
@@ -148,9 +149,8 @@
 ### 옛 형식(10월 2일 저녁판까지 — 고치지 않음)
 기사: `id, category(politics|economy|society|local|visa|sns), headline, summary[문단], context(배경 설명), update(이전 판 이후 새로 나온 내용, 후속 기사일 때만), source, url, title_th, published(ISO, +07:00), related[{source,title,url}], tags[], region(지역 기사), highlight`
 
-최상위: `id, date, edition(am|pm|early), edition_label, generated, updated(선택: 같은 판을 나중에 보강했을 때), coverage, previous(직전 판 id), briefing, highlights[id 3개], stories[], trends{items[], source, url, fetched, block, filtered, note}`
-- `trends.items[]` (10월 2일 저녁판부터) = `{tag: 원문 태그, ko: 한국어 번역/음역, desc: 한 줄 설명(무슨 드라마·아이돌·행사인지, 왜 뜨는지), verified: false 이면 화면에 '확인 안 됨' 표시}`. 옛 판은 문자열 목록이며 그대로 렌더됨(원문만).
-- `trends.fetched` = 수집 시각(+07:00), `block` = trends24 의 집계 블록 시각, `filtered` = 차단 목록으로 뺀 태그 수.
+최상위: `id, date, edition(am|pm|early), edition_label, generated, updated(선택: 같은 판을 나중에 보강했을 때), coverage, previous(직전 판 id), briefing, highlights[id 3개], stories[]`
+- 옛 판에 남은 `trends` 필드(`items`, `source` 등)는 레거시 호환용으로 보존할 수 있지만 `newslib.validate`가 검사하지 않고 사이트·`share_kit.py`가 읽거나 출력하지 않는다. 새 판에는 넣지 않는다.
 - 이미지·영상 필드(`image`, `media`, `video`, `embed` 등)는 금지(검증에서 멈춤). X 미디어·이미지는 절대 넣지 않고 텍스트만.
 (※ `2026-09-29-early`는 옛 형식이라 `id/edition_label` 등이 없지만 index가 파일 이름으로 판을 알아내므로 그대로 동작)
 
@@ -177,7 +177,6 @@
 
 - **Pantip·태사랑·SNS 글은 '사실'의 출처로 쓰지 않는다.** '온라인에서 이런 반응/화제가 있다'를 설명할 때만 쓰고, 언론·공식 기관이 확인하지 않은 내용은 **'확인 안 됨'** 이라고 밝히며 절대 사실처럼 쓰지 않는다. 기사 `source`/`url`(원문)은 언론·공식 기관 것이어야 한다(Pantip·Wongnai·태사랑 은 `related` 에만).
 - Wongnai 는 여행·맛집 기사에서 가게 위치·영업 정보 같은 **보조 정보**로만(평점·후기는 '이용자 후기'로 표시). 새 가게·행사 소식 자체는 언론·공식 발표로 확인.
-- **trends24 해시태그 목록을 기사 카드로 만드는 것은 여전히 금지**(트렌드 상자에만 — 아래 X 트렌드 규칙 그대로).
 ### 편집 원칙: 최소 건수 없음 — 소스를 넓게 훑고 좋은 기사만(운영자 결정 2026-10-03)
 - **주제별·지역별·매체별 최소 건수는 없다.** 숫자를 채우려고 약하거나 부풀린 기사를 넣지 않는다(2026-10-03 07:32 에 잠깐 넣었던 HARD 쿼터 — 연예 3건·파타야+시라차 4건·매체 6곳 등 — 는 폐지).
 - 대신 **기사를 고르기 전에 목록의 모든 소스 묶음을 훑는다**(종합·TV·영어·연예·스포츠·파타야/촌부리 지역·공식 기관·한국어 검색 — `tools/collect.py` 가 한 번에). 그래야 주제마다 실제 후보가 쌓이고 좋은 기사가 자연스럽게 올라온다.
@@ -206,16 +205,12 @@
      - `context`(💡 배경 설명)에는 **태국 거주 외국인(파타야 4년차 한국인 기준) 실용 팁**을 짧게: 무엇을 확인·준비하면 되는지. 기사에 없는 숫자·규정을 단정하지 말 것(확실하지 않으면 '확인하자'로).
      - 한국인·한국 교민 관련(한국인 사건, 대사관 공지, 한-태 관계)은 우선 싣는다.
    - **성인·선정적 기사 금지**: 성범죄·성매매·음란물 위주 기사, 노출 사진이 중심인 기사는 싣지 않는다. 이미지·영상은 어떤 기사에도 넣지 않는다. 검증이 `tools/trend_blocklist.txt` 키워드를 제목·원문 제목·태그·요약에서 찾으면 build 가 멈춤 → 그 기사를 빼거나(원칙), 일반 기사가 우연히 걸린 경우에만 차단 목록 정규식을 다듬는다.
-   - **X 트렌드(매번 새로)**: `python3 tools/fetch_trends.py <id> 10` → trends24.in 태국 최신 블록에서 상위 10개(차단 목록에 걸린 성인·선정적 태그는 자동으로 빼고 `필터됨` 개수 출력). 걸리지 않았어도 **보고 판단해 성적인 느낌의 정체불명 태그는 직접 뺀다**(뺀 수는 `filtered`에 더함).
-     - 남은 태그마다 웹 검색(태그 그대로 + 'series/EP', 배우 이름, 'Paris Fashion Week' 등)으로 무엇인지 확인 → `T(tag, ko, desc)`로 적는다: `ko`=한국어 번역·음역(예: `#PlsLoveรักได้ไหมEP4` → '플리즈 러브(사랑해도 될까) 4화'), `desc`=어떤 드라마·아이돌·행사인지, 왜 뜨는지 한 줄.
-     - **trends24 해시태그 목록을 기사 카드(SNS 탭)로 만들지 않는다** — 트렌드는 트렌드 상자에만(`tools/TRANSLATION_RULES.md`, `newslib.validate` 가 막음). 화면은 처음 3개 → 더 보기 5개 → 10개(최대)라 **10개까지만** 적는다(`fetch_trends.py <id> 10`).
-     - **확인이 안 되면 추측하지 말고** `T(tag, ko, "…찾지 못함", False)` → 화면에 '확인 안 됨' 표시.
-     - `trends.fetched`·`block`·`filtered`는 `raw/<id>/trends/trends.json` 값 그대로.
+   - **X 트렌드 수집·번역·편집·출력은 중단**했다. 옛 `raw/<id>/trends/` 원본과 옛 판 데이터는 감사·역사 기록으로만 보존하며, 새 판 편집 파일에는 `trends`를 만들지 않는다.
    - **🇰🇷 오늘의 한국 주요 뉴스(판 대체용 `korea_top`, 최대 10건)**: 화면은 보통 2시간마다 갱신되는 `data/korea.json` 을 쓰고, 그 파일이 없거나 6시간 넘게 지났을 때만 판의 `korea_top` 을 보여 준다(그래도 판마다 채워 둘 것). `python3 tools/fetch_korea.py <id>` → 후보 목록(한국 언론, 36시간 이내). **지금 한국에서 가장 화제인 전국 주요 뉴스 10개**(여러 매체 공통 톱·많이 읽힌 것; 교민 관련이라고 우선하지 않음)를 골라 `python3 tools/fetch_korea.py <id> --decode-only "제목 일부" …` 로 실제 기사 URL 을 푼 뒤 편집 파일 `korea_top = [KR(제목, 매체, URL, 게재시각), …]`. 제목은 한국어 원제를 `TRANSLATION_RULES.md` 제목 규칙대로 살짝만 다듬고 지어내지 않는다. 검증: 최대 10건·실제 링크(news.google.com 중계 링크 금지). 없으면 화면에 안 나옴.
-3. `tools/editions/<id>.py` 작성: **`cp tools/editions/_template.py tools/editions/<id>.py`** 후 `id/date/edition/generated/previous/briefing/highlights/stories/trends` 를 실제 내용으로 교체(새 형식: 기사마다 `topic` + `secondary` + `tags`, 브리핑은 `B(topic, "**굵게** 한 줄", story_id)` 5~6줄). 트렌드 `T(...)` 형식·외국인·비자 기사 쓰는 법은 `tools/editions/2026-10-02-pm.py` 참고(이 파일은 옛 형식 `category`이므로 기사 형식은 따라 하지 말 것). 뉴스·인용·숫자·URL은 절대 지어내지 않는다.
+3. `tools/editions/<id>.py` 작성: **`cp tools/editions/_template.py tools/editions/<id>.py`** 후 `id/date/edition/generated/previous/briefing/highlights/stories` 를 실제 내용으로 교체(새 형식: 기사마다 `topic` + `secondary` + `tags`, 브리핑은 `B(topic, "**굵게** 한 줄", story_id)` 5~6줄). X 트렌드 수집·번역·필드는 넣지 않는다. 뉴스·인용·숫자·URL은 절대 지어내지 않는다.
    - 주제 고르기: 지역 소식은 지역(`pattaya`/`sriracha`/`bangkok`)을 주 주제로, 성격(날씨·교통·생활·사건 등)을 보조로. 지역과 무관한 전국 소식은 성격을 주 주제로. 외국인·비자 소식은 `visa` 주 주제 + 지역 보조.
 4. `python3 tools/build_data.py tools/editions/<id>.py` (검증 실패 시 예외로 멈춤. `점검(경고):` 줄은 구성 안내 — 실제 뉴스가 있는데 빠진 주제면 보강)
-5. `python3 -m http.server 8765 &` → `python3 tools/screenshot.py` (`ALL OK` 확인) → `screenshots/`의 이미지를 직접 보고 문제 수정. 특히 `mobile-390-feed.png`(브리핑 5~6줄·굵게·주제 칩), `mobile-390-tab-visa.png`(외국인·비자 탭), `mobile-390-trends.png`(트렌드: 모든 화면에서 페이지 맨 아래·푸터 바로 위, 처음 3개 + '더 보기'(5→10)), `desktop-1280-top.png`. 앱 코드(assets·sw.js)를 고쳤으면 `python3 tools/test_pwa.py` 도.
+5. `python3 -m http.server 8765 &` → `python3 tools/screenshot.py` (`ALL OK` 확인) → `screenshots/`의 이미지를 직접 보고 문제 수정. 특히 `mobile-390-feed.png`(브리핑 5~6줄·굵게·주제 칩), `mobile-390-tab-visa.png`(외국인·비자 탭), `desktop-1280-top.png`; 390px·1280px에서 X 트렌드 섹션·메뉴 항목이 없는지도 확인한다. 앱 코드(assets·sw.js)를 고쳤으면 `python3 tools/test_pwa.py` 도.
 6. **💬 오늘의 질문 초안(매번, 승인 전까지 화면에 안 나옴)**: `python3 tools/discussion.py draft <id>` → `drafts/discussion/<id>.json` 의 **모든 기사(판의 기사 전부 — 건수 제한 없음, 2026-10-03 운영자 결정)**마다 `question`(독자에게 묻는 한 줄)·`operator_comment`(운영자 첫 댓글)를 채운다 — 자연스러운 한국어, 정직한 '운영자' 목소리(“운영자입니다.”), `TRANSLATION_RULES.md` 준수, 기사에 없는 사실·숫자 단정 금지, **절대 독자(사용자)인 척 쓰지 않는다**. `approved` 는 false 그대로. 보고에 `python3 tools/discussion.py show <id>` 결과를 붙여 운영자에게 보여 주고, **채팅에서 OK 받은 항목만** `approved: true` 로 바꾼 파일로 `python3 tools/discussion.py apply <id> <파일>` → 배포. **apply 는 그 판의 질문 전체를 파일 내용으로 바꾸므로, 일부만 새로 승인했으면 이미 적용된 `tools/discussions/<id>.json` 항목도 같은 파일에 넣는다.** (적용분은 `tools/discussions/<id>.json` 에 남아 판을 다시 만들어도 유지)
 7. **배포(필수)**: `bash tools/deploy.sh` — 아래 'Deploy' 참고. 07:08·18:08 정기 실행은 판을 만든 뒤 **매번** 실행할 것.
 8. **공유 키트(매번, 배포 뒤)**: `python3 tools/share_kit.py <id>` → `share/<id>.png`(카톡 사진 카드)·`share/<id>.txt`(메시지 문구, 올리지 않음) + 사이트용 `og/<id>.png`·`og/latest.png`(링크 미리보기 이미지)·`e/<id>/index.html`(판별 미리보기 페이지 → `?ed=<id>` 로 이동). og/·e/ 가 바뀌었으니 **`bash tools/deploy.sh` 한 번 더**. 그다음 `python3 tools/discussion.py draft <id>`(6번) 초안을 채워 보고에 붙인다.
@@ -259,11 +254,11 @@
 - **고르는 법**(LLM 없음, 같은 입력이면 같은 결과, 태국·교민 가중치 없음): Google News 한국 **'주요 뉴스'** 상위 15개 + **'대한민국' 주제** 피드 상위 50개. 점수 = 주요 뉴스 순위(50−3×순위) + 대한민국 순위(20−0.4×순위) + 둘 다면 5 + 묶음 매체 수(≤5) − 경과시간×0.5. 주요 뉴스 쪽 세계·IT 기사는 대한민국 피드와 같은 사건이거나 한국 관련 낱말(북한·국회·이 대통령·서울…)이 있을 때만. 36시간 넘은 것·칼럼/사설/포토·보도자료 매체·차단 목록(`trend_blocklist.txt`) 제외, 같은 사건(묶음 기사 id·제목 2-gram 유사도)은 하나만 → 상위 10건(6건 미만이면 실패 처리).
   - 제목은 원제 그대로 + 가벼운 정리(` - 언론사`·` | 언론사` 꼬리, `(종합N보)` 꼬리, 공백)만. 지어내지 않음. URL 은 `googlenewsdecoder` 로 실제 기사 주소(풀기 실패 시에만 Google News 링크). `time` = 피드 게재 시각(+07:00).
   - 10건·주소가 이전과 같고 `updated_at` 이 5시간 안이면 파일을 안 바꿈(커밋 없음). 로컬 시험: `python3 tools/fetch_korea.py --standalone --no-decode --force`(커밋하지 말 것 — deploy.sh 가 되돌림).
-- **화면**: 최신 판을 볼 때 `data/korea.json` 을 네트워크 우선으로 받음(`fetch(…?_=시각, {cache:"no-store"})`, 서비스 워커도 이 파일은 `no-store` 로 항상 새로 받고 오프라인일 때만 캐시). file:// 에서는 `data/korea.js`. `updated_at` 이 6시간 안이면 그것, 아니면 판 `korea_top`(지난 판을 볼 땐 그 판 것). 제목 'TOP 10' 배지 옆 **'업데이트 HH:MM'**(방콕), **순위 번호 1~10(1~3위 진한 배지)**, X 트렌드 상자와 같은 **3건 → '펼치기 (2건 더)' 5건 → '펼치기 (5건 더)' 10건 → '접기 ▴'(3건으로)** — `assets/app.js` `KOREA.STEPS = [3, 5, 10]`. **6~10위가 보일 때(10건 펼침)만 5위와 6위 사이에 작은 광고 자리**(`data/ads.json` 슬롯 `korea-mid`, strip 크기, '광고' 표시). **항목을 누르면 바로 아래 작은 카드**(제목·매체·게재 시각(방콕)·짧은 설명 — `korea.json`/`korea_top` 항목에 `desc`(또는 `summary`)가 있을 때만, 160자까지. **기사 본문은 절대 옮기지 않음**) + **'기사 보러 가기 ↗'** 버튼(새 탭). 다시 누르면 닫힘(한 번에 하나). 제목 줄을 누르면 섹션 전체 접기(이 기기에 기억). 화면으로 돌아왔을 때 10분 넘었으면 다시 받음.
+- **화면**: 최신 판을 볼 때 `data/korea.json` 을 네트워크 우선으로 받음(`fetch(…?_=시각, {cache:"no-store"})`, 서비스 워커도 이 파일은 `no-store` 로 항상 새로 받고 오프라인일 때만 캐시). file:// 에서는 `data/korea.js`. `updated_at` 이 6시간 안이면 그것, 아니면 판 `korea_top`(지난 판을 볼 땐 그 판 것). 제목 'TOP 10' 배지 옆 **'업데이트 HH:MM'**(방콕), **순위 번호 1~10(1~3위 진한 배지)**, **3건 → '펼치기 (2건 더)' 5건 → '펼치기 (5건 더)' 10건 → '접기 ▴'(3건으로)** — `assets/app.js` `KOREA.STEPS = [3, 5, 10]`. **6~10위가 보일 때(10건 펼침)만 5위와 6위 사이에 작은 광고 자리**(`data/ads.json` 슬롯 `korea-mid`, strip 크기, '광고' 표시). **항목을 누르면 바로 아래 작은 카드**(제목·매체·게재 시각(방콕)·짧은 설명 — `korea.json`/`korea_top` 항목에 `desc`(또는 `summary`)가 있을 때만, 160자까지. **기사 본문은 절대 옮기지 않음**) + **'기사 보러 가기 ↗'** 버튼(새 탭). 다시 누르면 닫힘(한 번에 하나). 제목 줄을 누르면 섹션 전체 접기(이 기기에 기억). 화면으로 돌아왔을 때 10분 넘었으면 다시 받음.
 - 판 빌드(deploy.sh)와 충돌 없음: deploy.sh 는 korea 파일을 올리지 않고 push 전 항상 `pull --rebase`.
 
 ## 외부 링크는 모두 새 탭
-- 사이트 밖으로 나가는 링크(한국 뉴스 '기사 보러 가기', 기사 원문·관련 기사, 트렌드, 시세 칩 출처, 광고 지도·카톡·라인 등)는 **모두 `target="_blank" rel="noopener"`**(광고는 `rel="sponsored noopener"`). 홈 화면 앱(PWA standalone)에서는 안드로이드·iOS 가 앱 안 브라우저 시트(닫기 ✕ → 우리 앱으로 돌아옴)로 연다. **`tel:` 전화 링크만 예외**(같은 창). 새 링크를 만들 때도 이 규칙을 지킬 것.
+- 사이트 밖으로 나가는 링크(한국 뉴스 '기사 보러 가기', 기사 원문·관련 기사, 시세 칩 출처, 광고 지도·카톡·라인 등)는 **모두 `target="_blank" rel="noopener"`**(광고는 `rel="sponsored noopener"`). 홈 화면 앱(PWA standalone)에서는 안드로이드·iOS 가 앱 안 브라우저 시트(닫기 ✕ → 우리 앱으로 돌아옴)로 연다. **`tel:` 전화 링크만 예외**(같은 창). 새 링크를 만들 때도 이 규칙을 지킬 것.
 
 ## 광고 자리(목업)
 - `data/ads.json`: `enabled`(false = 전부 숨김), `slots[]` = `{id: top(헤더 아래 띠)|nearby-food|nearby-hair|nearby-massage|nearby-mart(📍 내 주변 카테고리 화면 맨 위 — 마사지는 드래곤 마사지 배너, item `render:"dragon"`)|mid(한국 뉴스·브리핑과 주요 뉴스 사이 큰 배너)|korea-mid(한국 주요 뉴스 TOP 10 의 5위·6위 사이 작은 띠 — 10건 펼쳤을 때만)|infeed(기사 every 건마다 카드)|drawer(서랍 아래 작은 배너)|footer, size: strip|large|medium|small|wide, enabled, items[{category, title, subtitle, image?, link?(https 만), theme 1~5}]}`. 지금은 '여기에 광고하세요 · 광고 문의' 자리 표시만(가짜 업체명·전화·링크 없음). 고친 뒤 `python3 tools/newslib.py` 로 `data/ads.js` 재생성 → 배포. 새 슬롯 id 를 만들면 `tools/newslib.py` `build_ads()` 의 허용 목록에도 넣을 것(안 넣으면 판 빌드가 멈춤).
@@ -280,7 +275,7 @@
   - 사이트 파일(index.html, manifest.json, sw.js, assets/, data/, tools/, README.md 등)의 새 파일·변경분을 `edition <id>` 메시지로 커밋 → `main` 에 push
   - force-push 금지(스크립트도 하지 않음). push 전에 **항상 `git pull --rebase --autostash`**(Actions 의 korea.json 커밋을 받아 옴) → 일반 push, 거부되면 최대 4번 재시도
   - `data/korea.json|js`·`data/ticker.json|js` 는 **절대 커밋하지 않음**(로컬 사본은 HEAD 로 되돌린 뒤 pull — 오래된 한국 뉴스로 덮어쓰지 않게). `.github/` 는 사이트 파일과 함께 올림
-  - 라이브 `data/index.js` 에 최신 판 id 가 반영되고 **라이브 `data/<최신 판>.js`·`assets/app.js`·`sw.js` 내용이 로컬과 같아질 때까지** 대기(같은 판을 보강해 다시 올린 경우도 잡음, 최대 15분, `DEPLOY_TIMEOUT`) → `tools/verify_live.py` 로 390px 모바일 화면을 헤드리스 브라우저로 열어 첫 방문 온보딩('파타야 거주자' 선택)·최신 판·내 피드·브리핑·👍👎·오류·외국인·비자 탭 카드 수·트렌드 위치(페이지 맨 아래 `#trendBottom`)·한국 뉴스(`koreaSrc` live/edition, `koreaUpd`)·서비스 워커·manifest 확인, `screenshots/live-mobile-390.png`·`-onboarding.png`·`-visa.png` 저장
+  - 라이브 `data/index.js` 에 최신 판 id 가 반영되고 **라이브 `data/<최신 판>.js`·`assets/app.js`·`sw.js` 내용이 로컬과 같아질 때까지** 대기(같은 판을 보강해 다시 올린 경우도 잡음, 최대 15분, `DEPLOY_TIMEOUT`) → `tools/verify_live.py` 로 390px 모바일 화면을 헤드리스 브라우저로 열어 첫 방문 온보딩('파타야 거주자' 선택)·최신 판·내 피드·브리핑·👍👎·오류·외국인·비자 탭 카드 수·X 트렌드 섹션·메뉴가 없음·한국 뉴스(`koreaSrc` live/edition, `koreaUpd`)·서비스 워커·manifest 확인, `screenshots/live-mobile-390.png`·`-onboarding.png`·`-visa.png` 저장
   - 실패하면 0이 아닌 종료 코드로 끝남 → 원인 확인 후 다시 실행
 - **올리지 않는 것**(`.gitignore`): `raw/`(제3자 기사 원문 — 저작권), `archive/`, `screenshots/`, 캐시(`__pycache__` 등), 비밀 파일(`.env`, `*.key`, `*.pem`)
 - 푸터 고지: '태국 언론 보도를 한국어로 요약·번역한 개인 프로젝트입니다. 원문 링크를 확인하세요.'
@@ -288,5 +283,5 @@
   (프로젝트 Pages 라 `robots.txt` 는 도메인 루트가 아니어서 크롤러가 읽지 않을 수 있음 → 실제 효력은 meta 태그. 공개 저장소이므로 주소를 아는 사람은 누구나 볼 수 있음)
 
 ## 번역 규칙
-반드시 `tools/TRANSLATION_RULES.md`를 읽고 모든 기사·제목·트렌드 번역에 적용할 것.
+반드시 `tools/TRANSLATION_RULES.md`를 읽고 모든 기사·제목 번역에 적용할 것.
 국가가 모호한 주어에는 `태국`(한국 주체는 `한국`)을 붙이는 주체 명시 규칙도 모든 번역 문구에 적용한다.

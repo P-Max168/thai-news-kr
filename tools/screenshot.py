@@ -3,7 +3,7 @@
   python3 tools/screenshot.py [BASE_URL] [출력 폴더]
 저장(screenshots/): mobile-390-onboarding.png, mobile-390-topics.png, mobile-390-topics-max.png,
   mobile-390-feed.png(새 브리핑), mobile-390-feed-full.png, mobile-390-article.png(👍👎), mobile-390-settings.png,
-  mobile-390-tab-visa.png, mobile-390-trends.png, mobile-390-old-edition.png, desktop-1280.png, desktop-1280-top.png, desktop-topic.png
+  mobile-390-tab-visa.png, mobile-390-old-edition.png, desktop-1280.png, desktop-1280-top.png, desktop-topic.png
 문제(오류·검사 실패)가 있으면 'FAIL:' 줄을 출력하고 exit 1."""
 import asyncio, sys, json, pathlib
 from playwright.async_api import async_playwright
@@ -137,14 +137,12 @@ async def main():
             await m.click('#tabs [data-tab="visa"]')
             await m.wait_for_timeout(500)
             await m.screenshot(path=OUT + "mobile-390-tab-visa.png")
-        # 트렌드(모든 화면: 페이지 맨 아래, 푸터 바로 위)
+        # X 트렌드 종료: 섹션·앵커·관련 메뉴가 없어야 함
+        check(await m.evaluate("!document.querySelector('#trendWidget,#trendBottom,#trendList,#trendMore,#trendNote')"), "X 트렌드 섹션 제거")
         await drawer(m)
+        check(not await m.evaluate("/X\\s*트렌드|실시간 트렌드/.test(document.getElementById('drawer').innerText)"), "X 트렌드 메뉴 항목 제거")
         await m.click('#tabs [data-tab="feed"]')
         await m.wait_for_timeout(400)
-        check(await m.evaluate("!!document.querySelector('#trendBottom #trendWidget')"), "트렌드 페이지 맨 아래")
-        await m.evaluate("(()=>{const w=document.getElementById('trendWidget');scrollTo(0,w.getBoundingClientRect().top+scrollY-document.querySelector('.masthead').offsetHeight-8)})()")
-        await m.wait_for_timeout(300)
-        await m.screenshot(path=OUT + "mobile-390-trends.png")
         # 옛 판(문단 브리핑·category) 렌더
         for ed in ["2026-09-29-early", "2026-10-01-pm"]:
             await m.goto(BASE + "?date=" + ed, wait_until="networkidle")

@@ -50,15 +50,6 @@ korea_top = [
   KR("※ 한국 언론 제목(살짝만 다듬기)", "※ 매체", "https://※실제 기사 URL", "2026-01-01T07:00:00+07:00"),
 ]
 
-# X 트렌드: 상자(trends.items)에만 넣는다. trends24 를 출처로 한 '기사 카드'(SNS 탭)는 만들지 않는다(검증이 막음)
-T = lambda tag, ko, desc, verified=True: dict(tag=tag, ko=ko, desc=desc, verified=verified)
-trends = dict(
-  source="trends24.in (X/트위터 태국 트렌드)", url="https://trends24.in/thailand/",
-  fetched="※ raw/<id>/trends/trends.json 의 fetched", block="※ block", filtered=0,
-  note="※ 한 줄 요약",
-  items=[T("#tag", "※ 한국어", "※ 설명")],
-)
-
 data = dict(
   id="YYYY-MM-DD-am", date="YYYY-MM-DD", edition="am", edition_label="아침판",   # ※ 실행한 날(방콕) + am|pm
   weekday="※요일", timezone="Asia/Bangkok (UTC+7)",
@@ -67,7 +58,7 @@ data = dict(
   previous="※ 직전 판 id (data/index.json 의 latest)",
   briefing=briefing,
   highlights=["pt1", "※", "※"],   # 주요 뉴스 3건(기사 id) — 주제 선택과 관계없이 모든 사용자에게 보임
-  stories=stories, trends=trends, korea_top=korea_top)
+  stories=stories, korea_top=korea_top)
 
 if __name__ == "__main__":
     write_edition(data)

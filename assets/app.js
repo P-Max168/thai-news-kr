@@ -100,14 +100,14 @@
     renderSide();
     if (location.hash.length > 1) openStory(location.hash.slice(1), true);
   }
-  function renderAll() { renderTabs(); $("briefing").hidden = !topShown(); renderKorea(); renderTop(); renderFeed(); renderAds(); placeTrends(); }
+  function renderAll() { renderTabs(); $("briefing").hidden = !topShown(); renderKorea(); renderTop(); renderFeed(); renderAds(); }
 
   /* 🇰🇷 오늘의 한국 주요 뉴스 — 내 피드·전체 보기에서 맨 위. 최대 10건, 처음 4건 + '펼치기'(나머지 6건) / '접기'
    * 순위 TOP 10, 처음 3건 → 펼치기 5건 → 10건 → 접기
    * ① data/korea.json(GitHub Actions 가 2시간마다 갱신, 판과 무관): 네트워크 우선(cache: no-store + ?_=시각),
    *    file:// 에서는 data/korea.js(window.KOREA_NEWS). updated_at 이 6시간 안일 때만 사용(최신 판을 볼 때만)
    * ② 없거나 6시간 넘게 지났으면 판의 korea_top 으로 대체(없으면 섹션 숨김) */
-  // TOP 10(순위 1~10): 처음 3건 → '펼치기' 5건 → 10건 → '접기' (X 트렌드 상자와 같은 3→5→10)
+  // TOP 10(순위 1~10): 처음 3건 → '펼치기' 5건 → 10건 → '접기'
   var KOREA = { live: null, at: 0, step: 0, open: -1, STEPS: [3, 5, 10], MAX_AGE: 6 * 3600 * 1000, MAX: 10 };
   function loadKorea() {
     KOREA.at = Date.now();
@@ -514,25 +514,6 @@
   }
 
   function renderSide() {
-    var t = state.data.trends;
-    if (t && t.items && t.items.length) {
-      $("trendWidget").hidden = false;
-      var items = t.items.slice(0, TR_STEPS[TR_STEPS.length - 1]);   // 최대 10개
-      $("trendList").innerHTML = items.map(function (x, i) {
-        // 옛 판: 문자열(원문 태그만) / 10월 2일 저녁판부터: {tag, ko, desc, verified}
-        var o = typeof x === "string" ? { tag: x } : x;
-        var q = "https://x.com/search?q=" + encodeURIComponent(o.tag);
-        var unv = o.verified === false ? '<span class="tr-unv">확인 안 됨</span>' : "";
-        return '<li data-i="' + i + '"><div class="tr-body">' +
-          (o.ko ? '<b class="tr-ko">' + esc(o.ko) + "</b>" : "") +
-          '<a class="tr-tag" lang="th" href="' + q + '" target="_blank" rel="noopener">' + esc(o.tag) + " ↗</a>" +
-          (o.desc ? '<span class="tr-desc">' + unv + esc(o.desc) + "</span>" : "") + "</div></li>";
-      }).join("");
-      trStep = 0; trendShow();
-      $("trendWidget").classList.remove("is-expanded");
-      $("trendNote").innerHTML = esc(t.note) + '<br>출처: <a href="' + esc(t.url) + '" target="_blank" rel="noopener">' + esc(t.source) + "</a> · " + esc(fmtTime(t.fetched)) + " (BKK) 수집" +
-        (t.filtered != null ? " · 성인·선정적 태그 필터 적용(" + t.filtered + "개 제외)" : "");
-    } else { $("trendWidget").hidden = true; }
     var c = topicCounts(), max = 0;
     T.TOPICS.forEach(function (k) { max = Math.max(max, c[k.id] || 0); });
     $("catStats").innerHTML = T.TOPICS.map(function (k) {
@@ -591,30 +572,6 @@
     window.scrollTo(0, y);
     if (card) { card.classList.add("flash"); setTimeout(function () { card.classList.remove("flash"); }, 900); }
   }
-
-  /* X 트렌드: 처음 3개 → '더 보기' 5개 → 10개(최대) → '접기' */
-  var TR_STEPS = [3, 5, 10], trStep = 0;
-  function trendShow() {
-    var lis = $("trendList").children, n = lis.length, show = Math.min(n, TR_STEPS[trStep]);
-    for (var i = 0; i < n; i++) lis[i].classList.toggle("tr-h", i >= show);
-    var more = $("trendMore");
-    more.hidden = n <= TR_STEPS[0];
-    more.textContent = show >= n ? "접기 ▴" : "더 보기 (" + (Math.min(n, TR_STEPS[trStep + 1] || n) - show) + "개) ▾";
-  }
-  $("trendMore").addEventListener("click", function () {
-    var n = $("trendList").children.length;
-    if (Math.min(n, TR_STEPS[trStep]) >= n || trStep >= TR_STEPS.length - 1) trStep = 0; else trStep++;
-    trendShow();
-  });
-  // 트렌드 위젯: 모든 화면 크기·탭에서 페이지 맨 아래(모든 기사·사이드 위젯 다음, 푸터·푸터 광고 바로 위 #trendBottom)
-  var mq = window.matchMedia("(max-width:980px)");
-  function placeTrends() {
-    var w = $("trendWidget"), slot = $("trendBottom");
-    if (slot && w.parentNode !== slot) slot.appendChild(w);
-    w.classList.add("widget--inline", "widget--bottom");
-  }
-  placeTrends();
-  if (mq.addEventListener) mq.addEventListener("change", placeTrends); else if (mq.addListener) mq.addListener(placeTrends);
 
   document.addEventListener("click", function (e) {
     var el;

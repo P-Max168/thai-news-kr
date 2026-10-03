@@ -194,15 +194,12 @@ def validate(data):
         for r in s.get("related", []):
             assert r["url"].startswith("http"), (s["id"], r)
     for s in data["stories"]:
-        # 성인·선정적 기사 금지(트렌드와 같은 차단 목록). 이미지·영상은 아예 싣지 않는다.
+        # 성인·선정적 기사 금지(공통 차단 목록). 이미지·영상은 아예 싣지 않는다.
         txt = " ".join([s["headline"], s["title_th"], " ".join(s.get("tags", [])), " ".join(s["summary"])])
         hit = blocked(txt)
         assert not hit, (s["id"], "성인·선정적 키워드(%s) — 기사를 빼거나 표현 확인 (tools/trend_blocklist.txt)" % hit)
         for k in ("image", "images", "img", "media", "video", "embed"):
             assert k not in s, (s["id"], "이미지·미디어 필드 금지: " + k)
-        # trends24 해시태그 목록을 기사 카드로 만들지 않는다(트렌드는 trends 상자에만) — TRANSLATION_RULES.md
-        assert "trends24" not in (s.get("source", "") + " " + s.get("url", "")).lower(), \
-            (s["id"], "trends24 해시태그 목록은 기사 카드 금지 — trends 상자(trends.items)에만 넣을 것")
         dsc = s.get("discussion")
         if dsc is not None:  # 💬 오늘의 질문(정적, tools/discussion.py apply 로만 넣음)
             assert isinstance(dsc, dict) and dsc.get("question") and dsc.get("operator_comment") and isinstance(dsc.get("approved"), bool), \
@@ -218,13 +215,8 @@ def validate(data):
             # 외국인·비자: 저볼륨이라 최대 7일 전 기사 허용(그 이상은 금지)
             age = datetime.fromisoformat(data["generated"]) - datetime.fromisoformat(s["published"])
             assert age.days < 8, (s["id"], "외국인·비자 기사는 7일 이내만")
-    t = data.get("trends") or {}
-    for it in t.get("items", []):
-        tag = it if isinstance(it, str) else it.get("tag", "")
-        assert not blocked(tag), ("trends", tag, "차단 목록에 걸린 태그")
-        if isinstance(it, dict):
-            for k in ("tag", "ko", "desc"):
-                assert it.get(k), ("trends", tag, "필수: " + k)
+    # trends is a legacy field. It is intentionally optional and ignored: old editions
+    # may retain it for history, while new editions do not collect or render it.
     # discussion(오늘의 질문) 건수 제한 없음 — 2026-10-03 운영자 결정: 판의 모든 기사에(승인된 것만 화면에)
     kt = data.get("korea_top")
     if kt is not None:   # 🇰🇷 오늘의 한국 주요 뉴스(tools/fetch_korea.py) — 최대 10건, 링크 필수
