@@ -141,3 +141,9 @@ body.nb-open{overflow:hidden}
 .pc-empty__e{font-size:36px;margin:0 0 6px}
 .pc-skel{height:220px;margin-bottom:12px}
 .pc-src{font-size:13.5px;line-height:1.6;color:var(--muted,#5f6672);margin:16px 2px 0}
+/* 한식·한인 업소 + 칸별 출처 + 오래된 정보 표시 (2026-10-03) */
+.pc__kr{margin:2px 0 6px;font-size:14.5px;font-weight:700;color:#0b2a4a}
+.pc__kr small{font-weight:600;color:var(--muted,#5f6672);font-size:13px}
+.pc__fs{display:block;margin-top:2px;font-size:12.5px;color:var(--muted,#5f6672);font-weight:500}
+.pc__fs a{color:inherit;text-decoration:underline}
+.pc__old{display:inline-block;padding:1px 8px;border-radius:999px;background:#5f4b00;color:#fff;font-size:13px;font-weight:800;margin-right:4px}

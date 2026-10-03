@@ -6,6 +6,7 @@
  "attribution": "© OpenStreetMap contributors",
  "license_url": "https://www.openstreetmap.org/copyright",
  "report_kakao_url": "",
+ "old_before": "2023-01-01",
  "places": [
   {
    "id": "osm-node-421263061",
@@ -30,7 +31,23 @@
    "osm_check": null,
    "osm_edit": "2025-11-11",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/421263061"
+   "source_url": "https://www.openstreetmap.org/node/421263061",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/421263061",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "status": "o"
+   },
+   "info_date": "2025-11-11",
+   "old": false
   },
   {
    "id": "osm-node-11427908969",
@@ -53,7 +70,23 @@
    "osm_check": null,
    "osm_edit": "2023-12-18",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/11427908969"
+   "source_url": "https://www.openstreetmap.org/node/11427908969",
+   "korean": true,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/11427908969",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "status": "o"
+   },
+   "info_date": "2023-12-18",
+   "old": false
   },
   {
    "id": "osm-node-1896303236",
@@ -77,7 +110,25 @@
    "osm_check": "2024-02-08",
    "osm_edit": "2024-02-08",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/1896303236"
+   "source_url": "https://www.openstreetmap.org/node/1896303236",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/1896303236",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2024-02-08",
+   "old": false
   },
   {
    "id": "osm-node-13834194401",
@@ -100,7 +151,25 @@
    "osm_check": "2026-05-16",
    "osm_edit": "2026-05-16",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/13834194401"
+   "source_url": "https://www.openstreetmap.org/node/13834194401",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/13834194401",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2026-05-16",
+   "old": false
   },
   {
    "id": "osm-way-205436011",
@@ -124,7 +193,25 @@
    "osm_check": "2023-12-07",
    "osm_edit": "2023-12-07",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/way/205436011"
+   "source_url": "https://www.openstreetmap.org/way/205436011",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/way/205436011",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2023-12-07",
+   "old": false
   },
   {
    "id": "osm-node-2855131323",
@@ -147,7 +234,24 @@
    "osm_check": "2026-02-08",
    "osm_edit": "2026-02-10",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/2855131323"
+   "source_url": "https://www.openstreetmap.org/node/2855131323",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/2855131323",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "status": "o"
+   },
+   "info_date": "2026-02-08",
+   "old": false
   },
   {
    "id": "osm-node-13644786201",
@@ -170,7 +274,24 @@
    "osm_check": "2026-03-16",
    "osm_edit": "2026-03-15",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/13644786201"
+   "source_url": "https://www.openstreetmap.org/node/13644786201",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/13644786201",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "status": "o"
+   },
+   "info_date": "2026-03-16",
+   "old": false
   },
   {
    "id": "osm-way-1024660791",
@@ -193,7 +314,24 @@
    "osm_check": "2024-02-08",
    "osm_edit": "2024-02-08",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/way/1024660791"
+   "source_url": "https://www.openstreetmap.org/way/1024660791",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/way/1024660791",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "status": "o"
+   },
+   "info_date": "2024-02-08",
+   "old": false
   },
   {
    "id": "osm-node-5348990922",
@@ -218,7 +356,24 @@
    "osm_check": null,
    "osm_edit": "2019-09-26",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/5348990922"
+   "source_url": "https://www.openstreetmap.org/node/5348990922",
+   "korean": false,
+   "kr": "OSM 음식 종류: 한식",
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/5348990922",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "status": "o"
+   },
+   "info_date": "2019-09-26",
+   "old": true
   },
   {
    "id": "osm-node-1597614807",
@@ -241,7 +396,26 @@
    "osm_check": "2024-01-07",
    "osm_edit": "2024-01-07",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/1597614807"
+   "source_url": "https://www.openstreetmap.org/node/1597614807",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/1597614807",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "address": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2024-01-07",
+   "old": false
   },
   {
    "id": "osm-node-1597919327",
@@ -264,7 +438,25 @@
    "osm_check": "2026-05-16",
    "osm_edit": "2026-05-16",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/1597919327"
+   "source_url": "https://www.openstreetmap.org/node/1597919327",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/1597919327",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2026-05-16",
+   "old": false
   },
   {
    "id": "osm-node-13098251133",
@@ -287,7 +479,26 @@
    "osm_check": "2026-09-23",
    "osm_edit": "2026-09-23",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/13098251133"
+   "source_url": "https://www.openstreetmap.org/node/13098251133",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/13098251133",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "address": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2026-09-23",
+   "old": false
   },
   {
    "id": "osm-node-10236738256",
@@ -310,7 +521,24 @@
    "osm_check": "2022-12-04",
    "osm_edit": "2022-12-04",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/10236738256"
+   "source_url": "https://www.openstreetmap.org/node/10236738256",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/10236738256",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "status": "o"
+   },
+   "info_date": "2022-12-04",
+   "old": true
   },
   {
    "id": "osm-node-10843754919",
@@ -335,7 +563,24 @@
    "osm_check": "2025-09-20",
    "osm_edit": "2025-12-29",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/10843754919"
+   "source_url": "https://www.openstreetmap.org/node/10843754919",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/10843754919",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "status": "o"
+   },
+   "info_date": "2025-09-20",
+   "old": false
   },
   {
    "id": "osm-node-2766495240",
@@ -356,7 +601,24 @@
    "osm_check": null,
    "osm_edit": "2025-02-14",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/2766495240"
+   "source_url": "https://www.openstreetmap.org/node/2766495240",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/2766495240",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "status": "o"
+   },
+   "info_date": "2025-02-14",
+   "old": false
   },
   {
    "id": "osm-node-3530430786",
@@ -377,7 +639,24 @@
    "osm_check": null,
    "osm_edit": "2025-07-29",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/3530430786"
+   "source_url": "https://www.openstreetmap.org/node/3530430786",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/3530430786",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "status": "o"
+   },
+   "info_date": "2025-07-29",
+   "old": false
   },
   {
    "id": "osm-node-3501294931",
@@ -398,7 +677,23 @@
    "osm_check": null,
    "osm_edit": "2016-11-13",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/3501294931"
+   "source_url": "https://www.openstreetmap.org/node/3501294931",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/3501294931",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "status": "o"
+   },
+   "info_date": "2016-11-13",
+   "old": true
   },
   {
    "id": "osm-node-3220134251",
@@ -419,7 +714,23 @@
    "osm_check": null,
    "osm_edit": "2014-12-05",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/3220134251"
+   "source_url": "https://www.openstreetmap.org/node/3220134251",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/3220134251",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "phone": "o",
+    "status": "o"
+   },
+   "info_date": "2014-12-05",
+   "old": true
   },
   {
    "id": "osm-node-3229842190",
@@ -440,7 +751,23 @@
    "osm_check": null,
    "osm_edit": "2014-12-11",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/3229842190"
+   "source_url": "https://www.openstreetmap.org/node/3229842190",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/3229842190",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "phone": "o",
+    "status": "o"
+   },
+   "info_date": "2014-12-11",
+   "old": true
   },
   {
    "id": "osm-node-3767513789",
@@ -461,7 +788,25 @@
    "osm_check": null,
    "osm_edit": "2023-09-22",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/3767513789"
+   "source_url": "https://www.openstreetmap.org/node/3767513789",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/3767513789",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2023-09-22",
+   "old": false
   },
   {
    "id": "osm-node-13371461170",
@@ -482,7 +827,25 @@
    "osm_check": null,
    "osm_edit": "2025-12-13",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/13371461170"
+   "source_url": "https://www.openstreetmap.org/node/13371461170",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/13371461170",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2025-12-13",
+   "old": false
   },
   {
    "id": "osm-way-1073075340",
@@ -503,7 +866,25 @@
    "osm_check": null,
    "osm_edit": "2024-03-20",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/way/1073075340"
+   "source_url": "https://www.openstreetmap.org/way/1073075340",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/way/1073075340",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2024-03-20",
+   "old": false
   },
   {
    "id": "osm-node-1563463730",
@@ -524,7 +905,25 @@
    "osm_check": null,
    "osm_edit": "2023-11-03",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/1563463730"
+   "source_url": "https://www.openstreetmap.org/node/1563463730",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/1563463730",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2023-11-03",
+   "old": false
   },
   {
    "id": "osm-node-3266879862",
@@ -545,7 +944,25 @@
    "osm_check": null,
    "osm_edit": "2017-04-05",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/3266879862"
+   "source_url": "https://www.openstreetmap.org/node/3266879862",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/3266879862",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2017-04-05",
+   "old": true
   },
   {
    "id": "osm-node-3672436444",
@@ -566,12 +983,30 @@
    "osm_check": null,
    "osm_edit": "2017-05-25",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/3672436444"
+   "source_url": "https://www.openstreetmap.org/node/3672436444",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/3672436444",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2017-05-25",
+   "old": true
   },
   {
    "id": "osm-node-4791588323",
    "cat": "beauty",
-   "cat_ko": "피부·뷰티",
+   "cat_ko": "피부·미용",
    "name": "La Nitivadee Dermatology & Aesthetic Laser Center",
    "kind": "피부과 클리닉",
    "cuisine": [],
@@ -587,12 +1022,31 @@
    "osm_check": null,
    "osm_edit": "2023-09-24",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/4791588323"
+   "source_url": "https://www.openstreetmap.org/node/4791588323",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/4791588323",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "address": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2023-09-24",
+   "old": false
   },
   {
    "id": "osm-node-12475538243",
    "cat": "beauty",
-   "cat_ko": "피부·뷰티",
+   "cat_ko": "피부·미용",
    "name": "Divine Beauty Pattaya",
    "kind": "뷰티 숍",
    "cuisine": [],
@@ -608,12 +1062,29 @@
    "osm_check": "2026-09-23",
    "osm_edit": "2026-09-23",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/12475538243"
+   "source_url": "https://www.openstreetmap.org/node/12475538243",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/12475538243",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "status": "o"
+   },
+   "info_date": "2026-09-23",
+   "old": false
   },
   {
    "id": "osm-node-13206639089",
    "cat": "beauty",
-   "cat_ko": "피부·뷰티",
+   "cat_ko": "피부·미용",
    "name": "Perfect Beauty Studio",
    "kind": "뷰티 숍",
    "cuisine": [],
@@ -629,7 +1100,25 @@
    "osm_check": null,
    "osm_edit": "2025-12-12",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/13206639089"
+   "source_url": "https://www.openstreetmap.org/node/13206639089",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/13206639089",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "address": "o",
+    "website": "o",
+    "status": "o"
+   },
+   "info_date": "2025-12-12",
+   "old": false
   },
   {
    "id": "osm-node-4191237702",
@@ -654,7 +1143,23 @@
    "osm_check": "2024-02-18",
    "osm_edit": "2024-02-18",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/4191237702"
+   "source_url": "https://www.openstreetmap.org/node/4191237702",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/4191237702",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "status": "o"
+   },
+   "info_date": "2024-02-18",
+   "old": false
   },
   {
    "id": "osm-node-13016511957",
@@ -677,7 +1182,904 @@
    "osm_check": "2025-08-10",
    "osm_edit": "2025-12-29",
    "source": "OpenStreetMap",
-   "source_url": "https://www.openstreetmap.org/node/13016511957"
+   "source_url": "https://www.openstreetmap.org/node/13016511957",
+   "korean": false,
+   "kr": null,
+   "srcs": {
+    "o": {
+     "by": "OpenStreetMap",
+     "url": "https://www.openstreetmap.org/node/13016511957",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "o",
+    "hours": "o",
+    "phone": "o",
+    "status": "o"
+   },
+   "info_date": "2025-08-10",
+   "old": false
+  },
+  {
+   "id": "gmap-255598704886170663",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "파타야 정읍식당 (Pattaya Jeongeup)",
+   "kind": "한식당",
+   "cuisine": [],
+   "hours": "Sa 11:00-22:00",
+   "hours_partial": true,
+   "phone": "+66 65 636 2972",
+   "website": null,
+   "address": "78, 54 Pattaya Sai Song Rd, Pattaya City, Chon Buri 20260",
+   "lat": 12.945947,
+   "lng": 100.889618,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=255598704886170663",
+   "rating": "4.9",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=255598704886170663",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-10113132745327497823",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "인연한국식당 (Inyon Korea Restaurant)",
+   "kind": "한식당",
+   "cuisine": [],
+   "hours": "Sa 16:30-00:30",
+   "hours_partial": true,
+   "phone": "+66 82 636 6424",
+   "website": null,
+   "address": "Nongpure, 194/7 Mid Pattaya Road, Nong Prue, Bang Lamung, Banglamung, Chon Buri 20150",
+   "lat": 12.933967,
+   "lng": 100.895016,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=10113132745327497823",
+   "rating": "4.6",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=10113132745327497823",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-18411349768563138324",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "더부대 (The Bude)",
+   "kind": "한식당",
+   "cuisine": [],
+   "hours": "Sa 10:00-01:00",
+   "hours_partial": true,
+   "phone": "+66 61 410 8407",
+   "website": "https://www.facebook.com/profile.php?id=61569861045709",
+   "address": "Chon Buri, Bang Lamung District, Pattaya City, 2nd Road The Bude (Unit. 176, 78/54-56",
+   "lat": 12.945423,
+   "lng": 100.889708,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=18411349768563138324",
+   "rating": "4.9",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=18411349768563138324",
+     "at": "2026-10-03"
+    },
+    "w": {
+     "by": "가게 공식 페이스북",
+     "url": "https://www.facebook.com/profile.php?id=61569861045709",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "website": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-13487598382989439271",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "장군식당 2호점 (Janggun Restaurant 2)",
+   "kind": "한식당",
+   "cuisine": [],
+   "hours": "Sa 08:00-03:00",
+   "hours_partial": true,
+   "phone": "+66 65 306 7954",
+   "website": "https://www.instagram.com/janggun031000gmail.com9",
+   "address": "Muang Pattaya, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.944335,
+   "lng": 100.888572,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=13487598382989439271",
+   "rating": "5.0",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=13487598382989439271",
+     "at": "2026-10-03"
+    },
+    "w": {
+     "by": "가게 공식 인스타그램",
+     "url": "https://www.instagram.com/janggun031000gmail.com9",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "website": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-11558704260756431137",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "JIBBAB Korean Restaurant",
+   "kind": "한식당",
+   "cuisine": [],
+   "hours": "Sa 11:00-22:00",
+   "hours_partial": true,
+   "phone": "+66 95 730 9317",
+   "website": null,
+   "address": "171, 11 Naklua, Muang Pattaya, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.949353,
+   "lng": 100.893614,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=11558704260756431137",
+   "rating": "4.8",
+   "korean": true,
+   "kr": "Google 지도 종류: 한식당",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=11558704260756431137",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-144844224521017718",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "SEEU Korean Restaurant",
+   "kind": "한식당",
+   "cuisine": [],
+   "hours": "Sa 11:00-22:00",
+   "hours_partial": true,
+   "phone": "+66 38 195 277",
+   "website": null,
+   "address": "80 3 Muang Pattaya, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.943145,
+   "lng": 100.892708,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=144844224521017718",
+   "rating": "4.7",
+   "korean": true,
+   "kr": "Google 지도 종류: 한식당",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=144844224521017718",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-2729908442921533033",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Hanok Kbbq Pattaya",
+   "kind": "한식 바비큐",
+   "cuisine": [],
+   "hours": "Sa 11:30-22:30",
+   "hours_partial": true,
+   "phone": "+66 95 973 5666",
+   "website": "https://www.facebook.com/profile.php?id=61562109821998",
+   "address": "369, 3 Beach Rd, Pattaya City, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.938456,
+   "lng": 100.883835,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=2729908442921533033",
+   "rating": "4.5",
+   "korean": true,
+   "kr": "Google 지도 종류: 한식당",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=2729908442921533033",
+     "at": "2026-10-03"
+    },
+    "w": {
+     "by": "가게 공식 페이스북",
+     "url": "https://www.facebook.com/profile.php?id=61562109821998",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "website": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-14509487089591426873",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Hanwoori Garden (한우리)",
+   "kind": "한식당",
+   "cuisine": [],
+   "hours": "Sa 11:00-22:00",
+   "hours_partial": true,
+   "phone": "+66 38 411 596",
+   "website": null,
+   "address": "Pattaya City, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.947488,
+   "lng": 100.898328,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=14509487089591426873",
+   "rating": "4.1",
+   "korean": true,
+   "kr": "Google 지도 종류: 한식당",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=14509487089591426873",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-11432789597653540266",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Gayarang Korean Restaurant",
+   "kind": "한식당",
+   "cuisine": [],
+   "hours": "Sa 11:00-21:00",
+   "hours_partial": true,
+   "phone": "+66 99 295 4262",
+   "website": null,
+   "address": "33, Muang Pattaya, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.896164,
+   "lng": 100.909715,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=11432789597653540266",
+   "rating": "4.3",
+   "korean": true,
+   "kr": "Google 지도 종류: 한식당",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=11432789597653540266",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-9037205419974570278",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Firepork (Terminal 21 3층)",
+   "kind": "한식 바비큐",
+   "cuisine": [],
+   "hours": "Sa 11:00-23:00",
+   "hours_partial": true,
+   "phone": "+66 33 252 503",
+   "website": "https://www.facebook.com/fireporkthailand/",
+   "address": "Terminal 21 Pattaya, 777 Moo. 6, Banglamung, Pattaya City, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.949987,
+   "lng": 100.889343,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=9037205419974570278",
+   "rating": "4.8",
+   "korean": true,
+   "kr": "Google 지도 종류: 한식당",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=9037205419974570278",
+     "at": "2026-10-03"
+    },
+    "w": {
+     "by": "가게 공식 페이스북",
+     "url": "https://www.facebook.com/fireporkthailand/",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "website": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-15073289515241428784",
+   "cat": "food",
+   "cat_ko": "맛집",
+   "name": "Hangme Korean B.B.Q.",
+   "kind": "한식 바비큐",
+   "cuisine": [],
+   "hours": "Sa 10:30-22:30",
+   "hours_partial": true,
+   "phone": "+66 98 357 4942",
+   "website": null,
+   "address": "384, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.946157,
+   "lng": 100.898546,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=15073289515241428784",
+   "rating": "4.3",
+   "korean": true,
+   "kr": "Google 지도 종류: 한식 바비큐",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=15073289515241428784",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-5464154945514847055",
+   "cat": "mart",
+   "cat_ko": "마트",
+   "name": "위셀코리아마트(본점) & 분식좋아 (WESELL KOREA MART)",
+   "kind": "한인 마트 · 분식",
+   "cuisine": [],
+   "hours": "Sa 09:00-22:00",
+   "hours_partial": true,
+   "phone": "+66 85 502 8398",
+   "website": "https://www.facebook.com/WesellKoreaMart/",
+   "address": "8/112 Pattaya City, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.935757,
+   "lng": 100.903381,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=5464154945514847055",
+   "rating": "4.8",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=5464154945514847055",
+     "at": "2026-10-03"
+    },
+    "w": {
+     "by": "가게 공식 페이스북",
+     "url": "https://www.facebook.com/WesellKoreaMart/",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "website": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-15485910711713488062",
+   "cat": "mart",
+   "cat_ko": "마트",
+   "name": "파타야 한인마트 수원k마트",
+   "kind": "한인 마트",
+   "cuisine": [],
+   "hours": "Sa 10:00-22:00",
+   "hours_partial": true,
+   "phone": "+66 82 852 9255",
+   "website": null,
+   "address": "8 180 Moo 6, Pattaya City, Amphoe Bang Lamung, Chon Buri 20150",
+   "lat": 12.947759,
+   "lng": 100.899589,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=15485910711713488062",
+   "rating": "5.0",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=15485910711713488062",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-11923089133169316825",
+   "cat": "mart",
+   "cat_ko": "마트",
+   "name": "파타야 코리아타운 (Pattaya Korea Town)",
+   "kind": "한국 식료품점",
+   "cuisine": [],
+   "hours": "Sa 11:30-21:00",
+   "hours_partial": true,
+   "phone": "+66 65 940 1008",
+   "website": null,
+   "address": "Pattaya Nuea 7 Alley, Muang Pattaya, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.947702,
+   "lng": 100.899344,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=11923089133169316825",
+   "rating": "4.6",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=11923089133169316825",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-5872245969756695340",
+   "cat": "beauty",
+   "cat_ko": "피부·미용",
+   "name": "서울이발소 (Seoul Barbershop)",
+   "kind": "이발소",
+   "cuisine": [],
+   "hours": "Sa 10:00-21:00",
+   "hours_partial": true,
+   "phone": "+66 81 375 7001",
+   "website": "https://www.tiktok.com/@pattaya_seoulbarbershop",
+   "address": "240/5-6 Central Pattaya Rd, Pattaya City, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.934283,
+   "lng": 100.892864,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=5872245969756695340",
+   "rating": "4.9",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=5872245969756695340",
+     "at": "2026-10-03"
+    },
+    "w": {
+     "by": "가게 공식 틱톡",
+     "url": "https://www.tiktok.com/@pattaya_seoulbarbershop",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "website": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-7763899647333665611",
+   "cat": "travel",
+   "cat_ko": "여행·비자",
+   "name": "박군투어",
+   "kind": "여행사",
+   "cuisine": [],
+   "hours": "Sa 09:00-18:20",
+   "hours_partial": true,
+   "phone": "+66 80 230 2800",
+   "website": "http://www.park3848.com/",
+   "address": "Chon Buri, Bang Lamung District, Club Thailand: Pattaya Branch 78/70 Moo 9 Nongprue 주변",
+   "lat": 12.946575,
+   "lng": 100.889848,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=7763899647333665611",
+   "rating": "5.0",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=7763899647333665611",
+     "at": "2026-10-03"
+    },
+    "w": {
+     "by": "가게 공식 사이트",
+     "url": "http://www.park3848.com/",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "website": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-16449230828285769976",
+   "cat": "travel",
+   "cat_ko": "여행·비자",
+   "name": "디디타이투어",
+   "kind": "여행사",
+   "cuisine": [],
+   "hours": "Sa 00:00-24:00",
+   "hours_partial": true,
+   "phone": "+66 84 225 4074",
+   "website": "http://ddthai.co.kr/",
+   "address": "mike shopping mall, Pattaya City, Amphoe Bang Lamung, Chon Buri 20150",
+   "lat": 12.931034,
+   "lng": 100.881707,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=16449230828285769976",
+   "rating": "5.0",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=16449230828285769976",
+     "at": "2026-10-03"
+    },
+    "w": {
+     "by": "가게 공식 사이트",
+     "url": "http://ddthai.co.kr/",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "website": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-5143397496889875675",
+   "cat": "travel",
+   "cat_ko": "여행·비자",
+   "name": "남대문 여행사 (Numdaemoon Tour)",
+   "kind": "여행사",
+   "cuisine": [],
+   "hours": "Sa 00:00-24:00",
+   "hours_partial": true,
+   "phone": "+66 92 808 0932",
+   "website": "http://m.cafe.naver.com/namdeamun.cafe",
+   "address": "Pattayasaisong 3 Alley, Pattaya City, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.94478,
+   "lng": 100.890201,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=5143397496889875675",
+   "rating": "4.6",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=5143397496889875675",
+     "at": "2026-10-03"
+    },
+    "w": {
+     "by": "가게 공식 네이버 카페",
+     "url": "http://m.cafe.naver.com/namdeamun.cafe",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "website": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-10012892284384809664",
+   "cat": "travel",
+   "cat_ko": "여행·비자",
+   "name": "파타야가고파투어",
+   "kind": "여행사",
+   "cuisine": [],
+   "hours": "Sa 10:00-18:00",
+   "hours_partial": true,
+   "phone": "+66 95 958 0538",
+   "website": null,
+   "address": "3, 247, Muang Pattaya, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.946399,
+   "lng": 100.896749,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=10012892284384809664",
+   "rating": "3.4",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=10012892284384809664",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
+  },
+  {
+   "id": "gmap-17791113240875373753",
+   "cat": "travel",
+   "cat_ko": "여행·비자",
+   "name": "BM컨설팅 파타야지점",
+   "kind": "비자 상담(결혼·은퇴 비자)",
+   "cuisine": [],
+   "hours": "Sa off",
+   "hours_partial": true,
+   "phone": "+66 65 345 2201",
+   "website": "https://emetconsulting.com/",
+   "address": "222, M Floor, 99 Chaloem Phrakiat 9 Alley, Pattaya City, Bang Lamung District, Chon Buri 20150",
+   "lat": 12.939059,
+   "lng": 100.893915,
+   "price_thb": null,
+   "status": "Google 지도에 폐업 표시 없음",
+   "checked": "2026-10-03",
+   "osm_check": null,
+   "osm_edit": null,
+   "source": "Google 지도",
+   "source_url": "https://maps.google.com/?cid=17791113240875373753",
+   "rating": "5.0",
+   "korean": true,
+   "kr": "한글 상호",
+   "srcs": {
+    "g": {
+     "by": "Google 지도",
+     "url": "https://maps.google.com/?cid=17791113240875373753",
+     "at": "2026-10-03"
+    },
+    "w": {
+     "by": "가게 공식 사이트",
+     "url": "https://emetconsulting.com/",
+     "at": "2026-10-03"
+    }
+   },
+   "fsrc": {
+    "name": "g",
+    "hours": "g",
+    "phone": "g",
+    "address": "g",
+    "website": "g",
+    "status": "g"
+   },
+   "info_date": "2026-10-03",
+   "old": false
   }
  ]
 }

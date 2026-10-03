@@ -6,7 +6,9 @@
   "use strict";
   if (!window.TNPages) return;
   var DATA = null, loading = false, err = false, cat = "all", openOnly = false;
-  var CATS = [{ id: "all", e: "📇", t: "전체" }, { id: "food", e: "🍜", t: "맛집" }, { id: "cafe", e: "☕", t: "카페" }, { id: "pet", e: "🐶", t: "동물병원·펫샵" }, { id: "moto", e: "🏍️", t: "오토바이" }, { id: "beauty", e: "💅", t: "피부·뷰티" }];
+  var CATS = [{ id: "all", e: "📇", t: "전체" }, { id: "korean", e: "🇰🇷", t: "한식·한인" }, { id: "food", e: "🍜", t: "맛집" }, { id: "cafe", e: "☕", t: "카페" }, { id: "mart", e: "🛒", t: "마트" },
+    { id: "travel", e: "✈️", t: "여행·비자" }, { id: "beauty", e: "💈", t: "피부·미용" }, { id: "pet", e: "🐶", t: "동물병원·펫샵" }, { id: "moto", e: "🏍️", t: "오토바이" }];
+  function inCat(p, id) { return id === "all" || (id === "korean" ? !!p.korean : p.cat === id); }
   var esc = TNPages.esc;
   var KO = { Mo: "월", Tu: "화", We: "수", Th: "목", Fr: "금", Sa: "토", Su: "일", PH: "공휴일" }, ORDER = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
   var JS_DAY = { Su: 0, Mo: 1, Tu: 2, We: 3, Th: 4, Fr: 5, Sa: 6 };
@@ -45,6 +47,7 @@
     var hit = null;
     (oh.week[today] || []).forEach(function (iv) { if (n.min >= iv[0] && n.min < iv[1]) hit = iv[1] - n.min; });
     (oh.week[yest] || []).forEach(function (iv) { if (iv[1] > 1440 && n.min < iv[1] - 1440) hit = iv[1] - 1440 - n.min; });
+    if (hit == null && oh.week[today] === undefined) return null;   // 그 요일 영업시간을 모름(예: Google 제한된 보기 → 토요일만 확인) → '확인 안 됨'
     return hit == null ? "closed" : hit <= 60 ? "soon" : "open";
   }
   function t2(m) { m = m % 1440; return (m < 600 ? "0" : "") + Math.floor(m / 60) + ":" + (m % 60 < 10 ? "0" : "") + (m % 60); }
@@ -57,6 +60,8 @@
       if (g && g.k === k) g.d.push(d); else groups.push({ k: k, d: [d], iv: iv });
     });
     var txt = function (iv) { return !iv ? "확인 안 됨" : !iv.length ? "쉬는 날" : iv.map(function (x) { return t2(x[0]) + "~" + (x[1] > 1440 ? "다음 날 " : "") + (x[1] === 1440 ? "24:00" : t2(x[1])); }).join(", "); };
+    var known = ORDER.filter(function (d) { return oh.week[d] !== undefined; });
+    if (known.length < 7) return known.map(function (d) { return KO[d] + "요일 " + txt(oh.week[d]); }).join(" / ") + " (다른 요일은 확인 안 됨)";
     if (groups.length === 1) return "매일 " + txt(groups[0].iv);
     var s = groups.map(function (g) { var dd = g.d.length > 2 ? KO[g.d[0]] + "~" + KO[g.d[g.d.length - 1]] : g.d.map(function (x) { return KO[x]; }).join("·"); return dd + " " + txt(g.iv); }).join(" / ");
     return s + (/PH/.test(raw) ? " (공휴일은 가게에 확인)" : "");
@@ -79,7 +84,12 @@
       .then(function (d) { DATA = d; d.places.forEach(function (p) { p._oh = parseOH(p.hours); }); loading = false; TNPages.refresh(); },
             function () { loading = false; err = true; TNPages.refresh(); });
   }
-  function yearsOld(p) { var d = p.osm_check || p.osm_edit; return d ? (Date.now() - Date.parse(d)) / (365.25 * 864e5) : 99; }
+  // 칸마다 출처: p.fsrc[칸] → p.srcs[키] = { by, url, at(확인한 날) }
+  function fs(p, f) {
+    var k = p.fsrc && p.fsrc[f], s = k && p.srcs && p.srcs[k];
+    if (!s) return '<small class="pc__fs">확인한 출처에 없음</small>';
+    return '<small class="pc__fs"><a href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">' + esc(s.by) + " ↗</a> · " + esc(s.at) + " 확인</small>";
+  }
 
   function card(p) {
     var st = openState(p._oh);
@@ -87,19 +97,21 @@
       : st === "closed" ? '<span class="pc__open pc__open--off">⚪ 지금 닫힘</span>' : '<span class="pc__open">영업 여부 확인 안 됨</span>';
     var c = CATS.filter(function (x) { return x.id === p.cat; })[0] || CATS[0];
     var kind = [p.kind].concat(p.cuisine || []).filter(Boolean).join(" · ");
-    var old = yearsOld(p) >= 2 ? '<p class="pc__warn">⚠️ ' + (p.osm_check || p.osm_edit).slice(0, 4) + "년 정보예요. 지금과 다를 수 있으니 가기 전에 전화로 확인하세요.</p>" : "";
+    var old = p.old ? '<p class="pc__warn"><span class="pc__old">🕰️ 오래된 정보</span> ' + esc(String(p.info_date).slice(0, 4)) + "년에 마지막으로 확인된 정보예요. 지금과 다를 수 있으니 가기 전에 전화로 확인하세요.</p>" : "";
+    var kr = p.korean ? '<p class="pc__kr">🇰🇷 한식·한인 업소 <small>(근거: ' + esc(p.kr || "확인 안 됨") + ")</small></p>" : "";
     var map = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p.name + " " + p.lat + "," + p.lng);
     var kakao = DATA.report_kakao_url;
     return '<article class="pc" data-pc="' + esc(p.id) + '">' +
       '<div class="pc__top"><span class="pc__cat">' + c.e + " " + esc(p.cat_ko) + "</span>" + stHTML + "</div>" +
-      '<h3 class="pc__name">' + esc(p.name) + "</h3>" + (kind ? '<p class="pc__kind">' + esc(kind) + "</p>" : "") + old +
+      '<h3 class="pc__name">' + esc(p.name) + "</h3>" + (kind ? '<p class="pc__kind">' + esc(kind) + "</p>" : "") + kr + old +
       '<dl class="pc__info">' +
-        "<div><dt>🕒 영업시간</dt><dd>" + esc(hoursKo(p.hours, p._oh)) + "</dd></div>" +
-        "<div><dt>💰 가격</dt><dd" + (p.price_thb == null ? ' class="pc__na"' : "") + ">" + esc(priceKo(p.price_thb)) + "</dd></div>" +
-        "<div><dt>📍 주소</dt><dd" + (p.address ? "" : ' class="pc__na"') + ">" + esc(p.address || "확인 안 됨(지도 버튼으로 위치 보기)") + "</dd></div>" +
-        "<div><dt>🏪 영업 상태</dt><dd>" + esc(p.status) + "</dd></div>" +
-        "<div><dt>✅ 최종 확인</dt><dd>" + esc(p.checked) + " (지도 데이터 받아 옴)" +
-          '<small>현장 확인: ' + esc(p.osm_check || "확인 안 됨") + " · 지도 정보 수정: " + esc(p.osm_edit) + "</small></dd></div>" +
+        "<div><dt>🕒 영업시간</dt><dd>" + esc(hoursKo(p.hours, p._oh)) + fs(p, "hours") + "</dd></div>" +
+        "<div><dt>💰 가격</dt><dd" + (p.price_thb == null ? ' class="pc__na"' : "") + ">" + esc(priceKo(p.price_thb)) + fs(p, "price") + "</dd></div>" +
+        "<div><dt>📍 주소</dt><dd" + (p.address ? "" : ' class="pc__na"') + ">" + esc(p.address || "확인 안 됨(지도 버튼으로 위치 보기)") + fs(p, "address") + "</dd></div>" +
+        "<div><dt>📞 전화</dt><dd" + (p.phone ? "" : ' class="pc__na"') + ">" + esc(p.phone || "확인 안 됨") + fs(p, "phone") + "</dd></div>" +
+        "<div><dt>🏪 영업 상태</dt><dd>" + esc(p.status) + fs(p, "status") + "</dd></div>" +
+        "<div><dt>✅ 최종 확인</dt><dd>" + esc(p.checked) + (p.source === "Google 지도" ? " (Google 지도에서 직접 봄)" : " (지도 데이터 받아 옴)") +
+          (p.source === "Google 지도" ? "" : '<small>현장 확인: ' + esc(p.osm_check || "확인 안 됨") + " · 지도 정보 수정: " + esc(p.osm_edit) + "</small>") + "</dd></div>" +
       "</dl>" +
       '<div class="pc__btns"><a class="pc__btn pc__btn--map" href="' + esc(map) + '" target="_blank" rel="noopener">📍 지도</a>' +
         (p.phone ? '<a class="pc__btn" href="tel:' + esc(p.phone.replace(/[^\d+]/g, "")) + '">📞 전화</a>' : '<span class="pc__btn pc__btn--off" aria-disabled="true">📞 번호 확인 안 됨</span>') + "</div>" +
@@ -116,11 +128,12 @@
       load(); loadFx();
       if (err) return '<div class="empty empty--err pc-empty" role="alert"><b>⚠️ 가게 목록을 불러오지 못했어요.</b><br>인터넷 연결을 확인하고 다시 시도해 주세요.<br><button type="button" class="btn btn--primary btn--sm empty__retry" data-pc-retry>다시 시도</button></div>';
       if (!DATA) return '<div class="skel pc-skel" aria-hidden="true"></div><div class="skel pc-skel" aria-hidden="true"></div><p class="sr-only" role="status">가게 목록을 불러오는 중이에요…</p>';
-      var all = DATA.places, n = function (id) { return all.filter(function (p) { return id === "all" || p.cat === id; }).length; };
-      var list = all.filter(function (p) { return (cat === "all" || p.cat === cat) && (!openOnly || /open|soon/.test(openState(p._oh) || "")); });
-      list.sort(function (a, b) { var r = function (p) { var s = openState(p._oh); return s === "open" ? 0 : s === "soon" ? 1 : s === "closed" ? 2 : 3; }; return r(a) - r(b); });
+      var all = DATA.places, n = function (id) { return all.filter(function (p) { return inCat(p, id); }).length; };
+      var list = all.filter(function (p) { return inCat(p, cat) && (!openOnly || /open|soon/.test(openState(p._oh) || "")); });
+      // 줄 세우기: 오래된 정보(2023년 전)는 맨 뒤 → 그 안에서 영업 중 → 곧 닫음 → 닫힘 → 모름
+      list.sort(function (a, b) { var r = function (p) { var s = openState(p._oh); return (p.old ? 10 : 0) + (s === "open" ? 0 : s === "soon" ? 1 : s === "closed" ? 2 : 3); }; return r(a) - r(b); });
       var c = CATS.filter(function (x) { return x.id === cat; })[0];
-      var head = '<p class="pc-intro"><b>지도 데이터(OpenStreetMap)에서 받아 온 실제 가게 ' + all.length + "곳</b>이에요. 모르는 칸은 <b>확인 안 됨</b>으로 두었어요. 영업시간·가격은 바뀔 수 있으니 가기 전에 꼭 전화·지도로 확인하세요.</p>" +
+      var head = '<p class="pc-intro"><b>지도(OpenStreetMap·Google 지도)에서 실제로 확인한 가게 ' + all.length + "곳</b>이에요(한식·한인 업소 " + n("korean") + "곳). 칸마다 출처와 확인한 날을 적었고, 모르는 칸은 <b>확인 안 됨</b>으로 두었어요. <b>🕰️ 오래된 정보</b>(2023년 전)는 맨 뒤에 있어요. 영업시간·가격은 바뀔 수 있으니 가기 전에 꼭 전화·지도로 확인하세요.</p>" +
         '<div class="pc-filter" role="group" aria-label="가게 종류">' + CATS.map(function (x) {
           return '<button type="button" class="pc-f" data-pc-cat="' + x.id + '" aria-pressed="' + (x.id === cat) + '"><span aria-hidden="true">' + x.e + "</span> " + esc(x.t) + " <small>" + n(x.id) + "</small></button>"; }).join("") + "</div>" +
         '<button type="button" class="pc-openonly" data-pc-open aria-pressed="' + openOnly + '">' + (openOnly ? "✅" : "⬜") + " 🟢 지금 영업 중인 곳만 보기</button>";
@@ -128,7 +141,7 @@
         : '<div class="empty pc-empty"><p class="pc-empty__e" aria-hidden="true">🔍</p><p><b>' + (openOnly ? "지금 영업 중인 " + esc(c.t === "전체" ? "" : c.t + " ") + "가게가 없어요" : "이 종류 가게가 아직 없어요") + "</b></p>" +
           "<p>" + (openOnly ? "영업시간이 확인된 곳만 계산해요. 위의 '지금 영업 중인 곳만 보기'를 끄면 모두 보여요." : "다른 종류를 골라 보세요.") + "</p></div>";
       return head + body +
-        '<p class="pc-src">지도 데이터 © <a href="' + esc(DATA.license_url) + '" target="_blank" rel="noopener">OpenStreetMap contributors</a> · 받은 날 ' + esc(DATA.fetched) + " · '지금 영업 중'은 방콕 시간과 지도에 적힌 영업시간으로 계산해요. 이 목록은 광고가 아니고 돈을 받지 않아요(시험).</p>";
+        '<p class="pc-src">지도 데이터 © <a href="' + esc(DATA.license_url) + '" target="_blank" rel="noopener">OpenStreetMap contributors</a> · 한식·한인 업소는 Google 지도(로그인 없이 보이는 화면)에서 본 값 · 받은 날 ' + esc(DATA.fetched) + " · '지금 영업 중'은 방콕 시간과 지도에 적힌 영업시간으로 계산해요(그 요일 시간을 모르면 '확인 안 됨'). 이 목록은 광고가 아니고 돈을 받지 않아요(시험).</p>";
     },
     click: function (e, t) {
       var el;
