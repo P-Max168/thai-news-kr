@@ -1,6 +1,6 @@
 {
  "_readme": "관리자 승인함(#approve) 목록 — tools/pending.py 가 PENDING_APPROVAL.md 에서 만듦. 승인은 민구님이 고르고 봇이 다음 실행에 반영(자동 승인 없음)",
- "updated_at": "2026-10-03T15:48:45+07:00",
+ "updated_at": "2026-10-03T16:25:59+07:00",
  "items": [
   {
    "id": "p1",
@@ -56,6 +56,14 @@
    "kind": "연락 채널(운영자 이름)",
    "body": "**가게 카드 '✋ 정보 틀림 알리기(카톡)' 링크** — 운영자 카카오톡 채널(또는 오픈채팅) 주소를 정해 주세요. 지금은 광고 배너와 같은 자리표시(누르면 '카톡 문의 링크를 준비 중이에요'). 사진: backups/backup-20261003-1540-places-test/after-places-pet.jpg",
    "where": "`data/places-pattaya.json` `report_kakao_url`(tools/places/build_places.py)",
+   "status": "대기"
+  },
+  {
+   "id": "p8",
+   "no": 8,
+   "kind": "영업(가게 참여 시안)",
+   "body": "**가게 주인이 가격·영업시간 알려 주기(무료)** — 시안만, 보내기·저장·결제·실제 등록 없음. 카드에 '🏪 사장님이세요? 가격·영업시간 알려 주기' 버튼 → 요일별 시간·대표 메뉴 3개 가격(바트, 원화는 자동)·증빙 사진 1장·확인 연락처 → 운영자 확인 뒤 '✔ 가게가 알려 줌 · 날짜 · 확인 방법' 표시. 정해 주실 것: ① 받는 곳(카톡 채널 / 구글 설문지 / 사이트 안 칸 = Firestore 규칙 필요) ② 확인 방법(사진 + 전화 권장) ③ 표시 문구 ④ 무료 유지(권장, #6 상단 고정과 따로). 사진: backups/backup-20261003-1624-owner-mockup/mockup-owner.jpg",
+   "where": "`tools/places/mockup-owner.html`(사이트에 링크 안 됨) → OK 뒤 assets/places.js 버튼 + data 의 `srcs` 에 '가게가 알려 줌' 출처",
    "status": "대기"
   }
  ]
