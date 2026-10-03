@@ -21,9 +21,9 @@ if git ls-files | grep -qE '^(raw|archive|screenshots)/'; then
 fi
 
 git checkout -q main
-# 🇰🇷 data/korea.json|js 는 GitHub Actions(.github/workflows/korea.yml)가 2시간마다 갱신·커밋하는 파일 → 이 스크립트는 절대 올리지 않는다.
-# 로컬 사본(오래됐을 수 있음)은 버리고 원격 것을 받는다(pull 때 충돌·덮어쓰기 방지).
-KOREA_FILES="data/korea.json data/korea.js"
+# 🇰🇷 data/korea.json|js · 💱 data/ticker.json|js(헤더 시세 칩)는 GitHub Actions(.github/workflows/korea.yml)가 2시간마다 갱신·커밋하는 파일
+# → 이 스크립트는 절대 올리지 않는다. 로컬 사본(오래됐을 수 있음)은 버리고 원격 것을 받는다(pull 때 충돌·덮어쓰기 방지).
+KOREA_FILES="data/korea.json data/korea.js data/ticker.json data/ticker.js"
 for f in $KOREA_FILES; do
   if git ls-files --error-unmatch "$f" >/dev/null 2>&1; then git checkout -q -- "$f"; else rm -f "$f"; fi
 done

@@ -1,4 +1,5 @@
 # 🇰🇷 '오늘의 한국 주요 뉴스' 10건 갱신(판과 무관) — data/korea.json + data/korea.js
+# + 💱 헤더 시세 칩 데이터(바트→원 환율·태국 금시세) — data/ticker.json + data/ticker.js (tools/fetch_ticker.py)
 # 2시간마다(하루 12번) tools/fetch_korea.py --standalone 실행 → 바뀌었을 때만 봇 이름으로 커밋·push.
 # GitHub Pages 는 main 브랜치 루트 배포(legacy)라 push 하면 다시 배포된다(90초 안에 빌드가 안 보일 때만 Pages 빌드 요청).
 #
@@ -51,7 +52,14 @@ jobs:
         run: pip install --quiet googlenewsdecoder
 
       - name: 한국 주요 뉴스 수집(data/korea.json|js)
+        id: korea
+        continue-on-error: true
         run: python3 tools/fetch_korea.py --standalone ${{ inputs.force && '--force' || '' }}
+
+      - name: 시세 수집(환율·금시세 → data/ticker.json|js)
+        id: ticker
+        continue-on-error: true
+        run: python3 tools/fetch_ticker.py
 
       - name: 바뀌었으면 커밋·push (pull --rebase, 재시도)
         id: push
@@ -59,10 +67,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/korea.json data/korea.js
+          [ -f data/ticker.json ] && git add data/ticker.json data/ticker.js
           if git diff --cached --quiet; then
             echo "변경 없음 — 커밋 안 함"; echo "pushed=0" >> "$GITHUB_OUTPUT"; exit 0
           fi
-          git commit -q -m "korea: 한국 주요 뉴스 $(date '+%m-%d %H:%M') BKK"
+          if git diff --cached --quiet -- data/korea.json data/korea.js; then msg="ticker: 시세 $(date '+%m-%d %H:%M') BKK"; else msg="korea: 한국 주요 뉴스·시세 $(date '+%m-%d %H:%M') BKK"; fi
+          git commit -q -m "$msg"
           for i in 1 2 3 4 5; do
             git pull --rebase -X theirs -q origin main && git push -q origin HEAD:main && { echo "pushed=1" >> "$GITHUB_OUTPUT"; echo "push 완료 $(git rev-parse --short HEAD)"; exit 0; }
             echo "push 실패($i) → $((i * 15))s 뒤 재시도"; git rebase --abort 2>/dev/null || true; sleep $((i * 15))
@@ -80,3 +90,8 @@ jobs:
             if gh api "repos/${{ github.repository }}/pages/builds?per_page=5" --jq '.[].commit' | grep -q "$sha"; then echo "Pages 빌드 시작됨($sha)"; exit 0; fi
           done
           echo "Pages 빌드가 안 보여서 요청"; gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent || echo "Pages 빌드 요청 실패(무시)"
+
+      - name: 수집 실패 표시(한국 뉴스나 시세 중 하나라도 실패하면 빨간색 — 성공한 쪽은 위에서 이미 커밋됨)
+        if: steps.korea.outcome == 'failure' || steps.ticker.outcome == 'failure'
+        run: |
+          echo "korea=${{ steps.korea.outcome }} ticker=${{ steps.ticker.outcome }}"; exit 1

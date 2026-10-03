@@ -22,14 +22,14 @@
 <link rel="dns-prefetch" href="https://www.gstatic.com">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=884c659d">
+<link rel="stylesheet" href="assets/style.css?v=e4b68e5a">
 </head>
 <body>
 <header class="masthead">
   <div class="wrap masthead__inner">
-    <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-controls="drawer" aria-expanded="false"><span aria-hidden="true">☰</span></button>
+    <!-- 첫 줄: 🇹🇭❤️🇰🇷 + 제목. 국기는 윈도우 PC 에서도 보이도록 이모지 대신 인라인 SVG(태극기: 건·곤·감·리 위치, 태극 위 빨강·아래 파랑) -->
     <a class="brand" href="./" aria-label="태국 뉴스 한눈에 홈">
-      <span class="brand__mark" aria-hidden="true">TH</span>
+      <span class="brand__flags" aria-hidden="true"><svg class="flag" viewBox="0 0 30 20" width="30" height="20" role="img" aria-label="태국 국기"><rect width="30" height="20" fill="#A51931"/><rect y="3.333" width="30" height="13.333" fill="#F4F5F8"/><rect y="6.667" width="30" height="6.667" fill="#2D2A4A"/></svg><svg class="heart" viewBox="0 0 24 22" width="15" height="14" role="img" aria-label="하트"><path fill="#ff3b5c" d="M12 21.2l-1.5-1.36C5.1 14.94 1.5 11.68 1.5 7.65 1.5 4.4 4.05 1.85 7.3 1.85c1.84 0 3.6.86 4.7 2.2 1.1-1.34 2.86-2.2 4.7-2.2 3.25 0 5.8 2.55 5.8 5.8 0 4.03-3.6 7.29-9 12.2L12 21.2z"/></svg><svg class="flag flag--kr" viewBox="-36 -24 72 48" width="30" height="20" role="img" aria-label="대한민국 국기(태극기)"><rect x="-36" y="-24" width="72" height="48" fill="#fff"/><g transform="rotate(-56.3099325)"><path d="M-6-25H6M-6-22H6M-6-19H6M-6 19H6M-6 22H6M-6 25H6" stroke="#000" stroke-width="2"/><path d="M0 17V27" stroke="#fff" stroke-width="1"/><circle r="12" fill="#CD2E3A"/><path d="M0-12A6 6 0 0 0 0 0A6 6 0 0 1 0 12A12 12 0 0 1 0-12z" fill="#0047A0"/></g><g transform="rotate(-123.6900675)"><path d="M-6-25H6M-6-22H6M-6-19H6M-6 19H6M-6 22H6M-6 25H6" stroke="#000" stroke-width="2"/><path d="M0-23.5V-20.5M0 17V20.5M0 23.5V26.5" stroke="#fff" stroke-width="1"/></g></svg></span>
       <span class="brand__text">
         <strong>태국 뉴스 한눈에</strong>
         <small>파타야에서 읽는 오늘의 태국</small>
@@ -43,6 +43,11 @@
       </label>
       <div class="acct" id="acct" hidden></div>
     </div>
+  </div>
+  <!-- 둘째 줄: ☰ 메뉴(왼쪽 서랍) + 빠른 정보 칩(바트↔원·날씨·금시세·PM2.5 — assets/ticker.js, 좁은 화면은 옆으로 밀기) -->
+  <div class="wrap masthead__row2">
+    <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-controls="drawer" aria-expanded="false"><span aria-hidden="true">☰</span></button>
+    <div class="ticker is-empty" id="ticker" aria-label="빠른 정보: 환율·날씨·금시세·미세먼지"></div>
   </div>
   <!-- 예전 주제 탭 줄 자리: 일부러 비워 둠(운영자가 나중에 정함) -->
   <div class="subbar" aria-hidden="true"></div>
@@ -130,6 +135,8 @@
 <script src="assets/prefs.js?v=4c59b99b"></script>
 <script src="assets/taste.js?v=7c1f4138"></script>
 <script src="assets/app.js?v=66d5aaef"></script>
+<!-- 헤더 빠른 정보 칩 -->
+<script src="assets/ticker.js?v=c0a76a14"></script>
 <!-- 선택 기능(Google 로그인·동기화·댓글): 못 불러와도 사이트는 그대로 동작 -->
 <script src="assets/social.js?v=4fe678e6"></script>
 </body>

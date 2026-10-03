@@ -8,6 +8,8 @@
 
 > **2026-10-03 아침 추가**: 🇰🇷 한국 주요 뉴스가 **판과 따로 2시간마다(하루 12번) 자동 갱신**된다 — GitHub Actions `.github/workflows/korea.yml` 이 `tools/fetch_korea.py --standalone` 으로 `data/korea.json`(+`data/korea.js`)을 만들어 커밋. 화면은 **10건 중 4건 + '펼치기'(6건 더)/'접기'**, 제목 옆 '업데이트 HH:MM'(방콕). 🔥 태국 X 트렌드 상자는 모든 화면에서 **페이지 맨 아래**(모든 기사 다음, 푸터 바로 위)로 옮김(3→5→10 그대로). 아래 '🇰🇷 한국 주요 뉴스 자동 갱신' 참고.
 
+> **2026-10-03 헤더 개편**: 첫 줄 = **🇹🇭❤️🇰🇷 태국 뉴스 한눈에**(국기·하트는 인라인 SVG — 윈도우 PC 에서도 보임), 둘째 줄 = **☰ 메뉴(왼쪽) + 빠른 정보 칩**(💱 바트↔원 · 날씨 · 🪙 금시세 · PM2.5 미세먼지, 좁은 화면은 옆으로 밀기), 그 아래 빈 보조 줄은 그대로. 아래 '헤더(국기·☰·빠른 정보 칩)' 참고.
+
 ## 열어보기
 - 그냥 `index.html`을 더블클릭하면 됩니다(file:// 지원, fetch를 쓰지 않음).
 - 또는 `python3 -m http.server 8765` 실행 후 http://127.0.0.1:8765/ 접속.
@@ -15,7 +17,7 @@
 - `?date=2026-09-29-am`처럼 판 id로 지정. 예전 형식 `?date=2026-09-29`(날짜만)는 그날의 최신 판으로 연결됩니다.
 - `#p1`처럼 기사 id로 바로 열기 가능(예: `?date=2026-09-29-am#l1`). `?tab=visa`처럼 주제 탭 지정 가능(`feed`=내 피드, `all`=전체 보기).
 - 첫 방문: '어떤 분이세요?'(5개 페르소나) → 주제 5개 미리 선택 → 끄거나 3개까지 추가(최대 8개) → 저장. '건너뛰기'면 모든 주제. 나중에 헤더의 **🧩 내 주제**(또는 푸터 링크)에서 변경·'내 취향 초기화'. 설정은 브라우저 `localStorage`(`tnk.profile.v1`)에만 저장.
-- **☰ 메뉴(왼쪽 서랍)** = **⭐ 내 피드**(선택 주제 기사, 취향 순) + 🧩 내 주제 설정 + 선택한 주제들 + **전체 보기** + 다른 주제 + 계정(로그인) + 작은 광고 자리. 바깥 누르기·왼쪽으로 밀기·✕·Esc 로 닫힘(포커스 가둠). 헤더 아래 예전 탭 줄 자리는 비워 둠(운영자가 나중에 정함). 주요 뉴스 3건은 내 피드·전체 보기에서 주제 선택과 관계없이 항상 보임.
+- **☰ 메뉴(왼쪽 서랍, 헤더 둘째 줄 왼쪽 버튼)** = **⭐ 내 피드**(선택 주제 기사, 취향 순) + 🧩 내 주제 설정 + 선택한 주제들 + **전체 보기** + 다른 주제 + 계정(로그인) + 작은 광고 자리. 바깥 누르기·왼쪽으로 밀기·✕·Esc 로 닫힘(포커스 가둠). 헤더 아래 예전 탭 줄 자리는 비워 둠(운영자가 나중에 정함). 주요 뉴스 3건은 내 피드·전체 보기에서 주제 선택과 관계없이 항상 보임.
 - http(s)로 열면 PWA: 홈 화면에 추가(안드로이드: 안내 바의 '추가' 버튼 / iOS Safari: 공유 → 홈 화면에 추가), 한 번 열어 본 뒤엔 오프라인으로 최신 판 읽기. file:// 에서는 서비스 워커 없이 그냥 동작.
 - 판이 2개 이상이면 헤더에 **날짜·판 선택 드롭다운**('9월 29일 아침판 (최신)', '9월 29일 새벽판' …)이 나타나고, 이전 판을 보는 중엔 상단에 "최신 판 보기" 안내가 뜹니다.
 
@@ -35,7 +37,9 @@
 - `data/<id>.json` : 판 데이터(원본). `<id>` = `YYYY-MM-DD-am|pm|early`
 - `data/<id>.js`   : 같은 데이터를 `window.NEWS_DATA["<id>"]`에 등록하는 JS(file:// 용)
 - `data/korea.json` / `data/korea.js` : 🇰🇷 한국 주요 뉴스 10건 `{updated_at(+07:00), items:[{title, source, time, url}]}` / `window.KOREA_NEWS = …`(file:// 용). **GitHub Actions 전용 — 손으로 고치거나 deploy.sh 로 올리지 않음**
-- `.github/workflows/korea.yml` : 한국 주요 뉴스 2시간마다 갱신 워크플로(아래 '🇰🇷 한국 주요 뉴스 자동 갱신')
+- `.github/workflows/korea.yml` : 한국 주요 뉴스 + 헤더 시세 칩 데이터 2시간마다 갱신 워크플로(아래 '🇰🇷 한국 주요 뉴스 자동 갱신')
+- `data/ticker.json` / `data/ticker.js` : 헤더 빠른 정보 칩 데이터 `{updated_at, fx, gold, wx, aq}` / `window.TN_TICKER = …`(file:// 용). `tools/fetch_ticker.py` 가 만듦. **GitHub Actions 전용 — 손으로 고치거나 deploy.sh 로 올리지 않음**
+- `assets/ticker.js` : 헤더 둘째 줄 빠른 정보 칩(환율·날씨·금시세·PM2.5) 렌더 + 출처 작은 창(아래 '헤더')
 - `data/index.json|js` : 판 목록. `{latest, editions:[{id,date,edition,label,generated,stories}], dates:[id…]}` (최신순). **직접 고치지 말고 스크립트로 재생성**
 - `assets/app.js, style.css` : 렌더러/스타일(빌드 과정 없음)
 - `assets/topics.js` : **주제 10개·페르소나 5개 정의 + 옛 판 category→주제 매핑**(데이터 파일은 고치지 않음). 주제 id 는 `tools/newslib.py` 의 `TOPICS` 와 같아야 함
@@ -48,6 +52,7 @@
 - `tools/fetch_korea.py` : 🇰🇷 한국 주요 뉴스 — `--standalone` = 독립 파일 `data/korea.json|js` 생성(Actions 가 2시간마다), `<판 id>` = 판 `korea_top` 후보 수집(Google News KR) / `tools/discussion.py` : 💬 오늘의 질문 초안·적용 / `tools/strip_trend_cards.py` : trends24 기사 카드 제거(이미 실행함)
 - `drafts/` : 운영자 승인 전 초안(올리지 않음, .gitignore)
 - `manifest.json`, `sw.js`, `assets/icons/` : PWA(이름·아이콘·서비스 워커). 아이콘은 `python3 tools/make_icons.py` 로 다시 만들 수 있음(헤더 국기 로고 모양)
+- `tools/fetch_ticker.py` : 시세 칩 데이터 수집(환율 open.er-api.com → 실패 시 frankfurter, 금시세 goldtraders.or.th, 날씨·PM2.5 Open-Meteo 대체값) — Actions 가 2시간마다
 - `tools/stamp_assets.py` : assets 내용 해시로 `index.html` 의 `?v=` 와 `sw.js` 의 `VERSION` 갱신(서비스 워커 캐시 교체). **deploy.sh 가 자동 실행**
 - `tools/test_pwa.py` : 서비스 워커·manifest·설치 가능·오프라인 읽기 점검(헤드리스 Chrome)
 - `tools/editions/_template.py` : **새 형식 판 편집 템플릿**
@@ -60,6 +65,18 @@
 - `tools/screenshot.py` : Playwright 스크린샷 + 동작 점검(첫 방문 온보딩·페르소나·최대 8개·👍👎 재정렬·설정·옛 판 렌더·데스크톱). `FAIL:` 줄이 있으면 exit 1. 로컬 서버(`python3 -m http.server 8765`)를 먼저 띄울 것
 - `raw/<id>/`         : 그 판을 만들 때 수집한 RSS·원문 텍스트(출처 확인용). `raw/` 바로 아래 파일들은 새벽판 수집분, `raw/morning/`은 저장에 실패한 07:08 실행이 남긴 RSS(미검증 참고용)
 - `archive/legacy/`   : 더 이상 쓰지 않는 옛 파일(사이트에서 읽지 않음)
+
+## 헤더(국기·☰·빠른 정보 칩) — 2026-10-03 운영자 요청 ★판을 새로 만들어도 유지
+- **헤더는 판 데이터와 무관한 공용 템플릿**: `index.html`(마크업) + `assets/style.css`(맨 아래 '헤더(2026-10-03)' 블록) + `assets/ticker.js`. 모든 판(`?date=`·`?ed=`·`e/<id>/` → `?ed=` 로 이동)이 이 `index.html` 하나로 렌더되므로 정기 실행(판 빌드·`share_kit.py`)은 헤더를 건드리지 않는다. **정기 실행에서 index.html 헤더를 다시 쓰거나 지우지 말 것.** (`e/<id>/index.html` 은 메인으로 넘기는 미리보기 페이지라 헤더가 따로 있음 — 이번 변경 대상 아님. 공유 카드 PNG(`share_kit.py`)의 헤더 그림도 예전 모양 그대로)
+- **첫 줄**: 왼쪽부터 태국 국기 → ❤️ 하트 → 태극기 → '태국 뉴스 한눈에'(데스크톱은 아래 작은 부제). 오른쪽은 예전처럼 날짜·판 선택·로그인. 국기 이모지는 윈도우 PC 브라우저에서 글자로 보이므로 **인라인 SVG**(`index.html` `.brand__flags`). 태극기는 공식 비율(3:2, 태극 지름 = 세로의 1/2, 괘 막대 길이 = 태극 반지름, 두께 1/12·간격 1/24 지름, 태극에서 지름 1/4 띄움)로 그림: **왼쪽 위 건(☰)·오른쪽 아래 곤(☷)·오른쪽 위 감(☵)·왼쪽 아래 리(☲)**, 태극은 위 빨강(#CD2E3A)·아래 파랑(#0047A0). 고칠 때 이 배치를 바꾸지 말 것.
+- **둘째 줄**: 왼쪽 **☰ 메뉴 버튼(`#menuBtn`, 왼쪽 서랍 그대로)**, 오른쪽 **빠른 정보 칩**(`#ticker`). 좁은 화면은 옆으로 밀기(스크롤바 안 보임, 오른쪽 끝 흐림 표시). 그 아래 **빈 보조 줄(`.subbar`, 예전 탭 줄 자리)은 그대로 비워 둠**.
+- **칩 4개(운영자 확정 순서)** — 칩을 누르면 작은 창에 자세한 값·출처 링크·기준/받아 온 시각(방콕). 값이 없거나 오래되면 **그 칩을 숨김**(틀린 숫자를 보여 주지 않음, 절대 지어내지 않음):
+  1. **💱 바트↔원** `1฿ = 40.4원`(소수 1자리 — 환율이라서) ← `data/ticker.json` `fx.THB_KRW`(open.er-api.com THB 기준, 판 환율과 같은 출처. 실패 시 frankfurter/ECB). 받아 온 지 24시간·기준 시각 48시간 넘으면 숨김.
+  2. **날씨** `파타야 ⛅ 31° ☔40%` = 지금 기온 + 날씨 아이콘 + 앞으로 6시간 최고 강수확률. 지역 = 작은 창에서 고른 지역(`localStorage tnk.wxRegion`) > 페르소나(`tnk.profile.v1` persona 가 pattaya/sriracha/bangkok) > **파타야**(여행객·사업·미선택). 브라우저에서 Open-Meteo 직접(키 없음, 30분 캐시 `tnk.wx.v1`). 실패(429 등)하면 `ticker.json` `wx`(Actions 가 받은 값 — Open-Meteo, 막히면 MET Norway: 이때는 강수확률 대신 6시간 강수량)를 씀. 모델 시각 3시간 넘으면 숨김.
+  3. **🪙 금시세** `금 1바트 66,400฿ ≈2,685,409원` = 태국 금 거래상 협회(goldtraders.or.th) 공식 발표 **금괴 96.5% 1바트(15.244 g) 판매가**, 원화 = 판매가 × 위 환율(정수 반올림). 협회 사이트가 쓰는 공개 JSON `/api/GoldPrices/Latest`(공식 문서화된 API 아님 — 구조가 바뀌면 칩이 숨겨지고 워크플로가 빨간색). 주말·공휴일엔 발표가 없어 마지막 발표값 그대로(작은 창에 발표 시각 표시). 받아 온 지 24시간·발표 4일 넘으면 숨김.
+  4. **PM2.5** `PM2.5 13 좋음`(색 라벨) — 같은 지역, 브라우저에서 Open-Meteo 대기질(CAMS 예측 모델, 60분 캐시 `tnk.aq.v1`, 실패 시 `ticker.json` `aq`). 단계 = **태국 오염관리국(PCD) 2023 기준(15/25/37.5/75 µg/m³)을 4단계로**: 좋음 0–25(초록) · 보통 25.1–37.5(노랑) · 나쁨 37.6–75(주황) · 매우 나쁨 75 초과(빨강). 측정소 실측이 아닌 모델 값(작은 창에 표시).
+- 데이터 갱신: `data/ticker.json|js` 는 `korea.yml` 의 '시세 수집' 단계(`python3 tools/fetch_ticker.py`)가 2시간마다 만들어 한국 뉴스와 같은 커밋으로 올림(시세만 바뀌면 `ticker: 시세 MM-DD HH:MM BKK`). 항목 하나가 실패하면 그 항목은 이전 값(이전 받아 온 시각 그대로 → 오래되면 화면이 숨김). 화면은 `fetch(data/ticker.json?_=…, no-store)`(file:// 은 `data/ticker.js`), 서비스 워커도 no-store, 돌아왔을 때 10분 넘었으면 다시 받음.
+- 칩을 더하거나 순서를 바꾸려면 `assets/ticker.js` 의 `render()`·`body()` 만 고치면 됨. 새 assets 파일을 만들면 `tools/stamp_assets.py` 의 `ASSETS` 와 `index.html`·`sw.js` 에 `?v=` 항목을 같이 넣을 것.
 
 ## 주제(10개) — 2026-10-03 아침판부터
 | id | 이름 | 내용 |
@@ -177,7 +194,7 @@
 
 ## 🇰🇷 한국 주요 뉴스 자동 갱신(판과 무관)
 - **워크플로** `.github/workflows/korea.yml` (`korea-news`): cron `47 */2 * * *`(UTC) = **방콕 01:47 03:47 05:47 07:47 09:47 11:47 13:47 15:47 17:47 19:47 21:47 23:47**(하루 12번) + 수동 실행(`gh workflow run korea.yml`, 같아도 새로 쓰려면 `-f force=true`). GitHub 예약 실행은 늦게 시작할 수 있어서, 시작 시각이 판 빌드 시간대(07:00–07:40·18:00–18:40 BKK)면 :41 까지 기다렸다 실행.
-  - 단계: `pip install googlenewsdecoder` → `python3 tools/fetch_korea.py --standalone` → `data/korea.json|js` 가 바뀌었을 때만 `github-actions[bot]` 이름으로 커밋(`korea: 한국 주요 뉴스 MM-DD HH:MM BKK`) → `git pull --rebase -X theirs` 후 일반 push(최대 5번 재시도, force 없음) → Pages 는 legacy 브랜치 배포라 **push 만으로 다시 배포됨**(봇 push 도 `pages-build-deployment` 를 시작함을 확인. 90초 안에 그 커밋 빌드가 안 보일 때만 `POST pages/builds` 요청).
+  - 단계: `pip install googlenewsdecoder` → `python3 tools/fetch_korea.py --standalone` → **`python3 tools/fetch_ticker.py`(헤더 시세 칩 `data/ticker.json|js`, 위 '헤더' 참고)** — 두 수집 단계는 서로 독립(한쪽이 실패해도 다른 쪽은 커밋, 끝에 워크플로를 빨간색으로 표시) → `data/korea.json|js`·`data/ticker.json|js` 가 바뀌었을 때만 `github-actions[bot]` 이름으로 커밋(`korea: 한국 주요 뉴스 MM-DD HH:MM BKK`) → `git pull --rebase -X theirs` 후 일반 push(최대 5번 재시도, force 없음) → Pages 는 legacy 브랜치 배포라 **push 만으로 다시 배포됨**(봇 push 도 `pages-build-deployment` 를 시작함을 확인. 90초 안에 그 커밋 빌드가 안 보일 때만 `POST pages/builds` 요청).
   - 권한: 워크플로에 `permissions: contents: write, pages: write`(저장소 기본 권한은 read 그대로 둠).
   - 실패하면(Google News 장애 등) 기존 파일을 그대로 두고 워크플로가 빨간색으로 끝남 → 화면은 6시간이 지나면 판의 `korea_top` 으로 자동 대체.
 - **고르는 법**(LLM 없음, 같은 입력이면 같은 결과, 태국·교민 가중치 없음): Google News 한국 **'주요 뉴스'** 상위 15개 + **'대한민국' 주제** 피드 상위 50개. 점수 = 주요 뉴스 순위(50−3×순위) + 대한민국 순위(20−0.4×순위) + 둘 다면 5 + 묶음 매체 수(≤5) − 경과시간×0.5. 주요 뉴스 쪽 세계·IT 기사는 대한민국 피드와 같은 사건이거나 한국 관련 낱말(북한·국회·이 대통령·서울…)이 있을 때만. 36시간 넘은 것·칼럼/사설/포토·보도자료 매체·차단 목록(`trend_blocklist.txt`) 제외, 같은 사건(묶음 기사 id·제목 2-gram 유사도)은 하나만 → 상위 10건(6건 미만이면 실패 처리).
@@ -200,7 +217,7 @@
   - 먼저 `tools/stamp_assets.py` 로 앱 셸 버전 갱신(assets 가 바뀐 경우만 index.html·sw.js 수정)
   - 사이트 파일(index.html, manifest.json, sw.js, assets/, data/, tools/, README.md 등)의 새 파일·변경분을 `edition <id>` 메시지로 커밋 → `main` 에 push
   - force-push 금지(스크립트도 하지 않음). push 전에 **항상 `git pull --rebase --autostash`**(Actions 의 korea.json 커밋을 받아 옴) → 일반 push, 거부되면 최대 4번 재시도
-  - `data/korea.json|js` 는 **절대 커밋하지 않음**(로컬 사본은 HEAD 로 되돌린 뒤 pull — 오래된 한국 뉴스로 덮어쓰지 않게). `.github/` 는 사이트 파일과 함께 올림
+  - `data/korea.json|js`·`data/ticker.json|js` 는 **절대 커밋하지 않음**(로컬 사본은 HEAD 로 되돌린 뒤 pull — 오래된 한국 뉴스로 덮어쓰지 않게). `.github/` 는 사이트 파일과 함께 올림
   - 라이브 `data/index.js` 에 최신 판 id 가 반영되고 **라이브 `data/<최신 판>.js`·`assets/app.js`·`sw.js` 내용이 로컬과 같아질 때까지** 대기(같은 판을 보강해 다시 올린 경우도 잡음, 최대 15분, `DEPLOY_TIMEOUT`) → `tools/verify_live.py` 로 390px 모바일 화면을 헤드리스 브라우저로 열어 첫 방문 온보딩('파타야 거주자' 선택)·최신 판·내 피드·브리핑·👍👎·오류·외국인·비자 탭 카드 수·트렌드 위치(페이지 맨 아래 `#trendBottom`)·한국 뉴스(`koreaSrc` live/edition, `koreaUpd`)·서비스 워커·manifest 확인, `screenshots/live-mobile-390.png`·`-onboarding.png`·`-visa.png` 저장
   - 실패하면 0이 아닌 종료 코드로 끝남 → 원인 확인 후 다시 실행
 - **올리지 않는 것**(`.gitignore`): `raw/`(제3자 기사 원문 — 저작권), `archive/`, `screenshots/`, 캐시(`__pycache__` 등), 비밀 파일(`.env`, `*.key`, `*.pem`)

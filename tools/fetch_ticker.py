@@ -1,0 +1,151 @@
+# -*- coding: utf-8 -*-
+"""헤더 시세 칩용 데이터 — data/ticker.json + data/ticker.js(window.TN_TICKER, file:// 용).
+
+  python3 tools/fetch_ticker.py        # GitHub Actions(.github/workflows/korea.yml)가 2시간마다 실행
+
+- fx  : 바트→원 환율(THB_KRW, + 참고용 USD_THB·USD_KRW). 1순위 open.er-api.com(ExchangeRate-API, 하루 1번 갱신),
+        실패하면 api.frankfurter.app(ECB 기준환율, 평일 1번).
+- gold: 태국 금시세 — 금 거래상 협회(สมาคมค้าทองคำ, goldtraders.or.th) 공식 발표 '금괴 96.5% 1바트(15.244 g)' 판매가(bar_sell)·매입가(bar_buy).
+        협회 사이트가 쓰는 공개 JSON(/api/GoldPrices/Latest). 주말·공휴일엔 발표가 없어 마지막 발표값이 그대로다.
+- wx/aq: 날씨·미세먼지 PM2.5(Open-Meteo, 파타야·시라차·방콕) — 화면은 브라우저에서 Open-Meteo 를 직접 부르고(30/60분 캐시),
+        그게 실패할 때(요청 한도 429·오프라인 등)만 이 값(3시간 안의 것)을 쓴다.
+- 한 항목이 실패하면 그 항목은 이전 값을 그대로 둔다(fetched_at 도 그대로 → 화면이 24시간 넘은 값은 숨김).
+  값을 지어내지 않는다. 둘 다 실패하면 exit 1(워크플로에 빨간색으로 표시).
+"""
+import json, pathlib, sys, urllib.request
+from datetime import datetime, timezone, timedelta
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+BKK = timezone(timedelta(hours=7))
+UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36", "Accept": "application/json"}
+
+
+def now():
+    return datetime.now(BKK).isoformat(timespec="seconds")
+
+
+def get_json(url):
+    return json.loads(urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=30).read().decode("utf-8"))
+
+
+def fx_er_api():
+    d = get_json("https://open.er-api.com/v6/latest/THB")   # 판 환율(README '사용 환율')과 같은 THB 기준
+    if d.get("result") != "success":
+        raise ValueError("open.er-api result=%r" % d.get("result"))
+    r = d["rates"]
+    krw, usd = float(r["KRW"]), float(r["USD"])
+    if not (5 < krw < 200 and 0 < usd < 1):
+        raise ValueError("환율 값 이상: KRW=%r USD=%r" % (krw, usd))
+    t = datetime.fromtimestamp(int(d["time_last_update_unix"]), BKK).isoformat(timespec="seconds")
+    return dict(THB_KRW=round(krw, 4), USD_THB=round(1 / usd, 4), USD_KRW=round(krw / usd, 2), rate_time=t,
+                source="ExchangeRate-API (open.er-api.com)", url="https://www.exchangerate-api.com/")
+
+
+def fx_frankfurter():
+    d = get_json("https://api.frankfurter.app/latest?from=USD&to=THB,KRW")
+    thb, krw = float(d["rates"]["THB"]), float(d["rates"]["KRW"])
+    if not (5 < krw / thb < 200):
+        raise ValueError("환율 값 이상")
+    return dict(THB_KRW=round(krw / thb, 4), USD_THB=round(thb, 4), USD_KRW=round(krw, 2), rate_time=datetime.fromisoformat(d["date"] + "T16:00:00+01:00").astimezone(BKK).isoformat(timespec="seconds"),
+                source="Frankfurter (유럽중앙은행 ECB 기준환율)", url="https://www.frankfurter.app/")
+
+
+def gold_gta():
+    d = get_json("https://www.goldtraders.or.th/api/GoldPrices/Latest?readjson=false")
+    sell, buy = float(d["bL_SellPrice"]), float(d["bL_BuyPrice"])
+    if not (10000 < sell < 500000 and 10000 < buy <= sell):
+        raise ValueError("금시세 값 이상: sell=%r buy=%r" % (sell, buy))
+    at = d["asTime"]  # 방콕 현지 시각(오프셋 없음)
+    at = datetime.fromisoformat(at).replace(tzinfo=BKK).isoformat(timespec="seconds")
+    return dict(bar_sell=sell, bar_buy=buy, change=d.get("priceChangeFromPrevRow"), round=d.get("priceSeq") or d.get("seq"),
+                announced_at=at, unit="금괴 96.5% · 1바트(15.244 g)",
+                source="태국 금 거래상 협회 (สมาคมค้าทองคำ)", url="https://www.goldtraders.or.th/")
+
+
+REGIONS = [("pattaya", 12.9236, 100.8825), ("sriracha", 13.1682, 100.9310), ("bangkok", 13.7563, 100.5018)]  # assets/ticker.js 와 같게
+
+
+def _multi(url):
+    lat = ",".join(str(r[1]) for r in REGIONS); lon = ",".join(str(r[2]) for r in REGIONS)
+    d = get_json(url + "&latitude=" + lat + "&longitude=" + lon + "&timezone=Asia%2FBangkok")
+    d = d if isinstance(d, list) else [d]
+    if len(d) != len(REGIONS):
+        raise ValueError("지역 수 불일치")
+    return zip([r[0] for r in REGIONS], d)
+
+
+def wx_open_meteo():
+    out = {}
+    for rid, j in _multi("https://api.open-meteo.com/v1/forecast?current=temperature_2m,weather_code,is_day&hourly=precipitation_probability&forecast_hours=6"):
+        c = j["current"]; pp = [x for x in j.get("hourly", {}).get("precipitation_probability", []) if isinstance(x, (int, float))]
+        out[rid] = dict(t=c["temperature_2m"], code=c["weather_code"], day=c["is_day"], time=c["time"] + ":00+07:00", rain=max(pp) if pp else None)
+    return dict(regions=out, source="Open-Meteo", url="https://open-meteo.com/")
+
+
+MET_UA = {"User-Agent": "thai-news-kr/1.0 https://github.com/P-Max168/thai-news-kr", "Accept": "application/json"}
+
+
+def _met_code(sym):  # MET Norway symbol_code → WMO 날씨 코드(화면 아이콘용 대략 대응)
+    s = sym.split("_")[0]
+    for k, c in (("thunder", 95), ("snow", 71), ("sleet", 71), ("drizzle", 51), ("rainshowers", 80), ("rain", 61), ("fog", 45),
+                 ("cloudy", 3), ("partlycloudy", 2), ("fair", 1), ("clearsky", 0)):
+        if s == k or (k in ("thunder", "snow", "sleet", "drizzle", "rainshowers", "rain") and k in s):
+            return c
+    return 3
+
+
+def wx_met_no():  # Open-Meteo 가 막혔을 때(429 등) 대체 — 강수'확률'은 없어서 rain=None, 6시간 강수량(mm)만
+    out = {}
+    for rid, lat, lon in REGIONS:
+        d = json.loads(urllib.request.urlopen(urllib.request.Request(
+            "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=%.4f&lon=%.4f" % (lat, lon), headers=MET_UA), timeout=30).read())
+        now_ = datetime.now(timezone.utc)
+        ts = [t for t in d["properties"]["timeseries"] if datetime.fromisoformat(t["time"].replace("Z", "+00:00")) <= now_] or d["properties"]["timeseries"][:1]
+        t = ts[-1]; dd = t["data"]
+        sym = (dd.get("next_1_hours") or dd.get("next_6_hours") or {}).get("summary", {}).get("symbol_code", "cloudy")
+        out[rid] = dict(t=dd["instant"]["details"]["air_temperature"], code=_met_code(sym), day=0 if sym.endswith("_night") else 1,
+                        time=datetime.fromisoformat(t["time"].replace("Z", "+00:00")).astimezone(BKK).isoformat(timespec="seconds"), rain=None,
+                        rain6_mm=(dd.get("next_6_hours") or {}).get("details", {}).get("precipitation_amount"))
+    return dict(regions=out, source="MET Norway (yr.no)", url="https://api.met.no/")
+
+
+def aq_open_meteo():
+    out = {}
+    for rid, j in _multi("https://air-quality-api.open-meteo.com/v1/air-quality?current=pm2_5"):
+        c = j["current"]
+        if not isinstance(c.get("pm2_5"), (int, float)):
+            raise ValueError("pm2_5 없음")
+        out[rid] = dict(pm=c["pm2_5"], time=c["time"] + ":00+07:00")
+    return dict(regions=out, source="Open-Meteo 대기질 (CAMS)", url="https://open-meteo.com/en/docs/air-quality-api")
+
+
+def main():
+    jf, js = ROOT / "data" / "ticker.json", ROOT / "data" / "ticker.js"
+    try:
+        old = json.loads(jf.read_text(encoding="utf-8"))
+    except Exception:
+        old = {}
+    out = {"v": 1, "updated_at": now()}
+    ok = 0
+    for key, fns in (("fx", [fx_er_api, fx_frankfurter]), ("gold", [gold_gta]), ("wx", [wx_open_meteo, wx_met_no]), ("aq", [aq_open_meteo])):
+        val = None
+        for fn in fns:
+            try:
+                val = fn(); val["fetched_at"] = now(); break
+            except Exception as e:
+                print("%s: %s 실패 — %s" % (key, fn.__name__, e), file=sys.stderr)
+        if val:
+            ok += 1; out[key] = val
+            print(key, json.dumps(val, ensure_ascii=False))
+        elif old.get(key):
+            out[key] = old[key]; print("%s: 이전 값 유지(fetched_at %s)" % (key, old[key].get("fetched_at")), file=sys.stderr)
+    if not out.get("fx") and not out.get("gold") or not ok:
+        print("fx·gold 모두 실패 — 파일 그대로", file=sys.stderr); sys.exit(1)
+    txt = json.dumps(out, ensure_ascii=False, indent=1)
+    jf.write_text(txt + "\n", encoding="utf-8")
+    js.write_text("/* tools/fetch_ticker.py 가 만듦(GitHub Actions) — 직접 고치지 말 것 */\nwindow.TN_TICKER = " + txt + ";\n", encoding="utf-8")
+    print("저장:", jf.relative_to(ROOT), js.relative_to(ROOT))
+
+
+if __name__ == "__main__":
+    main()

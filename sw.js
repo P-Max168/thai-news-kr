@@ -1,18 +1,19 @@
 /* 태국 뉴스 한눈에 — 서비스 워커
  * - 앱 셸(HTML·CSS·JS·아이콘): 캐시 우선. 파일이 바뀌면 tools/stamp_assets.py 가 VERSION 과 ?v= 를 바꿔
  *   새 캐시로 교체된다(배포 스크립트가 자동 실행).
- * - data/korea.json|js(2시간마다 갱신되는 한국 뉴스): 네트워크 우선 + cache:"no-store"(HTTP 캐시도 안 씀)
+ * - data/korea.json|js(2시간마다 갱신되는 한국 뉴스)·data/ticker.json|js(헤더 시세 칩): 네트워크 우선 + cache:"no-store"(HTTP 캐시도 안 씀)
+ * - Open-Meteo(날씨·미세먼지 칩, 다른 도메인)는 가로채지 않음(assets/ticker.js 가 localStorage 에 캐시)
  * - index.html(페이지 이동)·data/*: 네트워크 우선(온라인이면 항상 새로 받음, HTTP 캐시도 재검증),
  *   실패(오프라인)할 때만 마지막으로 받은 캐시를 보여 준다.
  * - 설치 때 최신 판 데이터를 미리 받아 둬서 첫 방문 뒤 바로 오프라인으로 읽을 수 있다.
  * - Google 로그인·Firestore(firebase / googleapis / gstatic SDK / firebaseapp.com / google.com 계정 창)는
  *   절대 가로채거나 캐시하지 않는다(그냥 브라우저가 직접 요청). 글꼴(fonts.googleapis/gstatic)만 예외로 캐시.
  */
-var VERSION = "tnk-6af718c939";
+var VERSION = "tnk-c09bfb5c04";
 var SHELL = "shell-" + VERSION, DATA = "data-v1", EXT = "ext-v1";
 var SHELL_FILES = [
   "./", "index.html", "manifest.json",
-  "assets/style.css?v=884c659d", "assets/topics.js?v=e598247a", "assets/prefs.js?v=4c59b99b", "assets/taste.js?v=7c1f4138", "assets/app.js?v=66d5aaef", "assets/social.js?v=4fe678e6",
+  "assets/style.css?v=e4b68e5a", "assets/topics.js?v=e598247a", "assets/prefs.js?v=4c59b99b", "assets/taste.js?v=7c1f4138", "assets/app.js?v=66d5aaef", "assets/social.js?v=4fe678e6", "assets/ticker.js?v=c0a76a14",
   "assets/icons/icon-192.png", "assets/icons/icon-512.png", "assets/icons/maskable-512.png",
   "assets/icons/apple-touch-icon.png", "assets/icons/favicon-32.png"
 ];
@@ -99,8 +100,8 @@ self.addEventListener("fetch", function (e) {
     e.respondWith(networkFirst(req, SHELL, scope.href + "index.html").catch(function () { return caches.match(scope.href + "index.html"); }));
     return;
   }
-  // 🇰🇷 data/korea.json|js: 2시간마다 바뀜 → HTTP 캐시도 거치지 않고(no-store) 항상 새로 받음. 오프라인일 때만 마지막 캐시
-  if (/^data\/korea\.(json|js)$/.test(path)) { e.respondWith(networkFirst(req, DATA, dataKey(req.url), "no-store")); return; }
+  // 🇰🇷 data/korea.json|js · 💱 data/ticker.json|js: 2시간마다 바뀜 → HTTP 캐시도 거치지 않고(no-store) 항상 새로 받음. 오프라인일 때만 마지막 캐시
+  if (/^data\/(korea|ticker)\.(json|js)$/.test(path)) { e.respondWith(networkFirst(req, DATA, dataKey(req.url), "no-store")); return; }
   if (/^data\//.test(path)) { e.respondWith(networkFirst(req, DATA, dataKey(req.url))); return; }
   if (path === "sw.js") return;
   if (/^__\//.test(path)) return;   // (혹시 쓰게 될) Firebase 예약 경로 /__/auth 등은 가로채지 않음
