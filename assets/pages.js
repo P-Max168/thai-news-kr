@@ -231,4 +231,77 @@
       return false;
     }
   });
+
+  /* ---------- ✅ 관리자 승인함(운영자만) ----------
+   * 목록 = data/pending.json(tools/pending.py 가 PENDING_APPROVAL.md 에서 만듦). 여기서 고른 OK/보류는 이 기기에만 기록되고
+   * '결정 복사' 문구를 봇에게 보내면 봇이 다음 실행에 반영 — 이 화면은 아무것도 자동으로 승인·게시하지 않는다. */
+  var AP = { doc: null, err: null, busy: false, KEY: "tnk.approvals" };
+  function apDec() { try { return JSON.parse(localStorage.getItem(AP.KEY) || "{}") || {}; } catch (e) { return {}; } }
+  function apSave(d) { try { localStorage.setItem(AP.KEY, JSON.stringify(d)); } catch (e) {} }
+  function apLoad(force) {
+    if (AP.busy || (AP.doc && !force) || (AP.err && !force)) return;
+    AP.busy = true; AP.err = null;
+    fetch("data/pending.json?_=" + Date.now(), { cache: "no-store" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (d) { AP.doc = d; }).catch(function () { AP.err = "net"; })
+      .then(function () { AP.busy = false; if (cur === "approve") paint(); });
+  }
+  function md(t) {
+    return esc(t).replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/`([^`]+)`/g, "<code>$1</code>")
+      .replace(/(backups\/[\w.\-]+\/[\w.\-]+\.jpg)/g, function (m, u) { return '<a class="ap-photo" href="' + u + '" target="_blank" rel="noopener">📷 ' + u.split("/").pop().replace(/\.jpg$/, "") + "</a>"; });
+  }
+  function hm(ms) { return new Date(ms).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Bangkok" }); }
+  function apText(items, dec) {
+    var ok = [], hold = [];
+    items.forEach(function (x) { var d = dec[x.id]; if (d && d.d === "ok") ok.push("#" + x.no); else if (d && d.d === "hold") hold.push("#" + x.no); });
+    if (!ok.length && !hold.length) return "";
+    return "승인함 결정(" + new Date().toLocaleDateString("ko-KR", { month: "numeric", day: "numeric", timeZone: "Asia/Bangkok" }) + "): " + (ok.length ? "OK " + ok.join(" ") : "") + (ok.length && hold.length ? " / " : "") + (hold.length ? "보류 " + hold.join(" ") : "");
+  }
+  register("approve", {
+    title: "✅ 관리자 승인함",
+    render: function () {
+      var S2 = window.TNSocial;
+      if (!S2 || !S2.isAdmin || !S2.isAdmin()) {
+        return '<div class="empty hp-empty"><p class="hp-empty__e" aria-hidden="true">🔒</p><p><b>운영자만 볼 수 있어요</b></p><p>운영자 구글 계정으로 로그인하면 승인 기다리는 글·설정을 한곳에서 볼 수 있어요.</p>' +
+          (S2 && S2.signedIn && S2.signedIn() ? "" : '<button type="button" class="cta hp-go" data-login>구글로 로그인</button>') + "</div>";
+      }
+      apLoad(false);
+      if (AP.err) return '<div class="empty">목록을 불러오지 못했어요. <button type="button" class="linkbtn" data-ap-reload>다시 시도</button></div>';
+      if (!AP.doc) return '<div class="skel-list" aria-busy="true"><div class="skel"></div><div class="skel"></div></div>';
+      var items = AP.doc.items || [], dec = apDec();
+      var open = items.filter(function (x) { return !dec[x.id]; }).length;
+      var head = '<div class="ad-sum ap-sum"><div class="ad-cell"><span>전체</span><b>' + items.length + '</b></div><div class="ad-cell"><span>안 고름</span><b>' + open + '</b></div><div class="ad-cell"><span>고름</span><b>' + (items.length - open) + "</b></div></div>" +
+        '<p class="ap-note">여기서 누른 OK 는 <b>바로 올라가지 않아요</b>. 아래 \'결정 복사\'를 봇에게 보내 주시면 봇이 반영해요.</p>';
+      if (!items.length) return head + '<div class="empty">승인 기다리는 항목이 없어요 🙂</div>';
+      var all = open ? '<button type="button" class="cta ap-all" data-ap-all>✅ 남은 ' + open + "건 전부 OK</button>" : "";
+      var list = items.map(function (x) {
+        var d = dec[x.id];
+        var acts = d ? '<div class="ap-done ap-done--' + d.d + '"><span>' + (d.d === "ok" ? "✅ OK 고름" : "⏸️ 보류 고름") + " · " + hm(d.at) + '</span><button type="button" class="linkbtn" data-ap-undo="' + esc(x.id) + '">취소</button></div>'
+          : '<div class="ap-acts"><button type="button" class="ap-btn ap-btn--ok" data-ap-ok="' + esc(x.id) + '">OK</button><button type="button" class="ap-btn" data-ap-hold="' + esc(x.id) + '">보류</button></div>';
+        return '<li class="ap-item"><div class="ap-top"><span class="ad-rank">' + x.no + '</span><span class="ap-kind">' + esc(x.kind) + '</span><span class="ap-st">' + esc(x.status) + "</span></div>" +
+          '<p class="ap-body">' + md(x.body) + '</p><p class="ap-where">📍 ' + md(x.where) + "</p>" + acts + "</li>";
+      }).join("");
+      var txt = apText(items, dec);
+      var copy = txt ? '<section class="ad-sec ap-copy"><h3 class="ad-h">봇에게 보낼 결정</h3><p class="ap-txt" id="apTxt">' + esc(txt) + '</p><button type="button" class="cta" data-ap-copy>📋 결정 복사</button></section>' : "";
+      return head + all + '<ol class="ap-list">' + list + "</ol>" + copy + '<p class="hp-note">목록 기준 ' + esc(String(AP.doc.updated_at || "").replace("T", " ").slice(5, 16)) + ' (방콕) · 원본 PENDING_APPROVAL.md <button type="button" class="linkbtn" data-ap-reload>새로고침</button></p>';
+    },
+    click: function (e, t) {
+      var el, dec = apDec();
+      if ((el = t.closest("[data-ap-ok]"))) { dec[el.getAttribute("data-ap-ok")] = { d: "ok", at: Date.now() }; apSave(dec); paint(); return true; }
+      if ((el = t.closest("[data-ap-hold]"))) { dec[el.getAttribute("data-ap-hold")] = { d: "hold", at: Date.now() }; apSave(dec); paint(); return true; }
+      if ((el = t.closest("[data-ap-undo]"))) { delete dec[el.getAttribute("data-ap-undo")]; apSave(dec); paint(); return true; }
+      if (t.closest("[data-ap-all]")) {
+        (AP.doc && AP.doc.items || []).forEach(function (x) { if (!dec[x.id]) dec[x.id] = { d: "ok", at: Date.now() }; });
+        apSave(dec); paint(); if (window.TNApp) TNApp.toast("이 기기에 OK 로 표시했어요. '결정 복사'를 봇에게 보내 주세요", 3200); return true;
+      }
+      if (t.closest("[data-ap-copy]")) {
+        var tx = ($("apTxt") || {}).textContent || "";
+        var done = function () { if (window.TNApp) TNApp.toast("복사했어요. 봇과의 대화창에 붙여 넣어 주세요", 2600); };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(tx).then(done, function () { window.prompt("아래 글을 복사해 주세요", tx); });
+        else window.prompt("아래 글을 복사해 주세요", tx);
+        return true;
+      }
+      if (t.closest("[data-ap-reload]")) { AP.doc = null; AP.err = null; apLoad(true); paint(); return true; }
+      return false;
+    }
+  });
 })();

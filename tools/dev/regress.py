@@ -154,6 +154,14 @@ async def main():
         except Exception as e:
             lock = False
         rec(lock, "📊 반응 통계 페이지 — 운영자 아니면 잠금 안내")
+        try:
+            await pg.evaluate("TNPages.open('approve')"); await pg.wait_for_timeout(400)
+            lock2 = "운영자만" in await pg.inner_text("#tnPageBody")
+            await pg.evaluate("TNPages.close()"); await pg.wait_for_timeout(300)
+            pj = await pg.evaluate("fetch('data/pending.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>d?d.items.length:-1)")
+        except Exception as e:
+            lock2, pj = False, str(e)[:80]
+        rec(lock2 and isinstance(pj, int) and pj >= 0, "✅ 승인함 — 운영자 아니면 잠금 안내, 목록 파일(data/pending.json) 읽힘", "항목 %s건" % pj)
         # 첫 방문 시작 화면(새 방문자): 보류 중엔 예전 '어떤 분이세요?'(페르소나 5개), 켜지면 2단계
         c2 = await b.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True, timezone_id="Asia/Bangkok", locale="ko-KR")
         p2 = await c2.new_page()

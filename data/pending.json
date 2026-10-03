@@ -1,0 +1,22 @@
+{
+ "_readme": "관리자 승인함(#approve) 목록 — tools/pending.py 가 PENDING_APPROVAL.md 에서 만듦. 승인은 민구님이 고르고 봇이 다음 실행에 반영(자동 승인 없음)",
+ "updated_at": "2026-10-03T14:36:15+07:00",
+ "items": [
+  {
+   "id": "p1",
+   "no": 1,
+   "kind": "기능 켜기(결정)",
+   "body": "**2단계 시작 화면 다시 켜기** — '📍 어디 사세요?'(동부·방콕·북부·남부·그 외) → '관심(생활·여행·사업·비자)' → 내 피드를 📌꼭 봐야 할 뉴스·내 지역·지역 광고·전국 순으로. 지금은 민구님 답변대로 꺼 둠. 사진: backups/backup-20261003-1345-onboarding/after-onboarding.jpg backups/backup-20261003-1345-onboarding/after-onboarding2.jpg backups/backup-20261003-1345-onboarding/after-myfeed.jpg",
+   "where": "assets/topics.js `OB2 = true` 한 줄(README '보류' 줄)",
+   "status": "보류 중"
+  },
+  {
+   "id": "p2",
+   "no": 2,
+   "kind": "사이트 규칙(개인정보)",
+   "body": "**하트·🙌·🙅 익명 집계 시작** — 기사별 반응 수를 사는 곳(추정)·관심(추정)·주제와 함께 모음. 이름·이메일·성별·기기 정보는 저장 안 함. 개인정보 처리방침 초안(④)에 이 문장을 넣고, Firestore 규칙 게시(LOGIN_TODO) 뒤 보내기 스위치를 켬",
+   "where": "assets/social.js `RX_ON = true` + 개인정보 처리방침",
+   "status": "대기"
+  }
+ ]
+}
