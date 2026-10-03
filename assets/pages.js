@@ -155,10 +155,11 @@
   function adLoad(force) {
     var key = AD.days, c = AD.data[key];
     if (AD.busy || (!force && c && Date.now() - c.t < 120e3)) return;
+    if (!force && AD.err && AD.errDays === key) return;   // 실패하면 '다시 시도'를 누를 때까지 다시 부르지 않음(무한 재시도 방지)
     if (!window.TNSocial || !TNSocial.adminStats) { AD.err = "load"; return; }
     AD.busy = true; AD.err = null;
     TNSocial.adminStats(sinceOf(key)).then(function (rows) { AD.data[key] = { t: Date.now(), rows: rows }; })
-      .catch(function (e) { AD.err = /permission/i.test((e && (e.code || e.message)) || "") ? "perm" : "net"; })
+      .catch(function (e) { AD.err = /permission/i.test((e && (e.code || e.message)) || "") ? "perm" : "net"; AD.errDays = key; })
       .then(function () { AD.busy = false; if (cur === "admin") paint(); });
   }
   function agg(rows) {
@@ -200,7 +201,7 @@
       adLoad(false);
       var chips = '<div class="ad-per" role="group" aria-label="기간">' + PERIODS.map(function (p) { return '<button type="button" class="ad-pbtn" data-ad-days="' + p[0] + '" aria-pressed="' + (AD.days === p[0]) + '">' + p[1] + "</button>"; }).join("") + "</div>";
       var c = AD.data[AD.days];
-      if (AD.err === "perm") return chips + '<div class="empty">통계를 읽을 권한이 아직 없어요. Firestore 보안 규칙(저장소 firestore.rules 의 rx 부분)을 Firebase 콘솔에 게시해야 해요 — LOGIN_TODO.md 참고.</div>';
+      if (AD.err === "perm") return chips + '<div class="empty">통계를 읽을 권한이 아직 없어요. Firestore 보안 규칙(저장소 firestore.rules 의 rx 부분)을 Firebase 콘솔에 게시해야 해요 — LOGIN_TODO.md 참고. <button type="button" class="linkbtn" data-ad-reload>다시 시도</button></div>';
       if (AD.err) return chips + '<div class="empty">통계를 불러오지 못했어요. 인터넷 연결을 확인하고 <button type="button" class="linkbtn" data-ad-reload>다시 시도</button></div>';
       if (!c) return chips + '<div class="skel-list" aria-busy="true"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div><p class="hp-note">불러오는 중…</p>';
       var g = agg(c.rows);
@@ -224,7 +225,7 @@
     },
     click: function (e, t) {
       var el;
-      if ((el = t.closest("[data-ad-days]"))) { AD.days = +el.getAttribute("data-ad-days"); AD.topN = 5; paint(); return true; }
+      if ((el = t.closest("[data-ad-days]"))) { AD.days = +el.getAttribute("data-ad-days"); AD.topN = 5; if (AD.errDays !== AD.days) AD.err = null; paint(); return true; }
       if ((el = t.closest("[data-ad-more]"))) { AD.topN = 10; paint(); return true; }
       if ((el = t.closest("[data-ad-reload]"))) { AD.err = null; delete AD.data[AD.days]; adLoad(true); paint(); return true; }
       return false;
