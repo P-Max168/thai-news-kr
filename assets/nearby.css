@@ -99,3 +99,45 @@ body.nb-open{overflow:hidden}
 .nb-how summary{font-size:16px;min-height:50px}
 .nb-how ul{font-size:15px}
 .nb-sw{font-size:13.5px;min-height:62px}
+
+/* ===== 📇 가게 카드 시험(2026-10-03 ⑦) — 글자 크기는 뉴스 피드와 같게(이름 18px, 본문 15.5~16px) ===== */
+.nb-places{display:flex;align-items:center;gap:12px;margin:16px 0 4px;padding:14px 16px;min-height:64px;background:#fff;border:1px solid var(--line,#e2e6ee);border-radius:14px;color:var(--ink,#16181d);text-decoration:none;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+.nb-places > span:first-child{font-size:26px}
+.nb-places > span:nth-child(2){flex:1;display:flex;flex-direction:column;gap:2px}
+.nb-places b{font-size:16.5px}
+.nb-places small{font-size:13.5px;color:var(--muted,#5f6672)}
+.nb-places > span:last-child{font-size:24px;color:var(--muted,#5f6672)}
+.pc-intro{font-size:15.5px;line-height:1.65;margin:0 0 12px;color:var(--ink-2,#3a3f4a)}
+.pc-filter{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 8px}
+.pc-f{min-height:48px;padding:4px 4px;border:1px solid var(--line,#d7dde6);border-radius:12px;background:#fff;color:var(--ink,#16181d);font:inherit;font-size:14.5px;font-weight:700;line-height:1.25;cursor:pointer;word-break:keep-all}
+.pc-f small{font-size:12.5px;color:var(--muted,#5f6672);font-weight:700}
+.pc-f[aria-pressed="true"]{background:var(--navy,#0b2a4a);border-color:var(--navy,#0b2a4a);color:#fff}
+.pc-f[aria-pressed="true"] small{color:rgba(255,255,255,.85)}
+.pc-openonly{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-height:48px;margin:0 0 14px;border:1px solid var(--line,#d7dde6);border-radius:12px;background:#fff;font:inherit;font-size:15px;font-weight:700;color:var(--ink,#16181d);cursor:pointer}
+.pc-openonly[aria-pressed="true"]{background:#ebfbee;border-color:#8ce99a;color:#1b5e20}
+.pc-list{display:flex;flex-direction:column;gap:12px}
+.pc{background:#fff;border:1px solid var(--line,#e2e6ee);border-radius:16px;padding:16px 16px 12px;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+.pc__top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 6px}
+.pc__cat{font-size:13.5px;font-weight:800;color:var(--ink-2,#3a3f4a)}
+.pc__open{font-size:13.5px;font-weight:800;color:var(--muted,#5f6672);white-space:nowrap}
+.pc__open--on{color:#1b7a32}.pc__open--soon{color:#b35c00}.pc__open--off{color:var(--muted,#5f6672)}
+.pc__name{font-size:18.5px;font-weight:750;line-height:1.4;margin:0 0 2px;letter-spacing:-.3px}
+.pc__kind{font-size:14.5px;color:var(--muted,#5f6672);margin:0 0 8px}
+.pc__warn{font-size:14.5px;line-height:1.55;background:#fff8e6;border:1px solid #f5d98b;border-radius:10px;padding:8px 10px;margin:6px 0 8px;color:#6b4e00}
+.pc__info{margin:8px 0 12px;display:flex;flex-direction:column;gap:6px}
+.pc__info div{display:grid;grid-template-columns:7.2em 1fr;gap:8px;align-items:baseline}
+.pc__info dt{font-size:14.5px;font-weight:700;color:var(--ink-2,#3a3f4a)}
+.pc__info dd{margin:0;font-size:15.5px;line-height:1.55;color:var(--ink,#16181d);overflow-wrap:anywhere}
+.pc__info dd small{display:block;font-size:13.5px;color:var(--muted,#5f6672)}
+.pc__na{color:var(--muted,#5f6672)!important}
+.pc__btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pc__btn{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;border:1px solid var(--line,#cfd6e0);background:#fff;color:var(--ink,#16181d);font-size:15.5px;font-weight:700;text-decoration:none}
+.pc__btn--map{background:var(--navy,#0b2a4a);border-color:var(--navy,#0b2a4a);color:#fff}
+.pc__btn--off{color:var(--muted,#5f6672);background:#f4f5f7;font-size:14px}
+.pc__foot{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;margin-top:10px;font-size:13.5px;color:var(--muted,#5f6672)}
+.pc__foot a{color:var(--muted,#5f6672)}
+.pc__report{margin-left:auto;display:inline-flex;align-items:center;min-height:40px;padding:0 12px;border-radius:999px;border:1px solid #f0c75e;background:#fffbea;color:#6b4e00!important;font-weight:700;text-decoration:none}
+.pc-empty{font-size:16px;line-height:1.65;padding:28px 18px}
+.pc-empty__e{font-size:36px;margin:0 0 6px}
+.pc-skel{height:220px;margin-bottom:12px}
+.pc-src{font-size:13.5px;line-height:1.6;color:var(--muted,#5f6672);margin:16px 2px 0}

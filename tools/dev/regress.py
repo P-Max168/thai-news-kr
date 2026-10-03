@@ -189,6 +189,18 @@ async def main():
         except Exception as e:
             sw = {"err": str(e)[:100]}
         rec(sw.get("h") == "#nearby/moto" and sw.get("n") == 5 and sw.get("ws") == 1 and sw.get("how") and sw.get("back"), "📍 내 주변 — 화면 안에서 종류 바꾸기(같은 크기 5칸)·'이렇게 찾아요'·뒤로 = 피드", sw)
+        # ⑦ 가게 카드 시험(#places): 실제 OSM 데이터 30곳, 필터, 태국 문자 없음
+        try:
+            await pg.evaluate("TNPages.open('places')"); await pg.wait_for_timeout(1200)
+            pc = {"n": await pg.locator("#tnPage .pc").count()}
+            await pg.click('[data-pc-cat="pet"]'); await pg.wait_for_timeout(300); pc["pet"] = await pg.locator("#tnPage .pc").count()
+            await pg.click('[data-pc-cat="all"]'); await pg.wait_for_timeout(300); pc["all"] = await pg.locator("#tnPage .pc").count()
+            pc["thai"] = await pg.evaluate("/[\\u0E00-\\u0E7F]/.test(document.getElementById('tnPage').innerText)")
+            pc["src"] = await pg.evaluate("document.getElementById('tnPage').innerText.indexOf('OpenStreetMap contributors')>=0")
+            await pg.evaluate("TNPages.close()"); await pg.wait_for_timeout(400)
+        except Exception as e:
+            pc = {"err": str(e)[:100]}
+        rec(pc.get("all") == 30 and 0 < pc.get("pet", 0) < 30 and pc.get("thai") is False and pc.get("src"), "📇 가게 카드 30곳 — 종류 필터·출처 표시·태국 문자 없음", pc)
         # 다듬기: 글자 대비(WCAG AA) — 첫 화면(주요 뉴스 사진 카드는 계산 불가라 뺌)
         try:
             await pg.evaluate("window.scrollTo(0,0)")

@@ -152,6 +152,8 @@
       '<div class="nb-st" data-nb-st aria-live="polite">' + statusHTML() + "</div>" +
       '<p class="nb-sec">빠른 찾기</p><div class="nb-subs">' + c.subs.map(function (s) {
         return '<a class="nb-sub" data-nb-q="' + esc(s.query) + '" href="' + esc(mapsUrl(s.query)) + '" target="_blank" rel="noopener">' + esc(s.label) + "</a>"; }).join("") + "</div>" +
+      // 📇 가게 카드 시험(파타야 30곳, OSM 실제 데이터) — 2026-10-03 ⑦
+      '<a class="nb-places" href="#places" data-page="places" data-pl-cat="' + esc({ food: "food", pet: "pet", beauty: "beauty", moto: "moto" }[c.id] || "all") + '"><span aria-hidden="true">📇</span><span><b>파타야 가게 카드 30곳 보기</b><small>영업시간·지금 영업 중·전화 — 시험 중</small></span><span aria-hidden="true">›</span></a>' +
       '<p class="nb-note">💡 평점 좋은 곳만 보려면 구글 지도 위쪽 필터에서 <b>평점</b>을 눌러 4.0 이상 등을 고르세요.</p>' +
       // 이 화면의 기준(운영자·이용자 모두 '무엇으로 찾는지' 알 수 있게) — 2026-10-03 ③d
       '<details class="nb-how"><summary>🔎 이 화면은 이렇게 찾아요</summary><ul>' +

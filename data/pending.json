@@ -1,6 +1,6 @@
 {
  "_readme": "관리자 승인함(#approve) 목록 — tools/pending.py 가 PENDING_APPROVAL.md 에서 만듦. 승인은 민구님이 고르고 봇이 다음 실행에 반영(자동 승인 없음)",
- "updated_at": "2026-10-03T14:44:07+07:00",
+ "updated_at": "2026-10-03T15:48:45+07:00",
  "items": [
   {
    "id": "p1",
@@ -40,6 +40,22 @@
    "kind": "사이트 규칙(주소)",
    "body": "**ads.txt 를 둘 곳 정하기** — 애드센스는 도메인 맨 위 파일만 읽음. (가) GitHub 에 `p-max168.github.io` 저장소를 새로 만들어 ads.txt 하나만 두기(무료) 또는 (나) 맞춤 도메인 구입(유료, 연 약 400~600밧). 지금 저장소의 ads.txt 는 주석만 있는 자리표시",
    "where": "ads.txt",
+   "status": "대기"
+  },
+  {
+   "id": "p6",
+   "no": 6,
+   "kind": "영업(유료 상품 시안)",
+   "body": "**가게 카드 '기본 무료' vs '6개월 상단 고정(소액)'** — 시안만, 판매·결제·실제 광고 없음. 정해 주실 것: ① 상단 고정 가격 ② 결제 방법 ③ 한 종류당 고정 칸 수(1~2) ④ '광고' 표시 문구. 사진: backups/backup-20261003-1540-places-test/mockup-package.jpg",
+   "where": "`tools/places/mockup-package.html`(사이트에 링크 안 됨) → OK 뒤 assets/places.js 에 `pinned` 칸 추가",
+   "status": "대기"
+  },
+  {
+   "id": "p7",
+   "no": 7,
+   "kind": "연락 채널(운영자 이름)",
+   "body": "**가게 카드 '✋ 정보 틀림 알리기(카톡)' 링크** — 운영자 카카오톡 채널(또는 오픈채팅) 주소를 정해 주세요. 지금은 광고 배너와 같은 자리표시(누르면 '카톡 문의 링크를 준비 중이에요'). 사진: backups/backup-20261003-1540-places-test/after-places-pet.jpg",
+   "where": "`data/places-pattaya.json` `report_kakao_url`(tools/places/build_places.py)",
    "status": "대기"
   }
  ]
