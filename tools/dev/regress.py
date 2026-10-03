@@ -121,13 +121,15 @@ async def main():
         real = [e for e in errs if "favicon" not in e and e not in known]
         rec(not real, "콘솔 오류 없음", real[:5])
         if known: rec(None, "날씨 API 429(요청 제한) — 대체값으로 표시", len(known))
-        # 내 피드 구조(저장값 동부): 내 피드 칩 → (📌 꼭 봐야 할 뉴스) → 내 지역 → 지역 광고 → 전국
-        await pg.goto(URL + ("&" if "?" in URL else "?") + "_=" + str(int(time.time())), wait_until="networkidle")
-        await pg.wait_for_timeout(800)
-        fs = await pg.evaluate("""()=>({chip:(document.querySelector('#feed .mine__chip')||{}).innerText||'', reg:document.querySelectorAll('#feed .fsec--region .card').length,
-          ad:!!document.querySelector('#feed .ad-slot--region .ad, #feed .ad-slot--region a, #feed .ad-slot--region img'), nat:!!document.querySelector('#feed .fsec--nat'),
-          pin:document.querySelectorAll('#feed .pin--must .card').length})""")
-        rec(("동부" in fs["chip"]) and fs["nat"] and fs["ad"], "내 피드: 칩·내 지역·지역 광고·전국 묶음", fs)
+        # 내 피드 구조 — 2단계 시작 화면 스위치(topics.js ONBOARDING_2STEP)가 켜졌을 때만: 칩 → 📌 → 내 지역 → 지역 광고 → 전국
+        ob2 = await pg.evaluate("!!(window.TNTopics && TNTopics.ONBOARDING_2STEP)")
+        if ob2:
+            fs = await pg.evaluate("""()=>({chip:(document.querySelector('#feed .mine__chip')||{}).innerText||'', nat:!!document.querySelector('#feed .fsec--nat'),
+              ad:!!document.querySelector('#feed .ad-slot--region .ad, #feed .ad-slot--region a, #feed .ad-slot--region img')})""")
+            rec(fs["nat"] and fs["ad"], "내 피드: 칩·내 지역·지역 광고·전국 묶음(2단계 켜짐)", fs)
+        else:
+            fs = await pg.evaluate("({fsec:document.querySelectorAll('#feed .fsec').length, edit:document.querySelectorAll('[data-ob-edit]').length, cards:document.querySelectorAll('#feed .card').length})")
+            rec(fs["fsec"] == 0 and fs["edit"] == 0 and fs["cards"] > 0, "내 피드 = 예전 방식(2단계 시작 화면 보류 중, 묶음·'내 피드 바꾸기' 없음)", fs)
         # ❤️ 하트: 카드 ♡ → ❤️ + 토스트, 헤더 '❤️ N' → 내가 하트한 기사 페이지
         hz = {}
         try:
@@ -144,20 +146,24 @@ async def main():
         except Exception as e:
             hz["err"] = str(e)[:120]
         rec(hz.get("toast") and hz.get("n") == 1 and hz.get("rows", 0) >= 1 and hz.get("closed"), "❤️ 하트 → 헤더 개수·내가 하트한 기사 페이지·뒤로 가기", hz)
-        # 2단계 시작 화면(새 방문자)
+        # 첫 방문 시작 화면(새 방문자): 보류 중엔 예전 '어떤 분이세요?'(페르소나 5개), 켜지면 2단계
         c2 = await b.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True, timezone_id="Asia/Bangkok", locale="ko-KR")
         p2 = await c2.new_page()
         await p2.goto(URL, wait_until="networkidle"); await p2.wait_for_timeout(800)
-        ob = {"regions": await p2.locator("#sheet [data-region]").count()}
+        ob = {"personas": await p2.locator("#sheet [data-persona]").count(), "regions": await p2.locator("#sheet [data-region]").count()}
         try:
-            await p2.click('[data-region="bangkok"]'); await p2.click("[data-ob-next]"); await p2.wait_for_timeout(300)
-            ob["ints"] = await p2.locator("[data-int]").count()
-            await p2.click('[data-int="biz"]'); await p2.click("[data-ob-done]"); await p2.wait_for_timeout(600)
+            if ob["regions"]:
+                await p2.click('[data-region="bangkok"]'); await p2.click("[data-ob-next]"); await p2.wait_for_timeout(300)
+                await p2.click('[data-int="biz"]'); await p2.click("[data-ob-done]")
+            else:
+                await p2.click('[data-persona="pattaya"]'); await p2.wait_for_timeout(300); await p2.click("[data-save]")
+            await p2.wait_for_timeout(600)
             ob["closed"] = not await p2.is_visible("#sheet")
-            ob["chip"] = await p2.evaluate("(document.querySelector('#feed .mine__chip')||{}).innerText||''")
+            ob["cards"] = await p2.locator("#feed .card").count()
         except Exception as e:
             ob["err"] = str(e)[:120]
-        rec(ob.get("regions") == 5 and ob.get("ints") == 4 and ob.get("closed") and "방콕" in ob.get("chip", ""), "2단계 시작 화면(사는 곳 → 관심 → 내 피드)", ob)
+        ok_ob = ob.get("closed") and ob.get("cards", 0) > 0 and (ob["personas"] == 5 if not ob2 else ob["regions"] == 5)
+        rec(ok_ob, "첫 방문 시작 화면(%s)" % ("2단계" if ob2 else "예전 '어떤 분이세요?' — 2단계는 보류"), ob)
         await c2.close()
         await b.close()
     if OUT: pathlib.Path(OUT).write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")

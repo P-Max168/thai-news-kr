@@ -62,6 +62,20 @@
     return { region: m[1], interests: cleanInts(m[2].split(",")) };
   }
   /* 옛 설정(페르소나 5개·내 주제) → 사는 곳·관심(조용히 옮기기). 옛 페르소나: 파타야/시라차/방콕 거주자, 여행객, 사업·투자 */
+  var OB2 = false;
+  try {
+    var mq = /[?&]ob2=([01])/.exec(location.search);
+    if (mq) localStorage.setItem("tnk.ob2", mq[1]);
+    if (localStorage.getItem("tnk.ob2") === "1") OB2 = true;
+  } catch (e) {}
+  /* 2단계 시작 화면을 꺼 둔 동안: 새 형식 persona("r:…;i:…")를 예전 페르소나 id 로 되돌림(그 사이 새 화면을 거친 사용자용) */
+  function legacyPersona(region, ints) {
+    ints = ints || [];
+    if (region === "east") return "pattaya";
+    if (region === "bangkok") return "bangkok";
+    if (ints.indexOf("biz") >= 0 && ints.indexOf("travel") < 0) return "business";
+    return "traveler";
+  }
   function fromLegacy(persona, topics) {
     var t = (Array.isArray(topics) ? topics : []).map(canon), region = null, ints = [];
     if (persona === "pattaya" || persona === "sriracha") region = "east";
@@ -156,6 +170,11 @@
 
   root.TNTopics = {
     TOPICS: TOPICS, BY_ID: BY_ID, PERSONAS: PERSONAS, MAX_TOPICS: MAX_TOPICS, ALIAS: ALIAS, canon: canon,
+    /* ★ 2단계 시작 화면 스위치(2026-10-03 14:06 운영자 직접 답변 "시작 화면은 아직 보류" → 꺼 둠).
+     * false = 예전처럼 '어떤 분이세요?'(페르소나 5개) + 예전 내 피드(선택 주제 기사만). true 로 바꾸면 2단계 시작 화면·내 피드 묶음이 바로 켜짐.
+     * 미리 보기(이 기기만): 주소 끝에 ?ob2=1 (끄기 ?ob2=0) */
+    ONBOARDING_2STEP: OB2,
+    legacyPersona: legacyPersona,
     REGIONS: REGIONS, INTERESTS: INTERESTS, region: function (id) { return R_BY[id] || null; }, interest: function (id) { return I_BY[id] || null; },
     encodePersona: encodePersona, decodePersona: decodePersona, fromLegacy: fromLegacy, topicsFor: topicsFor, cleanInterests: cleanInts,
     get: function (id) { return BY_ID[canon(id)]; },

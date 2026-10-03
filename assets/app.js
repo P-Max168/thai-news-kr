@@ -9,7 +9,8 @@
   var DECO = { east: "〰", bangkok: "曼", north: "⛰", south: "☀", poleco: "政", society: "社", visa: "✈", life: "%", travel: "旅", ent: "#", weather: "☂" };
   // tab: "feed"(내 피드) | "all"(전체 보기) | 주제 id
   var state = { data: null, tab: "feed", edition: null, impact: null, dqOpen: {}, natStep: 0 };
-  var NAT_STEPS = [5, 10, 1000];   // 내 피드 '전국·다른 지역' 칸: 5건 → 10건 → 전부
+  var NAT_STEPS = [5, 10, 1000];
+  var OB2 = !!T.ONBOARDING_2STEP;   // 2단계 시작 화면·내 피드 묶음 스위치(topics.js — 2026-10-03 운영자 보류로 꺼 둠)   // 내 피드 '전국·다른 지역' 칸: 5건 → 10건 → 전부
   /* 한인 영향도 태그(판 데이터 story.impact — README '판마다 채울 필드(2026-10-03 추가)'). 순서 = 필터 칩 순서 */
   var IMPACT = [
     { k: "비자·체류", e: "🛂", c: "#6741d9" }, { k: "환율·물가", e: "💱", c: "#0c8f6a" }, { k: "교통·사고", e: "🚗", c: "#d9480f" },
@@ -246,9 +247,10 @@
   function renderTabs() {
     var c = topicCounts(), sel = selected(), list = tabList();
     $("tabs").innerHTML = list.map(function (k, i) {
-      return tabBtn(k, c, sel) + (i === 0 ? '<button type="button" class="dr-item dr-item--mine" data-ob-edit aria-haspopup="dialog">✏️ 내 피드 바꾸기 <small>사는 곳·관심</small></button>' +
+      return tabBtn(k, c, sel) + (i === 0 ? (OB2 ? '<button type="button" class="dr-item dr-item--mine" data-ob-edit aria-haspopup="dialog">✏️ 내 피드 바꾸기 <small>사는 곳·관심</small></button>' : "") +
         '<button type="button" class="dr-item" data-page="hearts">❤️ 내가 하트한 기사 <small id="drHeartN">' + L.hearts().length + '개</small></button>' +
-        '<button type="button" class="dr-item" id="myTopicsBtn" data-open-settings aria-haspopup="dialog">🧩 세부 주제·설정 <small>주제 직접 고르기·취향 초기화</small></button>' : "");
+        (OB2 ? '<button type="button" class="dr-item" id="myTopicsBtn" data-open-settings aria-haspopup="dialog">🧩 세부 주제·설정 <small>주제 직접 고르기·취향 초기화</small></button>'
+          : '<button type="button" class="dr-item" id="myTopicsBtn" data-open-settings aria-haspopup="dialog">🧩 내 주제 설정</button>') : "");
     }).join("");
     var other = sel ? T.TOPICS.map(function (t) { return t.id; }).filter(function (k) { return list.indexOf(k) < 0; }) : [];
     $("tabsOther").innerHTML = other.map(function (k) { return tabBtn(k, c, null).replace('class="tab', 'class="tab tab--other'); }).join("");
@@ -499,7 +501,7 @@
   function feedList() {
     var hl = state.data.highlights || [], st = state.data.stories, list;
     if (state.tab === "feed" || state.tab === "all") {
-      list = st.filter(function (s) { return hl.indexOf(s.id) < 0; });   // 내 피드 = 모든 기사를 지역·관심 순으로 묶어 보여 줌(feedGroups)
+      list = st.filter(function (s) { return hl.indexOf(s.id) < 0 && (OB2 || state.tab === "all" || inSelection(s)); });   // OB2: 내 피드 = 모든 기사를 지역·관심 순으로 묶음(feedGroups) / 꺼짐: 예전처럼 선택 주제 기사만
     } else {
       list = st.filter(function (s) { return tps(s).all.indexOf(state.tab) >= 0; });
     }
@@ -576,7 +578,7 @@
       IMPACT.filter(function (m) { return cnt[m.k]; }).map(function (m) {
         return '<button type="button" class="impf__c" data-imp="' + esc(m.k) + '" style="--ic:' + m.c + '" aria-pressed="' + (state.impact === m.k) + '"><span aria-hidden="true">' + m.e + "</span>" + esc(m.k) + " <small>" + cnt[m.k] + "</small></button>";
       }).join("") + "</div>" : "";
-    if (tab === "feed") { renderMyFeed(imp); return; }
+    if (tab === "feed" && OB2) { renderMyFeed(imp); return; }
     if (state.impact) {
       list = list.filter(function (s) { return impacts(s).indexOf(state.impact) >= 0; });
       $("feedCount").textContent = list.length + "건 · '" + state.impact + "' 영향만";
@@ -762,7 +764,7 @@
         (settingsMode ? '<div class="sheet__settings">' +
           '<button type="button" class="setbtn" data-reset-taste>↺ 내 취향 초기화 <small>👍👎로 배운 순서를 지워요</small></button>' +
           '<button type="button" class="setbtn" data-show-all>모든 주제 보기 <small>주제 선택 없이 전체를 내 피드로</small></button>' +
-          '<button type="button" class="setbtn" data-restart>📍 사는 곳·관심 다시 고르기</button>' +
+          (OB2 ? '<button type="button" class="setbtn" data-restart>📍 사는 곳·관심 다시 고르기</button>' : '<button type="button" class="setbtn" data-restart>처음 질문(어떤 분이세요?) 다시 보기</button>') +
           (Install.available() ? '<button type="button" class="setbtn" data-install>📲 홈 화면에 추가</button>' : "") +
           '<div class="acct-box" id="acctBox"></div>' +
           '<p class="sheet__note" id="storeNote">' + (window.TNSocial && window.TNSocial.signedIn() ? "구글 계정에 저장돼 다른 기기에서도 이어져요." : "설정과 취향은 이 기기(브라우저)에만 저장돼요. 구글로 로그인하면 다른 기기에서도 이어져요(선택).") + "</p></div>" : "") +
@@ -860,7 +862,7 @@
       if (e.target.closest("[data-skip]")) { finish(null, null); return; }
       if (e.target.closest("[data-show-all]")) { finish(null, persona); toast("모든 주제를 내 피드에 보여 드려요"); return; }
       if (e.target.closest("[data-back]")) { show("persona"); return; }
-      if (e.target.closest("[data-restart]")) { show("region"); return; }
+      if (e.target.closest("[data-restart]")) { if (OB2) show("region"); else { settingsMode = false; show("persona"); } return; }
       if (e.target.closest("[data-close]")) { close(); return; }
       if (e.target.closest("[data-install]")) { close(); Install.prompt(); return; }
       if (e.target.closest("[data-reset-taste]")) {
@@ -959,7 +961,7 @@
   document.addEventListener("visibilitychange", function () { if (!document.hidden && Date.now() - KOREA.at > 10 * 60 * 1000) loadKorea(); });
   if (cur) loadDate(cur.id); else $("feed").innerHTML = '<div class="empty">데이터가 없습니다.' + (navigator.onLine === false ? " 오프라인 상태입니다." : "") + "</div>";
   // 처음 방문: '어떤 분이세요?' (기사 링크(#id)로 들어온 경우에도 먼저 보여 주되 건너뛰기 가능)
-  if (!prof().onboarded) Onb.open("region", false); else Install.maybeShow();   // 첫 방문만 2단계 시작 화면(옛 사용자는 prefs.js 가 조용히 옮김)
+  if (!prof().onboarded) Onb.open(OB2 ? "region" : "persona", false); else Install.maybeShow();   // 첫 방문만 2단계 시작 화면(옛 사용자는 prefs.js 가 조용히 옮김)
 
   // 서비스 워커(오프라인 읽기·홈 화면 앱). file:// 에서는 쓰지 않음
   if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {

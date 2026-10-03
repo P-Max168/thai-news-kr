@@ -44,30 +44,35 @@ async def main():
         await m.goto(BASE, wait_until="networkidle")
         await m.evaluate("document.fonts.ready")
         await m.wait_for_timeout(500)
-        # ---------- 2단계 시작 화면(2026-10-03): ① 사는 곳 하나 → ② 관심 여러 개 ----------
-        check(await m.is_visible("#sheet"), "첫 방문: '어디 사세요?' 표시")
-        check(await m.locator("[data-region]").count() == 5, "사는 곳 5개")
+        check(await m.is_visible("#sheet"), "첫 방문: '어떤 분이세요?' 표시")
+        check(await m.locator("[data-persona]").count() == 5, "페르소나 5개")
         await m.screenshot(path=OUT + "mobile-390-onboarding.png")
-        await m.click('[data-region="east"]')
-        await m.wait_for_timeout(200)
-        check(await m.get_attribute('[data-region="east"]', "aria-checked") == "true", "동부 선택 표시")
-        await m.click("[data-ob-next]")
+        await m.click('[data-persona="sriracha"]')
         await m.wait_for_timeout(300)
-        check(await m.locator("[data-int]").count() == 4, "관심 4개(생활·여행·사업·비자)")
-        await m.click('[data-int="life"]')
-        await m.click('[data-int="visa"]')
-        await m.wait_for_timeout(200)
-        check("2개" in await m.inner_text("#intCnt"), "관심 2개 선택 표시")
+        pressed = await m.eval_on_selector_all('[data-pick][aria-pressed="true"]', "bs=>bs.map(b=>b.dataset.pick)")
+        print("  시라차 거주자 기본 주제:", pressed)
+        check(len(pressed) == 5 and "east" in pressed, "페르소나 선택 → 주제 5개 미리 선택(동부 포함)")
         await m.screenshot(path=OUT + "mobile-390-topics.png")
-        await m.click("[data-ob-done]")
+        # 3개 더(최대 8) + 9번째 시도 → 안내 문구
+        rest = await m.eval_on_selector_all('[data-pick][aria-pressed="false"]', "bs=>bs.map(b=>b.dataset.pick)")
+        for t in rest[:3]:
+            await m.click('[data-pick="%s"]' % t)
+        await m.click('[data-pick="%s"]' % rest[3])
+        await m.wait_for_timeout(200)
+        n_on = await m.locator('[data-pick][aria-pressed="true"]').count()
+        msg = await m.inner_text("#pickMsg")
+        check(n_on == 8 and "최대 8개" in msg, "최대 8개 제한 + 안내(%d개, '%s')" % (n_on, msg))
+        await m.screenshot(path=OUT + "mobile-390-topics-max.png")
+        # 하나 끄고(8→7) 저장
+        await m.click('[data-pick="%s"]' % rest[2])
+        await m.click("[data-save]")
         await m.wait_for_timeout(500)
-        check(not await m.is_visible("#sheet"), "완료 후 시작 화면 닫힘")
+        check(not await m.is_visible("#sheet"), "저장 후 시트 닫힘")
         prof = await m.evaluate("JSON.parse(localStorage.getItem('tnk.profile.v1'))")
-        check(prof["onboarded"] and prof.get("region") == "east" and prof.get("interests") == ["life", "visa"] and prof["persona"].startswith("r:east"),
-              "localStorage 저장: %s %s %s" % (prof.get("region"), prof.get("interests"), prof["topics"]))
+        check(prof["onboarded"] and prof["persona"] == "sriracha" and len(prof["topics"]) == 7, "localStorage 저장: %s" % prof["topics"])
         tabs = await m.eval_on_selector_all("#tabs .tab", "ts=>ts.map(t=>t.dataset.tab)")
         print("  탭:", tabs)
-        check(tabs[0] == "feed" and tabs[-1] == "all" and len(tabs) == len(prof["topics"]) + 2, "탭 = 내 피드 + 내 주제 + 전체 보기")
+        check(tabs[0] == "feed" and tabs[-1] == "all" and len(tabs) == 9, "탭 = 내 피드 + 선택 주제 7 + 전체 보기")
         check(await m.locator("#topGrid .top-card").count() == 3, "주요 뉴스 3건 항상 표시")
         bl = await m.locator("#briefing .brief-line").count()
         check(bl >= 3, "브리핑 글머리표 %d줄" % bl)
@@ -76,13 +81,12 @@ async def main():
         await m.screenshot(path=OUT + "mobile-390-feed-full.png", full_page=True)
         sw = await m.evaluate("[document.documentElement.scrollWidth, window.innerWidth]")
         check(sw[0] <= sw[1], "가로 스크롤 없음 %s" % sw)
-        # 내 피드 = 내 피드 칩 + (📌 꼭 봐야 할 뉴스) + 내 지역 묶음 + 지역 광고 + 전국 묶음, 내 지역 묶음은 동부 기사만
-        check(await m.locator("#feed .mine__chip").count() == 1, "내 피드 칩(📍동부 ✏️) 표시")
-        check(await m.locator("#feed .fsec--nat").count() == 1, "전국·다른 지역 묶음 표시")
-        bad = await m.evaluate("""() => { const st = window.NEWS_DATA[window.TNApp.state.edition.id].stories;
-          return [...document.querySelectorAll('#feed .fsec--region .card')].filter(c => { const s = st.find(x=>x.id===c.id);
-            return !TNTopics.storyTopics(s).all.includes('east'); }).map(c=>c.id); }""")
-        check(not bad, "내 지역 묶음 = 동부 기사만 %s" % bad)
+        # 내 피드 기사들이 선택 주제에 속하는지
+        bad = await m.evaluate("""() => { const sel = JSON.parse(localStorage.getItem('tnk.profile.v1')).topics;
+          const st = window.NEWS_DATA[window.TNApp.state.edition.id].stories;
+          return [...document.querySelectorAll('#feed .card')].filter(c => { const s = st.find(x=>x.id===c.id);
+            return !TNTopics.storyTopics(s).all.some(t=>sel.includes(t)); }).map(c=>c.id); }""")
+        check(not bad, "내 피드 = 선택 주제 기사만 %s" % bad)
         # 브리핑 줄 탭 → 기사로 이동·펼침
         first_line = m.locator("#briefing button.brief-line").first
         if await first_line.count():
@@ -95,16 +99,15 @@ async def main():
             await m.click('#tabs [data-tab="feed"]')
             await m.wait_for_timeout(400)
         # ---------- 👍👎 재정렬 ----------
-        SEC = "#feed .fsec--region .card" if await m.locator("#feed .fsec--region .card").count() >= 3 else "#feed .fsec--nat .card"
-        order0 = await m.eval_on_selector_all(SEC, "cs=>cs.map(c=>c.id)")
+        order0 = await m.eval_on_selector_all("#feed .card", "cs=>cs.map(c=>c.id)")
         first, last = order0[0], order0[-1]
         await m.click('#%s [data-vote="-1"]' % first)
         await m.wait_for_timeout(400)
-        order1 = await m.eval_on_selector_all(SEC, "cs=>cs.map(c=>c.id)")
+        order1 = await m.eval_on_selector_all("#feed .card", "cs=>cs.map(c=>c.id)")
         check(order1.index(first) > 0 and first in order1, "👎 기사 아래로(숨기지 않음): %s %d→%d" % (first, 0, order1.index(first)))
         await m.click('#%s [data-vote="1"]' % last)
         await m.wait_for_timeout(400)
-        order2 = await m.eval_on_selector_all(SEC, "cs=>cs.map(c=>c.id)")
+        order2 = await m.eval_on_selector_all("#feed .card", "cs=>cs.map(c=>c.id)")
         check(order2.index(last) < len(order2) - 1, "👍 기사 위로: %s %d→%d" % (last, len(order1) - 1, order2.index(last)))
         print("  순서:", order0, "→", order2)
         w = await m.evaluate("Object.keys(JSON.parse(localStorage.getItem('tnk.profile.v1')).taste.w).length")
@@ -122,18 +125,6 @@ async def main():
         await m.wait_for_timeout(400)
         check(await m.is_visible("[data-reset-taste]"), "설정에 '내 취향 초기화'")
         await m.screenshot(path=OUT + "mobile-390-settings.png")
-        # 세부 주제 최대 8개 제한 + 안내(설정 화면으로 옮김, 2026-10-03)
-        rest = await m.eval_on_selector_all('[data-pick][aria-pressed="false"]', "bs=>bs.map(b=>b.dataset.pick)")
-        n_on = await m.locator('[data-pick][aria-pressed="true"]').count()
-        for t in rest[:max(0, 8 - n_on)]:
-            await m.click('[data-pick="%s"]' % t)
-        if len(rest) > 8 - n_on:
-            await m.click('[data-pick="%s"]' % rest[8 - n_on])
-        await m.wait_for_timeout(200)
-        n_on = await m.locator('[data-pick][aria-pressed="true"]').count()
-        msg = await m.inner_text("#pickMsg")
-        check(n_on == 8 and "최대 8개" in msg, "최대 8개 제한 + 안내(%d개, '%s')" % (n_on, msg))
-        await m.screenshot(path=OUT + "mobile-390-topics-max.png")
         m.once("dialog", lambda d: asyncio.ensure_future(d.accept()))
         await m.click("[data-reset-taste]")
         await m.wait_for_timeout(400)

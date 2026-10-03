@@ -9,11 +9,11 @@
  * - Google 로그인·Firestore(firebase / googleapis / gstatic SDK / firebaseapp.com / google.com 계정 창)는
  *   절대 가로채거나 캐시하지 않는다(그냥 브라우저가 직접 요청). 글꼴(fonts.googleapis/gstatic)만 예외로 캐시.
  */
-var VERSION = "tnk-4185f7a789";
+var VERSION = "tnk-81a586abe5";
 var SHELL = "shell-" + VERSION, DATA = "data-v1", EXT = "ext-v1";
 var SHELL_FILES = [
   "./", "index.html", "manifest.json",
-  "assets/style.css?v=1f9604ae", "assets/topics.js?v=d98a0e72", "assets/prefs.js?v=abf254f9", "assets/taste.js?v=788775b8", "assets/app.js?v=624559ad", "assets/social.js?v=d3757c8d", "assets/ticker.js?v=fbc22bab",
+  "assets/style.css?v=1f9604ae", "assets/topics.js?v=3e951135", "assets/prefs.js?v=280ab29a", "assets/taste.js?v=788775b8", "assets/app.js?v=c668eb40", "assets/social.js?v=d3757c8d", "assets/ticker.js?v=fbc22bab",
   "assets/nearby.css?v=f91ab1c4", "assets/nearby.js?v=7db9a558", "assets/pages.js?v=1dda30b6",
   "assets/ads/massage/dragon-ad.css?v=7a850b03", "assets/ads/massage/dragon-ad.js?v=1961d18e", "assets/ads/massage/dragon.svg",
   "assets/icons/icon-192.png", "assets/icons/icon-512.png", "assets/icons/maskable-512.png",

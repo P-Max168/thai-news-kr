@@ -43,6 +43,14 @@
   function migrateRegion(d) {
     var T = root.TNTopics; if (!T || !T.decodePersona) return;
     var dec = T.decodePersona(d.persona);
+    if (!T.ONBOARDING_2STEP) {
+      // 보류 중(2026-10-03 14:06~): 새 시작 화면을 거친 사용자 → 예전 페르소나로(주제는 그대로), 사는 곳·관심 칸은 비움 → 예전과 똑같이 동작.
+      // 고른 값은 이 기기 ui.ob2 에 남겨 둠(다시 켤 때 되살림)
+      if (dec) { d.ui = d.ui || {}; d.ui.ob2 = d.persona; d.persona = T.legacyPersona(dec.region, dec.interests); }
+      d.region = null; d.interests = null;
+      return;
+    }
+    if (!dec && d.ui && d.ui.ob2 && T.decodePersona(d.ui.ob2) && d.onboarded) dec = T.decodePersona(d.ui.ob2);
     if (dec) { d.region = dec.region; d.interests = dec.interests; return; }
     if (d.onboarded && !d.region && (d.persona || (Array.isArray(d.topics) && d.topics.length))) {
       var f = T.fromLegacy(d.persona, d.topics); d.region = f.region; d.interests = f.interests;
