@@ -1,0 +1,3 @@
+- 바뀐 것: ③c 하트·🙌·🙅 익명 집계(Firestore rx: 기사·반응·사는 곳·관심·주제만, 개인 정보 없음 — 사는 곳·관심은 페르소나·내 주제로 추정) + 운영자 전용 📊 반응 통계 페이지(#admin, 오늘/7일/30일·합계·인기 기사·사는 곳/관심/주제별). 규칙은 firestore.rules 에 작성, 서버 보내기 스위치 RX_ON=false(규칙 게시 후 켬)
+- 왜: 운영자가 어떤 기사가 반응이 좋은지 지역·관심별로 보려고. 사진은 시험용 예시 데이터
+- 되돌리는 법: `git checkout backup-20261003-1412-rx-stats2 -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
