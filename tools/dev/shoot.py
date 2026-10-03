@@ -26,7 +26,8 @@ async def main():
             await pg.goto(u + ("&" if "?" in u else "?") + "_=" + str(int(time.time())), wait_until="networkidle")
             await pg.evaluate("document.fonts.ready"); await pg.wait_for_timeout(900)
             full = False
-            if name == "feed": await pg.evaluate("(document.querySelector('#feed .card')||document.body).scrollIntoView()"); await pg.evaluate("scrollBy(0,-130)")
+            await pg.add_style_tag(content="html{scroll-behavior:auto!important}")
+            if name == "feed": await pg.evaluate("(()=>{const c=document.querySelector('#feed .card:not(.pin .card)')||document.querySelector('#feed .card');scrollTo(0,c.getBoundingClientRect().top+scrollY-200)})()"); await pg.wait_for_timeout(300)
             elif name == "drawer": await pg.click("#menuBtn"); await pg.wait_for_timeout(500)
             elif name == "article":
                 await pg.locator("#feed .card .card__head").first.click(); await pg.wait_for_timeout(500)

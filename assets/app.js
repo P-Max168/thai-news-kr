@@ -51,7 +51,7 @@
   }
   function timeHTML(iso) {
     var r = relTime(iso);
-    return '<time datetime="' + esc(iso) + '" title="방콕 시간 기준">' + esc(fmtTime(iso)) + " (BKK)" + (r ? " · " + r : "") + "</time>";
+    return '<time datetime="' + esc(iso) + '" title="방콕 시간 기준">' + esc(fmtTime(iso)) + '<span class="tz"> (BKK)</span>' + (r ? " · " + r : "") + "</time>";   // 휴대폰은 (BKK) 숨김 — 사이트 전체가 방콕 시간(헤더에 표시)
   }
   function metaHTML(s) {
     return '<div class="meta"><span class="src">' + esc(s.source) + '</span><span class="dot">' + timeHTML(s.published) + "</span></div>";
@@ -807,7 +807,7 @@
     $("datepickWrap").hidden = false;
     document.body.classList.add("has-editions");
     $("datepick").innerHTML = EDS.map(function (e, i) {
-      return '<option value="' + esc(e.id) + '"' + (cur && e.id === cur.id ? " selected" : "") + ">" + esc(e.label) + (i === 0 ? " (최신)" : "") + "</option>";
+      return '<option value="' + esc(e.id) + '"' + (cur && e.id === cur.id ? " selected" : "") + ">" + esc(e.label) + (i === 0 && innerWidth > 640 ? " (최신)" : "") + "</option>";   // 휴대폰은 칸이 좁아 '(최신)' 생략(잘림 방지)
     }).join("");
     $("datepick").addEventListener("change", function () { location.href = location.pathname + "?date=" + encodeURIComponent(this.value); });
   }

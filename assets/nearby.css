@@ -67,3 +67,9 @@ body.nb-open{overflow:hidden}
   .nb-page__panel{min-height:0;width:100%;max-width:560px;max-height:calc(100vh - 48px);overflow-y:auto;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
   .nb-page__bar{padding-top:10px;padding-bottom:10px}
 }
+
+/* 디자인 다듬기 v1(2026-10-03 야간): 지역·빠른 찾기 버튼이 줄을 꽉 채우고 같은 크기 */
+.nb-rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px;width:100%;margin-top:4px}
+.nb-rg button{min-height:42px;font-size:14px;border-radius:12px;padding:6px 4px}
+.nb-subs{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px}
+.nb-sub{justify-content:center;min-height:46px;padding:0 6px;border-radius:12px;font-size:15px;text-align:center}
