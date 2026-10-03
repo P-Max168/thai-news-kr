@@ -438,7 +438,8 @@ def build_ads():
     ads = json.loads(src.read_text(encoding="utf-8"))
     for sl in ads.get("slots", []):
         assert sl.get("id") in ("top", "mid", "korea-mid", "infeed", "drawer", "footer", "nearby-food", "nearby-massage", "nearby-pet", "nearby-beauty", "nearby-moto",
-                             "nearby-hair", "nearby-mart"), ("ads", sl.get("id"))  # hair·mart = 10-03 v1 옛 자리(지금 화면 없음, 남아 있어도 무해)
+                             "nearby-hair", "nearby-mart",
+                             "region-east", "region-bangkok", "region-north", "region-south", "region-other"), ("ads", sl.get("id"))  # region-* = 내 피드 지역 광고(2026-10-03 야간)  # hair·mart = 10-03 v1 옛 자리(지금 화면 없음, 남아 있어도 무해)
         for it in sl.get("items", []):
             for k in ("image", "link"):
                 assert not it.get(k) or str(it[k]).startswith("https://"), ("ads", sl["id"], k, "https:// 만")

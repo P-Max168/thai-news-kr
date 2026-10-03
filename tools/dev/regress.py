@@ -121,6 +121,28 @@ async def main():
         real = [e for e in errs if "favicon" not in e and e not in known]
         rec(not real, "콘솔 오류 없음", real[:5])
         if known: rec(None, "날씨 API 429(요청 제한) — 대체값으로 표시", len(known))
+        # 내 피드 구조(저장값 동부): 내 피드 칩 → (📌 꼭 봐야 할 뉴스) → 내 지역 → 지역 광고 → 전국
+        await pg.goto(URL + ("&" if "?" in URL else "?") + "_=" + str(int(time.time())), wait_until="networkidle")
+        await pg.wait_for_timeout(800)
+        fs = await pg.evaluate("""()=>({chip:(document.querySelector('#feed .mine__chip')||{}).innerText||'', reg:document.querySelectorAll('#feed .fsec--region .card').length,
+          ad:!!document.querySelector('#feed .ad-slot--region .ad, #feed .ad-slot--region a, #feed .ad-slot--region img'), nat:!!document.querySelector('#feed .fsec--nat'),
+          pin:document.querySelectorAll('#feed .pin--must .card').length})""")
+        rec(("동부" in fs["chip"]) and fs["nat"] and fs["ad"], "내 피드: 칩·내 지역·지역 광고·전국 묶음", fs)
+        # 2단계 시작 화면(새 방문자)
+        c2 = await b.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True, timezone_id="Asia/Bangkok", locale="ko-KR")
+        p2 = await c2.new_page()
+        await p2.goto(URL, wait_until="networkidle"); await p2.wait_for_timeout(800)
+        ob = {"regions": await p2.locator("#sheet [data-region]").count()}
+        try:
+            await p2.click('[data-region="bangkok"]'); await p2.click("[data-ob-next]"); await p2.wait_for_timeout(300)
+            ob["ints"] = await p2.locator("[data-int]").count()
+            await p2.click('[data-int="biz"]'); await p2.click("[data-ob-done]"); await p2.wait_for_timeout(600)
+            ob["closed"] = not await p2.is_visible("#sheet")
+            ob["chip"] = await p2.evaluate("(document.querySelector('#feed .mine__chip')||{}).innerText||''")
+        except Exception as e:
+            ob["err"] = str(e)[:120]
+        rec(ob.get("regions") == 5 and ob.get("ints") == 4 and ob.get("closed") and "방콕" in ob.get("chip", ""), "2단계 시작 화면(사는 곳 → 관심 → 내 피드)", ob)
+        await c2.close()
         await b.close()
     if OUT: pathlib.Path(OUT).write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
     nf = sum(1 for x in res if x["ok"] is False)

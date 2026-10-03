@@ -35,6 +35,58 @@
   ];
   var MAX_TOPICS = 8;
 
+  /* ---------- 2단계 시작 화면(2026-10-03 운영자 승인): 사는 곳 1개 + 관심 여러 개 ----------
+   * 저장: profile.region · profile.interests (이 기기) + 동기화용으로 persona 에 "r:<지역>;i:<관심,…>" (32자 이하 — Firestore 규칙 그대로)
+   * topic = 그 지역의 주제 id(그 외·여행 중은 없음). 관심 → 주제(내 주제 목록·전국 뉴스 정렬에 씀) */
+  var REGIONS = [
+    { id: "east",    topic: "east",    emoji: "🏖️", label: "동부", sub: "(촌부리·라용)", full: "동부(촌부리·라용)", hint: "파타야·시라차·좀티엔·라용", wx: "pattaya" },
+    { id: "bangkok", topic: "bangkok", emoji: "🏙️", label: "방콕", sub: "", full: "방콕", hint: "방콕 시내·근교", wx: "bangkok" },
+    { id: "north",   topic: "north",   emoji: "⛰️", label: "북부", sub: "", full: "북부", hint: "치앙마이·치앙라이", wx: null },
+    { id: "south",   topic: "south",   emoji: "🏝️", label: "남부", sub: "", full: "남부", hint: "푸껫·사무이·핫야이", wx: null },
+    { id: "other",   topic: null,      emoji: "🧳", label: "그 외·여행 중", sub: "", full: "그 외·여행 중", hint: "전국 소식 위주로 보여 드려요", wx: null }
+  ];
+  var INTERESTS = [
+    { id: "life",   emoji: "🏠", label: "생활·정착", hint: "물가·병원·집 구하기·생활 정보", color: "#0b7285", topics: ["life", "weather", "society"] },
+    { id: "travel", emoji: "✈️", label: "여행·맛집", hint: "여행지·축제·맛집·교통",       color: "#d9480f", topics: ["travel", "weather", "ent"] },
+    { id: "biz",    emoji: "💼", label: "사업·투자", hint: "경제·부동산·환율·세금",       color: "#0c8f6a", topics: ["poleco", "life"] },
+    { id: "visa",   emoji: "🛂", label: "비자·체류", hint: "비자·90일 신고·이민국 규정",  color: "#6741d9", topics: ["visa"] }
+  ];
+  var R_BY = {}, I_BY = {};
+  REGIONS.forEach(function (r) { R_BY[r.id] = r; });
+  INTERESTS.forEach(function (x) { I_BY[x.id] = x; });
+  function cleanInts(a) { var o = []; (Array.isArray(a) ? a : []).forEach(function (x) { if (I_BY[x] && o.indexOf(x) < 0) o.push(x); }); return INTERESTS.map(function (x) { return x.id; }).filter(function (x) { return o.indexOf(x) >= 0; }); }
+  function encodePersona(region, ints) { return "r:" + (R_BY[region] ? region : "other") + ";i:" + cleanInts(ints).join(","); }
+  function decodePersona(p) {
+    var m = /^r:([a-z]+);i:([a-z,]*)$/.exec(p || "");
+    if (!m || !R_BY[m[1]]) return null;
+    return { region: m[1], interests: cleanInts(m[2].split(",")) };
+  }
+  /* 옛 설정(페르소나 5개·내 주제) → 사는 곳·관심(조용히 옮기기). 옛 페르소나: 파타야/시라차/방콕 거주자, 여행객, 사업·투자 */
+  function fromLegacy(persona, topics) {
+    var t = (Array.isArray(topics) ? topics : []).map(canon), region = null, ints = [];
+    if (persona === "pattaya" || persona === "sriracha") region = "east";
+    else if (persona === "bangkok") region = "bangkok";
+    else if (persona === "traveler") region = "other";
+    if (!region) ["east", "bangkok", "north", "south"].some(function (r) { if (t.indexOf(r) >= 0) { region = r; return true; } return false; });
+    if (!region) region = "other";
+    if (persona === "traveler") ints.push("travel");
+    if (persona === "business") ints.push("biz");
+    if (t.indexOf("life") >= 0) ints.push("life");
+    if (t.indexOf("travel") >= 0) ints.push("travel");
+    if (t.indexOf("poleco") >= 0) ints.push("biz");
+    if (t.indexOf("visa") >= 0) ints.push("visa");
+    ints = cleanInts(ints);
+    return { region: region, interests: ints.length ? ints : ["life"] };
+  }
+  /* 사는 곳 + 관심 → 내 주제 목록(서랍 '내 주제'·호환용). 지역 → 관심 주제 순, 최대 8개 */
+  function topicsFor(region, ints) {
+    var out = [], r = R_BY[region];
+    if (r && r.topic) out.push(r.topic);
+    cleanInts(ints).forEach(function (i) { I_BY[i].topics.forEach(function (t) { if (out.indexOf(t) < 0) out.push(t); }); });
+    if (!out.length) out = ["visa", "life", "travel", "weather"];
+    return TOPICS.map(function (x) { return x.id; }).filter(function (x) { return out.indexOf(x) >= 0; }).slice(0, MAX_TOPICS);
+  }
+
   /* ---------- 옛 판(category) → 새 주제 매핑 ---------- */
   var LEGACY_PRIMARY = { politics: "poleco", economy: "poleco", society: "society", visa: "visa", sns: "ent" };
   // 지역 키워드(한국어 표기 흔들림 포함 + 태국어)
@@ -104,6 +156,8 @@
 
   root.TNTopics = {
     TOPICS: TOPICS, BY_ID: BY_ID, PERSONAS: PERSONAS, MAX_TOPICS: MAX_TOPICS, ALIAS: ALIAS, canon: canon,
+    REGIONS: REGIONS, INTERESTS: INTERESTS, region: function (id) { return R_BY[id] || null; }, interest: function (id) { return I_BY[id] || null; },
+    encodePersona: encodePersona, decodePersona: decodePersona, fromLegacy: fromLegacy, topicsFor: topicsFor, cleanInterests: cleanInts,
     get: function (id) { return BY_ID[canon(id)]; },
     storyTopics: storyTopics, legacyTopics: legacyTopics
   };

@@ -60,7 +60,9 @@
   function region() {
     var R = NEARBY.regions, r = ls(LS_REGION); if (R[r]) return r;
     r = ls("tnk.wxRegion"); if (R[r]) return r;
-    var p = window.TNStore && window.TNStore.get && window.TNStore.get() && window.TNStore.get().persona;
+    var d = window.TNStore && window.TNStore.get && window.TNStore.get(), p = d && d.persona;
+    var rg = d && d.region && window.TNTopics && window.TNTopics.region && window.TNTopics.region(d.region);   // 시작 화면에서 고른 사는 곳
+    if (rg && R[rg.nb || rg.wx]) return rg.nb || rg.wx;
     return R[p] ? p : "pattaya";
   }
   function havePos() { return geo.pos && Date.now() - geo.at < GEO_TTL; }

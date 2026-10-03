@@ -31,13 +31,15 @@ async def main():
         resp = await pg.goto(url, wait_until="networkidle")
         await pg.evaluate("document.fonts.ready")
         await pg.wait_for_timeout(800)
-        onboarding = await pg.is_visible("#sheet [data-persona]")
+        onboarding = await pg.is_visible("#sheet [data-region]")   # 2단계 시작 화면(2026-10-03)
         pathlib.Path(SHOT).parent.mkdir(parents=True, exist_ok=True)
         if onboarding:
             await pg.screenshot(path=SHOT.replace(".png", "-onboarding.png"))
-            await pg.click('[data-persona="pattaya"]')
+            await pg.click('[data-region="east"]')
+            await pg.click("[data-ob-next]")
             await pg.wait_for_timeout(300)
-            await pg.click("[data-save]")
+            await pg.click('[data-int="life"]')
+            await pg.click("[data-ob-done]")
             await pg.wait_for_timeout(600)
         info = await pg.evaluate("""async () => {
           const st = ((window.NEWS_DATA||{})[(window.NEWS_INDEX||{}).latest]||{stories:[]}).stories;

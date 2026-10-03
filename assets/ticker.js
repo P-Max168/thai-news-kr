@@ -40,7 +40,9 @@
   }
   function region() {
     var r = ls(LS_REGION); if (REGIONS[r]) return r;
-    var p = window.TNStore && window.TNStore.get() && window.TNStore.get().persona;
+    var d = window.TNStore && window.TNStore.get(), p = d && d.persona;
+    var rg = d && d.region && window.TNTopics && window.TNTopics.region && window.TNTopics.region(d.region);   // 시작 화면에서 고른 사는 곳(동부 → 파타야, 방콕 → 방콕)
+    if (rg && REGIONS[rg.wx]) return rg.wx;
     return REGIONS[p] ? p : "pattaya";
   }
 

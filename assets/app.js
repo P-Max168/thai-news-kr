@@ -8,7 +8,8 @@
   var MAX = T.MAX_TOPICS;
   var DECO = { east: "〰", bangkok: "曼", north: "⛰", south: "☀", poleco: "政", society: "社", visa: "✈", life: "%", travel: "旅", ent: "#", weather: "☂" };
   // tab: "feed"(내 피드) | "all"(전체 보기) | 주제 id
-  var state = { data: null, tab: "feed", edition: null, impact: null, dqOpen: {} };
+  var state = { data: null, tab: "feed", edition: null, impact: null, dqOpen: {}, natStep: 0 };
+  var NAT_STEPS = [5, 10, 1000];   // 내 피드 '전국·다른 지역' 칸: 5건 → 10건 → 전부
   /* 한인 영향도 태그(판 데이터 story.impact — README '판마다 채울 필드(2026-10-03 추가)'). 순서 = 필터 칩 순서 */
   var IMPACT = [
     { k: "비자·체류", e: "🛂", c: "#6741d9" }, { k: "환율·물가", e: "💱", c: "#0c8f6a" }, { k: "교통·사고", e: "🚗", c: "#d9480f" },
@@ -245,7 +246,8 @@
   function renderTabs() {
     var c = topicCounts(), sel = selected(), list = tabList();
     $("tabs").innerHTML = list.map(function (k, i) {
-      return tabBtn(k, c, sel) + (i === 0 ? '<button type="button" class="dr-item" id="myTopicsBtn" data-open-settings aria-haspopup="dialog">🧩 내 주제 설정</button>' : "");
+      return tabBtn(k, c, sel) + (i === 0 ? '<button type="button" class="dr-item dr-item--mine" data-ob-edit aria-haspopup="dialog">✏️ 내 피드 바꾸기 <small>사는 곳·관심</small></button>' +
+        '<button type="button" class="dr-item" id="myTopicsBtn" data-open-settings aria-haspopup="dialog">🧩 세부 주제·설정 <small>주제 직접 고르기·취향 초기화</small></button>' : "");
     }).join("");
     var other = sel ? T.TOPICS.map(function (t) { return t.id; }).filter(function (k) { return list.indexOf(k) < 0; }) : [];
     $("tabsOther").innerHTML = other.map(function (k) { return tabBtn(k, c, null).replace('class="tab', 'class="tab tab--other'); }).join("");
@@ -494,11 +496,60 @@
   function feedList() {
     var hl = state.data.highlights || [], st = state.data.stories, list;
     if (state.tab === "feed" || state.tab === "all") {
-      list = st.filter(function (s) { return hl.indexOf(s.id) < 0 && (state.tab === "all" || inSelection(s)); });
+      list = st.filter(function (s) { return hl.indexOf(s.id) < 0; });   // 내 피드 = 모든 기사를 지역·관심 순으로 묶어 보여 줌(feedGroups)
     } else {
       list = st.filter(function (s) { return tps(s).all.indexOf(state.tab) >= 0; });
     }
     return L.sort(edId(), list, refTime());
+  }
+  /* ---------- 내 피드(2026-10-03 2단계 시작 화면): 📌 꼭 봐야 할 뉴스 → 📍 내 지역 → 지역 광고 → 전국·다른 지역(낮은 비중) ----------
+   * 꼭 봐야 할 뉴스 = 외국인·비자 기사(주 주제) + 한인 영향 '비자·체류' 기사 — 어느 지역이든 한인 생활에 바로 영향(전국 공통)
+   * 내 지역 = 사는 곳 주제(주·보조)가 붙은 기사, 취향 순 / 전국 = 나머지: 내 관심 주제 기사 먼저(취향 순), 그다음 나머지(취향 순) */
+  function mine() {
+    var d = prof(), r = d.region && T.region(d.region);
+    return { region: r, ints: T.cleanInterests(d.interests || []) };
+  }
+  function interestTopics(ints) { var o = []; ints.forEach(function (i) { var x = T.interest(i); if (x) x.topics.forEach(function (t) { if (o.indexOf(t) < 0) o.push(t); }); }); return o; }
+  function feedGroups() {
+    var hl = state.data.highlights || [], ed = edId(), ref = refTime(), m = mine();
+    var list = state.data.stories.filter(function (s) { return hl.indexOf(s.id) < 0; });
+    if (state.impact) list = list.filter(function (s) { return impacts(s).indexOf(state.impact) >= 0; });
+    var must = list.filter(function (s) { return tps(s).topic === "visa" || impacts(s).indexOf("비자·체류") >= 0; });
+    var rest = list.filter(function (s) { return must.indexOf(s) < 0; });
+    var rt = m.region && m.region.topic, reg = rt ? rest.filter(function (s) { return tps(s).all.indexOf(rt) >= 0; }) : [];
+    var nat = rest.filter(function (s) { return reg.indexOf(s) < 0; });
+    var it = interestTopics(m.ints).concat(selected() || []);
+    var natA = nat.filter(function (s) { return tps(s).all.some(function (t) { return it.indexOf(t) >= 0; }); });
+    var natB = nat.filter(function (s) { return natA.indexOf(s) < 0; });
+    return { m: m, must: L.sort(ed, must, ref), reg: L.sort(ed, reg, ref), nat: L.sort(ed, natA, ref).concat(L.sort(ed, natB, ref)) };
+  }
+  function mineChipHTML() {
+    var m = mine(), ints = m.ints.map(function (i) { var x = T.interest(i); return x.emoji + esc(x.label); });
+    var txt = m.region ? (m.region.id === "other" ? "🧳 " + esc(m.region.label) : "📍" + esc(m.region.label)) : "📍 사는 곳 고르기";
+    if (ints.length) txt += ' <span class="sep">·</span> ' + ints.slice(0, 2).join(" ") + (ints.length > 2 ? " +" + (ints.length - 2) : "");
+    return '<p class="mine"><span class="mine__l">내 피드</span><button type="button" class="mine__chip" data-ob-edit aria-label="내 피드 바꾸기(사는 곳·관심)">' + txt + ' <span class="ed" aria-hidden="true">✏️</span></button></p>';
+  }
+  function renderMyFeed(imp) {
+    var g = feedGroups(), m = g.m, n = g.must.length + g.reg.length + g.nat.length;
+    $("feedTitleText").textContent = "⭐ 내 피드";
+    $("feedCount").textContent = n + "건" + (state.impact ? " · '" + state.impact + "' 영향만" : " (주요 뉴스 제외)") + (L.hasTaste() ? " · 내 취향 반영 순서" : "");
+    var html = mineChipHTML() + imp;
+    if (!n) { $("feed").innerHTML = html + '<div class="empty">이 판에는 보여 드릴 기사가 없어요. ☰ 메뉴의 \'전체 보기\'를 눌러 보세요.</div>'; return; }
+    if (g.must.length) html += '<div class="pin pin--must" aria-label="꼭 봐야 할 뉴스"><p class="pin__h">📌 꼭 봐야 할 뉴스 <small>모든 지역 공통 · 외국인·비자</small></p>' + g.must.map(cardHTML).join("") + "</div>";
+    if (m.region && m.region.topic) {
+      html += '<section class="fsec fsec--region" aria-label="' + esc(m.region.full) + ' 뉴스"><h3 class="fsec__h">' + m.region.emoji + " " + esc(m.region.full) + ' 뉴스 <em>' + g.reg.length + "건</em></h3>" +
+        (g.reg.length ? g.reg.map(cardHTML).join("") : '<div class="empty empty--sm">이 판에는 ' + esc(m.region.full) + " 기사가 없어요. 아래 전국 소식을 보세요.</div>") + "</section>";
+    }
+    var ra = m.region && adSlot("region-" + m.region.id);
+    if (ra) html += '<div class="ad-slot ad-slot--region" data-region-ad="' + esc(m.region.id) + '">' + adHTML(ra, 0) + "</div>";
+    if (g.nat.length) {
+      var show = Math.min(g.nat.length, NAT_STEPS[state.natStep] || g.nat.length), more = g.nat.length - show;
+      var nxt = Math.min(g.nat.length, NAT_STEPS[state.natStep + 1] || g.nat.length) - show;
+      html += '<section class="fsec fsec--nat" aria-label="전국·다른 지역 뉴스"><h3 class="fsec__h">🇹🇭 ' + (m.region && m.region.topic ? "전국·다른 지역" : "전국") + ' 뉴스 <em>' + g.nat.length + "건</em></h3>" +
+        withInfeed(g.nat.slice(0, show).map(cardHTML)) +
+        (g.nat.length > NAT_STEPS[0] ? '<button type="button" class="more-btn" data-nat-more aria-expanded="' + !more + '">' + (more ? "펼치기 (" + nxt + "건 더) ▾" : "접기 ▴") + "</button>" : "") + "</section>";
+    }
+    $("feed").innerHTML = html;
   }
   function renderFeed() {
     var list = feedList(), tab = state.tab;
@@ -522,6 +573,7 @@
       IMPACT.filter(function (m) { return cnt[m.k]; }).map(function (m) {
         return '<button type="button" class="impf__c" data-imp="' + esc(m.k) + '" style="--ic:' + m.c + '" aria-pressed="' + (state.impact === m.k) + '"><span aria-hidden="true">' + m.e + "</span>" + esc(m.k) + " <small>" + cnt[m.k] + "</small></button>";
       }).join("") + "</div>" : "";
+    if (tab === "feed") { renderMyFeed(imp); return; }
     if (state.impact) {
       list = list.filter(function (s) { return impacts(s).indexOf(state.impact) >= 0; });
       $("feedCount").textContent = list.length + "건 · '" + state.impact + "' 영향만";
@@ -547,7 +599,7 @@
 
   /* ---------- 인터랙션 ---------- */
   function setTab(tab, keepScroll) {
-    state.tab = tab;
+    state.tab = tab; state.natStep = 0;
     Drawer.close(true);
     renderAll();
     if (!keepScroll) window.scrollTo({ top: 0, behavior: "smooth" });
@@ -612,6 +664,13 @@
       return;
     }
     if ((el = e.target.closest("[data-open-settings]"))) { Drawer.close(true); Onb.open("topics", true); return; }
+    if ((el = e.target.closest("[data-ob-edit]"))) { Drawer.close(true); Onb.open("region", true); return; }
+    if ((el = e.target.closest("[data-nat-more]"))) {
+      var g0 = feedGroups(), sh0 = Math.min(g0.nat.length, NAT_STEPS[state.natStep] || g0.nat.length);
+      if (sh0 >= g0.nat.length) { state.natStep = 0; renderFeed(); var ns = document.querySelector(".fsec--nat"); if (ns) ns.scrollIntoView({ block: "start" }); }
+      else { state.natStep++; var fy0 = window.pageYOffset; renderFeed(); window.scrollTo(0, fy0); }
+      return;
+    }
     if ((el = e.target.closest("[data-tab]"))) { setTab(el.getAttribute("data-tab")); return; }
     if ((el = e.target.closest("[data-open]"))) { openStory(el.getAttribute("data-open")); history.replaceState(null, "", location.search + "#" + el.getAttribute("data-open")); return; }
     if ((el = e.target.closest(".card__head"))) toggleCard(el.parentNode);
@@ -625,7 +684,35 @@
 
   /* ---------- 온보딩 · 내 주제 설정 ---------- */
   var Onb = (function () {
-    var sheet = $("sheet"), pick = [], persona = null, settingsMode = false, lastFocus = null;
+    var sheet = $("sheet"), pick = [], persona = null, settingsMode = false, lastFocus = null, reg = null, ints = [];
+    /* 2단계 시작 화면(2026-10-03 운영자 승인 시안 /workspace/mockups/residence): ① 어디 사세요?(하나) ② 무엇에 관심 있으세요?(여러 개) */
+    function obTop(n) {
+      var fl = document.querySelector(".brand__flags");
+      return '<div class="ob__top"><span class="ob__brand"><span class="ob__flags" aria-hidden="true">' + (fl ? fl.innerHTML : "") + "</span> 태국 뉴스 한눈에</span>" +
+        (settingsMode ? '<button type="button" class="ob__x" data-close aria-label="닫기">✕</button>' : "") + '<span class="ob__step">' + n + ' / 2</span></div>' +
+        '<div class="ob__bar" role="progressbar" aria-valuemin="1" aria-valuemax="2" aria-valuenow="' + n + '" aria-label="2단계 중 ' + n + '단계"><i class="on"></i><i' + (n === 2 ? ' class="on"' : "") + "></i></div>";
+    }
+    function stepRegion() {
+      return '<div class="ob">' + obTop(1) + '<div class="ob__body"><h2 class="ob__q" id="sheetTitle">📍 어디 사세요?</h2>' +
+        '<p class="ob__sub">사는 곳 소식을 <b>맨 위에</b> 보여 드려요. <b>하나만</b> 골라 주세요.</p>' +
+        '<div class="opts" role="radiogroup" aria-label="사는 곳">' + T.REGIONS.map(function (r) {
+          return '<button type="button" class="opt" role="radio" data-region="' + r.id + '" aria-checked="' + (reg === r.id) + '"><span class="opt__e" aria-hidden="true">' + r.emoji + '</span>' +
+            '<span class="opt__t"><b>' + esc(r.label) + (r.sub ? " <span>" + esc(r.sub) + "</span>" : "") + "</b><small>" + esc(r.hint) + '</small></span><span class="opt__r" aria-hidden="true"></span></button>';
+        }).join("") + '</div><p class="pick-msg" id="pickMsg" role="status" aria-live="polite"></p></div>' +
+        '<div class="ob__foot"><button type="button" class="cta" data-ob-next>다음 <small aria-hidden="true">→</small></button>' +
+        (settingsMode ? '<button type="button" class="skip" data-close>닫기</button>' : '<button type="button" class="skip" data-skip>나중에 고를게요</button>') + "</div></div>";
+    }
+    function stepInterests() {
+      var r = T.region(reg);
+      return '<div class="ob">' + obTop(2) + '<div class="ob__body">' + (r ? '<span class="picked">📍 사는 곳 <b>' + esc(r.full) + "</b></span>" : "") +
+        '<h2 class="ob__q" id="sheetTitle">🙋 무엇에 관심 있으세요?<small>(여러 개 선택)</small></h2><p class="ob__sub">고른 주제의 기사를 <b>먼저</b> 보여 드려요.</p>' +
+        '<div class="grid2" role="group" aria-label="관심">' + T.INTERESTS.map(function (x) {
+          return '<button type="button" class="int" data-int="' + x.id + '" aria-pressed="' + (ints.indexOf(x.id) >= 0) + '" style="--tc:' + x.color + '"><span class="int__c" aria-hidden="true">✓</span><span class="int__e" aria-hidden="true">' + x.emoji + '</span>' +
+            '<span class="int__t">' + esc(x.label) + '</span><span class="int__s">' + esc(x.hint) + "</span></button>";
+        }).join("") + '</div><p class="note">💡 <span>언제든 <span class="mi">☰ 메뉴</span>에서 <b>바꿀 수 있어요</b></span></p><p class="pick-msg" id="pickMsg" role="status" aria-live="polite"></p></div>' +
+        '<div class="ob__foot"><p class="ob__cnt" id="intCnt"><b>' + ints.length + "개</b> 선택함</p>" +
+        '<button type="button" class="cta" data-ob-done>완료 <small aria-hidden="true">✓</small></button><button type="button" class="skip" data-ob-prev>← 이전</button></div></div>';
+    }
     function personaHTML(compact) {
       return T.PERSONAS.map(function (p) {
         return '<button type="button" class="persona' + (compact ? " persona--sm" : "") + '" data-persona="' + p.id + '" aria-pressed="' + (persona === p.id) + '">' +
@@ -653,7 +740,7 @@
         (settingsMode ? '<div class="sheet__settings">' +
           '<button type="button" class="setbtn" data-reset-taste>↺ 내 취향 초기화 <small>👍👎로 배운 순서를 지워요</small></button>' +
           '<button type="button" class="setbtn" data-show-all>모든 주제 보기 <small>주제 선택 없이 전체를 내 피드로</small></button>' +
-          '<button type="button" class="setbtn" data-restart>처음 질문(어떤 분이세요?) 다시 보기</button>' +
+          '<button type="button" class="setbtn" data-restart>📍 사는 곳·관심 다시 고르기</button>' +
           (Install.available() ? '<button type="button" class="setbtn" data-install>📲 홈 화면에 추가</button>' : "") +
           '<div class="acct-box" id="acctBox"></div>' +
           '<p class="sheet__note" id="storeNote">' + (window.TNSocial && window.TNSocial.signedIn() ? "구글 계정에 저장돼 다른 기기에서도 이어져요." : "설정과 취향은 이 기기(브라우저)에만 저장돼요. 구글로 로그인하면 다른 기기에서도 이어져요(선택).") + "</p></div>" : "") +
@@ -672,7 +759,9 @@
     }
     function msg(t, warn) { var m = $("pickMsg"); if (!m) return; m.textContent = t; m.classList.toggle("warn", !!warn); if (warn) { m.classList.remove("shake"); void m.offsetWidth; m.classList.add("shake"); } }
     function show(step) {
-      sheet.innerHTML = '<div class="sheet__panel" role="document">' + (step === "persona" ? stepPersona() : stepTopics()) + "</div>";
+      var ob = step === "region" || step === "interests";
+      sheet.classList.toggle("sheet--ob", ob);
+      sheet.innerHTML = '<div class="sheet__panel" role="document">' + (step === "region" ? stepRegion() : step === "interests" ? stepInterests() : step === "persona" ? stepPersona() : stepTopics()) + "</div>";
       sheet.setAttribute("data-step", step);
       updCount();
       if (window.TNSocial && $("acctBox")) window.TNSocial.renderAccountBox($("acctBox"));
@@ -682,11 +771,12 @@
       settingsMode = !!settings; lastFocus = document.activeElement;
       var d = prof();
       persona = d.persona; pick = (selected() || []).slice();
+      reg = d.region || null; ints = T.cleanInterests(d.interests || []);
       sheet.hidden = false; document.body.classList.add("sheet-open");
       show(step);
     }
     function close() {
-      sheet.hidden = true; document.body.classList.remove("sheet-open"); sheet.innerHTML = "";
+      sheet.hidden = true; document.body.classList.remove("sheet-open"); sheet.innerHTML = ""; sheet.classList.remove("sheet--ob");
       if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
       Install.maybeShow();
     }
@@ -697,9 +787,33 @@
       if (state.data) renderAll();
       window.scrollTo(0, 0);
     }
+    function finishMine() {
+      var r = reg || "other", it = ints.slice();
+      S.update(function (d) { d.onboarded = true; d.region = r; d.interests = it; d.persona = T.encodePersona(r, it); d.topics = T.topicsFor(r, it); });
+      state.tab = "feed"; state.natStep = 0;
+      close();
+      if (state.data) renderAll();
+      window.scrollTo(0, 0);
+      var rr = T.region(r);
+      toast("⭐ 내 피드를 " + (rr && rr.topic ? esc(rr.full) + " 소식 먼저로" : "전국 소식 위주로") + " 맞췄어요");
+    }
     sheet.addEventListener("click", function (e) {
       var el = e.target;
       if (el === sheet) { if (settingsMode) close(); return; }
+      if ((el = e.target.closest("[data-region]"))) {
+        reg = el.getAttribute("data-region");
+        sheet.querySelectorAll("[data-region]").forEach(function (b) { b.setAttribute("aria-checked", String(b === el)); });
+        msg(""); return;
+      }
+      if (e.target.closest("[data-ob-next]")) { if (!reg) { msg("사는 곳을 하나 골라 주세요 🙂", true); return; } show("interests"); return; }
+      if (e.target.closest("[data-ob-prev]")) { show("region"); return; }
+      if ((el = e.target.closest("[data-int]"))) {
+        var iid = el.getAttribute("data-int"), ii = ints.indexOf(iid);
+        if (ii >= 0) ints.splice(ii, 1); else ints.push(iid);
+        el.setAttribute("aria-pressed", String(ii < 0));
+        var c = $("intCnt"); if (c) c.innerHTML = "<b>" + ints.length + "개</b> 선택함"; msg(""); return;
+      }
+      if (e.target.closest("[data-ob-done]")) { if (!ints.length) { msg("관심을 1개 이상 골라 주세요 🙂", true); return; } finishMine(); return; }
       if ((el = e.target.closest("[data-persona]"))) {
         persona = el.getAttribute("data-persona");
         pick = T.PERSONAS.filter(function (p) { return p.id === persona; })[0].topics.slice();
@@ -724,7 +838,7 @@
       if (e.target.closest("[data-skip]")) { finish(null, null); return; }
       if (e.target.closest("[data-show-all]")) { finish(null, persona); toast("모든 주제를 내 피드에 보여 드려요"); return; }
       if (e.target.closest("[data-back]")) { show("persona"); return; }
-      if (e.target.closest("[data-restart]")) { settingsMode = false; show("persona"); return; }
+      if (e.target.closest("[data-restart]")) { show("region"); return; }
       if (e.target.closest("[data-close]")) { close(); return; }
       if (e.target.closest("[data-install]")) { close(); Install.prompt(); return; }
       if (e.target.closest("[data-reset-taste]")) {
@@ -823,7 +937,7 @@
   document.addEventListener("visibilitychange", function () { if (!document.hidden && Date.now() - KOREA.at > 10 * 60 * 1000) loadKorea(); });
   if (cur) loadDate(cur.id); else $("feed").innerHTML = '<div class="empty">데이터가 없습니다.' + (navigator.onLine === false ? " 오프라인 상태입니다." : "") + "</div>";
   // 처음 방문: '어떤 분이세요?' (기사 링크(#id)로 들어온 경우에도 먼저 보여 주되 건너뛰기 가능)
-  if (!prof().onboarded) Onb.open("persona", false); else Install.maybeShow();
+  if (!prof().onboarded) Onb.open("region", false); else Install.maybeShow();   // 첫 방문만 2단계 시작 화면(옛 사용자는 prefs.js 가 조용히 옮김)
 
   // 서비스 워커(오프라인 읽기·홈 화면 앱). file:// 에서는 쓰지 않음
   if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
@@ -834,7 +948,7 @@
   // 로그인 병합·다른 기기 변경(src="remote") → 다시 그리기. 첫 질문 창이 떠 있는데 계정에 설정이 있으면 닫기
   S.subscribe(function (d, src) {
     if (src !== "remote") return;
-    if (d.onboarded && !$("sheet").hidden && $("sheet").getAttribute("data-step") === "persona" && !Onb.settings()) Onb.close();
+    if (d.onboarded && !$("sheet").hidden && /^(persona|region|interests)$/.test($("sheet").getAttribute("data-step")) && !Onb.settings()) Onb.close();
     if (state.data) { L.backfill(edId(), state.data.stories); renderAll(); }
   });
   window.TNApp = { state: state, openSettings: function () { Onb.open("topics", true); }, toast: toast, edId: function () { return state.data ? edId() : null; },

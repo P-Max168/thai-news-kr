@@ -12,7 +12,7 @@
 (function (root) {
   "use strict";
   var KEY = "tnk.profile.v1";
-  function blank() { return { v: 1, onboarded: false, persona: null, topics: null, taste: { w: {}, votes: {}, vf: {} }, ui: {}, updatedAt: 0, settingsAt: 0 }; }
+  function blank() { return { v: 1, onboarded: false, persona: null, topics: null, region: null, interests: null, taste: { w: {}, votes: {}, vf: {} }, ui: {}, updatedAt: 0, settingsAt: 0 }; }
 
   var localAdapter = {
     name: "local",
@@ -38,8 +38,19 @@
     var m = /^([tl]):(.+)$/.exec(f);
     return m && TOPIC_ALIAS[m[2]] ? m[1] + ":" + TOPIC_ALIAS[m[2]] : f;
   }
+  /* 2단계 시작 화면(2026-10-03): 사는 곳(region)·관심(interests). persona 가 "r:…;i:…" 면 거기서 읽고(로그인 동기화로 온 값),
+   * 옛 사용자(페르소나·내 주제만 있음)는 조용히 옮김 — 시작 화면을 다시 보여 주지 않음 */
+  function migrateRegion(d) {
+    var T = root.TNTopics; if (!T || !T.decodePersona) return;
+    var dec = T.decodePersona(d.persona);
+    if (dec) { d.region = dec.region; d.interests = dec.interests; return; }
+    if (d.onboarded && !d.region && (d.persona || (Array.isArray(d.topics) && d.topics.length))) {
+      var f = T.fromLegacy(d.persona, d.topics); d.region = f.region; d.interests = f.interests;
+    }
+  }
   function migrate(d) {
     if (!d || typeof d !== "object") return d;
+    try { migrateRegion(d); } catch (e) {}
     if (Array.isArray(d.topics)) {
       var out = [];
       d.topics.forEach(function (t) { t = TOPIC_ALIAS[t] || t; if (typeof t === "string" && out.indexOf(t) < 0) out.push(t); });
@@ -85,7 +96,7 @@
     if (!b.settingsAt && b.onboarded) b.settingsAt = b.updatedAt || 0;
     return migrate(b);
   }
-  function settingsSig(d) { return JSON.stringify([d.onboarded, d.persona, d.topics]); }
+  function settingsSig(d) { return JSON.stringify([d.onboarded, d.persona, d.topics, d.region, d.interests]); }
 
   var doc = normalize(localAdapter.readSync());
   // 옛 주제 id 를 옮겼으면 이 기기 저장값도 바로 고쳐 둠(시각은 그대로 — 다른 기기 설정을 덮지 않게)
