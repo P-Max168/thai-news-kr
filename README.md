@@ -8,7 +8,7 @@
 
 > **2026-10-03 아침 추가**: 🇰🇷 한국 주요 뉴스가 **판과 따로 2시간마다(하루 12번) 자동 갱신**된다 — GitHub Actions `.github/workflows/korea.yml` 이 `tools/fetch_korea.py --standalone` 으로 `data/korea.json`(+`data/korea.js`)을 만들어 커밋. 화면은 **순위 TOP 10: 3건 → '펼치기' 5건 → 10건 → '접기'**(같은 날 헤더 개편 때 4+6 에서 바꿈, 5위·6위 사이 작은 광고 `korea-mid`), 제목 옆 '업데이트 HH:MM'(방콕). 🔥 태국 X 트렌드 상자는 모든 화면에서 **페이지 맨 아래**(모든 기사 다음, 푸터 바로 위)로 옮김(3→5→10 그대로). 아래 '🇰🇷 한국 주요 뉴스 자동 갱신' 참고.
 
-> **2026-10-03 헤더 개편**: 첫 줄 = **🇹🇭❤️🇰🇷 태국 뉴스 한눈에**(국기·하트는 인라인 SVG — 윈도우 PC 에서도 보임), 둘째 줄 = **☰ 메뉴(왼쪽) + 빠른 정보 칩**(바트↔원 · 날씨 · PM2.5 미세먼지 · 🪙 금시세, 좁은 화면은 옆으로 밀기), 그 아래 빈 보조 줄은 그대로. 아래 '헤더(국기·☰·빠른 정보 칩)' 참고.
+> **2026-10-03 헤더 개편**: 첫 줄 = **🇹🇭❤️🇰🇷 태국 뉴스 한눈에**(국기·하트는 인라인 SVG — 윈도우 PC 에서도 보임), 둘째 줄 = **☰ 메뉴(왼쪽, 큰 버튼) + 두 줄짜리 빠른 정보 상자 3개**(환율 원·달러 / 날씨·PM2.5 / 금·휘발유(95)), 그 아래 빈 보조 줄은 그대로. 아래 '헤더(국기·☰·빠른 정보 칩)' 참고.
 
 ## 열어보기
 - 그냥 `index.html`을 더블클릭하면 됩니다(file:// 지원, fetch를 쓰지 않음).
@@ -38,8 +38,8 @@
 - `data/<id>.js`   : 같은 데이터를 `window.NEWS_DATA["<id>"]`에 등록하는 JS(file:// 용)
 - `data/korea.json` / `data/korea.js` : 🇰🇷 한국 주요 뉴스 10건 `{updated_at(+07:00), items:[{title, source, time, url}]}` / `window.KOREA_NEWS = …`(file:// 용). **GitHub Actions 전용 — 손으로 고치거나 deploy.sh 로 올리지 않음**
 - `.github/workflows/korea.yml` : 한국 주요 뉴스 + 헤더 시세 칩 데이터 2시간마다 갱신 워크플로(아래 '🇰🇷 한국 주요 뉴스 자동 갱신')
-- `data/ticker.json` / `data/ticker.js` : 헤더 빠른 정보 칩 데이터 `{updated_at, fx, gold, wx, aq}` / `window.TN_TICKER = …`(file:// 용). `tools/fetch_ticker.py` 가 만듦. **GitHub Actions 전용 — 손으로 고치거나 deploy.sh 로 올리지 않음**
-- `assets/ticker.js` : 헤더 둘째 줄 빠른 정보 칩(환율·날씨·금시세·PM2.5) 렌더 + 출처 작은 창(아래 '헤더')
+- `data/ticker.json` / `data/ticker.js` : 헤더 빠른 정보 칩 데이터 `{updated_at, fx, gold, fuel, wx, aq}` / `window.TN_TICKER = …`(file:// 용). `tools/fetch_ticker.py` 가 만듦. **GitHub Actions 전용 — 손으로 고치거나 deploy.sh 로 올리지 않음**
+- `assets/ticker.js` : 헤더 둘째 줄 빠른 정보 상자 3개(환율 원·달러 / 날씨·PM2.5 / 금·휘발유95) 렌더 + 출처 작은 창(아래 '헤더')
 - `data/index.json|js` : 판 목록. `{latest, editions:[{id,date,edition,label,generated,stories}], dates:[id…]}` (최신순). **직접 고치지 말고 스크립트로 재생성**
 - `assets/app.js, style.css` : 렌더러/스타일(빌드 과정 없음)
 - `assets/topics.js` : **주제 10개·페르소나 5개 정의 + 옛 판 category→주제 매핑**(데이터 파일은 고치지 않음). 주제 id 는 `tools/newslib.py` 의 `TOPICS` 와 같아야 함
@@ -52,7 +52,7 @@
 - `tools/fetch_korea.py` : 🇰🇷 한국 주요 뉴스 — `--standalone` = 독립 파일 `data/korea.json|js` 생성(Actions 가 2시간마다), `<판 id>` = 판 `korea_top` 후보 수집(Google News KR) / `tools/discussion.py` : 💬 오늘의 질문 초안·적용 / `tools/strip_trend_cards.py` : trends24 기사 카드 제거(이미 실행함)
 - `drafts/` : 운영자 승인 전 초안(올리지 않음, .gitignore)
 - `manifest.json`, `sw.js`, `assets/icons/` : PWA(이름·아이콘·서비스 워커). 아이콘은 `python3 tools/make_icons.py` 로 다시 만들 수 있음(헤더 국기 로고 모양)
-- `tools/fetch_ticker.py` : 시세 칩 데이터 수집(환율 open.er-api.com → 실패 시 frankfurter, 금시세 goldtraders.or.th, 날씨·PM2.5 Open-Meteo 대체값) — Actions 가 2시간마다
+- `tools/fetch_ticker.py` : 시세 칩 데이터 수집(환율 open.er-api.com → 실패 시 frankfurter, 금시세 goldtraders.or.th, 휘발유(95) 방짝, 날씨·PM2.5 Open-Meteo 대체값) — Actions 가 2시간마다
 - `tools/stamp_assets.py` : assets 내용 해시로 `index.html` 의 `?v=` 와 `sw.js` 의 `VERSION` 갱신(서비스 워커 캐시 교체). **deploy.sh 가 자동 실행**
 - `tools/test_pwa.py` : 서비스 워커·manifest·설치 가능·오프라인 읽기 점검(헤드리스 Chrome)
 - `tools/editions/_template.py` : **새 형식 판 편집 템플릿**
@@ -69,14 +69,18 @@
 ## 헤더(국기·☰·빠른 정보 칩) — 2026-10-03 운영자 요청 ★판을 새로 만들어도 유지
 - **헤더는 판 데이터와 무관한 공용 템플릿**: `index.html`(마크업) + `assets/style.css`(맨 아래 '헤더(2026-10-03)' 블록) + `assets/ticker.js`. 모든 판(`?date=`·`?ed=`·`e/<id>/` → `?ed=` 로 이동)이 이 `index.html` 하나로 렌더되므로 정기 실행(판 빌드·`share_kit.py`)은 헤더를 건드리지 않는다. **정기 실행에서 index.html 헤더를 다시 쓰거나 지우지 말 것.** (`e/<id>/index.html` 은 메인으로 넘기는 미리보기 페이지라 헤더가 따로 있음 — 이번 변경 대상 아님. 공유 카드 PNG(`share_kit.py`)의 헤더 그림도 예전 모양 그대로)
 - **첫 줄**: 왼쪽부터 태국 국기 → ❤️ 하트 → 태극기 → '태국 뉴스 한눈에'(데스크톱은 아래 작은 부제). 오른쪽은 예전처럼 날짜·판 선택·로그인. 국기 이모지는 윈도우 PC 브라우저에서 글자로 보이므로 **인라인 SVG**(`index.html` `.brand__flags`). 태극기는 공식 비율(3:2, 태극 지름 = 세로의 1/2, 괘 막대 길이 = 태극 반지름, 두께 1/12·간격 1/24 지름, 태극에서 지름 1/4 띄움)로 그림: **왼쪽 위 건(☰)·오른쪽 아래 곤(☷)·오른쪽 위 감(☵)·왼쪽 아래 리(☲)**, 태극은 위 빨강(#CD2E3A)·아래 파랑(#0047A0). 고칠 때 이 배치를 바꾸지 말 것.
-- **둘째 줄**: 왼쪽 **☰ 메뉴 버튼(`#menuBtn`, 왼쪽 서랍 그대로 — 운영자 요청으로 크게: 52×46px(데스크톱 54×48, 최소 44×44 터치 영역), 26px 굵은 세 줄 SVG + 아래 작은 '메뉴' 글자, 밝은 둥근 배경)**, 오른쪽 **빠른 정보 칩**(`#ticker`). 좁은 화면은 옆으로 밀기(스크롤바 안 보임, 오른쪽 끝 흐림 표시). 그 아래 **빈 보조 줄(`.subbar`, 예전 탭 줄 자리)은 그대로 비워 둠**.
-- **칩 4개(운영자 확정 순서: 환율 → 날씨 → 미세먼지 → 금시세)** — 칩을 누르면 작은 창에 자세한 값·출처 링크·기준/받아 온 시각(방콕). 값이 없거나 오래되면 **그 칩을 숨김**(틀린 숫자를 보여 주지 않음, 절대 지어내지 않음):
-  1. **바트↔원** `1바트 = 40.4원`(아이콘 없이 글자만 — 칩 폭 줄임, 소수 1자리 — 환율이라서) ← `data/ticker.json` `fx.THB_KRW`(open.er-api.com THB 기준, 판 환율과 같은 출처. 실패 시 frankfurter/ECB). 받아 온 지 24시간·기준 시각 48시간 넘으면 숨김.
-  2. **날씨** `파타야 ⛅ 31° ☔40%` = 지금 기온 + 날씨 아이콘 + 앞으로 6시간 최고 강수확률. 지역 = 작은 창에서 고른 지역(`localStorage tnk.wxRegion`) > 페르소나(`tnk.profile.v1` persona 가 pattaya/sriracha/bangkok) > **파타야**(여행객·사업·미선택). 브라우저에서 Open-Meteo 직접(키 없음, 30분 캐시 `tnk.wx.v1`). 실패(429 등)하면 `ticker.json` `wx`(Actions 가 받은 값 — Open-Meteo, 막히면 MET Norway: 이때는 강수확률 대신 6시간 강수량)를 씀. 모델 시각 3시간 넘으면 숨김.
-  3. **PM2.5** `PM2.5 13 좋음`(색 라벨) — 같은 지역, 브라우저에서 Open-Meteo 대기질(CAMS 예측 모델, 60분 캐시 `tnk.aq.v1`, 실패 시 `ticker.json` `aq`). 단계 = **태국 오염관리국(PCD) 2023 기준(15/25/37.5/75 µg/m³)을 4단계로**: 좋음 0–25(초록) · 보통 25.1–37.5(노랑) · 나쁨 37.6–75(주황) · 매우 나쁨 75 초과(빨강). 측정소 실측이 아닌 모델 값(작은 창에 표시).
-  4. **🪙 금시세** `금 1바트 66,400฿ ≈2,685,409원` = 태국 금 거래상 협회(goldtraders.or.th) 공식 발표 **금괴 96.5% 1바트(15.244 g) 판매가**, 원화 = 판매가 × 위 환율(정수 반올림). 협회 사이트가 쓰는 공개 JSON `/api/GoldPrices/Latest`(공식 문서화된 API 아님 — 구조가 바뀌면 칩이 숨겨지고 워크플로가 빨간색). 주말·공휴일엔 발표가 없어 마지막 발표값 그대로(작은 창에 발표 시각 표시). 받아 온 지 24시간·발표 4일 넘으면 숨김.
+- **둘째 줄**: 왼쪽 **☰ 메뉴 버튼(`#menuBtn`, 왼쪽 서랍 그대로 — 운영자 요청으로 크게: 54×50px(데스크톱 58×52, 최소 44×44 터치 영역), 26px 굵은 세 줄 SVG + 아래 작은 '메뉴' 글자, 밝은 둥근 배경)**, 오른쪽 **빠른 정보 상자**(`#ticker`). 좁은 화면은 옆으로 밀기(스크롤바 안 보임, 오른쪽 끝 흐림 표시). 그 아래 **빈 보조 줄(`.subbar`, 예전 탭 줄 자리)은 그대로 비워 둠**.
+- **빠른 정보 = 두 줄짜리 상자 3개(운영자 확정 10-03 07:28)** — ☰ 버튼과 같은 높이(모바일 50px·데스크톱 52px), 두 줄 같은 글자 크기, 통화 아이콘 없음. 390px 폭에 다 들어가게 맞춤(더 좁으면 옆으로 밀기 + 오른쪽 흐림). 상자를 누르면 작은 창에 두 줄 각각의 자세한 값·출처 링크·기준/받아 온 시각(방콕). 값이 없거나 오래되면 **그 줄을 숨김**(두 줄 다 없으면 상자 숨김, 틀린 숫자를 보여 주지 않음, 절대 지어내지 않음):
+  1. **상자1 환율**: `1바트 = 40.4원` / `1달러 = 33.7바트`(둘 다 소수 1자리 — 환율이라서) ← `data/ticker.json` `fx.THB_KRW`·`fx.USD_THB`(open.er-api.com THB 기준, 판 환율과 같은 출처. 실패 시 frankfurter/ECB). 받아 온 지 24시간·기준 시각 48시간 넘으면 숨김.
+  2. **상자2 날씨·미세먼지**: `🌤️ 27° ☔79%`(지금 기온 + 날씨 아이콘 + 앞으로 6시간 최고 강수확률, 넓은 화면은 앞에 지역 이름) / `PM2.5 12 좋음`(색 라벨).
+     - 지역 = 작은 창에서 고른 지역(`localStorage tnk.wxRegion`) > 페르소나(`tnk.profile.v1` persona 가 pattaya/sriracha/bangkok) > **파타야**(여행객·사업·미선택).
+     - 날씨: 브라우저에서 Open-Meteo 직접(키 없음, 30분 캐시 `tnk.wx.v1`). 실패(429 등)하면 `ticker.json` `wx`(Actions 가 받은 값 — Open-Meteo, 막히면 MET Norway: 이때는 강수확률 대신 6시간 강수량). 모델 시각 3시간 넘으면 숨김.
+     - PM2.5: 같은 지역, 브라우저에서 Open-Meteo 대기질(CAMS 예측 모델, 60분 캐시 `tnk.aq.v1`, 실패 시 `ticker.json` `aq`). 단계 = **태국 오염관리국(PCD) 2023 기준(15/25/37.5/75 µg/m³)을 4단계로**: 좋음 0–25(초록) · 보통 25.1–37.5(노랑) · 나쁨 37.6–75(주황) · 매우 나쁨 75 초과(빨강). 측정소 실측이 아닌 모델 값(작은 창에 표시).
+  3. **상자3 금·휘발유**: `금 66,400฿` / `휘발유(95) 40.69฿`.
+     - 금: 태국 금 거래상 협회(goldtraders.or.th) 공식 발표 **금괴 96.5% 1바트(15.244 g) 판매가**(작은 창에 매입가·원화 환산(판매가 × 환율, 정수 반올림)). 협회 사이트가 쓰는 공개 JSON `/api/GoldPrices/Latest`(공식 문서화된 API 아님 — 구조가 바뀌면 줄이 숨겨지고 워크플로가 빨간색). 주말·공휴일엔 발표가 없어 마지막 발표값 그대로(작은 창에 발표 시각). 받아 온 지 24시간·발표 4일 넘으면 숨김.
+     - 휘발유(95): **방짝(Bangchak) 공식 유가 JSON**(`oil-price.bangchak.co.th/ApiOilPrice2/th`)의 **가소홀 95**(แก๊สโซฮอล์ 95 S EVO) 오늘 가격, 바트/L, **방콕 소매가(방콕 지방세 미포함, 방짝 표기)**. 작은 창에 원화 환산·어제 가격·가격 공지/적용 시각. 받아 온 지 24시간 넘거나 피드 날짜가 이틀 넘게 지나면 숨김. 경유(디젤)는 운영자 요청으로 쓰지 않음.
 - 데이터 갱신: `data/ticker.json|js` 는 `korea.yml` 의 '시세 수집' 단계(`python3 tools/fetch_ticker.py`)가 2시간마다 만들어 한국 뉴스와 같은 커밋으로 올림(시세만 바뀌면 `ticker: 시세 MM-DD HH:MM BKK`). 항목 하나가 실패하면 그 항목은 이전 값(이전 받아 온 시각 그대로 → 오래되면 화면이 숨김). 화면은 `fetch(data/ticker.json?_=…, no-store)`(file:// 은 `data/ticker.js`), 서비스 워커도 no-store, 돌아왔을 때 10분 넘었으면 다시 받음.
-- 칩을 더하거나 순서를 바꾸려면 `assets/ticker.js` 의 `render()`·`body()` 만 고치면 됨. 새 assets 파일을 만들면 `tools/stamp_assets.py` 의 `ASSETS` 와 `index.html`·`sw.js` 에 `?v=` 항목을 같이 넣을 것.
+- 상자·줄을 더하거나 바꾸려면 `assets/ticker.js` 의 `render()`(상자=`tile(키, [줄1, 줄2])`)·`part()`/`TILE`(작은 창 내용) 만 고치면 됨. 새 assets 파일을 만들면 `tools/stamp_assets.py` 의 `ASSETS` 와 `index.html`·`sw.js` 에 `?v=` 항목을 같이 넣을 것.
 
 ## 주제(10개) — 2026-10-03 아침판부터
 | id | 이름 | 내용 |

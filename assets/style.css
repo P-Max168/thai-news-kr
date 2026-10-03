@@ -538,3 +538,36 @@ body.drawer-open{overflow:hidden}
 .menu-btn__ic{display:block;width:26px;height:20px}
 .menu-btn__t{display:block;font-size:10.5px;font-weight:700;line-height:1;letter-spacing:.5px;opacity:.92}
 @media (max-width:640px){.masthead__row2 .menu-btn{width:52px;height:46px}}
+/* 빠른 정보: 두 줄짜리 상자 3개(운영자 확정 10-03 07:28) — ☰ 버튼과 같은 높이, 두 줄 같은 글자 크기, 통화 아이콘 없음 */
+.masthead__row2 .menu-btn{width:58px;height:52px}
+.ticker{min-height:52px}
+.tk-chip.tk-tile{height:52px;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:0 11px;border-radius:12px;font-size:13px}
+.tk-ln{display:flex;align-items:center;gap:4px;line-height:1.15;white-space:nowrap}
+.tk-tile .tk-l{font-size:inherit;opacity:.75}
+.tk-tile .tk-i{font-size:13px}
+.tk-tile .tk-rain{font-size:inherit;margin-left:3px}
+.tk-tile .tk-lv{font-size:11px;padding:2px 6px}
+.tk-pop__sec+.tk-pop__sec{border-top:1px solid #eef0f3;margin-top:10px;padding-top:10px}
+@media (max-width:640px){
+  .masthead__row2 .menu-btn{width:56px;height:50px}
+  .ticker{min-height:50px;gap:5px}
+  .tk-chip.tk-tile{height:50px;padding:0 9px;font-size:12.5px;gap:3px}
+}
+@media (max-width:640px){
+  .masthead__row2{gap:6px}
+  .ticker{gap:4px;padding-right:12px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 12px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 12px),transparent)}
+  .tk-chip.tk-tile{padding:0 7px;font-size:12px}
+  .tk-ln{gap:3px}
+  .tk-tile .tk-rain{margin-left:1px}
+  .tk-tile .tk-lv{font-size:10.5px;padding:2px 5px}
+}
+@media (max-width:420px){ .tk-tile .tk-rg{display:none} }   /* 좁은 화면: 지역 이름은 작은 창에서(날씨 제목·지역 버튼) */
+@media (max-width:640px){
+  .masthead__row2{padding-left:10px;padding-right:10px}
+  .masthead__row2 .menu-btn{width:54px;height:50px}
+  .ticker{padding-right:0;-webkit-mask-image:none;mask-image:none}
+  .ticker.is-overflow{padding-right:14px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 14px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 14px),transparent)}
+  .tk-chip.tk-tile{padding:0 6px}
+}
+@media (max-width:640px){ .tk-chip.tk-tile{padding:0 5px} .ticker{gap:3px} }
+.tk-pop{overflow-y:auto;overscroll-behavior:contain}

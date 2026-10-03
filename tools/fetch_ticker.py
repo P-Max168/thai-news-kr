@@ -7,6 +7,8 @@
         실패하면 api.frankfurter.app(ECB 기준환율, 평일 1번).
 - gold: 태국 금시세 — 금 거래상 협회(สมาคมค้าทองคำ, goldtraders.or.th) 공식 발표 '금괴 96.5% 1바트(15.244 g)' 판매가(bar_sell)·매입가(bar_buy).
         협회 사이트가 쓰는 공개 JSON(/api/GoldPrices/Latest). 주말·공휴일엔 발표가 없어 마지막 발표값이 그대로다.
+- fuel: 방콕 소매 휘발유 가격 — 방짝(Bangchak) 공식 유가 JSON(oil-price.bangchak.co.th/ApiOilPrice2/th)의 '가소홀 95'(แก๊สโซฮอล์ 95) 오늘 가격(바트/L).
+        방콕(กทม.) 소매가, 방콕 지방세 미포함(방짝 표기). 찾지 못하면 항목 없음(지어내지 않음).
 - wx/aq: 날씨·미세먼지 PM2.5(Open-Meteo, 파타야·시라차·방콕) — 화면은 브라우저에서 Open-Meteo 를 직접 부르고(30/60분 캐시),
         그게 실패할 때(요청 한도 429·오프라인 등)만 이 값(3시간 안의 것)을 쓴다.
 - 한 항목이 실패하면 그 항목은 이전 값을 그대로 둔다(fetched_at 도 그대로 → 화면이 24시간 넘은 값은 숨김).
@@ -60,6 +62,40 @@ def gold_gta():
     return dict(bar_sell=sell, bar_buy=buy, change=d.get("priceChangeFromPrevRow"), round=d.get("priceSeq") or d.get("seq"),
                 announced_at=at, unit="금괴 96.5% · 1바트(15.244 g)",
                 source="태국 금 거래상 협회 (สมาคมค้าทองคำ)", url="https://www.goldtraders.or.th/")
+
+
+def _be_date(dmy, hm="00:00"):  # '01/10/2569' (불기) + '21:15' → ISO(+07:00)
+    d, m, y = [int(x) for x in dmy.split("/")]
+    hh, mm = [int(x) for x in (hm or "00:00").replace(".", ":").split(":")[:2]]
+    return datetime(y - 543 if y > 2400 else y, m, d, hh, mm, tzinfo=BKK).isoformat(timespec="seconds")
+
+
+TH_MON = {"ม.ค.": 1, "ก.พ.": 2, "มี.ค.": 3, "เม.ย.": 4, "พ.ค.": 5, "มิ.ย.": 6, "ก.ค.": 7, "ส.ค.": 8, "ก.ย.": 9, "ต.ค.": 10, "พ.ย.": 11, "ธ.ค.": 12}
+
+
+def _th_effective(txt):  # 'ราคามีผล ณ วันที่ 2 ต.ค. 69 เวลา 05.00 น.' → ISO(+07:00) 또는 None
+    import re
+    m = re.search(r"วันที่\s*(\d{1,2})\s*([ก-๙.]+)\s*(\d{2,4})\s*เวลา\s*(\d{1,2})[.:](\d{2})", txt or "")
+    if not m or m.group(2) not in TH_MON:
+        return None
+    y = int(m.group(3)); y = y + 2500 if y < 100 else y; y = y - 543 if y > 2400 else y
+    return datetime(y, TH_MON[m.group(2)], int(m.group(1)), int(m.group(4)), int(m.group(5)), tzinfo=BKK).isoformat(timespec="seconds")
+
+
+def fuel_bangchak():
+    d = get_json("https://oil-price.bangchak.co.th/ApiOilPrice2/th")
+    d = d[0] if isinstance(d, list) else d
+    lst = json.loads(d["OilList"]) if isinstance(d["OilList"], str) else d["OilList"]
+    g95 = [o for o in lst if "แก๊สโซฮอล์ 95" in o.get("OilName", "") or "Gasohol 95" in o.get("OilName", "")]
+    if not g95:
+        raise ValueError("가소홀 95 없음: %s" % [o.get("OilName") for o in lst])
+    o = g95[0]; price = float(o["PriceToday"])
+    if not (15 < price < 100):
+        raise ValueError("유가 값 이상: %r" % price)
+    return dict(gasohol95=price, name=o["OilName"], yesterday=o.get("PriceYesterday"), tomorrow=o.get("PriceTomorrow"),
+                feed_date=_be_date(d["OilDateNow"]), announced_at=_be_date(d["OilPriceDate"], d.get("OilPriceTime")),
+                effective=d.get("OilRemark2"), effective_at=_th_effective(d.get("OilRemark2")), note="방콕 소매가(방콕 지방세 미포함)",
+                source="방짝(Bangchak) 유가 공지", url="https://www.bangchak.co.th/th/oilprice")
 
 
 REGIONS = [("pattaya", 12.9236, 100.8825), ("sriracha", 13.1682, 100.9310), ("bangkok", 13.7563, 100.5018)]  # assets/ticker.js 와 같게
@@ -127,7 +163,7 @@ def main():
         old = {}
     out = {"v": 1, "updated_at": now()}
     ok = 0
-    for key, fns in (("fx", [fx_er_api, fx_frankfurter]), ("gold", [gold_gta]), ("wx", [wx_open_meteo, wx_met_no]), ("aq", [aq_open_meteo])):
+    for key, fns in (("fx", [fx_er_api, fx_frankfurter]), ("gold", [gold_gta]), ("fuel", [fuel_bangchak]), ("wx", [wx_open_meteo, wx_met_no]), ("aq", [aq_open_meteo])):
         val = None
         for fn in fns:
             try:
