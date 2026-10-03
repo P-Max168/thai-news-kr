@@ -1,0 +1,3 @@
+- 바뀐 것: ① 파타야 한식·한인 업소 6곳 추가 확인(합 56곳 · 한식·한인 27) — ISUNG·수북한·유락·Seoul Garden·수원왕갈비·지두방
+- 왜: 민구 님 지시: 새로 찾은 9곳을 같은 규칙으로 확인해 맞는 곳만
+- 되돌리는 법: `git checkout backup-20261003-1654-korean-places-2 -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
