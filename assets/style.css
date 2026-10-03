@@ -888,3 +888,6 @@ body.drawer-open{overflow:hidden}
 .tab[aria-selected="true"] .n{color:inherit}
 .tk-lv--good{background:#237a3b}
 .toast{bottom:calc(24px + env(safe-area-inset-bottom))}   /* 알림 띠도 홈 막대 위로(앱 포장 준비) */
+
+/* 속도(2026-10-03 18:25): 첫 기사 카드 전 빠른 정보 자리표시 상자 4개 — 같은 높이·모양, 글자 없음(ticker.js 가 채우면 사라짐) */
+.tk-ph{flex:1 1 0!important;pointer-events:none;min-width:0}

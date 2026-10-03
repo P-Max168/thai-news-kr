@@ -40,3 +40,6 @@ body.nb-open{overflow:hidden}
   .nb-cat__t{max-width:100%;overflow:visible;white-space:nowrap}
 }
 @media (max-width:370px){ .nb-cat{font-size:12px;letter-spacing:-.3px} }
+/* 속도(2026-10-03 18:25): 첫 기사 카드 전 자리표시 — 같은 크기 빈 칸(글자·그림 없음) */
+.nb-ph-lab{min-width:34px;height:30px}
+.nb-ph{pointer-events:none}

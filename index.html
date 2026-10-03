@@ -26,8 +26,8 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script>(function(){var u="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css";function add(){var l=document.createElement("link");l.rel="stylesheet";l.href=u;l.crossOrigin="anonymous";l.onload=function(){try{localStorage.setItem("tnk.font","1")}catch(e){}};document.head.appendChild(l)}var seen=false;try{seen=localStorage.getItem("tnk.font")==="1"}catch(e){}if(seen)add();else addEventListener("load",function(){setTimeout(add,300)})})();</script>
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"></noscript>
-<link rel="stylesheet" href="assets/style.css?v=9deb9877">
-<link rel="stylesheet" href="assets/nearby.css?v=2cd0d2cb">
+<link rel="stylesheet" href="assets/style.css?v=5892b9a8">
+<link rel="stylesheet" href="assets/nearby.css?v=d94adfa2">
 <link rel="stylesheet" href="assets/ads/massage/dragon-ad.css?v=992ae706">
 </head>
 <body>
@@ -55,10 +55,10 @@
     <div class="mbox"><!-- ☰ 메뉴 + ❤️ 하트 개수(누르면 '내가 하트한 기사' 페이지, assets/pages.js) -->
     <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-controls="drawer" aria-expanded="false"><svg class="menu-btn__ic" viewBox="0 0 26 20" width="26" height="20" aria-hidden="true"><path d="M2 3h22M2 10h22M2 17h22" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg><span class="menu-btn__t" aria-hidden="true">메뉴</span></button>
     <button type="button" class="heart-btn" id="heartBtn" data-page="hearts" aria-label="내가 하트한 기사 보기"><span aria-hidden="true">🤍</span><b>0</b></button></div>
-    <div class="ticker is-empty" id="ticker" aria-label="빠른 정보: 환율·날씨·금시세·미세먼지"></div>
+    <div class="ticker is-empty" id="ticker" aria-label="빠른 정보: 환율·날씨·금시세·미세먼지"><span class="tk-chip tk-tile tk-ph" aria-hidden="true"></span><span class="tk-chip tk-tile tk-ph" aria-hidden="true"></span><span class="tk-chip tk-tile tk-ph" aria-hidden="true"></span><span class="tk-chip tk-tile tk-ph" aria-hidden="true"></span></div>
   </div>
   <!-- 셋째 줄(예전 주제 탭 줄 자리): 📍 내 주변 — 이름표 + 카테고리 버튼 5개(맛집·마사지·동물병원·피부·뷰티·오토바이, assets/nearby.js 가 채움, 설정은 그 파일의 NEARBY 객체) -->
-  <div class="subbar subbar--nearby"><nav class="wrap nearby" id="nearbyRow" aria-label="내 주변 가게 찾기"></nav></div>
+  <div class="subbar subbar--nearby"><nav class="wrap nearby" id="nearbyRow" aria-label="내 주변 가게 찾기"><span class="nb-lab nb-ph-lab" aria-hidden="true"></span><div class="nb-cats" aria-hidden="true"><span class="nb-cat nb-ph"></span><span class="nb-cat nb-ph"></span><span class="nb-cat nb-ph"></span><span class="nb-cat nb-ph"></span><span class="nb-cat nb-ph"></span></div></nav></div>
 </header>
 
 <!-- ☰ 메뉴(왼쪽 서랍): 내 피드 · 내 주제 설정 · 주제별 · 전체 보기 · 계정 -->
@@ -140,11 +140,11 @@
 <script src="assets/adsafe.js?v=f83c8d3e"></script>
 <script src="assets/app.js?v=bfbbbc16"></script>
 <!-- 헤더 빠른 정보 칩(맨 위에 보이는 값이라 보통 우선순위 — 17:45 낮췄더니 첫 기사 카드 때 칩이 비어 있어서 되돌림). 아래 로그인·내 주변은 fetchpriority="low" = 판 데이터·app.js·CSS 를 먼저 받게(실행 순서는 그대로) -->
-<script src="assets/ticker.js?v=3f5803ed"></script>
+<script src="assets/ticker.js?v=b7ba6ad9"></script>
 <!-- 선택 기능(Google 로그인·동기화·댓글): 못 불러와도 사이트는 그대로 동작 -->
 <script src="assets/social.js?v=4caae75d" fetchpriority="low"></script>
 <!-- 📍 내 주변(헤더 셋째 줄 + #nearby/<id> 화면). defer = 드래곤 광고 스크립트 다음에 실행 -->
-<script src="assets/nearby.js?v=a1c50515" fetchpriority="low" defer></script>
+<script src="assets/nearby.js?v=f42257ba" fetchpriority="low" defer></script>
 <!-- 속도(2026-10-03 17:05): 쪽 화면(하트·승인함·가게 카드 등) 스크립트는 첫 기사 카드가 그려진 뒤 받음 — 느린 망에서 판 데이터와 대역을 나눠 쓰지 않게.
      app.js 첫 그리기 끝 → TNLate() / 늦어도 load 뒤. 쪽 화면 CSS(assets/late.css)도 여기서 받음. 🧑‍💼 구인판 시안(assets/jobs.js)은 주소가 #jobs 일 때만 받음(메뉴 링크 없음). pages.js → places.js 순서(places 는 TNPages 필요). 주소 #places 등은 pages.js 가 받은 뒤 바로 열림 -->
 <script>window.TNLate=function(){if(window.__tnLate)return;window.__tnLate=1;(window.__tnQ||[]).forEach(function(f){requestAnimationFrame(f)});window.__tnQ=null;var c=document.createElement("link");c.rel="stylesheet";c.href="assets/late.css?v=7910a8d5";document.head.appendChild(c);var a=document.createElement("script");a.src="assets/pages.js?v=39e6c79e";a.onload=function(){var b=document.createElement("script");b.src="assets/places.js?v=c4d69727";document.body.appendChild(b);if(/^#jobs/.test(location.hash))window.TNJobs()};document.body.appendChild(a)};window.TNJobs=function(){if(window.__tnJobs)return;window.__tnJobs=1;var j=document.createElement("script");j.src="assets/jobs.js?v=dd8ae2ef";document.body.appendChild(j)};addEventListener("hashchange",function(){if(/^#jobs/.test(location.hash)&&window.TNPages)window.TNJobs()});addEventListener("load",function(){setTimeout(window.TNLate,0)});</script>

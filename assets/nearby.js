@@ -275,7 +275,8 @@
   window.addEventListener("popstate", fromHash);
   window.addEventListener("hashchange", fromHash);
 
-  renderRow();
+  // 속도(2026-10-03 18:25, 검수 지시): 헤더 5칸은 첫 기사 카드 뒤에 채움(자리는 index.html 의 빈 칸 5개). 주소가 #nearby/… 면 바로
+  if (window.TNAfterFirst && !/^#nearby\//.test(location.hash)) window.TNAfterFirst(renderRow); else renderRow();
   if (/^#nearby\//.test(location.hash)) fromHash();
   window.TNNearby = { open: open, close: back, config: NEARBY, mapsUrl: mapsUrl };
 })();

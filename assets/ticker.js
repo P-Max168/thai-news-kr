@@ -138,7 +138,10 @@
       lines.map(function (l) { return '<span class="' + (l[2] || "tk-ln") + '">' + l[1] + "</span>"; }).join("") + "</span></button>";
   }
   function ft(list) { var c = clock(list); return c ? [c + " 조회", c + " 조회"] : null; }
+  var renderLater = false;
   function render() {
+    // 속도(2026-10-03 18:25, 검수 지시): 첫 기사 카드가 그려지기 전에는 칩을 채우지 않음 — 자리는 index.html 의 빈 상자 4개가 잡고 있음
+    if (!window.__tnLate && window.TNAfterFirst) { if (!renderLater) { renderLater = true; window.TNAfterFirst(function () { renderLater = false; render(); }); } return; }
     var f = fxOK(), u = usdtOK(), w = wxOK(), g = goldOK(), a = aqOK(), o = fuelOK(), h = [];
     h.push(tile("fx", [
       f && ["1바트 " + f.THB_KRW.toFixed(1) + "원", "1바트 = <b>" + f.THB_KRW.toFixed(1) + "원</b>"],
