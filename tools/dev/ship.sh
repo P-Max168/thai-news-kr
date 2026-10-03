@@ -6,6 +6,7 @@ cd "$(dirname "$0")/../.."
 MSG="$1"
 KOREA_FILES="data/korea.json data/korea.js data/ticker.json data/ticker.js"
 for f in $KOREA_FILES; do git checkout -q -- "$f" 2>/dev/null || true; done
+python3 tools/pending.py >/dev/null 2>&1 || true   # 승인함 목록(PENDING_APPROVAL.md → data/pending.json)
 python3 tools/stamp_assets.py
 git add -A
 git reset -q -- $KOREA_FILES 2>/dev/null || true

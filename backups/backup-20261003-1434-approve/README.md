@@ -1,0 +1,3 @@
+- 바뀐 것: ③e ✅ 관리자 승인함(#approve, 운영자만): PENDING_APPROVAL.md 표 → data/pending.json(tools/pending.py) → 항목별 OK/보류·'남은 N건 전부 OK'·'결정 복사'(봇에게 보낼 문구), 사진 경로는 📷 링크. 결정은 이 기기에만 기록, 자동 승인·게시 없음. PENDING 에 2건 추가(2단계 시작 화면 다시 켜기 / 익명 반응 집계 시작)
+- 왜: 민구님이 아침에 한곳에서 한 번에 고르게. 운영자 이름 글은 봇이 올리지 않음
+- 되돌리는 법: `git checkout backup-20261003-1434-approve -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
