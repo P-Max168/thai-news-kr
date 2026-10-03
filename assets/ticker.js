@@ -166,14 +166,15 @@
     var open = pop && !pop.hidden ? pop.getAttribute("data-k") : null;
     box.innerHTML = h.join("");
     box.classList.toggle("is-empty", !box.children.length);
-    fitMark();
+    if (window.TNAfterFirst) window.TNAfterFirst(fitMark); else fitMark();   // 속도: 재기는 첫 기사 카드 뒤에
     if (open) { var b = box.querySelector('[data-tk="' + open + '"]'); if (b) show(open, b, true); else hide(); }
   }
 
   // 다 들어가면 오른쪽 흐림 표시 없음, 넘치면(옆으로 밀어야 하면) 흐림 표시
   function fitMark() { box.classList.remove("is-overflow"); box.classList.toggle("is-overflow", box.scrollWidth > box.clientWidth + 1); }
   window.addEventListener("resize", fitMark);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitMark);
+  // 속도(17:45): document.fonts.ready 는 읽기만 해도 스타일 계산을 강제 → 첫 기사 카드 뒤에
+  (window.TNAfterFirst || function (f) { f(); })(function () { if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitMark); });
 
   /* ---------- 작은 정보 창 ---------- */
   var pop = document.createElement("div");

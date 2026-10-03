@@ -6,7 +6,7 @@ deploy.sh 가 커밋 전에 자동 실행한다. data/ 는 대상 아님(네트�
 import hashlib, pathlib, re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-ASSETS = ["assets/style.css", "assets/topics.js", "assets/prefs.js", "assets/taste.js", "assets/adsafe.js", "assets/app.js", "assets/social.js", "assets/ticker.js", "assets/nearby.css", "assets/nearby.js", "assets/pages.js", "assets/places.js", "assets/ads/massage/dragon-ad.css", "assets/ads/massage/dragon-ad.js"]
+ASSETS = ["assets/style.css", "assets/topics.js", "assets/prefs.js", "assets/taste.js", "assets/adsafe.js", "assets/app.js", "assets/social.js", "assets/ticker.js", "assets/nearby.css", "assets/late.css", "assets/nearby.js", "assets/pages.js", "assets/places.js", "assets/ads/massage/dragon-ad.css", "assets/ads/massage/dragon-ad.js"]
 # social.js 가 import() 하는 모듈(index.html 에 직접 없음): social.js 안의 FB_URL ?v= 를 먼저 갱신
 MODULES = {"assets/fb.js": "assets/social.js"}
 EXTRA = ["manifest.json", "offline.html", "assets/ads/massage/dragon.svg"] + sorted(str(p.relative_to(ROOT)) for p in (ROOT / "assets/icons").glob("*.png"))

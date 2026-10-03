@@ -18,14 +18,16 @@
 <meta name="apple-mobile-web-app-title" content="태국뉴스">
 <!-- 속도: 판 목록(작음)을 먼저 받고, 최신 판 데이터는 앱 코드와 동시에 받기 시작(app.js 가 이 태그를 그대로 씀) -->
 <script src="data/index.js"></script>
+<!-- 속도(2026-10-03 17:40): 넘침 표시(오른쪽 흐림)처럼 모양 재기만 하는 일은 첫 기사 카드 뒤로(재기 = 강제 레이아웃, CPU×4 에서 약 0.1초). window.TNLate 가 비움 -->
+<script>window.TNAfterFirst=function(f){if(window.__tnLate)return requestAnimationFrame(f);(window.__tnQ=window.__tnQ||[]).push(f)};</script>
 <script>(function(){try{var m=/[?&](?:e|ed|date)=([^&#]*)/.exec(location.search),id=m?decodeURIComponent(m[1]):(window.NEWS_INDEX||{}).latest;if(!id||!/^\d{4}-\d{2}-\d{2}-(am|pm|early)$/.test(id))return;var s=document.createElement("script");s.id="tnkData";s.async=true;s.src="data/"+id+".js";s.setAttribute("data-ed",id);s.onload=function(){s.setAttribute("data-done","1")};s.onerror=function(){s.setAttribute("data-done","err")};document.head.appendChild(s)}catch(e){}})();</script>
 <!-- 속도(2026-10-03): 글꼴(Pretendard, 첫 방문 약 700KB)은 화면을 막지 않게 — 처음 오신 분은 기기 기본 글꼴로 바로 보이고 페이지가 다 뜬 뒤 받음,
      한 번 받은 기기(tnk.font=1)는 캐시에서 바로 적용. 태국 글꼴은 화면에 태국 문자가 없어 뺌 -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script>(function(){var u="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css";function add(){var l=document.createElement("link");l.rel="stylesheet";l.href=u;l.crossOrigin="anonymous";l.onload=function(){try{localStorage.setItem("tnk.font","1")}catch(e){}};document.head.appendChild(l)}var seen=false;try{seen=localStorage.getItem("tnk.font")==="1"}catch(e){}if(seen)add();else addEventListener("load",function(){setTimeout(add,300)})})();</script>
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"></noscript>
-<link rel="stylesheet" href="assets/style.css?v=a1ff337e">
-<link rel="stylesheet" href="assets/nearby.css?v=cf7ed822">
+<link rel="stylesheet" href="assets/style.css?v=9deb9877">
+<link rel="stylesheet" href="assets/nearby.css?v=2cd0d2cb">
 <link rel="stylesheet" href="assets/ads/massage/dragon-ad.css?v=992ae706">
 </head>
 <body>
@@ -138,13 +140,13 @@
 <script src="assets/adsafe.js?v=f83c8d3e"></script>
 <script src="assets/app.js?v=bfbbbc16"></script>
 <!-- 헤더 빠른 정보 칩 -->
-<script src="assets/ticker.js?v=fbc22bab"></script>
+<script src="assets/ticker.js?v=3f5803ed"></script>
 <!-- 선택 기능(Google 로그인·동기화·댓글): 못 불러와도 사이트는 그대로 동작 -->
 <script src="assets/social.js?v=4caae75d"></script>
 <!-- 📍 내 주변(헤더 셋째 줄 + #nearby/<id> 화면). defer = 드래곤 광고 스크립트 다음에 실행 -->
-<script src="assets/nearby.js?v=5d9e8574" defer></script>
+<script src="assets/nearby.js?v=a1c50515" defer></script>
 <!-- 속도(2026-10-03 17:05): 쪽 화면(하트·승인함·가게 카드 등) 스크립트는 첫 기사 카드가 그려진 뒤 받음 — 느린 망에서 판 데이터와 대역을 나눠 쓰지 않게.
-     app.js 첫 그리기 끝 → TNLate() / 늦어도 load 뒤. pages.js → places.js 순서(places 는 TNPages 필요). 주소 #places 등은 pages.js 가 받은 뒤 바로 열림 -->
-<script>window.TNLate=function(){if(window.__tnLate)return;window.__tnLate=1;var a=document.createElement("script");a.src="assets/pages.js?v=39e6c79e";a.onload=function(){var b=document.createElement("script");b.src="assets/places.js?v=b4ce2cb2";document.body.appendChild(b)};document.body.appendChild(a)};addEventListener("load",function(){setTimeout(window.TNLate,0)});</script>
+     app.js 첫 그리기 끝 → TNLate() / 늦어도 load 뒤. 쪽 화면 CSS(assets/late.css)도 여기서 받음. pages.js → places.js 순서(places 는 TNPages 필요). 주소 #places 등은 pages.js 가 받은 뒤 바로 열림 -->
+<script>window.TNLate=function(){if(window.__tnLate)return;window.__tnLate=1;(window.__tnQ||[]).forEach(function(f){requestAnimationFrame(f)});window.__tnQ=null;var c=document.createElement("link");c.rel="stylesheet";c.href="assets/late.css?v=d8f2a644";document.head.appendChild(c);var a=document.createElement("script");a.src="assets/pages.js?v=39e6c79e";a.onload=function(){var b=document.createElement("script");b.src="assets/places.js?v=b4ce2cb2";document.body.appendChild(b)};document.body.appendChild(a)};addEventListener("load",function(){setTimeout(window.TNLate,0)});</script>
 </body>
 </html>

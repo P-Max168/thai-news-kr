@@ -93,8 +93,9 @@
     };
     cats.addEventListener("scroll", fit, { passive: true });
     window.addEventListener("resize", fit);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
-    fit();
+    // 속도(17:45): 재기와 document.fonts.ready(읽기만 해도 스타일 계산을 강제, CPU×4 에서 약 90ms)는 첫 기사 카드 뒤에
+    var fit2 = function () { fit(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit); };
+    if (window.TNAfterFirst) window.TNAfterFirst(fit2); else fit2();
   }
 
   /* ---------- 광고(data/ads.json 슬롯 nearby-<id>) — app.js adHTML 과 같은 모양. item.render === "dragon" 이면 드래곤 스웨디시 배너 ---------- */
