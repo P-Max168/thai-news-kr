@@ -97,10 +97,12 @@
   function renderAll() { renderTabs(); $("briefing").hidden = !topShown(); renderKorea(); renderTop(); renderFeed(); renderAds(); placeTrends(); }
 
   /* 🇰🇷 오늘의 한국 주요 뉴스 — 내 피드·전체 보기에서 맨 위. 최대 10건, 처음 4건 + '펼치기'(나머지 6건) / '접기'
+   * 순위 TOP 10, 처음 3건 → 펼치기 5건 → 10건 → 접기
    * ① data/korea.json(GitHub Actions 가 2시간마다 갱신, 판과 무관): 네트워크 우선(cache: no-store + ?_=시각),
    *    file:// 에서는 data/korea.js(window.KOREA_NEWS). updated_at 이 6시간 안일 때만 사용(최신 판을 볼 때만)
    * ② 없거나 6시간 넘게 지났으면 판의 korea_top 으로 대체(없으면 섹션 숨김) */
-  var KOREA = { live: null, at: 0, more: false, MAX_AGE: 6 * 3600 * 1000, SHOW: 4, MAX: 10 };
+  // TOP 10(순위 1~10): 처음 3건 → '펼치기' 5건 → 10건 → '접기' (X 트렌드 상자와 같은 3→5→10)
+  var KOREA = { live: null, at: 0, step: 0, STEPS: [3, 5, 10], MAX_AGE: 6 * 3600 * 1000, MAX: 10 };
   function loadKorea() {
     KOREA.at = Date.now();
     function done(d) {
@@ -139,20 +141,21 @@
     if (!src || !topShown()) { el.hidden = true; return; }
     var k = src.items.slice(0, KOREA.MAX);
     var closed = !!(prof().ui && prof().ui.koreaClosed);
-    var extra = Math.max(0, k.length - KOREA.SHOW);
+    var kAd = adSlot("korea-mid");
+    var ST = KOREA.STEPS, show = Math.min(k.length, ST[KOREA.step] || k.length), next = Math.min(k.length, ST[KOREA.step + 1] || k.length);
     el.hidden = false;
     el.classList.toggle("is-closed", closed);
-    el.classList.toggle("is-more", KOREA.more);
     el.setAttribute("data-korea-src", src.live ? "live" : "edition");
-    el.innerHTML = '<button type="button" class="korea__head" data-korea-toggle aria-expanded="' + !closed + '" aria-controls="koreaList"><span><span class="korea__title" id="koreaTitle">🇰🇷 오늘의 한국 주요 뉴스</span><span class="korea__sub">' +
-      (src.at ? '<time class="korea__upd" datetime="' + esc(src.at) + '" title="방콕 시간 기준">업데이트 ' + esc(hhmm(src.at)) + "</time> · " : "") + "한국 언론 " + k.length + "건</span></span><span class=\"korea__chev\" aria-hidden=\"true\">▾</span></button>" +
+    el.innerHTML = '<button type="button" class="korea__head" data-korea-toggle aria-expanded="' + !closed + '" aria-controls="koreaList"><span><span class="korea__title" id="koreaTitle">🇰🇷 오늘의 한국 주요 뉴스 <b class="korea__top">TOP ' + k.length + '</b></span><span class="korea__sub">' +
+      (src.at ? '<time class="korea__upd" datetime="' + esc(src.at) + '" title="방콕 시간 기준">업데이트 ' + esc(hhmm(src.at)) + "</time>" : "한국 언론") + "</span></span><span class=\"korea__chev\" aria-hidden=\"true\">▾</span></button>" +
       '<ol class="korea__list" id="koreaList">' + k.map(function (x, i) {
-        return '<li' + (i >= KOREA.SHOW ? ' class="k-extra"' : "") + '><a href="' + esc(x.url) + '" target="_blank" rel="noopener"><span class="kn">' + (i + 1) + '</span><span class="kt">' +
+        return '<li' + (i >= show ? ' class="k-extra"' : "") + (i < 3 ? ' data-rank-top' : "") + '><a href="' + esc(x.url) + '" target="_blank" rel="noopener"><span class="kn" aria-label="' + (i + 1) + '위">' + (i + 1) + '</span><span class="kt">' +
           (x.badge ? '<span class="kp">' + esc(x.badge) + "</span>" : "") + esc(x.headline) +
-          '<span class="km">' + esc(x.source) + (x.published ? " · " + esc(fmtTime(x.published)) + " (BKK)" : "") + " ↗</span></span></a></li>";
+          '<span class="km">' + esc(x.source) + (x.published ? " · " + esc(fmtTime(x.published)) + " (BKK)" : "") + " ↗</span></span></a></li>" +
+          (i === 4 && show > 5 && kAd ? '<li class="k-ad">' + adHTML(kAd, 0) + "</li>" : "");   // 5위·6위 사이 작은 광고(6~10위가 보일 때만, data/ads.json 'korea-mid')
       }).join("") + "</ol>" +
-      (extra ? '<button type="button" class="korea__more" data-korea-more aria-controls="koreaList" aria-expanded="' + KOREA.more + '">' +
-        (KOREA.more ? "접기 ▴" : "펼치기 (" + extra + "건 더) ▾") + "</button>" : "");
+      (k.length > ST[0] ? '<button type="button" class="korea__more" data-korea-more aria-controls="koreaList" aria-expanded="' + (show >= k.length) + '">' +
+        (show >= k.length ? "접기 ▴" : "펼치기 (" + (next - show) + "건 더) ▾") + "</button>" : "");
   }
 
   /* 브리핑: 새 형식 [{topic, text(**굵게**), story_id}] / 옛 형식(문단) → 문장별 글머리표 */
@@ -495,7 +498,11 @@
     var el;
     if ((el = e.target.closest("[data-vote]"))) { doVote(el); return; }
     if ((el = e.target.closest("[data-korea-toggle]"))) { S.update(function (d) { d.ui.koreaClosed = !d.ui.koreaClosed; }); renderKorea(); return; }
-    if ((el = e.target.closest("[data-korea-more]"))) { KOREA.more = !KOREA.more; renderKorea(); if (!KOREA.more) $("korea").scrollIntoView({ block: "nearest" }); return; }
+    if ((el = e.target.closest("[data-korea-more]"))) {   // 3 → 5 → 10 → 접기(3)
+      var kn = $("koreaList") ? $("koreaList").children.length : 0;
+      if (Math.min(kn, KOREA.STEPS[KOREA.step]) >= kn || KOREA.step >= KOREA.STEPS.length - 1) KOREA.step = 0; else KOREA.step++;
+      renderKorea(); if (!KOREA.step) $("korea").scrollIntoView({ block: "nearest" }); return;
+    }
     if ((el = e.target.closest("[data-open-settings]"))) { Drawer.close(true); Onb.open("topics", true); return; }
     if ((el = e.target.closest("[data-tab]"))) { setTab(el.getAttribute("data-tab")); return; }
     if ((el = e.target.closest("[data-open]"))) { openStory(el.getAttribute("data-open")); history.replaceState(null, "", location.search + "#" + el.getAttribute("data-open")); return; }

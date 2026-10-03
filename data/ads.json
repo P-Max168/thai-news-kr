@@ -9,6 +9,9 @@
   {"id": "mid", "size": "large", "enabled": true, "items": [
    {"category": "부동산", "title": "여기에 광고하세요", "subtitle": "큰 배너 자리 · 콘도·임대 안내 예시 · 광고 문의", "theme": 2}
   ]},
+  {"id": "korea-mid", "size": "strip", "enabled": true, "items": [
+   {"category": "교민 생활", "title": "여기에 광고하세요", "subtitle": "한국 뉴스 5위·6위 사이 작은 자리 · 광고 문의", "theme": 2}
+  ]},
   {"id": "infeed", "size": "medium", "enabled": true, "every": 5, "items": [
    {"category": "비자 대행", "title": "여기에 광고하세요", "subtitle": "기사 사이 카드 · 광고 문의", "theme": 3},
    {"category": "여행사", "title": "여기에 광고하세요", "subtitle": "기사 사이 카드 · 광고 문의", "theme": 4},

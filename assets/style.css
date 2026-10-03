@@ -369,7 +369,7 @@ body.sheet-open{overflow:hidden}
 .korea__list .km{display:block;font-size:11.5px;color:var(--muted);font-weight:400;margin-top:1px}
 .korea__list .kp{display:inline-block;font-size:10.5px;background:#e7f5ff;color:#1864ab;border-radius:999px;padding:0 6px;margin-right:4px;font-weight:700}
 .korea__upd{font-weight:700;color:#3b5bdb}
-.korea:not(.is-more) .korea__list .k-extra{display:none}
+.korea__list .k-extra{display:none}
 .korea.is-closed .korea__more{display:none}
 .korea__more{display:block;width:calc(100% - 28px);margin:0 14px 12px;border:1px solid var(--line);background:#f8f9fb;border-radius:9px;padding:8px;font:inherit;font-size:13px;font-weight:700;color:var(--navy-2);cursor:pointer}
 /* 설치 안내(안드로이드 바·iOS 2단계 카드) */
@@ -509,3 +509,11 @@ body.drawer-open{overflow:hidden}
   .brand__text strong{font-size:15.5px}
   .brand{gap:6px}
 }
+/* 🇰🇷 한국 주요 뉴스 TOP 10(2026-10-03): 순위 번호 배지, 1~3위 강조, 3→5→10 펼치기 */
+.korea__top{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:#3b5bdb;border-radius:6px;padding:1px 6px;margin-left:4px;vertical-align:2px;letter-spacing:.3px}
+.korea__list a{align-items:flex-start}
+.korea__list .kn{width:22px;height:22px;border-radius:6px;background:#eef2ff;color:#3b5bdb;font-size:12.5px;display:inline-flex;align-items:center;justify-content:center;margin-top:1px;font-variant-numeric:tabular-nums}
+.korea__list li[data-rank-top] .kn{background:#3b5bdb;color:#fff}
+.korea__list li.k-ad{border-top:1px solid #f0f1f3;padding:8px 0}
+.korea__list li.k-ad .ad{min-height:36px;padding:6px 10px;border-radius:9px}
+.korea__sub{white-space:nowrap;display:inline-block}
