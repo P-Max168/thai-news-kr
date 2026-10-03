@@ -1,0 +1,3 @@
+- 바뀐 것: ⑫ 🏠 임대 카드 시험 10개(#rent, 메뉴 링크 없음) — 공개 매물 쪽 값만, 월세 바트+원·㎡+평·칸마다 출처, 사진·게시·연락 없음, 승인함 #9
+- 왜: 검토자 지시 3번/7번: 생활 플랫폼의 집 구하기 칸 시험
+- 되돌리는 법: `git checkout backup-20261003-1645-rent-test -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
