@@ -1,0 +1,3 @@
+- 바뀐 것: ⑧ 360px 내 주변 칸 다듬기 — 5칸 같은 너비, '피부·뷰티' → '뷰티', 글자 12~13px, 안 잘림
+- 왜: 검토자 16:15 지시 1번: 좁은 휴대폰에서 동물병원·피부·뷰티 글자가 빽빽함
+- 되돌리는 법: `git checkout backup-20261003-1619-nearby-360 -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
