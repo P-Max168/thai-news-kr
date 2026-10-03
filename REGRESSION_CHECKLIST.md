@@ -39,3 +39,4 @@
 | 33 | 360px 폭: 내 주변 헤더 줄 5칸·종류 바꾸기 5칸 모두 같은 너비, 글자 칸 안(‘피부·뷰티’ → ‘뷰티’, 화면 읽기엔 전체 이름) | `tools/dev/regress.py` |
 | 34 | 속도: 가게 카드 종류 바꾸기 = 화면 밖 카드 그리기 미룸(content-visibility) — 바꾸기 빠름, 스크롤·'오래된 정보 맨 뒤'·찾기 그대로 | `/tmp/pprof.py` 같은 측정(DEV_LOG 숫자) + `tools/dev/regress.py` |
 | 35 | 🏠 임대 카드 시험(#rent, 메뉴 링크 없음): 공개 매물 10개, 월세 바트+원, ㎡+평, 칸마다 출처, 사진 없음 | `tools/dev/regress.py` |
+| 36 | 속도: 쪽 화면 스크립트(pages.js·places.js)는 첫 기사 카드 뒤에 받음 — 주소 #places·#hearts 바로 열기, ☰ 메뉴·하트·승인함 그대로 | `tools/dev/regress.py` + `tools/dev/perf.py` |

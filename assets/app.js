@@ -122,6 +122,7 @@
     if (L.backfill(edId(), data.stories)) S.update(function () {});
     renderAll();
     renderSide();
+    if (window.TNLate) setTimeout(window.TNLate, 0);   // 첫 그리기 뒤 쪽 화면 스크립트 받기(index.html)
     if (location.hash.length > 1) openStory(location.hash.slice(1), true);
   }
   function renderAll() { renderTabs(); $("briefing").hidden = !topShown(); renderKorea(); renderTop(); renderFeed(); renderAds(); }
