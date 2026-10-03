@@ -244,11 +244,19 @@
     else { var t = topicOf(k); label = t.emoji + " " + t.label; n = c[k] || 0; if (sel && sel.indexOf(k) < 0) cls += " tab--temp"; }
     return '<button type="button" class="' + cls + '" role="tab" data-tab="' + k + '" aria-selected="' + (state.tab === k) + '"><span class="tab__l">' + esc(label) + '</span><span class="n">' + (n || "–") + "</span></button>";
   }
+  /* ☰ 맨 위 바로가기 2칸(같은 크기): ❤️ 하트한 기사 N개 · 📍 내 주변(마지막에 본 가게 종류, 처음엔 맛집) */
+  function renderQuick() {
+    var q = $("drawerQuick"); if (!q) return;
+    var last = null;
+    try { last = localStorage.getItem("tnk.nbLast"); } catch (e) {}
+    q.innerHTML = '<button type="button" class="dq-btn" data-page="hearts"><span class="dq-e" aria-hidden="true">❤️</span><b>하트한 기사</b><small id="drHeartN">' + L.hearts().length + "개</small></button>" +
+      '<button type="button" class="dq-btn" data-quick-nearby="' + esc(last || "") + '"><span class="dq-e" aria-hidden="true">📍</span><b>내 주변</b><small>맛집·마사지·병원</small></button>';
+  }
   function renderTabs() {
+    renderQuick();
     var c = topicCounts(), sel = selected(), list = tabList();
     $("tabs").innerHTML = list.map(function (k, i) {
       return tabBtn(k, c, sel) + (i === 0 ? (OB2 ? '<button type="button" class="dr-item dr-item--mine" data-ob-edit aria-haspopup="dialog">✏️ 내 피드 바꾸기 <small>사는 곳·관심</small></button>' : "") +
-        '<button type="button" class="dr-item" data-page="hearts">❤️ 내가 하트한 기사 <small id="drHeartN">' + L.hearts().length + '개</small></button>' +
         (OB2 ? '<button type="button" class="dr-item" id="myTopicsBtn" data-open-settings aria-haspopup="dialog">🧩 세부 주제·설정 <small>주제 직접 고르기·취향 초기화</small></button>'
           : '<button type="button" class="dr-item" id="myTopicsBtn" data-open-settings aria-haspopup="dialog">🧩 내 주제 설정</button>') : "");
     }).join("");
@@ -265,6 +273,7 @@
       last = document.activeElement;
       ov.hidden = false; dr.classList.add("is-open"); dr.setAttribute("aria-hidden", "false"); btn.setAttribute("aria-expanded", "true");
       document.body.classList.add("drawer-open");
+      renderQuick();   // 하트 수·마지막 내 주변 종류 최신으로
       if (window.TNSocial && $("drawerAcct")) window.TNSocial.renderAccountBox($("drawerAcct"));
       if (window.TNSocial && window.TNSocial.warm) window.TNSocial.warm();   // 로그인 모듈은 메뉴를 열 때 미리 받음
       var cur = dr.querySelector('[aria-selected="true"]') || items()[0];
@@ -691,6 +700,11 @@
     if ((el = e.target.closest("[data-issue]"))) {
       var ts = byId(el.getAttribute("data-sid")), tp = $("tl-" + el.getAttribute("data-sid"));
       if (ts && tp) togglePanel(el, tp, function () { return timelineHTML(ts); });
+      return;
+    }
+    if ((el = e.target.closest("[data-quick-nearby]"))) {
+      Drawer.close(true);
+      if (window.TNNearby) { var cfg = (TNNearby.config && TNNearby.config.categories) || [], want = el.getAttribute("data-quick-nearby"); var id = (cfg.filter(function (c) { return c.id === want; })[0] || cfg[0] || {}).id; if (id) TNNearby.open(id, true); }
       return;
     }
     if ((el = e.target.closest("[data-open-settings]"))) { Drawer.close(true); Onb.open("topics", true); return; }

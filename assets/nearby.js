@@ -221,6 +221,7 @@
     ensureRoot();
     if (root.hidden) lastFocus = document.activeElement;
     cur = id;
+    try { localStorage.setItem("tnk.nbLast", id); } catch (e) {}   // ☰ 바로가기 '📍 내 주변'이 마지막 종류로 열림
     root.innerHTML = renderPage(c);
     mountAd(root.querySelector("[data-nb-ad]"), c);
     root.hidden = false; root.scrollTop = 0;

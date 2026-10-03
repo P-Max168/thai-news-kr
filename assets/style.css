@@ -876,3 +876,12 @@ body.drawer-open{overflow:hidden}
 .skel{height:64px;border-radius:14px;background:linear-gradient(90deg,#eceff3 25%,#f6f7f9 50%,#eceff3 75%);background-size:200% 100%;animation:skel 1.2s linear infinite}
 @keyframes skel{to{background-position:-200% 0}}
 @media (prefers-reduced-motion:reduce){.skel{animation:none}}
+
+/* ===== ☰ 맨 위 바로가기(2026-10-03): 같은 크기 2칸, 줄 꽉 채움 ===== */
+.drawer__quick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px}
+.dq-btn{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:72px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:#fff;font:inherit;color:var(--ink);text-align:left;cursor:pointer;box-shadow:var(--shadow)}
+.dq-btn:hover{background:#f8f9fb}
+.dq-btn:focus-visible{outline:2px solid #74c0fc;outline-offset:2px}
+.dq-e{font-size:22px;line-height:1}
+.dq-btn b{font-size:15.5px;font-weight:800;letter-spacing:-.3px;margin-top:2px}
+.dq-btn small{font-size:12.5px;color:var(--muted);font-weight:600}
