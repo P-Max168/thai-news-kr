@@ -239,6 +239,16 @@ async def main():
             pc = {"err": str(e)[:100]}
         rec(pc.get("all", 0) >= 40 and 0 < pc.get("pet", 0) < 30 and pc.get("kr", 0) >= 10 and pc.get("bkk", {}).get("n", 0) >= 20 and pc["bkk"].get("kr") == pc["bkk"].get("n") and pc["bkk"].get("osm") and pc["bkk"].get("thai") is False and pc.get("sri", 0) >= 1 and pc.get("gm", {}).get("n", 0) >= 20 and pc.get("gm", {}).get("bad") == 0 and pc.get("krsrc") and pc.get("oldlast") and pc.get("thai") is False and pc.get("src"),
             "📇 가게 카드 — 지역 3곳(파타야·시라차·방콕 OSM 한식·한인) · 한식·한인 10곳+(칸마다 출처·확인일, 구글 지도 가게는 이름·동네·링크만 — 전화·시간·평점 없음)·오래된 정보 맨 뒤·종류 필터·태국 문자 없음", pc)
+        # 🧑‍💼 구인판 시안(#jobs): 주소로만 열림, 예시 6개(모두 '예시' 표시), 광고 1칸, 입력·올리기 없음, 메뉴 링크 없음
+        try:
+            await pg.evaluate("location.hash='#jobs'"); await pg.wait_for_timeout(2500)
+            jb = await pg.evaluate("""()=>{const p=document.getElementById('tnPage');return {open:TNPages.current()==='jobs', n:p.querySelectorAll('.jb').length, ex:p.querySelectorAll('.jb .jb-ex').length, warn:/모두 예시/.test(p.textContent), ad:p.querySelectorAll('.jb-ad .dm-ad').length,
+              forms:p.querySelectorAll('form,input,textarea').length, thai:/[\\u0E00-\\u0E7F]/.test(p.textContent), linked:!!document.querySelector('a[href="#jobs"],[data-page="jobs"]')}}""")
+            await pg.evaluate("TNPages.close()"); await pg.wait_for_timeout(400)
+        except Exception as e:
+            jb = {"err": str(e)[:100]}
+        rec(jb.get("open") and jb.get("n") == 6 and jb.get("ex") == 6 and jb.get("warn") and jb.get("ad") == 1 and jb.get("forms") == 0 and jb.get("thai") is False and jb.get("linked") is False,
+            "🧑‍💼 구인판 시안(#jobs) — 주소로만, 예시 6개 모두 '예시', 광고 1칸, 입력·올리기 없음, 메뉴 링크 없음", jb)
         # 🏠 임대 카드 시험(#rent): 공개 매물 10개, 월세 바트+원, ㎡+평, 칸마다 출처, 메뉴 링크 없음
         try:
             await pg.evaluate("TNPages.open('rent')"); await pg.wait_for_timeout(1500)

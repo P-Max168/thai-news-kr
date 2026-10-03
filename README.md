@@ -359,6 +359,11 @@
 반드시 `tools/TRANSLATION_RULES.md`를 읽고 모든 기사·제목 번역에 적용할 것.
 국가가 모호한 주어에는 `태국`(한국 주체는 `한국`)을 붙이는 주체 명시 규칙도 모든 번역 문구에 적용한다.
 
+### 🧑‍💼 구인판 시안 (2026-10-03, 승인함 #11 — 주소로만, 메뉴 링크 없음)
+- 열기: 사이트 주소 뒤에 `#jobs`. 스크립트 `assets/jobs.js` 는 주소가 #jobs 일 때만 받음(첫 화면 속도 영향 없음). 모양 CSS 는 `assets/late.css`(가게 카드와 같은 카드).
+- 내용: 공고 6개 **모두 (예시)** — 진짜 회사·가게 아님. 급여·근무 시간 칸은 '[사장님 입력]'(지어내지 않음). 올리기·지원·연락·입력칸 없음.
+- 광고: `data/ads.json` 'infeed' 자리 설정 그대로(같은 드래곤 배너·300x250), 📢 추천 업종만 '인력·비자 대행·통역'. 판 빌드(tools/newslib.py)는 안 건드림.
+
 ### 📇 가게 카드 — 시라차·방콕 (2026-10-03 18시, OSM 만)
 - 화면: 가게 카드 맨 위 **📍 파타야 · 시라차 · 방콕** 지역 버튼(고른 지역은 이 기기에 기억 `tnk.pcRegion`). 데이터 `data/places-sriracha.json`(2곳) · `data/places-bangkok.json`(34곳).
 - 원본: `tools/places/{sriracha,bangkok}-osm-2026-10-03.json`(Overpass mail.ru 거울, 한식 cuisine 또는 한글 상호) · 고른 목록·뺀 이유: `tools/places/{sriracha,bangkok}-pick-2026-10-03.json`

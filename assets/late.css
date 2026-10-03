@@ -192,3 +192,9 @@
 /* 지역 고르기(파타야·시라차·방콕, 2026-10-03 18시) — 종류 버튼과 같은 모양, 아래 칸과 조금 띄움 */
 .pc-region{margin:0 0 12px}
 .pc-region .pc-f[aria-pressed="true"]{background:#0c8f6a;border-color:#0c8f6a}
+/* 🧑‍💼 구인판 시안(#jobs, 2026-10-03) — 가게 카드와 같은 모양 + '예시' 표시 */
+.jb-warn{font-size:15px;line-height:1.6;background:#fff4e6;border:1px solid #ffc078;border-radius:12px;padding:10px 12px;margin:0 0 12px;color:#7a3e00}
+.jb-ex{display:inline-block;padding:2px 10px;border-radius:999px;background:#7a3e00;color:#fff;font-size:13px;font-weight:800}
+.jb-kinds{margin:0 0 8px}
+.jb-post{color:var(--muted,#5f6672);background:#f4f5f7;cursor:default}
+.jb-ad{margin:0}
