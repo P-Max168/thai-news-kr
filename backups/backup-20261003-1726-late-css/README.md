@@ -1,0 +1,3 @@
+- 바뀐 것: ② 속도: 쪽 화면 CSS(내 주변 종류 화면·가게 카드·하트 쪽·관리자·승인함, 약 17KB)를 assets/late.css 로 옮겨 첫 기사 카드 뒤에 받기 + 넘침 재기·document.fonts.ready(스타일 계산 강제)를 첫 카드 뒤로
+- 왜: 검수 17:12 지시 2번: 첫 기사 카드 0.2초 되찾기(필요 없는 CSS 나중에)
+- 되돌리는 법: `git checkout backup-20261003-1726-late-css -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)

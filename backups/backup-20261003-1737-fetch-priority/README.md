@@ -1,0 +1,3 @@
+- 바뀐 것: ② 속도: 판 데이터 스크립트 fetchpriority=high, 로그인(social.js)·내 주변(nearby.js) 스크립트 low(실행 순서 그대로). 시세 칩(ticker.js)은 낮췄다가 보통으로 되돌림
+- 왜: 검수 17:12 지시 2번 이어서 — 느린 망에서 판 데이터·CSS 가 먼저 오게
+- 되돌리는 법: `git checkout backup-20261003-1737-fetch-priority -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
