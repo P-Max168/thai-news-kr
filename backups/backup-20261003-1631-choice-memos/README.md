@@ -1,0 +1,3 @@
+- 바뀐 것: ⑩ 승인함 #4·#5 고르기 메모(CHOICE_MEMO_4_5.md) — 무료 먼저, 유료 3개 연 가격(바트·원), 애드센스 공식 문서 링크
+- 왜: 검토자 지시 5번: 아침에 민구 님이 번호만 고르게
+- 되돌리는 법: `git checkout backup-20261003-1631-choice-memos -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
