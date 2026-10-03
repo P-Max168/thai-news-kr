@@ -1,6 +1,7 @@
 /* 태국 뉴스 한눈에 — 헤더 둘째 줄 '빠른 정보' 칩 (☰ 오른쪽, 좁은 화면에서는 옆으로 밀기)
- * 배치(운영자 확정, 10-03 07:28): 두 줄짜리 상자 3개(☰ 버튼과 같은 높이)
- *   상자1 = 1바트 = 40.4원 / 1달러 = 33.7바트   상자2 = 날씨(아이콘·기온·강수확률) / 미세먼지 PM2.5(단계)   상자3 = 금시세(금괴 판매가) / 휘발유(95) 가격
+ * 배치(운영자 확정 10-03 07:28 → 10-03 09시 v3): 상자 3개(☰ 버튼과 같은 높이), 맨 아래 작은 줄 = 조회 시각(방콕 'HH:MM 조회')
+ *   상자1 = 1바트 = 40.4원 / 1달러 = 33.7바트 / 1테더 = 33.5바트(USDT, 구글 파이낸스 기준 — 실패 시 CoinGecko) / 조회 시각
+ *   상자2 = 날씨(아이콘·기온·강수확률) / 미세먼지 PM2.5(단계) / 지역 이름 + 조회 시각   상자3 = 금시세(금괴 판매가) / 휘발유(가소홀 95) 가격 / 조회 시각
  *  환율·금시세·휘발유 = data/ticker.json(GitHub Actions korea.yml → tools/fetch_ticker.py, 2시간마다). file:// 에서는 data/ticker.js(window.TN_TICKER)
  *  날씨·미세먼지 = Open-Meteo(무료·키 없음·CORS 허용)를 브라우저에서 직접 — 지역 = 이 기기에서 고른 지역 > 페르소나(파타야/시라차/방콕) > 파타야
  *     날씨 30분, 미세먼지 60분 localStorage 캐시
@@ -48,10 +49,11 @@
   }
   function cached(key, ttl, rg, url, pick) {
     var c = ls(key);
-    if (c && c.rg === rg && Date.now() - c.at < ttl && c.d) return Promise.resolve(c.d);
+    function withAt(x, at) { return x ? Object.assign({ at: at }, x) : null; }   // at = 브라우저가 받아 온 시각(칩 맨 아래 '조회' 줄)
+    if (c && c.rg === rg && Date.now() - c.at < ttl && c.d) return Promise.resolve(withAt(c.d, c.at));
     return fetch(url).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (j) {
-      var d = pick(j); ls(key, { rg: rg, at: Date.now(), d: d }); return d;
-    }).catch(function () { return c && c.rg === rg ? c.d : null; });   // 실패하면 같은 지역의 이전 캐시(신선도는 render 에서 판단)
+      var d = pick(j), at = Date.now(); ls(key, { rg: rg, at: at, d: d }); return withAt(d, at);
+    }).catch(function () { return c && c.rg === rg ? withAt(c.d, c.at) : null; });   // 실패하면 같은 지역의 이전 캐시(신선도는 render 에서 판단)
   }
   function loadWx() {
     var rg = region(), R = REGIONS[rg], q = "latitude=" + R.lat + "&longitude=" + R.lon + "&timezone=" + encodeURIComponent(TZ);
@@ -93,7 +95,7 @@
   // 날씨·미세먼지: 브라우저에서 직접 받은 Open-Meteo 값 우선, 실패하면 data/ticker.json 의 서버 값(Actions 가 2시간마다) — 둘 다 3시간 안의 것만
   function srv(key, rg) {
     var s = st.tk && st.tk[key], v = s && s.regions && s.regions[rg];
-    return v && fresh(s.fetched_at, DAY) ? Object.assign({ rg: rg, src: s.source, url: s.url, viaServer: true }, v) : null;
+    return v && fresh(s.fetched_at, DAY) ? Object.assign({ rg: rg, src: s.source, url: s.url, viaServer: true, at: ms(s.fetched_at) }, v) : null;
   }
   function wxOK() {
     var rg = region(), w = st.wx && st.wx.rg === rg && fresh(st.wx.time, 3 * 36e5) ? Object.assign({ src: "Open-Meteo", url: "https://open-meteo.com/" }, st.wx) : null;
@@ -107,31 +109,47 @@
   }
 
   function fuelOK() { var o = st.tk && st.tk.fuel; return o && o.gasohol95 > 0 && fresh(o.fetched_at, DAY) && fresh(o.feed_date, 2 * DAY) ? o : null; }
+  function usdtOK() { var u = st.tk && st.tk.usdt; return u && u.USDT_THB > 0 && fresh(u.fetched_at, DAY) && (!u.price_time || fresh(u.price_time, 2 * DAY)) ? u : null; }
+  // 조회 시각(방콕): 오늘이면 'HH:MM', 아니면 'M/D HH:MM' — 상자 안 항목 중 가장 오래된 것
+  function clock(list) {
+    var t = list.filter(function (x) { return x > 0; }); if (!t.length) return "";
+    var o = {}, f = function (v) { new Intl.DateTimeFormat("en-US", { timeZone: TZ, month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false })
+      .formatToParts(new Date(v)).forEach(function (p) { o[p.type] = p.value; }); return o.month + "/" + o.day; };
+    var m = Math.min.apply(null, t), today = f(Date.now()), d = f(m);
+    return (d === today ? "" : d + " ") + o.hour.replace(/^24$/, "00") + ":" + o.minute;
+  }
   function n2(x) { return Number(x).toLocaleString("ko-KR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 
   // 상자 = 두 줄([라벨용 글, 화면 HTML] 두 개). 한 줄이 없으면 그 줄만 빠지고, 둘 다 없으면 상자를 안 그림
-  function tile(k, lines) {
+  // foot = [라벨용 글, 화면 HTML] — 맨 아래 작은 '조회 시각' 줄(값 줄이 하나도 없으면 상자째 안 그림)
+  function tile(k, lines, foot) {
     lines = lines.filter(Boolean); if (!lines.length) return "";
+    if (foot && foot[1]) lines.push(foot.concat("tk-ln tk-ft"));
     return '<button type="button" class="tk-chip tk-tile" data-tk="' + k + '" aria-haspopup="dialog" aria-label="' + esc(lines.map(function (l) { return l[0]; }).join(", ")) + ' (누르면 출처)">' +
-      lines.map(function (l) { return '<span class="tk-ln">' + l[1] + "</span>"; }).join("") + "</button>";
+      lines.map(function (l) { return '<span class="' + (l[2] || "tk-ln") + '">' + l[1] + "</span>"; }).join("") + "</button>";
   }
+  function ft(list) { var c = clock(list); return c ? [c + " 조회", c + " 조회"] : null; }
   function render() {
-    var f = fxOK(), w = wxOK(), g = goldOK(), a = aqOK(), o = fuelOK(), h = [];
+    var f = fxOK(), u = usdtOK(), w = wxOK(), g = goldOK(), a = aqOK(), o = fuelOK(), h = [];
     h.push(tile("fx", [
       f && ["1바트 " + f.THB_KRW.toFixed(1) + "원", "1바트 = <b>" + f.THB_KRW.toFixed(1) + "원</b>"],
-      f && f.USD_THB > 0 && ["1달러 " + f.USD_THB.toFixed(1) + "바트", "1달러 = <b>" + f.USD_THB.toFixed(1) + "바트</b>"]
-    ]));
+      f && f.USD_THB > 0 && ["1달러 " + f.USD_THB.toFixed(1) + "바트", "1달러 = <b>" + f.USD_THB.toFixed(1) + "바트</b>"],
+      u && ["1테더(USDT) " + u.USDT_THB.toFixed(1) + "바트", "1테더 = <b>" + u.USDT_THB.toFixed(1) + "바트</b>"]
+    ], ft([f && ms(f.fetched_at), u && ms(u.fetched_at)])));
     var ic = w && wmo(w.code, w.day), lv = a && pmLevel(a.pm);
     h.push(tile("env", [
       w && [REGIONS[w.rg].name + " " + Math.round(w.t) + "도 " + ic[1] + (w.rain != null ? " 강수확률 " + w.rain + "%" : ""),
-        '<span class="tk-l tk-rg">' + REGIONS[w.rg].name + '</span><span class="tk-i" aria-hidden="true">' + ic[0] + "</span><b>" + Math.round(w.t) + "°</b>" +
+        '<span class="tk-i" aria-hidden="true">' + ic[0] + "</span><b>" + Math.round(w.t) + "°</b>" +
         (w.rain != null ? '<span class="tk-rain">☔' + w.rain + "%</span>" : "")],
       a && ["미세먼지 PM2.5 " + Math.round(a.pm) + " " + lv.t, '<span class="tk-l">PM2.5</span><b>' + Math.round(a.pm) + '</b><span class="tk-lv tk-lv--' + lv.k + '">' + lv.t + "</span>"]
-    ]));
+    ], (function () {   // 지역 이름은 맨 아래 조회 줄 앞에(첫 줄 폭 줄이기 — 운영자 요청 10-03: 날씨 상자 잘림)
+      var c = clock([w && w.at, a && a.at]), rn = REGIONS[(w || a || {}).rg || region()].name;
+      return c ? [rn + " " + c + " 조회", '<span class="tk-rg">' + rn + "</span>" + c + " 조회"] : null;
+    })()));
     h.push(tile("price", [
       g && ["금시세 금괴 1바트 " + n0(g.bar_sell) + "바트", '<span class="tk-l">금</span><b>' + n0(g.bar_sell) + '<small class="tk-u">바트</small></b>'],
-      o && ["휘발유 95 리터당 " + n2(o.gasohol95) + "바트", '<span class="tk-l">휘발유(95)</span><b>' + n2(o.gasohol95) + '<small class="tk-u">바트</small></b>']
-    ]));
+      o && ["휘발유 리터당 " + n2(o.gasohol95) + "바트", '<span class="tk-l">휘발유</span><b>' + n2(o.gasohol95) + '<small class="tk-u">바트</small></b>']
+    ], ft([g && ms(g.fetched_at), o && ms(o.fetched_at)])));
     var open = pop && !pop.hidden ? pop.getAttribute("data-k") : null;
     box.innerHTML = h.join("");
     box.classList.toggle("is-empty", !box.children.length);
@@ -153,10 +171,19 @@
     return '<p class="tk-pop__src">' + lines.map(esc).join("<br>") + '<br>출처: <a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(name) + " ↗</a></p>";
   }
   function part(k) {
-    var f = fxOK(), w = wxOK(), g = goldOK(), a = aqOK(), o = fuelOK();
+    var f = fxOK(), u = usdtOK(), w = wxOK(), g = goldOK(), a = aqOK(), o = fuelOK();
     if (k === "fx" && f) return "<b class=\"tk-pop__t\">환율</b><p>1바트 = <b>" + f.THB_KRW.toFixed(2) + "원</b> · 1만 바트 ≈ " + n0(f.THB_KRW * 1e4) + "원" +
       (f.USD_THB > 0 ? "<br>1달러 = <b>" + f.USD_THB.toFixed(2) + "바트</b>" + (f.USD_KRW > 0 ? " · 1달러 = " + n0(f.USD_KRW) + "원" : "") : "") + "</p>" +
       src(f.source, f.url, ["기준 시각 " + when(f.rate_time) + " (방콕)", "받아 온 시각 " + when(f.fetched_at) + " · 참고용(은행·환전소 실제 환율과 다름)"]);
+    if (k === "usdt" && u) {
+      var ukrw = f ? Math.round(u.USDT_THB * f.THB_KRW) : null, chg = typeof u.change_pct === "number" ? u.change_pct : null;
+      return "<b class=\"tk-pop__t\">테더(USDT) 시세</b><p>1테더 = <b>" + u.USDT_THB.toFixed(2) + "바트</b>" + (ukrw ? " (약 " + n0(ukrw) + "원)" : "") +
+        (chg ? " · " + (u.google ? "전일 대비 " : "24시간 ") + (chg > 0 ? "▲" : "▼") + Math.abs(chg).toFixed(2) + "%" : "") + "</p>" +
+        src(u.google ? "구글 파이낸스 (Google Finance)" : u.source, u.url, [
+          u.google ? "구글 기준 · 시세 시각 " + when(u.price_time) + " (방콕)"
+                   : "구글 값을 받지 못해 대신 쓴 값 — 구글 표시값과 조금 다를 수 있음" + (u.price_time ? " · 시세 시각 " + when(u.price_time) + " (방콕)" : ""),
+          "받아 온 시각 " + when(u.fetched_at) + " · 참고용(거래소·P2P 실제 거래가와 다름)"]);
+    }
     if (k === "wx" && w) {
       var ic = wmo(w.code, w.day), cur = region();
       return "<b class=\"tk-pop__t\">" + ic[0] + " " + REGIONS[w.rg].name + " 지금 날씨</b><p><b>" + w.t.toFixed(1) + "°C</b> " + esc(ic[1]) +
@@ -184,7 +211,7 @@
       src(o.source, o.url, ["가격 공지 " + when(o.announced_at) + (o.effective_at ? " · 적용 " + when(o.effective_at) + "부터" : ""), "받아 온 시각 " + when(o.fetched_at) + " · 주유소·지역마다 조금씩 다름"]);
     return "";
   }
-  var TILE = { fx: ["fx"], env: ["wx", "pm"], price: ["gold", "fuel"] };
+  var TILE = { fx: ["fx", "usdt"], env: ["wx", "pm"], price: ["gold", "fuel"] };
   function body(k) {
     return (TILE[k] || [k]).map(part).filter(Boolean).map(function (x) { return '<div class="tk-pop__sec">' + x + "</div>"; }).join("");
   }

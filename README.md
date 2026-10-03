@@ -43,9 +43,9 @@
 - `data/<id>.js`   : 같은 데이터를 `window.NEWS_DATA["<id>"]`에 등록하는 JS(file:// 용)
 - `data/korea.json` / `data/korea.js` : 🇰🇷 한국 주요 뉴스 10건 `{updated_at(+07:00), items:[{title, source, time, url}]}` / `window.KOREA_NEWS = …`(file:// 용). **GitHub Actions 전용 — 손으로 고치거나 deploy.sh 로 올리지 않음**
 - `.github/workflows/korea.yml` : 한국 주요 뉴스 + 헤더 시세 칩 데이터 2시간마다 갱신 워크플로(아래 '🇰🇷 한국 주요 뉴스 자동 갱신')
-- `data/ticker.json` / `data/ticker.js` : 헤더 빠른 정보 칩 데이터 `{updated_at, fx, gold, fuel, wx, aq}` / `window.TN_TICKER = …`(file:// 용). `tools/fetch_ticker.py` 가 만듦. **GitHub Actions 전용 — 손으로 고치거나 deploy.sh 로 올리지 않음**
+- `data/ticker.json` / `data/ticker.js` : 헤더 빠른 정보 칩 데이터 `{updated_at, fx, usdt, gold, fuel, wx, aq}` / `window.TN_TICKER = …`(file:// 용). `tools/fetch_ticker.py` 가 만듦. **GitHub Actions 전용 — 손으로 고치거나 deploy.sh 로 올리지 않음**
 - `assets/nearby.js` · `assets/nearby.css` : 헤더 셋째 줄 **📍 내 주변**(카테고리 버튼 4개 + `#nearby/<id>` 화면, 설정 = `NEARBY` 객체 — 아래 '헤더')
-- `assets/ticker.js` : 헤더 둘째 줄 빠른 정보 상자 3개(환율 원·달러 / 날씨·PM2.5 / 금·휘발유95) 렌더 + 출처 작은 창(아래 '헤더')
+- `assets/ticker.js` : 헤더 둘째 줄 빠른 정보 상자 3개(환율 원·달러·테더 / 날씨·PM2.5 / 금·휘발유, 맨 아래 작은 조회 시각 줄) 렌더 + 출처 작은 창(아래 '헤더')
 - `data/index.json|js` : 판 목록. `{latest, editions:[{id,date,edition,label,generated,stories}], dates:[id…]}` (최신순). **직접 고치지 말고 스크립트로 재생성**
 - `assets/app.js, style.css` : 렌더러/스타일(빌드 과정 없음)
 - `assets/topics.js` : **주제 11개·페르소나 5개 정의 + 옛 판 category→주제 매핑**(데이터 파일은 고치지 않음). 주제 id 는 `tools/newslib.py` 의 `TOPICS` 와 같아야 함
@@ -58,7 +58,7 @@
 - `tools/fetch_korea.py` : 🇰🇷 한국 주요 뉴스 — `--standalone` = 독립 파일 `data/korea.json|js` 생성(Actions 가 2시간마다), `<판 id>` = 판 `korea_top` 후보 수집(Google News KR) / `tools/discussion.py` : 💬 오늘의 질문 초안·적용 / `tools/strip_trend_cards.py` : 옛 판의 trends24 기사 카드 정리(역사 자료용)
 - `drafts/` : 운영자 승인 전 초안(올리지 않음, .gitignore)
 - `manifest.json`, `sw.js`, `assets/icons/` : PWA(이름·아이콘·서비스 워커). 아이콘은 `python3 tools/make_icons.py` 로 다시 만들 수 있음(헤더 국기 로고 모양)
-- `tools/fetch_ticker.py` : 시세 칩 데이터 수집(환율 open.er-api.com → 실패 시 frankfurter, 금시세 goldtraders.or.th, 휘발유(95) 방짝, 날씨·PM2.5 Open-Meteo 대체값) — Actions 가 2시간마다
+- `tools/fetch_ticker.py` : 시세 칩 데이터 수집(환율 open.er-api.com → 실패 시 frankfurter, 테더 USDT/THB 구글 파이낸스 → 실패 시 CoinGecko → Bitkub, 금시세 goldtraders.or.th, 휘발유(가소홀 95) 방짝, 날씨·PM2.5 Open-Meteo 대체값) — Actions 가 2시간마다
 - `tools/stamp_assets.py` : assets 내용 해시로 `index.html` 의 `?v=` 와 `sw.js` 의 `VERSION` 갱신(서비스 워커 캐시 교체). **deploy.sh 가 자동 실행**
 - `tools/test_pwa.py` : 서비스 워커·manifest·설치 가능·오프라인 읽기 점검(헤드리스 Chrome)
 - `tools/editions/_template.py` : **새 형식 판 편집 템플릿**
@@ -75,7 +75,7 @@
 ## 헤더(국기·☰·빠른 정보 칩) — 2026-10-03 운영자 요청 ★판을 새로 만들어도 유지
 - **헤더는 판 데이터와 무관한 공용 템플릿**: `index.html`(마크업) + `assets/style.css`(맨 아래 '헤더(2026-10-03)' 블록) + `assets/ticker.js`. 모든 판(`?date=`·`?ed=`·`e/<id>/` → `?ed=` 로 이동)이 이 `index.html` 하나로 렌더되므로 정기 실행(판 빌드·`share_kit.py`)은 헤더를 건드리지 않는다. **정기 실행에서 index.html 헤더를 다시 쓰거나 지우지 말 것.** (`e/<id>/index.html` 은 메인으로 넘기는 미리보기 페이지라 헤더가 따로 있음 — 이번 변경 대상 아님. 공유 카드 PNG(`share_kit.py`)의 헤더 그림도 예전 모양 그대로)
 - **첫 줄**: 왼쪽부터 태국 국기 → ❤️ 하트 → 태극기 → '태국 뉴스 한눈에'(데스크톱은 아래 작은 부제). 오른쪽은 예전처럼 날짜·판 선택·로그인. 국기 이모지는 윈도우 PC 브라우저에서 글자로 보이므로 **인라인 SVG**(`index.html` `.brand__flags`). 태극기는 공식 비율(3:2, 태극 지름 = 세로의 1/2, 괘 막대 길이 = 태극 반지름, 두께 1/12·간격 1/24 지름, 태극에서 지름 1/4 띄움)로 그림: **왼쪽 위 건(☰)·오른쪽 아래 곤(☷)·오른쪽 위 감(☵)·왼쪽 아래 리(☲)**, 태극은 위 빨강(#CD2E3A)·아래 파랑(#0047A0). 고칠 때 이 배치를 바꾸지 말 것.
-- **둘째 줄**: 왼쪽 **☰ 메뉴 버튼(`#menuBtn`, 왼쪽 서랍 그대로 — 운영자 요청으로 크게: 54×50px(데스크톱 58×52, 최소 44×44 터치 영역), 26px 굵은 세 줄 SVG + 아래 작은 '메뉴' 글자, 밝은 둥근 배경)**, 오른쪽 **빠른 정보 상자**(`#ticker`). 좁은 화면은 옆으로 밀기(스크롤바 안 보임, 오른쪽 끝 흐림 표시). 그 아래 셋째 줄(`.subbar`, 예전 탭 줄 자리)은 **📍 내 주변**(아래).
+- **둘째 줄**: 왼쪽 **☰ 메뉴 버튼(`#menuBtn`, 왼쪽 서랍 그대로 — 운영자 요청으로 크게: 54×64px(360px 이하 50×64, 데스크톱 58×68 — 10-03 09시 v3 에서 상자 높이에 맞춰 세로로 늘림, 최소 44×44 터치 영역), 26px 굵은 세 줄 SVG + 아래 작은 '메뉴' 글자, 밝은 둥근 배경)**, 오른쪽 **빠른 정보 상자**(`#ticker`). 좁은 화면은 옆으로 밀기(스크롤바 안 보임, 오른쪽 끝 흐림 표시). 그 아래 셋째 줄(`.subbar`, 예전 탭 줄 자리)은 **📍 내 주변**(아래).
 - **셋째 줄 = 📍 내 주변(2026-10-03 운영자 요청, 예전엔 빈 줄)** ★판을 새로 만들어도 유지 — `index.html` `<div class="subbar subbar--nearby"><nav id="nearbyRow">` + `assets/nearby.js`(줄·화면 렌더) + `assets/nearby.css`(스타일). 정기 실행은 이 줄을 비우거나 지우지 말 것.
   - 줄: 왼쪽 **'📍 내 주변' 이름표(링크 아님, 누를 수 없음)** + 카테고리 버튼 4개 **🍜 맛집 · 💇 미용실 · 💆 마사지 · 🛒 마트**(높이 34px, 줄 높이 약 42px, 390px 폭에 다 들어감 — 더 좁으면 옆으로 밀기).
   - 버튼 → 앱 안 화면 **`#nearby/food|hair|massage|mart`**(모바일 = 전체 화면, 데스크톱 = 가운데 창, 뉴스 피드는 뒤에 그대로). **← 뒤로**·Esc·브라우저 뒤로·데스크톱 바깥 누르기 = 피드로. 주소에 `#nearby/massage` 를 붙여 바로 열 수도 있음.
@@ -83,17 +83,19 @@
   - 위치: 지도 버튼을 누를 때 브라우저 위치 권한을 물음 → 허용 = `https://www.google.com/maps/search/<검색어>/@위도,경도,15z`(내 위치 중심), 거절·실패·미지원 = `https://www.google.com/maps/search/?api=1&query=<검색어> in Pattaya|Si Racha|Bangkok`. 지역 = 이 화면에서 고른 지역(`localStorage tnk.nearbyRegion`) > 날씨 칩 지역(`tnk.wxRegion`) > 페르소나 > **파타야**. 이미 허용된 기기는 화면을 열 때 묻지 않고 좌표를 받아 둠. 좌표는 지도 주소를 만드는 데만 쓰고 저장하지 않음(페이지 메모리 10분). 검색어는 영어(`restaurants`·`hair salon`·`massage`·`supermarket`·`korean restaurant`·`korean mart` …), 화면 글자는 한국어만(태국 문자 없음). 위치 확인이 길어 팝업이 막히면 '버튼을 한 번 더 눌러 주세요' 안내(링크는 이미 바뀌어 있음).
   - 링크는 모두 `<a target="_blank" rel="noopener">` → 홈 화면 앱(PWA)에서는 앱 안 브라우저 시트로 열림(아래 '외부 링크는 모두 새 탭').
   - **카테고리 설정은 `assets/nearby.js` 맨 위 `NEARBY` 객체 하나**(`window.TN_NEARBY`): `{id, emoji, label, slot, query, places:{includedTypes}, subs:[{label, query, places}]}` + 지역 좌표. 카테고리·빠른 찾기를 더하거나 바꿀 때 이것만 고치면 줄·화면·링크가 같이 바뀜(새 광고 슬롯 id 는 `data/ads.json` + `tools/newslib.py` `build_ads()` 허용 목록에도). **나중에 Google Places API(New) Nearby Search 로 앱 안 순위 목록으로 바꿀 때**: `places.includedTypes` 와 좌표(`geo.pos`)를 그대로 쓰고 `renderPage()` 의 지도 버튼(`.nb-go`) 아래에 목록을 넣으면 됨(API 키는 HTTP 리퍼러 제한 필요 — 지금은 키 없음, 구글 지도 링크만).
-- **빠른 정보 = 두 줄짜리 상자 3개(운영자 확정 10-03 07:28)** — ☰ 버튼과 같은 높이(모바일 50px·데스크톱 52px), 두 줄 같은 글자 크기, 통화 아이콘 없음. 390px 폭에 다 들어가게 맞춤(더 좁으면 옆으로 밀기 + 오른쪽 흐림). 상자를 누르면 작은 창에 두 줄 각각의 자세한 값·출처 링크·기준/받아 온 시각(방콕). 값이 없거나 오래되면 **그 줄을 숨김**(두 줄 다 없으면 상자 숨김, 틀린 숫자를 보여 주지 않음, 절대 지어내지 않음):
-  1. **상자1 환율**: `1바트 = 40.4원` / `1달러 = 33.7바트`(둘 다 소수 1자리 — 환율이라서) ← `data/ticker.json` `fx.THB_KRW`·`fx.USD_THB`(open.er-api.com THB 기준, 판 환율과 같은 출처. 실패 시 frankfurter/ECB). 받아 온 지 24시간·기준 시각 48시간 넘으면 숨김.
-  2. **상자2 날씨·미세먼지**: `🌤️ 27° ☔79%`(지금 기온 + 날씨 아이콘 + 앞으로 6시간 최고 강수확률, 넓은 화면은 앞에 지역 이름) / `PM2.5 12 좋음`(색 라벨).
+- **빠른 정보 = 상자 3개 + 맨 아래 작은 '조회 시각' 줄(v3, 운영자 요청 10-03 09시 — 처음 확정 10-03 07:28)** — ☰ 버튼과 같은 높이(**모바일 64px·데스크톱 68px**), 통화 아이콘 없음. 각 상자 맨 아래 작은 회색 줄 = **`HH:MM 조회`**(방콕, 그 상자 안 값들을 받아 온 시각 중 가장 이른 것 — `ticker.json` 의 항목별 `fetched_at`, 날씨·PM2.5 는 브라우저가 Open-Meteo 에서 받은 시각(캐시면 캐시 받은 시각, 서버 대체값이면 그 `fetched_at`). 오늘이 아니면 `10/2 21:47 조회`). 시세가 '언제 기준 값'인지는 작은 창(기준·발표 시각)에. **360·390·430px 폭에 세 상자가 옆으로 밀기 없이 다 들어감**(10-03 측정: 360px 에서 여유 약 15px, 390px 약 27px — 360px 이하에서는 ☰ 폭 50px·상자 글자 11.5px). 그래도 넘치면 옆으로 밀기 + 오른쪽 흐림. 상자를 누르면 작은 창에 줄마다 자세한 값·출처 링크·기준/받아 온 시각(방콕). 값이 없거나 오래되면 **그 줄을 숨김**(값 줄이 다 없으면 상자 숨김, 틀린 숫자를 보여 주지 않음, 절대 지어내지 않음):
+  1. **상자1 환율(글자 조금 작게 — 모바일 11.5px, 360px 이하 11px)**: `1바트 = 40.4원` / `1달러 = 33.7바트` / `1테더 = 33.5바트` / `09:04 조회`(모두 소수 1자리, 작은 창은 2자리).
+     - 원·달러 ← `data/ticker.json` `fx.THB_KRW`·`fx.USD_THB`(open.er-api.com THB 기준, 판 환율과 같은 출처. 실패 시 frankfurter/ECB). 받아 온 지 24시간·기준 시각 48시간 넘으면 숨김.
+     - **테더(USDT/THB)** ← `ticker.json` `usdt.USDT_THB`. 운영자 요청 = **구글에 나오는 값과 같게** → 1순위 **구글 파이낸스 시세 페이지**(`https://www.google.com/finance/quote/USDT-THB?hl=en`, 키 없음 — 페이지 안 데이터 `"Tether (USDT / THB)",…,[현재가,변동,변동%…],null,전일종가,…,[유닉스 시각]` 을 정규식으로 읽음. 공식 API 아님 → 구조가 바뀌면 다음 단계로). 구글이 막으면(동의 화면·429·구조 변경) **CoinGecko** `simple/price?ids=tether&vs_currencies=thb`(여러 거래소 집계 — 구글 값도 비슷한 집계 시세), 그것도 실패하면 **Bitkub** 공개 ticker `api/v3/market/ticker?sym=USDT_THB` 마지막 체결가. `usdt.google = true` 일 때만 작은 창에 **'구글 기준'**, 아니면 '구글 값을 받지 못해 대신 쓴 값 — 구글 표시값과 조금 다를 수 있음' + 실제 출처 이름. 작은 창: 1테더 = 33.52바트(원화 환산) · 전일 대비(구글)/24시간(CoinGecko) 변동. 받아 온 지 24시간·시세 시각 48시간 넘으면 숨김.
+  2. **상자2 날씨·미세먼지**: `🌤️ 27° ☔79%`(날씨 아이콘 + 지금 기온 + 앞으로 6시간 최고 강수확률, 간격 2px로 좁힘) / `PM2.5 12 좋음`(색 라벨) / **`파타야 09:05 조회`**(지역 이름은 v3 부터 첫 줄이 아니라 이 조회 줄 앞에 — 첫 줄 '☔90%' 잘림 해결, 모든 폭에서 지역이 보임).
      - 지역 = 작은 창에서 고른 지역(`localStorage tnk.wxRegion`) > 페르소나(`tnk.profile.v1` persona 가 pattaya/sriracha/bangkok) > **파타야**(여행객·사업·미선택).
      - 날씨: 브라우저에서 Open-Meteo 직접(키 없음, 30분 캐시 `tnk.wx.v1`). 실패(429 등)하면 `ticker.json` `wx`(Actions 가 받은 값 — Open-Meteo, 막히면 MET Norway: 이때는 강수확률 대신 6시간 강수량). 모델 시각 3시간 넘으면 숨김.
      - PM2.5: 같은 지역, 브라우저에서 Open-Meteo 대기질(CAMS 예측 모델, 60분 캐시 `tnk.aq.v1`, 실패 시 `ticker.json` `aq`). 단계 = **태국 오염관리국(PCD) 2023 기준(15/25/37.5/75 µg/m³)을 4단계로**: 좋음 0–25(초록) · 보통 25.1–37.5(노랑) · 나쁨 37.6–75(주황) · 매우 나쁨 75 초과(빨강). 측정소 실측이 아닌 모델 값(작은 창에 표시).
-  3. **상자3 금·휘발유**: `금 66,400฿` / `휘발유(95) 40.69฿`.
+  3. **상자3 금·휘발유**: `금 66,400바트` / `휘발유 40.69바트` / `09:04 조회`('바트'는 작은 글자. 화면 라벨은 그냥 '휘발유' — 값은 그대로 가소홀 95, 작은 창 제목에 '가소홀 95').
      - 금: 태국 금 거래상 협회(goldtraders.or.th) 공식 발표 **금괴 96.5% 1바트(15.244 g) 판매가**(작은 창에 매입가·원화 환산(판매가 × 환율, 정수 반올림)). 협회 사이트가 쓰는 공개 JSON `/api/GoldPrices/Latest`(공식 문서화된 API 아님 — 구조가 바뀌면 줄이 숨겨지고 워크플로가 빨간색). 주말·공휴일엔 발표가 없어 마지막 발표값 그대로(작은 창에 발표 시각). 받아 온 지 24시간·발표 4일 넘으면 숨김.
-     - 휘발유(95): **방짝(Bangchak) 공식 유가 JSON**(`oil-price.bangchak.co.th/ApiOilPrice2/th`)의 **가소홀 95**(แก๊สโซฮอล์ 95 S EVO) 오늘 가격, 바트/L, **방콕 소매가(방콕 지방세 미포함, 방짝 표기)**. 작은 창에 원화 환산·어제 가격·가격 공지/적용 시각. 받아 온 지 24시간 넘거나 피드 날짜가 이틀 넘게 지나면 숨김. 경유(디젤)는 운영자 요청으로 쓰지 않음.
+     - 휘발유(가소홀 95): **방짝(Bangchak) 공식 유가 JSON**(`oil-price.bangchak.co.th/ApiOilPrice2/th`)의 **가소홀 95**(แก๊สโซฮอล์ 95 S EVO) 오늘 가격, 바트/L, **방콕 소매가(방콕 지방세 미포함, 방짝 표기)**. 작은 창에 원화 환산·어제 가격·가격 공지/적용 시각. 받아 온 지 24시간 넘거나 피드 날짜가 이틀 넘게 지나면 숨김. 경유(디젤)는 운영자 요청으로 쓰지 않음.
 - 데이터 갱신: `data/ticker.json|js` 는 `korea.yml` 의 '시세 수집' 단계(`python3 tools/fetch_ticker.py`)가 2시간마다 만들어 한국 뉴스와 같은 커밋으로 올림(시세만 바뀌면 `ticker: 시세 MM-DD HH:MM BKK`). 항목 하나가 실패하면 그 항목은 이전 값(이전 받아 온 시각 그대로 → 오래되면 화면이 숨김). 화면은 `fetch(data/ticker.json?_=…, no-store)`(file:// 은 `data/ticker.js`), 서비스 워커도 no-store, 돌아왔을 때 10분 넘었으면 다시 받음.
-- 상자·줄을 더하거나 바꾸려면 `assets/ticker.js` 의 `render()`(상자=`tile(키, [줄1, 줄2])`)·`part()`/`TILE`(작은 창 내용) 만 고치면 됨. 새 assets 파일을 만들면 `tools/stamp_assets.py` 의 `ASSETS` 와 `index.html`·`sw.js` 에 `?v=` 항목을 같이 넣을 것.
+- 상자·줄을 더하거나 바꾸려면 `assets/ticker.js` 의 `render()`(상자=`tile(키, [줄1, 줄2, …], 조회줄)` — 조회줄은 `ft([받아 온 시각들])`)·`part()`/`TILE`(작은 창 내용, 환율 상자 = `fx`+`usdt`) 만 고치면 됨. 스타일은 `assets/style.css` 의 '빠른 정보 v3' 블록(맨 아래쪽). 새 assets 파일을 만들면 `tools/stamp_assets.py` 의 `ASSETS` 와 `index.html`·`sw.js` 에 `?v=` 항목을 같이 넣을 것.
 
 ## 주제(11개) — 2026-10-03 저녁판부터(아침판은 10개: 파타야·시라차 따로)
 | id | 이름 | 내용 |

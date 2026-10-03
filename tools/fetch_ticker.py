@@ -9,6 +9,10 @@
         협회 사이트가 쓰는 공개 JSON(/api/GoldPrices/Latest). 주말·공휴일엔 발표가 없어 마지막 발표값이 그대로다.
 - fuel: 방콕 소매 휘발유 가격 — 방짝(Bangchak) 공식 유가 JSON(oil-price.bangchak.co.th/ApiOilPrice2/th)의 '가소홀 95'(แก๊สโซฮอล์ 95) 오늘 가격(바트/L).
         방콕(กทม.) 소매가, 방콕 지방세 미포함(방짝 표기). 찾지 못하면 항목 없음(지어내지 않음).
+- usdt: 테더(USDT) 1개 = 몇 바트(USDT/THB). 운영자 요청 = '구글에 나오는 값과 같게'.
+        1순위 구글 파이낸스 시세 페이지(google.com/finance/quote/USDT-THB — 키 없음, 페이지 안 데이터의 현재가·시각),
+        막히면(동의 화면·429·구조 변경) CoinGecko simple price(tether→thb, 여러 거래소 평균 — 구글 값도 비슷한 집계 시세),
+        그것도 실패하면 Bitkub(태국 거래소) 공개 ticker 의 USDT_THB 마지막 체결가. source 에 실제로 쓴 곳을 적는다(구글일 때만 '구글 기준').
 - wx/aq: 날씨·미세먼지 PM2.5(Open-Meteo, 파타야·시라차·방콕) — 화면은 브라우저에서 Open-Meteo 를 직접 부르고(30/60분 캐시),
         그게 실패할 때(요청 한도 429·오프라인 등)만 이 값(3시간 안의 것)을 쓴다.
 - 한 항목이 실패하면 그 항목은 이전 값을 그대로 둔다(fetched_at 도 그대로 → 화면이 24시간 넘은 값은 숨김).
@@ -98,6 +102,44 @@ def fuel_bangchak():
                 source="방짝(Bangchak) 유가 공지", url="https://www.bangchak.co.th/th/oilprice")
 
 
+def _usdt_ok(p):
+    if not (20 < p < 60):
+        raise ValueError("USDT/THB 값 이상: %r" % p)
+    return p
+
+
+def usdt_google():
+    import re
+    html = urllib.request.urlopen(urllib.request.Request("https://www.google.com/finance/quote/USDT-THB?hl=en",
+                                  headers=dict(UA, Accept="text/html", **{"Accept-Language": "en-US,en;q=0.9"})), timeout=30).read().decode("utf-8", "replace")
+    # 페이지 안 데이터: ["/g/…",null,"Tether (USDT / THB)",3,null,[현재가,변동,변동%,…],null,전일종가,null,null,null,[유닉스시각]
+    m = re.search(r'"Tether \(USDT / THB\)",\d+,null,\[([\d.]+),(-?[\d.eE-]+),(-?[\d.eE-]+)[^\]]*\],null,([\d.]+)(?:,null){3},\[(\d{9,11})\]', html)
+    if not m:
+        raise ValueError("구글 파이낸스 페이지에서 USDT/THB 값을 못 찾음(동의 화면·차단·구조 변경?) len=%d" % len(html))
+    p = _usdt_ok(float(m.group(1))); ts = int(m.group(5))
+    if abs(datetime.now(timezone.utc).timestamp() - ts) > 2 * 86400:
+        raise ValueError("구글 시세 시각이 이틀 넘게 지남: %s" % ts)
+    return dict(USDT_THB=round(p, 4), change=round(float(m.group(2)), 4), change_pct=round(float(m.group(3)), 3), prev_close=round(float(m.group(4)), 4),
+                price_time=datetime.fromtimestamp(ts, BKK).isoformat(timespec="seconds"), google=True,
+                source="구글 파이낸스 (Google Finance)", url="https://www.google.com/finance/quote/USDT-THB")
+
+
+def usdt_coingecko():
+    d = get_json("https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=thb&include_last_updated_at=true&include_24hr_change=true")["tether"]
+    p = _usdt_ok(float(d["thb"]))
+    return dict(USDT_THB=round(p, 4), change_pct=round(float(d["thb_24h_change"]), 3) if d.get("thb_24h_change") is not None else None,
+                price_time=datetime.fromtimestamp(int(d["last_updated_at"]), BKK).isoformat(timespec="seconds"), google=False,
+                source="CoinGecko (여러 거래소 집계 시세)", url="https://www.coingecko.com/en/coins/tether/thb")
+
+
+def usdt_bitkub():
+    d = get_json("https://api.bitkub.com/api/v3/market/ticker?sym=USDT_THB")
+    d = [x for x in (d if isinstance(d, list) else [d]) if x.get("symbol") == "USDT_THB"][0]
+    p = _usdt_ok(float(d["last"]))
+    return dict(USDT_THB=round(p, 4), change_pct=float(d["percent_change"]) if d.get("percent_change") not in (None, "") else None,
+                price_time=None, google=False, source="Bitkub (태국 거래소 마지막 체결가)", url="https://www.bitkub.com/market/USDT")
+
+
 REGIONS = [("pattaya", 12.9236, 100.8825), ("sriracha", 13.1682, 100.9310), ("bangkok", 13.7563, 100.5018)]  # assets/ticker.js 와 같게
 
 
@@ -163,7 +205,7 @@ def main():
         old = {}
     out = {"v": 1, "updated_at": now()}
     ok = 0
-    for key, fns in (("fx", [fx_er_api, fx_frankfurter]), ("gold", [gold_gta]), ("fuel", [fuel_bangchak]), ("wx", [wx_open_meteo, wx_met_no]), ("aq", [aq_open_meteo])):
+    for key, fns in (("fx", [fx_er_api, fx_frankfurter]), ("usdt", [usdt_google, usdt_coingecko, usdt_bitkub]), ("gold", [gold_gta]), ("fuel", [fuel_bangchak]), ("wx", [wx_open_meteo, wx_met_no]), ("aq", [aq_open_meteo])):
         val = None
         for fn in fns:
             try:

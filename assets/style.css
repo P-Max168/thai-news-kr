@@ -638,3 +638,31 @@ body.drawer-open{overflow:hidden}
 .origin__th--fold span{display:block;font-family:var(--font-th);margin-top:4px}
 .tk-u{font-size:.6em;font-weight:700;margin-left:1px;letter-spacing:-.4px;opacity:.85}
 @media (max-width:640px){ .tk-chip.tk-tile[data-tk="price"]{padding:0 3px} .tk-tile[data-tk="price"] .tk-ln{gap:2px} .tk-tile[data-tk="price"] .tk-u{font-size:.66em;margin-left:0;letter-spacing:-.2px} }   /* ฿ → 바트 로 늘어난 폭 보정(390px 한 화면) */
+/* 빠른 정보 v3(운영자 요청 10-03 09시): 상자 맨 아래 작은 '조회 시각' 줄(방콕) → 상자·☰ 버튼을 세로로 조금 길게(모바일 64px·데스크톱 68px)
+   환율 상자는 글자 조금 작게(1바트·1달러·1테더 세 줄), 날씨 상자는 간격 좁히고 지역 이름은 조회 줄로, '휘발유(95)' → '휘발유' */
+.masthead__row2 .menu-btn{height:68px}
+.ticker{min-height:68px}
+.tk-chip.tk-tile{height:68px;gap:2px}
+.tk-ft{display:flex;align-items:center;gap:3px;font-size:10.5px;line-height:1.1;font-weight:500;opacity:.6;white-space:nowrap;letter-spacing:-.1px;margin-top:1px}
+.tk-tile .tk-ft .tk-rg{display:inline;font-size:inherit;opacity:1;font-weight:700}
+.tk-tile[data-tk="fx"]{font-size:12.5px}
+.tk-tile[data-tk="env"] .tk-ln{gap:3px}
+.tk-tile[data-tk="env"] .tk-rain{margin-left:1px}
+@media (max-width:640px){
+  .masthead__row2 .menu-btn{height:64px}
+  .ticker{min-height:64px}
+  .tk-chip.tk-tile{height:64px;gap:2px}
+  .tk-tile[data-tk="fx"]{font-size:11.5px;letter-spacing:-.15px}
+  .tk-tile[data-tk="fx"] .tk-ln{gap:2px}
+  .tk-tile[data-tk="env"] .tk-ln{gap:2px}
+  .tk-tile[data-tk="env"] .tk-rain{margin-left:0}
+  .tk-tile[data-tk="env"] .tk-i{font-size:12px}
+  .tk-ft{font-size:9.5px;gap:2px}
+}
+@media (max-width:380px){   /* 360px 폰: ☰ 폭·여백 조금 줄이고 상자 글자 11.5px — 세 상자가 한 화면에(옆으로 밀기 없이) */
+  .masthead__row2{padding-left:8px;padding-right:8px;gap:5px}
+  .masthead__row2 .menu-btn{width:50px}
+  .tk-chip.tk-tile{font-size:11.5px}
+  .tk-tile[data-tk="fx"]{font-size:11px}
+  .tk-ft{font-size:9px}
+}
