@@ -9,12 +9,12 @@
  * - Google 로그인·Firestore(firebase / googleapis / gstatic SDK / firebaseapp.com / google.com 계정 창)는
  *   절대 가로채거나 캐시하지 않는다(그냥 브라우저가 직접 요청). 글꼴(fonts.googleapis/gstatic)만 예외로 캐시.
  */
-var VERSION = "tnk-e42c7edeed";
+var VERSION = "tnk-c3d8263545";
 var SHELL = "shell-" + VERSION, DATA = "data-v1", EXT = "ext-v1";
 var SHELL_FILES = [
-  "./", "index.html", "manifest.json",
-  "assets/style.css?v=b582e92e", "assets/topics.js?v=3e951135", "assets/prefs.js?v=280ab29a", "assets/taste.js?v=788775b8", "assets/app.js?v=1fd68d9f", "assets/social.js?v=4caae75d", "assets/ticker.js?v=fbc22bab",
-  "assets/nearby.css?v=f91ab1c4", "assets/nearby.js?v=88e6a0db", "assets/pages.js?v=90e0a552",
+  "./", "index.html", "manifest.json", "offline.html",
+  "assets/style.css?v=1c0923ca", "assets/topics.js?v=3e951135", "assets/prefs.js?v=280ab29a", "assets/taste.js?v=788775b8", "assets/app.js?v=7de2580f", "assets/social.js?v=4caae75d", "assets/ticker.js?v=fbc22bab",
+  "assets/nearby.css?v=f91ab1c4", "assets/nearby.js?v=23ec7afa", "assets/pages.js?v=e11d25c8",
   "assets/ads/massage/dragon-ad.css?v=992ae706", "assets/ads/massage/dragon-ad.js?v=1961d18e", "assets/ads/massage/dragon.svg",
   "assets/icons/icon-192.png", "assets/icons/icon-512.png", "assets/icons/maskable-512.png",
   "assets/icons/apple-touch-icon.png", "assets/icons/favicon-32.png"
@@ -97,9 +97,16 @@ self.addEventListener("fetch", function (e) {
   var path = url.pathname.slice(scope.pathname.length);
   if (req.mode === "navigate") {
     // 앱 셸로 다루는 페이지는 루트(./)·index.html 뿐. e/<판 id>/ 같은 미리보기 페이지 등 다른 페이지는 가로채지 않음
+    // 안내 4쪽(소개·연락·개인정보·약관): 네트워크 우선, 한 번 연 쪽은 오프라인에서도 보임, 처음이면 오프라인 안내(offline.html)
+    if (/^(privacy|terms|about|contact)\.html$/.test(path)) {
+      e.respondWith(networkFirst(req, SHELL, scope.href + path).catch(function () { return caches.match(scope.href + "offline.html"); }));
+      return;
+    }
     if (path !== "" && path !== "index.html") return;
-    // 페이지: 네트워크 우선, 오프라인이면 캐시한 index.html
-    e.respondWith(networkFirst(req, SHELL, scope.href + "index.html").catch(function () { return caches.match(scope.href + "index.html"); }));
+    // 페이지: 네트워크 우선, 오프라인이면 캐시한 index.html(그것도 없으면 오프라인 안내)
+    e.respondWith(networkFirst(req, SHELL, scope.href + "index.html").catch(function () {
+      return caches.match(scope.href + "index.html").then(function (r) { return r || caches.match(scope.href + "offline.html"); });
+    }));
     return;
   }
   // 🇰🇷 data/korea.json|js · 💱 data/ticker.json|js: 2시간마다 바뀜 → HTTP 캐시도 거치지 않고(no-store) 항상 새로 받음. 오프라인일 때만 마지막 캐시

@@ -178,6 +178,29 @@ async def main():
             lg[f] = await pg.evaluate("f=>fetch(f,{cache:'no-store'}).then(r=>r.ok?r.text():'').then(t=>t.length).catch(()=>-1)", f)
         links = await pg.locator(".footer__links a").count()
         rec(all(v > 100 for v in lg.values()) and links == 4, "안내 4쪽(개인정보·약관·소개·연락) + ads.txt 열림, 푸터 링크 4개", dict(lg, footerLinks=links))
+        # 앱 포장 준비: 휴대폰 뒤로 버튼 = 서랍·설정 창·페이지·내 주변 닫기, 기록 칸 안 남음
+        bk = {}
+        try:
+            async def stt():
+                return await pg.evaluate("({dr:document.getElementById('drawer').classList.contains('is-open'),sh:!document.getElementById('sheet').hidden,pg:!!(window.TNPages&&TNPages.current()),nb:!!document.querySelector('#nearbyPage:not([hidden])'),hs:history.state})")
+            async def gb():
+                await pg.go_back(wait_until="commit"); await pg.wait_for_timeout(400)
+            await pg.evaluate("window.scrollTo(0,0)")
+            await pg.click("#menuBtn"); await pg.wait_for_timeout(400); await gb(); x = await stt(); bk["서랍"] = not x["dr"] and x["hs"] is None
+            await pg.click("#menuBtn"); await pg.wait_for_timeout(400); await pg.click("#drawerQuick [data-page=hearts]"); await pg.wait_for_timeout(500); await gb(); x = await stt(); bk["서랍→하트"] = not x["pg"] and not x["dr"] and x["hs"] is None
+            await pg.click("#menuBtn"); await pg.wait_for_timeout(400); await pg.click("#drawerQuick [data-quick-nearby]"); await pg.wait_for_timeout(600); await gb(); x = await stt(); bk["서랍→내 주변"] = not x["nb"] and x["hs"] is None
+            await pg.click("#menuBtn"); await pg.wait_for_timeout(400); await pg.click("#drawer [data-open-settings]"); await pg.wait_for_timeout(500); await gb(); x = await stt(); bk["서랍→설정 창"] = not x["sh"] and x["hs"] is None
+            await pg.click("#menuBtn"); await pg.wait_for_timeout(400); await pg.click("[data-drawer-close]"); await pg.wait_for_timeout(400); x = await stt(); bk["✕ 닫기 뒤 기록 칸"] = x["hs"] is None
+        except Exception as e:
+            bk["err"] = str(e)[:100]
+        rec(bool(bk) and all(v is True for v in bk.values()), "휴대폰 뒤로 버튼 = 서랍·하트·내 주변·설정 창 닫기(피드에 남음, 기록 칸 안 남음)", bk)
+        try:
+            mf = await pg.evaluate("fetch('manifest.json',{cache:'no-store'}).then(r=>r.json()).then(d=>({icons:d.icons.map(i=>i.sizes+'/'+(i.purpose||'any')).join(' '),shortcuts:(d.shortcuts||[]).length}))")
+            off = await pg.evaluate("fetch('offline.html',{cache:'no-store'}).then(r=>r.ok?r.text():'').then(t=>t.indexOf('연결되어 있지 않아요')>0)")
+        except Exception as e:
+            mf, off = {"err": str(e)[:80]}, False
+        rec(isinstance(mf, dict) and "512x512/maskable" in mf.get("icons", "") and "192x192/any" in mf.get("icons", "") and mf.get("shortcuts") == 2 and off,
+            "앱 포장 준비 — manifest 아이콘(192·512·maskable)·바로가기 2개, 오프라인 안내 쪽", dict(mf, offline=off) if isinstance(mf, dict) else mf)
         # 첫 방문 시작 화면(새 방문자): 보류 중엔 예전 '어떤 분이세요?'(페르소나 5개), 켜지면 2단계
         c2 = await b.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True, timezone_id="Asia/Bangkok", locale="ko-KR")
         p2 = await c2.new_page()

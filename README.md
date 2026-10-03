@@ -322,6 +322,10 @@
 - `ads.txt` = 주석만 있는 자리표시(형식 줄 `google.com, pub-…, DIRECT, f08c47fec0942fa0`). 애드센스는 **도메인 맨 위**(`https://p-max168.github.io/ads.txt`)만 읽으므로 둘 곳은 PENDING #5. 검색 막기(`noindex` + robots.txt) 풀기는 PENDING #4, 신청은 LOGIN_TODO.
 - 제휴(어필리에이트) 링크: 애드센스 정책 확인 전까지 보류.
 
+## 앱 포장 준비(2026-10-03 — 메모만, 포장·등록은 아직)
+- 자세한 길·비용은 **`APP_PACKAGING.md`**(Android 무료 쪽 = PWABuilder TWA, Android·iOS = Capacitor, iOS 는 Apple 개발자 연 99달러 → LOGIN_TODO).
+- 갖춘 것: manifest 아이콘 192·512·maskable + 바로가기 2개(❤️ `#hearts` · 📍 `#nearby/food`), 오프라인 안내 `offline.html`(sw 가 캐시 — 앱 셸·안내 4쪽 오프라인 대체), 노치 여백(`env(safe-area-inset-*)`: 헤더·맨 위로·푸터 추가), **뒤로 버튼 = 닫기**(`assets/app.js` `Back`: ☰ 서랍·설정 창을 열 때 주소를 안 바꾸는 기록 1칸 `history.state.ui` 를 넣고, 뒤로 = 닫기. 닫기 버튼으로 닫으면 그 칸을 지움. 서랍에서 #hearts·#nearby·설정 창으로 바로 넘어가면 그 칸을 이어 씀(`replaceState`) — `pages.js`·`nearby.js` 도 `history.state.ui` 가 있으면 push 대신 replace).
+
 ## 홈 화면 추가 안내
 - 안드로이드(Chrome·삼성 인터넷): `beforeinstallprompt` → 아래 안내 바 '홈 화면에 추가할까요? 앱처럼 편하게 볼 수 있어요' [추가하기]/[나중에]. iOS Safari: 2단계 그림 카드(① 아래 도구 막대 공유 버튼 — 아래로 튀는 화살표 ② '홈 화면에 추가') + 닫기. '나중에'/닫기 = **7일** 동안 안 보임(이 기기 `ui.installHintUntil`). 설치 후·홈 화면 앱에서는 안 보임.
 

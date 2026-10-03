@@ -265,6 +265,16 @@
     $("tabsOther").hidden = $("tabsOtherTitle").hidden = !other.length;
   }
 
+  /* ---------- 휴대폰·앱 '뒤로' 버튼(2026-10-03 앱 포장 준비) ----------
+     서랍·설정 창을 열 때 기록 1칸(주소 그대로, state.ui)을 넣고 '뒤로' = 닫기(앱이 꺼지지 않게).
+     닫기 버튼으로 닫으면 그 칸을 history.back() 으로 지움 — 같은 순간 다른 화면(#hearts·#nearby·설정 창)이 열리면
+     그 화면이 이 칸을 이어 쓰므로(replaceState, pages.js·nearby.js 도 같은 규칙) 지우지 않음 */
+  var Back = {
+    push: function (k) { var st = { ui: k }; if (history.state && history.state.ui) history.replaceState(st, ""); else history.pushState(st, ""); },
+    pop: function (k) { setTimeout(function () { if (history.state && history.state.ui === k) history.back(); }, 0); },
+    is: function (k) { return !!(history.state && history.state.ui === k); }
+  };
+
   /* ---------- ☰ 서랍 ---------- */
   var Drawer = (function () {
     var dr = $("drawer"), ov = $("drawerOv"), btn = $("menuBtn"), last = null, x0 = null, y0 = null;
@@ -273,19 +283,22 @@
       last = document.activeElement;
       ov.hidden = false; dr.classList.add("is-open"); dr.setAttribute("aria-hidden", "false"); btn.setAttribute("aria-expanded", "true");
       document.body.classList.add("drawer-open");
+      Back.push("dr");
       renderQuick();   // 하트 수·마지막 내 주변 종류 최신으로
       if (window.TNSocial && $("drawerAcct")) window.TNSocial.renderAccountBox($("drawerAcct"));
       if (window.TNSocial && window.TNSocial.warm) window.TNSocial.warm();   // 로그인 모듈은 메뉴를 열 때 미리 받음
       var cur = dr.querySelector('[aria-selected="true"]') || items()[0];
       setTimeout(function () { if (cur) cur.focus({ preventScroll: true }); }, 30);
     }
-    function close(noFocus) {
+    function close(noFocus, fromPop) {
       if (!dr.classList.contains("is-open")) return;
+      if (!fromPop) Back.pop("dr");
       dr.classList.remove("is-open"); dr.setAttribute("aria-hidden", "true"); btn.setAttribute("aria-expanded", "false");
       ov.hidden = true; document.body.classList.remove("drawer-open");
       if (!noFocus && last && last.focus) last.focus({ preventScroll: true });
     }
     btn.addEventListener("click", function () { if (dr.classList.contains("is-open")) close(); else open(); });
+    window.addEventListener("popstate", function () { if (dr.classList.contains("is-open") && !Back.is("dr")) close(true, true); });
     ov.addEventListener("click", function () { close(); });
     dr.addEventListener("click", function (e) { if (e.target.closest("[data-drawer-close]")) close(); });
     document.addEventListener("keydown", function (e) {
@@ -830,14 +843,17 @@
       var d = prof();
       persona = d.persona; pick = (selected() || []).slice();
       reg = d.region || null; ints = T.cleanInterests(d.interests || []);
+      if (sheet.hidden) Back.push("sh");
       sheet.hidden = false; document.body.classList.add("sheet-open");
       show(step);
     }
-    function close() {
+    function close(fromPop) {
+      if (fromPop !== true && !sheet.hidden) Back.pop("sh");
       sheet.hidden = true; document.body.classList.remove("sheet-open"); sheet.innerHTML = ""; sheet.classList.remove("sheet--ob");
       if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
       Install.maybeShow();
     }
+    window.addEventListener("popstate", function () { if (!sheet.hidden && !Back.is("sh")) close(true); });
     function finish(topics, per) {
       S.update(function (d) { d.onboarded = true; d.topics = topics; d.persona = per; });
       state.tab = "feed";

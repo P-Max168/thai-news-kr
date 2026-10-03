@@ -53,7 +53,7 @@
     if (!pages[name]) return;
     var h = "#" + name;
     if (location.hash !== h) {
-      if (!cur) { history.pushState({ pg: name }, "", h); pushed = true; }
+      if (!cur) { if (history.state && history.state.ui) history.replaceState({ pg: name }, "", h); else history.pushState({ pg: name }, "", h); pushed = true; }   // 서랍·설정 창 기록 칸은 이어 씀(app.js Back)
       else history.replaceState({ pg: name }, "", h);
     }
     show(name);

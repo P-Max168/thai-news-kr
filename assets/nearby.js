@@ -242,7 +242,7 @@
     if (!byId(id)) return;
     var h = "#nearby/" + id;
     if (location.hash !== h) {
-      if (push && !cur) { history.pushState({ nb: id }, "", h); pushed = true; }
+      if (push && !cur) { if (history.state && history.state.ui) history.replaceState({ nb: id }, "", h); else history.pushState({ nb: id }, "", h); pushed = true; }   // 서랍 기록 칸은 이어 씀(app.js Back)
       else history.replaceState(history.state && history.state.nb ? { nb: id } : history.state, "", h);
     }
     show(id);
