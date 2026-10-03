@@ -1,6 +1,6 @@
 {
  "_readme": "관리자 승인함(#approve) 목록 — tools/pending.py 가 PENDING_APPROVAL.md 에서 만듦. 승인은 민구님이 고르고 봇이 다음 실행에 반영(자동 승인 없음)",
- "updated_at": "2026-10-03T17:15:20+07:00",
+ "updated_at": "2026-10-03T17:51:10+07:00",
  "items": [
   {
    "id": "p1",
@@ -72,6 +72,14 @@
    "kind": "공개 여부(임대 카드)",
    "body": "**아침에 민구님이 보고 메뉴에 열지 결정** — 지금은 사이트 어디에도 링크 없음(`#rent`, 개발 도구로만 열림). ⚠️ 17:20 방콕: 출처 FazWaz 이용 약관이 내용 복사·추출·모으기를 허락 없이 금지(https://www.lifullconnect.com/legal-notice-fazwaz/)라 **매물 10개는 내림** — 쪽에는 '내렸어요' 안내 + 약관 링크만. 메뉴에 열려면 허락받은 출처(제휴·API·가게·중개인이 직접 준 매물)가 먼저 필요. 사진: backups/backup-20261003-1714-rent-takedown/",
    "where": "`data/rentals-pattaya.json`(빈 목록) · assets/places.js `rent` 쪽",
+   "status": "대기"
+  },
+  {
+   "id": "p10",
+   "no": 10,
+   "kind": "광고 사진(드래곤 스웨디시 배너)",
+   "body": "**실제 가게 사진을 배너에 넣을지** — 지금 광고 자리 16곳(맨 위·큰 배너·기사 사이 3·한국 뉴스 사이·메뉴·내 주변 5·지역 5·맨 아래)은 전부 같은 그림(용 그림 dragon.svg) + 같은 색·글꼴. 실제 사진은 없음: 구글 지도 사진은 약관상 못 씀, 지어낸 사진·남의 사진도 안 씀. 운영자가 직접 찍은 가게 사진(가로 사진 1장, 얼굴·손님 없이)을 주시면 같은 모양으로 넣음. 같이 바뀐 것: 구글 평점 칩(Google 4.5) 뺌. 사진: backups/backup-20261003-1749-ad-photos/",
+   "where": "`assets/ads/massage/ad.json` · `dragon-ad.js`",
    "status": "대기"
   }
  ]

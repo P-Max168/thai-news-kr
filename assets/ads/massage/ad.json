@@ -3,8 +3,8 @@
   "type": "sponsored",
   "label": "광고",
   "title": "드래곤 스웨디시 (파타야)",
-  "subtitle": "파타야 3rd Road · 영업 11:30–23:30 · Google 평점 4.5 · 080-736-5211",
-  "alt": "광고: 드래곤 스웨디시 – 파타야 3rd Road, 영업 11:30–23:30, Google 평점 4.5, 전화 080-736-5211",
+  "subtitle": "파타야 3rd Road · 영업 11:30–23:30 · 080-736-5211",
+  "alt": "광고: 드래곤 스웨디시 – 파타야 3rd Road, 영업 11:30–23:30, 전화 080-736-5211",
   "image_large": "assets/ads/massage/dragon-massage-large-1200x600.png",
   "image_strip": "assets/ads/massage/dragon-massage-strip-1200x300.png",
   "image_small": "assets/ads/massage/dragon-massage-small-600x200.png",
@@ -19,7 +19,7 @@
     "copy": "파타야 스웨디시 마사지 · 하루의 피로를 풀어주는 편안한 휴식",
     "copy_short": "하루의 피로를 풀어주는 편안한 휴식",
     "hours_short": "11:30–23:30",
-    "rating_short": "Google 4.5",
+    "rating_short": null,
     "area_short": "파타야 3rd Road",
     "area_city": "파타야",
     "phone_display": "080-736-5211"
@@ -49,14 +49,15 @@
     ],
     "phone": "+66 80 736 5211 (080-736-5211)",
     "hours": "11:30–23:30 (shown by Google for Fri 2026-10-09 and Sat 2026-10-03; the full weekly schedule was not exposed in Google's limited view, so other days are unverified). Google also lists a secondary 'pickup' hours set of 11:30–21:30 (not used in the ad).",
-    "rating": "4.5 (Google Maps)",
+    "rating": null,
     "review_count": "unknown – Google shows 'engagement not allowed for this type of place per Google policy / posting disabled', so the count isn't public",
     "services_prices": "unknown – no menu/prices published on the listing",
     "website": "none listed",
     "google_place_id": "ChIJPQWpMLO_AjERqu3KL9kMyEQ",
     "google_ftid": "0x3102bfb330a9053d:0x44c80cd92fcaedaa",
     "maps_url_canonical": "https://www.google.com/maps/place/?q=place_id:ChIJPQWpMLO_AjERqu3KL9kMyEQ",
-    "source": "Google Maps listing behind https://maps.app.goo.gl/sxwzECaxPxkANutE9 (fetched 2026-10-03 ~05:55 ICT)"
+    "source": "Google Maps listing behind https://maps.app.goo.gl/sxwzECaxPxkANutE9 (fetched 2026-10-03 ~05:55 ICT)",
+    "_rating_note": "2026-10-03 17:50 방콕: Google 지도 평점은 Google 지도 약관(내용 복사 금지, https://www.google.com/help/terms_maps/) 때문에 배너에 안 씀. 평점 칩 없음."
   },
   "source_template": "assets/ads/massage/dragon-ad.js + dragon-ad.css (PNG previews: python3 assets/ads/massage/src/render.py)",
   "name_note": "화면 이름은 운영자가 부르는 '드래곤 스웨디시'(2026-10-03). Google 지도 등록 이름은 facts.google_listing_name('드래곤 스웨디시 마사지 Dragon Massage') 그대로"

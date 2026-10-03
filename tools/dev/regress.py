@@ -67,9 +67,9 @@ async def main():
             await pg.locator("#feed .card [data-vote='1'][aria-pressed='true']").first.click(); await pg.wait_for_timeout(300)   # 취소(원상복구)
         else: rec(False, "🙌 더 보여줘 / 🙅 덜 보여줘", "버튼 없음")
         # 광고
-        ads = await pg.evaluate("""()=>[...document.querySelectorAll('[data-ad-slot]:not([hidden]), .ad-slot--feed')].filter(e=>e.offsetParent!==null||e.closest('#drawer')).map(e=>({id:e.getAttribute('data-ad-slot')||'infeed', dm: !!e.querySelector('.dm-ad'), img: !!e.querySelector('img, picture'), tag: !!e.querySelector('.dm-target') && /이 자리 추천 업종/.test(e.querySelector('.dm-target').textContent), tel: !!e.querySelector('a[href="tel:+66807365211"]')}))""")
-        bad = [a["id"] for a in ads if not (a["dm"] and a["img"] and a["tag"])]
-        rec(len(ads) >= 4 and not bad, "광고 자리 = 드래곤 배너 + 사진 + 📢 추천 업종", "%d자리, 문제: %s" % (len(ads), bad or "없음"))
+        ads = await pg.evaluate("""()=>[...document.querySelectorAll('[data-ad-slot]:not([hidden]), .ad-slot--feed')].filter(e=>e.offsetParent!==null||e.closest('#drawer')).map(e=>({id:e.getAttribute('data-ad-slot')||'infeed', dm: !!e.querySelector('.dm-ad'), img: !!e.querySelector('img, picture'), art: [...e.querySelectorAll('.dm-ad__art')].every(i=>i.getAttribute('src')&&/dragon\.svg/.test(i.getAttribute('src'))), gr: /평점|Google \d/.test(e.textContent), tag: !!e.querySelector('.dm-target') && /이 자리 추천 업종/.test(e.querySelector('.dm-target').textContent), tel: !!e.querySelector('a[href="tel:+66807365211"]')}))""")
+        bad = [a["id"] for a in ads if not (a["dm"] and a["img"] and a["art"] and a["tag"] and not a["gr"])]
+        rec(len(ads) >= 4 and not bad, "광고 자리 = 드래곤 배너 + 같은 그림(dragon.svg) + 📢 추천 업종, 구글 평점 없음", "%d자리, 문제: %s" % (len(ads), bad or "없음"))
         rec(any(a["tel"] for a in ads), "전화 링크 tel:+66807365211")
         # 태국 문자·원화
         await pg.goto(URL + ("&" if "?" in URL else "?") + "tab=all&_=" + str(int(time.time())), wait_until="networkidle"); await pg.wait_for_timeout(600)

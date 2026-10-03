@@ -41,3 +41,4 @@
 | 35 | 🏠 임대 카드 시험(#rent, 메뉴 링크 없음): ⛔ 17:20 내림 — 매물 0개, '내렸어요' 안내 + 출처 약관 링크, 사진 없음 | `tools/dev/regress.py` |
 | 36 | 속도: 쪽 화면 스크립트(pages.js·places.js)는 첫 기사 카드 뒤에 받음 — 주소 #places·#hearts 바로 열기, ☰ 메뉴·하트·승인함 그대로 | `tools/dev/regress.py` + `tools/dev/perf.py` |
 | 37 | 📇 Google 지도에서 온 한식·한인 가게(20곳+): 이름·동네·'구글 지도에서 보기'만 — 전화 버튼·+66 번호·평점 없음(Google 지도 약관) | `tools/dev/regress.py` |
+| 38 | 📢 광고 자리 전부 같은 드래곤 그림(dragon.svg) + 추천 업종 꼬리표, 구글 평점 칩 없음(Google 지도 약관) | `tools/dev/regress.py` |

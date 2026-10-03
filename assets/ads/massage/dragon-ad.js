@@ -59,7 +59,7 @@
     var body = v === "bar"
       ? '<div class="dm-ad__body"><p class="dm-ad__name">' + tag + " " + esc(d.name_lead) + " <b>" + esc(d.name_main) + "</b></p>" +
         '<p class="dm-ad__copy"><span>' + esc(d.area_city || d.area_short) + "</span> · <span>" + esc(d.hours_short) + "</span>" +
-        '<span class="dm-ad__more"> · ' + esc(d.rating_short) + " · " + esc(d.phone_display) + "</span></p></div>"
+        '<span class="dm-ad__more"> · ' + [d.rating_short, d.phone_display].filter(Boolean).map(esc).join(" · ") + "</span></p></div>"
       : tag + '<div class="dm-ad__body"><p class="dm-ad__en">' + esc(d.brand_en) + "</p>" +
         '<p class="dm-ad__name">' + esc(d.name_lead) + " <b>" + esc(d.name_main) + "</b></p>" +
         '<p class="dm-ad__copy">' + esc(v === "small" ? d.copy_short || d.copy : d.copy) + "</p></div>" +
