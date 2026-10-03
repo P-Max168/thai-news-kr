@@ -206,6 +206,16 @@ async def main():
         except Exception as e:
             sw = {"err": str(e)[:100]}
         rec(sw.get("h") == "#nearby/moto" and sw.get("n") == 5 and sw.get("ws") == 1 and sw.get("how") and sw.get("back"), "📍 내 주변 — 화면 안에서 종류 바꾸기(같은 크기 5칸)·'이렇게 찾아요'·뒤로 = 피드", sw)
+        # 360px 폭: 내 주변 헤더 줄·종류 바꾸기 칸 = 같은 너비, 글자가 칸 안에 들어감(안 잘림)
+        try:
+            vs = pg.viewport_size; await pg.set_viewport_size({"width": 360, "height": 740}); await pg.wait_for_timeout(400)
+            fit = await pg.evaluate("""()=>{const m=(sel,ts)=>{const c=[...document.querySelectorAll(sel)];return {n:c.length,ws:[...new Set(c.map(e=>Math.round(e.getBoundingClientRect().width)))].length,
+              over:c.filter(e=>{const t=e.querySelector(ts),r=document.createRange();r.selectNodeContents(t);const cs=getComputedStyle(e);return r.getBoundingClientRect().width>e.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)+0.5}).map(e=>e.innerText.trim())}};
+              return m('#nearbyRow .nb-cat','.nb-cat__t')}""")
+            await pg.set_viewport_size(vs); await pg.wait_for_timeout(300)
+        except Exception as e:
+            fit = {"err": str(e)[:100]}
+        rec(fit.get("n") == 5 and fit.get("ws") == 1 and fit.get("over") == [], "360px 폭 — 내 주변 줄 5칸 같은 너비·글자 안 잘림", fit)
         # ⑦ 가게 카드 시험(#places): 실제 OSM 30곳 + Google 지도 한식·한인 20곳, 필터, 칸별 출처, 오래된 정보 뒤로, 태국 문자 없음
         try:
             await pg.evaluate("TNPages.open('places')"); await pg.wait_for_timeout(1200)

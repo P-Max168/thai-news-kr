@@ -1,5 +1,5 @@
 /* 📍 내 주변 — 헤더 셋째 줄(예전 탭 줄 자리 .subbar)의 카테고리 버튼 + 카테고리 화면(#nearby/<id>)
- * - 줄: '📍 내 주변'(누를 수 없는 이름표) + 카테고리 버튼 5개(🍜 맛집 · 💆 마사지 · 🐶 동물병원 · 💅 피부·뷰티 · 🏍️ 오토바이, 2026-10-03 v2).
+ * - 줄: '📍 내 주변'(누를 수 없는 이름표) + 카테고리 버튼 5개(🍜 맛집 · 💆 마사지 · 🐶 동물병원 · 💅 뷰티(=피부과·성형·에스테틱, 좁은 화면에서 안 잘리게 짧게 10-03) · 🏍️ 오토바이, 2026-10-03 v2).
  *   휴대폰(≤640px)은 버튼 = 그림 위·글자 아래 두 줄(390·430px 에 다 들어감), 더 좁아 넘치면 옆으로 밀기 + 오른쪽 끝 흐림(.nearby--scroll).
  * - 버튼 → 화면 #nearby/<id>(앱 안 전체 화면, 데스크톱은 가운데 창): 맨 위 광고 1개(data/ads.json 슬롯 nearby-<id>, '광고')
  *   → 큰 버튼 '📍 내 주변 평점 좋은 곳 구글 지도로 보기'(새 탭) → 빠른 찾기 작은 버튼 → 안내.
@@ -35,7 +35,7 @@
         subs: [ { label: "동물병원", query: "veterinary clinic", places: { includedTypes: ["veterinary_care"] } },
                 { label: "펫샵", query: "pet shop", places: { includedTypes: ["pet_store"] } },
                 { label: "애견미용", query: "pet grooming", places: { includedTypes: ["pet_care"], textQuery: "pet grooming" } } ] },
-      { id: "beauty", emoji: "💅", label: "피부과·성형·에스테틱", short: "피부·뷰티", tag: "피부과·성형·에스테틱", slot: "nearby-beauty", query: "skin clinic",
+      { id: "beauty", emoji: "💅", label: "피부과·성형·에스테틱", short: "뷰티", tag: "피부과·성형·에스테틱", slot: "nearby-beauty", query: "skin clinic",
         places: { includedTypes: ["skin_care_clinic", "beauty_salon", "medical_clinic"] },
         subs: [ { label: "피부과", query: "dermatology clinic", places: { includedTypes: ["skin_care_clinic"], textQuery: "dermatology clinic" } },
                 { label: "성형외과", query: "plastic surgery clinic", places: { includedTypes: ["medical_clinic"], textQuery: "plastic surgery clinic" } },

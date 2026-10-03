@@ -159,3 +159,12 @@ body.nb-open{overflow:hidden}
 .as-rules th,.as-rules td{border:1px solid var(--line,#d7dde6);padding:6px;text-align:left;vertical-align:top;word-break:keep-all}
 .as-rules th{background:#f1f3f5}
 .as-rules td:nth-child(2){white-space:nowrap;font-weight:800;text-align:center}
+/* 360px 이하 다듬기(2026-10-03 16:20): 헤더 줄·종류 바꾸기 칸 = 모두 같은 너비, 글자 안 잘림(긴 이름 '피부·뷰티' → '뷰티', 화면 읽기 프로그램엔 전체 이름) */
+@media (max-width:600px){
+  .nb-cat{flex:1 1 0;min-width:0}
+  .nb-cat__t{max-width:100%;overflow:visible;white-space:nowrap}
+}
+@media (max-width:370px){
+  .nb-sw{font-size:13px;padding:6px 1px;letter-spacing:-.3px}
+}
+@media (max-width:370px){ .nb-cat{font-size:12px;letter-spacing:-.3px} }
