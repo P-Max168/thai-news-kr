@@ -178,6 +178,13 @@ async def main():
             lg[f] = await pg.evaluate("f=>fetch(f,{cache:'no-store'}).then(r=>r.ok?r.text():'').then(t=>t.length).catch(()=>-1)", f)
         links = await pg.locator(".footer__links a").count()
         rec(all(v > 100 for v in lg.values()) and links == 4, "안내 4쪽(개인정보·약관·소개·연락) + ads.txt 열림, 푸터 링크 4개", dict(lg, footerLinks=links))
+        # 다듬기: 글자 대비(WCAG AA) — 첫 화면(주요 뉴스 사진 카드는 계산 불가라 뺌)
+        try:
+            await pg.evaluate("window.scrollTo(0,0)")
+            low = await pg.evaluate(pathlib.Path(__file__).with_name("contrast.js").read_text(encoding="utf-8"))
+        except Exception as e:
+            low = [{"err": str(e)[:80]}]
+        rec(not low, "글자 대비 4.5:1(큰 글자 3:1) 미달 없음 — 첫 화면", ("%d곳: " % len(low) + ", ".join("%s %s(%s)" % (x.get("cls"), x.get("t"), x.get("cr")) for x in low[:4])) if low else "")
         # 앱 포장 준비: 휴대폰 뒤로 버튼 = 서랍·설정 창·페이지·내 주변 닫기, 기록 칸 안 남음
         bk = {}
         try:
