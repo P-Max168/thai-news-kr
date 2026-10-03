@@ -307,6 +307,41 @@ def coverage_report(data):
             warn.append("%s 기사 0건 — 실제 뉴스가 있으면 1건 이상" % TOPICS[t])
     return warn
 
+# 정기 실행 안전장치(2026-10-03): 판 스크립트가 옛 주제(pattaya·sriracha 또는 한국어 '파타야'·'시라차')를 써도
+# write_edition 이 검증 전에 east 로 바꾸고 경고만 출력(실패 아님). validate() 자체는 그대로 엄격.
+TOPIC_AUTOFIX = {"pattaya": "east", "sriracha": "east", "파타야": "east", "시라차": "east"}
+
+
+def _fix_tid(t):
+    return TOPIC_AUTOFIX.get(t.strip() if isinstance(t, str) else t, t)
+
+
+def normalize_topics(data):
+    """기사 topic·secondary·브리핑 topic 의 옛 주제 값을 east 로 바꿈(중복 제거). 바꾼 내역 목록 반환."""
+    fixed = []
+    for s in data.get("stories", []):
+        t = s.get("topic")
+        if t is not None and _fix_tid(t) != t:
+            s["topic"] = _fix_tid(t); fixed.append("%s topic %r→east" % (s.get("id"), t))
+        sec = s.get("secondary")
+        if isinstance(sec, list):
+            out = []
+            for x in sec:
+                y = _fix_tid(x)
+                if y != x:
+                    fixed.append("%s secondary %r→east" % (s.get("id"), x))
+                if y != s.get("topic") and y not in out:
+                    out.append(y)
+            if out != sec:
+                s["secondary"] = out
+    for b in data.get("briefing") or []:
+        if isinstance(b, dict) and b.get("topic") is not None and _fix_tid(b["topic"]) != b["topic"]:
+            fixed.append("briefing topic %r→east" % b["topic"]); b["topic"] = _fix_tid(b["topic"])
+    for f in fixed:
+        print("경고(자동 수정): 옛 주제 → 'east'(동부(촌부리·라용)):", f)
+    return fixed
+
+
 def write_edition(data, merge_discussions=True):
     """data/<id>.json + data/<id>.js 저장 후 index 재생성.
     tools/discussions/<id>.json(운영자가 승인한 💬 오늘의 질문, tools/discussion.py apply)이 있으면 다시 합친다."""
@@ -317,6 +352,8 @@ def write_edition(data, merge_discussions=True):
             for x in json.loads(f.read_text(encoding="utf-8")):
                 if x["id"] in by and x.get("approved") is True:
                     by[x["id"]]["discussion"] = dict(question=x["question"], operator_comment=x["operator_comment"], approved=True)
+    if is_new_format(data):
+        normalize_topics(data)
     validate(data)
     eid = data["id"]
     (DATA / (eid + ".json")).write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
