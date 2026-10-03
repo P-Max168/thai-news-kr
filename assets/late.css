@@ -198,3 +198,11 @@
 .jb-kinds{margin:0 0 8px}
 .jb-post{color:var(--muted,#5f6672);background:#f4f5f7;cursor:default}
 .jb-ad{margin:0}
+/* 파타야 동네 5칸(2026-10-03 18:45) — 한 줄에 같은 크기 5개, 두 줄 글자(동네·작은 글씨 둘째 이름) */
+.pc-subs{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;margin:0 0 4px}
+.pc-subs .pc-f{min-height:52px;padding:3px 2px;font-size:13.5px;letter-spacing:-.4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;word-break:keep-all}
+.pc-subs .pc-f small{font-size:11.5px}
+.pc-subs .pc-f .pc-subs__2{font-size:11.5px;font-weight:700;letter-spacing:-.5px}
+.pc-subs .pc-f[aria-pressed="true"]{background:#0c8f6a;border-color:#0c8f6a}
+.pc-subnote{font-size:13.5px;line-height:1.5;color:var(--muted,#5f6672);margin:0 0 10px}
+@media (max-width:370px){ .pc-subs .pc-f{font-size:12.5px} .pc-subs .pc-f small,.pc-subs .pc-f .pc-subs__2{font-size:10.5px} }

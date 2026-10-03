@@ -133,6 +133,26 @@ def osm_cards(raw, pick, region_ko):
         })
     return out
 
+# 파타야 동네 5곳(검수 지시 2026-10-03 18:18, 대략 나눔) — OSM 좌표가 있으면 좌표로, 구글 지도 가게는 적어 둔 큰 동네(_area)로.
+#   동파타야 = 수쿰윗 길 동쪽(경계 경도: 북위 12.93 이남 ≈ 100.896, 이북은 12.93→100.897 · 12.97→100.911 로 비스듬히 — Nominatim 'Sukhumvit, Pattaya' 선 모양으로 어림, 2026-10-03)
+#   수쿰윗 서쪽: 북위 12.949 이상 = 북파타야·나끌루아(웡아맛 포함) / 12.927~12.949 = 센트럴(파타야 클랑~파타야 느아 사이) / 12.912~12.927 = 남파타야 / 12.912 미만 = 좀티엔·프라땀낙(텝쁘라싯 포함)
+#   경계에서 300m 안쪽 가게는 틀릴 수 있음. 동네를 모르는 곳(sub=null)은 '전체'에서만 보임.
+SUBS = {"central": "센트럴", "south": "남파타야", "north": "북파타야·나끌루아", "jomtien": "좀티엔·프라땀낙", "east": "동파타야"}
+def suk_lng(lat):
+    return 100.896 if lat < 12.93 else 100.897 + (lat - 12.93) * 0.35
+def sub_of(p):
+    if p.get("lat") is not None:
+        la, ln = p["lat"], p["lng"]
+        if ln >= suk_lng(la): return "east"
+        return "north" if la >= 12.949 else "central" if la >= 12.927 else "south" if la >= 12.912 else "jomtien"
+    a = p.get("area") or ""
+    if "나끌루아" in a or "북파타야" in a or "웡아맛" in a: return "north"
+    if "동쪽" in a or "농쁘루" in a or "동파타야" in a: return "east"
+    if "좀티엔" in a or "프라땀낙" in a: return "jomtien"
+    if "남파타야" in a: return "south"
+    if "센트럴" in a: return "central"
+    return None   # '파타야 시내'·'동네 확인 안 됨' — 어림하지 않음
+
 # 시라차·방콕(2026-10-03 18시): OSM 만(구글 지도는 약관 때문에 새로 안 씀). 고른 목록 = tools/places/<지역>-pick-2026-10-03.json(뺀 것·이유 포함)
 REGIONS = {"pattaya": "파타야", "sriracha": "시라차", "bangkok": "방콕"}
 
@@ -145,6 +165,9 @@ def write(region, raw, out):
            "attribution": "© OpenStreetMap contributors", "license_url": "https://www.openstreetmap.org/copyright",
            "report_kakao_url": "",   # '정보 틀림' 카톡 링크(운영자 카톡 채널 주소 — 승인함 #7). 비어 있으면 화면은 '링크 준비 중' 자리표시
            "old_before": OLD_BEFORE, "places": out}
+    if region == "pattaya":
+        doc["subs"] = [{"id": k, "t": v} for k, v in SUBS.items()]
+        doc["subs_note"] = "동네는 대략 나눔(OSM 좌표 + 수쿰윗 길 기준 어림, 구글 지도 가게는 적어 둔 큰 동네). 경계 근처는 틀릴 수 있고, 동네를 모르는 곳은 '전체'에서만 보여요."
     dst.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     assert not THAI.search(dst.read_text(encoding="utf-8")), "태국 문자가 남아 있음"
     print("%s places: %d → %s · 한식·한인 %d · 오래된 정보 %d" % (region, len(out), dst.relative_to(ROOT), sum(1 for p in out if p.get("korean")), sum(1 for p in out if p["old"])))
@@ -153,6 +176,9 @@ def main():
     raw = json.load(open(RAW, encoding="utf-8"))
     out = osm_cards(raw, json.load(open(PICK, encoding="utf-8")), "파타야")
     out += korean()
+    for p in out: p["sub"] = sub_of(p)
+    import collections
+    print("파타야 동네:", dict(collections.Counter(p["sub"] for p in out)))
     write("pattaya", raw, out)
     for r in ("sriracha", "bangkok"):
         rraw = json.load(open(ROOT / ("tools/places/%s-osm-2026-10-03.json" % r), encoding="utf-8"))

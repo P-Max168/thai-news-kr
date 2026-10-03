@@ -5,7 +5,7 @@
 (function () {
   "use strict";
   if (!window.TNPages) return;
-  var DATA = null, loading = false, err = false, cat = "all", openOnly = false;
+  var DATA = null, loading = false, err = false, cat = "all", openOnly = false, sub = "";   // sub: 파타야 동네(빈칸 = 전체)
   // 지역(2026-10-03 18시): 파타야(OSM+구글 이름·동네) · 시라차·방콕(OSM 한식·한인만). 지역마다 data/places-<id>.json, 고른 지역은 이 기기에 기억
   var REGS = [{ id: "pattaya", t: "파타야" }, { id: "sriracha", t: "시라차" }, { id: "bangkok", t: "방콕" }], CACHE = {};
   var region = (function () { try { var r = localStorage.getItem("tnk.pcRegion"); return REGS.some(function (x) { return x.id === r; }) ? r : "pattaya"; } catch (e) { return "pattaya"; } })();
@@ -137,7 +137,9 @@
       load(); loadFx();
       if (err) return '<div class="empty empty--err pc-empty" role="alert"><b>⚠️ 가게 목록을 불러오지 못했어요.</b><br>인터넷 연결을 확인하고 다시 시도해 주세요.<br><button type="button" class="btn btn--primary btn--sm empty__retry" data-pc-retry>다시 시도</button></div>';
       if (!DATA) return '<div class="skel pc-skel" aria-hidden="true"></div><div class="skel pc-skel" aria-hidden="true"></div><p class="sr-only" role="status">가게 목록을 불러오는 중이에요…</p>';
-      var all = DATA.places, n = function (id) { return all.filter(function (p) { return inCat(p, id); }).length; };
+      var subs = region === "pattaya" && DATA.subs ? DATA.subs : null;
+      if (!subs) sub = "";
+      var all0 = DATA.places, all = sub ? all0.filter(function (p) { return p.sub === sub; }) : all0, n = function (id) { return all.filter(function (p) { return inCat(p, id); }).length; };
       var list = all.filter(function (p) { return inCat(p, cat) && (!openOnly || /open|soon/.test(openState(p._oh) || "")); });
       // 줄 세우기: 오래된 정보(2023년 전)는 맨 뒤 → 그 안에서 영업 중 → 곧 닫음 → 닫힘 → 모름
       list.sort(function (a, b) { var r = function (p) { var s = openState(p._oh); return (p.old ? 10 : 0) + (s === "open" ? 0 : s === "soon" ? 1 : s === "closed" ? 2 : 3); }; return r(a) - r(b); });
@@ -145,7 +147,11 @@
       var rg = REGS.filter(function (x) { return x.id === region; })[0];
       var head = '<div class="pc-filter pc-region" role="group" aria-label="지역">' + REGS.map(function (x) {
           return '<button type="button" class="pc-f" data-pc-region="' + x.id + '" aria-pressed="' + (x.id === region) + '">📍 ' + esc(x.t) + (CACHE[x.id] ? " <small>" + CACHE[x.id].places.length + "</small>" : "") + "</button>"; }).join("") + "</div>" +
-        '<p class="pc-intro"><b>' + esc(rg.t) + " — 지도(" + (region === "pattaya" ? "OpenStreetMap·Google 지도" : "OpenStreetMap") + ")에서 실제로 확인한 가게 " + all.length + "곳</b>이에요(한식·한인 업소 " + n("korean") + "곳). 칸마다 출처와 확인한 날을 적었고, 모르는 칸은 <b>확인 안 됨</b>으로 두었어요. <b>🕰️ 오래된 정보</b>(2023년 전)는 맨 뒤에 있어요. 영업시간·가격은 바뀔 수 있으니 가기 전에 꼭 전화·지도로 확인하세요.</p>" +
+        (subs ? '<div class="pc-filter pc-subs" role="group" aria-label="파타야 동네">' + subs.map(function (x) {
+          var parts = x.t.split("·"), k = all0.filter(function (p) { return p.sub === x.id; }).length;
+          return '<button type="button" class="pc-f" data-pc-sub="' + x.id + '" aria-pressed="' + (x.id === sub) + '" title="' + esc(x.t) + '">' + esc(parts[0]) + (parts[1] ? "<small class=\"pc-subs__2\">" + esc(parts[1]) + "</small>" : "") + " <small>" + k + "</small></button>"; }).join("") + "</div>" +
+          '<p class="pc-subnote">' + (sub ? "🔎 <b>" + esc(subs.filter(function (x) { return x.id === sub; })[0].t) + "</b>만 보는 중 — 같은 버튼을 한 번 더 누르면 전체. " : "") + "동네는 대략 나눔이에요(경계 근처는 틀릴 수 있고, 동네를 모르는 " + all0.filter(function (p) { return !p.sub; }).length + "곳은 전체에서만 보여요).</p>" : "") +
+        '<p class="pc-intro"><b>' + esc(rg.t) + (sub ? " " + esc(subs.filter(function (x) { return x.id === sub; })[0].t) : "") + " — 지도(" + (region === "pattaya" ? "OpenStreetMap·Google 지도" : "OpenStreetMap") + ")에서 실제로 확인한 가게 " + all.length + "곳</b>이에요(한식·한인 업소 " + n("korean") + "곳). 칸마다 출처와 확인한 날을 적었고, 모르는 칸은 <b>확인 안 됨</b>으로 두었어요. <b>🕰️ 오래된 정보</b>(2023년 전)는 맨 뒤에 있어요. 영업시간·가격은 바뀔 수 있으니 가기 전에 꼭 전화·지도로 확인하세요.</p>" +
         '<div class="pc-filter" role="group" aria-label="가게 종류">' + CATS.map(function (x) {
           return '<button type="button" class="pc-f" data-pc-cat="' + x.id + '" aria-pressed="' + (x.id === cat) + '"><span aria-hidden="true">' + x.e + "</span> " + esc(x.t) + " <small>" + n(x.id) + "</small></button>"; }).join("") + "</div>" +
         '<button type="button" class="pc-openonly" data-pc-open aria-pressed="' + openOnly + '">' + (openOnly ? "✅" : "⬜") + " 🟢 지금 영업 중인 곳만 보기</button>";
@@ -158,6 +164,7 @@
     click: function (e, t) {
       var el;
       if ((el = t.closest("[data-pc-region]"))) { region = el.getAttribute("data-pc-region"); try { localStorage.setItem("tnk.pcRegion", region); } catch (x) {} DATA = CACHE[region] || null; load(); TNPages.refresh(); return true; }
+      if ((el = t.closest("[data-pc-sub]"))) { var s2 = el.getAttribute("data-pc-sub"); sub = sub === s2 ? "" : s2; TNPages.refresh(); return true; }
       if ((el = t.closest("[data-pc-cat]"))) { cat = el.getAttribute("data-pc-cat"); TNPages.refresh(); return true; }
       if ((el = t.closest("[data-pc-open]"))) { openOnly = !openOnly; TNPages.refresh(); return true; }
       if ((el = t.closest("[data-pc-retry]"))) { err = false; load(); TNPages.refresh(); return true; }
