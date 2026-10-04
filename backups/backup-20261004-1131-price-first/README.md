@@ -1,0 +1,3 @@
+- 바뀐 것: 💰 가게 카드(#places)·임대 카드(#rent) 가격 먼저: 종류 줄 바로 아래 굵은 '350바트 약 14,068원'(헤더와 같은 환율 data/ticker.json fx.THB_KRW, 원 단위 반올림 — 전엔 100원 단위) 또는 '💰 가격 확인 안 됨' + 출처 줄, 아래 칸 목록의 '💰 가격'·'💰 월세' 줄은 맨 위로 옮겨서 뺌(커밋 5384b6c)
+- 왜: Max 디자인 지시(10-03 18:45) 4번 — 목록 카드는 가격(굵은 숫자)부터
+- 되돌리는 법: `git checkout backup-20261004-1131-price-first -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
