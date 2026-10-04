@@ -1,0 +1,17 @@
+tools/preflight.sh 시험(10-05 01:56~01:57 방콕, 임시 복제 /tmp/pf/c — 원격 = 임시 bare 저장소, 진짜 원격엔 push 없음)
+1 정상            → PREFLIGHT OK (exit 0)
+2 10분 넘은 .git/index.lock + 다른 브랜치(side) + README 수정 + 원격이 1커밋 앞섬
+                  → 고침: 잠금 지움 · side → main · 변경 1개 stash('preflight 10-05 01:56:09 test-dirty') · pull 로 원격 커밋 받음 → OK (exit 0)
+3 충돌로 멈춘 rebase(.git/rebase-merge) + 브랜치 r2 → 고침: rebase 취소 · r2 → main → OK (exit 0)
+4 원격 저장소 없음(인터넷·원격 장애 흉내) → 3번 재시도 뒤 PREFLIGHT FAIL: git pull --rebase 3번 실패 (exit 1)
+실행 기록(/tmp/pf/logs/automation.log):
+10-05 01:56:07 START test-clean pid=1399752 head=5895fae
+10-05 01:56:08 OK    test-clean  | 오늘 아침판 2026-10-05-am: 없음
+10-05 01:56:09 START test-dirty pid=1399833 head=5895fae
+10-05 01:56:10 OK    test-dirty 오래된 잠금 .git/index.lock 지움;브랜치 side → main;올리지 않은 변경 1개 → stash('preflight …', git stash list 로 확인) | 오늘 아침판 2026-10-05-am: 없음
+10-05 01:56:10 START test-rebase pid=1399918 head=1a47a88
+10-05 01:56:11 OK    test-rebase 멈춘 rebase 취소;브랜치 r2 → main | 오늘 아침판 2026-10-05-am: 없음
+10-05 01:56:11 START test-noremote pid=1399980 head=1a47a88
+10-05 01:57:12 FAIL  test-noremote git pull --rebase 3번 실패(인터넷·충돌)
+10-05 01:57:12 END   test-clean ok 시험
+덤: 개발 복제(/workspace/tnk-dev)에서 실수로 돌렸을 때 올리지 않은 변경 3개가 stash 로 옮겨졌고 git stash pop 으로 그대로 돌아옴 → 버리는 일 없음 확인

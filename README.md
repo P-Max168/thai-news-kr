@@ -216,6 +216,7 @@
   - 주제를 채우려고 고르지 않는다 — 좋은 후보가 없으면 그 주제는 비우고 `coverage` 에 적는다(절대 지어내지 않음).
 
 ## 정기 실행(07:08 / 18:08) 절차
+0. **맨 먼저 점검(2026-10-05~)**: `bash tools/preflight.sh am-build`(저녁은 `pm-build`, 07:38·18:38 대체 루틴은 `backup-check`). 오래된 git 잠금·멈춘 rebase·다른 브랜치·올리지 않은 변경(stash, 버리지 않음)을 스스로 정리하고 원격과 맞춘 뒤 디스크·메모리·인터넷·도구를 확인한다. **`PREFLIGHT FAIL` 이면 판을 만들지 말고 그 줄을 Max 에게 알린다**(실패 이유가 그대로 적힘). 끝나면 `bash tools/preflight.sh end am-build ok`(실패면 `fail "이유"`). 시작·끝·배포(deploy.sh 가 자동)는 `/workspace/logs/automation.log` 에 남는다 — 다음에 판이 빠지면 이 파일에 START 가 있는지부터 본다(없으면 예약 실행 자체가 안 온 것).
 1. 수집: **먼저 `python3 tools/collect.py`** 를 실행한다(`tools/sources.json` 의 RSS·뉴스 사이트맵·Google News 검색 약 240개를 동시에 훑음(24시간 창이면 2~3분), 실패한 소스는 건너뛰고 끝에 표시, 1분 안쪽). 결과 = `drafts/candidates/latest.md`(사람용)·`latest.json`(최근 14시간, 중복 합침, 주제별(동부·방콕·북부·남부 …)·매체별 건수, `also` = 같은 사건을 보도한 다른 매체). 기간은 `--hours 20` 처럼 바꾼다(저녁판은 아침판 이후 ~11시간이면 충분). `drafts/` 는 .gitignore 대상이라 커밋되지 않는다.
    - **후보에서 고른다**: 주제마다 후보를 훑어 뉴스 가치·한국인 관련성 순으로 고르고, 같은 사건은 `also` 를 보고 가장 자세한 원 보도를 원문 `url` 로. Google News 항목(`type: gnews`)은 링크가 news.google.com 이므로 `python3 tools/gnews.py --decode` 또는 원문 검색으로 실제 기사 URL·게재 시각을 확인한다. 주제 분류는 제목 키워드 기반이라 틀릴 수 있다 — `other`(미분류)도 한 번 훑는다.
    - **피드가 없는 곳은 손으로**: `sources.json` 의 `type: html`(Pattaya Mail 홈·PRD Chonburi·주태국 한국대사관 공지·Air4Thai·BOT·KOTRA 등)과 `disabled`(TMD·이민국·Pattaya People — 적힌 대체 경로로) 를 필요할 때 연다. 기존 방식(`python3 tools/gnews.py raw/<id>/<폴더> "검색어"`)으로 더 찾아도 된다. 원문은 `raw/<id>/`에 저장.

@@ -6,6 +6,9 @@
 # - force-push 하지 않는다. 원격이 앞서 있으면 rebase 후 일반 push.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# 실행 기록(2026-10-05): 끝나면 /workspace/logs/automation.log 에 deploy ok/fail 한 줄(tools/preflight.sh end) — 실패 원인 추적용, 동작에는 영향 없음
+_deploy_end() { local c=$?; bash tools/preflight.sh end deploy "$([ $c -eq 0 ] && echo ok || echo fail)" "exit=$c $(git rev-parse --short HEAD 2>/dev/null)" >/dev/null 2>&1 || true; }
+trap _deploy_end EXIT
 
 LIVE_URL="${LIVE_URL:-https://p-max168.github.io/thai-news-kr/}"
 TIMEOUT="${DEPLOY_TIMEOUT:-900}"   # 라이브 반영 대기(초)

@@ -1,0 +1,3 @@
+- 바뀐 것: 판 빌드 전 점검 tools/preflight.sh 새로(오래된 git 잠금 지움·멈춘 rebase 취소·main 으로·올리지 않은 변경 stash·pull --rebase 3번 재시도·디스크/메모리/인터넷/도구 확인, 못 고치면 PREFLIGHT FAIL → 빌드 말고 Max 알림) + 실행 기록 /workspace/logs/automation.log(START/OK/FAIL/END, deploy.sh 도 끝나면 한 줄) + README 정기 실행 절차 0번. 화면 변화 없음 → 사진 대신 test-output.txt(시험 4가지)
+- 왜: 10-04 07:09 아침판 실패 원인 조사 — 상자에는 그 시간 실행 흔적이 전혀 없었음(예약 실행이 상자에 안 옴 추정). 다음엔 '시작은 됐는지'를 바로 알 수 있게, 상자 쪽 원인(잠금·더러운 체크아웃·충돌)은 스스로 고치게
+- 되돌리는 법: `git rm tools/preflight.sh` + `git checkout backup-20261005-0155-build-preflight -- tools/deploy.sh README.md` → 커밋 → push(force 금지). /workspace/logs/automation.log 는 저장소 밖 파일(지워도 됨)
