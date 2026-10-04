@@ -44,3 +44,6 @@
 | 38 | 📢 광고 자리 전부 같은 드래곤 그림(dragon.svg) + 추천 업종 꼬리표, 구글 평점 칩 없음(Google 지도 약관) | `tools/dev/regress.py` |
 | 39 | 📇 가게 카드 지역 고르기: 방콕 20곳+(모두 한식·한인·출처 OpenStreetMap·태국 문자 없음), 시라차 1곳+ | `tools/dev/regress.py` |
 | 40 | 🧑‍💼 구인판 시안(#jobs): 주소로만 열림(메뉴 링크 없음), 예시 6개 모두 '예시' 표시·경고 문구, 광고 1칸, 입력칸·올리기 없음, 태국 문자 없음 | `tools/dev/regress.py` |
+| 41 | 🕒 실제 날짜만: 기사 시각 '10/4 09:14'(방콕), 한국 뉴스 머리 '10/4 09:15', 헤더 4칸 맨 아래 'M/D HH:MM' — 'N분/시간 전' 없음 | `tools/dev/regress.py`('상대 시간 없음'·헤더 날짜 4개) |
+| 42 | 🔍 확대: viewport 에 user-scalable=no·maximum-scale 없음, 글자 크기 = rem(광고 그림 dragon-ad.css 만 px — 정해진 광고 크기 안 그림이라 고정) | `tools/dev/regress.py` |
+| 43 | 🔠 큰 글자(html 120%·150%, 360px): 9화면(첫 화면·서랍·기사·#places·#nearby/food·#hearts·#jobs·#rent·#approve) 가로 넘침·버튼 잘림 0 — 헤더 칸·5칸 줄(내 주변·동네·종류 바꾸기)은 원래 크기(헤더 일부 110%)까지만 커짐 | `python3 tools/dev/bigtext.py [URL] --shots 폴더` + 사진 |

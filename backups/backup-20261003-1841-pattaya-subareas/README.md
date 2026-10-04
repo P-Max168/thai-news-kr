@@ -1,0 +1,3 @@
+- 바뀐 것: 📇 가게 카드 파타야 동네 5칸(센트럴·남파타야·북파타야/나끌루아·좀티엔/프라땀낙·동파타야) — OSM 좌표+수쿰윗 기준으로 대략 나눔(커밋 c40359f)
+- 왜: 검수 지시(10-03 18:18) 4번(한가하면)
+- 되돌리는 법: `git checkout backup-20261003-1841-pattaya-subareas -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고) — 이 항목만이면 `git revert c40359f`

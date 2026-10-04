@@ -40,6 +40,9 @@ async def main():
         miss = [k for k in need if k not in txt]
         rec(h["menu"] and h["n"] == 4 and not miss and len(re.findall(r"\d{1,2}/\d{1,2} \d{2}:\d{2}", txt)) >= 4, "헤더 ☰ + 상자 4개(환율·USDT·날씨/PM2.5·금/휘발유, 조회 날짜·시각 M/D HH:MM)", txt[:200] + ((" 빠짐:" + ",".join(miss)) if miss else ""))
         rec(not h["over"], "가로 넘침 없음(390px)")
+        vp = await pg.evaluate("(document.querySelector('meta[name=viewport]')||{}).content||''")
+        rem = await pg.evaluate("(()=>{let px=0,rm=0;for(const sh of document.styleSheets){let rs;try{rs=sh.cssRules}catch(e){continue}const walk=l=>{for(const r of l){if(r.cssRules)walk(r.cssRules);const f=r.style&&r.style.fontSize;if(!f)continue;if(/\\dpx/.test(f)&&f!=='0px'&&!/rem/.test(f)&&!/dragon|dm-/.test(r.selectorText||''))px++;if(/rem/.test(f))rm++}};walk(rs)}return {px,rm}})()")
+        rec(not re.search(r"user-scalable\s*=\s*(no|0)|maximum-scale", vp) and rem["px"] == 0 and rem["rm"] > 100, "확대 허용(viewport 에 user-scalable=no·maximum-scale 없음) + 글자 크기 rem(광고 그림 빼고 px 글자 0)", {"viewport": vp, **rem})
         if h["hearts"] is not None: rec(True, "헤더 ❤️ 개수 표시", h["hearts"])
         # 한국 뉴스
         k = await pg.evaluate("[...document.querySelectorAll('#korea .korea__list > li:not(.k-ad)')].filter(l=>l.offsetParent!==null).length")
