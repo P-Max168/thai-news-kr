@@ -1,0 +1,5 @@
+태국 이민청(Immigration Bureau) 누리집 https://www.immigration.go.th/en/ — 10-05 05:50(방콕) 조회 도구(WebFetch)로 읽음.
+이 상자의 크롬·curl 은 403(막힘) → 화면 사진 없음. 읽은 부분(영문 원문 그대로):
+  "Introducing the new way to extend your stay in Thailand! Log in now to the link for a seamless experience.
+   *https://thaiextension.vfsevisa.com/index.html  *Valid for select visa categories."   (제목: E-Extension 온라인 체류 연장)
+게시일: 미확인(쪽에 날짜 없음). 같은 쪽 새 소식 목록의 최근 글 = 2025-12-08 'GET READY FOR THAILAND', 2025-11-28 남부 8개 주 홍수 체류 초과 벌금 면제(지난 일·임시) — 비자면제 개편(2026-09-15) 글은 이 목록에서 못 찾음.
