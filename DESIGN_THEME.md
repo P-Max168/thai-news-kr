@@ -1,4 +1,6 @@
-# 디자인 테마 스위치 (2026-10-04, 모던 테마 1단계)
+# 디자인 테마 스위치 (2026-10-04 1단계 미리보기 → 2026-10-05 00:26 방콕 2단계: 모던이 기본)
+
+> **되돌리기 한 줄:** `index.html` 의 `<script>window.TN_THEME="modern";</script>` 를 `<script>window.TN_THEME="classic";</script>` 로 바꾸고 배포하면 예전 디자인으로 돌아갑니다(태그 `backup-20261005-0018-modern-on`).
 
 ## 한 줄로 켜고 끄기
 `index.html` 맨 위(head) 의 이 한 줄만 바꾸면 됩니다.
@@ -9,9 +11,11 @@
 ```
 
 - **되돌리기 = 이 값을 `"classic"` 으로 바꾸고 배포(한 줄).** 다른 파일은 안 건드려도 됩니다(모던 파일이 있어도 classic 이면 받지도 않음).
-- 미리보기(기본 디자인은 그대로 둔 채): 주소 뒤에 `?theme=modern` → 같은 탭에서는 계속 모던으로 보임. `?theme=classic` 이면 해제.
-  예: https://p-max168.github.io/thai-news-kr/?theme=modern · https://p-max168.github.io/thai-news-kr/?theme=modern#places
-- 지금(1단계)은 `"classic"` — 기본 화면은 예전과 같습니다.
+- 비교: 주소 뒤에 `?theme=classic` → 같은 탭에서는 계속 예전 디자인. `?theme=modern` 이면 다시 모던.
+  예: https://p-max168.github.io/thai-news-kr/?theme=classic · https://p-max168.github.io/thai-news-kr/?theme=classic#places
+- 지금(2단계, 10-05 00:26 방콕부터)은 `"modern"` — 모든 방문자가 모던 디자인.
+- 휴대폰 상단 색: index.html 기본값은 모던에 맞춤(`apple-mobile-web-app-status-bar-style` = `default` 진한 글자, `theme-color` = #ffffff). classic 일 때는 스위치 스크립트가 페이지를 열 때 `black-translucent`·#0b2a4a 로 바꿈. manifest.json(theme_color #ffffff, background_color #F2F4F6)은 실행 중 못 바꿔서 기본(모던)을 따름.
+- 따로 떨어진 쪽(404.html·offline.html·안내 4쪽 tools/legal_pages.py·판 미리보기 tools/share_kit.py → e/<판>/)은 스위치와 상관없이 모던 모양(파일 안 CSS). 예전 모양이 필요하면 태그 `backup-20261005-0018-modern-on` 에서 그 파일들을 되돌림.
 
 ## 모던 테마 파일(따로 떨어진 층)
 | 파일 | 하는 일 |
