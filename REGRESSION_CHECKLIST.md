@@ -48,3 +48,4 @@
 | 42 | 🔍 확대: viewport 에 user-scalable=no·maximum-scale 없음, 글자 크기 = rem(광고 그림 dragon-ad.css 만 px — 정해진 광고 크기 안 그림이라 고정) | `tools/dev/regress.py` |
 | 43 | 🔠 큰 글자(html 120%·150%, 360px): 9화면(첫 화면·서랍·기사·#places·#nearby/food·#hearts·#jobs·#rent·#approve) 가로 넘침·버튼 잘림 0 — 헤더 칸·5칸 줄(내 주변·동네·종류 바꾸기)은 원래 크기(헤더 일부 110%)까지만 커짐 | `python3 tools/dev/bigtext.py [URL] --shots 폴더` + 사진 |
 | 44 | 💰 가격 먼저(가게 카드·임대 카드): 카드 맨 위(종류 줄 바로 아래) 굵은 '350바트 약 14,068원'(헤더와 같은 환율 data/ticker.json, 원 단위 반올림) 또는 '💰 가격 확인 안 됨' — 지어낸 가격 없음 | `tools/dev/regress.py`(가게 카드 줄 price) + 사진 |
+| 45 | 🚫 첫 화면에 덮는 창·떠 있는 요소·로그인 요구 없음: 처음 방문 = '어떤 분이세요?' 창이 저절로 안 뜨고 피드 맨 위 '👋 … 고르기' 한 줄(누르면 열림, app.js FIRST_SHEET_AUTO=false) / 홈 화면 추가 안내 = 페이지 맨 아래 글 흐름 속 칸(떠 있는 바 아님) / '맨 위로 ↑' 떠 있는 버튼 없음 / 보이는 광고 칸마다 '광고' 글자 | `python3 tools/dev/audit_first.py [URL]` + `tools/dev/regress.py` |

@@ -894,3 +894,7 @@ body.drawer-open{overflow:hidden}
 /* 큰 글자(120~150%, 2026-10-04): 🙌·🙅 버튼이 칸 밖으로 잘리지 않게 — 자리가 모자라면 버튼이 아래로 줄바꿈(보통 크기에선 그대로 한 줄) */
 .vote-btns{flex-wrap:wrap;min-width:0;row-gap:6px}
 .top-card .rank{white-space:nowrap;flex:0 0 auto} .top-card .badges{flex-wrap:wrap}
+/* 첫 화면·떠 있는 요소 금지(2026-10-04): 홈 화면 추가 안내 = 페이지 맨 아래 글 흐름 속 칸(고정·그림자 없음), 첫 방문 인사 한 줄 */
+.install-hint.install-hint--inline{position:static;left:auto;right:auto;bottom:auto;z-index:auto;margin:8px auto 16px;width:calc(100% - 24px);box-shadow:none}
+.install-hint--inline .ihi__arrow{display:none}
+.feed-intro--hello{background:#fff8e1;border:1px solid #ffe08a;border-radius:12px;padding:10px 12px}

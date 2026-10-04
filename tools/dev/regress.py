@@ -316,7 +316,10 @@ async def main():
         c2 = await b.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True, timezone_id="Asia/Bangkok", locale="ko-KR")
         p2 = await c2.new_page()
         await p2.goto(URL, wait_until="networkidle"); await p2.wait_for_timeout(800)
-        ob = {"personas": await p2.locator("#sheet [data-persona]").count(), "regions": await p2.locator("#sheet [data-region]").count()}
+        # 2026-10-04: 첫 화면에 창이 저절로 뜨면 안 됨 → 피드 맨 위 '👋 … 고르기' 한 줄을 눌러야 열림
+        auto = await p2.is_visible("#sheet"); hello = await p2.locator("[data-ob-start]").count()
+        if not auto and hello: await p2.locator("[data-ob-start]").first.click(); await p2.wait_for_timeout(500)
+        ob = {"auto_sheet": auto, "hello": hello, "personas": await p2.locator("#sheet [data-persona]").count(), "regions": await p2.locator("#sheet [data-region]").count()}
         try:
             if ob["regions"]:
                 await p2.click('[data-region="bangkok"]'); await p2.click("[data-ob-next]"); await p2.wait_for_timeout(300)
@@ -328,8 +331,8 @@ async def main():
             ob["cards"] = await p2.locator("#feed .card").count()
         except Exception as e:
             ob["err"] = str(e)[:120]
-        ok_ob = ob.get("closed") and ob.get("cards", 0) > 0 and (ob["personas"] == 5 if not ob2 else ob["regions"] == 5)
-        rec(ok_ob, "첫 방문 시작 화면(%s)" % ("2단계" if ob2 else "예전 '어떤 분이세요?' — 2단계는 보류"), ob)
+        ok_ob = ob.get("auto_sheet") is False and ob.get("hello", 0) > 0 and ob.get("closed") and ob.get("cards", 0) > 0 and (ob["personas"] == 5 if not ob2 else ob["regions"] == 5)
+        rec(ok_ob, "첫 방문: 창 저절로 안 뜸 + '👋 고르기' 한 줄 → 시작 화면(%s)" % ("2단계" if ob2 else "예전 '어떤 분이세요?' — 2단계는 보류"), ob)
         await c2.close()
         await b.close()
     if OUT: pathlib.Path(OUT).write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")

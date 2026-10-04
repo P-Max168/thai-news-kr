@@ -10,6 +10,8 @@
   // tab: "feed"(내 피드) | "all"(전체 보기) | 주제 id
   var state = { data: null, tab: "feed", edition: null, impact: null, dqOpen: {}, natStep: 0 };
   var NAT_STEPS = [5, 10, 1000];
+  // 첫 화면에 덮는 창 금지(2026-10-04 Max 디자인 지시 6번): 처음 방문해도 '어떤 분이세요?' 창을 저절로 열지 않음 — 피드 맨 위 한 줄 '고르기'를 누를 때만 열림. true = 예전처럼 저절로 열기
+  var FIRST_SHEET_AUTO = false;
   var OB2 = !!T.ONBOARDING_2STEP;   // 2단계 시작 화면·내 피드 묶음 스위치(topics.js — 2026-10-03 운영자 보류로 꺼 둠)   // 내 피드 '전국·다른 지역' 칸: 5건 → 10건 → 전부
   /* 한인 영향도 태그(판 데이터 story.impact — README '판마다 채울 필드(2026-10-03 추가)'). 순서 = 필터 칩 순서 */
   var IMPACT = [
@@ -631,6 +633,7 @@
     var pin = [];
     if (tab !== "visa") { pin = list.filter(function (s) { return tps(s).topic === "visa"; }); list = list.filter(function (s) { return pin.indexOf(s) < 0; }); }
     var pinHTML = pin.length ? '<div class="pin" aria-label="비자 소식 고정"><p class="pin__h">📌 비자 소식 <small>외국인·비자 기사를 맨 위에 모았어요</small></p>' + pin.map(cardHTML).join("") + "</div>" : "";
+    if (!FIRST_SHEET_AUTO && !prof().onboarded) intro = '<p class="feed-intro feed-intro--cta feed-intro--hello">👋 처음 오셨나요? 어떤 분인지 고르면 관심 주제를 먼저 골라 드려요. <button type="button" class="linkbtn" data-ob-start>고르기</button></p>' + intro;
     $("feed").innerHTML = intro + imp + ((pin.length || list.length) ? pinHTML + withInfeed(list.map(cardHTML)) : '<div class="empty">' + esc(empty) + "</div>");
   }
 
@@ -742,6 +745,7 @@
       if (window.TNNearby) { var cfg = (TNNearby.config && TNNearby.config.categories) || [], want = el.getAttribute("data-quick-nearby"); var id = (cfg.filter(function (c) { return c.id === want; })[0] || cfg[0] || {}).id; if (id) TNNearby.open(id, true); }
       return;
     }
+    if ((el = e.target.closest("[data-ob-start]"))) { Onb.open(OB2 ? "region" : "persona", false); return; }
     if ((el = e.target.closest("[data-open-settings]"))) { Drawer.close(true); Onb.open("topics", true); return; }
     if ((el = e.target.closest("[data-ob-edit]"))) { Drawer.close(true); Onb.open("region", true); return; }
     if ((el = e.target.closest("[data-nat-more]"))) {
@@ -758,8 +762,9 @@
     if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches("article[data-open]")) { e.preventDefault(); e.target.click(); }
     if (e.key === "Escape" && !$("sheet").hidden) Onb.close();
   });
-  window.addEventListener("scroll", function () { $("toTop").classList.toggle("show", window.pageYOffset > 600); }, { passive: true });
-  $("toTop").addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+  // 떠 있는 '맨 위로 ↑' 버튼은 뺌(2026-10-04 — 화면 위에 떠서 글을 가리는 요소 금지). 맨 위로는 머리 제목(홈) 누르기·휴대폰 상단 탭
+  var toTop = $("toTop");
+  if (toTop) { window.addEventListener("scroll", function () { toTop.classList.toggle("show", window.pageYOffset > 600); }, { passive: true }); toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); }); }
 
   /* ---------- 온보딩 · 내 주제 설정 ---------- */
   var Onb = (function () {
@@ -944,7 +949,7 @@
     function standalone() { return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true; }
     window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); deferred = e; maybeShow(); });
     window.addEventListener("appinstalled", function () { deferred = null; hide(); S.update(function (d) { d.ui.installed = true; }); toast("📲 홈 화면에 추가했어요"); });
-    function hide() { var el = $("installHint"); el.hidden = true; el.className = "install-hint"; }
+    function hide() { var el = $("installHint"); el.hidden = true; el.className = "install-hint install-hint--inline"; }
     function dismissed() {
       var ui = prof().ui || {};
       if (ui.installHint === "dismissed") return true;          // 예전(영구) 닫기 기록은 그대로 존중
@@ -957,13 +962,13 @@
       if (standalone()) { hide(); return; }
       if (!force && (dismissed() || !prof().onboarded || !$("sheet").hidden)) return;
       if (deferred) {
-        el.className = "install-hint";
+        el.className = "install-hint install-hint--inline";
         el.innerHTML = '<span class="ih__icon" aria-hidden="true"><img src="assets/icons/icon-192.png" alt="" width="36" height="36"></span>' +
           '<span class="ih__t"><b>홈 화면에 추가할까요?</b><small>앱처럼 편하게 볼 수 있어요</small></span>' +
           '<span class="ih__btns"><button type="button" class="btn btn--primary btn--sm" data-ih-install>추가하기</button><button type="button" class="ih__later" data-ih-close>나중에</button></span>';
         el.hidden = false;
       } else if (isIOS) {
-        el.className = "install-hint install-hint--ios";
+        el.className = "install-hint install-hint--inline install-hint--ios";
         el.innerHTML = '<div class="ihi__head"><b>📲 홈 화면에 추가하면 앱처럼 열려요</b><button type="button" class="ih__x" data-ih-close aria-label="닫기">닫기</button></div>' +
           (isSafari ? "" : '<p class="ihi__warn">먼저 이 페이지를 <b>Safari</b>에서 열어 주세요.</p>') +
           '<ol class="ihi__steps">' +
@@ -1019,7 +1024,7 @@
   document.addEventListener("visibilitychange", function () { if (!document.hidden && Date.now() - KOREA.at > 10 * 60 * 1000) loadKorea(); });
   if (cur) loadDate(cur.id); else $("feed").innerHTML = loadFail("뉴스 목록을 불러오지 못했어요.");
   // 처음 방문: '어떤 분이세요?' (기사 링크(#id)로 들어온 경우에도 먼저 보여 주되 건너뛰기 가능)
-  if (!prof().onboarded) Onb.open(OB2 ? "region" : "persona", false); else Install.maybeShow();   // 첫 방문만 2단계 시작 화면(옛 사용자는 prefs.js 가 조용히 옮김)
+  if (!prof().onboarded) { if (FIRST_SHEET_AUTO) Onb.open(OB2 ? "region" : "persona", false); } else Install.maybeShow();   // 첫 방문만 2단계 시작 화면(옛 사용자는 prefs.js 가 조용히 옮김)
 
   // 서비스 워커(오프라인 읽기·홈 화면 앱). file:// 에서는 쓰지 않음
   if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
