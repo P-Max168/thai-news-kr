@@ -1,0 +1,376 @@
+/* ===== 모던 테마(2026-10-04, 운영자 요청: 토스·당근 느낌 — 구조는 그대로, 느낌만) =====
+   이 파일은 tools/modern/build_css.py 가 tools/modern/modern.src.css 에서 만듦(직접 고치지 말고 원본을 고친 뒤 다시 만들기).
+   모든 규칙 앞에 html.th-modern → index.html 의 한 줄 스위치(window.TN_THEME)가 "modern" 일 때만 적용.
+   색: 배경 #F2F4F6 · 카드 #FFFFFF · 강조색 하나(#3182F6, 고른 상태·주요 버튼에만) · 글자 회색 단계(#191F28 제목 / #4E5968 본문 / #6B7684 보조)
+   글자 크기는 기존보다 작게 하지 않음(키우기만). 테두리·그라데이션·여러 색 칩 없앰, 줄 대신 간격으로 나눔 */
+:root{
+  --m-ac:#3182F6; --m-acd:#1B64DA; --m-tint:#E8F3FF;
+  --m-t1:#191F28; --m-t2:#4E5968; --m-t3:#6B7684; --m-t4:#8B95A1; --m-t5:#B0B8C1;
+  --m-bg:#F2F4F6; --m-box:#F7F8FA; --m-pill:#F2F4F6; --m-press:#E5E8EB;
+  --m-r:16px; --m-sh:0 1px 2px rgba(0,27,55,.04);
+  --navy:#3182F6; --navy-2:#3182F6; --ink:#191F28; --ink-2:#4E5968; --muted:#6B7684;
+  --line:#EEF0F3; --bg:#F2F4F6; --card:#fff; --accent:#3182F6; --gold:#3182F6;
+  --radius:16px; --shadow:var(--m-sh);
+}
+body{background:var(--m-bg);color:var(--m-t1)}
+/* 주제·영향 색(--tc·--ic, 칸마다 style 로 줌)은 모두 회색으로 → 여러 색 칩 없앰 */
+[style*="--tc"],[style*="--ic"]{--tc:#4E5968!important;--ic:#4E5968!important}
+
+/* ---------- 선 아이콘(assets/modern.js 가 이모지 자리에 넣음) ---------- */
+.mic{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.mic--l{margin-right:.32em}
+.mic--fill{fill:currentColor}
+.mic--dot{width:.9em;height:.9em;vertical-align:-.08em}
+
+/* ---------- 헤더: 흰 바탕 + 회색 칸 ---------- */
+.masthead{background:#fff;color:var(--m-t1);box-shadow:0 1px 0 rgba(0,0,0,.05)}
+.brand__text strong{color:var(--m-t1);letter-spacing:-.5px}
+.brand__text small{color:var(--m-t3);opacity:1}
+.brand__flags .flag{box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.brand__flags .heart{filter:none}
+.dateline{color:var(--m-t2)}
+.datepick select{background:var(--m-pill);color:var(--m-t1);border:0;border-radius:10px;font-weight:600}
+.gbtn{background:var(--m-pill);border:0;color:var(--m-t1)}
+.gbtn:hover{background:var(--m-press)}
+.acct__me{border-color:var(--m-press)}
+.masthead__row2 .menu-btn,.masthead__row2 .mbox .menu-btn{background:var(--m-pill);border:0;color:var(--m-t1)}
+.masthead__row2 .menu-btn:hover{background:var(--m-press)}
+.heart-btn{background:var(--m-pill);border:0;color:var(--m-t2)}
+.heart-btn:hover{background:var(--m-press)}
+.heart-btn .mic{width:1.1em;height:1.1em}
+.heart-btn .mic--fill{color:var(--m-ac)}
+.tk-chip{background:var(--m-pill);border:0;color:var(--m-t1)}
+.tk-chip:hover,.tk-chip[aria-expanded="true"]{background:var(--m-press)}
+.tk-l,.tk-tile .tk-l{opacity:1;color:var(--m-t3)}
+.tk-ft{opacity:1;color:var(--m-t4)}
+.tk-u{opacity:1;color:var(--m-t2)}
+.tk-lv{background:var(--m-press);color:var(--m-t2)}
+.tk-lv--good{background:var(--m-tint);color:var(--m-acd)}
+.tk-lv--bad,.tk-lv--vbad{background:var(--m-t1);color:#fff}
+.tk-pop{border:0;border-radius:16px;box-shadow:0 8px 28px rgba(0,27,55,.14)}
+.tk-pop__x{background:var(--m-pill)}
+.tk-pop__rg button{border:0;background:var(--m-pill)}
+.tk-pop__rg button[aria-pressed="true"]{background:var(--m-ac);color:#fff}
+.tk-pop__src a{color:var(--m-ac)}
+.subbar,.subbar.subbar--nearby{background:#fff;border-top:0}
+.nb-lab{color:var(--m-t1)}
+.nb-lab .mic{color:var(--m-ac)}
+.nb-cat{background:var(--m-pill);border:0;color:var(--m-t1)}
+.nb-cat:hover,.nb-cat[aria-current]{background:var(--m-press)}
+.nb-cat .mic{width:1.2em;height:1.2em;color:var(--m-t2)}
+.nearby.nearby--scroll:not(.nearby--end)::after{background:linear-gradient(90deg,rgba(255,255,255,0),#fff 85%)}
+
+/* ---------- ☰ 서랍 ---------- */
+.drawer{box-shadow:4px 0 24px rgba(0,27,55,.12)}
+.drawer__head{border-bottom:0;padding:6px 4px 12px}
+.drawer__head b{font-size:1.125rem;font-weight:800;color:var(--m-t1)}
+.drawer__x{background:var(--m-pill);color:var(--m-t2)}
+.drawer__x .mic{width:1.1em;height:1.1em}
+.dq-btn{border:0;background:var(--m-box);box-shadow:none;border-radius:16px}
+.dq-btn:hover{background:var(--m-pill)}
+.dq-e .mic{width:1.25em;height:1.25em;color:var(--m-ac)}
+.drawer .tab{color:var(--m-t1);font-weight:600;border-radius:12px}
+.drawer .tab .mic{color:var(--m-t3)}
+.drawer .tab:hover{background:var(--m-box)}
+.drawer .tab[aria-selected="true"]{background:var(--m-tint);color:var(--m-acd);box-shadow:none;font-weight:700}
+.drawer .tab[aria-selected="true"] .mic,.drawer .tab[aria-selected="true"] .n{color:var(--m-acd)}
+.drawer .tab .n{color:var(--m-t4)}
+.drawer .tab--other{color:var(--m-t2)}
+.dr-item,.dr-item--mine{background:var(--m-box);color:var(--m-t1);border-radius:12px}
+.dr-item:hover{background:var(--m-pill)}
+.dr-item .mic{color:var(--m-t3)}
+.drawer__sec{color:var(--m-t4);margin-top:16px}
+.drawer__legal a{border:0;background:var(--m-box);border-radius:12px;color:var(--m-t2)}
+.acct-box{border:0;background:var(--m-box);border-radius:14px}
+
+/* ---------- 제목 ---------- */
+.section-title{border-bottom:0;padding-bottom:0;font-size:1.25rem;font-weight:800;letter-spacing:-.5px;color:var(--m-t1);margin:34px 2px 14px}
+.section-title em{color:var(--m-t3)}
+.section-title .mic{color:var(--m-ac)}
+.fsec__h{color:var(--m-t1);letter-spacing:-.5px}
+.fsec__h em{color:var(--m-t3)}
+.fsec--nat .fsec__h{color:var(--m-t2)}
+
+/* ---------- 한국 주요 뉴스 ---------- */
+.korea{border:0;box-shadow:var(--m-sh);border-radius:var(--m-r);margin-bottom:12px}
+.korea__head{background:#fff;padding:16px 18px 10px}
+.korea__title{color:var(--m-t1);font-size:1rem}
+.korea__top{background:var(--m-ac);border-radius:6px}
+.korea__upd{color:var(--m-t3)}
+.korea__chev{color:var(--m-t4)}
+.korea__list{padding:0 18px 8px}
+.korea__list li,.korea__list li.k-ad{border-top:0}
+.korea__list .k-row,.korea__list>li>a{padding:10px 0}
+.korea__list .kn{background:var(--m-pill);color:var(--m-t2);border-radius:8px}
+.korea__list li[data-rank-top] .kn{background:var(--m-tint);color:var(--m-acd)}
+.korea__list .kt{color:var(--m-t1)}
+.korea__list .km{color:var(--m-t3)}
+.korea__list .kp{background:var(--m-pill);color:var(--m-t2)}
+.korea__list .k-chev{color:var(--m-t5)}
+.korea__list .k-card{background:var(--m-box);border:0;border-radius:12px}
+.korea__list .k-card__go{background:var(--m-ac);border-radius:10px}
+.korea__list .k-card__go:hover{background:var(--m-acd)}
+.korea__more{border:0;background:var(--m-pill);color:var(--m-t2);border-radius:12px;margin:4px 18px 16px;width:calc(100% - 36px)}
+
+/* ---------- 브리핑 ---------- */
+.briefing{background:#fff;border:0;box-shadow:var(--m-sh);border-radius:var(--m-r);padding:18px 18px 10px}
+.briefing__badge{background:var(--m-tint);color:var(--m-acd);font-weight:700}
+.briefing__title{color:var(--m-t3);font-weight:600}
+.brief-list li+li{border-top:0}
+.brief-line{padding:10px 2px;border-radius:10px}
+button.brief-line:hover{background:var(--m-box)}
+button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
+.bchip,.bchip--none{background:var(--m-pill);border:0;color:var(--m-t2);font-weight:700;padding:1px 8px}
+.brief-text{color:var(--m-t2)}
+.brief-text b{background:none;color:var(--m-t1)}
+.brief-go{color:var(--m-t5)}
+
+/* ---------- 칩: 모두 회색 알약(강조색은 고른 상태만) ---------- */
+.chip,.chip--topic,.chip--sec,.chip--region,.chip--date,.chip--imp,.top-card .chip{background:var(--m-pill);color:var(--m-t2);border:0;font-weight:600}
+.chip--sec{padding:3px 9px}
+.chip .mic{width:1.05em;height:1.05em;color:var(--m-t4)}
+.chip--new{background:var(--m-tint);color:var(--m-acd)}
+.mini{background:var(--m-pill);border:0;color:var(--m-t2)}
+.feed-intro .mini{background:#fff}
+.meta{color:var(--m-t3)}
+.meta .src{color:var(--m-t2);font-weight:600}
+.meta .dot::before{color:var(--m-t5)}
+.tags span{background:var(--m-pill);color:var(--m-t3);border-radius:999px;padding:3px 10px}
+.edtag{color:var(--m-ac)}
+
+/* ---------- 오늘의 주요 뉴스(위 3장): 진한 그라데이션·물결 장식 없앰 → 흰 카드 ---------- */
+.top-card{color:var(--m-t1);background:#fff;box-shadow:var(--m-sh);border-radius:var(--m-r);min-height:0;justify-content:flex-start;padding:20px}
+.top-card--main{min-height:0}
+.top-card::before{background:#fff}
+.top-card .deco{display:none}
+.top-card:hover{transform:none}
+.top-card:focus-visible{outline:2px solid var(--m-ac)}
+.top-card .rank{background:var(--m-ac);color:#fff;font-weight:700}
+.top-card h3{color:var(--m-t1);letter-spacing:-.5px}
+.top-card p{color:var(--m-t2);opacity:1}
+.top-card .meta{color:var(--m-t3)}
+.top-card .meta .src{color:var(--m-t2)}
+.top__grid{gap:12px}
+
+/* ---------- 기사 카드: 테두리·왼쪽 색 줄 없앰, 넓은 여백, 간격으로 나눔 ---------- */
+.feed__list,.fsec{gap:12px}
+.card{border:0;box-shadow:var(--m-sh);border-radius:var(--m-r)}
+.card:hover{border:0}
+.card.is-open{box-shadow:0 2px 10px rgba(0,27,55,.06)}
+.card__head,.card .card__head{border-left:0;padding:20px 20px 14px}
+.card__acts{border-left:0;padding:2px 20px 16px}
+.card__tools{border-left:0;padding:0 20px 12px}
+.card__body{padding:0 20px 22px}
+.tool-panel{margin:0 20px 14px;border:0;background:var(--m-box);border-radius:14px}
+.card__title{color:var(--m-t1);font-weight:700;letter-spacing:-.5px}
+.card__lead{color:var(--m-t2)}
+.more{color:var(--m-t3)}
+.card__body .para{color:#333D4B}
+.card-heart{color:var(--m-t5)}
+.card-heart[aria-pressed="true"]{color:var(--m-ac)}
+.card-heart:hover{background:var(--m-box)}
+.card-heart .mic{width:1.5rem;height:1.5rem;stroke-width:1.8}
+.card.flash{animation:m-flash .9s ease}
+@keyframes m-flash{0%{box-shadow:0 0 0 3px rgba(49,130,246,.45)}100%{box-shadow:0 1px 2px rgba(0,27,55,.04)}}
+.forme{background:var(--m-box);border:0;border-radius:14px;color:#333D4B;padding:12px 14px}
+.forme__h{color:var(--m-t1);font-weight:800}
+.forme__h .mic{color:var(--m-ac)}
+.context{background:var(--m-box);border:0;border-radius:14px;color:var(--m-t2);padding:14px 16px}
+.context b{color:var(--m-t1)}
+.context b .mic{color:var(--m-t3)}
+.origin{border-top:0;padding-top:4px;margin-top:14px}
+.origin__th small,.origin__th--fold summary{color:var(--m-t4)}
+.btn{background:var(--m-ac);border-radius:12px;padding:10px 16px}
+.btn:hover{background:var(--m-acd)}
+.btn--primary{background:var(--m-ac)}
+.related li{border-top:0}
+.related a{color:var(--m-t2)}
+.vote{border:0;background:var(--m-pill);color:var(--m-t2)}
+.vote:hover{background:var(--m-press)}
+.vote--up[aria-pressed="true"]{background:var(--m-tint);color:var(--m-acd);box-shadow:none}
+.vote--down[aria-pressed="true"]{background:var(--m-press);color:var(--m-t1);box-shadow:none}
+.vote-q{color:var(--m-t3)}
+.tool{border:0;background:var(--m-pill);color:var(--m-t2)}
+.tool b{color:var(--m-t1)}
+.tool.is-on{background:var(--m-tint);color:var(--m-acd)}
+.tool__n{background:var(--m-ac)}
+.also__list a{border:0;background:#fff;border-radius:12px}
+.also__m{background:var(--m-pill);color:var(--m-t2)}
+.tl__list::before{background:var(--m-press)}
+.tl__i::before{border-color:var(--m-t5)}
+.tl__go{color:var(--m-ac)}
+.talk{border-top:0;margin-top:20px;padding-top:4px}
+.dq-line,.dq{background:var(--m-box);border:0;border-radius:14px}
+.dq-line__h,.dq__h{color:var(--m-t1)}
+.dq-line__n{background:var(--m-ac)}
+.dq-line i{color:var(--m-t4)}
+.cmt{border-bottom:0}
+.cmt--op{background:var(--m-box);border:0;border-radius:14px}
+.badge-op{background:var(--m-t2)}
+.cform--out{background:var(--m-box);border-radius:14px}
+.cform input,.cform textarea,.rform textarea{border:1px solid var(--m-press);border-radius:12px}
+.qr__l{color:var(--m-t3)}
+.qr__l .mic{color:var(--m-t4)}
+.qr__c{background:var(--m-pill);border:0;color:#333D4B;border-radius:12px}
+.qr__c:hover,.qr__c:focus-visible{background:var(--m-press)}
+.replies{border-left-color:var(--m-press)}
+.gbtn--light{background:var(--m-pill);border:0;color:var(--m-t1)}
+.linkbtn{color:var(--m-ac);text-decoration:none}
+.linkbtn--light{color:var(--m-t2)}
+
+/* ---------- 피드 위 안내·필터 ---------- */
+.feed-intro{color:var(--m-t3)}
+.feed-intro--cta,.feed-intro--hello{background:#fff;border:0;border-radius:14px;color:var(--m-t2)}
+.impf__l{color:var(--m-t3)}
+.impf__c,.impf__c:not([style]){background:#fff;border:0;color:var(--m-t2)}
+.impf__c[aria-pressed="true"],.impf__c:not([style])[aria-pressed="true"]{background:var(--m-ac);border-color:var(--m-ac);color:#fff}
+.impf__c small{color:var(--m-t4)}
+.pin{background:none;padding:0;margin:0}
+.pin__h{color:var(--m-t1)}
+.pin__h .mic{color:var(--m-ac)}
+.mine__chip{border:0;background:#fff;box-shadow:none;color:var(--m-t1)}
+.mine__chip .sep{color:var(--m-t5)}
+.more-btn{border:0;background:#fff;color:var(--m-t2);border-radius:14px}
+.update,.edition-note{background:#fff;border:0;border-radius:14px;color:var(--m-t2)}
+.update b{color:var(--m-t1)}
+.edition-note a{color:var(--m-ac)}
+.empty{border:0;background:#fff}
+.empty--err{background:#fff;color:var(--m-t2)}
+.skel{background:linear-gradient(90deg,#EEF0F3 25%,#F7F8FA 50%,#EEF0F3 75%);background-size:200% 100%}
+
+/* ---------- 광고: 같은 모양·크기·사진, 둥근 모서리·옅은 그림자·'광고' 표시만 같은 말투 ---------- */
+.dm-ad{border-radius:var(--m-r);box-shadow:var(--m-sh)}
+.dm-ad--bar{border-radius:14px}
+.dm-ad__tag,.dm-ad--bar .dm-ad__tag{background:rgba(255,255,255,.2);color:#fff;font-weight:600;letter-spacing:0;border-radius:6px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.dm-btn--map{background:var(--dm-gold2);box-shadow:none}
+.dm-btn .mic{width:1.1em;height:1.1em}
+.dm-target{border:0;background:#fff;color:var(--m-t2);font-weight:600;border-radius:999px;padding:5px 11px}
+.dm-target b{color:var(--m-t1)}
+.dm-target .mic{color:var(--m-t3)}
+.ad{border:0;box-shadow:var(--m-sh);border-radius:14px}
+.ad__tag{background:rgba(255,255,255,.2);color:#fff;font-weight:600;border-radius:6px}
+.ad--t1,.ad--t2,.ad--t3,.ad--t4,.ad--t5{background:#333D4B}
+
+/* ---------- 오른쪽 칸(데스크톱)·바닥 ---------- */
+.widget{border:0;box-shadow:var(--m-sh);border-radius:var(--m-r)}
+.widget--muted{background:#fff}
+.cat-stats .bar{background:var(--m-pill)}
+.src-list li{background:var(--m-pill);color:var(--m-t2);border-radius:999px}
+.footer{background:#fff;color:var(--m-t3)}
+.footer strong{color:var(--m-t1)}
+.footer__about{color:var(--m-t2)}
+.footer__links a{color:var(--m-t2)}
+.to-top{background:#fff;color:var(--m-t1);box-shadow:0 2px 10px rgba(0,27,55,.12)}
+.install-hint{border:0;border-radius:16px}
+.ih__x{background:var(--m-pill)}
+.ihi__steps li{background:var(--m-box)}
+.ihi__n{background:var(--m-ac)}
+.acct-menu{border:0;border-radius:16px;box-shadow:0 8px 28px rgba(0,27,55,.14)}
+.acct-out{background:var(--m-pill);border:0}
+.toast{background:var(--m-t1);border-radius:14px}
+
+/* ---------- 시작 화면·내 주제 시트(구조 그대로, 색만) ---------- */
+.sheet__panel{border-radius:20px}
+.sheet__x,.ob__x{background:var(--m-pill)}
+.persona{background:var(--m-box);border:1.5px solid transparent}
+.persona:hover,.persona[aria-pressed="true"]{border-color:var(--m-ac);background:var(--m-tint)}
+.tpick,.int,.opt{--tc:#3182F6!important;border-color:transparent;background:var(--m-box)}
+.tpick[aria-pressed="true"],.int[aria-pressed="true"]{background:var(--m-tint);border-color:var(--m-ac);box-shadow:none}
+.opt[aria-checked="true"]{border-color:var(--m-ac);background:var(--m-tint)}
+.opt__e{box-shadow:none}
+.opt__e .mic,.int__e .mic,.tpick__e .mic,.persona__e .mic{color:var(--m-t2)}
+.setbtn{border:0;background:var(--m-box)}
+.cta{background:var(--m-ac);box-shadow:none}
+.note,.pick-msg.warn{background:var(--m-box);border:0;color:var(--m-t2)}
+.note b{color:var(--m-t1)}
+.picked{background:var(--m-pill)}
+.ob__bar i{background:var(--m-press)}
+.ob__step{background:var(--m-tint);color:var(--m-acd)}
+
+/* ---------- 쪽 화면: 📍 내 주변 · 📇 가게 카드 · ❤️ 하트 · 구인판 · 관리자 (late.css 덮어씀) ---------- */
+.nb-page,.nb-page__panel{background:var(--m-bg)}
+.nb-page__bar{background:#fff;color:var(--m-t1);box-shadow:0 1px 0 rgba(0,0,0,.05)}
+.nb-back{background:var(--m-pill);border:0;color:var(--m-t1)}
+.nb-back:hover{background:var(--m-press)}
+.nb-page__t .mic{color:var(--m-ac)}
+.nb-go{background:var(--m-ac);box-shadow:none;border-radius:var(--m-r)}
+.nb-go:hover{filter:none;background:var(--m-acd)}
+.nb-st__t--hl{color:var(--m-ac)}
+.nb-rg button{border:0;background:#fff}
+.nb-rg button[aria-pressed="true"]{background:var(--m-ac);color:#fff}
+.nb-sec{color:var(--m-t2)}
+.nb-sub{border:0;background:#fff;color:var(--m-t1)}
+.nb-sub:hover{color:var(--m-ac)}
+.nb-sw{border:0;background:#fff;color:var(--m-t1)}
+.nb-sw .mic{width:1.3em;height:1.3em;color:var(--m-t2)}
+.nb-sw[aria-current]{background:var(--m-ac);color:#fff}
+.nb-sw[aria-current] .mic{color:#fff}
+.nb-how{border:0;border-radius:var(--m-r)}
+.nb-note{color:var(--m-t2)}
+.nb-places{border:0;box-shadow:none;border-radius:var(--m-r)}
+.nb-places .mic{color:var(--m-ac)}
+.pc-intro{color:var(--m-t2)}
+.pc-f,.pc-subs .pc-f{border:0;background:#fff;color:var(--m-t1)}
+.pc-f .mic{color:var(--m-t3)}
+.pc-f[aria-pressed="true"],.pc-region .pc-f[aria-pressed="true"],.pc-subs .pc-f[aria-pressed="true"]{background:var(--m-ac);border-color:var(--m-ac);color:#fff}
+.pc-f[aria-pressed="true"] .mic{color:#fff}
+.pc-openonly{border:0;background:#fff;color:var(--m-t1)}
+.pc-openonly .mic--dot{color:var(--m-ac)}
+.pc-openonly[aria-pressed="true"]{background:var(--m-tint);color:var(--m-acd)}
+.pc-list{gap:12px}
+.pc{border:0;box-shadow:var(--m-sh);border-radius:var(--m-r);padding:20px 18px 16px}
+.pc__cat{color:var(--m-t2);font-weight:700}
+.pc__cat .mic{color:var(--m-t3)}
+.pc__open{color:var(--m-t3)}
+.pc__open--on{color:var(--m-ac)}
+.pc__open--soon{color:var(--m-t1)}
+.pc__open--off{color:var(--m-t4)}
+.pc__name{color:var(--m-t1);font-weight:700;font-size:1.1875rem;letter-spacing:-.5px}
+.pc__kind{color:var(--m-t3)}
+.pc__kr{color:var(--m-t1)}
+.pc__warn{background:var(--m-box);border:0;border-radius:12px;color:var(--m-t2)}
+.pc__old{background:var(--m-t2)}
+.pc__price,.pc__price b{color:var(--m-t1)}
+.pc__price--na{color:var(--m-t3)}
+.pc__price .mic{color:var(--m-t4)}
+.pc__info{gap:8px}
+.pc__info dt{color:var(--m-t3);font-weight:600}
+.pc__info dt .mic{color:var(--m-t4)}
+.pc__info dd{color:var(--m-t1)}
+.pc__info dd small,.pc__fs{color:var(--m-t4)}
+.pc__btn{border:0;background:var(--m-pill);color:var(--m-t1)}
+.pc__btn--map{background:var(--m-ac);color:#fff}
+.pc__btn--off{background:var(--m-box);color:var(--m-t4)}
+.pc__foot,.pc__foot a,.pc-src{color:var(--m-t4)}
+.pc__report{border:0;background:var(--m-pill);color:var(--m-t2)!important}
+.jb-warn{background:#fff;border:0;color:var(--m-t2)}
+.jb-ex{background:var(--m-t2)}
+.jb-post{background:var(--m-box)}
+.hp-row{border:0;border-radius:var(--m-r)}
+.hp-ic{background:var(--m-pill)}
+.hp-x{border-left:0;background:var(--m-box)}
+.hp-n .mic,.hp-empty__e .mic{color:var(--m-ac)}
+.adm-link,.ad-pbtn,.ad-cell,.ad-sec,.ap-item,.ap-btn{border:0}
+.ad-pbtn[aria-pressed="true"],.ap-btn--ok{background:var(--m-ac);color:#fff}
+.ad-rank{background:var(--m-tint);color:var(--m-acd)}
+.ap-kind,.ap-photo{background:var(--m-pill);color:var(--m-t2)}
+.ap-note{background:#fff;border:0}
+.ad-tr,.ad-art{border-top-color:var(--m-box)}
+
+/* ---------- 휴대폰(360px 먼저): 글자 크기는 그대로 또는 조금 크게, 여백 넉넉히 ---------- */
+@media (max-width:640px){
+  .section-title{font-size:1.25rem;margin-top:30px}
+  .card__head,.card .card__head{padding:18px 18px 12px}
+  .card__title{font-size:1.125rem}
+  .card__acts{padding:2px 18px 16px}
+  .card__tools{padding:0 18px 12px}
+  .card__body{padding:0 18px 20px}
+  .tool-panel{margin:0 18px 14px}
+  .briefing{padding:16px 16px 8px}
+  .top-card{padding:18px}
+  .top-card--main h3{font-size:1.375rem}
+  .top-card h3{font-size:1.125rem}
+  .korea__head{padding:14px 16px 8px}
+  .korea__list{padding:0 16px 6px}
+  .korea__more{margin:4px 16px 14px;width:calc(100% - 32px)}
+}
