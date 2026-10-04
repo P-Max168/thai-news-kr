@@ -1,15 +1,16 @@
 /* ===== 모던 테마(2026-10-04, 운영자 요청: 토스·당근 느낌 — 구조는 그대로, 느낌만) =====
    이 파일은 tools/modern/build_css.py 가 tools/modern/modern.src.css 에서 만듦(직접 고치지 말고 원본을 고친 뒤 다시 만들기).
    모든 규칙 앞에 html.th-modern → index.html 의 한 줄 스위치(window.TN_THEME)가 "modern" 일 때만 적용.
-   색: 배경 #F2F4F6 · 카드 #FFFFFF · 강조색 하나(#3182F6, 고른 상태·주요 버튼에만) · 글자 회색 단계(#191F28 제목 / #4E5968 본문 / #6B7684 보조)
+   색: 배경 #F2F4F6 · 카드 #FFFFFF · 강조색 하나(#1B64DA 토스 계열 파랑 — #3182F6 은 흰 글자 대비 3.7:1 이라 사이트 기준 4.5:1 에 못 미쳐 한 단계 진한 것, 고른 상태·주요 버튼에만)
+   · 글자 회색 단계(#191F28 제목 / #4E5968 본문 / #5F6B7A 날짜·출처 같은 보조, #8B95A1 은 아이콘에만 — 회색 칸 위에서도 4.5:1)
    글자 크기는 기존보다 작게 하지 않음(키우기만). 테두리·그라데이션·여러 색 칩 없앰, 줄 대신 간격으로 나눔 */
 :root{
-  --m-ac:#3182F6; --m-acd:#1B64DA; --m-tint:#E8F3FF;
-  --m-t1:#191F28; --m-t2:#4E5968; --m-t3:#6B7684; --m-t4:#8B95A1; --m-t5:#B0B8C1;
+  --m-ac:#1B64DA; --m-acd:#1957C2; --m-tint:#E8F3FF; --m-ic:#8B95A1;
+  --m-t1:#191F28; --m-t2:#4E5968; --m-t3:#5F6B7A; --m-t4:#5F6B7A; --m-t5:#B0B8C1;
   --m-bg:#F2F4F6; --m-box:#F7F8FA; --m-pill:#F2F4F6; --m-press:#E5E8EB;
   --m-r:16px; --m-sh:0 1px 2px rgba(0,27,55,.04);
-  --navy:#3182F6; --navy-2:#3182F6; --ink:#191F28; --ink-2:#4E5968; --muted:#6B7684;
-  --line:#EEF0F3; --bg:#F2F4F6; --card:#fff; --accent:#3182F6; --gold:#3182F6;
+  --navy:#1B64DA; --navy-2:#1B64DA; --ink:#191F28; --ink-2:#4E5968; --muted:#5F6B7A;
+  --line:#EEF0F3; --bg:#F2F4F6; --card:#fff; --accent:#1B64DA; --gold:#1B64DA;
   --radius:16px; --shadow:var(--m-sh);
 }
 body{background:var(--m-bg);color:var(--m-t1)}
@@ -128,7 +129,7 @@ button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
 /* ---------- 칩: 모두 회색 알약(강조색은 고른 상태만) ---------- */
 .chip,.chip--topic,.chip--sec,.chip--region,.chip--date,.chip--imp,.top-card .chip{background:var(--m-pill);color:var(--m-t2);border:0;font-weight:600}
 .chip--sec{padding:3px 9px}
-.chip .mic{width:1.05em;height:1.05em;color:var(--m-t4)}
+.chip .mic{width:1.05em;height:1.05em;color:var(--m-ic)}
 .chip--new{background:var(--m-tint);color:var(--m-acd)}
 .mini{background:var(--m-pill);border:0;color:var(--m-t2)}
 .feed-intro .mini{background:#fff}
@@ -171,7 +172,7 @@ button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
 .card-heart:hover{background:var(--m-box)}
 .card-heart .mic{width:1.5rem;height:1.5rem;stroke-width:1.8}
 .card.flash{animation:m-flash .9s ease}
-@keyframes m-flash{0%{box-shadow:0 0 0 3px rgba(49,130,246,.45)}100%{box-shadow:0 1px 2px rgba(0,27,55,.04)}}
+@keyframes m-flash{0%{box-shadow:0 0 0 3px rgba(27,100,218,.4)}100%{box-shadow:0 1px 2px rgba(0,27,55,.04)}}
 .forme{background:var(--m-box);border:0;border-radius:14px;color:#333D4B;padding:12px 14px}
 .forme__h{color:var(--m-t1);font-weight:800}
 .forme__h .mic{color:var(--m-ac)}
@@ -210,7 +211,7 @@ button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
 .cform--out{background:var(--m-box);border-radius:14px}
 .cform input,.cform textarea,.rform textarea{border:1px solid var(--m-press);border-radius:12px}
 .qr__l{color:var(--m-t3)}
-.qr__l .mic{color:var(--m-t4)}
+.qr__l .mic{color:var(--m-ic)}
 .qr__c{background:var(--m-pill);border:0;color:#333D4B;border-radius:12px}
 .qr__c:hover,.qr__c:focus-visible{background:var(--m-press)}
 .replies{border-left-color:var(--m-press)}
@@ -260,6 +261,7 @@ button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
 .footer strong{color:var(--m-t1)}
 .footer__about{color:var(--m-t2)}
 .footer__links a{color:var(--m-t2)}
+.footer__small{opacity:1;color:var(--m-t3)}
 .to-top{background:#fff;color:var(--m-t1);box-shadow:0 2px 10px rgba(0,27,55,.12)}
 .install-hint{border:0;border-radius:16px}
 .ih__x{background:var(--m-pill)}
@@ -274,7 +276,7 @@ button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
 .sheet__x,.ob__x{background:var(--m-pill)}
 .persona{background:var(--m-box);border:1.5px solid transparent}
 .persona:hover,.persona[aria-pressed="true"]{border-color:var(--m-ac);background:var(--m-tint)}
-.tpick,.int,.opt{--tc:#3182F6!important;border-color:transparent;background:var(--m-box)}
+.tpick,.int,.opt{--tc:#1B64DA!important;border-color:transparent;background:var(--m-box)}
 .tpick[aria-pressed="true"],.int[aria-pressed="true"]{background:var(--m-tint);border-color:var(--m-ac);box-shadow:none}
 .opt[aria-checked="true"]{border-color:var(--m-ac);background:var(--m-tint)}
 .opt__e{box-shadow:none}
@@ -313,7 +315,7 @@ button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
 .pc-f,.pc-subs .pc-f{border:0;background:#fff;color:var(--m-t1)}
 .pc-f .mic{color:var(--m-t3)}
 .pc-f[aria-pressed="true"],.pc-region .pc-f[aria-pressed="true"],.pc-subs .pc-f[aria-pressed="true"]{background:var(--m-ac);border-color:var(--m-ac);color:#fff}
-.pc-f[aria-pressed="true"] .mic{color:#fff}
+.pc-f[aria-pressed="true"] .mic,.pc-f[aria-pressed="true"] small{color:#fff}
 .pc-openonly{border:0;background:#fff;color:var(--m-t1)}
 .pc-openonly .mic--dot{color:var(--m-ac)}
 .pc-openonly[aria-pressed="true"]{background:var(--m-tint);color:var(--m-acd)}
@@ -332,10 +334,10 @@ button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
 .pc__old{background:var(--m-t2)}
 .pc__price,.pc__price b{color:var(--m-t1)}
 .pc__price--na{color:var(--m-t3)}
-.pc__price .mic{color:var(--m-t4)}
+.pc__price .mic{color:var(--m-ic)}
 .pc__info{gap:8px}
 .pc__info dt{color:var(--m-t3);font-weight:600}
-.pc__info dt .mic{color:var(--m-t4)}
+.pc__info dt .mic{color:var(--m-ic)}
 .pc__info dd{color:var(--m-t1)}
 .pc__info dd small,.pc__fs{color:var(--m-t4)}
 .pc__btn{border:0;background:var(--m-pill);color:var(--m-t1)}
