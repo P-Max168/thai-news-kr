@@ -119,7 +119,8 @@
           '<span class="hp-tx"><b class="hp-t">' + title + '</b><small>' + (m && m.src ? esc(m.src) + " · " : "") + esc(edLabel(h.ed)) + "</small></span></button>" +
           '<button type="button" class="hp-x" data-hp-del="' + esc(h.ed) + "|" + esc(h.id) + '" aria-label="하트 취소">❤️</button></li>';
       }).join("");
-      var more = n > show.length ? '<button type="button" class="more-btn" data-hp-more>더 보기 (' + Math.min(n - show.length, STEPS[step + 1] - show.length) + "건 더) ▾</button>" : "";
+      var upto = Math.min(n, STEPS[step + 1]);   // 다음에 몇 개까지(2026-10-05 — 예전 'N건 더')
+      var more = n > show.length ? '<button type="button" class="more-btn" data-hp-more>' + (upto >= n ? "전체 " + n + "개 보기" : upto + "개까지 보기") + " ▾</button>" : "";
       return head + '<ul class="hp-list">' + rows + "</ul>" + more +
         '<p class="hp-note">이 기기에 저장돼요. Google 로그인하면 다른 기기와 같이 보여요.</p>';
     },
@@ -211,7 +212,7 @@
       var top = arts.slice(0, AD.topN).map(function (x, i) {
         return '<li class="ad-art"><span class="ad-rank">' + (i + 1) + '</span><span class="ad-at">' + esc(storyTitle(x.a)) + '</span><span class="ad-an">❤️ <b>' + n0(x.m.h) + "</b> 🙌 <b>" + n0(x.m.u) + "</b> 🙅 <b>" + n0(x.m.d) + "</b></span></li>";
       }).join("");
-      var more = arts.length > AD.topN && AD.topN < 10 ? '<button type="button" class="more-btn" data-ad-more>더 보기 ▾</button>' : "";
+      var more = arts.length > AD.topN && AD.topN < 10 ? '<button type="button" class="more-btn" data-ad-more>펼치기 (' + Math.min(10, arts.length) + '위까지) ▾</button>' : "";
       var rl = function (k) { var r = T && T.region(k); return r ? r.emoji + " " + r.label : k === "none" ? "미선택" : k; };
       var il = function (k) { var r = T && T.interest(k); return r ? r.emoji + " " + r.label : k === "none" ? "미선택" : k; };
       var tl = function (k) { var t = window.TNApp && TNApp.topicOf(k); return t && t.label ? t.emoji + " " + t.label : k; };

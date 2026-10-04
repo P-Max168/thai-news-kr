@@ -66,6 +66,9 @@
     var sel = selected(); if (!sel) return true;
     return tps(s).all.some(function (t) { return sel.indexOf(t) >= 0; });
   }
+  /* 순위 없는 목록 '더 보기' 글: 다음에 몇 개까지 보이는지(2026-10-05 — 예전 'N건 더'). 끝까지면 '전체 N개 보기' */
+  function moreLabel(upto, total) { return (upto >= total ? "전체 " + total + "개 보기" : upto + "개까지 보기") + " ▾"; }
+  window.TNMoreLabel = moreLabel;
   function edId() { return (state.edition && state.edition.id) || state.data.id || state.data.date; }
   /* ⚠️ 오류 신고 버튼(기사·가게·임대·광고) — 누르면 assets/report.js 를 처음 한 번 불러와 버튼 바로 아래를 펼침(팝업 없음) */
   function repBtn(kind, id) { return '<button type="button" class="rep-btn" data-rep="' + kind + '" data-rep-id="' + esc(id) + '" aria-expanded="false"><span class="rep-btn__e" aria-hidden="true">⚠️</span> 오류 신고</button>'; }
@@ -205,7 +208,7 @@
           (i === 4 && show > 5 && kAd && !adRisk(x) && !adRisk(k[5]) ? '<li class="k-ad">' + adHTML(kAd, 0) + "</li>" : "");   // 5위·6위 사이 작은 광고(6~10위가 보일 때만, data/ads.json 'korea-mid')
       }).join("") + "</ol>" +
       (k.length > ST[0] ? '<button type="button" class="korea__more" data-korea-more aria-controls="koreaList" aria-expanded="' + (show >= k.length) + '">' +
-        (show >= k.length ? "접기 ▴" : "펼치기 (" + (next - show) + "건 더) ▾") + "</button>" : "");
+        (show >= k.length ? "접기 ▴" : "펼치기 (" + next + "위까지) ▾") + "</button>" : "");   // 몇 위까지 보이는지(2026-10-05 — 예전 'N건 더')
   }
 
   /* 브리핑: 새 형식 [{topic, text(**굵게**), story_id}] / 옛 형식(문단) → 문장별 글머리표 */
@@ -615,7 +618,7 @@
       var nxt = Math.min(g.nat.length, NAT_STEPS[state.natStep + 1] || g.nat.length) - show;
       html += '<section class="fsec fsec--nat" aria-label="전국·다른 지역 뉴스"><h3 class="fsec__h">🇹🇭 ' + (m.region && m.region.topic ? "전국·다른 지역" : "전국") + ' 뉴스 <em>' + g.nat.length + "건</em></h3>" +
         withInfeed(g.nat.slice(0, show).map(cardHTML)) +
-        (g.nat.length > NAT_STEPS[0] ? '<button type="button" class="more-btn" data-nat-more aria-expanded="' + !more + '">' + (more ? "펼치기 (" + nxt + "건 더) ▾" : "접기 ▴") + "</button>" : "") + "</section>";
+        (g.nat.length > NAT_STEPS[0] ? '<button type="button" class="more-btn" data-nat-more aria-expanded="' + !more + '">' + (more ? moreLabel(show + nxt, g.nat.length) : "접기 ▴") + "</button>" : "") + "</section>";
     }
     $("feed").innerHTML = html;
   }
