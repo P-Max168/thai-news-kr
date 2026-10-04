@@ -9,8 +9,8 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f4f5f7",
-  "theme_color": "#0b2a4a",
+  "background_color": "#F2F4F6",
+  "theme_color": "#ffffff",
   "categories": [
     "news"
   ],

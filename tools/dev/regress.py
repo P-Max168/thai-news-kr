@@ -3,7 +3,7 @@
   python3 tools/dev/regress.py [URL] [--json out.json]
 결과: 항목마다 '통과/실패/참고' 한 줄(한국어). 실패가 있으면 exit 1.
 뉴스 정기 실행과 무관(개발 점검용). 첫 방문 시작 화면은 저장값을 미리 넣어 건너뜀(온보딩 자체는 따로 점검)."""
-import asyncio, json, re, sys, time, pathlib
+import urllib.parse, asyncio, json, re, sys, time, pathlib
 from playwright.async_api import async_playwright
 
 URL = next((a for a in sys.argv[1:] if a.startswith("http")), "https://p-max168.github.io/thai-news-kr/")
@@ -317,7 +317,7 @@ async def main():
         # 다듬기: 없는 주소 = 한국어 404(라이브 GitHub Pages 만), 첫 화면 뼈대 자리
         if "github.io" in URL:
             try:
-                r404 = await pg.evaluate("u=>fetch(u,{cache:'no-store'}).then(async r=>({st:r.status,ko:(await r.text()).indexOf('찾을 수 없어요')>0}))", URL + "no-such-page-" + str(int(time.time())))
+                r404 = await pg.evaluate("u=>fetch(u,{cache:'no-store'}).then(async r=>({st:r.status,ko:(await r.text()).indexOf('찾을 수 없어요')>0}))", urllib.parse.urljoin(urllib.parse.urlsplit(URL)._replace(query="", fragment="").geturl(), "no-such-page-" + str(int(time.time()))))   # ?theme= 같은 쿼리가 붙은 URL 에서도 사이트 경로 + 없는 쪽
             except Exception as e:
                 r404 = {"err": str(e)[:80]}
             rec(r404.get("st") == 404 and r404.get("ko"), "없는 주소 = 한국어 404 쪽('페이지를 찾을 수 없어요' + 오늘의 뉴스 버튼)", r404)

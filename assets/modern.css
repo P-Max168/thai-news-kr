@@ -229,6 +229,7 @@ html.th-modern .ad--t1,html.th-modern .ad--t2,html.th-modern .ad--t3,html.th-mod
 html.th-modern .widget{border:0;box-shadow:var(--m-sh);border-radius:var(--m-r)}
 html.th-modern .widget--muted{background:#fff}
 html.th-modern .cat-stats .bar{background:var(--m-pill)}
+html.th-modern .cat-stats .bar i{background:var(--m-ac)!important;opacity:.85}
 html.th-modern .src-list li{background:var(--m-pill);color:var(--m-t2);border-radius:999px}
 html.th-modern .footer{background:#fff;color:var(--m-t3)}
 html.th-modern .footer strong{color:var(--m-t1)}

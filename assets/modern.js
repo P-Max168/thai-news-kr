@@ -13,7 +13,7 @@
   var ICON = [
     "#heartBtn", ".nb-lab", ".nb-cat", ".dq-btn", ".drawer .tab", ".dr-item", ".drawer__x", ".dm-target", ".dm-btn",
     ".section-title", ".fsec__h", ".pin__h", ".forme__h", ".context > b", ".qr__l", ".vote", ".tool", ".update > b", ".linkbtn",
-    ".btn", ".k-card__go", ".card-heart", ".tk-i", ".korea__more", ".more-btn", ".feed-intro", ".edition-note", ".empty",
+    ".btn", ".k-card__go", ".card-heart", ".tk-i", ".tk-chip", ".tk-pop", ".korea__more", ".more-btn", ".feed-intro", ".edition-note", ".empty",
     ".nb-page__t", ".nb-back", ".nb-sw", ".nb-go", ".nb-places", ".nb-note", ".nb-how summary", ".nb-sec",
     ".pc-f", ".pc-intro b", ".pc-openonly", ".pc__cat", ".pc__open", ".pc__price", ".pc__info dt", ".pc__btn", ".pc__report", ".pc__old",
     ".pc-empty__e", ".jb-ex", ".hp-n", ".hp-empty__e", ".hp-ic", ".hp-x", ".persona__e", ".tpick__e", ".opt__e", ".int__e", ".setbtn",

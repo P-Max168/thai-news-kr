@@ -37,7 +37,7 @@ async def main():
         check(not man.get("errors"), "manifest 오류 없음 %s" % man.get("errors"))
         mj = json.loads(man.get("data") or "{}")
         print("  manifest:", {k: mj.get(k) for k in ("name", "short_name", "display", "theme_color", "start_url")}, "icons:", [(i["sizes"], i.get("purpose")) for i in mj.get("icons", [])])
-        check(mj.get("name") == "태국 뉴스 한눈에" and mj.get("theme_color") == "#0b2a4a", "manifest 이름·테마색")
+        check(mj.get("name") == "태국 뉴스 한눈에" and mj.get("theme_color") == "#ffffff", "manifest 이름·테마색(모던 흰 헤더, 2026-10-05)")
         await pg.reload(wait_until="networkidle")   # SW 가 페이지를 제어하도록
         ctrl = await pg.evaluate("!!navigator.serviceWorker.controller")
         check(ctrl, "페이지가 서비스 워커 제어 중")

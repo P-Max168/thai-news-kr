@@ -424,15 +424,15 @@ def edition_page(data, meta, chosen, tp, ed_url, img):
 <title>%(title)s</title>
 <meta name="description" content="%(desc)s">
 %(og)s
-<meta name="theme-color" content="#0b2a4a">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/icons/favicon-32.png">
 <!-- 판별 링크 미리보기용 정적 페이지(tools/share_kit.py 가 생성). 사람은 바로 판 화면으로 이동.
      meta refresh 는 일부 미리보기 수집기가 따라가 메인 페이지 태그를 읽을 수 있어 쓰지 않음(JS 이동 + 링크). -->
 <script>location.replace(%(target_js)s + location.hash);</script>
-<style>body{margin:0;font-family:Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:#f4f5f7;color:#16181d}
-header{background:#0b2a4a;color:#fff;padding:18px 20px;font-weight:800;font-size:20px}main{padding:20px;max-width:640px;margin:auto}
-a.btn{display:inline-block;margin-top:14px;background:#f5b700;color:#3a2a00;font-weight:800;padding:10px 18px;border-radius:999px;text-decoration:none}
-li{margin:6px 0}</style>
+<style>body{margin:0;font-family:Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:#F2F4F6;color:#191F28}
+header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+li{margin:6px 0;color:#333D4B}</style>
 </head>
 <body>
 <header>태국 뉴스 한눈에</header>

@@ -256,6 +256,7 @@ button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
 .widget{border:0;box-shadow:var(--m-sh);border-radius:var(--m-r)}
 .widget--muted{background:#fff}
 .cat-stats .bar{background:var(--m-pill)}
+.cat-stats .bar i{background:var(--m-ac)!important;opacity:.85}
 .src-list li{background:var(--m-pill);color:var(--m-t2);border-radius:999px}
 .footer{background:#fff;color:var(--m-t3)}
 .footer strong{color:var(--m-t1)}
