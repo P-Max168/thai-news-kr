@@ -6,6 +6,28 @@
    kakao_url / line_url are non-empty (add data-preview to show '#' placeholders). */
 (function () {
   "use strict";
+  /* ★ 배너 스타일 스위치(2026-10-05 민구님 지시 — 최종 하나 고르면 이 한 줄만 바꾸기)
+       "mix"    = 자리마다 다른 스타일(비교용, 기본값): 맨 위 띠 A · 메인 큰 배너 B · 기사 사이 1번째 C · 2번째 D · 3번째 A · 한국 뉴스 사이 B · 메뉴 서랍 C · 맨 아래 띠 D
+       "rotate" = 들어올 때마다 A→B→C→D 차례로(한 화면 안 모든 자리는 같은 스타일)
+       "A" 검정+금색(호텔 스파) · "B" 짙은 남색+금색 · "C" 와인+크림 · "D" 흰 카드+강한 빨강+큰 버튼  → 그 스타일로 모든 자리 고정
+       "off"    = 10-05 02:37 이전 모양(모던 = 흰 카드, 클래식 = 어두운 빨강+금색)
+     미리 보기만(저장 안 됨): 주소 끝에 ?dragon=A (B·C·D·rotate·mix·off) */
+  var DRAGON_STYLE = "mix";
+  var STYLES = ["A", "B", "C", "D"];
+  var MIX = { "top:0": "A", "mid:0": "B", "infeed:0": "C", "infeed:1": "D", "infeed:2": "A", "korea-mid:0": "B", "drawer:0": "C", "footer:0": "D" };
+  try { var qs = /[?&]dragon=(A|B|C|D|rotate|mix|off)\b/.exec(location.search); if (qs) DRAGON_STYLE = qs[1]; } catch (e) {}
+  var ROT = 0;
+  if (DRAGON_STYLE === "rotate") { try { ROT = (+localStorage.getItem("tnk.dm.rot") || 0) + 1; localStorage.setItem("tnk.dm.rot", String(ROT % 1000)); } catch (e) {} }
+  /* key = "자리 id:몇 번째"(예: infeed:1). 반환 = "A".."D" 또는 ""(예전 모양) */
+  function pickStyle(key) {
+    if (DRAGON_STYLE === "off") return "";
+    if (STYLES.indexOf(DRAGON_STYLE) >= 0) return DRAGON_STYLE;
+    if (DRAGON_STYLE === "rotate") return STYLES[ROT % 4];
+    key = String(key || "");
+    if (MIX[key]) return MIX[key];
+    for (var h = 0, i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) % 9973;   // 내 주변·지역 칸 = 자리 이름으로 고정(새로고침해도 같음)
+    return STYLES[h % 4];
+  }
   var me = document.currentScript;
   var BASE = me && me.src ? new URL(".", me.src).href : "assets/ads/massage/";
   var esc = function (s) {
@@ -54,6 +76,8 @@
     var chips = [["clock", d.hours_short], ["star", d.rating_short], ["pin", d.area_short]]
       .filter(function (c) { return c[1]; })
       .map(function (c) { return '<li class="dm-ad__chip">' + I[c[0]] + esc(c[1]) + "</li>"; }).join("");
+    var st = /^[ABCD]$/.test(opt.style || "") ? opt.style : "";
+    var sAttr = st ? ' data-dm-s="' + st + '"' : "";
     var fixed = opt.fixedHeight ? ' dm-ad--fixed" style="--dm-h:' + (+opt.fixedHeight) + 'px' : "";
     var tag = '<span class="dm-ad__tag">' + esc(ad.label || "광고") + "</span>";
     var body = v === "bar"
@@ -65,7 +89,7 @@
         '<p class="dm-ad__copy">' + esc(v === "small" ? d.copy_short || d.copy : d.copy) + "</p></div>" +
         '<ul class="dm-ad__chips">' + chips + "</ul>";
     return targetHTML(opt.target) +
-      '<aside class="dm-ad dm-ad--' + v + fixed + '" aria-label="' + esc(ad.label || "광고") + ": " + esc(ad.title) + '">' +
+      '<aside class="dm-ad dm-ad--' + v + fixed + '"' + sAttr + ' aria-label="' + esc(ad.label || "광고") + ": " + esc(ad.title) + '">' +
       '<div class="dm-ad__in">' +
       '<a class="dm-ad__cover" href="' + esc(ad.link) + '"' + ext + ' aria-label="' + esc(ad.title) + ' – Google 지도 보기"></a>' +
       '<img class="dm-ad__art" src="' + esc(base + "dragon.svg") + '" alt="" width="760" height="600" loading="lazy" decoding="async" aria-hidden="true">' +
@@ -76,10 +100,10 @@
 
   /* 사이트 광고 자리(data/ads.json item.render === "dragon")용: data/ads.js 에 같이 실린 ad.json(window.TN_ADS.dragon)으로 바로(동기) 그린다.
      못 그리면 null → 호출 쪽이 일반 카드로 대신 그림 */
-  function slotHTML(item) {
+  function slotHTML(item, key) {
     var ad = window.TN_ADS && window.TN_ADS.dragon;
     if (!ad || !item) return null;
-    return html(ad, item.variant || "small", { preview: !!item.preview, target: item.target || item.category || "" });
+    return html(ad, item.variant || "small", { preview: !!item.preview, target: item.target || item.category || "", style: pickStyle(key) });
   }
 
   var cache = null;
@@ -99,7 +123,7 @@
     var fh = opt.fixedHeight || +el.getAttribute("data-fixed-height") || 0;
     var target = opt.target != null ? opt.target : el.getAttribute("data-target") || "";
     return (opt.data ? Promise.resolve(opt.data) : load()).then(function (ad) {
-      el.innerHTML = html(ad, variant, { preview: preview, fixedHeight: fh, base: opt.base, target: target });
+      el.innerHTML = html(ad, variant, { preview: preview, fixedHeight: fh, base: opt.base, target: target, style: opt.style != null ? opt.style : pickStyle(opt.key || el.getAttribute("data-dm-key") || "") });
       el.addEventListener("click", function (e) {           /* '#' placeholders (preview) do nothing */
         var t = e.target.closest && e.target.closest("a[data-placeholder]");
         if (t) e.preventDefault();
@@ -112,6 +136,6 @@
     var els = document.querySelectorAll("[data-dragon-ad]:not([data-dragon-ad-done])");
     for (var i = 0; i < els.length; i++) { els[i].setAttribute("data-dragon-ad-done", ""); mount(els[i]); }
   }
-  window.DragonAd = { html: html, slotHTML: slotHTML, targetHTML: targetHTML, mount: mount, load: load, auto: auto, base: BASE };
+  window.DragonAd = { style: function () { return DRAGON_STYLE; }, pickStyle: pickStyle, html: html, slotHTML: slotHTML, targetHTML: targetHTML, mount: mount, load: load, auto: auto, base: BASE };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", auto); else auto();
 })();

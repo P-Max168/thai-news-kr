@@ -1,0 +1,3 @@
+바뀐 것: 드래곤 스웨디시 배너 스타일 4종 — A 검정+금색(호텔 스파, 이중 금테) · B 짙은 남색+금색 · C 와인+크림 그라데이션 · D 흰 카드+강한 빨강+큰 지도 버튼. 그림(dragon.svg)·글·전화·시간·위치는 예전 그대로(새 사실 없음). 스위치 = assets/ads/massage/dragon-ad.js 의 `var DRAGON_STYLE = "mix";` 한 줄(mix·rotate·A·B·C·D·off), 미리 보기 = 주소 끝 ?dragon=A. 비교 사진 compare-ABCD-360.jpg
+왜: 10-05 03:46 민구님(Max 전달) — 광고는 사이트와 똑같을 필요 없이 눈에 띄고 고급스럽게, 02:37 흰 카드는 너무 차분함. 최종 하나는 민구님이 고름
+되돌리는 법: 스타일만 끄기 = DRAGON_STYLE 를 "off" 로(02:37 모양). 전부 되돌리기 = `git checkout backup-20261005-0348-dragon-4styles -- assets/ads/massage/dragon-ad.js assets/ads/massage/dragon-ad.css assets/app.js assets/nearby.js README.md` → stamp → 커밋 → push(force 금지)

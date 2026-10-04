@@ -167,29 +167,108 @@
    그림(dragon.svg)·글(카피)·크기·자리·'광고' 표시 그대로. 바뀌는 것 = 색·모서리만:
    어두운 빨강+금색 바탕 → 흰 카드(옅은 테두리 1px 안쪽 그림자라 크기 그대로), 모서리 16px, 글자 진한 회색, 가게 이름은 굵게 + 빨강 강조(배너가 안 묻히게),
    용 그림은 흰 바탕 위에 선명하게(왼쪽 글 자리는 흐리게 빠짐), '광고' 회색 알약, 지도 = 사이트 강조색 파랑, 전화 = 흰 바탕 테두리 */
-html.th-modern aside.dm-ad{
+html.th-modern aside.dm-ad:not([data-dm-s]){
   --dm-ink:#191F28;--dm-sub:#4E5968;--dm-mute:#8B95A1;--dm-bd:#E5E8EB;--dm-acc:#1B64DA;--dm-hot:#D6213B;
   color:var(--dm-ink);border-radius:16px;
   background:radial-gradient(70% 120% at 92% 45%,#FFF1F1 0%,rgba(255,241,241,0) 62%),#fff;
   box-shadow:inset 0 0 0 1px var(--dm-bd)}
-html.th-modern aside.dm-ad.dm-ad--bar{border-radius:16px}
-html.th-modern aside.dm-ad .dm-ad__in::before{display:none}
-html.th-modern aside.dm-ad .dm-ad__art{opacity:.95}
-html.th-modern aside.dm-ad.dm-ad--bar .dm-ad__art{opacity:.8}
-html.th-modern aside.dm-ad .dm-ad__name,html.th-modern aside.dm-ad .dm-ad__copy,html.th-modern aside.dm-ad .dm-ad__en{text-shadow:0 0 10px #fff,0 0 4px #fff}
-html.th-modern aside.dm-ad .dm-ad__en{color:var(--dm-hot);font-weight:700}
-html.th-modern aside.dm-ad .dm-ad__name{color:var(--dm-ink);font-weight:800}
-html.th-modern aside.dm-ad .dm-ad__name b{color:var(--dm-hot);font-weight:800}
-html.th-modern aside.dm-ad .dm-ad__copy{color:var(--dm-sub)}
-html.th-modern aside.dm-ad .dm-ad__tag{background:#F2F4F6;color:var(--dm-sub);font-weight:700;letter-spacing:0;border-radius:6px;-webkit-backdrop-filter:none;backdrop-filter:none}
-html.th-modern aside.dm-ad .dm-ad__chip{background:rgba(242,244,246,.92);border-color:transparent;color:var(--dm-sub)}
-html.th-modern aside.dm-ad .dm-ad__chip svg[stroke]{stroke:var(--dm-mute)}
-html.th-modern aside.dm-ad .dm-ad__chip svg path[fill="#e9c46a"]{fill:#FFB400}
-html.th-modern aside.dm-ad .dm-btn{background:#fff;border-color:var(--dm-bd);color:var(--dm-ink);box-shadow:none}
-html.th-modern aside.dm-ad a.dm-btn:not(.dm-btn--map),html.th-modern aside.dm-ad a.dm-btn:not(.dm-btn--map):visited{color:var(--dm-ink)}
-html.th-modern aside.dm-ad .dm-btn--map,html.th-modern aside.dm-ad a.dm-btn--map,html.th-modern aside.dm-ad a.dm-btn--map:visited{background:var(--dm-acc);border-color:var(--dm-acc);color:#fff}
-html.th-modern aside.dm-ad .dm-btn--kakao{border-color:#F2D600}
-html.th-modern aside.dm-ad .dm-btn--line{border-color:#06c755}
-html.th-modern aside.dm-ad .dm-btn .mic{color:inherit}
-html.th-modern aside.dm-ad .dm-ad__cover:focus-visible{outline-color:var(--dm-acc)}
-html.th-modern aside.dm-ad .dm-btn:focus-visible{outline-color:var(--dm-acc)}
+html.th-modern aside.dm-ad:not([data-dm-s]).dm-ad--bar{border-radius:16px}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-ad__in::before{display:none}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-ad__art{opacity:.95}
+html.th-modern aside.dm-ad:not([data-dm-s]).dm-ad--bar .dm-ad__art{opacity:.8}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-ad__name,html.th-modern aside.dm-ad:not([data-dm-s]) .dm-ad__copy,html.th-modern aside.dm-ad:not([data-dm-s]) .dm-ad__en{text-shadow:0 0 10px #fff,0 0 4px #fff}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-ad__en{color:var(--dm-hot);font-weight:700}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-ad__name{color:var(--dm-ink);font-weight:800}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-ad__name b{color:var(--dm-hot);font-weight:800}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-ad__copy{color:var(--dm-sub)}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-ad__tag{background:#F2F4F6;color:var(--dm-sub);font-weight:700;letter-spacing:0;border-radius:6px;-webkit-backdrop-filter:none;backdrop-filter:none}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-ad__chip{background:rgba(242,244,246,.92);border-color:transparent;color:var(--dm-sub)}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-ad__chip svg[stroke]{stroke:var(--dm-mute)}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-ad__chip svg path[fill="#e9c46a"]{fill:#FFB400}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-btn{background:#fff;border-color:var(--dm-bd);color:var(--dm-ink);box-shadow:none}
+html.th-modern aside.dm-ad:not([data-dm-s]) a.dm-btn:not(.dm-btn--map),html.th-modern aside.dm-ad:not([data-dm-s]) a.dm-btn:not(.dm-btn--map):visited{color:var(--dm-ink)}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-btn--map,html.th-modern aside.dm-ad:not([data-dm-s]) a.dm-btn--map,html.th-modern aside.dm-ad:not([data-dm-s]) a.dm-btn--map:visited{background:var(--dm-acc);border-color:var(--dm-acc);color:#fff}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-btn--kakao{border-color:#F2D600}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-btn--line{border-color:#06c755}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-btn .mic{color:inherit}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-ad__cover:focus-visible{outline-color:var(--dm-acc)}
+html.th-modern aside.dm-ad:not([data-dm-s]) .dm-btn:focus-visible{outline-color:var(--dm-acc)}
+
+/* ---------- 스타일 4종 A·B·C·D(2026-10-05 03:46 민구님 지시: 눈에 띄게·고급스럽게, 사이트와 '어색하지 않을' 정도로만 맞춤) ----------
+   dragon-ad.js 의 DRAGON_STYLE 한 줄로 고름(aside data-dm-s="A|B|C|D"). 모던·클래식 둘 다 같은 스타일. 그림(dragon.svg)·글·자리 크기 그대로 —
+   바뀌는 것 = 색·테두리·버튼 모양(D 만 지도 버튼을 더 크게, 높이 +6px 안쪽). 테두리는 inset 그림자라 크기 안 바뀜 */
+/* 선택자 앞 'html … .dm-ad.dm-ad' = modern.css(html.th-modern .dm-ad{box-shadow:none} 등)보다 우선하게(나중 파일이 같은 무게면 이김) */
+html aside.dm-ad.dm-ad[data-dm-s]{--g1:#F7E3A1;--g2:#D9B45A;--g3:#B8913A}
+html aside.dm-ad.dm-ad[data-dm-s] .dm-ad__name b{font-weight:800}
+html aside.dm-ad.dm-ad[data-dm-s] .dm-ad__tag{letter-spacing:.08em}
+/* 금속 느낌 금색 버튼(A·B 공통) */
+html aside.dm-ad.dm-ad[data-dm-s=A] a.dm-btn--map,html aside.dm-ad.dm-ad[data-dm-s=B] a.dm-btn--map,
+html aside.dm-ad.dm-ad[data-dm-s=A] a.dm-btn--map:visited,html aside.dm-ad.dm-ad[data-dm-s=B] a.dm-btn--map:visited{
+  background:linear-gradient(180deg,var(--g1) 0%,var(--g2) 55%,var(--g3) 100%);border-color:transparent;color:#1A1306;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 4px 14px rgba(0,0,0,.35)}
+html aside.dm-ad.dm-ad[data-dm-s=A] .dm-ad__name b,html aside.dm-ad.dm-ad[data-dm-s=B] .dm-ad__name b{
+  background:linear-gradient(180deg,#FBEFC4 0%,#E6C36E 50%,#C79A3E 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.7))}
+
+/* A — 검정 + 금색: 호텔 스파(이중 금색 테두리) */
+html aside.dm-ad.dm-ad[data-dm-s=A]{color:#F3EAD3;
+  background:radial-gradient(80% 120% at 86% 42%,rgba(201,162,74,.24) 0%,rgba(201,162,74,0) 60%),linear-gradient(120deg,#040404 0%,#0F0E11 55%,#1D1810 100%);
+  box-shadow:inset 0 0 0 1px rgba(212,175,55,.75),inset 0 0 0 4px #070707,inset 0 0 0 5px rgba(212,175,55,.28)}
+html aside.dm-ad.dm-ad[data-dm-s=A] .dm-ad__in::before{opacity:.07}
+html aside.dm-ad.dm-ad[data-dm-s=A] .dm-ad__art{opacity:.72}
+html aside.dm-ad.dm-ad[data-dm-s=A] .dm-ad__en{color:#D9B45A}
+html aside.dm-ad.dm-ad[data-dm-s=A] .dm-ad__name{color:#F6EEDB}
+html aside.dm-ad.dm-ad[data-dm-s=A] .dm-ad__copy{color:rgba(243,234,211,.9)}
+html aside.dm-ad.dm-ad[data-dm-s=A] .dm-ad__tag{background:#0A0A0A;color:#E9CF86;box-shadow:inset 0 0 0 1px #D4AF37}
+html aside.dm-ad.dm-ad[data-dm-s=A] .dm-ad__chip{background:rgba(0,0,0,.6);border-color:rgba(212,175,55,.6);color:#F1E4C3}
+html aside.dm-ad.dm-ad[data-dm-s=A] a.dm-btn:not(.dm-btn--map),html aside.dm-ad.dm-ad[data-dm-s=A] a.dm-btn:not(.dm-btn--map):visited{background:rgba(0,0,0,.55);border-color:rgba(212,175,55,.85);color:#F1DFA8}
+
+/* B — 짙은 남색 + 금색 */
+html aside.dm-ad.dm-ad[data-dm-s=B]{color:#F4F1E8;
+  background:radial-gradient(80% 120% at 88% 40%,rgba(72,118,214,.38) 0%,rgba(72,118,214,0) 60%),radial-gradient(70% 110% at 0% 100%,rgba(226,190,106,.12) 0%,rgba(226,190,106,0) 60%),linear-gradient(120deg,#050F26 0%,#0B1E45 55%,#14306A 100%);
+  box-shadow:inset 0 0 0 1px rgba(226,190,106,.55)}
+html aside.dm-ad.dm-ad[data-dm-s=B] .dm-ad__in::before{opacity:.06}
+html aside.dm-ad.dm-ad[data-dm-s=B] .dm-ad__art{opacity:.7}
+html aside.dm-ad.dm-ad[data-dm-s=B] .dm-ad__en{color:#E2BE6A}
+html aside.dm-ad.dm-ad[data-dm-s=B] .dm-ad__name{color:#FFFFFF}
+html aside.dm-ad.dm-ad[data-dm-s=B] .dm-ad__copy{color:rgba(236,240,250,.9)}
+html aside.dm-ad.dm-ad[data-dm-s=B] .dm-ad__tag{background:#E2BE6A;color:#0B1E45}
+html aside.dm-ad.dm-ad[data-dm-s=B] .dm-ad__chip{background:rgba(4,12,32,.55);border-color:rgba(226,190,106,.55);color:#EEF1F8}
+html aside.dm-ad.dm-ad[data-dm-s=B] a.dm-btn:not(.dm-btn--map),html aside.dm-ad.dm-ad[data-dm-s=B] a.dm-btn:not(.dm-btn--map):visited{background:rgba(4,12,32,.5);border-color:rgba(255,255,255,.8);color:#fff}
+
+/* C — 와인(버건디) + 크림, 은은한 그라데이션 */
+html aside.dm-ad.dm-ad[data-dm-s=C]{color:#F7EBD7;
+  background:radial-gradient(75% 120% at 86% 30%,rgba(255,214,190,.16) 0%,rgba(255,214,190,0) 60%),linear-gradient(135deg,#34081A 0%,#5E1229 50%,#86203F 100%);
+  box-shadow:inset 0 0 0 1px rgba(247,235,215,.4)}
+html aside.dm-ad.dm-ad[data-dm-s=C] .dm-ad__in::before{opacity:.05}
+html aside.dm-ad.dm-ad[data-dm-s=C] .dm-ad__art{opacity:.6}
+html aside.dm-ad.dm-ad[data-dm-s=C] .dm-ad__en{color:#EBCBA2}
+html aside.dm-ad.dm-ad[data-dm-s=C] .dm-ad__name{color:#FBF2E4}
+html aside.dm-ad.dm-ad[data-dm-s=C] .dm-ad__name b{color:#F3D9A4}
+html aside.dm-ad.dm-ad[data-dm-s=C] .dm-ad__copy{color:rgba(247,235,215,.92)}
+html aside.dm-ad.dm-ad[data-dm-s=C] .dm-ad__tag{background:#F7EBD7;color:#5A0F24}
+html aside.dm-ad.dm-ad[data-dm-s=C] .dm-ad__chip{background:rgba(40,5,16,.45);border-color:rgba(247,235,215,.5);color:#F7EBD7}
+html aside.dm-ad.dm-ad[data-dm-s=C] .dm-ad__chip svg[stroke]{stroke:#F3D9A4}
+html aside.dm-ad.dm-ad[data-dm-s=C] a.dm-btn--map,html aside.dm-ad.dm-ad[data-dm-s=C] a.dm-btn--map:visited{background:linear-gradient(180deg,#FFF7EA 0%,#EBD3AE 100%);border-color:transparent;color:#5A0F24;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+html aside.dm-ad.dm-ad[data-dm-s=C] a.dm-btn:not(.dm-btn--map),html aside.dm-ad.dm-ad[data-dm-s=C] a.dm-btn:not(.dm-btn--map):visited{background:rgba(40,5,16,.4);border-color:rgba(247,235,215,.85);color:#F7EBD7}
+
+/* D — 흰 카드 + 강한 빨강 + 큰 지도 버튼(사이트와 가장 잘 어울림) */
+html aside.dm-ad.dm-ad[data-dm-s=D]{color:#191F28;
+  background:radial-gradient(70% 120% at 92% 45%,#FFE3E7 0%,rgba(255,227,231,0) 62%),#fff;
+  box-shadow:inset 0 0 0 1px #F0C9CF,0 6px 18px rgba(215,20,43,.10)}
+html aside.dm-ad.dm-ad[data-dm-s=D] .dm-ad__in::before{opacity:1;inset:0 auto 0 0;width:5px;background:#D7142B;background-image:none}
+html aside.dm-ad.dm-ad[data-dm-s=D] .dm-ad__art{opacity:.95}
+html aside.dm-ad.dm-ad[data-dm-s=D].dm-ad--bar .dm-ad__art{opacity:.8}
+html aside.dm-ad.dm-ad[data-dm-s=D] .dm-ad__name,html aside.dm-ad.dm-ad[data-dm-s=D] .dm-ad__copy,html aside.dm-ad.dm-ad[data-dm-s=D] .dm-ad__en{text-shadow:0 0 10px #fff,0 0 4px #fff}
+html aside.dm-ad.dm-ad[data-dm-s=D] .dm-ad__en{color:#D7142B;font-weight:800}
+html aside.dm-ad.dm-ad[data-dm-s=D] .dm-ad__name{color:#111827;font-weight:800}
+html aside.dm-ad.dm-ad[data-dm-s=D] .dm-ad__name b{color:#D7142B}
+html aside.dm-ad.dm-ad[data-dm-s=D] .dm-ad__copy{color:#4E5968}
+html aside.dm-ad.dm-ad[data-dm-s=D] .dm-ad__tag{background:#191F28;color:#fff;letter-spacing:.02em}
+html aside.dm-ad.dm-ad[data-dm-s=D] .dm-ad__chip{background:#FFF0F2;border-color:transparent;color:#8A1020}
+html aside.dm-ad.dm-ad[data-dm-s=D] .dm-ad__chip svg[stroke]{stroke:#D7142B}
+html aside.dm-ad.dm-ad[data-dm-s=D] a.dm-btn--map,html aside.dm-ad.dm-ad[data-dm-s=D] a.dm-btn--map:visited{background:linear-gradient(180deg,#EE2A42 0%,#C80F26 100%);border-color:transparent;color:#fff;box-shadow:0 6px 14px rgba(215,20,43,.30)}
+html aside.dm-ad.dm-ad[data-dm-s=D] a.dm-btn:not(.dm-btn--map),html aside.dm-ad.dm-ad[data-dm-s=D] a.dm-btn:not(.dm-btn--map):visited{background:#fff;border-color:#D7142B;color:#C80F26}
+html aside.dm-ad.dm-ad[data-dm-s=D]:not(.dm-ad--bar) .dm-ad__cta{grid-template-columns:1.6fr 1fr}
+html aside.dm-ad.dm-ad[data-dm-s=D]:not(.dm-ad--bar) .dm-btn{min-height:50px}
+html aside.dm-ad.dm-ad[data-dm-s=D]:not(.dm-ad--bar) a.dm-btn--map{font-size:17px}

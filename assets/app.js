@@ -520,7 +520,7 @@
     var it = sl.items[(n || 0) % sl.items.length], lab = (window.TN_ADS.label || "광고");
     // render:"dragon" = 드래곤 스웨디시 배너(assets/ads/massage/dragon-ad.js, variant·'이 자리 추천 업종' 꼬리표). 못 그리면 아래 일반 카드
     var rb = adRep(sl.id, it);
-    var dg = it.render === "dragon" && window.DragonAd && window.DragonAd.slotHTML(it);
+    var dg = it.render === "dragon" && window.DragonAd && window.DragonAd.slotHTML(it, sl.id + ":" + ((n || 0) % sl.items.length));
     if (dg) return dg + rb;
     var safe = function (u) { return u && /^https:\/\//.test(u) ? u : null; };
     var link = safe(it.link), img = safe(it.image);
