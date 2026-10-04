@@ -12,7 +12,8 @@ THAI = re.compile(r"[\u0E00-\u0E3E\u0E40-\u0E7F]")   # ฿(U+0E3F)는 허용
 SEED = """(()=>{ if(!localStorage.getItem('tnk.profile.v1')) localStorage.setItem('tnk.profile.v1', JSON.stringify({v:1,onboarded:true,persona:'pattaya',topics:['east','visa','life','weather','society'],region:'east',interests:['life'],taste:{w:{},votes:{},vf:{}},ui:{installHintUntil:Date.now()+864e5},updatedAt:1,settingsAt:1})); })()"""
 # 2026-10-05: RX_ON·REP_ON 이 켜진 뒤로 자동 점검이 실서버(Firestore)에 반응·신고를 쓰면 안 됨(하트 누르기 점검 = 매번 rx 문서 2개가 생김)
 #  → 모든 점검 창에서 ① 이 기기 스위치 끄기(tnk.rxon·tnk.repon = "0") ② Firestore 쓰기 요청(:commit·PATCH·DELETE) 자체를 막고 수를 셈
-NOWRITE = "try{localStorage.setItem('tnk.rxon','0');localStorage.setItem('tnk.repon','0')}catch(e){}"
+# 2026-10-05(Max 04:30 ③): 광고 클릭 수(adclicks)도 — 코드 스위치 AD_CLICK_ON=false 지만 이 기기 끄기(tnk.adclick="0")도 같이
+NOWRITE = "try{localStorage.setItem('tnk.rxon','0');localStorage.setItem('tnk.repon','0');localStorage.setItem('tnk.adclick','0')}catch(e){}"
 FS = {"blocked": 0}
 async def guard(c):
     await c.add_init_script(NOWRITE)
@@ -458,6 +459,23 @@ async def main():
             rec(okhw, "헤더 빠른 정보 최악 경우('매우 나쁨'·가장 긴 값) 320·360·412 — 넘침 0, 칸 4개(단계 = 넘칠 때만 켠 줄이기 단계 수, 5 = 2줄)", hw)
         except Exception as e:
             rec(False, "헤더 빠른 정보 최악 경우 점검 실행 실패", str(e)[:160])
+        # 2026-10-05(Max 04:30 ③): 광고 자리별 클릭 수(익명 adclicks) — 준비만, 꺼짐이어야 함. 코드 스위치 false + 광고 링크 눌러도 대기열·adclicks 요청 0
+        try:
+            c3 = await b.new_context(viewport={"width": 360, "height": 780}); await guard(c3); p3 = await c3.new_page()
+            acreq = []
+            p3.on("request", lambda r: acreq.append(r.url) if ("adclicks" in r.url or "adclicks" in (r.post_data or "")) else None)
+            await p3.goto(URL, wait_until="load"); await p3.wait_for_timeout(2000)
+            src = await p3.evaluate("async()=>{const s=[...document.scripts].map(x=>x.src).find(u=>/assets\\/social\\.js/.test(u)); return s ? await (await fetch(s)).text() : ''}")
+            off = bool(re.search(r"var AD_CLICK_ON = false;", src)) and not re.search(r"var AD_CLICK_ON = true", src)
+            nclk = await p3.evaluate("""()=>{addEventListener('click',e=>e.preventDefault(),true); const a=[...document.querySelectorAll('[data-ad-slot]:not([hidden]) a[href], .ad-slot--feed a[href]')].filter(x=>!x.hasAttribute('data-placeholder')).slice(0,3); a.forEach(x=>x.click()); return a.length}""")
+            await p3.wait_for_timeout(3800)
+            q = await p3.evaluate("localStorage.getItem('tnk.adq')")
+            api = await p3.evaluate("!!(window.TNSocial && TNSocial.adClickOn && TNSocial.adClickOn() === false)")
+            rec(off and api and nclk > 0 and not q and not acreq, "광고 자리별 클릭 수(익명) = 꺼짐(AD_CLICK_ON=false, 준비만) — 광고 링크 눌러도 이 기기 대기열·adclicks 요청 0",
+                {"코드스위치false": off, "adClickOn()=false": api, "누른 광고 링크": nclk, "대기열": q, "adclicks 요청": len(acreq)})
+            await c3.close()
+        except Exception as e:
+            rec(False, "광고 클릭 수 꺼짐 점검 실행 실패", str(e)[:160])
         rec(FS["blocked"] == 0 or None, "자동 점검이 실서버(Firestore)에 반응·신고를 안 씀(이 기기 스위치 끔 + 쓰기 요청 차단)", "막은 쓰기 요청 %d개" % FS["blocked"])
         await b.close()
     if OUT: pathlib.Path(OUT).write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")

@@ -6,6 +6,7 @@ rules_version = '2';
 //  config/admins   : {uids: [...]} 운영자 목록 — 콘솔에서만 수정(클라이언트 쓰기 금지)
 //  rx/{id}         : 익명 반응(하트·🙌·🙅) — 누구나 추가만, 운영자만 읽기(2026-10-03 야간)
 //  reports/{id}    : ⚠️ 오류 신고(기사·가게·임대·광고) — 누구나 추가만, 운영자만 읽기, 고치기·지우기 금지(2026-10-05)
+//  adclicks/{id}   : 광고 자리별 클릭 수(자리 id + 방콕 날짜 별 숫자만) — 누구나 n 을 1~20 올리기만, 운영자만 읽기(2026-10-05 추가 · ⏳ 아직 게시 전, LOGIN_TODO '대기')
 //  그 밖의 모든 경로 : 거부
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -152,6 +153,31 @@ service cloud.firestore {
       allow read: if isAdmin();
       allow create: if validRep(request.resource.data);
       allow update, delete: if false;
+    }
+
+    // ---------- 📊 광고 자리별 클릭 수 adclicks/{자리_날짜} (2026-10-05 추가 · ⏳ 게시 전 — 다음 규칙 게시 때 함께) ----------
+    // 사람 정보 없음: 문서 = {s: 광고 자리 id, d: 방콕 날짜 YYYYMMDD(정수), n: 클릭 수} 세 칸만(uid·기기·시각·기사 저장 안 함 — 다른 키는 거부).
+    // 문서 id = s + "_" + d. 날짜는 서버 시각 기준 방콕 오늘·어제만(옛 날짜 채우기 금지). 만들 때 n = 1~20, 고칠 때 n 만 1~20 늘리기(줄이기·지우기 금지).
+    // 읽기는 운영자만(승인함 통계). 사이트 코드 스위치 assets/social.js AD_CLICK_ON = false(꺼짐)
+    function bkDay(t) {
+      let b = t + duration.value(7, 'h');
+      return b.year() * 10000 + b.month() * 100 + b.day();
+    }
+    function validAdClick(d, id) {
+      return d.keys().hasOnly(['s', 'd', 'n']) && d.keys().hasAll(['s', 'd', 'n'])
+        && d.s is string && d.s.matches('^(top|mid|korea-mid|infeed|drawer|footer|nearby-[a-z]{2,12}|region-[a-z]{2,12})$')
+        && d.d is int && (d.d == bkDay(request.time) || d.d == bkDay(request.time - duration.value(1, 'd')))
+        && id == d.s + '_' + string(d.d)
+        && d.n is int;
+    }
+    match /adclicks/{id} {
+      allow read: if isAdmin();
+      allow create: if validAdClick(request.resource.data, id)
+        && request.resource.data.n >= 1 && request.resource.data.n <= 20;
+      allow update: if validAdClick(request.resource.data, id)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['n'])
+        && request.resource.data.n > resource.data.n && request.resource.data.n <= resource.data.n + 20;
+      allow delete: if false;
     }
 
     // ---------- 그 밖에는 모두 거부 ----------

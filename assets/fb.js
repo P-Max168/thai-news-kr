@@ -216,3 +216,20 @@ export async function listReports(sinceMs, max) {
   const snap = await F.getDocs(q);
   return snap.docs.map(function (d) { const x = d.data(); return Object.assign({}, x, { at: x.at && x.at.toMillis ? x.at.toMillis() : 0 }); });
 }
+
+/* ---------- 광고 자리별 클릭 수(익명): adclicks/{자리_날짜} (2026-10-05, 준비만 — social.js AD_CLICK_ON=false) ----------
+ * {s:자리 id, d:방콕 날짜 YYYYMMDD(정수), n:클릭 수}. 사람·기기·시각 정보 없음. 문서 id = s + "_" + d.
+ * 쓰기 = n 을 1~20 만 올리기(규칙이 모양·날짜·증가 폭 검사), 읽기 = 운영자만. 규칙(firestore.rules adclicks)은 아직 게시 전 → 지금 보내면 거부됨 */
+export async function addAdClicks(list) {
+  await fs();
+  const b = F.writeBatch(db);
+  list.slice(0, 20).forEach(function (x) { b.set(F.doc(db, "adclicks", x.s + "_" + x.d), { s: x.s, d: x.d, n: F.increment(x.n) }, { merge: true }); });
+  await b.commit();
+  return list.length;
+}
+export async function listAdClicks(sinceDay) {
+  await fs();
+  const q = F.query(F.collection(db, "adclicks"), F.where("d", ">=", sinceDay), F.limit(2000));
+  const snap = await F.getDocs(q);
+  return snap.docs.map(function (d) { return d.data(); });
+}

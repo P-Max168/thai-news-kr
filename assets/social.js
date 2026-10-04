@@ -6,7 +6,7 @@
  */
 (function () {
   "use strict";
-  var FB_URL = "assets/fb.js?v=4edebac2";       // tools/stamp_assets.py 가 ?v= 갱신
+  var FB_URL = "assets/fb.js?v=05834eb7";       // tools/stamp_assets.py 가 ?v= 갱신
   var AUTH_KEY = "tnk.auth.v1";                  // 이 기기: {uid, linked:[uid…]} (계정 정보는 저장 안 함)
   var S = window.TNStore, L = window.TNTaste;
   var live = /^https?:$/.test(location.protocol);
@@ -383,12 +383,53 @@
       if (e && /permission/i.test(e.code || e.message || "")) { try { localStorage.setItem(RXOFF, String(Date.now())); } catch (x) {} }
     });
   }
+  /* ---------- 광고 자리별 클릭 수(익명, 준비만 — 2026-10-05 Max 04:30) ----------
+   * 모으는 것 = 광고 자리 id + 날짜(방콕 기준 YYYYMMDD) 별 숫자 하나뿐. 사람·기기·시각·기사 정보 없음.
+   * Firestore adclicks/{자리_날짜} = {s:자리 id, d:20261005, n:클릭 수} — 이 기기에서 모았다가 3초 뒤 한 번에 n 을 올림(increment).
+   * ★ AD_CLICK_ON = false: 꺼 둠. 꺼져 있으면 클릭을 듣지도 않음(화면·동작 변화 0). firestore.rules 의 adclicks 부분은 아직 게시 전
+   *   (LOGIN_TODO '대기') — 켜기 = 민구님 규칙 게시 + 승인 뒤 이 한 줄. 시험용 켜기(tnk.adclick="1")는 localhost 에서만 먹음, "0" = 이 기기 끄기 */
+  var AD_CLICK_ON = false;
+  try { var acv = localStorage.getItem("tnk.adclick"); if (acv === "0") AD_CLICK_ON = false; else if (acv === "1" && /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) AD_CLICK_ON = true; } catch (e) {}
+  var ACQ = "tnk.adq", acTimer = null, acBusy = false;
+  function bkDay(ms) { var d = new Date((ms || Date.now()) + 7 * 3600e3); return d.getUTCFullYear() * 10000 + (d.getUTCMonth() + 1) * 100 + d.getUTCDate(); }
+  function acRead() { try { return JSON.parse(localStorage.getItem(ACQ) || "{}") || {}; } catch (e) { return {}; } }
+  function acWrite(q) { try { localStorage.setItem(ACQ, JSON.stringify(q)); } catch (e) {} }
+  var AC_SLOT = /^(top|mid|korea-mid|infeed|drawer|footer|nearby-[a-z]{2,12}|region-[a-z]{2,12})$/;
+  function adSlotOf(a) {   // 누른 링크가 어느 광고 자리인지(자리 id 만)
+    var el;
+    if ((el = a.closest("[data-ad-slot]"))) return el.getAttribute("data-ad-slot");
+    if (a.closest(".ad-slot--feed")) return "infeed";
+    if (a.closest(".k-ad")) return "korea-mid";
+    if ((el = a.closest("[data-region-ad]"))) return "region-" + el.getAttribute("data-region-ad");
+    if (a.closest("[data-nb-ad]")) { var m = /^#nearby\/([a-z]+)/.exec(location.hash); return m ? "nearby-" + m[1] : ""; }
+    return "";
+  }
+  function acClick(e) {
+    var a = e.target.closest && e.target.closest("a[href]"); if (!a || a.hasAttribute("data-placeholder")) return;
+    var s = adSlotOf(a); if (!AC_SLOT.test(s)) return;
+    var q = acRead(), k = s + "_" + bkDay(); q[k] = Math.min(20, (q[k] || 0) + 1); acWrite(q);
+    clearTimeout(acTimer); acTimer = setTimeout(acFlush, 3000);
+  }
+  function acFlush() {
+    if (!AD_CLICK_ON || acBusy || !live || failed) return;
+    var q = acRead(), today = bkDay(), yday = bkDay(Date.now() - 864e5), list = [];
+    Object.keys(q).forEach(function (k) { var i = k.lastIndexOf("_"), s = k.slice(0, i), d = +k.slice(i + 1); if (AC_SLOT.test(s) && (d === today || d === yday) && q[k] > 0) list.push({ s: s, d: d, n: Math.min(20, q[k]) }); });
+    if (!list.length) { acWrite({}); return; }   // 그제 이전 것은 버림(규칙도 오늘·어제만 받음)
+    if (!fb) { if (!fbP) load().then(start).then(function () { setTimeout(acFlush, 500); }).catch(function () {}); return; }
+    if (!fb.addAdClicks) return;
+    list = list.slice(0, 20); acBusy = true;
+    fb.addAdClicks(list).then(function () {
+      var cur = acRead(); list.forEach(function (x) { var k = x.s + "_" + x.d; cur[k] = Math.max(0, (cur[k] || 0) - x.n); if (!cur[k]) delete cur[k]; }); acWrite(cur); acBusy = false;
+    }).catch(function () { acBusy = false; });   // 규칙 미게시(permission-denied)·오프라인 = 이 기기에 남겨 둠(자리·날짜별 최대 20)
+  }
+  if (AD_CLICK_ON && live) { document.addEventListener("click", acClick, true); addEventListener("pagehide", function () { if (acTimer) { clearTimeout(acTimer); acFlush(); } }); }
+  function adminAdClicks(sinceDay) { return load().then(function (m) { start(m); return m.listAdClicks(sinceDay); }); }
   function adminStats(sinceMs) { return load().then(function (m) { start(m); return m.listReactions(sinceMs, 5000); }); }
   // ⚠️ 오류 신고(assets/report.js): 로그인 없이 reports 에 추가만 / 운영자 승인함에서 읽기
   function report(r) { if (!live || failed) return Promise.reject(new Error("off")); return load().then(function (m) { start(m); return m.addReport(r); }); }
   function adminReports(sinceMs) { return load().then(function (m) { start(m); return m.listReports(sinceMs, 300); }); }
 
-  window.TNSocial = { react: react, report: report, adminReports: adminReports, isAdmin: function () { return !!(user && admin); }, adminStats: adminStats, warm: function () { if (live && !fbP && !failed) load().then(start).catch(function () {}); }, mountComments: mountComments, renderAccountBox: renderAccountBox, signedIn: function () { return !!user; }, _filter: badText, _nick: nickOk, _replyChips: replyChips };
+  window.TNSocial = { react: react, report: report, adClickOn: function () { return AD_CLICK_ON; }, adminAdClicks: adminAdClicks, adminReports: adminReports, isAdmin: function () { return !!(user && admin); }, adminStats: adminStats, warm: function () { if (live && !fbP && !failed) load().then(start).catch(function () {}); }, mountComments: mountComments, renderAccountBox: renderAccountBox, signedIn: function () { return !!user; }, _filter: badText, _nick: nickOk, _replyChips: replyChips };
 
   renderHeader();
   if (!live) return;

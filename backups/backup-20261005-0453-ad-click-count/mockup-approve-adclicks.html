@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>시안 — 승인함 📊 광고 자리별 클릭 수</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="../../assets/late.css">
+<script>if(!/[?&]theme=classic/.test(location.search)){document.documentElement.classList.add("th-modern");document.write('<link rel="stylesheet" href="../../assets/modern.css">');}</script>
+<style>
+  body{margin:0} .mk{max-width:720px;margin:0 auto;padding:12px 16px 40px}
+  .mk-warn{border:2px dashed #e8590c;border-radius:12px;padding:10px 12px;margin:0 0 12px;font-size:.9rem;line-height:1.5}
+  .mk-warn b{color:#e8590c}
+  .mk .ad-tr{grid-template-columns:minmax(0,1fr) 3.2em 3.2em 3.2em}
+  .mk .ad-tr small{display:block;color:var(--muted);font-size:.75rem;line-height:1.2}
+  .mk .ad-tr b{color:#868e96;font-weight:600}
+  .mk-per{display:flex;gap:6px;margin:0 0 10px}.mk-per button{opacity:.55}
+  .mk-note{font-size:.85rem;line-height:1.55;margin:12px 0 0}
+</style>
+</head>
+<body>
+<div class="mk">
+  <h2 class="nb-page__t">✅ 승인함 — 📊 광고 자리별 클릭 수 <small>(시안)</small></h2>
+  <p class="mk-warn"><b>시안 — 아직 안 켬.</b> 사이트 스위치 <code>AD_CLICK_ON = false</code> · 보안 규칙(<code>adclicks</code>) 게시 전(LOGIN_TODO '대기').
+    아래 표는 모양만 보여 주는 빈 표예요 — 숫자는 '—'(모은 숫자 없음, 예시 숫자도 넣지 않음).</p>
+  <div class="mk-per ad-per" role="group" aria-label="기간"><button type="button" class="ad-pbtn" aria-pressed="true" disabled>오늘</button><button type="button" class="ad-pbtn" disabled>7일</button><button type="button" class="ad-pbtn" disabled>30일</button></div>
+  <section class="ad-sec"><h3 class="ad-h">자리별 클릭 수 <small>(방콕 날짜 기준)</small></h3>
+    <div class="ad-tb" role="table">
+      <div class="ad-tr ad-tr--h" role="row"><span role="columnheader">광고 자리</span><span role="columnheader">오늘</span><span role="columnheader">7일</span><span role="columnheader">30일</span></div>
+      <div class="ad-tr" role="row"><span role="cell">맨 위 띠 <small>top</small></span><b>—</b><b>—</b><b>—</b></div>
+      <div class="ad-tr" role="row"><span role="cell">메인 큰 배너 <small>mid</small></span><b>—</b><b>—</b><b>—</b></div>
+      <div class="ad-tr" role="row"><span role="cell">기사 사이 <small>infeed</small></span><b>—</b><b>—</b><b>—</b></div>
+      <div class="ad-tr" role="row"><span role="cell">한국 뉴스 5·6위 사이 <small>korea-mid</small></span><b>—</b><b>—</b><b>—</b></div>
+      <div class="ad-tr" role="row"><span role="cell">☰ 서랍 <small>drawer</small></span><b>—</b><b>—</b><b>—</b></div>
+      <div class="ad-tr" role="row"><span role="cell">맨 아래 띠 <small>footer</small></span><b>—</b><b>—</b><b>—</b></div>
+      <div class="ad-tr" role="row"><span role="cell">📍 내 주변 맛집 <small>nearby-food</small></span><b>—</b><b>—</b><b>—</b></div>
+      <div class="ad-tr" role="row"><span role="cell">📍 내 주변 마사지 <small>nearby-massage</small></span><b>—</b><b>—</b><b>—</b></div>
+      <div class="ad-tr" role="row"><span role="cell">📍 내 주변 동물병원 <small>nearby-pet</small></span><b>—</b><b>—</b><b>—</b></div>
+      <div class="ad-tr" role="row"><span role="cell">📍 내 주변 뷰티 <small>nearby-beauty</small></span><b>—</b><b>—</b><b>—</b></div>
+      <div class="ad-tr" role="row"><span role="cell">📍 내 주변 오토바이 <small>nearby-moto</small></span><b>—</b><b>—</b><b>—</b></div>
+      <div class="ad-tr" role="row"><span role="cell">지역 뉴스 칸 <small>region-*</small></span><b>—</b><b>—</b><b>—</b></div>
+    </div>
+  </section>
+  <p class="mk-note"><b>모으는 것</b>: 광고 자리 id + 날짜(방콕) 별 숫자 하나뿐. 사람·기기·시각·기사 정보는 안 모아요.
+    그래서 같은 분이 여러 번 눌러도 가릴 수 없어요 → '대략적인 관심도'로만 봐 주세요.<br>
+    <b>켜는 순서</b>: ① 민구님 보안 규칙 게시(다음 규칙 게시 때 함께) ② 켜기 승인 ③ <code>assets/social.js</code> 한 줄 <code>AD_CLICK_ON = true</code>.</p>
+</div>
+</body>
+</html>
