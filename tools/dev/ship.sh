@@ -27,10 +27,13 @@ done
 echo "push: $(git log -1 --oneline)"
 ( cd /workspace/thai-news-portal && git pull -q --rebase --autostash ) && echo "정본 체크아웃 갱신"
 # 라이브 반영 대기(app.js·sw.js·index.html 이 로컬과 같아질 때까지, 최대 6분)
+# 앱 셸 3개 + 이번 커밋에서 바뀐 파일(최대 5개, data/·backups/ 제외) — stamp 가 안 바뀌는 변경(예: 광고 css 만)도 실제로 확인
+CHECK_FILES="sw.js assets/app.js index.html $(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep -E '\.(js|css|html|md|sh|py)$' | grep -vE '^(data|backups)/' | head -5 | tr '\n' ' ')"
 wait_live() {
   for i in $(seq 1 36); do
     ts=$(date +%s); same=1
-    for f in sw.js assets/app.js index.html; do
+    for f in $CHECK_FILES; do
+      [ -f "$f" ] || continue
       [ "$(curl -fsS "https://p-max168.github.io/thai-news-kr/$f?_=$ts" 2>/dev/null | sha256sum | cut -c1-16)" = "$(sha256sum $f | cut -c1-16)" ] || same=0
     done
     [ $same = 1 ] && return 0
