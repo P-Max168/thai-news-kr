@@ -423,5 +423,7 @@ button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
 /* ===== ☰ 서랍 '화면 디자인' 고르기(모던 모양) ===== */
 .thm{border:1px solid var(--m-bd);background:#fff;color:var(--m-t1);border-radius:12px;font-weight:700}
 .thm small{color:var(--m-t3)}
+.thm .mic{color:var(--m-t3)}
+.thm[aria-checked="true"] .mic{color:var(--m-acd)}
 .thm[aria-checked="true"]{border-color:var(--m-ac);background:var(--m-tint);color:var(--m-acd);box-shadow:inset 0 0 0 1px var(--m-ac)}
 .thm[aria-checked="true"] small{color:var(--m-acd)}

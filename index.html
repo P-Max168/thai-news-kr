@@ -29,6 +29,11 @@
      우선순위 = 주소 ?theme=(그 탭 동안) > 서랍에서 고른 값 > 아래 기본값(처음 오신 분). TN_THEME 은 '처음 오신 분 기본값'이 됨 -->
 <script>window.TN_THEME="modern";</script>
 <script>(function(){var t=window.TN_THEME,m=/[?&]theme=(modern|classic)(?:&|$)/.exec(location.search);try{var k=localStorage.getItem("tnk.theme.pick");if(k==="modern"||k==="classic")t=k;if(m)sessionStorage.setItem("tnk.theme",m[1]);t=sessionStorage.getItem("tnk.theme")||t}catch(e){if(m)t=m[1]}window.__tnTheme=t;if(t==="modern")document.documentElement.className+=" th-modern";else{var q=function(n,v){var e=document.querySelector('meta[name="'+n+'"]');if(e)e.setAttribute("content",v)};q("theme-color","#0b2a4a");q("apple-mobile-web-app-status-bar-style","black-translucent")}})();</script>
+<!-- 서랍 '화면 디자인' 칸 연결(DOMContentLoaded). 본문 중간 인라인 스크립트는 CSS 를 다 받을 때까지 그 뒤 HTML 읽기를 멈춰 첫 화면이 늦어져서(로컬 측정 +0.12초) 여기 둠 -->
+<script>document.addEventListener("DOMContentLoaded",function(){(function(){var w=document.getElementById("themePick");if(!w)return;var cur=window.__tnTheme==="modern"?"modern":"classic",bs=w.querySelectorAll(".thm");
+for(var i=0;i<bs.length;i++)(function(b){var t=b.getAttribute("data-theme");b.setAttribute("aria-checked",t===cur?"true":"false");
+b.addEventListener("click",function(){try{localStorage.setItem("tnk.theme.pick",t);sessionStorage.removeItem("tnk.theme")}catch(e){}if(t===cur)return;
+var u=location.href.replace(/([?&])theme=(modern|classic)(&|(?=#)|$)/,function(a,p,v,q){return q?p:""});try{history.replaceState(history.state,"",u)}catch(e){}location.reload()})})(bs[i])})();});</script>
 <!-- 속도(2026-10-03): 글꼴(Pretendard, 첫 방문 약 700KB)은 화면을 막지 않게 — 처음 오신 분은 기기 기본 글꼴로 바로 보이고 페이지가 다 뜬 뒤 받음,
      한 번 받은 기기(tnk.font=1)는 캐시에서 바로 적용. 태국 글꼴은 화면에 태국 문자가 없어 뺌 -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -38,7 +43,7 @@
 <link rel="stylesheet" href="assets/nearby.css?v=411a136f">
 <link rel="stylesheet" href="assets/ads/massage/dragon-ad.css?v=992ae706">
 <!-- 모던 테마일 때만: 기존 CSS 뒤에 덮는 층(html.th-modern 으로 시작하는 규칙만) + 이모지 → 선 아이콘(modern.js) -->
-<script>if(window.__tnTheme==="modern")document.write('<link rel="stylesheet" href="assets/modern.css?v=b7ef3728"><script src="assets/modern.js?v=aa638a48"><\/script>');</script>
+<script>if(window.__tnTheme==="modern")document.write('<link rel="stylesheet" href="assets/modern.css?v=ddd23f5f"><script src="assets/modern.js?v=00c62d28"><\/script>');</script>
 </head>
 <body>
 <header class="masthead">
@@ -83,13 +88,9 @@
   <!-- 화면 디자인 고르기(2026-10-05 민구님 요청): 누르면 이 기기에 저장(localStorage tnk.theme.pick) 하고 화면을 한 번 새로 그림. 창·팝업 없음 -->
   <p class="drawer__sec" id="themePickTitle">화면 디자인</p>
   <div class="drawer__theme" id="themePick" role="radiogroup" aria-labelledby="themePickTitle">
-    <button type="button" class="thm" data-theme="classic" role="radio" aria-checked="false"><span class="thm__n">📰 클래식</span><small>예전 모양</small></button>
-    <button type="button" class="thm" data-theme="modern" role="radio" aria-checked="false"><span class="thm__n">✨ 모던</span><small>새 모양</small></button>
+    <button type="button" class="thm" data-theme="classic" role="radio" aria-checked="false"><span class="thm__n"><span class="thm__e" aria-hidden="true">📰</span> 클래식</span><small>예전 모양</small></button>
+    <button type="button" class="thm" data-theme="modern" role="radio" aria-checked="false"><span class="thm__n"><span class="thm__e" aria-hidden="true">✨</span> 모던</span><small>새 모양</small></button>
   </div>
-  <script>(function(){var w=document.getElementById("themePick");if(!w)return;var cur=window.__tnTheme==="modern"?"modern":"classic",bs=w.querySelectorAll(".thm");
-for(var i=0;i<bs.length;i++)(function(b){var t=b.getAttribute("data-theme");b.setAttribute("aria-checked",t===cur?"true":"false");
-b.addEventListener("click",function(){try{localStorage.setItem("tnk.theme.pick",t);sessionStorage.removeItem("tnk.theme")}catch(e){}if(t===cur)return;
-var u=location.href.replace(/([?&])theme=(modern|classic)(&|(?=#)|$)/,function(a,p,v,q){return q?p:""});try{history.replaceState(history.state,"",u)}catch(e){}location.reload()})})(bs[i])})();</script>
   <p class="drawer__sec">계정</p>
   <div class="drawer__acct acct-box" id="drawerAcct"></div>
   <div class="ad-slot" data-ad-slot="drawer" hidden></div>

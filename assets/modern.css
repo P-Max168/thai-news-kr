@@ -375,5 +375,7 @@ html.th-modern .footer{border-top:1px solid var(--m-bd)}
 html.th-modern .forme__h .mic,html.th-modern .vote .mic,html.th-modern .tool .mic,html.th-modern .dm-target .mic,html.th-modern .drawer .tab .mic,html.th-modern .dr-item .mic,html.th-modern .pin__h .mic,html.th-modern .section-title .mic,html.th-modern .fsec__h .mic,html.th-modern .linkbtn .mic,html.th-modern .context > b .mic,html.th-modern .feed-intro .mic,html.th-modern .update > b .mic,html.th-modern .edition-note .mic,html.th-modern .cmts__h .mic,html.th-modern .korea__more .mic,html.th-modern .more-btn .mic,html.th-modern .qr__l .mic,html.th-modern .nb-sec .mic,html.th-modern .nb-note .mic,html.th-modern .pc-intro b .mic,html.th-modern .jb-warn .mic,html.th-modern .pc-src .mic,html.th-modern .tk-pop__t .mic,html.th-modern .sheet__kicker .mic{display:none}
 html.th-modern .thm{border:1px solid var(--m-bd);background:#fff;color:var(--m-t1);border-radius:12px;font-weight:700}
 html.th-modern .thm small{color:var(--m-t3)}
+html.th-modern .thm .mic{color:var(--m-t3)}
+html.th-modern .thm[aria-checked="true"] .mic{color:var(--m-acd)}
 html.th-modern .thm[aria-checked="true"]{border-color:var(--m-ac);background:var(--m-tint);color:var(--m-acd);box-shadow:inset 0 0 0 1px var(--m-ac)}
 html.th-modern .thm[aria-checked="true"] small{color:var(--m-acd)}
