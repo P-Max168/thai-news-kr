@@ -932,3 +932,12 @@ body.drawer-open{overflow:hidden}
 .rp-type{font-weight:700;color:#8a4b00}
 .rp-memo{margin:6px 0 2px;font-weight:600}
 .rp-none{color:var(--muted);font-weight:400}
+
+/* 빠른 정보 글자 조금 키우기(Max 02:25 지시, 2026-10-05) — 4칸 구조·자리·순서 그대로, 넘침 0, rem.
+   휴대폰: 값 글자 10.4→11px(360)·11.5→12.2px(412), 조회 시각 줄 8.8→10px, ฿ 단위 .82em→.88em. 늘어난 폭은 상자 안쪽 여백을 조금 줄여서 맞춤 */
+@media (max-width:640px){
+  #ticker .tk-chip.tk-tile,#ticker .tk-chip.tk-tile[data-tk]{padding:0 clamp(.125rem,.65vw,.375rem);font-size:clamp(.6875rem,2.95vw,.8125rem)}
+  #ticker .tk-tile[data-tk="fx"]{font-size:clamp(.6875rem,2.95vw,.8125rem)}
+  #ticker .tk-tile .tk-u,#ticker .tk-tile[data-tk="price"] .tk-u{font-size:.88em}
+  #ticker .tk-tile .tk-ft{font-size:clamp(.625rem,2.75vw,.75rem)}
+}
