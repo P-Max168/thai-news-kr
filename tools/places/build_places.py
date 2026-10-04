@@ -13,7 +13,10 @@ RAW = ROOT / "tools/places/pattaya-osm-2026-10-03.json"
 PICK = ROOT / "tools/places/pattaya-pick-2026-10-03.json"
 OUT = ROOT / "data/places-pattaya.json"
 GPICK = ROOT / "tools/places/pattaya-korean-pick-2026-10-03.json"
-OLD_BEFORE = "2023-01-01"   # 이보다 오래된 정보 = '오래된 정보' 표시 + 목록 뒤로
+# 오래된 정보 기준(2026-10-05 Max 06:33): 오늘(방콕) − 730일(2년) — 자동 계산(예전엔 2023-01-01 고정이라 README 의 '2년'과 달랐음).
+#   기준 날 = OSM check_date(현장 확인 날)가 있으면 그것, 없으면 지도 정보를 마지막으로 고친 날. 화면(assets/places.js)도 같은 규칙으로 매일 다시 계산
+OLD_DAYS = 730
+OLD_BEFORE = (datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=7))).date() - datetime.timedelta(days=OLD_DAYS)).isoformat()
 FETCHED = "2026-10-03"
 THAI = re.compile(r"[\u0E00-\u0E7F]")
 BAD = re.compile(r"massage|\bspa\b|go-?go|\bbar\b|club|lady|soapy|nuru|cabaret|\bshow\b", re.I)
@@ -95,9 +98,11 @@ def korean():
             "id": "gmap-" + cid, "cat": cat, "cat_ko": CAT[cat], "name": name, "kind": kind, "cuisine": [],
             "hours": None, "hours_partial": False, "phone": None, "website": None, "address": None,
             "area": area or "파타야(동네 확인 안 됨)", "lat": None, "lng": None,
-            "price_thb": None, "vat_extra": None, "status": "확인 안 됨", "checked": at, "osm_check": None, "osm_edit": None,
+            "price_thb": None, "vat_extra": None, "status": "영업 확인 안 됨", "checked": at, "osm_check": None, "osm_edit": None,
+            "unverified": True,   # 구글 지도에서 이름이 한 번 보인 것뿐 — 영업 여부·정보 날짜 모름(2026-10-05: 받은 날을 정보 날짜로 쓰던 것 고침)
+            "verified_by": None, "verified_at": None,
             "source": "Google 지도", "source_url": gurl, "gmaps_only": True,
-            "korean": True, "kr": kr, "srcs": srcs, "fsrc": fsrc, "info_date": at,
+            "korean": True, "kr": kr, "srcs": srcs, "fsrc": fsrc, "info_date": None, "info_kind": None,
         })
     return res
 
@@ -121,15 +126,17 @@ def osm_cards(raw, pick, region_ko):
             "hours": t.get("opening_hours") or None,           # OSM 영업시간 원문(화면이 한국어로 풀고 '지금 영업 중' 계산)
             "phone": phone, "website": web, "address": addr, "lat": round(lat, 6), "lng": round(lon, 6),
             "price_thb": None, "vat_extra": None,              # vat_extra: 가격 VAT 별도 여부(true/false) — 가게·공식 출처 확인 전엔 null(화면 '확인 안 됨'). OSM 에 가격 없음 → '확인 안 됨'(바트·원은 값이 생기면 같이 표시)
-            "status": "지도 데이터에 폐업 표시 없음",            # disused/폐업 태그 없는 것만 받음
-            "checked": FETCHED,                                # 이 사이트가 데이터를 받아 확인한 날
+            "status": "지도에 폐업 표시 없음(현장 확인 아님)",   # disused/폐업 태그 없는 것만 받음 — 실제 영업 확인이 아님(2026-10-05)
+            "checked": FETCHED,                                # 지도에서 데이터를 받은 날(확인한 날 아님 — 화면 '지도에서 받은 날')
+            "verified_by": None, "verified_at": None,          # 실제 확인(전화·방문) 기록 — 둘 다 있을 때만 화면 '확인함'. 지어내지 않음
             "osm_check": t.get("check_date:opening_hours") or t.get("check_date") or None,   # OSM 기여자가 현장 확인한 날(있을 때만)
             "osm_edit": e["timestamp"][:10],                   # OSM 에서 마지막으로 고친 날
             "source": "OpenStreetMap", "source_url": "https://www.openstreetmap.org/%s/%d" % (typ, i),
             "korean": cat == "food" and "한식" in cz, "kr": "OSM 음식 종류: 한식" if "한식" in cz else None,
             "srcs": {"o": {"by": "OpenStreetMap", "url": "https://www.openstreetmap.org/%s/%d" % (typ, i), "at": FETCHED}},
             "fsrc": {f: "o" for f, v in (("name", nm), ("hours", t.get("opening_hours")), ("phone", phone), ("address", addr), ("website", web), ("status", 1)) if v},
-            "info_date": t.get("check_date:opening_hours") or t.get("check_date") or e["timestamp"][:10],   # 정보가 마지막으로 확인·수정된 날
+            "info_date": t.get("check_date:opening_hours") or t.get("check_date") or e["timestamp"][:10],   # 오래된 정보 기준 날: 현장 확인 날 > 마지막으로 고친 날
+            "info_kind": "check" if (t.get("check_date:opening_hours") or t.get("check_date")) else "edit",
         })
     return out
 
@@ -157,14 +164,14 @@ def sub_of(p):
 REGIONS = {"pattaya": "파타야", "sriracha": "시라차", "bangkok": "방콕"}
 
 def write(region, raw, out):
-    for p in out: p["old"] = p["info_date"] < OLD_BEFORE
+    for p in out: p["old"] = bool(p["info_date"]) and p["info_date"] < OLD_BEFORE   # 빌드한 날 기준(참고) — 화면은 매일 다시 계산
     dst = ROOT / ("data/places-%s.json" % region)
     doc = {"_readme": "📇 %s 가게 카드 시험 — tools/places/build_places.py 가 만듦. 실제 OSM 데이터%s, 모르는 값 = null(화면 '확인 안 됨'). © OpenStreetMap contributors (ODbL)"
                       % (REGIONS[region], " + 한식·한인 업소는 이름·큰 동네·Google 지도 링크만(Google 지도 약관: 내용 복사·업소 목록 만들기 금지)" if region == "pattaya" else "만(OSM 음식 종류 korean 또는 한글 상호)"),
            "region": region, "region_ko": REGIONS[region], "fetched": FETCHED, "osm_base": raw.get("osm3s", {}).get("timestamp_osm_base"),
            "attribution": "© OpenStreetMap contributors", "license_url": "https://www.openstreetmap.org/copyright",
            "report_kakao_url": "",   # '정보 틀림' 카톡 링크(운영자 카톡 채널 주소 — 승인함 #7). 비어 있으면 화면은 '링크 준비 중' 자리표시
-           "old_before": OLD_BEFORE, "places": out}
+           "old_before": OLD_BEFORE, "old_days": OLD_DAYS, "old_rule": "기준 날(현장 확인 날, 없으면 지도 정보 고친 날)이 오늘 − 730일보다 앞 = 오래된 정보(화면이 매일 다시 계산)", "places": out}
     if region == "pattaya":
         doc["subs"] = [{"id": k, "t": v} for k, v in SUBS.items()]
         doc["subs_note"] = "동네는 대략 나눔(OSM 좌표 + 수쿰윗 길 기준 어림, 구글 지도 가게는 적어 둔 큰 동네). 경계 근처는 틀릴 수 있고, 동네를 모르는 곳은 '전체'에서만 보여요."

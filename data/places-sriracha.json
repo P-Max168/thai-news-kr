@@ -7,7 +7,9 @@
  "attribution": "© OpenStreetMap contributors",
  "license_url": "https://www.openstreetmap.org/copyright",
  "report_kakao_url": "",
- "old_before": "2023-01-01",
+ "old_before": "2024-10-05",
+ "old_days": 730,
+ "old_rule": "기준 날(현장 확인 날, 없으면 지도 정보 고친 날)이 오늘 − 730일보다 앞 = 오래된 정보(화면이 매일 다시 계산)",
  "places": [
   {
    "id": "osm-node-6753965738",
@@ -26,8 +28,10 @@
    "lng": 100.975911,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2019-08-28",
    "source": "OpenStreetMap",
@@ -46,6 +50,7 @@
     "status": "o"
    },
    "info_date": "2019-08-28",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -66,8 +71,10 @@
    "lng": 100.925357,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2023-10-14",
    "source": "OpenStreetMap",
@@ -88,7 +95,8 @@
     "status": "o"
    },
    "info_date": "2023-10-14",
-   "old": false
+   "info_kind": "edit",
+   "old": true
   }
  ]
 }

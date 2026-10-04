@@ -7,7 +7,9 @@
  "attribution": "© OpenStreetMap contributors",
  "license_url": "https://www.openstreetmap.org/copyright",
  "report_kakao_url": "",
- "old_before": "2023-01-01",
+ "old_before": "2024-10-05",
+ "old_days": 730,
+ "old_rule": "기준 날(현장 확인 날, 없으면 지도 정보 고친 날)이 오늘 − 730일보다 앞 = 오래된 정보(화면이 매일 다시 계산)",
  "places": [
   {
    "id": "osm-node-2103839980",
@@ -26,8 +28,10 @@
    "lng": 100.502826,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2014-01-01",
    "source": "OpenStreetMap",
@@ -49,6 +53,7 @@
     "status": "o"
    },
    "info_date": "2014-01-01",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -68,8 +73,10 @@
    "lng": 100.539946,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2013-11-07",
    "source": "OpenStreetMap",
@@ -89,6 +96,7 @@
     "status": "o"
    },
    "info_date": "2013-11-07",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -108,8 +116,10 @@
    "lng": 100.557948,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2017-12-26",
    "source": "OpenStreetMap",
@@ -128,6 +138,7 @@
     "status": "o"
    },
    "info_date": "2017-12-26",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -147,8 +158,10 @@
    "lng": 100.580287,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2023-03-25",
    "source": "OpenStreetMap",
@@ -167,7 +180,8 @@
     "status": "o"
    },
    "info_date": "2023-03-25",
-   "old": false
+   "info_kind": "edit",
+   "old": true
   },
   {
    "id": "osm-node-3877687710",
@@ -186,8 +200,10 @@
    "lng": 100.560662,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2015-12-05",
    "source": "OpenStreetMap",
@@ -206,6 +222,7 @@
     "status": "o"
    },
    "info_date": "2015-12-05",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -225,8 +242,10 @@
    "lng": 100.558152,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2016-09-14",
    "source": "OpenStreetMap",
@@ -245,6 +264,7 @@
     "status": "o"
    },
    "info_date": "2016-09-14",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -264,8 +284,10 @@
    "lng": 100.566615,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2016-10-31",
    "source": "OpenStreetMap",
@@ -284,6 +306,7 @@
     "status": "o"
    },
    "info_date": "2016-10-31",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -303,8 +326,10 @@
    "lng": 100.494265,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2017-01-11",
    "source": "OpenStreetMap",
@@ -323,6 +348,7 @@
     "status": "o"
    },
    "info_date": "2017-01-11",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -343,8 +369,10 @@
    "lng": 100.543732,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2025-05-31",
    "source": "OpenStreetMap",
@@ -363,6 +391,7 @@
     "status": "o"
    },
    "info_date": "2025-05-31",
+   "info_kind": "edit",
    "old": false
   },
   {
@@ -382,8 +411,10 @@
    "lng": 100.569601,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2017-05-17",
    "source": "OpenStreetMap",
@@ -402,6 +433,7 @@
     "status": "o"
    },
    "info_date": "2017-05-17",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -421,8 +453,10 @@
    "lng": 100.605215,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2019-05-31",
    "source": "OpenStreetMap",
@@ -442,6 +476,7 @@
     "status": "o"
    },
    "info_date": "2019-05-31",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -461,8 +496,10 @@
    "lng": 100.535344,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2018-02-06",
    "source": "OpenStreetMap",
@@ -484,6 +521,7 @@
     "status": "o"
    },
    "info_date": "2018-02-06",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -503,8 +541,10 @@
    "lng": 100.557976,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2018-02-12",
    "source": "OpenStreetMap",
@@ -525,6 +565,7 @@
     "status": "o"
    },
    "info_date": "2018-02-12",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -545,8 +586,10 @@
    "lng": 100.582847,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2019-09-24",
    "source": "OpenStreetMap",
@@ -566,6 +609,7 @@
     "status": "o"
    },
    "info_date": "2019-09-24",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -585,8 +629,10 @@
    "lng": 100.524028,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2024-02-11",
    "source": "OpenStreetMap",
@@ -609,7 +655,8 @@
     "status": "o"
    },
    "info_date": "2024-02-11",
-   "old": false
+   "info_kind": "edit",
+   "old": true
   },
   {
    "id": "osm-node-9275070125",
@@ -628,8 +675,10 @@
    "lng": 100.532999,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2021-11-22",
    "source": "OpenStreetMap",
@@ -648,6 +697,7 @@
     "status": "o"
    },
    "info_date": "2021-11-22",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -667,8 +717,10 @@
    "lng": 100.573687,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2022-03-18",
    "source": "OpenStreetMap",
@@ -687,6 +739,7 @@
     "status": "o"
    },
    "info_date": "2022-03-18",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -706,8 +759,10 @@
    "lng": 100.533995,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2022-12-17",
    "source": "OpenStreetMap",
@@ -726,6 +781,7 @@
     "status": "o"
    },
    "info_date": "2022-12-17",
+   "info_kind": "edit",
    "old": true
   },
   {
@@ -745,8 +801,10 @@
    "lng": 100.548219,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2023-10-08",
    "source": "OpenStreetMap",
@@ -766,7 +824,8 @@
     "status": "o"
    },
    "info_date": "2023-10-08",
-   "old": false
+   "info_kind": "edit",
+   "old": true
   },
   {
    "id": "osm-node-11323335083",
@@ -785,8 +844,10 @@
    "lng": 100.527883,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2023-11-05",
    "source": "OpenStreetMap",
@@ -805,7 +866,8 @@
     "status": "o"
    },
    "info_date": "2023-11-05",
-   "old": false
+   "info_kind": "edit",
+   "old": true
   },
   {
    "id": "osm-node-11323335096",
@@ -824,8 +886,10 @@
    "lng": 100.528588,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2023-11-05",
    "source": "OpenStreetMap",
@@ -844,7 +908,8 @@
     "status": "o"
    },
    "info_date": "2023-11-05",
-   "old": false
+   "info_kind": "edit",
+   "old": true
   },
   {
    "id": "osm-node-11323335124",
@@ -863,8 +928,10 @@
    "lng": 100.528232,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2023-11-05",
    "source": "OpenStreetMap",
@@ -883,7 +950,8 @@
     "status": "o"
    },
    "info_date": "2023-11-05",
-   "old": false
+   "info_kind": "edit",
+   "old": true
   },
   {
    "id": "osm-node-11323335139",
@@ -902,8 +970,10 @@
    "lng": 100.528552,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2023-11-05",
    "source": "OpenStreetMap",
@@ -922,7 +992,8 @@
     "status": "o"
    },
    "info_date": "2023-11-05",
-   "old": false
+   "info_kind": "edit",
+   "old": true
   },
   {
    "id": "osm-node-11419961275",
@@ -941,8 +1012,10 @@
    "lng": 100.538706,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2023-12-15",
    "source": "OpenStreetMap",
@@ -961,7 +1034,8 @@
     "status": "o"
    },
    "info_date": "2023-12-15",
-   "old": false
+   "info_kind": "edit",
+   "old": true
   },
   {
    "id": "osm-node-11422327359",
@@ -980,8 +1054,10 @@
    "lng": 100.582258,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2023-12-16",
    "source": "OpenStreetMap",
@@ -1000,7 +1076,8 @@
     "status": "o"
    },
    "info_date": "2023-12-16",
-   "old": false
+   "info_kind": "edit",
+   "old": true
   },
   {
    "id": "osm-node-12438172901",
@@ -1019,8 +1096,10 @@
    "lng": 100.562855,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2024-12-21",
    "source": "OpenStreetMap",
@@ -1039,6 +1118,7 @@
     "status": "o"
    },
    "info_date": "2024-12-21",
+   "info_kind": "edit",
    "old": false
   },
   {
@@ -1058,8 +1138,10 @@
    "lng": 100.672733,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2025-02-25",
    "source": "OpenStreetMap",
@@ -1078,6 +1160,7 @@
     "status": "o"
    },
    "info_date": "2025-02-25",
+   "info_kind": "edit",
    "old": false
   },
   {
@@ -1097,8 +1180,10 @@
    "lng": 100.547253,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2025-03-09",
    "source": "OpenStreetMap",
@@ -1117,6 +1202,7 @@
     "status": "o"
    },
    "info_date": "2025-03-09",
+   "info_kind": "edit",
    "old": false
   },
   {
@@ -1136,8 +1222,10 @@
    "lng": 100.678607,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2026-05-16",
    "source": "OpenStreetMap",
@@ -1156,6 +1244,7 @@
     "status": "o"
    },
    "info_date": "2026-05-16",
+   "info_kind": "edit",
    "old": false
   },
   {
@@ -1175,8 +1264,10 @@
    "lng": 100.677878,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2026-05-16",
    "source": "OpenStreetMap",
@@ -1195,6 +1286,7 @@
     "status": "o"
    },
    "info_date": "2026-05-16",
+   "info_kind": "edit",
    "old": false
   },
   {
@@ -1214,8 +1306,10 @@
    "lng": 100.575417,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2026-05-22",
    "source": "OpenStreetMap",
@@ -1234,6 +1328,7 @@
     "status": "o"
    },
    "info_date": "2026-05-22",
+   "info_kind": "edit",
    "old": false
   },
   {
@@ -1253,8 +1348,10 @@
    "lng": 100.525906,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2025-01-07",
    "source": "OpenStreetMap",
@@ -1273,6 +1370,7 @@
     "status": "o"
    },
    "info_date": "2025-01-07",
+   "info_kind": "edit",
    "old": false
   },
   {
@@ -1292,8 +1390,10 @@
    "lng": 100.52291,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2025-01-07",
    "source": "OpenStreetMap",
@@ -1312,6 +1412,7 @@
     "status": "o"
    },
    "info_date": "2025-01-07",
+   "info_kind": "edit",
    "old": false
   },
   {
@@ -1331,8 +1432,10 @@
    "lng": 100.582895,
    "price_thb": null,
    "vat_extra": null,
-   "status": "지도 데이터에 폐업 표시 없음",
+   "status": "지도에 폐업 표시 없음(현장 확인 아님)",
    "checked": "2026-10-03",
+   "verified_by": null,
+   "verified_at": null,
    "osm_check": null,
    "osm_edit": "2024-02-09",
    "source": "OpenStreetMap",
@@ -1352,7 +1455,8 @@
     "status": "o"
    },
    "info_date": "2024-02-09",
-   "old": false
+   "info_kind": "edit",
+   "old": true
   }
  ]
 }
