@@ -762,6 +762,8 @@
     if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches("article[data-open]")) { e.preventDefault(); e.target.click(); }
     if (e.key === "Escape" && !$("sheet").hidden) Onb.close();
   });
+  // 🧪 시안(승인함 #12): 주소에 ?mock=tabs 가 있을 때만 아래 탭·주제 칩 시안을 불러옴 — 기본 화면엔 아무것도 안 바뀜
+  if (/[?&]mock=tabs\b/.test(location.search)) { var mk = document.createElement("script"); mk.src = "assets/mock-tabs.js"; document.body.appendChild(mk); }
   // 떠 있는 '맨 위로 ↑' 버튼은 뺌(2026-10-04 — 화면 위에 떠서 글을 가리는 요소 금지). 맨 위로는 머리 제목(홈) 누르기·휴대폰 상단 탭
   var toTop = $("toTop");
   if (toTop) { window.addEventListener("scroll", function () { toTop.classList.toggle("show", window.pageYOffset > 600); }, { passive: true }); toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); }); }
