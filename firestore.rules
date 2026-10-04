@@ -7,6 +7,7 @@ rules_version = '2';
 //  rx/{id}         : 익명 반응(하트·🙌·🙅) — 누구나 추가만, 운영자만 읽기(2026-10-03 야간)
 //  reports/{id}    : ⚠️ 오류 신고(기사·가게·임대·광고) — 누구나 추가만, 운영자만 읽기, 고치기·지우기 금지(2026-10-05)
 //  adclicks/{id}   : 광고 자리별 클릭 수(자리 id + 방콕 날짜 별 숫자만) — 누구나 n 을 1~20 올리기만, 운영자만 읽기(2026-10-05 추가 · ⏳ 아직 게시 전, LOGIN_TODO '대기')
+//  placeflags/{id} : 🚫 가게별 폐업 신고 숫자·폐업 확인(숫자만, 원문·사람 정보 없음) — 누구나 읽기, 운영자만 쓰기, 지우기 금지(2026-10-05 추가 · ⏳ 아직 게시 전, LOGIN_TODO '대기')
 //  그 밖의 모든 경로 : 거부
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -143,7 +144,7 @@ service cloud.firestore {
       return d.keys().hasOnly(['id', 'kind', 'type', 'memo', 'url', 'ed', 'at']) && d.keys().hasAll(['id', 'kind', 'type', 'url', 'at'])
         && d.id is string && d.id.size() >= 1 && d.id.size() <= 80
         && d.kind in ['article', 'place', 'rent', 'ad']
-        && d.type in ['wrong', 'link', 'screen', 'etc']
+        && d.type in ['wrong', 'link', 'screen', 'etc', 'closed']   // 'closed' = 🚫 폐업·없어짐(2026-10-05 추가 · ⏳ 게시 전)
         && (!('memo' in d) || (d.memo is string && d.memo.size() <= 80))
         && d.url is string && d.url.size() <= 300 && d.url.matches('^https://p-max168[.]github[.]io/thai-news-kr/.*')
         && (!('ed' in d) || (d.ed is string && d.ed.size() <= 20))
@@ -177,6 +178,22 @@ service cloud.firestore {
       allow update: if validAdClick(request.resource.data, id)
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['n'])
         && request.resource.data.n > resource.data.n && request.resource.data.n <= resource.data.n + 20;
+      allow delete: if false;
+    }
+
+    // ---------- 🚫 가게 폐업 신고 숫자 placeflags/{가게 id} (2026-10-05 추가 · ⏳ 게시 전 — 다음 규칙 게시 때 함께) ----------
+    // 신고 원문(reports)은 계속 운영자만 읽음. 운영자 승인함이 가게별 폐업 신고를 세어 숫자만 여기 씀 → 가게 카드 화면이 공개로 읽어 '폐업 신고됨' 표시.
+    // 문서 = {id: 가게 id(문서 id 와 같음), n: 신고 수 0~9999, st: '' | 'closed'(운영자 폐업 확인 = 폐업 보관함), at: 서버 시각} — 다른 키 거부. 지우기 금지(기록 남김)
+    function validPlaceFlag(d, id) {
+      return d.keys().hasOnly(['id', 'n', 'st', 'at']) && d.keys().hasAll(['id', 'n', 'st', 'at'])
+        && d.id == id && id.matches('^(osm-(node|way|relation)-[0-9]{1,12}|gmap-[0-9]{1,24})$')
+        && d.n is int && d.n >= 0 && d.n <= 9999
+        && d.st in ['', 'closed']
+        && d.at == request.time;
+    }
+    match /placeflags/{id} {
+      allow read: if true;
+      allow create, update: if isAdmin() && validPlaceFlag(request.resource.data, id);
       allow delete: if false;
     }
 

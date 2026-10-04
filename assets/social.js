@@ -428,8 +428,10 @@
   // ⚠️ 오류 신고(assets/report.js): 로그인 없이 reports 에 추가만 / 운영자 승인함에서 읽기
   function report(r) { if (!live || failed) return Promise.reject(new Error("off")); return load().then(function (m) { start(m); return m.addReport(r); }); }
   function adminReports(sinceMs) { return load().then(function (m) { start(m); return m.listReports(sinceMs, 300); }); }
+  // 🚫 가게 폐업 신고 숫자(공개 placeflags) — 운영자 승인함에서만 씀(규칙: 운영자만 쓰기)
+  function adminPlaceFlag(id, n, st) { return load().then(function (m) { start(m); if (!m.setPlaceFlag) throw new Error("old fb.js"); return m.setPlaceFlag(id, n, st); }); }
 
-  window.TNSocial = { react: react, report: report, adClickOn: function () { return AD_CLICK_ON; }, adminAdClicks: adminAdClicks, adminReports: adminReports, isAdmin: function () { return !!(user && admin); }, adminStats: adminStats, warm: function () { if (live && !fbP && !failed) load().then(start).catch(function () {}); }, mountComments: mountComments, renderAccountBox: renderAccountBox, signedIn: function () { return !!user; }, _filter: badText, _nick: nickOk, _replyChips: replyChips };
+  window.TNSocial = { react: react, report: report, adClickOn: function () { return AD_CLICK_ON; }, adminAdClicks: adminAdClicks, adminReports: adminReports, adminPlaceFlag: adminPlaceFlag, isAdmin: function () { return !!(user && admin); }, adminStats: adminStats, warm: function () { if (live && !fbP && !failed) load().then(start).catch(function () {}); }, mountComments: mountComments, renderAccountBox: renderAccountBox, signedIn: function () { return !!user; }, _filter: badText, _nick: nickOk, _replyChips: replyChips };
 
   renderHeader();
   if (!live) return;

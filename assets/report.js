@@ -10,7 +10,12 @@
   try { if (localStorage.getItem("tnk.repon") === "0") REP_ON = false; } catch (e) {}
   var MAIL = "mgisgood1919@gmail.com";
   var QK = "tnk.rep.q", LK = "tnk.rep.log";
-  var TYPES = [["wrong", "정보 틀림"], ["link", "링크 깨짐"], ["screen", "화면 이상"], ["etc", "기타"]];
+  var TYPES = [["wrong", "정보 틀림"], ["link", "링크 깨짐"], ["screen", "화면 이상"], ["etc", "기타"], ["closed", "🚫 폐업·없어짐"]];
+  // 🚫 폐업·없어짐(2026-10-05 Max 06:33): 가게 카드(kind=place)에만 보임. 운영자 승인함이 가게별로 세어 2건 이상 = 카드에 '폐업 신고됨'(숫자만 공개 — 원문은 운영자만)
+  //   ★ CLOSED_TYPE_ON = false: 지금 게시된 규칙(03:24)은 type 'closed' 를 거부함 → 그동안은 type 'etc' + 메모 맨 앞 CLOSED_TAG 로 보냄(승인함은 두 모양 다 셈).
+  //     새 규칙(firestore.rules — 'closed' 허용, LOGIN_TODO '대기') 게시 뒤 true 로
+  var CLOSED_TYPE_ON = false, CLOSED_TAG = "[폐업·없어짐]";
+  function isClosedRep(x) { return !!x && (x.type === "closed" || (x.kind === "place" && String(x.memo || "").indexOf(CLOSED_TAG) === 0)); }
   var KINDS = { article: "기사", place: "가게 카드", rent: "임대 카드", ad: "광고" };
   var seq = 0;
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
@@ -36,10 +41,10 @@
     return "mailto:" + MAIL + "?subject=" + encodeURIComponent("[태국 뉴스 한눈에] 오류 신고 · " + typeLabel(r.type)) + "&body=" + encodeURIComponent(body);
   }
 
-  function panelHTML(n) {
+  function panelHTML(n, kind) {
     return '<div class="rep" id="rep-' + n + '" role="group" aria-label="오류 신고">' +
       '<p class="rep__h">어떤 문제인가요?</p><div class="rep__ks" role="radiogroup" aria-label="문제 종류">' +
-      TYPES.map(function (t) { return '<button type="button" class="rep__k" role="radio" aria-checked="false" data-rep-k="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>" +
+      TYPES.filter(function (t) { return t[0] !== "closed" || kind === "place"; }).map(function (t) { return '<button type="button" class="rep__k" role="radio" aria-checked="false" data-rep-k="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>" +
       '<input class="rep__m" type="text" maxlength="80" enterkeyhint="send" placeholder="한 줄 메모 (선택, 80자까지)" aria-label="한 줄 메모 (선택)">' +
       '<div class="rep__acts"><button type="button" class="rep__send" data-rep-send disabled>보내기</button><button type="button" class="rep__x" data-rep-x>닫기</button></div>' +
       '<p class="rep__st" role="status" aria-live="polite"></p></div>';
@@ -48,7 +53,7 @@
   function toggle(btn) {
     if (btn._rep && btn._rep.parentNode) return close(btn);
     var n = ++seq, w = document.createElement("div");
-    w.innerHTML = panelHTML(n); var p = w.firstChild;
+    w.innerHTML = panelHTML(n, btn.getAttribute("data-rep")); var p = w.firstChild;
     var at = btn.closest(".rep-row") || btn;   // 버튼 줄 바로 아래(같은 줄 옆이 아니라)
     at.parentNode.insertBefore(p, at.nextSibling);
     btn._rep = p; p._btn = btn;
@@ -68,6 +73,8 @@
     if (why) return status(p, esc(why), "warn");
     var ed = (window.TNApp && TNApp.edId && TNApp.edId()) || "";
     var r = { id: id, kind: KINDS[btn.getAttribute("data-rep")] ? btn.getAttribute("data-rep") : "article", type: type, memo: memo, url: pageURL(), ed: String(ed).slice(0, 20), t: Date.now(), sent: false };
+    if (type === "closed" && r.kind !== "place") return;
+    if (type === "closed" && !CLOSED_TYPE_ON) { r.type = "etc"; r.memo = (CLOSED_TAG + " " + memo).trim().slice(0, 80); }   // 게시된 규칙에 맞춘 모양(위 설명)
     logIt(id, type);
     var q = rd(QK); q.push(r); var saved = wr(QK, q.slice(-30));
     p.querySelector("[data-rep-send]").disabled = true;
@@ -106,5 +113,5 @@
   });
 
   /* 승인함(#approve)용: 이 기기에 저장된 신고 */
-  window.TNReport = { toggle: toggle, local: function () { return rd(QK); }, on: function () { return REP_ON; }, types: TYPES, kinds: KINDS, typeLabel: typeLabel };
+  window.TNReport = { toggle: toggle, local: function () { return rd(QK); }, on: function () { return REP_ON; }, types: TYPES, kinds: KINDS, typeLabel: typeLabel, isClosed: isClosedRep, CLOSED_TAG: CLOSED_TAG };
 })();

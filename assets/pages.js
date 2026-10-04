@@ -305,7 +305,7 @@
   }
   /* ⚠️ 오류 신고함(승인함 안) — 서버(Firestore reports, 운영자만 읽기) + 이 기기에 저장된 신고. 보기만, 자동 처리 없음 */
   var RP = { rows: null, err: null, busy: false, t: 0 };
-  var RP_T = { wrong: "정보 틀림", link: "링크 깨짐", screen: "화면 이상", etc: "기타" }, RP_K = { article: "기사", place: "가게 카드", rent: "임대 카드", ad: "광고" };
+  var RP_T = { wrong: "정보 틀림", link: "링크 깨짐", screen: "화면 이상", etc: "기타", closed: "🚫 폐업·없어짐" }, RP_K = { article: "기사", place: "가게 카드", rent: "임대 카드", ad: "광고" };
   function rpLoad(force) {
     if (RP.busy || (!force && (RP.rows || RP.err) && Date.now() - RP.t < 120e3)) return;
     if (!window.TNSocial || !TNSocial.adminReports) { RP.err = "load"; return; }
@@ -323,6 +323,43 @@
   }
   // '[테스트]' 로 시작하는 메모 = 시험 신고(서버에서 지울 수 없음 — 규칙상 삭제 금지) → 진짜 신고와 섞지 않고 맨 아래 접힌 칸에 따로
   function isTestRep(x) { return /^\s*\[테스트\]/.test(String((x && x.memo) || "")); }
+  /* 🚫 가게 폐업 신고 집계(2026-10-05 Max 06:33) — 신고 원문은 운영자만 읽으므로 여기(운영자 화면)에서 가게별로 셈 →
+   *   ① 공개 숫자 placeflags/{가게 id} 에 n 만 씀(열 때 자동, 바뀐 것만) ② '폐업 확인 → 보관함' 누르면 st=closed(지우지 않음, '되돌리기' 가능)
+   *   ③ 규칙 게시 전이라 서버 쓰기가 막히면 '기록 복사' 글을 봇에게 → 봇이 data/places-flags.json 에 올림(같은 효과)
+   *   폐업 신고 = type 'closed', 또는 (규칙 게시 전 모양) 가게 카드 신고의 메모가 '[폐업·없어짐]' 으로 시작 */
+  var PF = { st: {}, dec: null };
+  var PF_TAG = "[폐업·없어짐]";
+  function pfIsClosed(x) { return !!x && x.kind === "place" && (x.type === "closed" || String(x.memo || "").indexOf(PF_TAG) === 0); }
+  function pfDec() { if (PF.dec) return PF.dec; try { PF.dec = JSON.parse(localStorage.getItem("tnk.pf.dec") || "{}") || {}; } catch (e) { PF.dec = {}; } return PF.dec; }
+  function pfSave() { try { localStorage.setItem("tnk.pf.dec", JSON.stringify(PF.dec || {})); } catch (e) {} }
+  function pfGroups(rows) {
+    var g = {};
+    rows.filter(pfIsClosed).forEach(function (x) { var id = String(x.id || "").replace(/^place:/, ""); if (!id) return; var o = g[id] = g[id] || { id: id, n: 0, last: 0 }; o.n++; o.last = Math.max(o.last, x.at || 0); });
+    return Object.keys(g).map(function (k) { return g[k]; }).sort(function (a, b) { return b.n - a.n || b.last - a.last; });
+  }
+  function pfWrite(id, n, st) {
+    var S2 = window.TNSocial, key = id + "|" + n + "|" + st;
+    if (!S2 || !S2.adminPlaceFlag || PF.st[id] === key || PF.st[id] === "busy") return;
+    PF.st[id] = "busy";
+    S2.adminPlaceFlag(id, n, st).then(function () { PF.st[id] = key; }, function (e) { PF.st[id] = /permission/i.test((e && (e.code || e.message)) || "") ? "perm" : "net"; }).then(function () { if (cur === "approve") paint(); });
+  }
+  function pfHTML(rows) {
+    var gs = pfGroups(rows), dec = pfDec();
+    if (!gs.length && !Object.keys(dec).length) return '<p class="as-sum">🚫 가게 폐업 신고: 최근 30일 0건</p>';
+    gs.forEach(function (o) { pfWrite(o.id, o.n, dec[o.id] === "closed" ? "closed" : ""); });   // 공개 숫자 맞추기(바뀐 것만)
+    var li = gs.map(function (o) {
+      var c = dec[o.id] === "closed", w = PF.st[o.id], ws = w === "perm" ? "공개 숫자 쓰기 막힘(규칙 게시 전) — 아래 '기록 복사'로" : w === "net" ? "공개 숫자 쓰기 실패(연결)" : w === "busy" ? "공개 숫자 쓰는 중…" : w ? "공개 숫자 반영됨" : "";
+      return '<li class="rp-item"><div class="ap-top"><span class="ap-kind">가게 카드</span><span class="rp-type">🚫 폐업 신고 ' + o.n + "건" + (o.n >= 2 ? " · 화면에 '폐업 신고됨'" : "") + '</span><span class="ap-st">' + (c ? "🗄️ 보관함" : "") + "</span></div>" +
+        '<p class="ap-where">가게 <code>' + esc(o.id) + "</code>" + (ws ? " · " + esc(ws) : "") + "</p>" +
+        '<div class="ap-acts">' + (c ? '<button type="button" class="ap-btn" data-pf-undo="' + esc(o.id) + '" data-pf-n="' + o.n + '">보관함에서 되돌리기</button>'
+          : '<button type="button" class="ap-btn ap-btn--ok" data-pf-close="' + esc(o.id) + '" data-pf-n="' + o.n + '">폐업 확인 → 보관함</button>') + "</div></li>";
+    }).join("");
+    var txt = gs.map(function (o) { return o.id + " n=" + o.n + (dec[o.id] === "closed" ? " st=closed" : ""); }).join("\n");
+    return '<details class="as-near pf-sec" open><summary>🚫 가게 폐업 신고 ' + gs.length + "곳(가게별로 셈 — 2건 이상이면 카드에 '폐업 신고됨')</summary>" +
+      '<p class="as-sum">신고 원문은 여기서만 보여요. 공개되는 건 가게별 숫자뿐이에요. <b>폐업 확인</b>을 누르면 그 가게는 화면의 \'폐업 보관함\'(기본 숨김)으로 가요 — 지우지 않아요.</p>' +
+      '<ol class="ap-list rp-list">' + li + "</ol>" +
+      (txt ? '<p class="ap-txt" id="pfTxt">가게 폐업 기록(data/places-flags.json 에 올려 줘):\n' + esc(txt) + '</p><button type="button" class="cta" data-pf-copy>📋 기록 복사</button>' : "") + "</details>";
+  }
   function repHTML() {
     rpLoad(false);
     var loc = []; try { loc = JSON.parse(localStorage.getItem("tnk.rep.q") || "[]") || []; } catch (e) {}
@@ -335,7 +372,7 @@
     var tst = test.length ? '<details class="as-near rp-test"><summary>🧪 시험 신고 ' + test.length + "건(메모가 '[테스트]'로 시작 — 진짜 신고 아님, 규칙상 지울 수 없어 따로 모음)</summary><ol class=\"ap-list rp-list\">" + test.map(function (x) { return rpRow(x, x.at); }).join("") + "</ol></details>" : "";
     var mine = loc.length ? '<details class="as-near"><summary>이 기기에 저장된 신고 ' + loc.length + "건(서버 저장 실패 — 메일로 보냈을 수 있음)</summary><ol class=\"ap-list rp-list\">" + loc.slice().reverse().map(function (x) { return rpRow(x, x.t); }).join("") + "</ol></details>" : "";
     return '<section class="ad-sec rp-sec" id="reports" aria-labelledby="rpH"><h3 class="ad-h" id="rpH">⚠️ 오류 신고함 <small>(최근 30일)</small></h3>' +
-      '<p class="as-sum">기사·가게 카드·광고의 <b>오류 신고</b>가 여기 모여요. <b>자동으로 고치거나 지우지 않아요</b> — 보고 고칠 것을 봇에게 알려 주세요.</p>' + srv + tst + mine + "</section>";
+      '<p class="as-sum">기사·가게 카드·광고의 <b>오류 신고</b>가 여기 모여요. <b>자동으로 고치거나 지우지 않아요</b> — 보고 고칠 것을 봇에게 알려 주세요.</p>' + (RP.rows ? pfHTML(real) : "") + srv + tst + mine + "</section>";
   }
   register("approve", {
     title: "✅ 관리자 승인함",
@@ -382,6 +419,12 @@
         return true;
       }
       if (t.closest("[data-rp-reload]")) { rpLoad(true); paint(); return true; }
+      if ((el = t.closest("[data-pf-close],[data-pf-undo]"))) {   // 🚫 폐업 확인 → 보관함 / 되돌리기(지우기 없음)
+        var pid = el.getAttribute("data-pf-close") || el.getAttribute("data-pf-undo"), pd = pfDec(), cl = el.hasAttribute("data-pf-close");
+        if (cl) pd[pid] = "closed"; else delete pd[pid];
+        pfSave(); delete PF.st[pid]; pfWrite(pid, +el.getAttribute("data-pf-n") || 0, cl ? "closed" : ""); paint(); return true;
+      }
+      if (t.closest("[data-pf-copy]")) { var pt = document.getElementById("pfTxt"); if (pt && navigator.clipboard) navigator.clipboard.writeText(pt.textContent).catch(function () {}); return true; }
       if (t.closest("[data-ap-reload]")) { AP.doc = null; AP.err = null; apLoad(true); paint(); return true; }
       return false;
     }

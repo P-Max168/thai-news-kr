@@ -233,3 +233,12 @@ export async function listAdClicks(sinceDay) {
   const snap = await F.getDocs(q);
   return snap.docs.map(function (d) { return d.data(); });
 }
+
+/* ---------- 🚫 가게 폐업 신고 숫자(공개): placeflags/{가게 id} (2026-10-05, 운영자만 씀 — 규칙 게시 전엔 거부됨) ----------
+ * {id: 가게 id, n: 폐업 신고 수, st: ""|"closed"(운영자 폐업 확인 = 폐업 보관함), at: 서버 시각}. 신고 원문·사람 정보 없음(숫자만).
+ * 읽기 = 누구나(화면 assets/places.js 가 REST 로 읽음 — data/places-flags.json 의 fs_live 가 true 일 때만), 쓰기 = 운영자만, 지우기 금지 */
+export async function setPlaceFlag(id, n, st) {
+  await fs();
+  await F.setDoc(F.doc(db, "placeflags", String(id)), { id: String(id), n: Math.max(0, Math.min(9999, n | 0)), st: st === "closed" ? "closed" : "", at: F.serverTimestamp() });
+  return true;
+}
