@@ -198,3 +198,19 @@ export async function listReactions(sinceMs, max) {
   const snap = await F.getDocs(q);
   return snap.docs.map(function (d) { const x = d.data(); return Object.assign({}, x, { at: x.at && x.at.toMillis ? x.at.toMillis() : 0 }); });
 }
+
+/* ---------- ⚠️ 오류 신고: reports/{자동 id} (2026-10-05) ----------
+ * 기사·가게·임대·광고의 '오류 신고' → 운영자 승인함(#approve). 로그인 필요 없음, 사람 정보 없음(uid·기기 정보 저장 안 함).
+ * {id:항목, kind:article|place|rent|ad, type:wrong|link|screen|etc, memo:≤80자, url:페이지 주소, ed:판 id, at:서버 시각}
+ * 쓰기 = 누구나 '추가'만(규칙이 모양 검사), 읽기 = 운영자만, 고치기·지우기 금지(자동 처리 없음) */
+export async function addReport(r) {
+  await fs();
+  const d = { id: String(r.id).slice(0, 80), kind: r.kind, type: r.type, memo: String(r.memo || "").slice(0, 80), url: String(r.url).slice(0, 300), ed: String(r.ed || "").slice(0, 20), at: F.serverTimestamp() };
+  await F.addDoc(F.collection(db, "reports"), d);
+}
+export async function listReports(sinceMs, max) {
+  await fs();
+  const q = F.query(F.collection(db, "reports"), F.where("at", ">=", F.Timestamp.fromMillis(sinceMs)), F.limit(max || 300));
+  const snap = await F.getDocs(q);
+  return snap.docs.map(function (d) { const x = d.data(); return Object.assign({}, x, { at: x.at && x.at.toMillis ? x.at.toMillis() : 0 }); });
+}

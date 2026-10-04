@@ -6,7 +6,7 @@
  */
 (function () {
   "use strict";
-  var FB_URL = "assets/fb.js?v=1544b0bd";       // tools/stamp_assets.py 가 ?v= 갱신
+  var FB_URL = "assets/fb.js?v=3804536b";       // tools/stamp_assets.py 가 ?v= 갱신
   var AUTH_KEY = "tnk.auth.v1";                  // 이 기기: {uid, linked:[uid…]} (계정 정보는 저장 안 함)
   var S = window.TNStore, L = window.TNTaste;
   var live = /^https?:$/.test(location.protocol);
@@ -383,8 +383,11 @@
     });
   }
   function adminStats(sinceMs) { return load().then(function (m) { start(m); return m.listReactions(sinceMs, 5000); }); }
+  // ⚠️ 오류 신고(assets/report.js): 로그인 없이 reports 에 추가만 / 운영자 승인함에서 읽기
+  function report(r) { if (!live || failed) return Promise.reject(new Error("off")); return load().then(function (m) { start(m); return m.addReport(r); }); }
+  function adminReports(sinceMs) { return load().then(function (m) { start(m); return m.listReports(sinceMs, 300); }); }
 
-  window.TNSocial = { react: react, isAdmin: function () { return !!(user && admin); }, adminStats: adminStats, warm: function () { if (live && !fbP && !failed) load().then(start).catch(function () {}); }, mountComments: mountComments, renderAccountBox: renderAccountBox, signedIn: function () { return !!user; }, _filter: badText, _nick: nickOk, _replyChips: replyChips };
+  window.TNSocial = { react: react, report: report, adminReports: adminReports, isAdmin: function () { return !!(user && admin); }, adminStats: adminStats, warm: function () { if (live && !fbP && !failed) load().then(start).catch(function () {}); }, mountComments: mountComments, renderAccountBox: renderAccountBox, signedIn: function () { return !!user; }, _filter: badText, _nick: nickOk, _replyChips: replyChips };
 
   renderHeader();
   if (!live) return;

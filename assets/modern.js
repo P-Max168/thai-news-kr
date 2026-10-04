@@ -18,7 +18,7 @@
     ".nb-page__t", ".nb-back", ".nb-sw", ".nb-go", ".nb-places", ".nb-note", ".nb-how summary", ".nb-sec",
     ".pc-f", ".pc-intro b", ".pc-openonly", ".pc__cat", ".pc__open", ".pc__price", ".pc__info dt", ".pc__btn", ".pc__report", ".pc__old",
     ".pc-empty__e", ".jb-ex", ".hp-n", ".hp-empty__e", ".hp-ic", ".hp-x", ".persona__e", ".tpick__e", ".opt__e", ".int__e", ".setbtn",
-    ".sheet__kicker", ".acct-menu", ".ih__icon", ".ihi__ic", ".adm-link", ".ad-h", ".tk-pop__t", ".cmts__h", ".pc__foot", ".pc__fs", ".pc-src", ".jb-warn", ".thm__e"
+    ".sheet__kicker", ".acct-menu", ".ih__icon", ".ihi__ic", ".adm-link", ".ad-h", ".tk-pop__t", ".cmts__h", ".pc__foot", ".pc__fs", ".pc-src", ".jb-warn", ".thm__e", ".rep-btn", ".rp-sec .ad-h"
   ].join(",");
   var STRIP = [".chip", ".bchip", ".mini", ".impf__c", ".cat-stats .lbl", ".also__m", ".mine__chip", ".korea__title"].join(",");
   var keys = Object.keys(MAP).sort(function (a, b) { return b.length - a.length; });

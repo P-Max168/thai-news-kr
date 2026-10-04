@@ -1,6 +1,6 @@
 /* 📇 파타야 가게 카드 시험(2026-10-03) — 화면 안 페이지 #places (assets/pages.js 에 등록)
  * 데이터: data/places-pattaya.json (tools/places/build_places.py — OpenStreetMap 에서 실제로 받은 값만, 모르는 값 = null → '확인 안 됨')
- * 카드: 이름·종류·🟢 지금 영업 중(OSM 영업시간으로 방콕 시간 기준 계산)·영업시간(한국어)·가격(바트+원, 모르면 확인 안 됨)·주소·최종 확인일·출처·지도·전화·정보 틀림(카톡)
+ * 카드: 이름·종류·🟢 지금 영업 중(OSM 영업시간으로 방콕 시간 기준 계산)·영업시간(한국어)·가격(바트+원, 모르면 확인 안 됨)·주소·최종 확인일·출처·지도·전화·⚠️ 오류 신고(assets/report.js, 카톡 링크가 정해지면 카톡도)
  * 성인 업종 없음(데이터 만들 때 뺌). 결제·상단 고정 없음(시안은 mockups/places-package.html, 승인함 #6). */
 (function () {
   "use strict";
@@ -100,6 +100,8 @@
     return '<small class="pc__fs"><a href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">' + esc(s.by) + " ↗</a> · " + esc(s.at) + " 확인</small>";
   }
 
+  // ⚠️ 오류 신고(assets/report.js — 카드 안에서 펼침). 카톡 링크(report_kakao_url, 승인함 #7)가 생기면 그 링크도 함께 보임
+  function rep(kind, id) { return window.TNRepBtn ? '<div class="rep-row rep-row--pc">' + TNRepBtn(kind, id) + "</div>" : ""; }
   function card(p) {
     var st = openState(p._oh);
     var stHTML = st === "open" ? '<span class="pc__open pc__open--on">🟢 지금 영업 중</span>' : st === "soon" ? '<span class="pc__open pc__open--soon">🟠 곧 닫아요</span>'
@@ -130,9 +132,8 @@
         (p.phone ? '<a class="pc__btn" href="tel:' + esc(p.phone.replace(/[^\d+]/g, "")) + '">📞 전화</a>' : '<span class="pc__btn pc__btn--off" aria-disabled="true">📞 번호 확인 안 됨</span>') + "</div>" +
       '<div class="pc__foot"><a href="' + esc(p.source_url) + '" target="_blank" rel="noopener">출처: ' + esc(p.source) + " ↗</a>" +
         (p.website ? ' · <a href="' + esc(p.website) + '" target="_blank" rel="noopener nofollow">가게 사이트 ↗</a>' : "") +
-        (kakao ? '<a class="pc__report" href="' + esc(kakao) + '" target="_blank" rel="noopener">✋ 정보 틀림 알리기(카톡)</a>'
-               : '<a class="pc__report" href="#" data-placeholder data-pc-report aria-disabled="true" title="카톡 링크 준비 중">✋ 정보 틀림 알리기(카톡)</a>') +
-      "</div></article>";
+        (kakao ? '<a class="pc__report" href="' + esc(kakao) + '" target="_blank" rel="noopener">✋ 정보 틀림 알리기(카톡)</a>' : "") +
+      "</div>" + rep("place", "place:" + p.id) + "</article>";
   }
 
   TNPages.register("places", {
@@ -172,7 +173,6 @@
       if ((el = t.closest("[data-pc-cat]"))) { cat = el.getAttribute("data-pc-cat"); TNPages.refresh(); return true; }
       if ((el = t.closest("[data-pc-open]"))) { openOnly = !openOnly; TNPages.refresh(); return true; }
       if ((el = t.closest("[data-pc-retry]"))) { err = false; load(); TNPages.refresh(); return true; }
-      if ((el = t.closest("[data-pc-report]"))) { e.preventDefault(); if (window.TNApp && TNApp.toast) TNApp.toast("카톡 문의 링크를 준비 중이에요", 2000); return true; }
       return false;
     }
   });
@@ -198,7 +198,7 @@
         "<div><dt>🧾 보증금·관리비·계약 기간</dt><dd class=\"pc__na\">확인 안 됨" + na + "</dd></div>" +
         "<div><dt>✅ 올린 날 · 고친 날</dt><dd>" + esc(x.listed || "확인 안 됨") + " · " + esc(x.updated || "확인 안 됨") + f + "</dd></div>" +
       "</dl>" +
-      '<div class="pc__btns"><a class="pc__btn pc__btn--map" href="' + esc(map) + '" target="_blank" rel="noopener">📍 지도</a><a class="pc__btn" href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">🔗 원래 매물 보기</a></div></article>';
+      '<div class="pc__btns"><a class="pc__btn pc__btn--map" href="' + esc(map) + '" target="_blank" rel="noopener">📍 지도</a><a class="pc__btn" href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">🔗 원래 매물 보기</a></div>' + rep("rent", "rent:" + x.id) + "</article>";
   }
   TNPages.register("rent", {
     title: "🏠 파타야 임대 카드(시험)",

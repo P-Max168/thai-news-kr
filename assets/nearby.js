@@ -121,10 +121,10 @@
     // render:"dragon" = 드래곤 스웨디시 배너 + '이 자리 추천 업종' 꼬리표(data/ads.js 의 TN_ADS.dragon 으로 바로 그림). 못 그리면 일반 카드
     if (it.render === "dragon" && !it.target && c.tag) { it = Object.assign({}, it, { target: c.tag }); }   // 꼬리표 비었으면 NEARBY 의 tag
     var dg = it.render === "dragon" && window.DragonAd && window.DragonAd.slotHTML && window.DragonAd.slotHTML(it);
-    el.innerHTML = dg || adHTML(sl);
+    el.innerHTML = (dg || adHTML(sl)) + (window.TNAdRep ? TNAdRep(c.slot, it) : "");
     if (!dg && it.render === "dragon" && window.DragonAd) {   // 옛 ads.js(TN_ADS.dragon 없음): ad.json 을 받아 그림
       window.DragonAd.mount(document.createElement("div"), { variant: it.variant || "small", target: it.target || "" }).then(function (box) {
-        if (box && box.innerHTML && cur === c.id) el.innerHTML = box.innerHTML;
+        if (box && box.innerHTML && cur === c.id) el.innerHTML = box.innerHTML + (window.TNAdRep ? TNAdRep(c.slot, it) : "");
       });
     }
   }

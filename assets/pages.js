@@ -285,6 +285,35 @@
       '<details class="as-how" open><summary>점수 매기는 법(전부)</summary>' + rules + '<p class="as-man">✍️ ' + esc(R.manual) + "</p></details>" +
       '<p class="hp-note">기준을 바꾸려면 봇에게 \'민감 기사 기준에서 ○○ 빼 줘/넣어 줘\'라고 말해 주세요(파일: assets/adsafe.js). 편집자 점검: <code>python3 tools/adsafe.py</code></p></section>';
   }
+  /* ⚠️ 오류 신고함(승인함 안) — 서버(Firestore reports, 운영자만 읽기) + 이 기기에 저장된 신고. 보기만, 자동 처리 없음 */
+  var RP = { rows: null, err: null, busy: false, t: 0 };
+  var RP_T = { wrong: "정보 틀림", link: "링크 깨짐", screen: "화면 이상", etc: "기타" }, RP_K = { article: "기사", place: "가게 카드", rent: "임대 카드", ad: "광고" };
+  function rpLoad(force) {
+    if (RP.busy || (!force && (RP.rows || RP.err) && Date.now() - RP.t < 120e3)) return;
+    if (!window.TNSocial || !TNSocial.adminReports) { RP.err = "load"; return; }
+    RP.busy = true; RP.err = null;
+    TNSocial.adminReports(Date.now() - 30 * 864e5).then(function (rows) { RP.rows = rows.sort(function (a, b) { return b.at - a.at; }); })
+      .catch(function (e) { RP.err = /permission/i.test((e && (e.code || e.message)) || "") ? "perm" : "net"; })
+      .then(function () { RP.busy = false; RP.t = Date.now(); if (cur === "approve") paint(); });
+  }
+  function rpRow(x, at) {
+    var u = String(x.url || "");
+    return '<li class="rp-item"><div class="ap-top"><span class="ap-kind">' + esc(RP_K[x.kind] || x.kind) + '</span><span class="rp-type">' + esc(RP_T[x.type] || x.type) + '</span><span class="ap-st">' + (at ? esc(hm(at)) : "") + "</span></div>" +
+      '<p class="rp-memo">' + (x.memo ? esc(x.memo) : '<span class="rp-none">메모 없음</span>') + "</p>" +
+      '<p class="ap-where">항목 <code>' + esc(x.id) + "</code>" + (x.ed ? " · 판 " + esc(x.ed) : "") + "</p>" +
+      (/^https:\/\//.test(u) ? '<p class="ap-where"><a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(u.replace(/^https:\/\/[^/]+/, "")) + " ↗</a></p>" : (u ? '<p class="ap-where">' + esc(u) + "</p>" : "")) + "</li>";
+  }
+  function repHTML() {
+    rpLoad(false);
+    var loc = []; try { loc = JSON.parse(localStorage.getItem("tnk.rep.q") || "[]") || []; } catch (e) {}
+    var srv = RP.err === "perm" ? '<p class="as-sum">서버 신고함은 아직 꺼져 있어요(Firestore 규칙의 reports 부분 게시 전 — 승인함 항목 참고). 그동안 독자는 신고를 자기 휴대폰에 저장하고, 원하면 <b>메일로 보내기</b>로 운영자 메일에 보내요.</p>'
+      : RP.err ? '<p class="as-sum">서버 신고함을 불러오지 못했어요. <button type="button" class="linkbtn" data-rp-reload>다시 시도</button></p>'
+      : !RP.rows ? '<p class="as-sum">불러오는 중…</p>'
+      : RP.rows.length ? '<ol class="ap-list rp-list">' + RP.rows.map(function (x) { return rpRow(x, x.at); }).join("") + "</ol>" : '<p class="as-sum">최근 30일 동안 들어온 신고가 없어요 🙂</p>';
+    var mine = loc.length ? '<details class="as-near"><summary>이 기기에 저장된 신고 ' + loc.length + "건(시험·서버로 못 보낸 것)</summary><ol class=\"ap-list rp-list\">" + loc.slice().reverse().map(function (x) { return rpRow(x, x.t); }).join("") + "</ol></details>" : "";
+    return '<section class="ad-sec rp-sec" id="reports" aria-labelledby="rpH"><h3 class="ad-h" id="rpH">⚠️ 오류 신고함 <small>(최근 30일)</small></h3>' +
+      '<p class="as-sum">기사·가게 카드·광고의 <b>오류 신고</b>가 여기 모여요. <b>자동으로 고치거나 지우지 않아요</b> — 보고 고칠 것을 봇에게 알려 주세요.</p>' + srv + mine + "</section>";
+  }
   register("approve", {
     title: "✅ 관리자 승인함",
     render: function () {
@@ -300,7 +329,7 @@
       var open = items.filter(function (x) { return !dec[x.id]; }).length;
       var head = '<div class="ad-sum ap-sum"><div class="ad-cell"><span>전체</span><b>' + items.length + '</b></div><div class="ad-cell"><span>안 고름</span><b>' + open + '</b></div><div class="ad-cell"><span>고름</span><b>' + (items.length - open) + "</b></div></div>" +
         '<p class="ap-note">여기서 누른 OK 는 <b>바로 올라가지 않아요</b>. 아래 \'결정 복사\'를 봇에게 보내 주시면 봇이 반영해요.</p>';
-      if (!items.length) return head + '<div class="empty">승인 기다리는 항목이 없어요 🙂</div>' + adsafeHTML();
+      if (!items.length) return head + '<div class="empty">승인 기다리는 항목이 없어요 🙂</div>' + repHTML() + adsafeHTML();
       var all = open ? '<button type="button" class="cta ap-all" data-ap-all>✅ 남은 ' + open + "건 전부 OK</button>" : "";
       var list = items.map(function (x) {
         var d = dec[x.id];
@@ -311,7 +340,7 @@
       }).join("");
       var txt = apText(items, dec);
       var copy = txt ? '<section class="ad-sec ap-copy"><h3 class="ad-h">봇에게 보낼 결정</h3><p class="ap-txt" id="apTxt">' + esc(txt) + '</p><button type="button" class="cta" data-ap-copy>📋 결정 복사</button></section>' : "";
-      return head + all + '<ol class="ap-list">' + list + "</ol>" + copy + '<p class="hp-note">목록 기준 ' + esc(String(AP.doc.updated_at || "").replace("T", " ").slice(5, 16)) + ' (방콕) · 원본 PENDING_APPROVAL.md <button type="button" class="linkbtn" data-ap-reload>새로고침</button></p>' + adsafeHTML();
+      return head + all + '<ol class="ap-list">' + list + "</ol>" + copy + '<p class="hp-note">목록 기준 ' + esc(String(AP.doc.updated_at || "").replace("T", " ").slice(5, 16)) + ' (방콕) · 원본 PENDING_APPROVAL.md <button type="button" class="linkbtn" data-ap-reload>새로고침</button></p>' + repHTML() + adsafeHTML();
     },
     click: function (e, t) {
       var el, dec = apDec();
@@ -329,6 +358,7 @@
         else window.prompt("아래 글을 복사해 주세요", tx);
         return true;
       }
+      if (t.closest("[data-rp-reload]")) { rpLoad(true); paint(); return true; }
       if (t.closest("[data-ap-reload]")) { AP.doc = null; AP.err = null; apLoad(true); paint(); return true; }
       return false;
     }

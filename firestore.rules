@@ -5,6 +5,7 @@ rules_version = '2';
 //  comments/{id}   : 댓글. 숨김 아닌 것만 누구나 읽기 / 로그인한 본인만 작성(30초 1회) / 본인·운영자 삭제 / 운영자 숨김 / 신고 3회면 자동 숨김
 //  config/admins   : {uids: [...]} 운영자 목록 — 콘솔에서만 수정(클라이언트 쓰기 금지)
 //  rx/{id}         : 익명 반응(하트·🙌·🙅) — 누구나 추가만, 운영자만 읽기(2026-10-03 야간)
+//  reports/{id}    : ⚠️ 오류 신고(기사·가게·임대·광고) — 누구나 추가만, 운영자만 읽기, 고치기·지우기 금지(2026-10-05)
 //  그 밖의 모든 경로 : 거부
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -131,6 +132,25 @@ service cloud.firestore {
     match /rx/{id} {
       allow read: if isAdmin();
       allow create: if validRx(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    // ---------- ⚠️ 오류 신고 reports/{id} (2026-10-05 추가) ----------
+    // 기사·가게·임대·광고의 '오류 신고'. 로그인 불필요, 사람 정보 없음(아래 키 외에는 거부). 누구나 '추가'만, 읽기는 운영자만(승인함 #approve),
+    // 고치기·지우기 금지(자동 처리 없음). at 은 서버 시각만. url 은 이 사이트 주소만.
+    function validRep(d) {
+      return d.keys().hasOnly(['id', 'kind', 'type', 'memo', 'url', 'ed', 'at']) && d.keys().hasAll(['id', 'kind', 'type', 'url', 'at'])
+        && d.id is string && d.id.size() >= 1 && d.id.size() <= 80
+        && d.kind in ['article', 'place', 'rent', 'ad']
+        && d.type in ['wrong', 'link', 'screen', 'etc']
+        && (!('memo' in d) || (d.memo is string && d.memo.size() <= 80))
+        && d.url is string && d.url.size() <= 300 && d.url.matches('^https://p-max168[.]github[.]io/thai-news-kr/.*')
+        && (!('ed' in d) || (d.ed is string && d.ed.size() <= 20))
+        && d.at == request.time;
+    }
+    match /reports/{id} {
+      allow read: if isAdmin();
+      allow create: if validRep(request.resource.data);
       allow update, delete: if false;
     }
 

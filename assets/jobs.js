@@ -21,7 +21,7 @@
     var A = window.TN_ADS, sl = A && A.enabled !== false && A.slots && A.slots.filter(function (x) { return x.id === "infeed" && x.enabled !== false && x.items && x.items.length; })[0];
     var it = sl && Object.assign({}, sl.items[0], { target: "인력·비자 대행·통역" });
     var h = it && window.DragonAd && window.DragonAd.slotHTML && window.DragonAd.slotHTML(it);
-    return h ? '<div class="ad-slot jb-ad" data-unit="' + esc(sl.unit || "300x250") + '">' + h + "</div>" : "";
+    return h ? '<div class="ad-slot jb-ad" data-unit="' + esc(sl.unit || "300x250") + '">' + h + (window.TNAdRep ? TNAdRep("jobs", it) : "") + "</div>" : "";
   }
   function card(j) {
     var r = REGS.filter(function (x) { return x.id === j.region; })[0], k = KINDS.filter(function (x) { return x.id === j.kind; })[0];

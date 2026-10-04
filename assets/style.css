@@ -905,3 +905,30 @@ body.drawer-open{overflow:hidden}
 .thm[aria-checked="true"]{border-color:var(--navy);background:#e8f0fb;color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
 .thm:focus-visible{box-shadow:0 0 0 2px #74c0fc}
 
+
+/* ⚠️ 오류 신고(2026-10-05) — 기사(펼친 본문 끝)·가게/임대 카드·광고 자리 아래 작은 버튼, 누르면 바로 아래가 펼쳐짐(팝업 없음). assets/report.js */
+.rep-row{display:flex;justify-content:flex-end;margin:10px 0 0}
+.rep-row--ad{margin:4px 0 0}
+.rep-row--pc{margin:8px 0 0}
+.rep-btn{display:inline-flex;align-items:center;gap:4px;min-height:34px;padding:0 10px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--muted);font:inherit;font-size:.8125rem;font-weight:600;cursor:pointer}
+.rep-btn[aria-expanded="true"]{border-color:#f0c75e;background:#fffbea;color:#6b4e00}
+.rep-btn__e{font-size:.875rem;line-height:1}
+.rep{margin:8px 0 2px;padding:12px;border:1px solid #f0c75e;border-radius:12px;background:#fffdf3;font-size:.9375rem}
+.rep__h{margin:0 0 8px;font-weight:700;font-size:.9375rem;color:var(--ink)}
+.rep__ks{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.rep__k{min-height:40px;padding:0 8px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink-2);font:inherit;font-size:.9375rem;font-weight:600;cursor:pointer}
+.rep__k[aria-checked="true"]{border-color:var(--navy);background:var(--navy);color:#fff}
+.rep__m{display:block;width:100%;margin:8px 0 0;min-height:42px;padding:0 10px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:1rem}
+.rep__acts{display:flex;gap:6px;margin-top:8px}
+.rep__send,.rep__x{min-height:42px;padding:0 16px;border-radius:10px;font:inherit;font-size:.9375rem;font-weight:700;cursor:pointer}
+.rep__send{flex:1;border:0;background:var(--navy);color:#fff}
+.rep__send:disabled{opacity:.45;cursor:default}
+.rep__x{border:1px solid var(--line);background:#fff;color:var(--ink-2)}
+.rep__st{margin:8px 0 0;font-size:.875rem;line-height:1.55;color:var(--ink-2)}
+.rep__st:empty{display:none}
+.rep__st--ok{color:#0c6b4f}
+.rep__st--warn{color:#8a4b00}
+.rep__mail{display:flex;align-items:center;justify-content:center;margin-top:8px;min-height:42px;border-radius:10px;border:1px solid var(--navy);color:var(--navy);font-weight:700;text-decoration:none}
+.rp-type{font-weight:700;color:#8a4b00}
+.rp-memo{margin:6px 0 2px;font-weight:600}
+.rp-none{color:var(--muted);font-weight:400}

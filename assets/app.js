@@ -67,6 +67,21 @@
     return tps(s).all.some(function (t) { return sel.indexOf(t) >= 0; });
   }
   function edId() { return (state.edition && state.edition.id) || state.data.id || state.data.date; }
+  /* ⚠️ 오류 신고 버튼(기사·가게·임대·광고) — 누르면 assets/report.js 를 처음 한 번 불러와 버튼 바로 아래를 펼침(팝업 없음) */
+  function repBtn(kind, id) { return '<button type="button" class="rep-btn" data-rep="' + kind + '" data-rep-id="' + esc(id) + '" aria-expanded="false"><span class="rep-btn__e" aria-hidden="true">⚠️</span> 오류 신고</button>'; }
+  function adRep(slotId, it) { return '<div class="rep-row rep-row--ad">' + repBtn("ad", "ad:" + (slotId || "slot") + ":" + ((it && (it.id || it.render)) || "item")) + "</div>"; }
+  window.TNRepBtn = repBtn; window.TNAdRep = adRep;
+  var repLoading = false;
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-rep]"); if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    if (window.TNReport) return TNReport.toggle(b);
+    if (repLoading) return; repLoading = true;
+    var sc = document.createElement("script"); sc.src = "assets/report.js?v=44364820";
+    sc.onload = function () { if (window.TNReport) TNReport.toggle(b); };
+    sc.onerror = function () { repLoading = false; toast("오류 신고 칸을 불러오지 못했어요. 인터넷 연결을 확인해 주세요", 2600); };
+    document.body.appendChild(sc);
+  }, true);
   function refTime() { return new Date(state.data.generated || (state.data.date + "T12:00:00+07:00")).getTime(); }
 
   /* ---------- 데이터 로드 ---------- */
@@ -386,6 +401,7 @@
       '<div class="card__body" id="body-' + esc(s.id) + '">' + upd + paras + ctx +
         '<div class="origin">' + originTitle(s.title_th) +
         '<a class="btn" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.source.replace(/\s*\(.*\)$/, "")) + " 원문 보기 ↗</a>" + rel + tags + "</div>" +
+        '<div class="rep-row">' + repBtn("article", edId() + "/" + s.id) + "</div>" +
         talkHTML(s) +
       "</div>" + voteHTML(s) + "</article>";
   }
@@ -500,16 +516,17 @@
   function adHTML(sl, n) {
     var it = sl.items[(n || 0) % sl.items.length], lab = (window.TN_ADS.label || "광고");
     // render:"dragon" = 드래곤 스웨디시 배너(assets/ads/massage/dragon-ad.js, variant·'이 자리 추천 업종' 꼬리표). 못 그리면 아래 일반 카드
+    var rb = adRep(sl.id, it);
     var dg = it.render === "dragon" && window.DragonAd && window.DragonAd.slotHTML(it);
-    if (dg) return dg;
+    if (dg) return dg + rb;
     var safe = function (u) { return u && /^https:\/\//.test(u) ? u : null; };
     var link = safe(it.link), img = safe(it.image);
     var inner = '<span class="ad__tag">' + esc(lab) + "</span>" + (img ? '<img class="ad__img" src="' + esc(img) + '" alt="" loading="lazy">' : "") +
       '<span class="ad__txt">' + (it.category ? '<span class="ad__cat">' + esc(it.category) + "</span>" : "") +
       '<b class="ad__t">' + esc(it.title || "여기에 광고하세요") + '</b><small class="ad__s">' + esc(it.subtitle || "광고 문의") + "</small></span>";
     var cls = "ad ad--" + esc(sl.size || "medium") + " ad--t" + (it.theme || 1);
-    return link ? '<a class="' + cls + '" href="' + esc(link) + '" target="_blank" rel="noopener sponsored" aria-label="' + esc(lab) + '">' + inner + "</a>"
-      : '<div class="' + cls + '" role="note" aria-label="' + esc(lab) + ' 자리">' + inner + "</div>";
+    return (link ? '<a class="' + cls + '" href="' + esc(link) + '" target="_blank" rel="noopener sponsored" aria-label="' + esc(lab) + '">' + inner + "</a>"
+      : '<div class="' + cls + '" role="note" aria-label="' + esc(lab) + ' 자리">' + inner + "</div>") + rb;
   }
   function renderAds() {
     [].forEach.call(document.querySelectorAll("[data-ad-slot]"), function (el) {
