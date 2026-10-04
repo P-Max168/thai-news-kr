@@ -33,6 +33,12 @@
   function ms(iso) { var t = iso ? new Date(iso).getTime() : NaN; return isFinite(t) ? t : 0; }
   function fresh(iso, max) { var t = ms(iso); return t > 0 && Date.now() - t <= max && t - Date.now() < 36e5; }
   function n0(x) { return Math.round(x).toLocaleString("ko-KR"); }
+  // 휘발유 '전날 값' 날짜(방콕): feed_date 하루 전 → 'M/D ' (모르면 '전날 ')
+  function prevDay(iso) {
+    var t = ms(iso); if (!t) return "전날 ";
+    var o = {}; new Intl.DateTimeFormat("en-US", { timeZone: TZ, month: "numeric", day: "numeric" }).formatToParts(new Date(t - 864e5)).forEach(function (p) { o[p.type] = p.value; });
+    return o.month + "/" + o.day + " ";
+  }
   function when(iso) {
     var o = {}; new Intl.DateTimeFormat("ko-KR", { timeZone: TZ, month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false })
       .formatToParts(new Date(iso)).forEach(function (p) { o[p.type] = p.value; });
@@ -119,13 +125,13 @@
 
   function fuelOK() { var o = st.tk && st.tk.fuel; return o && o.gasohol95 > 0 && fresh(o.fetched_at, DAY) && fresh(o.feed_date, 2 * DAY) ? o : null; }
   function usdtOK() { var u = st.tk && st.tk.usdt; return u && u.USDT_THB > 0 && fresh(u.fetched_at, DAY) && (!u.price_time || fresh(u.price_time, 2 * DAY)) ? u : null; }
-  // 조회 시각(방콕): 오늘이면 'HH:MM', 아니면 'M/D HH:MM' — 상자 안 항목 중 가장 오래된 것
+  // 조회 시각(방콕): 언제나 'M/D HH:MM'(2026-10-04 실제 날짜 표시) — 상자 안 항목 중 가장 오래된 것
   function clock(list) {
     var t = list.filter(function (x) { return x > 0; }); if (!t.length) return "";
     var o = {}, f = function (v) { new Intl.DateTimeFormat("en-US", { timeZone: TZ, month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false })
       .formatToParts(new Date(v)).forEach(function (p) { o[p.type] = p.value; }); return o.month + "/" + o.day; };
-    var m = Math.min.apply(null, t), today = f(Date.now()), d = f(m);
-    return (d === today ? "" : d + " ") + o.hour.replace(/^24$/, "00") + ":" + o.minute;
+    var d = f(Math.min.apply(null, t));
+    return d + " " + o.hour.replace(/^24$/, "00") + ":" + o.minute;
   }
   function n2(x) { return Number(x).toLocaleString("ko-KR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 
@@ -137,7 +143,8 @@
     return '<button type="button" class="tk-chip tk-tile" data-tk="' + k + '" aria-haspopup="dialog" aria-label="' + esc(lines.map(function (l) { return l[0]; }).join(", ")) + ' (누르면 출처)"><span class="tk-in">' +
       lines.map(function (l) { return '<span class="' + (l[2] || "tk-ln") + '">' + l[1] + "</span>"; }).join("") + "</span></button>";
   }
-  function ft(list) { var c = clock(list); return c ? [c + " 조회", c + " 조회"] : null; }
+  // 화면 = 'M/D HH:MM'(날짜를 넣으면서 칸이 넓어져 화면 글자 '조회'는 뺌 — 읽어 주기·출처 창엔 그대로 '조회')
+  function ft(list) { var c = clock(list); return c ? [c + " 조회", c] : null; }
   var renderLater = false;
   function render() {
     // 속도(2026-10-03 18:25, 검수 지시): 첫 기사 카드가 그려지기 전에는 칩을 채우지 않음 — 자리는 index.html 의 빈 상자 4개가 잡고 있음
@@ -160,7 +167,7 @@
       a && ["미세먼지 PM2.5 " + Math.round(a.pm) + " " + lv.t, '<span class="tk-l">PM2.5</span><b>' + Math.round(a.pm) + '</b><span class="tk-lv tk-lv--' + lv.k + '">' + lv.t + "</span>"]
     ], (function () {   // 지역 이름은 맨 아래 조회 줄 앞에(첫 줄 폭 줄이기 — 운영자 요청 10-03: 날씨 상자 잘림)
       var c = clock([w && w.at, a && a.at]), rn = REGIONS[(w || a || {}).rg || region()].name;
-      return c ? [rn + " " + c + " 조회", '<span class="tk-rg">' + rn + "</span>" + c + " 조회"] : null;
+      return c ? [rn + " " + c + " 조회", '<span class="tk-rg">' + rn + "</span>" + c] : null;
     })()));
     h.push(tile("price", [
       g && ["금시세 금괴 1바트 " + n0(g.bar_sell) + "바트", '<span class="tk-l">금</span><b>' + n0(g.bar_sell) + '<small class="tk-u">฿</small></b>'],
@@ -223,7 +230,7 @@
         src(a.src, a.url, ["모델 기준 " + when(a.time) + " (방콕)" + (a.viaServer ? " · 서버에서 2시간마다 받은 값" : " · 1시간마다 새로"), "측정소 실측값이 아닌 예측 모델 값 — 실측은 Air4Thai(air4thai.pcd.go.th)"]);
     }
     if (k === "fuel" && o) return "<b class=\"tk-pop__t\">⛽ 휘발유 가격 — 가소홀 95</b><p>리터당 <b>" + n2(o.gasohol95) + "바트</b>" +
-      (f ? " (약 " + n0(o.gasohol95 * f.THB_KRW) + "원)" : "") + (typeof o.yesterday === "number" && o.yesterday !== o.gasohol95 ? " · 어제 " + n2(o.yesterday) + "바트" : "") + "</p>" +
+      (f ? " (약 " + n0(o.gasohol95 * f.THB_KRW) + "원)" : "") + (typeof o.yesterday === "number" && o.yesterday !== o.gasohol95 ? " · " + prevDay(o.feed_date) + n2(o.yesterday) + "바트" : "") + "</p>" +
       '<p class="tk-pop__note">' + esc(noTh(o.name)) + " · " + esc(noTh(o.note)) + "</p>" +
       src(o.source, o.url, ["가격 공지 " + when(o.announced_at) + (o.effective_at ? " · 적용 " + when(o.effective_at) + "부터" : ""), "받아 온 시각 " + when(o.fetched_at) + " · 주유소·지역마다 조금씩 다름"]);
     return "";

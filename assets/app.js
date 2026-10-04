@@ -45,15 +45,9 @@
     var o = {}; p.forEach(function (x) { o[x.type] = x.value; });
     return o.month + "월 " + o.day + "일(" + o.weekday + ")";
   }
-  function relTime(iso) {
-    var diff = (Date.now() - new Date(iso).getTime()) / 60000;
-    if (diff < 0 || diff > 60 * 48) return "";
-    if (diff < 60) return Math.max(1, Math.round(diff)) + "분 전";
-    return Math.floor(diff / 60) + "시간 전";
-  }
+  // 실제 날짜만(2026-10-04 Max 디자인 지시: 'N시간 전' 같은 상대 시간 안 씀 — 오래된 글이 새 글처럼 보이지 않게). 형식 '10/3 14:20'(방콕)
   function timeHTML(iso) {
-    var r = relTime(iso);
-    return '<time datetime="' + esc(iso) + '" title="방콕 시간 기준">' + esc(fmtTime(iso)) + '<span class="tz"> (BKK)</span>' + (r ? " · " + r : "") + "</time>";   // 휴대폰은 (BKK) 숨김 — 사이트 전체가 방콕 시간(헤더에 표시)
+    return '<time datetime="' + esc(iso) + '" title="방콕 시간 기준">' + esc(fmtTime(iso)) + '<span class="tz"> (BKK)</span>' + "</time>";   // 휴대폰은 (BKK) 숨김 — 사이트 전체가 방콕 시간(헤더에 표시)
   }
   function metaHTML(s) {
     return '<div class="meta"><span class="src">' + esc(s.source) + '</span><span class="dot">' + timeHTML(s.published) + "</span></div>";
@@ -178,7 +172,7 @@
     el.classList.toggle("is-closed", closed);
     el.setAttribute("data-korea-src", src.live ? "live" : "edition");
     el.innerHTML = '<button type="button" class="korea__head" data-korea-toggle aria-expanded="' + !closed + '" aria-controls="koreaList"><span><span class="korea__title" id="koreaTitle">🇰🇷 오늘의 한국 주요 뉴스 <b class="korea__top">TOP ' + k.length + '</b></span><span class="korea__sub">' +
-      (src.at ? '<time class="korea__upd" datetime="' + esc(src.at) + '" title="방콕 시간 기준">업데이트 ' + esc(hhmm(src.at)) + "</time>" : "한국 언론") + "</span></span><span class=\"korea__chev\" aria-hidden=\"true\">▾</span></button>" +
+      (src.at ? '<time class="korea__upd" datetime="' + esc(src.at) + '" title="방콕 시간 기준 업데이트">' + esc(fmtTime(src.at)) + "</time>" : "한국 언론") + "</span></span><span class=\"korea__chev\" aria-hidden=\"true\">▾</span></button>" +
       '<ol class="korea__list" id="koreaList">' + k.map(function (x, i) {
         // 항목을 누르면 바로 아래 작은 카드(제목·매체·시각·짧은 설명이 데이터에 있을 때만 — 기사 본문은 절대 옮기지 않음) + '기사 보러 가기 ↗'(새 탭)
         var op = KOREA.open === i, d = (x.desc || x.summary || "").toString().trim();

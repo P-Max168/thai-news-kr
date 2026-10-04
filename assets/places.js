@@ -193,7 +193,7 @@
         "<div><dt>📐 면적</dt><dd>" + esc(String(x.sqm)) + "㎡ (약 " + esc(String(x.pyeong)) + "평)" + f + "</dd></div>" +
         "<div><dt>📍 지역</dt><dd>" + esc(x.area) + f + "</dd></div>" +
         "<div><dt>🧾 보증금·관리비·계약 기간</dt><dd class=\"pc__na\">확인 안 됨" + na + "</dd></div>" +
-        "<div><dt>✅ 올린 날 · 고친 날</dt><dd>" + esc(x.listed || "확인 안 됨") + " · " + esc(x.updated_rel ? x.checked + " 기준 " + x.updated_rel : "확인 안 됨") + f + "</dd></div>" +
+        "<div><dt>✅ 올린 날 · 고친 날</dt><dd>" + esc(x.listed || "확인 안 됨") + " · " + esc(x.updated || "확인 안 됨") + f + "</dd></div>" +
       "</dl>" +
       '<div class="pc__btns"><a class="pc__btn pc__btn--map" href="' + esc(map) + '" target="_blank" rel="noopener">📍 지도</a><a class="pc__btn" href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">🔗 원래 매물 보기</a></div></article>';
   }

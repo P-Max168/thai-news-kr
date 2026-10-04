@@ -38,7 +38,7 @@ async def main():
         txt = " | ".join(h["txt"])
         need = ["1바트", "원", "1달러", "฿", "USDT", "PM2.5", "금", "휘발유"]
         miss = [k for k in need if k not in txt]
-        rec(h["menu"] and h["n"] == 4 and not miss and txt.count("조회") >= 4, "헤더 ☰ + 상자 4개(환율·USDT·날씨/PM2.5·금/휘발유, 조회 시각)", txt[:200] + ((" 빠짐:" + ",".join(miss)) if miss else ""))
+        rec(h["menu"] and h["n"] == 4 and not miss and len(re.findall(r"\d{1,2}/\d{1,2} \d{2}:\d{2}", txt)) >= 4, "헤더 ☰ + 상자 4개(환율·USDT·날씨/PM2.5·금/휘발유, 조회 날짜·시각 M/D HH:MM)", txt[:200] + ((" 빠짐:" + ",".join(miss)) if miss else ""))
         rec(not h["over"], "가로 넘침 없음(390px)")
         if h["hearts"] is not None: rec(True, "헤더 ❤️ 개수 표시", h["hearts"])
         # 한국 뉴스
@@ -77,6 +77,9 @@ async def main():
         th = await pg.evaluate("document.body.innerText")   # 모든 기사를 펼친 상태
         found = THAI.findall(th)
         rec(not found, "화면에 태국 문자 없음(메인, 기사 전부 펼침)", "".join(found[:20]))
+        meta = await pg.evaluate("[...document.querySelectorAll('time, .meta, .km, .k-card__m, .tk-ft, .cm, [class*=\"time\"], [class*=\"date\"]')].map(e=>e.innerText).join(' | ')")
+        rel = re.findall(r"\d+\s*(?:분|시간|일)\s*전|방금", meta)
+        rec(not rel, "상대 시간('N시간 전') 없음 — 실제 날짜만(메인, 기사 전부 펼침)", rel[:5])
         krw = await pg.evaluate(r"""()=>{const d=(window.NEWS_DATA||{})[(window.NEWS_INDEX||{}).latest]; if(!d) return null; let miss=[], n=0;
           const txt=d.stories.map(s=>[s.headline].concat(s.summary||[], s.for_me||'', s.context||'').join(' ')).join(' \n ');
           const re=/(\d[\d,.]*\s?(?:만|억)?\s?(?:바트|฿))/g; let m; while((m=re.exec(txt))){ n++; const after=txt.slice(m.index, m.index+m[0].length+30); if(!/원/.test(after.slice(m[0].length))) miss.push(after.slice(0,40)); }

@@ -221,7 +221,7 @@
         table("🎯 관심별 <small>페르소나·내 주제로 추정</small>", g.byI, il, ["life", "travel", "biz", "visa", "none"]) +
         table("🗂️ 주제별", g.byT, tl) +
         '<p class="hp-note">개인 정보 없이 모은 숫자예요(사는 곳·관심·주제만, 성별·이름·기기 정보 없음). 취소한 반응은 빼고 셉니다. 조회 ' +
-        new Date(c.t).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Bangkok" }) + ' · 반응 ' + c.rows.length.toLocaleString("ko-KR") + '건 <button type="button" class="linkbtn" data-ad-reload>새로고침</button></p>';
+        hm(c.t) + ' · 반응 ' + c.rows.length.toLocaleString("ko-KR") + '건 <button type="button" class="linkbtn" data-ad-reload>새로고침</button></p>';
     },
     click: function (e, t) {
       var el;
@@ -249,7 +249,8 @@
     return esc(t).replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/`([^`]+)`/g, "<code>$1</code>")
       .replace(/(backups\/[\w.\-]+\/[\w.\-]+\.jpg)/g, function (m, u) { return '<a class="ap-photo" href="' + u + '" target="_blank" rel="noopener">📷 ' + u.split("/").pop().replace(/\.jpg$/, "") + "</a>"; });
   }
-  function hm(ms) { return new Date(ms).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Bangkok" }); }
+  // 시각은 실제 날짜와 함께 'M/D HH:MM'(방콕) — 2026-10-04 실제 날짜 표시
+  function hm(ms) { var o = {}; new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Bangkok", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(new Date(ms)).forEach(function (p) { o[p.type] = p.value; }); return o.month + "/" + o.day + " " + o.hour.replace(/^24$/, "00") + ":" + o.minute; }
   function apText(items, dec) {
     var ok = [], hold = [];
     items.forEach(function (x) { var d = dec[x.id]; if (d && d.d === "ok") ok.push("#" + x.no); else if (d && d.d === "hold") hold.push("#" + x.no); });
