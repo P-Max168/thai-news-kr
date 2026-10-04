@@ -1,13 +1,13 @@
 /* 태국 뉴스 한눈에 — ⚠️ 오류 신고(2026-10-05). 기사·가게 카드(#places)·임대 카드(#rent)·광고 자리마다 작은 '오류 신고' 버튼.
  * 누르면 버튼 바로 아래가 펼쳐짐(팝업·덮는 시트 없음): 정보 틀림 / 링크 깨짐 / 화면 이상 / 기타 + 한 줄 메모. 로그인 필요 없음.
  * 받는 곳: Firestore reports/{자동 id}(운영자만 읽기, 누구나 추가만 — firestore.rules) → 관리자 승인함 #approve '오류 신고함'. 자동 처리 없음.
- *   ★ REP_ON: 규칙 게시 전엔 false → 서버로 안 보내고(403 오류 방지) 이 휴대폰에 저장 + '메일로 보내기'(운영자 메일, 내용 미리 채움).
- *     규칙을 게시하면 true 로(승인함 PENDING). 미리 시험: localStorage tnk.repon = "1"
+ *   ★ REP_ON = true(2026-10-05 03:26 Max — 03:24 규칙 게시 뒤): 먼저 서버(reports)에 저장. 서버 저장이 실패할 때만
+ *     이 휴대폰에 저장 + '메일로 보내기'(운영자 메일, 내용 미리 채움). 이 기기만 끄기(시험용): localStorage tnk.repon = "0"
  * 같은 기기 제한: 30초에 1번, 하루 10번, 같은 항목·같은 종류는 하루 1번. 이 파일은 app.js 가 버튼을 처음 누를 때 불러옴. */
 (function () {
   "use strict";
-  var REP_ON = false;
-  try { if (localStorage.getItem("tnk.repon") === "1") REP_ON = true; } catch (e) {}
+  var REP_ON = true;
+  try { if (localStorage.getItem("tnk.repon") === "0") REP_ON = false; } catch (e) {}
   var MAIL = "mgisgood1919@gmail.com";
   var QK = "tnk.rep.q", LK = "tnk.rep.log";
   var TYPES = [["wrong", "정보 틀림"], ["link", "링크 깨짐"], ["screen", "화면 이상"], ["etc", "기타"]];
@@ -71,14 +71,19 @@
     logIt(id, type);
     var q = rd(QK); q.push(r); var saved = wr(QK, q.slice(-30));
     p.querySelector("[data-rep-send]").disabled = true;
+    // 메일은 '서버 저장 실패'(또는 이 기기에서 끈 경우)에만 — 정상일 땐 메일 버튼 없음
     var fallback = function () {
-      status(p, (saved ? "이 휴대폰에 저장했어요. " : "") + "<b>아직 운영자에게 자동으로 전달되지 않아요.</b> 바로 알리려면 아래 버튼으로 메일을 보내 주세요(내용은 미리 채워져 있어요)." +
+      status(p, (REP_ON ? "<b>서버에 저장하지 못했어요</b>(인터넷 연결 등). " : "") + (saved ? "이 휴대폰에 저장했어요. " : "") + "<b>아직 운영자에게 자동으로 전달되지 않았어요.</b> 바로 알리려면 아래 버튼으로 메일을 보내 주세요(내용은 미리 채워져 있어요)." +
         '<a class="rep__mail" href="' + esc(mailHref(r)) + '">메일로 보내기</a>', "info");
     };
     if (!REP_ON || !window.TNSocial || !TNSocial.report) return fallback();
     status(p, "보내는 중…", "");
-    TNSocial.report(r).then(function () {
-      r.sent = true; var q2 = rd(QK); q2.forEach(function (x) { if (x.t === r.t && x.id === r.id) x.sent = true; }); wr(QK, q2);
+    // 서버가 12초 안에 답이 없으면(느린·끊긴 연결) 실패로 보고 메일 버튼을 보여 줌
+    var tmo = new Promise(function (ok, no) { setTimeout(function () { no(new Error("timeout")); }, 12e3); });
+    Promise.race([TNSocial.report(r), tmo]).then(function (docId) {
+      // 서버에 들어간 신고는 이 기기 목록에서 뺌(승인함 '이 기기에 저장된 신고' = 서버로 못 보낸 것만)
+      r.sent = true; wr(QK, rd(QK).filter(function (x) { return !(x.t === r.t && x.id === r.id); }));
+      try { p.setAttribute("data-rep-doc", String(docId || "")); } catch (e) {}
       status(p, "<b>신고가 운영자 승인함에 들어갔어요.</b> 운영자가 직접 확인해요. 고마워요!", "ok");
     }).catch(function () { fallback(); });
   }

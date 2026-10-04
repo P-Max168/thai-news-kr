@@ -180,7 +180,7 @@
   function agg(rows) {
     var z = function () { return { h: 0, u: 0, d: 0 }; }, tot = z(), byR = {}, byI = {}, byT = {}, byA = {};
     rows.forEach(function (x) {
-      if (!/^[hud]$/.test(x.k)) return;
+      if (!/^[hud]$/.test(x.k) || /^test\//.test(String(x.a || ""))) return;   // 'test/…' = 시험 반응(지울 수 없음) → 통계에서 뺌
       var v = x.v === -1 ? -1 : 1;
       tot[x.k] += v;
       (byR[x.r || "none"] = byR[x.r || "none"] || z())[x.k] += v;
@@ -321,16 +321,21 @@
       '<p class="ap-where">항목 <code>' + esc(x.id) + "</code>" + (x.ed ? " · 판 " + esc(x.ed) : "") + "</p>" +
       (/^https:\/\//.test(u) ? '<p class="ap-where"><a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(u.replace(/^https:\/\/[^/]+/, "")) + " ↗</a></p>" : (u ? '<p class="ap-where">' + esc(u) + "</p>" : "")) + "</li>";
   }
+  // '[테스트]' 로 시작하는 메모 = 시험 신고(서버에서 지울 수 없음 — 규칙상 삭제 금지) → 진짜 신고와 섞지 않고 맨 아래 접힌 칸에 따로
+  function isTestRep(x) { return /^\s*\[테스트\]/.test(String((x && x.memo) || "")); }
   function repHTML() {
     rpLoad(false);
     var loc = []; try { loc = JSON.parse(localStorage.getItem("tnk.rep.q") || "[]") || []; } catch (e) {}
-    var srv = RP.err === "perm" ? '<p class="as-sum">서버 신고함은 아직 꺼져 있어요(Firestore 규칙의 reports 부분 게시 전 — 승인함 항목 참고). 그동안 독자는 신고를 자기 휴대폰에 저장하고, 원하면 <b>메일로 보내기</b>로 운영자 메일에 보내요.</p>'
+    loc = loc.filter(function (x) { return x && !x.sent && !isTestRep(x); });
+    var real = (RP.rows || []).filter(function (x) { return !isTestRep(x); }), test = (RP.rows || []).filter(isTestRep);
+    var srv = RP.err === "perm" ? '<p class="as-sum">서버 신고함을 읽을 권한이 없어요(운영자 계정이 아니거나 Firestore 규칙 문제). 독자 신고는 서버에 저장되고, 서버 저장이 실패한 경우에만 <b>메일로 보내기</b>로 운영자 메일에 와요.</p>'
       : RP.err ? '<p class="as-sum">서버 신고함을 불러오지 못했어요. <button type="button" class="linkbtn" data-rp-reload>다시 시도</button></p>'
       : !RP.rows ? '<p class="as-sum">불러오는 중…</p>'
-      : RP.rows.length ? '<ol class="ap-list rp-list">' + RP.rows.map(function (x) { return rpRow(x, x.at); }).join("") + "</ol>" : '<p class="as-sum">최근 30일 동안 들어온 신고가 없어요 🙂</p>';
-    var mine = loc.length ? '<details class="as-near"><summary>이 기기에 저장된 신고 ' + loc.length + "건(시험·서버로 못 보낸 것)</summary><ol class=\"ap-list rp-list\">" + loc.slice().reverse().map(function (x) { return rpRow(x, x.t); }).join("") + "</ol></details>" : "";
+      : real.length ? '<ol class="ap-list rp-list">' + real.map(function (x) { return rpRow(x, x.at); }).join("") + "</ol>" : '<p class="as-sum">최근 30일 동안 들어온 신고가 없어요 🙂</p>';
+    var tst = test.length ? '<details class="as-near rp-test"><summary>🧪 시험 신고 ' + test.length + "건(메모가 '[테스트]'로 시작 — 진짜 신고 아님, 규칙상 지울 수 없어 따로 모음)</summary><ol class=\"ap-list rp-list\">" + test.map(function (x) { return rpRow(x, x.at); }).join("") + "</ol></details>" : "";
+    var mine = loc.length ? '<details class="as-near"><summary>이 기기에 저장된 신고 ' + loc.length + "건(서버 저장 실패 — 메일로 보냈을 수 있음)</summary><ol class=\"ap-list rp-list\">" + loc.slice().reverse().map(function (x) { return rpRow(x, x.t); }).join("") + "</ol></details>" : "";
     return '<section class="ad-sec rp-sec" id="reports" aria-labelledby="rpH"><h3 class="ad-h" id="rpH">⚠️ 오류 신고함 <small>(최근 30일)</small></h3>' +
-      '<p class="as-sum">기사·가게 카드·광고의 <b>오류 신고</b>가 여기 모여요. <b>자동으로 고치거나 지우지 않아요</b> — 보고 고칠 것을 봇에게 알려 주세요.</p>' + srv + mine + "</section>";
+      '<p class="as-sum">기사·가게 카드·광고의 <b>오류 신고</b>가 여기 모여요. <b>자동으로 고치거나 지우지 않아요</b> — 보고 고칠 것을 봇에게 알려 주세요.</p>' + srv + tst + mine + "</section>";
   }
   register("approve", {
     title: "✅ 관리자 승인함",

@@ -1,0 +1,162 @@
+rules_version = '2';
+// 태국 뉴스 한눈에 — Firestore 보안 규칙 (Firebase 콘솔 → Firestore Database → 규칙 에 그대로 붙여 넣고 '게시')
+//  users/{uid}     : 본인 설정·취향(본인만 읽기/쓰기). lastCommentAt = 댓글 30초 제한용(서버 시각만 허용)
+//  profiles/{uid}  : 공개 닉네임 {nickname, isAdmin, updatedAt} (누구나 읽기, 본인만 쓰기)
+//  comments/{id}   : 댓글. 숨김 아닌 것만 누구나 읽기 / 로그인한 본인만 작성(30초 1회) / 본인·운영자 삭제 / 운영자 숨김 / 신고 3회면 자동 숨김
+//  config/admins   : {uids: [...]} 운영자 목록 — 콘솔에서만 수정(클라이언트 쓰기 금지)
+//  rx/{id}         : 익명 반응(하트·🙌·🙅) — 누구나 추가만, 운영자만 읽기(2026-10-03 야간)
+//  reports/{id}    : ⚠️ 오류 신고(기사·가게·임대·광고) — 누구나 추가만, 운영자만 읽기, 고치기·지우기 금지(2026-10-05)
+//  그 밖의 모든 경로 : 거부
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
+    function adminsPath() { return /databases/$(database)/documents/config/admins; }
+    function isAdmin() {
+      return signedIn() && exists(adminsPath()) && request.auth.uid in get(adminsPath()).data.uids;
+    }
+    function optType(d, k, t) {
+      return !(k in d) || (t == 'string' && d[k] is string) || (t == 'bool' && d[k] is bool)
+        || (t == 'number' && d[k] is number) || (t == 'int' && d[k] is int)
+        || (t == 'map' && d[k] is map) || (t == 'timestamp' && d[k] is timestamp);
+    }
+
+    // ---------- 본인 설정·취향 ----------
+    function validTaste(t) {
+      return t is map && t.keys().hasOnly(['w', 'votes', 'vf'])
+        && (!('w' in t) || (t.w is map && t.w.size() <= 3000))
+        && (!('votes' in t) || (t.votes is map && t.votes.size() <= 1500))
+        && (!('vf' in t) || (t.vf is map && t.vf.size() <= 1500));
+    }
+    function validUser(d) {
+      return d.keys().hasOnly(['v', 'onboarded', 'persona', 'topics', 'taste', 'updatedAt', 'settingsAt', 'serverAt', 'lastCommentAt'])
+        && optType(d, 'v', 'int') && optType(d, 'onboarded', 'bool')
+        && (!('persona' in d) || d.persona == null || (d.persona is string && d.persona.size() <= 32))
+        && (!('topics' in d) || d.topics == null || (d.topics is list && d.topics.size() <= 10))
+        && (!('taste' in d) || validTaste(d.taste))
+        && optType(d, 'updatedAt', 'number') && optType(d, 'settingsAt', 'number')
+        && optType(d, 'serverAt', 'timestamp') && optType(d, 'lastCommentAt', 'timestamp');
+    }
+    // lastCommentAt 은 그대로 두거나, 지금 서버 시각(request.time)으로만 바꿀 수 있음(되돌려 제한 피하기 금지)
+    function lastCommentOk() {
+      let before = resource == null ? null : resource.data.get('lastCommentAt', null);
+      let after = request.resource.data.get('lastCommentAt', null);
+      return after == before || after == request.time;
+    }
+    match /users/{uid} {
+      allow read: if isOwner(uid);
+      allow create, update: if isOwner(uid) && validUser(request.resource.data) && lastCommentOk();
+      allow delete: if false;
+    }
+
+    // ---------- 공개 닉네임 ----------
+    function validNick(n) {
+      return n is string && n.size() >= 2 && n.size() <= 12
+        && !n.matches('(?i).*(운영자|관리자|운영진|admin|official).*');
+    }
+    match /profiles/{uid} {
+      allow read: if true;
+      allow create, update: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['nickname', 'isAdmin', 'updatedAt'])
+        && validNick(request.resource.data.nickname)
+        && request.resource.data.get('isAdmin', false) == isAdmin()
+        && optType(request.resource.data, 'updatedAt', 'timestamp');
+      allow delete: if isOwner(uid);
+    }
+
+    // ---------- 운영자 목록(콘솔에서만) ----------
+    match /config/admins {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // ---------- 댓글 ----------
+    function userPath(uid) { return /databases/$(database)/documents/users/$(uid); }
+    function profilePath(uid) { return /databases/$(database)/documents/profiles/$(uid); }
+    // 30초에 1회: 같은 batch 에서 users/{uid}.lastCommentAt 을 지금 시각으로 바꿔야 하고, 이전 값은 30초 이전이어야 함
+    function rateOk(uid) {
+      return getAfter(userPath(uid)).data.get('lastCommentAt', null) == request.time
+        && (!exists(userPath(uid))
+            || get(userPath(uid)).data.get('lastCommentAt', null) == null
+            || request.time > get(userPath(uid)).data.lastCommentAt + duration.value(30, 's'));
+    }
+    function validNewComment(d) {
+      return d.keys().hasOnly(['articleId', 'edition', 'uid', 'nickname', 'text', 'createdAt', 'isAdmin', 'hidden', 'reports', 'reporters'])
+        && d.keys().hasAll(['articleId', 'edition', 'uid', 'nickname', 'text', 'createdAt', 'isAdmin', 'hidden', 'reports', 'reporters'])
+        && d.uid == request.auth.uid
+        && d.articleId is string && d.articleId.size() >= 1 && d.articleId.size() <= 40
+        && d.edition is string && d.edition.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}-(am|pm|early)$')
+        && d.text is string && d.text.size() >= 1 && d.text.size() <= 500
+        && d.nickname is string && exists(profilePath(request.auth.uid))
+        && d.nickname == getAfter(profilePath(request.auth.uid)).data.nickname
+        && d.createdAt == request.time
+        && d.isAdmin == isAdmin()
+        && d.hidden == false && d.reports == 0 && d.reporters == [];
+    }
+    // 신고: 로그인한 다른 사람이 1번만, reports +1, 3번 이상이면 hidden = true
+    function validReport() {
+      let r = request.resource.data;
+      let o = resource.data;
+      return r.diff(o).affectedKeys().hasOnly(['reports', 'reporters', 'hidden'])
+        && o.uid != request.auth.uid
+        && !(request.auth.uid in o.reporters)
+        && r.reporters == o.reporters.concat([request.auth.uid])
+        && r.reports == o.reports + 1
+        && r.hidden == (o.hidden || r.reports >= 3)
+        && r.reporters.size() <= 50;
+    }
+    match /comments/{id} {
+      allow read: if resource.data.hidden == false || isAdmin();
+      allow create: if signedIn() && validNewComment(request.resource.data) && rateOk(request.auth.uid);
+      allow update: if signedIn() && (
+        validReport()
+        || (isAdmin() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['hidden']))
+      );
+      allow delete: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+    }
+
+    // ---------- 익명 반응 집계 rx/{id} (2026-10-03 야간 추가) ----------
+    // 하트·🙌·🙅 를 운영자 통계용으로 모음. 사람 정보 없음(uid·이름·성별·기기 정보 저장 안 함 — 아래 키 외에는 거부).
+    // 누구나 '추가'만(로그인 불필요), 고치기·지우기 금지, 읽기는 운영자만. at 은 서버 시각만.
+    // a = "<판 id>/<기사 id>", k = h(하트)|u(더 보여줘)|d(덜 보여줘), v = 1(누름)|-1(취소), r = 사는 곳(추정), i = 관심(추정), tp = 기사 주 주제
+    function validRx(d) {
+      return d.keys().hasOnly(['a', 'k', 'v', 'r', 'i', 'tp', 'at']) && d.keys().hasAll(['a', 'k', 'v', 'at'])
+        && d.a is string && d.a.size() >= 3 && d.a.size() <= 48
+        && d.k in ['h', 'u', 'd'] && d.v in [1, -1]
+        && (!('r' in d) || d.r in ['east', 'bangkok', 'north', 'south', 'other', 'none'])
+        && (!('i' in d) || (d.i is list && d.i.size() <= 4 && d.i.hasOnly(['life', 'travel', 'biz', 'visa'])))
+        && (!('tp' in d) || (d.tp is string && d.tp.size() <= 16))
+        && d.at == request.time;
+    }
+    match /rx/{id} {
+      allow read: if isAdmin();
+      allow create: if validRx(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    // ---------- ⚠️ 오류 신고 reports/{id} (2026-10-05 추가) ----------
+    // 기사·가게·임대·광고의 '오류 신고'. 로그인 불필요, 사람 정보 없음(아래 키 외에는 거부). 누구나 '추가'만, 읽기는 운영자만(승인함 #approve),
+    // 고치기·지우기 금지(자동 처리 없음). at 은 서버 시각만. url 은 이 사이트 주소만.
+    function validRep(d) {
+      return d.keys().hasOnly(['id', 'kind', 'type', 'memo', 'url', 'ed', 'at']) && d.keys().hasAll(['id', 'kind', 'type', 'url', 'at'])
+        && d.id is string && d.id.size() >= 1 && d.id.size() <= 80
+        && d.kind in ['article', 'place', 'rent', 'ad']
+        && d.type in ['wrong', 'link', 'screen', 'etc']
+        && (!('memo' in d) || (d.memo is string && d.memo.size() <= 80))
+        && d.url is string && d.url.size() <= 300 && d.url.matches('^https://p-max168[.]github[.]io/thai-news-kr/.*')
+        && (!('ed' in d) || (d.ed is string && d.ed.size() <= 20))
+        && d.at == request.time;
+    }
+    match /reports/{id} {
+      allow read: if isAdmin();
+      allow create: if validRep(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    // ---------- 그 밖에는 모두 거부 ----------
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

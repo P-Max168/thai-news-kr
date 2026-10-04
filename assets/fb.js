@@ -188,9 +188,10 @@ export async function reportComment(id) {
  * 쓰기 = 누구나 '추가'만(규칙이 모양 검사), 읽기 = 운영자만. 규칙이 아직 게시 전이면 permission-denied → 화면은 조용히 무시 */
 export async function addReactions(list) {
   await fs();
-  const b = F.writeBatch(db);
-  list.slice(0, 20).forEach(function (x) { b.set(F.doc(F.collection(db, "rx")), Object.assign({}, x, { at: F.serverTimestamp() })); });
+  const b = F.writeBatch(db), ids = [];
+  list.slice(0, 20).forEach(function (x) { const ref = F.doc(F.collection(db, "rx")); ids.push(ref.id); b.set(ref, Object.assign({}, x, { at: F.serverTimestamp() })); });
   await b.commit();
+  return ids;   // 저장된 문서 id(확인·기록용)
 }
 export async function listReactions(sinceMs, max) {
   await fs();
@@ -206,7 +207,8 @@ export async function listReactions(sinceMs, max) {
 export async function addReport(r) {
   await fs();
   const d = { id: String(r.id).slice(0, 80), kind: r.kind, type: r.type, memo: String(r.memo || "").slice(0, 80), url: String(r.url).slice(0, 300), ed: String(r.ed || "").slice(0, 20), at: F.serverTimestamp() };
-  await F.addDoc(F.collection(db, "reports"), d);
+  const ref = await F.addDoc(F.collection(db, "reports"), d);
+  return ref.id;   // 저장된 문서 id(확인·기록용)
 }
 export async function listReports(sinceMs, max) {
   await fs();

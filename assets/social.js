@@ -6,7 +6,7 @@
  */
 (function () {
   "use strict";
-  var FB_URL = "assets/fb.js?v=3804536b";       // tools/stamp_assets.py 가 ?v= 갱신
+  var FB_URL = "assets/fb.js?v=4edebac2";       // tools/stamp_assets.py 가 ?v= 갱신
   var AUTH_KEY = "tnk.auth.v1";                  // 이 기기: {uid, linked:[uid…]} (계정 정보는 저장 안 함)
   var S = window.TNStore, L = window.TNTaste;
   var live = /^https?:$/.test(location.protocol);
@@ -351,10 +351,10 @@
    * 이 기기 대기열(localStorage tnk.rxq, 최대 60개)에 모았다가 Firebase 가 준비되면 20개씩 보냄. 개인 정보 없음.
    * 규칙 미게시·오프라인 등으로 실패: permission-denied 면 하루 동안 보내지 않음(tnk.rxoff), 그 밖엔 다음 기회에 다시 */
   var RXQ = "tnk.rxq", RXOFF = "tnk.rxoff", rxTimer = null, rxBusy = false;
-  // ★ 서버로 보내기 스위치: Firestore 규칙(rx)을 콘솔에 게시한 뒤 true 로(LOGIN_TODO.md). 그 전엔 이 기기 대기열에만 쌓음
-  //   (게시 전에 보내면 거부(403)되고 콘솔 오류가 남음). 미리 시험: localStorage tnk.rxon = "1"
-  var RX_ON = false;
-  try { if (localStorage.getItem("tnk.rxon") === "1") RX_ON = true; } catch (e) {}
+  // ★ 서버로 보내기 스위치: 2026-10-05 03:24 Firestore 규칙(rx·reports 포함 162줄) 게시 → 03:26 Max 지시로 켬.
+  //   이 기기 대기열(그동안 모인 것 포함)을 Firebase 가 준비되면 보냄. 이 기기만 끄기(시험용): localStorage tnk.rxon = "0"
+  var RX_ON = true;
+  try { if (localStorage.getItem("tnk.rxon") === "0") RX_ON = false; } catch (e) {}
   function rxRead() { try { return JSON.parse(localStorage.getItem(RXQ) || "[]") || []; } catch (e) { return []; } }
   function rxWrite(q) { try { localStorage.setItem(RXQ, JSON.stringify(q.slice(-60))); } catch (e) {} }
   function rxOff() { try { return Date.now() - (+localStorage.getItem(RXOFF) || 0) < 864e5; } catch (e) { return true; } }
@@ -374,8 +374,9 @@
     if (!fb) { if (!fbP) load().then(start).then(function () { setTimeout(rxFlush, 500); }).catch(function () {}); return; }
     if (!fb.addReactions) return;
     var batch = q.slice(0, 20); rxBusy = true;
-    fb.addReactions(batch).then(function () {
+    fb.addReactions(batch).then(function (ids) {
       rxWrite(rxRead().slice(batch.length)); rxBusy = false;
+      try { localStorage.setItem("tnk.rx.last", JSON.stringify({ t: Date.now(), n: batch.length, ids: (ids || []).slice(0, 20) })); } catch (x) {}
       if (rxRead().length) setTimeout(rxFlush, 1000);
     }).catch(function (e) {
       rxBusy = false;

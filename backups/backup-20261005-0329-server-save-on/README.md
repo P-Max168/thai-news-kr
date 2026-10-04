@@ -1,0 +1,3 @@
+바뀐 것: RX_ON·REP_ON 켬(반응·오류 신고를 Firestore 에 저장, OB2 는 그대로 끔) · 메일 버튼은 서버 저장 실패(12초 무응답 포함) 때만 · 승인함 오류 신고함에서 메모가 '[테스트]'로 시작하면 '🧪 시험 신고' 접힌 칸에 따로, 반응 통계는 a='test/…' 뺌 · fb.js 가 저장된 문서 id 를 돌려줌 · LOGIN_TODO Firestore 줄 '완료 10-05 03:24'
+왜: Max 가 10-05 03:24 firestore.rules(162줄, reports·rx 포함) 게시 → 03:26 서버 저장 켜고 실제 저장·거부 확인 지시. 시험 문서는 규칙상 지울 수 없어 화면에서 따로 모음
+되돌리는 법: `git checkout backup-20261005-0329-server-save-on -- assets/social.js assets/report.js assets/fb.js assets/pages.js LOGIN_TODO.md README.md PENDING_APPROVAL.md` → python3 tools/pending.py → stamp → 커밋 → push(force 금지). 급하면 이 기기만: localStorage tnk.rxon="0" / tnk.repon="0"
