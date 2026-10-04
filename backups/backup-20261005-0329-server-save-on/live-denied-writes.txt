@@ -1,0 +1,15 @@
+10-05 03:35 BKK · 라이브 페이지 안에서 Firestore REST 직접 호출(로그인 없음, 사이트 공개 API 키). reports=TUFTRZQgiB63dBalPR3S rx=xvNPBF9FHyVX2MoPFlTt
+만들기 시험(8·9·11·12)은 currentDocument.exists=true 를 붙여서, 규칙이 잘못 허용해도 문서가 생기지 않게(404) 함 · 10 은 없는 필드만 지우는 무해 마스크
+1 신고 읽기(로그인 없음) | GET /reports/TUFTRZQgiB63dBalPR3S | HTTP 403 | PERMISSION_DENIED: Missing or insufficient permissions.
+2 신고 목록 읽기(승인함 쿼리, 로그인 없음) | POST :runQuery | HTTP 403 | [{"error":{"code":403,"message":"Missing or insufficient permissions.","status":"PERMISSION_DENIED"}}]
+3 신고 고치기(update memo) | PATCH /reports/TUFTRZQgiB63dBalPR3S | HTTP 403 | PERMISSION_DENIED: Missing or insufficient permissions.
+4 신고 지우기(delete) | DELETE /reports/TUFTRZQgiB63dBalPR3S | HTTP 403 | PERMISSION_DENIED: Missing or insufficient permissions.
+5 반응 읽기 | GET /rx/xvNPBF9FHyVX2MoPFlTt | HTTP 403 | PERMISSION_DENIED: Missing or insufficient permissions.
+6 반응 고치기(update v) | PATCH /rx/xvNPBF9FHyVX2MoPFlTt | HTTP 403 | PERMISSION_DENIED: Missing or insufficient permissions.
+7 반응 지우기(delete) | DELETE /rx/xvNPBF9FHyVX2MoPFlTt | HTTP 403 | PERMISSION_DENIED: Missing or insufficient permissions.
+8 신고 새로 만들기 — 다른 사이트 url(모양 검사) | POST :commit | HTTP 403 | PERMISSION_DENIED: Missing or insufficient permissions.
+9 반응 새로 만들기 — 허용 안 된 키 uid(개인 정보 막기) | POST :commit | HTTP 403 | PERMISSION_DENIED: Missing or insufficient permissions.
+10 운영자 목록 config/admins 쓰기 | PATCH /config/admins | HTTP 403 | PERMISSION_DENIED: Missing or insufficient permissions.
+11 남의 users/{uid} 쓰기(로그인 없음) | PATCH /users/zzDeniedProbe | HTTP 403 | PERMISSION_DENIED: Missing or insufficient permissions.
+12 규칙에 없는 경로 쓰기(zz_probe) | PATCH /zz_probe/x | HTTP 403 | PERMISSION_DENIED: Missing or insufficient permissions.
+13 config/admins 읽기(허용되어야 함 — 비교용) | GET /config/admins | HTTP 200 | {"name":"projects/thai-news-kr/databases/(default)/documents/config/admins","fields":{"uids":{"arrayValue":{"values":[{"stringValue":"JtLZofHGvoNo3EnNxZRlGFuiGq

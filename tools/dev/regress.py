@@ -10,6 +10,18 @@ URL = next((a for a in sys.argv[1:] if a.startswith("http")), "https://p-max168.
 OUT = sys.argv[sys.argv.index("--json") + 1] if "--json" in sys.argv else None
 THAI = re.compile(r"[\u0E00-\u0E3E\u0E40-\u0E7F]")   # ฿(U+0E3F)는 허용
 SEED = """(()=>{ if(!localStorage.getItem('tnk.profile.v1')) localStorage.setItem('tnk.profile.v1', JSON.stringify({v:1,onboarded:true,persona:'pattaya',topics:['east','visa','life','weather','society'],region:'east',interests:['life'],taste:{w:{},votes:{},vf:{}},ui:{installHintUntil:Date.now()+864e5},updatedAt:1,settingsAt:1})); })()"""
+# 2026-10-05: RX_ON·REP_ON 이 켜진 뒤로 자동 점검이 실서버(Firestore)에 반응·신고를 쓰면 안 됨(하트 누르기 점검 = 매번 rx 문서 2개가 생김)
+#  → 모든 점검 창에서 ① 이 기기 스위치 끄기(tnk.rxon·tnk.repon = "0") ② Firestore 쓰기 요청(:commit·PATCH·DELETE) 자체를 막고 수를 셈
+NOWRITE = "try{localStorage.setItem('tnk.rxon','0');localStorage.setItem('tnk.repon','0')}catch(e){}"
+FS = {"blocked": 0}
+async def guard(c):
+    await c.add_init_script(NOWRITE)
+    async def h(route):
+        r = route.request
+        if r.method in ("PATCH", "DELETE") or ":commit" in r.url or ":batchWrite" in r.url:
+            FS["blocked"] += 1; await route.abort()
+        else: await route.continue_()
+    await c.route(re.compile(r"https://firestore\.googleapis\.com/.*"), h)
 res = []
 def rec(ok, name, detail=""):
     res.append({"ok": ok, "name": name, "detail": detail})
@@ -20,6 +32,10 @@ async def main():
         kw = dict(args=["--no-sandbox"])
         if pathlib.Path("/usr/bin/google-chrome").exists(): kw["executable_path"] = "/usr/bin/google-chrome"
         b = await p.chromium.launch(**kw)
+        _nc = b.new_context
+        async def _guarded(*a, **k):
+            c = await _nc(*a, **k); await guard(c); return c
+        b.new_context = _guarded
         ctx = await b.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, is_mobile=True, has_touch=True,
                                   timezone_id="Asia/Bangkok", locale="ko-KR")
         await ctx.add_init_script(SEED)
@@ -398,6 +414,7 @@ async def main():
         ok_ob = ob.get("auto_sheet") is False and ob.get("hello", 0) > 0 and ob.get("closed") and ob.get("cards", 0) > 0 and (ob["personas"] == 5 if not ob2 else ob["regions"] == 5)
         rec(ok_ob, "첫 방문: 창 저절로 안 뜸 + '👋 고르기' 한 줄 → 시작 화면(%s)" % ("2단계" if ob2 else "예전 '어떤 분이세요?' — 2단계는 보류"), ob)
         await c2.close()
+        rec(FS["blocked"] == 0 or None, "자동 점검이 실서버(Firestore)에 반응·신고를 안 씀(이 기기 스위치 끔 + 쓰기 요청 차단)", "막은 쓰기 요청 %d개" % FS["blocked"])
         await b.close()
     if OUT: pathlib.Path(OUT).write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
     nf = sum(1 for x in res if x["ok"] is False)

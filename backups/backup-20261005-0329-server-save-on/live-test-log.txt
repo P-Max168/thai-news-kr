@@ -1,0 +1,13 @@
+== A. RX 끈 상태(tnk.rxon=0)에서 반응 1개 → 이 기기 대기열 03:34:15
+  대기열: [{"a":"test/max-rules-0326","k":"h","v":1,"r":"none","i":[],"tp":"society"}] · rx commit 요청 수: 0
+== B. RX 켠 상태(기본값 true)로 다시 열기 → 대기열 올라가는지 03:34:28
+  firestore POST :commit → 200
+  tnk.rx.last: {"t":1791146076618,"n":1,"ids":["xvNPBF9FHyVX2MoPFlTt"]} · 남은 대기열: []
+  commit body: {"writes":[{"update":{"name":"projects/thai-news-kr/databases/(default)/documents/rx/xvNPBF9FHyVX2MoPFlTt","fields":{"a":{"stringValue":"test/max-rules-0326"},"k":{"stringValue":"h"},"v":{"integerValue":"1"},"r":{"stringValue":"none"},"i":{"arrayValue":{"values":[]}},"tp":{"stringValue":"society"}}},"updateTransforms":[{"fieldPath":"at","setToServerValue":"REQUEST_TIME"}]}]}
+== C. 오류 신고 1건(메모 '[테스트] Max 규칙 게시 확인') 03:34:36
+  버튼: ad ad:top:dragon
+  firestore POST :commit → 200
+  화면: 신고가 운영자 승인함에 들어갔어요. 운영자가 직접 확인해요. 고마워요!
+  reports 문서 id: TUFTRZQgiB63dBalPR3S
+  commit body: {"writes":[{"update":{"name":"projects/thai-news-kr/databases/(default)/documents/reports/TUFTRZQgiB63dBalPR3S","fields":{"id":{"stringValue":"ad:top:dragon"},"kind":{"stringValue":"ad"},"type":{"stringValue":"etc"},"memo":{"stringValue":"[테스트] Max 규칙 게시 확인"},"url":{"stringValue":"https://p-max168.github.io/thai-news-kr/"},"ed":{"stringValue":"2026-10-04-pm"}}},"updateTransforms":[{"fieldPath":"at","setToServerValue":"REQUEST_TIME"}],"currentDocument":{"exists":false}}]}
+  이 기기 신고 목록(tnk.rep.q): []

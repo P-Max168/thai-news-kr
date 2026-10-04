@@ -25,7 +25,10 @@ for i in 1 2 3 4; do
 done
 [ -n "$ok" ] || { echo "push 실패" >&2; exit 3; }
 echo "push: $(git log -1 --oneline)"
-( cd /workspace/thai-news-portal && git pull -q --rebase --autostash ) && echo "정본 체크아웃 갱신"
+# 정본 체크아웃 갱신 — 실패하면 크게 알리고 끝에 exit 5(10-05 03:33: 정본에 같은 이름의 추적 안 된 파일이 있어 pull 이 멈췄는데 조용히 넘어감 → 07:08 정기 실행이 옛 코드로 돌 뻔)
+CANON_FAIL=""
+if ( cd /workspace/thai-news-portal && git pull -q --rebase --autostash ) 2>/tmp/ship-canon.err; then echo "정본 체크아웃 갱신"
+else CANON_FAIL=1; echo "‼️ 정본 체크아웃(/workspace/thai-news-portal) 갱신 실패 — 아래 이유를 고친 뒤 그 폴더에서 git pull --rebase --autostash" >&2; head -5 /tmp/ship-canon.err >&2; fi
 # 라이브 반영 대기(app.js·sw.js·index.html 이 로컬과 같아질 때까지, 최대 6분)
 # 앱 셸 3개 + 이번 커밋에서 바뀐 파일(최대 5개, data/·backups/ 제외) — stamp 가 안 바뀌는 변경(예: 광고 css 만)도 실제로 확인
 CHECK_FILES="sw.js assets/app.js index.html $(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep -E '\.(js|css|html|md|sh|py)$' | grep -vE '^(data|backups)/' | head -5 | tr '\n' ' ')"
@@ -41,10 +44,10 @@ wait_live() {
   done
   return 1
 }
-if wait_live; then echo "라이브 반영 확인 ($(TZ=Asia/Bangkok date +%H:%M))"; exit 0; fi
+if wait_live; then echo "라이브 반영 확인 ($(TZ=Asia/Bangkok date +%H:%M))"; [ -z "$CANON_FAIL" ] || exit 5; exit 0; fi
 # 6분 안에 안 바뀜 = GitHub Pages 배포가 실패했을 수 있음(10-05 02:45: deploy 단계 'Failed to get ID Token' 시간 초과 — GitHub 쪽 일시 오류).
 # → 빈 커밋 하나로 Pages 를 한 번만 다시 돌림(force 아님). 그래도 안 되면 exit 2 + 크게 알림(사람·Max 가 Actions 확인)
 echo "라이브 반영 확인 못 함(6분 초과) → Pages 다시 배포 1번 시도" >&2
 git commit -q --allow-empty -m "재배포: GitHub Pages 배포가 6분 안에 반영 안 돼 한 번 더(ship.sh 자동)" && git pull --rebase --autostash -q origin main && git push -q origin main || { echo "재배포 push 실패" >&2; exit 2; }
-if wait_live; then echo "라이브 반영 확인 — 재배포로 ($(TZ=Asia/Bangkok date +%H:%M))"; exit 0; fi
+if wait_live; then echo "라이브 반영 확인 — 재배포로 ($(TZ=Asia/Bangkok date +%H:%M))"; [ -z "$CANON_FAIL" ] || exit 5; exit 0; fi
 echo "‼️ 라이브 반영 확인 못 함(재배포 뒤에도) — GitHub Actions 'pages build and deployment' 확인 필요" >&2; exit 2
