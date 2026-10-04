@@ -210,12 +210,12 @@
         '<div class="pc-filter" role="group" aria-label="가게 종류">' + CATS.map(function (x) {
           return '<button type="button" class="pc-f" data-pc-cat="' + x.id + '" aria-pressed="' + (x.id === cat) + '"><span aria-hidden="true">' + x.e + "</span> " + esc(x.t) + " <small>" + n(x.id) + "</small></button>"; }).join("") + "</div>" +
         '<button type="button" class="pc-openonly" data-pc-open aria-pressed="' + openOnly + '">' + (openOnly ? "✅" : "⬜") + " 🟢 지금 영업 중인 곳만 보기</button>";
-      // 접힌 칸 2개(기본 닫힘): 🕰️ 오래된 정보(맨 아래) · 🗄️ 폐업 보관함(운영자 폐업 확인, 있을 때만). 다시 그려도 연 상태는 기억(fold)
+      // 접힌 칸 2개(기본 닫힘): 🗄️ 폐업 보관함(운영자 폐업 확인, 있을 때만) · 🕰️ 오래된 정보(맨 아래). 다시 그려도 연 상태는 기억(fold)
       var oldSec = olds.length ? '<details class="pc-fold pc-fold--old" data-pc-fold="old"' + (fold.old ? " open" : "") + '><summary>🕰️ 오래된 정보 ' + olds.length + "곳 <small>지도 정보가 2년 넘게 그대로예요 — 문 닫았을 수 있어요</small></summary>" +
           '<div class="pc-list">' + olds.map(card).join("") + "</div></details>" : "";
       var archSec = arch.length ? '<details class="pc-fold pc-fold--arch" data-pc-fold="arch"' + (fold.arch ? " open" : "") + '><summary>🗄️ 폐업 보관함 ' + arch.length + "곳 <small>운영자가 폐업으로 확인한 곳 — 기록으로만 남겨 둬요</small></summary>" +
           '<div class="pc-list">' + arch.map(card).join("") + "</div></details>" : "";
-      var body = list.length || olds.length ? (list.length ? '<div class="pc-list">' + list.map(card).join("") + "</div>" : "") + oldSec + archSec
+      var body = list.length || olds.length ? (list.length ? '<div class="pc-list">' + list.map(card).join("") + "</div>" : "") + archSec + oldSec
         : '<div class="empty pc-empty"><p class="pc-empty__e" aria-hidden="true">🔍</p><p><b>' + (openOnly ? "지금 영업 중인 " + esc(c.t === "전체" ? "" : c.t + " ") + "가게가 없어요" : "이 종류 가게가 아직 없어요") + "</b></p>" +
           "<p>" + (openOnly ? "최근 2년 안에 현장 확인된 곳만 계산해요. 위의 '지금 영업 중인 곳만 보기'를 끄면 모두 보여요." : "다른 종류를 골라 보세요.") + "</p></div>";
       return head + body + (!(list.length || olds.length) ? archSec : "") +
