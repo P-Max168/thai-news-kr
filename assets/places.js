@@ -22,16 +22,20 @@
   var KO = { Mo: "월", Tu: "화", We: "수", Th: "목", Fr: "금", Sa: "토", Su: "일", PH: "공휴일" }, ORDER = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
   var JS_DAY = { Su: 0, Mo: 1, Tu: 2, We: 3, Th: 4, Fr: 5, Sa: 6 };
   /* ---- 믿음 규칙(위 머리말) ---- */
-  var OLD_DAYS = 730, CLOSED_MIN = 2;
+  // ★ 상수 2개(2026-10-05 Max 06:55): OLD_DAYS = 🕰️ 오래된 정보(지도 정보 날짜) 730일 · OPEN_DAYS = '🟢 지금 영업 중' 자격(영업 확인 뒤) 90일(조사봇 제안 채택 — 06:33 지시의 730일에서 바뀜)
+  var OLD_DAYS = 730, OPEN_DAYS = 90, CLOSED_MIN = 2;
   function bkDate(ms) { return new Date(ms + 7 * 3600e3).toISOString().slice(0, 10); }
   function oldBefore() { return bkDate(Date.now() - OLD_DAYS * 864e5); }
-  function verified(p) { return !!(p && p.verified_by && p.verified_at); }
-  function basis(p) {   // 오래된 정보 기준 날: 운영자 확인 날 · 현장 확인 날 · 지도 정보 고친 날 중 가장 늦은 것(구글 지도 가게 = 모름 → null)
-    var d = [verified(p) ? String(p.verified_at).slice(0, 10) : "", p.osm_check || (p.gmaps_only ? "" : p.osm_edit) || ""].sort().pop();
-    return d || null;
-  }
+  function openBefore() { return bkDate(Date.now() - OPEN_DAYS * 864e5); }
+  // 확인 기록: verified_status(영업 확인·폐업 의심·확인 불가) + verified_by + verified_at + verified_source_url(근거 링크) — 넷 다 있어야 기록으로 봄
+  function hasRec(p) { return !!(p && p.verified_status && p.verified_by && p.verified_at && p.verified_source_url); }
+  function verified(p) { return hasRec(p) && p.verified_status === "영업 확인"; }   // '✅ 확인함' = 근거 링크 + 확인 시각 있는 '영업 확인'만
+  function suspect(p) { return hasRec(p) && p.verified_status === "폐업 의심"; }
+  function fresh(p) { return verified(p) && String(p.verified_at).slice(0, 10) >= openBefore(); }
+  function recheck(p) { return verified(p) && !fresh(p); }   // 영업 확인이 90일 지남 → 초록불 끔 + '재확인 필요'
+  function basis(p) { return p.gmaps_only ? null : (p.osm_check || p.osm_edit || null); }   // 오래된 정보 기준 날 = 지도 현장 확인 날, 없으면 지도 정보 고친 날(구글 지도 가게 = 모름)
   function isOld(p) { var b = basis(p); return !!b && b < oldBefore(); }
-  function openOK(p) { return verified(p) || (!!p.osm_check && p.osm_check >= oldBefore()); }   // '🟢 지금 영업 중' 보여도 되는 곳
+  function openOK(p) { return fresh(p) && !suspect(p) && !reported(p) && !archived(p); }   // '🟢 지금 영업 중' 보여도 되는 곳
   var FLAGS = null;   // { 가게 id: { n: 폐업 신고 수, st: "closed"(운영자 폐업 확인) | "", at } }
   function flag(p) { return (FLAGS && FLAGS[p.id]) || {}; }
   function archived(p) { return flag(p).st === "closed"; }
@@ -140,23 +144,30 @@
   // ⚠️ 오류 신고(assets/report.js — 카드 안에서 펼침). 카톡 링크(report_kakao_url, 승인함 #7)가 생기면 그 링크도 함께 보임
   function rep(kind, id) { return window.TNRepBtn ? '<div class="rep-row rep-row--pc">' + TNRepBtn(kind, id) + "</div>" : ""; }
   function card(p) {
-    var ok = openOK(p), st = ok ? openState(p._oh) : null, old = isOld(p), arch = archived(p), repd = reported(p), ver = verified(p);
-    var stHTML = !ok ? '<span class="pc__open">' + (p.gmaps_only ? "영업 확인 안 됨" : "영업시간(지도 기준)") + "</span>" : st === "open" ? '<span class="pc__open pc__open--on">🟢 지금 영업 중</span>' : st === "soon" ? '<span class="pc__open pc__open--soon">🟠 곧 닫아요</span>'
-      : st === "closed" ? '<span class="pc__open pc__open--off">⚪ 지금 닫힘</span>' : '<span class="pc__open">영업 여부 확인 안 됨</span>';
+    var ok = openOK(p), st = ok ? openState(p._oh) : null, old = isOld(p), arch = archived(p), repd = reported(p), ver = verified(p), sus = suspect(p), rc = recheck(p);
+    var stHTML = !ok ? '<span class="pc__open' + (sus ? " pc__open--sus" : "") + '">' + (arch ? "🗄️ 폐업 보관함" : sus ? "⚠️ 폐업 의심" : rc ? "🔁 재확인 필요" : "영업 확인 안 됨") + "</span>" : st === "open" ? '<span class="pc__open pc__open--on">🟢 지금 영업 중</span>' : st === "soon" ? '<span class="pc__open pc__open--soon">🟠 곧 닫아요</span>'
+      : st === "closed" ? '<span class="pc__open pc__open--off">⚪ 지금 닫힘</span>' : '<span class="pc__open pc__open--on">✅ 영업 확인</span>';
     var c = CATS.filter(function (x) { return x.id === p.cat; })[0] || CATS[0];
     var kind = [p.kind].concat(p.cuisine || []).filter(Boolean).join(" · ");
     var b = basis(p), warn = "";
-    if (arch) warn += '<p class="pc__warn pc__warn--x"><span class="pc__closed">🗄️ 폐업 보관함</span> 운영자가 폐업으로 확인했어요' + (flag(p).at ? "(" + esc(flag(p).at) + ")" : "") + ". 기록으로만 남겨 둬요.</p>";
+    if (arch) warn += '<p class="pc__warn pc__warn--x"><span class="pc__closed">🗄️ 폐업 보관함</span> ' + (flag(p).note ? esc(flag(p).note) : "운영자가 폐업으로 확인했어요") + (flag(p).at ? " (" + esc(flag(p).at) + ")" : "") + ". 기록으로만 남겨 둬요.</p>";
+    else if (sus) warn += '<p class="pc__warn pc__warn--x"><span class="pc__closed">⚠️ 폐업 의심</span> 가기 전 전화 확인 — 조사에서 문 닫았을 수 있다는 근거가 나왔어요(아래 조사 결과).</p>';
     else if (repd) warn += '<p class="pc__warn pc__warn--x"><span class="pc__closed">🚫 폐업 신고됨</span> 독자 폐업 신고 ' + (+flag(p).n) + "건 — 운영자가 아직 확인 안 했어요. 가기 전에 꼭 전화로 확인하세요.</p>";
-    if (old) warn += '<p class="pc__warn"><span class="pc__old">🕰️ 오래된 정보</span> 지도 정보가 ' + esc(b) + (p.osm_check ? "에 현장 확인된 뒤" : "에 고쳐진 뒤") + " 2년 넘게 바뀐 기록이 없어요. 문을 닫았을 수 있으니 가기 전에 전화로 확인하세요.</p>";
-    else if (p.gmaps_only && !ver) warn += '<p class="pc__warn pc__warn--unv"><span class="pc__unv">❔ 영업 확인 안 됨</span> 구글 지도에서 이름만 본 곳이에요. 지금 영업하는지는 확인 안 됐어요.</p>';
-    var vline = ver ? "<div><dt>✅ 확인함</dt><dd>" + esc(String(p.verified_at).slice(0, 10)) + "<small>" + esc(p.verified_by) + "</small></dd></div>" : "";
+    if (old) warn += '<p class="pc__warn"><span class="pc__old">🕰️ 오래된 정보</span> 지도 정보가 ' + esc(b) + (p.osm_check ? "에 현장 확인된 뒤" : "에 고쳐진 뒤") + " 2년 넘게 바뀐 기록이 없어요" +
+      (ver ? "(영업은 아래 조사에서 확인 — 영업시간·전화는 다를 수 있어요)." : ". 문을 닫았을 수 있으니 가기 전에 전화로 확인하세요.") + "</p>";
+    if (rc) warn += '<p class="pc__warn"><span class="pc__old">🔁 재확인 필요</span> 영업 확인이 ' + OPEN_DAYS + "일 넘게 지났어요(" + esc(String(p.verified_at).slice(0, 10)) + "). 가기 전에 전화로 확인하세요.</p>";
+    else if (p.gmaps_only && !ver && !sus && !old) warn += '<p class="pc__warn pc__warn--unv"><span class="pc__unv">❔ 영업 확인 안 됨</span> 구글 지도에서 이름만 본 곳이에요. 지금 영업하는지는 확인 안 됐어요.</p>';
+    // 어디서·언제 확인했는지(조사 기록이 있을 때만 — 근거 링크·확인 시각 그대로)
+    var vsrc = hasRec(p) ? '<small class="pc__fs"><a href="' + esc(p.verified_source_url) + '" target="_blank" rel="noopener nofollow">' + (/google\./.test(p.verified_source_url) ? "Google 지도" : "근거") + " ↗</a> · " + esc(p.verified_at) + " · " + esc(p.verified_by) + "</small>" +
+      (p.verified_marker ? "<small>보인 것: " + esc(p.verified_marker) + "</small>" : "") : "";
+    var vline = ver ? "<div><dt>✅ 확인함</dt><dd>영업 확인" + (rc ? " — " + OPEN_DAYS + "일 지나 재확인 필요" : "") + vsrc + "</dd></div>"
+      : hasRec(p) ? "<div><dt>🔎 조사 결과</dt><dd>" + esc(p.verified_status) + vsrc + "</dd></div>" : "<div><dt>🔎 조사 결과</dt><dd class=\"pc__na\">조사 기록 없음(영업 확인 안 됨)</dd></div>";
     var kr = p.korean ? '<p class="pc__kr">🇰🇷 한식·한인 업소 <small>(근거: ' + esc(p.kr || "확인 안 됨") + ")</small></p>" : "";
     // Google 지도에서 온 가게(gmaps_only): 약관 때문에 이름·동네만 — 위치·전화·시간은 구글 지도 링크로(2026-10-03 17:25)
     var go = !!p.gmaps_only;
-    var map = go ? p.source_url : "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p.name + " " + p.lat + "," + p.lng);
+    var map = go ? p.source_url : "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p.lat + "," + p.lng);   // 좌표만(이름+좌표는 구글이 못 찾음 — 조사봇 10-05)
     var kakao = DATA.report_kakao_url;
-    return '<article class="pc' + (old ? " pc--old" : "") + (repd || arch ? " pc--closed" : "") + '" data-pc="' + esc(p.id) + '"' + (old ? ' data-pc-old="' + esc(b) + '"' : "") + (ver ? " data-pc-ver" : "") + ">" +
+    return '<article class="pc' + (old ? " pc--old" : "") + (repd || arch ? " pc--closed" : "") + '" data-pc="' + esc(p.id) + '"' + (old ? ' data-pc-old="' + esc(b) + '"' : "") + (ver ? " data-pc-ver" : "") + (sus ? " data-pc-sus" : "") + (ok ? " data-pc-ok" : "") + ">" +
       '<div class="pc__top"><span class="pc__cat">' + c.e + " " + esc(p.cat_ko) + "</span>" + stHTML + "</div>" +
       priceTop(p.price_thb, p.price_label || "", fs(p, "price")) +
       '<h3 class="pc__name">' + esc(p.name) + "</h3>" + (kind ? '<p class="pc__kind">' + esc(kind) + "</p>" : "") + kr + warn +
@@ -166,7 +177,7 @@
         (go ? "<div><dt>📍 동네</dt><dd>" + esc(p.area) + "<small>정확한 위치·주소는 아래 '구글 지도에서 보기'</small>" + fs(p, "area") + "</dd></div>"
             : "<div><dt>📍 주소</dt><dd" + (p.address ? "" : ' class="pc__na"') + ">" + esc(p.address || "확인 안 됨(지도 버튼으로 위치 보기)") + fs(p, "address") + "</dd></div>") +
         "<div><dt>📞 전화</dt><dd" + (p.phone ? "" : ' class="pc__na"') + ">" + esc(p.phone || "확인 안 됨") + fs(p, "phone") + "</dd></div>" +
-        "<div><dt>🏪 영업 상태</dt><dd>" + esc(p.status) + fs(p, "status") + "</dd></div>" +
+        (go ? "" : "<div><dt>🏪 지도 표시</dt><dd>" + esc(p.status) + "<small>OpenStreetMap 폐업 태그 검사 · " + esc(p.checked) + " 받음</small></dd></div>") +
         vline +
         "<div><dt>🗂️ 지도에서 받은 날</dt><dd>" + esc(p.checked) + (go ? "<small>가게 이름·동네만 받았어요 — 전화·영업시간은 구글 지도에서 보세요</small>" :
           '<small>현장 확인 날(지도 기록): ' + esc(p.osm_check || "없음") + " · 지도 정보 고친 날: " + esc(p.osm_edit) + "</small>") + "</dd></div>" +
@@ -191,11 +202,14 @@
       var all0 = DATA.places.filter(function (p) { return !archived(p); }), all = all1.filter(function (p) { return !archived(p); }), n = function (id) { return all.filter(function (p) { return inCat(p, id); }).length; };
       var arch = all1.filter(function (p) { return archived(p) && inCat(p, cat); });   // 폐업 보관함(운영자 확인) — 기본 숨김, 지우지 않음
       var list = all.filter(function (p) { return inCat(p, cat) && (!openOnly || (openOK(p) && /open|soon/.test(openState(p._oh) || ""))); });
+      if (openOnly) arch = [];   // 보관함은 '지금 영업 중만 보기'에서 아예 안 보임
       // 줄 세우기(2026-10-05): 운영자 확인 → 최근 지도 정보(OSM) → 영업 확인 안 됨(구글 지도 이름만) → 폐업 신고됨 / 그 안에서 영업 중 → 곧 닫음 → 닫힘 → 모름
       //   오래된 정보(기준 날이 2년 넘음)는 맨 아래 접힌 칸으로 따로
-      var rank = function (p) { var s = openOK(p) ? openState(p._oh) : null; return (reported(p) ? 30 : 0) + (verified(p) ? 0 : p.gmaps_only ? 20 : 10) + (s === "open" ? 0 : s === "soon" ? 1 : s === "closed" ? 2 : 3); };
+      //   (2026-10-05 06:55) 영업 확인(90일 안) → 재확인 필요 → 영업 확인 안 됨(OSM → 구글) → 폐업 신고됨 / 오래된 정보 중 영업 확인 안 된 곳 = 접힌 칸 / ⚠️ 폐업 의심 = 맨 아래
+      var rank = function (p) { var s = openOK(p) ? openState(p._oh) : null; return (reported(p) ? 40 : 0) + (fresh(p) ? 0 : recheck(p) ? 10 : p.gmaps_only ? 30 : 20) + (s === "open" ? 0 : s === "soon" ? 1 : s === "closed" ? 2 : 3); };
       list.sort(function (a, b) { return rank(a) - rank(b); });
-      var olds = list.filter(isOld); list = list.filter(function (p) { return !isOld(p); });
+      var sus = list.filter(suspect); list = list.filter(function (p) { return !suspect(p); });
+      var olds = list.filter(function (p) { return isOld(p) && !verified(p); }); list = list.filter(function (p) { return !(isOld(p) && !verified(p)); });
       var c = CATS.filter(function (x) { return x.id === cat; })[0];
       var rg = REGS.filter(function (x) { return x.id === region; })[0];
       var head = '<div class="pc-filter pc-region" role="group" aria-label="지역">' + REGS.map(function (x) {
@@ -204,9 +218,10 @@
           var parts = x.t.split("·"), k = all0.filter(function (p) { return p.sub === x.id; }).length;
           return '<button type="button" class="pc-f" data-pc-sub="' + x.id + '" aria-pressed="' + (x.id === sub) + '" title="' + esc(x.t) + '">' + esc(parts[0]) + (parts[1] ? "<small class=\"pc-subs__2\">" + esc(parts[1]) + "</small>" : "") + " <small>" + k + "</small></button>"; }).join("") + "</div>" +
           '<p class="pc-subnote">' + (sub ? "🔎 <b>" + esc(subs.filter(function (x) { return x.id === sub; })[0].t) + "</b>만 보는 중 — 같은 버튼을 한 번 더 누르면 전체. " : "") + "동네는 대략 나눔이에요(경계 근처는 틀릴 수 있고, 동네를 모르는 " + all0.filter(function (p) { return !p.sub; }).length + "곳은 전체에서만 보여요).</p>" : "") +
-        '<p class="pc-intro"><b>' + esc(rg.t) + (sub ? " " + esc(subs.filter(function (x) { return x.id === sub; })[0].t) : "") + " — 지도에 등록된 가게 " + all.length + "곳, 영업 여부는 확인 안 됨(가기 전에 전화로 확인)</b>" +
+        '<p class="pc-intro"><b>' + esc(rg.t) + (sub ? " " + esc(subs.filter(function (x) { return x.id === sub; })[0].t) : "") + " — 지도에 등록된 가게 " + all.length + "곳" + (all.filter(verified).length ? " · 영업 확인 " + all.filter(fresh).length + "곳, 나머지는" : ",") + " 영업 여부는 확인 안 됨(가기 전에 전화로 확인)</b>" +
           '<small class="pc-intro__s">지도(' + (region === "pattaya" ? "OpenStreetMap·Google 지도" : "OpenStreetMap") + ")에서 받은 목록이에요(한식·한인 업소 " + n("korean") + "곳). 칸마다 출처와 지도에서 받은 날을 적었고, 모르는 칸은 <b>확인 안 됨</b>이에요. 지도 정보가 2년 넘게 그대로인 " +
-          all.filter(isOld).length + "곳은 <b>🕰️ 오래된 정보</b>로 맨 아래에 접어 두었어요.</small></p>" +
+          all.filter(isOld).length + "곳은 <b>🕰️ 오래된 정보</b> 배지를 달고, 그중 영업 확인 안 된 곳은 아래에 접어 두었어요." +
+          (all.filter(verified).length ? " <b>✅ 영업 확인</b> = 조사에서 그 가게 쪽에 폐업 표시가 없고 최근 활동이 보인 곳(어디서·언제 봤는지 카드에 적음), " + OPEN_DAYS + "일이 지나면 '재확인 필요'. <b>⚠️ 폐업 의심</b>은 맨 아래예요." : "") + "</small></p>" +
         '<div class="pc-filter" role="group" aria-label="가게 종류">' + CATS.map(function (x) {
           return '<button type="button" class="pc-f" data-pc-cat="' + x.id + '" aria-pressed="' + (x.id === cat) + '"><span aria-hidden="true">' + x.e + "</span> " + esc(x.t) + " <small>" + n(x.id) + "</small></button>"; }).join("") + "</div>" +
         '<button type="button" class="pc-openonly" data-pc-open aria-pressed="' + openOnly + '">' + (openOnly ? "✅" : "⬜") + " 🟢 지금 영업 중인 곳만 보기</button>";
@@ -215,11 +230,13 @@
           '<div class="pc-list">' + olds.map(card).join("") + "</div></details>" : "";
       var archSec = arch.length ? '<details class="pc-fold pc-fold--arch" data-pc-fold="arch"' + (fold.arch ? " open" : "") + '><summary>🗄️ 폐업 보관함 ' + arch.length + "곳 <small>운영자가 폐업으로 확인한 곳 — 기록으로만 남겨 둬요</small></summary>" +
           '<div class="pc-list">' + arch.map(card).join("") + "</div></details>" : "";
-      var body = list.length || olds.length ? (list.length ? '<div class="pc-list">' + list.map(card).join("") + "</div>" : "") + archSec + oldSec
+      var susSec = sus.length ? '<section class="pc-sus" aria-label="폐업 의심"><h3 class="pc-sus__h">⚠️ 폐업 의심 ' + sus.length + "곳 <small>가기 전 전화 확인 — 조사에서 문 닫았을 수 있다는 근거가 나온 곳</small></h3>" +
+          '<div class="pc-list">' + sus.map(card).join("") + "</div></section>" : "";
+      var body = list.length || olds.length || sus.length ? (list.length ? '<div class="pc-list">' + list.map(card).join("") + "</div>" : "") + oldSec + susSec + archSec
         : '<div class="empty pc-empty"><p class="pc-empty__e" aria-hidden="true">🔍</p><p><b>' + (openOnly ? "지금 영업 중인 " + esc(c.t === "전체" ? "" : c.t + " ") + "가게가 없어요" : "이 종류 가게가 아직 없어요") + "</b></p>" +
-          "<p>" + (openOnly ? "최근 2년 안에 현장 확인된 곳만 계산해요. 위의 '지금 영업 중인 곳만 보기'를 끄면 모두 보여요." : "다른 종류를 골라 보세요.") + "</p></div>";
-      return head + body + (!(list.length || olds.length) ? archSec : "") +
-        '<p class="pc-src">지도 데이터 © <a href="' + esc(DATA.license_url) + '" target="_blank" rel="noopener">OpenStreetMap contributors</a> ' + (region === "pattaya" ? " · 한식·한인 업소 일부는 가게 이름·동네만 적고 나머지는 구글 지도 링크로(Google 지도 이용 약관)" : " · " + esc(rg.t) + "는 OSM 에 한식(음식 종류)이나 한글 상호로 올라온 곳만") + ' · 받은 날 ' + esc(DATA.fetched) + " · '🟢 지금 영업 중'은 지도에 최근 2년 안 현장 확인 날이 있는 곳만 방콕 시간과 지도 영업시간으로 계산해요(나머지는 '영업시간(지도 기준)'만). 이 목록은 광고가 아니고 돈을 받지 않아요(시험).</p>";
+          "<p>" + (openOnly ? "최근 " + OPEN_DAYS + "일 안에 영업 확인된 곳만 계산해요. 위의 '지금 영업 중인 곳만 보기'를 끄면 모두 보여요." : "다른 종류를 골라 보세요.") + "</p></div>";
+      return head + body + (!(list.length || olds.length || sus.length) ? archSec : "") +
+        '<p class="pc-src">지도 데이터 © <a href="' + esc(DATA.license_url) + '" target="_blank" rel="noopener">OpenStreetMap contributors</a> ' + (region === "pattaya" ? " · 한식·한인 업소 일부는 가게 이름·동네만 적고 나머지는 구글 지도 링크로(Google 지도 이용 약관)" : " · " + esc(rg.t) + "는 OSM 에 한식(음식 종류)이나 한글 상호로 올라온 곳만") + ' · 받은 날 ' + esc(DATA.fetched) + " · '🟢 지금 영업 중'은 최근 " + OPEN_DAYS + "일 안에 영업 확인된 곳만 방콕 시간과 지도 영업시간으로 계산해요(나머지는 '영업 확인 안 됨'). 이 목록은 광고가 아니고 돈을 받지 않아요(시험).</p>";
     },
     click: function (e, t) {
       var el;
@@ -278,5 +295,5 @@
     var el = e.target.closest && e.target.closest("[data-pl-cat]"); if (!el) return;
     var w = el.getAttribute("data-pl-cat"); cat = CATS.some(function (x) { return x.id === w; }) ? w : "all"; openOnly = false;
   }, true);
-  window.TNPlaces = { parseOH: parseOH, openState: openState, hoursKo: hoursKo, oldBefore: oldBefore, basis: basis, isOld: isOld, openOK: openOK, verified: verified, CLOSED_MIN: CLOSED_MIN };
+  window.TNPlaces = { parseOH: parseOH, openState: openState, hoursKo: hoursKo, oldBefore: oldBefore, openBefore: openBefore, basis: basis, isOld: isOld, openOK: openOK, verified: verified, suspect: suspect, recheck: recheck, OLD_DAYS: OLD_DAYS, OPEN_DAYS: OPEN_DAYS, CLOSED_MIN: CLOSED_MIN };
 })();

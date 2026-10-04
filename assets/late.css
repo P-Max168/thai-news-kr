@@ -183,6 +183,8 @@
 .pc-fold > summary{cursor:pointer;min-height:48px;padding:12px 14px;font-weight:800;font-size:.9688rem;line-height:1.45;list-style-position:inside}
 .pc-fold > summary small{display:block;font-weight:600;font-size:.8438rem;color:var(--muted,#5f6672)}
 .pc-fold > .pc-list{padding:0 8px 10px}
+.pc-sus{margin:16px 0 0}.pc-sus__h{font-size:1rem;font-weight:800;margin:0 2px 8px;color:#7a1414;line-height:1.45}.pc-sus__h small{display:block;font-weight:600;font-size:.8438rem;color:var(--muted,#5f6672)}
+.pc__open--sus{color:#9b1c1c}
 .pc__info dt small{display:block;font-weight:600;font-size:.75rem;color:var(--muted,#5f6672)}
 /* 🛡️ 승인함 — 광고 옆 민감 기사 기준 (2026-10-03) */
 .as-sum,.as-mid,.as-none,.as-man{font-size:.9375rem;line-height:1.6;margin:6px 0}
