@@ -2,7 +2,8 @@
  * html.th-modern 일 때만 index.html 이 이 파일을 받음(기본 디자인엔 영향 없음). 앱 파일(app.js 등)은 그대로 두고,
  * 새로 그려지는 부분은 MutationObserver 로 그 자리에서(그리기 전에) 바꿈.
  * - ICON: 메뉴·서랍·헤더 칸·버튼·제목 → 이모지를 선 아이콘으로
- * - STRIP: 주제·영향 칩 → 아이콘 없이 글자만(회색 알약). 단 📍지역·📅날짜는 작은 선 아이콘
+ * - STRIP: 주제·영향 칩·한국 뉴스 제목(🇰🇷) → 아이콘 없이 글자만(회색 알약). 단 📍지역·📅날짜는 작은 선 아이콘
+ * - 글자가 이미 말해 주는 곳의 아이콘은 modern.css 가 숨김(2026-10-05 이모지 더 줄이기)
  * - 기사 본문·제목·댓글 같은 내용 글자는 건드리지 않음(아래 목록에 없는 곳은 그대로) */
 (function () {
   "use strict";
@@ -17,12 +18,12 @@
     ".nb-page__t", ".nb-back", ".nb-sw", ".nb-go", ".nb-places", ".nb-note", ".nb-how summary", ".nb-sec",
     ".pc-f", ".pc-intro b", ".pc-openonly", ".pc__cat", ".pc__open", ".pc__price", ".pc__info dt", ".pc__btn", ".pc__report", ".pc__old",
     ".pc-empty__e", ".jb-ex", ".hp-n", ".hp-empty__e", ".hp-ic", ".hp-x", ".persona__e", ".tpick__e", ".opt__e", ".int__e", ".setbtn",
-    ".sheet__kicker", ".acct-menu", ".ih__icon", ".ihi__ic", ".adm-link", ".ad-h", ".tk-pop__t", ".cmts__h"
+    ".sheet__kicker", ".acct-menu", ".ih__icon", ".ihi__ic", ".adm-link", ".ad-h", ".tk-pop__t", ".cmts__h", ".pc__foot", ".pc__fs", ".pc-src", ".jb-warn"
   ].join(",");
-  var STRIP = [".chip", ".bchip", ".mini", ".impf__c", ".cat-stats .lbl", ".also__m", ".mine__chip"].join(",");
+  var STRIP = [".chip", ".bchip", ".mini", ".impf__c", ".cat-stats .lbl", ".also__m", ".mine__chip", ".korea__title"].join(",");
   var keys = Object.keys(MAP).sort(function (a, b) { return b.length - a.length; });
   var RE = new RegExp("(" + keys.map(function (k) { return k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }).join("|") + ")\uFE0F?( ?)", "g");
-  var PICT = /\p{Extended_Pictographic}\uFE0F?(\u200D\p{Extended_Pictographic}\uFE0F?)*( ?)/gu;
+  var PICT = /(?:[\u{1F1E6}-\u{1F1FF}]{2}|\p{Extended_Pictographic}\uFE0F?(\u200D\p{Extended_Pictographic}\uFE0F?)*)( ?)/gu;  // 국기(🇰🇷)도
   var QUICK = /[\u2190-\u2BFF\u3030\uD83C-\uD83E]/;
 
   function icon(name, emo, lead) {

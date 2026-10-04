@@ -50,3 +50,5 @@
 | 44 | 💰 가격 먼저(가게 카드·임대 카드): 카드 맨 위(종류 줄 바로 아래) 굵은 '350바트 약 14,068원'(헤더와 같은 환율 data/ticker.json, 원 단위 반올림) 또는 '💰 가격 확인 안 됨' — 지어낸 가격 없음 | `tools/dev/regress.py`(가게 카드 줄 price) + 사진 |
 | 45 | 🚫 첫 화면에 덮는 창·떠 있는 요소·로그인 요구 없음: 처음 방문 = '어떤 분이세요?' 창이 저절로 안 뜨고 피드 맨 위 '👋 … 고르기' 한 줄(누르면 열림, app.js FIRST_SHEET_AUTO=false) / 홈 화면 추가 안내 = 페이지 맨 아래 글 흐름 속 칸(떠 있는 바 아님) / '맨 위로 ↑' 떠 있는 버튼 없음 / 보이는 광고 칸마다 '광고' 글자 | `python3 tools/dev/audit_first.py [URL]` + `tools/dev/regress.py` |
 | 46 | 💱 '฿' 는 헤더 숫자 칸에만: 메인(기사 전부 펼침)·서랍·#places·#rent·#jobs·#approve·#hearts·#nearby/food 글·속성에 헤더 칸 밖 '฿' 0, 헤더 칸 ฿ 1개 이상 | `tools/dev/regress.py` |
+| 47 | 🎨 화면 디자인 고르기: 새 방문자 = TN_THEME 기본값(지금 모던), ☰ 서랍 '화면 디자인' 📰 클래식 / ✨ 모던 2칸, 누르면 localStorage tnk.theme.pick 저장 → 다시 열어도 유지, 창·팝업 없음(?theme= 는 그 탭 동안 우선) | `tools/dev/regress.py` |
+| 48 | 📐 화면 폭 320·360·430·768·1024(iPhone SE ~ Pro Max·iPad 세로/가로): 옆으로 넘침 0 | `tools/dev/regress.py` |

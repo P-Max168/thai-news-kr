@@ -321,6 +321,41 @@ async def main():
             except Exception as e:
                 r404 = {"err": str(e)[:80]}
             rec(r404.get("st") == 404 and r404.get("ko"), "없는 주소 = 한국어 404 쪽('페이지를 찾을 수 없어요' + 오늘의 뉴스 버튼)", r404)
+        # 화면 디자인 고르기(2026-10-05): 새 방문자 = 기본값(TN_THEME), ☰ 서랍 📰 클래식/✨ 모던 → 이 기기에 저장(tnk.theme.pick)·다시 열어도 유지
+        try:
+            base = urllib.parse.urlsplit(URL)._replace(query="", fragment="").geturl()
+            c3 = await b.new_context(viewport={"width": 360, "height": 780}, is_mobile=True, has_touch=True, timezone_id="Asia/Bangkok", locale="ko-KR")
+            await c3.add_init_script(SEED); p3 = await c3.new_page()
+            TJS = "()=>({m:document.documentElement.classList.contains('th-modern'),d:window.TN_THEME,k:localStorage.getItem('tnk.theme.pick'),n:document.querySelectorAll('#themePick .thm').length,on:(document.querySelector('#themePick .thm[aria-checked=\"true\"]')||{}).dataset})"
+            await p3.goto(base + "?_=%d" % time.time(), wait_until="load"); await p3.wait_for_timeout(900)
+            t1 = await p3.evaluate(TJS)
+            await p3.click("#menuBtn"); await p3.wait_for_timeout(400)
+            async with p3.expect_navigation(): await p3.click('#themePick .thm[data-theme="classic"]')
+            await p3.wait_for_timeout(700)
+            await p3.goto(base + "?_=%d" % time.time(), wait_until="load"); await p3.wait_for_timeout(700)
+            t2 = await p3.evaluate(TJS)
+            await p3.click("#menuBtn"); await p3.wait_for_timeout(400)
+            async with p3.expect_navigation(): await p3.click('#themePick .thm[data-theme="modern"]')
+            await p3.wait_for_timeout(700)
+            t3 = await p3.evaluate(TJS)
+            await c3.close()
+            th = {"새 방문": "modern" if t1["m"] else "classic", "기본값": t1["d"], "칸": t1["n"], "클래식 고른 뒤": "modern" if t2["m"] else "classic", "저장": t2["k"], "모던 고른 뒤": "modern" if t3["m"] else "classic"}
+            okth = t1["n"] == 2 and th["새 방문"] == t1["d"] and th["클래식 고른 뒤"] == "classic" and t2["k"] == "classic" and th["모던 고른 뒤"] == "modern" and t3["k"] == "modern"
+        except Exception as e:
+            okth, th = False, {"err": str(e)[:100]}
+        rec(okth, "화면 디자인 고르기 — 새 방문자 = 기본값, ☰ 서랍 📰 클래식/✨ 모던 누르면 이 기기에 저장·다시 열어도 유지(창 없음)", th)
+        # 화면 폭(iPhone SE 320 ~ iPad 가로 1024): 옆으로 넘치는 곳 없음
+        try:
+            ow = {}
+            for wdt in (320, 360, 430, 768, 1024):
+                c4 = await b.new_context(viewport={"width": wdt, "height": 800}, is_mobile=wdt < 1000, has_touch=wdt < 1000, locale="ko-KR")
+                await c4.add_init_script(SEED); p4 = await c4.new_page()
+                await p4.goto(URL + ("&" if "?" in URL else "?") + "_=%d" % time.time(), wait_until="load"); await p4.wait_for_timeout(900)
+                ow[wdt] = await p4.evaluate("document.documentElement.scrollWidth - innerWidth"); await c4.close()
+            okw = all(v <= 1 for v in ow.values())
+        except Exception as e:
+            okw, ow = False, {"err": str(e)[:100]}
+        rec(okw, "화면 폭 320·360·430·768·1024 — 옆으로 넘침 없음", ow)
         # ฿ 는 헤더 숫자 칸(#ticker .tk-u)에만(2026-10-04 Max 승인) — 기사·브리핑·서랍·가게·임대·구인·승인함·내 주변·하트 화면 글은 '바트'
         BAHT_JS = r"""()=>{const out=[]; let hdr=0; const w=document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
           while(w.nextNode()){const n=w.currentNode, t=n.textContent; if(t.indexOf('฿')<0) continue; const el=n.parentElement; if(!el.getClientRects().length) continue;

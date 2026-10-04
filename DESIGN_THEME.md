@@ -1,4 +1,4 @@
-# 디자인 테마 스위치 (2026-10-04 1단계 미리보기 → 2026-10-05 00:26 방콕 2단계: 모던이 기본)
+# 디자인 테마 스위치 (2026-10-04 1단계 미리보기 → 2026-10-05 00:26 방콕 2단계: 모던이 기본 → 3단계: 읽는 분이 서랍에서 고르기)
 
 > **되돌리기 한 줄:** `index.html` 의 `<script>window.TN_THEME="modern";</script>` 를 `<script>window.TN_THEME="classic";</script>` 로 바꾸고 배포하면 예전 디자인으로 돌아갑니다(태그 `backup-20261005-0018-modern-on`).
 
@@ -14,6 +14,11 @@
 - 비교: 주소 뒤에 `?theme=classic` → 같은 탭에서는 계속 예전 디자인. `?theme=modern` 이면 다시 모던.
   예: https://p-max168.github.io/thai-news-kr/?theme=classic · https://p-max168.github.io/thai-news-kr/?theme=classic#places
 - 지금(2단계, 10-05 00:26 방콕부터)은 `"modern"` — 모든 방문자가 모던 디자인.
+- **읽는 분이 고르기(3단계, 2026-10-05 민구님 요청, 태그 `backup-20261005-0104-theme-choice`)**: ☰ 서랍 '화면 디자인' 칸에 `📰 클래식`(예전 모양) / `✨ 모던`(새 모양) 두 버튼(창·팝업 없음). 누르면 이 기기 localStorage `tnk.theme.pick` 에 저장하고 화면을 한 번 새로 그림(모던 층은 그리는 중에 이모지를 바꾸므로 그 자리에서 되돌리지 않고 새로 엶). 주소에 `?theme=` 가 있으면 그 값은 지우고 엶.
+  - 우선순위: 주소 `?theme=`(그 탭 동안, sessionStorage `tnk.theme`) > 서랍에서 고른 값(`tnk.theme.pick`) > `TN_THEME`(처음 오신 분 기본값 = 지금 `"modern"`).
+  - 그래서 TN_THEME 을 `"classic"` 으로 바꿔도 **이미 서랍에서 모던을 고른 분은 모던 그대로**. 모두 한꺼번에 되돌리려면 서랍 칸까지 빼야 함(아래 태그로 index.html 되돌리기 + 머리 스크립트에서 `tnk.theme.pick` 읽는 부분 삭제).
+- 모던 읽기 쉬운 구분(3단계): 카드·상자 1px #E5E8EB 테두리(그림자 대신), 목록 줄 사이 1px #EEF0F3, 섹션 제목 위 1px 선, 서랍 칸 사이 선 — 간격은 그대로. modern.src.css 맨 아래 '읽기 쉬운 구분' 블록.
+- 모던 이모지·아이콘 더 줄이기(3단계): 글자가 이미 말해 주는 곳(섹션 제목·'그래서 나는?'·더/덜 보여줘·매체·타임라인 버튼·서랍 주제 목록·광고 위 '추천 업종' 등)의 장식 아이콘은 숨김, 🇰🇷(한국 뉴스 제목) 지움. 남김 = 글자 없는 버튼(하트·닫기)·헤더 칸·내 주변 업종 줄·서랍 바로가기·📍지역·📅날짜·광고 버튼·바깥 링크 ↗. 홈 360px 보이는 아이콘 129 → 57개. 서랍의 '📰 클래식 / ✨ 모던' 이름은 민구님이 정한 이름이라 그대로.
 - 휴대폰 상단 색: index.html 기본값은 모던에 맞춤(`apple-mobile-web-app-status-bar-style` = `default` 진한 글자, `theme-color` = #ffffff). classic 일 때는 스위치 스크립트가 페이지를 열 때 `black-translucent`·#0b2a4a 로 바꿈. manifest.json(theme_color #ffffff, background_color #F2F4F6)은 실행 중 못 바꿔서 기본(모던)을 따름.
 - 공유 카드·링크 미리보기 그림(tools/share_kit.py → share/<판>.png, og/<판>.png)도 모던 모양(2026-10-05 00:39~, 태그 `backup-20261005-0039-share-card-modern`): 흰 헤더·#F2F4F6 바탕·흰 카드(모서리 = 16px × 그림 배율 --u)·강조색 #1B64DA 하나·글자 #191F28/#4E5968/#5F6B7A·아이콘 #8B95A1, 주제 칩 글자만, 📍·🔗·› 는 assets/modern-icons.svg 선 아이콘. 스위치와 상관없음(그림이라 classic 으로 못 바꿈). 10-05 아침판 전에 올라간 og/ 그림은 예전 남색 그대로.
 - 따로 떨어진 쪽(404.html·offline.html·안내 4쪽 tools/legal_pages.py·판 미리보기 tools/share_kit.py → e/<판>/)은 스위치와 상관없이 모던 모양(파일 안 CSS). 예전 모양이 필요하면 태그 `backup-20261005-0018-modern-on` 에서 그 파일들을 되돌림.

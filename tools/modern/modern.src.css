@@ -377,3 +377,51 @@ button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
   .korea__list{padding:0 16px 6px}
   .korea__more{margin:4px 16px 14px;width:calc(100% - 32px)}
 }
+
+/* ===== 읽기 쉬운 구분(2026-10-05 민구님 요청 '모던하면서 클래식하게'): 간격은 그대로 두고 옅은 선을 더함 =====
+   카드·상자 = 1px #E5E8EB 테두리(그림자 대신), 목록 줄 사이 = 1px #EEF0F3, 섹션 제목 위 = 1px #E5E8EB 선 */
+:root{--m-bd:#E5E8EB; --m-row:#EEF0F3}
+.masthead{box-shadow:none;border-bottom:1px solid var(--m-bd)}
+.subbar,.subbar.subbar--nearby{border-bottom:1px solid var(--m-bd)}
+.korea,.briefing,.top-card,.card,.widget,.pc,.hp-row,.update,.edition-note,.empty,.more-btn,.feed-intro--cta,.feed-intro--hello,.nb-places,.nb-how{border:1px solid var(--m-bd);box-shadow:none}
+.card:hover{border:1px solid var(--m-bd)}
+.card.is-open{border-color:#D1D6DB;box-shadow:none}
+.card.flash{animation:m-flash2 .9s ease}
+@keyframes m-flash2{0%{box-shadow:0 0 0 3px rgba(27,100,218,.4)}100%{box-shadow:0 0 0 0 rgba(27,100,218,0)}}
+.top-card:focus-visible{outline:2px solid var(--m-ac);outline-offset:1px}
+.dm-ad{box-shadow:none}
+.ad{box-shadow:none}
+.mine__chip,.impf__c,.impf__c:not([style]),.pc-f,.pc-subs .pc-f,.pc-openonly,.nb-sw,.nb-sub,.nb-rg button,.dm-target,.jb-warn,.ap-note,.also__list a{border:1px solid var(--m-bd)}
+.impf__c[aria-pressed="true"],.pc-f[aria-pressed="true"],.nb-sw[aria-current],.nb-rg button[aria-pressed="true"]{border-color:var(--m-ac)}
+/* 목록 안 줄 나눔 */
+.korea__list li+li,.korea__list li.k-ad{border-top:1px solid var(--m-row)}
+.brief-list li+li{border-top:1px solid var(--m-row)}
+.brief-line{border-radius:0}
+.related li+li{border-top:1px solid var(--m-row)}
+.cmt{border-bottom:1px solid var(--m-row)}
+.cmt:last-child{border-bottom:0}
+.origin{border-top:1px solid var(--m-row);padding-top:14px}
+.talk{border-top:1px solid var(--m-row);padding-top:16px}
+.card__acts{border-top:1px solid var(--m-row);padding-top:12px}
+.src-list li{border:0}
+.cat-stats li+li{border-top:1px solid var(--m-row)}
+/* 섹션 나눔: 섹션 제목 위 옅은 선(첫 제목은 위 카드와 붙지 않게 간격만) */
+.section-title{border-top:1px solid var(--m-bd);padding-top:22px;margin-top:26px}
+.main-col>.section-title:first-child{border-top:0;padding-top:0}
+/* 서랍: 칸 사이 옅은 선 */
+.drawer__head{border-bottom:1px solid var(--m-bd);margin-bottom:10px}
+.drawer__sec{border-top:1px solid var(--m-row);padding-top:14px;margin:14px 4px 6px}
+.dq-btn,.dr-item,.dr-item--mine,.acct-box,.drawer__legal a{border:1px solid var(--m-bd)}
+.footer{border-top:1px solid var(--m-bd)}
+
+/* ===== 이모지·아이콘 더 줄이기(2026-10-05): 글자가 이미 말해 주는 곳의 장식 아이콘은 숨김 =====
+   남기는 곳 = 글자 없는 버튼(하트·닫기), 헤더 칸(날씨·비), 내 주변 업종 줄, 서랍 바로가기 2개, 📍지역·📅날짜, 광고 버튼, 바깥 링크 ↗ */
+.forme__h .mic,.vote .mic,.tool .mic,.dm-target .mic,.drawer .tab .mic,.dr-item .mic,.pin__h .mic,.section-title .mic,.fsec__h .mic,
+.linkbtn .mic,.context > b .mic,.feed-intro .mic,.update > b .mic,.edition-note .mic,.cmts__h .mic,.korea__more .mic,.more-btn .mic,.qr__l .mic,
+.nb-sec .mic,.nb-note .mic,.pc-intro b .mic,.jb-warn .mic,.pc-src .mic,.tk-pop__t .mic,.sheet__kicker .mic{display:none}
+
+/* ===== ☰ 서랍 '화면 디자인' 고르기(모던 모양) ===== */
+.thm{border:1px solid var(--m-bd);background:#fff;color:var(--m-t1);border-radius:12px;font-weight:700}
+.thm small{color:var(--m-t3)}
+.thm[aria-checked="true"]{border-color:var(--m-ac);background:var(--m-tint);color:var(--m-acd);box-shadow:inset 0 0 0 1px var(--m-ac)}
+.thm[aria-checked="true"] small{color:var(--m-acd)}

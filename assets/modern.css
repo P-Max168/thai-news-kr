@@ -342,3 +342,38 @@ html.th-modern .top-card h3{font-size:1.125rem}
 html.th-modern .korea__head{padding:14px 16px 8px}
 html.th-modern .korea__list{padding:0 16px 6px}
 html.th-modern .korea__more{margin:4px 16px 14px;width:calc(100% - 32px)}}
+html.th-modern{--m-bd:#E5E8EB; --m-row:#EEF0F3}
+html.th-modern .masthead{box-shadow:none;border-bottom:1px solid var(--m-bd)}
+html.th-modern .subbar,html.th-modern .subbar.subbar--nearby{border-bottom:1px solid var(--m-bd)}
+html.th-modern .korea,html.th-modern .briefing,html.th-modern .top-card,html.th-modern .card,html.th-modern .widget,html.th-modern .pc,html.th-modern .hp-row,html.th-modern .update,html.th-modern .edition-note,html.th-modern .empty,html.th-modern .more-btn,html.th-modern .feed-intro--cta,html.th-modern .feed-intro--hello,html.th-modern .nb-places,html.th-modern .nb-how{border:1px solid var(--m-bd);box-shadow:none}
+html.th-modern .card:hover{border:1px solid var(--m-bd)}
+html.th-modern .card.is-open{border-color:#D1D6DB;box-shadow:none}
+html.th-modern .card.flash{animation:m-flash2 .9s ease}
+@keyframes m-flash2{0%{box-shadow:0 0 0 3px rgba(27,100,218,.4)}100%{box-shadow:0 0 0 0 rgba(27,100,218,0)}}
+html.th-modern .top-card:focus-visible{outline:2px solid var(--m-ac);outline-offset:1px}
+html.th-modern .dm-ad{box-shadow:none}
+html.th-modern .ad{box-shadow:none}
+html.th-modern .mine__chip,html.th-modern .impf__c,html.th-modern .impf__c:not([style]),html.th-modern .pc-f,html.th-modern .pc-subs .pc-f,html.th-modern .pc-openonly,html.th-modern .nb-sw,html.th-modern .nb-sub,html.th-modern .nb-rg button,html.th-modern .dm-target,html.th-modern .jb-warn,html.th-modern .ap-note,html.th-modern .also__list a{border:1px solid var(--m-bd)}
+html.th-modern .impf__c[aria-pressed="true"],html.th-modern .pc-f[aria-pressed="true"],html.th-modern .nb-sw[aria-current],html.th-modern .nb-rg button[aria-pressed="true"]{border-color:var(--m-ac)}
+html.th-modern .korea__list li+li,html.th-modern .korea__list li.k-ad{border-top:1px solid var(--m-row)}
+html.th-modern .brief-list li+li{border-top:1px solid var(--m-row)}
+html.th-modern .brief-line{border-radius:0}
+html.th-modern .related li+li{border-top:1px solid var(--m-row)}
+html.th-modern .cmt{border-bottom:1px solid var(--m-row)}
+html.th-modern .cmt:last-child{border-bottom:0}
+html.th-modern .origin{border-top:1px solid var(--m-row);padding-top:14px}
+html.th-modern .talk{border-top:1px solid var(--m-row);padding-top:16px}
+html.th-modern .card__acts{border-top:1px solid var(--m-row);padding-top:12px}
+html.th-modern .src-list li{border:0}
+html.th-modern .cat-stats li+li{border-top:1px solid var(--m-row)}
+html.th-modern .section-title{border-top:1px solid var(--m-bd);padding-top:22px;margin-top:26px}
+html.th-modern .main-col>.section-title:first-child{border-top:0;padding-top:0}
+html.th-modern .drawer__head{border-bottom:1px solid var(--m-bd);margin-bottom:10px}
+html.th-modern .drawer__sec{border-top:1px solid var(--m-row);padding-top:14px;margin:14px 4px 6px}
+html.th-modern .dq-btn,html.th-modern .dr-item,html.th-modern .dr-item--mine,html.th-modern .acct-box,html.th-modern .drawer__legal a{border:1px solid var(--m-bd)}
+html.th-modern .footer{border-top:1px solid var(--m-bd)}
+html.th-modern .forme__h .mic,html.th-modern .vote .mic,html.th-modern .tool .mic,html.th-modern .dm-target .mic,html.th-modern .drawer .tab .mic,html.th-modern .dr-item .mic,html.th-modern .pin__h .mic,html.th-modern .section-title .mic,html.th-modern .fsec__h .mic,html.th-modern .linkbtn .mic,html.th-modern .context > b .mic,html.th-modern .feed-intro .mic,html.th-modern .update > b .mic,html.th-modern .edition-note .mic,html.th-modern .cmts__h .mic,html.th-modern .korea__more .mic,html.th-modern .more-btn .mic,html.th-modern .qr__l .mic,html.th-modern .nb-sec .mic,html.th-modern .nb-note .mic,html.th-modern .pc-intro b .mic,html.th-modern .jb-warn .mic,html.th-modern .pc-src .mic,html.th-modern .tk-pop__t .mic,html.th-modern .sheet__kicker .mic{display:none}
+html.th-modern .thm{border:1px solid var(--m-bd);background:#fff;color:var(--m-t1);border-radius:12px;font-weight:700}
+html.th-modern .thm small{color:var(--m-t3)}
+html.th-modern .thm[aria-checked="true"]{border-color:var(--m-ac);background:var(--m-tint);color:var(--m-acd);box-shadow:inset 0 0 0 1px var(--m-ac)}
+html.th-modern .thm[aria-checked="true"] small{color:var(--m-acd)}
