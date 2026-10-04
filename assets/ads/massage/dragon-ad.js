@@ -7,12 +7,12 @@
 (function () {
   "use strict";
   /* ★ 배너 스타일 스위치(2026-10-05 민구님 지시 — 최종 하나 고르면 이 한 줄만 바꾸기)
-       "mix"    = 자리마다 다른 스타일(비교용, 기본값): 맨 위 띠 A · 메인 큰 배너 B · 기사 사이 1번째 C · 2번째 D · 3번째 A · 한국 뉴스 사이 B · 메뉴 서랍 C · 맨 아래 띠 D
+       "mix"    = 자리마다 다른 스타일(비교용, 10-05 03:57~04:15 기본값): 맨 위 띠 A · 메인 큰 배너 B · 기사 사이 1번째 C · 2번째 D · 3번째 A · 한국 뉴스 사이 B · 메뉴 서랍 C · 맨 아래 띠 D
        "rotate" = 들어올 때마다 A→B→C→D 차례로(한 화면 안 모든 자리는 같은 스타일)
        "A" 검정+금색(호텔 스파) · "B" 짙은 남색+금색 · "C" 와인+크림 · "D" 흰 카드+강한 빨강+큰 버튼  → 그 스타일로 모든 자리 고정
        "off"    = 10-05 02:37 이전 모양(모던 = 흰 카드, 클래식 = 어두운 빨강+금색)
      미리 보기만(저장 안 됨): 주소 끝에 ?dragon=A (B·C·D·rotate·mix·off) */
-  var DRAGON_STYLE = "mix";
+  var DRAGON_STYLE = "A";   // 10-05 04:15 민구님 선택: A 검정+금색(모든 자리·두 테마). B·C·D 코드는 남겨 둠(?dragon=B 로 미리 보기)
   var STYLES = ["A", "B", "C", "D"];
   var MIX = { "top:0": "A", "mid:0": "B", "infeed:0": "C", "infeed:1": "D", "infeed:2": "A", "korea-mid:0": "B", "drawer:0": "C", "footer:0": "D" };
   try { var qs = /[?&]dragon=(A|B|C|D|rotate|mix|off)\b/.exec(location.search); if (qs) DRAGON_STYLE = qs[1]; } catch (e) {}
