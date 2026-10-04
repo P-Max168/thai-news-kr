@@ -2,5 +2,14 @@
  "_readme": "📇 가게 카드 폐업 신고·폐업 확인 기록(2026-10-05). 신고 원문(Firestore reports)은 운영자만 읽음 → 숫자만 여기(저장소에 올린 기록)와 Firestore placeflags(공개 읽기·운영자만 쓰기)에. 지우지 않음 — 되돌릴 땐 st 를 빈칸으로. flags: {가게 id: {n: 폐업 신고 수, st: \"closed\"(운영자 폐업 확인) | \"\", at: YYYY-MM-DD, note}}",
  "fs_live": false,
  "fs_live_note": "Firestore placeflags 규칙(firestore.rules)이 게시되면 true 로 — 그 전엔 읽기가 403 이라 화면이 안 읽음(LOGIN_TODO '대기')",
- "flags": {}
+ "flags": {
+  "osm-node-11427908969": {
+   "n": 0,
+   "st": "closed",
+   "at": "2026-10-05",
+   "name": "Chibing chicken and Bingsu",
+   "note": "Google 지도 'Permanently closed'(조사봇 2차 검수 2026-10-05 06:32 확인, OSM 좌표에서 16m 같은 이름) · Max 06:55 보관함 이동 승인",
+   "url": "https://www.google.com/maps/place/Chibing+Chicken+and+Bingsu+Pattaya/@12.9277773,100.8752156,17z/data=!3m1!4b1!4m6!3m5!1s0x31029743d2caa0cf:0xab564305a7fab71e!8m2!3d12.9277773!4d100.8752156!16s%2Fg%2F11t6ywb_zw"
+  }
+ }
 }

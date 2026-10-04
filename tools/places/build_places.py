@@ -15,7 +15,7 @@ OUT = ROOT / "data/places-pattaya.json"
 GPICK = ROOT / "tools/places/pattaya-korean-pick-2026-10-03.json"
 # 오래된 정보 기준(2026-10-05 Max 06:33): 오늘(방콕) − 730일(2년) — 자동 계산(예전엔 2023-01-01 고정이라 README 의 '2년'과 달랐음).
 #   기준 날 = OSM check_date(현장 확인 날)가 있으면 그것, 없으면 지도 정보를 마지막으로 고친 날. 화면(assets/places.js)도 같은 규칙으로 매일 다시 계산
-OLD_DAYS = 730
+OLD_DAYS = 730   # ★ 한 상수: 오래된 정보 + '🟢 지금 영업 중' 자격 창(조사봇 제안 90일 ↔ Max 06:33 지시 730일 → 730, DEV_LOG 10-05)
 OLD_BEFORE = (datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=7))).date() - datetime.timedelta(days=OLD_DAYS)).isoformat()
 FETCHED = "2026-10-03"
 THAI = re.compile(r"[\u0E00-\u0E7F]")
@@ -100,11 +100,42 @@ def korean():
             "area": area or "파타야(동네 확인 안 됨)", "lat": None, "lng": None,
             "price_thb": None, "vat_extra": None, "status": "영업 확인 안 됨", "checked": at, "osm_check": None, "osm_edit": None,
             "unverified": True,   # 구글 지도에서 이름이 한 번 보인 것뿐 — 영업 여부·정보 날짜 모름(2026-10-05: 받은 날을 정보 날짜로 쓰던 것 고침)
-            "verified_by": None, "verified_at": None,
+            "status_code": "unknown",
+            "verified_status": None, "verified_by": None, "verified_at": None, "verified_source_url": None, "verified_marker": None,
             "source": "Google 지도", "source_url": gurl, "gmaps_only": True,
             "korean": True, "kr": kr, "srcs": srcs, "fsrc": fsrc, "info_date": None, "info_kind": None,
         })
+    # 2026-10-05 Max 06:55 지시 6번: 1차에 '폐업'으로 뺀 NewKoreaMart·Jin Sung 은 조사봇 2차에서 그 가게 쪽(cid) 폐업 표시 없음 → '확인 불가'로 다시 넣음(이름·링크만, 동네 모름)
+    for r in json.load(open(VERIFY, encoding="utf-8")).get("readd", []):
+        gurl = "https://maps.google.com/?cid=" + r["cid"]
+        res.append({
+            "id": "gmap-" + r["cid"], "cat": r["cat"], "cat_ko": CAT[r["cat"]], "name": r["name"], "kind": r["kind"], "cuisine": [],
+            "hours": None, "hours_partial": False, "phone": None, "website": None, "address": None,
+            "area": "파타야(동네 확인 안 됨)", "lat": None, "lng": None,
+            "price_thb": None, "vat_extra": None, "status": "영업 확인 안 됨", "checked": "2026-10-03", "osm_check": None, "osm_edit": None,
+            "unverified": True, "status_code": "unknown", "readded": "2026-10-05 — 1차에 '폐업'으로 뺐다가 2차 검수에서 폐업 표시 없음 확인 → 다시 넣음",
+            "verified_status": None, "verified_by": None, "verified_at": None, "verified_source_url": None, "verified_marker": None,
+            "source": "Google 지도", "source_url": gurl, "gmaps_only": True,
+            "korean": True, "kr": "Google 지도 이름", "srcs": {"g": {"by": "Google 지도", "url": gurl, "at": "2026-10-03"}}, "fsrc": {"name": "g"},
+            "info_date": None, "info_kind": None,
+        })
     return res
+
+# 조사봇 2차 검수 등급(2026-10-05, 보고서 값 그대로 — tools/places/parse_verify.py). 이름으로 맞춤(파타야만 — 방콕·시라차는 검수 기록 없음 = 전부 '확인 안 됨')
+VERIFY = ROOT / "tools/places/pattaya-verify-2026-10-05.json"
+def apply_verify(out):
+    v = json.load(open(VERIFY, encoding="utf-8"))
+    by = v["by_name"]; readd = {"gmap-" + r["cid"]: r for r in v.get("readd", [])}
+    n = 0
+    for p in out:
+        r = by.get(p["name"]) or readd.get(p["id"])
+        if not r: continue
+        for k in ("verified_status", "verified_by", "verified_at", "verified_source_url", "verified_marker"): p[k] = r[k]
+        p["status_code"] = {"영업 확인": "open_verified", "폐업 의심": "closed_suspected"}.get(r["verified_status"], "unknown")
+        n += 1
+    missing = [p["name"] for p in out if not p.get("verified_status")]
+    assert not missing, ("검수 기록 없는 파타야 가게", missing)
+    print("검수 등급 적용:", n)
 
 def osm_cards(raw, pick, region_ko):
     by = {(e["type"], e["id"]): e for e in raw["elements"]}
@@ -121,20 +152,25 @@ def osm_cards(raw, pick, region_ko):
         addr = ok(t.get("address")) or (", ".join(x for x in [ok(t.get("addr:housenumber")), ok(t.get("addr:street"))] if x) if ok(t.get("addr:street")) else None)   # 길 이름(영어)이 없으면 번지만으론 안 씀
         phone = (t.get("phone") or t.get("contact:phone") or "").split(";")[0].strip() or None
         web = t.get("website") or t.get("contact:website") or None
+        # 폐업 표시 실제 검사(2026-10-05, 조사봇 원인 ① — 예전엔 검사 없이 '폐업 표시 없음'을 박았음): disused:*·was:*·abandoned:*·opening_hours=closed/off
+        life = sorted(k for k in t if k.split(":")[0] in ("disused", "was", "abandoned", "demolished", "removed")) + (["opening_hours=" + t["opening_hours"]] if (t.get("opening_hours") or "").strip().lower() in ("closed", "off") else [])
         out.append({
             "id": "osm-%s-%d" % (typ, i), "cat": cat, "cat_ko": CAT[cat], "name": nm, "kind": kind, "cuisine": cz,
             "hours": t.get("opening_hours") or None,           # OSM 영업시간 원문(화면이 한국어로 풀고 '지금 영업 중' 계산)
             "phone": phone, "website": web, "address": addr, "lat": round(lat, 6), "lng": round(lon, 6),
             "price_thb": None, "vat_extra": None,              # vat_extra: 가격 VAT 별도 여부(true/false) — 가게·공식 출처 확인 전엔 null(화면 '확인 안 됨'). OSM 에 가격 없음 → '확인 안 됨'(바트·원은 값이 생기면 같이 표시)
-            "status": "지도에 폐업 표시 없음(현장 확인 아님)",   # disused/폐업 태그 없는 것만 받음 — 실제 영업 확인이 아님(2026-10-05)
+            "status": "지도에 폐업 표시 있음 — 영업 확인 안 됨" if life else "지도에 폐업 표시 없음(현장 확인 아님)",   # 위 검사 결과(실제 영업 확인 아님)
+            "status_code": "closed_suspected" if life else "unknown",   # open_verified(근거 있는 확인만) | closed_suspected | unknown — 근거 없으면 무조건 unknown, unknown 은 영업 중으로 안 봄
+            "osm_life_tags": life,
             "checked": FETCHED,                                # 지도에서 데이터를 받은 날(확인한 날 아님 — 화면 '지도에서 받은 날')
-            "verified_by": None, "verified_at": None,          # 실제 확인(전화·방문) 기록 — 둘 다 있을 때만 화면 '확인함'. 지어내지 않음
+            "verified_status": None, "verified_by": None, "verified_at": None, "verified_source_url": None, "verified_marker": None,   # 실제 확인 기록 — by·at + 근거(url 또는 how: 전화·방문) 있을 때만 화면 '확인함'. 지어내지 않음
             "osm_check": t.get("check_date:opening_hours") or t.get("check_date") or None,   # OSM 기여자가 현장 확인한 날(있을 때만)
             "osm_edit": e["timestamp"][:10],                   # OSM 에서 마지막으로 고친 날
             "source": "OpenStreetMap", "source_url": "https://www.openstreetmap.org/%s/%d" % (typ, i),
             "korean": cat == "food" and "한식" in cz, "kr": "OSM 음식 종류: 한식" if "한식" in cz else None,
             "srcs": {"o": {"by": "OpenStreetMap", "url": "https://www.openstreetmap.org/%s/%d" % (typ, i), "at": FETCHED}},
-            "fsrc": {f: "o" for f, v in (("name", nm), ("hours", t.get("opening_hours")), ("phone", phone), ("address", addr), ("website", web), ("status", 1)) if v},
+            "fsrc": {f: "o" for f, v in (("name", nm), ("hours", t.get("opening_hours")), ("phone", phone), ("address", addr), ("website", web)) if v},
+            # 영업 상태 칸 출처: 예전엔 ("status", 1) 로 늘 붙였음(조사봇 원인 ②) → 지금은 위 폐업 태그 검사를 한 OSM 원본에만, 글도 '폐업 표시 검사'로(화면 fs 'status' 아님)
             "info_date": t.get("check_date:opening_hours") or t.get("check_date") or e["timestamp"][:10],   # 오래된 정보 기준 날: 현장 확인 날 > 마지막으로 고친 날
             "info_kind": "check" if (t.get("check_date:opening_hours") or t.get("check_date")) else "edit",
         })
@@ -184,6 +220,7 @@ def main():
     out = osm_cards(raw, json.load(open(PICK, encoding="utf-8")), "파타야")
     out += korean()
     for p in out: p["sub"] = sub_of(p)
+    apply_verify(out)
     import collections
     print("파타야 동네:", dict(collections.Counter(p["sub"] for p in out)))
     write("pattaya", raw, out)

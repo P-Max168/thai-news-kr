@@ -1,0 +1,479 @@
+{
+ "_readme": "조사봇 2차 검수(2026-10-05 06:31~06:53 BKK) 등급 — tools/places/parse_verify.py 가 보고서 표에서 그대로 옮김. 가게 이름으로 data 와 맞춤(56곳 모두 같은 이름). build_places.py 가 적용.",
+ "by_name": {
+  "Chibing chicken and Bingsu": {
+   "verified_status": "폐업 의심",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:32",
+   "verified_source_url": "https://www.google.com/maps/place/Chibing+Chicken+and+Bingsu+Pattaya/@12.9277773,100.8752156,17z/data=!3m1!4b1!4m6!3m5!1s0x31029743d2caa0cf:0xab564305a7fab71e!8m2!3d12.9277773!4d100.8752156!16s%2Fg%2F11t6ywb_zw",
+   "verified_marker": "Permanently closed",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "파타야 정읍식당 (Pattaya Jeongeup)": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:35",
+   "verified_source_url": "https://www.google.com/maps/place/%ED%8C%8C%ED%83%80%EC%95%BC+%EC%A0%95%EC%9D%8D%EC%8B%9D%EB%8B%B9+Pattaya+Jeongeup+Korean+Restaurant/@12.9459474,100.8896185,17z/data=!3m1!4b1!4m6!3m5!1s0x3102bdd9c8995247:0x38c11aaf9ca4427!8m2!3d12.9459474!4d100.8896185!16s%2Fg%2F11z80y_mn9",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 11 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "인연한국식당 (Inyon Korea Restaurant)": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:35",
+   "verified_source_url": "https://www.google.com/maps/place/Inyon+korea+restaurant+Pattaya+%EC%9D%B8%EC%97%B0%ED%95%9C%EA%B5%AD%EC%8B%9D%EB%8B%B9/@12.9339667,100.8950159,17z/data=!3m1!4b1!4m6!3m5!1s0x3102959cf7746699:0x8c5910a6739dd25f!8m2!3d12.9339667!4d100.8950159!16s%2Fg%2F11xnm_v6br",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 4:30 PM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "더부대 (The Bude)": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:35",
+   "verified_source_url": "https://www.google.com/maps/place/The+Bude+%EB%8D%94%EB%B6%80%EB%8C%80/@12.9454228,100.8897079,17z/data=!3m1!4b1!4m6!3m5!1s0x3102bd000a041edb:0xff82411126ad1f14!8m2!3d12.9454228!4d100.8897079!16s%2Fg%2F11yb7mdvc2",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 10 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "장군식당 2호점 (Janggun Restaurant 2)": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:35",
+   "verified_source_url": "https://www.google.com/maps/place/%EC%9E%A5%EA%B5%B0%EC%8B%9D%EB%8B%B9+2%ED%98%B8%EC%A0%90+janggun+restaurant+2/@12.9443349,100.8885719,17z/data=!3m1!4b1!4m6!3m5!1s0x310297c2e5f4614f:0xbb2d9344db37f127!8m2!3d12.9443349!4d100.8885719!16s%2Fg%2F11zc3q8ksx",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 8 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "JIBBAB Korean Restaurant": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:35",
+   "verified_source_url": "https://www.google.com/maps/place/JIBBAB+Korean+restaurant/@12.9493526,100.8936141,17z/data=!3m1!4b1!4m6!3m5!1s0x3102bf479bb02e6d:0xa068c448d62e6121!8m2!3d12.9493526!4d100.8936141!16s%2Fg%2F11v_8ffxpn",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 11 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "SEEU Korean Restaurant": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:35",
+   "verified_source_url": "https://www.google.com/maps/place/SEEU+(Korean+Restaurant",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 11 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Hanok Kbbq Pattaya": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:36",
+   "verified_source_url": "https://www.google.com/maps/place/Hanok+Kbbq+Pattaya/@12.938456,100.8838351,17z/data=!3m1!4b1!4m6!3m5!1s0x31029750af626889:0x25e29543e1ad7e69!8m2!3d12.938456!4d100.8838351!16s%2Fg%2F11w29m30b0",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 11:30 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Hanwoori Garden (한우리)": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:36",
+   "verified_source_url": "https://www.google.com/maps/place/Hanwoori+Garden/@12.9474883,100.898328,17z/data=!3m1!4b1!4m6!3m5!1s0x3102be03acf3a767:0xc95c0da228369f39!8m2!3d12.9474883!4d100.898328!16s%2Fg%2F11c1wx5v6y",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 11 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Gayarang Korean Restaurant": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:36",
+   "verified_source_url": "https://www.google.com/maps/place/Gayarang+Korean+restaurant/@12.8961639,100.9097146,17z/data=!3m1!4b1!4m6!3m5!1s0x3102bdfde4184539:0x9ea96d90c7eb9daa!8m2!3d12.8961639!4d100.9097146!16s%2Fg%2F1hm1z3bfs",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 11 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Firepork (Terminal 21 3층)": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:36",
+   "verified_source_url": "https://www.google.com/maps/place/Firepork+-+Terminal+21+3rd+Floor/@12.9499874,100.8893432,17z/data=!3m1!4b1!4m6!3m5!1s0x3102960e6aebe1ab:0x7d6a9a72c3d1b126!8m2!3d12.9499874!4d100.8893432!16s%2Fg%2F11f3n84yt5",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 11 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Hangme Korean B.B.Q.": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:36",
+   "verified_source_url": "https://www.google.com/maps/place/Hangme+Korean+B.B.Q./@12.9461574,100.8985458,17z/data=!3m1!4b1!4m6!3m5!1s0x3102be025ec9bbcf:0xd12f14f3d095d730!8m2!3d12.9461574!4d100.8985458!16s%2Fg%2F11bzpn33t6",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 10:30 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "위셀코리아마트(본점) & 분식좋아 (WESELL KOREA MART)": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:36",
+   "verified_source_url": "https://www.google.com/maps/place/WESELL+KOREA+MART+(+PATTAYA+",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 9 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "파타야 한인마트 수원k마트": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:37",
+   "verified_source_url": "https://www.google.com/maps/place/%ED%8C%8C%ED%83%80%EC%95%BC+%ED%95%9C%EC%9D%B8%EB%A7%88%ED%8A%B8+%EC%88%98%EC%9B%90k%EB%A7%88%ED%8A%B8/@12.9477591,100.8995887,17z/data=!3m1!4b1!4m6!3m5!1s0x3102bf7403296625:0xd6e901be93195cbe!8m2!3d12.9477591!4d100.8995887!16s%2Fg%2F11nhz95ds8",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 10 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "파타야 코리아타운 (Pattaya Korea Town)": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:37",
+   "verified_source_url": "https://www.google.com/maps/place/%ED%8C%8C%ED%83%80%EC%95%BC+%EC%BD%94%EB%A6%AC%EC%95%84%ED%83%80%EC%9A%B4+Pattaya+Korea+Town/@12.9477018,100.8993443,17z/data=!3m1!4b1!4m6!3m5!1s0x3102bf5dfd09c94d:0xa577526537e093d9!8m2!3d12.9477018!4d100.8993443!16s%2Fg%2F11tj0kjk1q",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 11:30 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "서울이발소 (Seoul Barbershop)": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:37",
+   "verified_source_url": "https://www.google.com/maps/place/%EC%84%9C%EC%9A%B8%EC%9D%B4%EB%B0%9C%EC%86%8C(Seoul+Barbershop",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 10 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "박군투어": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:37",
+   "verified_source_url": "https://www.google.com/maps/place/%EB%B0%95%EA%B5%B0%ED%88%AC%EC%96%B4/@12.9465754,100.8898475,17z/data=!3m1!4b1!4m6!3m5!1s0x3102bf2a299b6287:0x6bbee998271a8b4b!8m2!3d12.9465754!4d100.8898475!16s%2Fg%2F11h4cllskx",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 9 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "디디타이투어": {
+   "verified_status": "폐업 의심",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:37",
+   "verified_source_url": "https://www.google.com/maps/place/%EB%94%94%EB%94%94%ED%83%80%EC%9D%B4%ED%88%AC%EC%96%B4/@12.9310338,100.8817071,17z/data=!3m1!4b1!4m6!3m5!1s0x310297c68826c415:0xe44768495c60b8f8!8m2!3d12.9310338!4d100.8817071!16s%2Fg%2F11tfgfmcqr",
+   "verified_marker": "폐업·휴업 표시 없음 (Open 24 hours)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "남대문 여행사 (Numdaemoon Tour)": {
+   "verified_status": "폐업 의심",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:37",
+   "verified_source_url": "https://www.google.com/maps/place/%EB%82%A8%EB%8C%80%EB%AC%B8+%EC%97%AC%ED%96%89%EC%82%AC+Numdaemoon+Tour/@12.9447799,100.8902012,17z/data=!3m1!4b1!4m6!3m5!1s0x3102bdffff8e8697:0x476104c5c4c11cdb!8m2!3d12.9447799!4d100.8902012!16s%2Fg%2F11c749wq51",
+   "verified_marker": "폐업·휴업 표시 없음 (Open 24 hours)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "파타야가고파투어": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:37",
+   "verified_source_url": "https://www.google.com/maps/place/%ED%8C%8C%ED%83%80%EC%95%BC%EA%B0%80%EA%B3%A0%ED%8C%8C%ED%88%AC%EC%96%B4/@12.9463989,100.8967487,17z/data=!3m1!4b1!4m6!3m5!1s0x3102be1c84790159:0x8af4f07b690192c0!8m2!3d12.9463989!4d100.8967487!16s%2Fg%2F1hf35mn0r",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 10 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "BM컨설팅 파타야지점": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:38",
+   "verified_source_url": "https://www.google.com/maps/place/%ED%83%9C%EA%B5%AD%EB%B9%84%EC%9E%90+%EA%B2%B0%ED%98%BC%EB%B9%84%EC%9E%90+%EC%9D%80%ED%87%B4%EB%B9%84%EC%9E%90+BM%EC%BB%A8%EC%84%A4%ED%8C%85+%ED%8C%8C%ED%83%80%EC%95%BC%EC%A7%80%EC%A0%90/@12.939059,100.8939152,17z/data=!3m1!4b1!4m6!3m5!1s0x31029541da8763c9:0xf6e6bb3b312014b9!8m2!3d12.939059!4d100.8939152!16s%2Fg%2F11vbkhtjd2",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 9 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "ISUNG PATTAYA (Terminal 21)": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:38",
+   "verified_source_url": "https://www.google.com/maps/place/ISUNG+PATTAYA/@12.9499873,100.889337,17z/data=!3m1!4b1!4m6!3m5!1s0x3102bf4d2124e4a5:0x78790fde00a47a8!8m2!3d12.9499873!4d100.889337!16s%2Fg%2F11vd9s48mv",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 11 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "수북한 돼지국밥·기장미역국 (SooBukHan)": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:38",
+   "verified_source_url": "https://www.google.com/maps/place/SooBukHan+%EC%88%98%EB%B6%81%ED%95%9C+%EB%8F%BC%EC%A7%80%EA%B5%AD%EB%B0%A5%E2%96%AA%EF%B8%8E%EA%B8%B0%EC%9E%A5%EB%AF%B8%EC%97%AD%EA%B5%AD/@12.9454169,100.8895383,17z/data=!3m1!4b1!4m6!3m5!1s0x3102bd11ead264e9:0x35e0bdf487afdafb!8m2!3d12.9454169!4d100.8895383!16s%2Fg%2F11w9hl487j",
+   "verified_marker": "폐업·휴업 표시 없음 (Open 24 hours)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "유락파타야 (Yurak Pattaya)": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:38",
+   "verified_source_url": "https://www.google.com/maps/place/yurak+pattaya+%EC%9C%A0%EB%9D%BD%ED%8C%8C%ED%83%80%EC%95%BC/@12.9373502,100.8932692,17z/data=!3m1!4b1!4m6!3m5!1s0x310295f03929265d:0x3e6fdbd737ae6299!8m2!3d12.9373502!4d100.8932692!16s%2Fg%2F11bw7fq5br",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 11 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Seoul Garden Korean BBQ": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:38",
+   "verified_source_url": "https://www.google.com/maps/place/Seoul+Garden+Korean+BBQ/@12.9207966,100.9706043,17z/data=!3m1!4b1!4m6!3m5!1s0x31029783c18325f9:0xec35abb2fc7641a4!8m2!3d12.9207966!4d100.9706043!16s%2Fg%2F11n3pd8jq1",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 11 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Suwon Wang Galbi Pattaya (수원왕갈비)": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:38",
+   "verified_source_url": "https://www.google.com/maps/place/Suwon+Wang+Galbi+Pattaya+Korean+Restaurant/@12.9477565,100.8995828,17z/data=!3m1!4b1!4m6!3m5!1s0x3102bfb38aebcad5:0xd026f28dcae94b06!8m2!3d12.9477565!4d100.8995828!16s%2Fg%2F11tjzpnj6n",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 11:30 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Jidubang Korean Market (지두방)": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:39",
+   "verified_source_url": "https://www.google.com/maps/place/Jidubang+Korean+Market/@12.9350762,100.9011348,17z/data=!3m1!4b1!4m6!3m5!1s0x310295001e407d75:0x365c73d0cec6ceda!8m2!3d12.9350762!4d100.9011348!16s%2Fg%2F11vzcdgf31",
+   "verified_marker": "폐업·휴업 표시 없음",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "ICE FROST Dessert Cafe": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:33",
+   "verified_source_url": "https://www.google.com/maps/search/ICE%20FROST%20Dessert%20Cafe/@12.919298,100.89224,17z?hl=en",
+   "verified_marker": "같은 가게 특정 못 함(검색 결과 여러 곳)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Pattaya Veterinary Clinic": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:33",
+   "verified_source_url": "https://www.google.com/maps/place/Pattaya+Veterinary+Clinic/@12.957715,100.892117,17z/data=!4m6!3m5!1s0x3102be084212a017:0x3ddce1492bdb92b1!8m2!3d12.9576882!4d100.8921747!16s%2Fg%2F1wg5vf_t",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 9 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Happy Dog": {
+   "verified_status": "폐업 의심",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:34",
+   "verified_source_url": "https://www.google.com/maps/search/Happy%20Dog/@12.908314,100.903546,17z?hl=en",
+   "verified_marker": "이 좌표의 가게 못 찾음(한 번 찾기가 1072m 떨어진 다른 가게로 열림)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Pet Boutique Hotel": {
+   "verified_status": "폐업 의심",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:34",
+   "verified_source_url": "https://www.google.com/maps/search/Pet%20Boutique%20Hotel/@12.938079,100.926486,17z?hl=en",
+   "verified_marker": "이 좌표의 가게 못 찾음(한 번 찾기가 975m 떨어진 다른 가게로 열림)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "PRC Pitstop": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:39",
+   "verified_source_url": "https://www.google.com/maps/search/PRC%20Pitstop/@12.908978,100.885495,17z?hl=en",
+   "verified_marker": "이 좌표의 가게 못 찾음(한 번 찾기가 2948km 떨어진 다른 가게로 열림)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "I-Moto Pattaya": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:39",
+   "verified_source_url": "https://www.google.com/maps/place/iMoto+Pattaya/@12.967045,100.91012,17z/data=!4m6!3m5!1s0x3102be6ad594ca97:0xdc62a44b1809c3c5!8m2!3d12.9669691!4d100.9101474!16s%2Fg%2F11dxdzttmn",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 10 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Ninja BBQ Buffet Pattaya": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:32",
+   "verified_source_url": "https://www.google.com/maps/search/Ninja%20BBQ%20Buffet%20Pattaya/@12.944878,100.895869,17z?hl=en",
+   "verified_marker": "같은 가게 특정 못 함(검색 결과 여러 곳)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Pan Pan": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:32",
+   "verified_source_url": "https://www.google.com/maps/place/Pan+Pan+Italian+Restaurant/@12.9050672,100.8689639,17z/data=!3m1!4b1!4m6!3m5!1s0x31029660ba10780b:0xeacc1647157ec284!8m2!3d12.9050672!4d100.8689639!16s%2Fg%2F1tfskfxg",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 9 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Tsunami Sushi Buffet Chaiyapruek": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:32",
+   "verified_source_url": "https://www.google.com/maps/place/Tsunami+Sushi+Buffet+Chaiyapruek/@12.880848,100.897572,17z/data=!4m6!3m5!1s0x310294239a6ca357:0x182ed31b56be2f22!8m2!3d12.8808646!4d100.8976002!16s%2Fg%2F11cs6f8zw7",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 11:30 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Prego": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:32",
+   "verified_source_url": "https://www.google.com/maps/place/Prego+Pattaya+Pasta+Lab+%26+Bar/@12.949084,100.88486,17z/data=!4m6!3m5!1s0x3102bd8a566edc53:0xa265c883f83789fe!8m2!3d12.9490939!4d100.8848286!16s%2Fg%2F11tfnphk59",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 12 PM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Joy Enjoy Norwegian": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:32",
+   "verified_source_url": "https://www.google.com/maps/search/Joy%20Enjoy%20Norwegian/@12.901892,100.870271,17z?hl=en",
+   "verified_marker": "같은 가게 특정 못 함(검색 결과 여러 곳)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Jaena Pad Thai": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:32",
+   "verified_source_url": "https://www.google.com/maps/place/Jaena+Pad+Thai/@12.879626,100.892408,17z/data=!4m6!3m5!1s0x31029420f64e7277:0xbe823798efc36a3f!8m2!3d12.8796008!4d100.8924129!16s%2Fg%2F11b81xdmjl",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 8:30 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Trattoria Italiana": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:32",
+   "verified_source_url": "https://www.google.com/maps/search/Trattoria%20Italiana/@12.905378,100.869774,17z?hl=en",
+   "verified_marker": "같은 가게 특정 못 함(검색 결과 여러 곳)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "라 바게뜨": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:33",
+   "verified_source_url": "https://www.google.com/maps/place/La+Baguette+The+French+Bakery/@12.952108,100.888117,17z/data=!4m6!3m5!1s0x3102bdfdc826e99b:0x582de9e97396cd34!8m2!3d12.9520576!4d100.8880436!16s%2Fg%2F1tdkp7f3",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 8 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Starbucks Coffee": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:33",
+   "verified_source_url": "https://www.google.com/maps/search/Starbucks%20Coffee/@12.923956,100.878675,17z?hl=en",
+   "verified_marker": "같은 가게 특정 못 함(검색 결과 여러 곳)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "One Day Esthetic Art Cafe": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:33",
+   "verified_source_url": "https://www.google.com/maps/place/One+Day+Aesthetic+Art+Cafe/@12.945772,100.909349,17z/data=!4m6!3m5!1s0x3102bf089a89a077:0x9250935aaa84aa5c!8m2!3d12.9457101!4d100.9095571!16s%2Fg%2F11hhz7g3t3",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 9:30 AM Tue)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Camellia Matcha Space": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:33",
+   "verified_source_url": "https://www.google.com/maps/place/Camellia+Matcha+Space/@12.912385,100.925537,17z/data=!4m6!3m5!1s0x30e29f8cc1847155:0x9518e86c5790a4ba!8m2!3d12.9124415!4d100.9255839!16s%2Fg%2F11s6cd6rbq",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 10 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Toffee Cake Pattaya": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:33",
+   "verified_source_url": "https://www.google.com/maps/place/Toffee+Cake+Pattaya/@12.950983,100.897401,17z/data=!4m6!3m5!1s0x3102bf489c4193c7:0x7536adc542456625!8m2!3d12.9512179!4d100.8973628!16s%2Fg%2F11ndxqncgj",
+   "verified_marker": "폐업·휴업 표시 없음 (Opens soon)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Rungroj Veterinary": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:33",
+   "verified_source_url": "https://www.google.com/maps/place/%E0%B8%A3%E0%B8%B8%E0%B9%88%E0%B8%87%E0%B9%82%E0%B8%A3%E0%B8%88%E0%B8%99%E0%B9%8C%E0%B8%AA%E0%B8%B1%E0%B8%95%E0%B8%A7%E0%B9%81%E0%B8%9E%E0%B8%97%E0%B8%A2%E0%B9%8C+Rungroj+Veterinary/@12.949158,100.903851,17z/data=!4m6!3m5!1s0x3102be1c8ef8dd07:0xa81ba364d77293df!8m2!3d12.9491251!4d100.9038644!16s%2Fg%2F1tgby6g0",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 8 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Animal Hospital": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:33",
+   "verified_source_url": "https://www.google.com/maps/search/Animal%20Hospital/@12.879482,100.891887,17z?hl=en",
+   "verified_marker": "같은 가게 특정 못 함(검색 결과 여러 곳)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Take it Easy Bike and Car rental": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:34",
+   "verified_source_url": "https://www.google.com/maps/place/Take+it+Easy+Car+%26+Bike+Rental/@12.934683,100.886503,17z/data=!4m6!3m5!1s0x310296063a40ef7f:0x6bd6b03c071f58c5!8m2!3d12.9345806!4d100.8866159!16s%2Fg%2F12m94xbf9",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 9 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Pattaya Motorbike Rentals.": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:34",
+   "verified_source_url": "https://www.google.com/maps/search/Pattaya%20Motorbike%20Rentals./@12.920389,100.892944,17z?hl=en",
+   "verified_marker": "같은 가게 특정 못 함(검색 결과 여러 곳)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Speed Bike Pattaya Rental": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:34",
+   "verified_source_url": "https://www.google.com/maps/place/Speed+Bike+motorbikes+rental+Pattaya/@12.915957,100.876708,17z/data=!4m6!3m5!1s0x3102966e668eb3cd:0x83c3710f547f3761!8m2!3d12.915853!4d100.876657!16s%2Fg%2F11g6jr2xfg",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 9 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Mityon Pattaya": {
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:39",
+   "verified_source_url": "https://www.google.com/maps/search/Mityon%20Pattaya/@12.93377,100.89457,17z?hl=en",
+   "verified_marker": "같은 가게 특정 못 함(검색 결과 여러 곳)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "La Nitivadee Dermatology & Aesthetic Laser Center": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:39",
+   "verified_source_url": "https://www.google.com/maps/place/La+Nitivadee+Dermatology+%26+Aesthetic+Laser+Center/@12.932622,100.880416,17z/data=!4m6!3m5!1s0x31029590f9050637:0x4639aeff87a1f50b!8m2!3d12.9327235!4d100.8803343!16s%2Fg%2F1hc1dglgz",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 10 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Divine Beauty Pattaya": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:39",
+   "verified_source_url": "https://www.google.com/maps/place/Divine+Beauty+Pattaya+%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%95%E0%B9%88%E0%B8%AD%E0%B8%82%E0%B8%99%E0%B8%95%E0%B8%B2+%E0%B8%9E%E0%B8%B1%E0%B8%97%E0%B8%A2%E0%B8%B2/@12.908922,100.909628,17z/data=!4m6!3m5!1s0x310295e4ea93b40b:0x802b026275f71a24!8m2!3d12.9088778!4d100.9096261!16s%2Fg%2F11qbr8w_70",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 11 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Perfect Beauty Studio": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:39",
+   "verified_source_url": "https://www.google.com/maps/place/Perfect+Beauty+Studio+Phra+Tamnak+5+%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%97%E0%B8%B3%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%9A+%E0%B8%95%E0%B9%88%E0%B8%AD%E0%B8%82%E0%B8%99%E0%B8%95%E0%B8%B2/@12.91192,100.861402,17z/data=!4m6!3m5!1s0x3102972a697ebaff:0xcbdd61edf081ab0a!8m2!3d12.911955!4d100.8614419!16s%2Fg%2F11y4qgshj8",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 10 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Bake n' Brew": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:40",
+   "verified_source_url": "https://www.google.com/maps/place/Bake+n'+Brew/@12.929552,100.887452,17z/data=!4m6!3m5!1s0x310296090a8a1053:0xe1edf20905b8fd1b!8m2!3d12.9295563!4d100.8874284!16s%2Fg%2F1hm382qqj",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 8 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  "Sheeva Cafe Pattaya": {
+   "verified_status": "영업 확인",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:40",
+   "verified_source_url": "https://www.google.com/maps/place/Sheeva+Cafe/@12.917915,100.898162,17z/data=!4m6!3m5!1s0x310295dc5b3a3f1d:0x51e6958d7cb959ab!8m2!3d12.9178728!4d100.8981846!16s%2Fg%2F11fk4v7tp3",
+   "verified_marker": "폐업·휴업 표시 없음 (Closed · Opens 9 AM)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  }
+ },
+ "readd": [
+  {
+   "cat": "mart",
+   "cid": "12640387334293026116",
+   "name": "NewKoreaMart",
+   "kind": "한인 마트",
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:30",
+   "verified_source_url": "https://maps.google.com/?cid=12640387334293026116",
+   "verified_marker": "그 가게 쪽(cid)에 폐업 표시 없음(1차의 '폐업'은 검색 결과 목록에서 잘못 읽은 것으로 추정)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  },
+  {
+   "cat": "food",
+   "cid": "433464209049918173",
+   "name": "Jin Sung Korean Restaurant",
+   "kind": "한식당",
+   "verified_status": "확인 불가",
+   "verified_by": "조사봇(2차 검수)",
+   "verified_at": "2026-10-05 06:30",
+   "verified_source_url": "https://maps.google.com/?cid=433464209049918173",
+   "verified_marker": "그 가게 쪽(cid)에 폐업 표시 없음(1차의 '폐업'은 검색 결과 목록에서 잘못 읽은 것으로 추정)",
+   "verified_report": "업소검증_파타야_2026-10-05.md"
+  }
+ ]
+}

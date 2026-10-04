@@ -29,9 +29,14 @@
    "price_thb": null,
    "vat_extra": null,
    "status": "지도에 폐업 표시 없음(현장 확인 아님)",
+   "status_code": "unknown",
+   "osm_life_tags": [],
    "checked": "2026-10-03",
+   "verified_status": null,
    "verified_by": null,
    "verified_at": null,
+   "verified_source_url": null,
+   "verified_marker": null,
    "osm_check": null,
    "osm_edit": "2019-08-28",
    "source": "OpenStreetMap",
@@ -46,8 +51,7 @@
     }
    },
    "fsrc": {
-    "name": "o",
-    "status": "o"
+    "name": "o"
    },
    "info_date": "2019-08-28",
    "info_kind": "edit",
@@ -72,9 +76,14 @@
    "price_thb": null,
    "vat_extra": null,
    "status": "지도에 폐업 표시 없음(현장 확인 아님)",
+   "status_code": "unknown",
+   "osm_life_tags": [],
    "checked": "2026-10-03",
+   "verified_status": null,
    "verified_by": null,
    "verified_at": null,
+   "verified_source_url": null,
+   "verified_marker": null,
    "osm_check": null,
    "osm_edit": "2023-10-14",
    "source": "OpenStreetMap",
@@ -91,8 +100,7 @@
    "fsrc": {
     "name": "o",
     "hours": "o",
-    "phone": "o",
-    "status": "o"
+    "phone": "o"
    },
    "info_date": "2023-10-14",
    "info_kind": "edit",
