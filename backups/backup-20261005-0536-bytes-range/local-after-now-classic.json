@@ -1,0 +1,968 @@
+[
+ {
+  "window_ms": 5656,
+  "load_ms": 3139,
+  "nav": 19876,
+  "res": [
+   {
+    "u": "http://localhost:8765/data/index.js",
+    "b": 2606,
+    "end": 382,
+    "st": 190
+   },
+   {
+    "u": "http://localhost:8765/assets/style.css?v=aae32522",
+    "b": 76152,
+    "end": 1740,
+    "st": 191
+   },
+   {
+    "u": "http://localhost:8765/assets/nearby.css?v=411a136f",
+    "b": 3972,
+    "end": 427,
+    "st": 198
+   },
+   {
+    "u": "http://localhost:8765/assets/ads/massage/dragon-ad.css?v=c79f816c",
+    "b": 23270,
+    "end": 878,
+    "st": 198
+   },
+   {
+    "u": "http://localhost:8765/data/ads.js",
+    "b": 9421,
+    "end": 630,
+    "st": 240
+   },
+   {
+    "u": "http://localhost:8765/assets/ads/massage/dragon-ad.js?v=286d1e52",
+    "b": 11120,
+    "end": 682,
+    "st": 240
+   },
+   {
+    "u": "http://localhost:8765/assets/topics.js?v=3e951135",
+    "b": 15491,
+    "end": 915,
+    "st": 240
+   },
+   {
+    "u": "http://localhost:8765/assets/prefs.js?v=280ab29a",
+    "b": 9470,
+    "end": 832,
+    "st": 241
+   },
+   {
+    "u": "http://localhost:8765/assets/taste.js?v=788775b8",
+    "b": 9658,
+    "end": 982,
+    "st": 241
+   },
+   {
+    "u": "http://localhost:8765/assets/adsafe.js?v=f83c8d3e",
+    "b": 6010,
+    "end": 959,
+    "st": 241
+   },
+   {
+    "u": "http://localhost:8765/assets/app.js?v=c3d4d24f",
+    "b": 84341,
+    "end": 2130,
+    "st": 241
+   },
+   {
+    "u": "http://localhost:8765/assets/ticker.js?v=8a30ddcf",
+    "b": 26251,
+    "end": 1551,
+    "st": 247
+   },
+   {
+    "u": "http://localhost:8765/assets/social.js?v=2b5b4ab6",
+    "b": 37856,
+    "end": 2294,
+    "st": 247
+   },
+   {
+    "u": "http://localhost:8765/assets/nearby.js?v=89ea569d",
+    "b": 22819,
+    "end": 2212,
+    "st": 248
+   },
+   {
+    "u": "http://localhost:8765/data/2026-10-04-pm.js",
+    "b": 41401,
+    "end": 1799,
+    "st": 389
+   },
+   {
+    "u": "http://localhost:8765/data/korea.json?_=1791153045450",
+    "b": 4570,
+    "end": 2377,
+    "st": 2185
+   },
+   {
+    "u": "http://localhost:8765/data/issues.json?_=2985255",
+    "b": 29008,
+    "end": 2520,
+    "st": 2186
+   },
+   {
+    "u": "http://localhost:8765/data/ticker.json?_=1791153045476",
+    "b": 2813,
+    "end": 2392,
+    "st": 2203
+   },
+   {
+    "u": "https://api.open-meteo.com/v1/forecast?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=temperature_2m,weather_code,is_day&hourly=precipitation_probability&forecast_hours=6",
+    "b": 0,
+    "end": 2932,
+    "st": 2204
+   },
+   {
+    "u": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=pm2_5",
+    "b": 0,
+    "end": 2850,
+    "st": 2204
+   },
+   {
+    "u": "http://localhost:8765/assets/ads/massage/dragon.svg",
+    "b": 86252,
+    "end": 3960,
+    "st": 3086
+   },
+   {
+    "u": "http://localhost:8765/assets/late.css?v=ac98db6c",
+    "b": 20278,
+    "end": 3644,
+    "st": 3182
+   },
+   {
+    "u": "http://localhost:8765/assets/pages.js?v=33fd59c3",
+    "b": 33719,
+    "end": 3787,
+    "st": 3183
+   },
+   {
+    "u": "http://localhost:8765/assets/icons/favicon-32.png",
+    "b": 905,
+    "end": 3442,
+    "st": 3263
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css",
+    "b": 0,
+    "end": 3482,
+    "st": 3440
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.91.woff2",
+    "b": 0,
+    "end": 3557,
+    "st": 3532
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.90.woff2",
+    "b": 0,
+    "end": 3550,
+    "st": 3533
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.89.woff2",
+    "b": 0,
+    "end": 3558,
+    "st": 3533
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.87.woff2",
+    "b": 0,
+    "end": 3561,
+    "st": 3534
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.82.woff2",
+    "b": 0,
+    "end": 3586,
+    "st": 3571
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.88.woff2",
+    "b": 0,
+    "end": 3589,
+    "st": 3574
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.85.woff2",
+    "b": 0,
+    "end": 3588,
+    "st": 3575
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.86.woff2",
+    "b": 0,
+    "end": 3622,
+    "st": 3604
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.79.woff2",
+    "b": 0,
+    "end": 3705,
+    "st": 3687
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.83.woff2",
+    "b": 0,
+    "end": 3714,
+    "st": 3696
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.84.woff2",
+    "b": 0,
+    "end": 3739,
+    "st": 3726
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.81.woff2",
+    "b": 0,
+    "end": 3752,
+    "st": 3734
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.80.woff2",
+    "b": 0,
+    "end": 3768,
+    "st": 3752
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.71.woff2",
+    "b": 0,
+    "end": 3771,
+    "st": 3754
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.78.woff2",
+    "b": 0,
+    "end": 3796,
+    "st": 3782
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.75.woff2",
+    "b": 0,
+    "end": 3800,
+    "st": 3783
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.60.woff2",
+    "b": 0,
+    "end": 3802,
+    "st": 3788
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.76.woff2",
+    "b": 0,
+    "end": 3819,
+    "st": 3801
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.25.woff2",
+    "b": 0,
+    "end": 3820,
+    "st": 3807
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.77.woff2",
+    "b": 0,
+    "end": 3860,
+    "st": 3841
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.26.woff2",
+    "b": 0,
+    "end": 3958,
+    "st": 3941
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.72.woff2",
+    "b": 0,
+    "end": 3960,
+    "st": 3946
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.16.woff2",
+    "b": 0,
+    "end": 3961,
+    "st": 3948
+   },
+   {
+    "u": "http://localhost:8765/assets/places.js?v=494783b6",
+    "b": 0,
+    "end": 4649,
+    "st": 4647
+   },
+   {
+    "u": "http://localhost:8765/assets/fb.js?v=05834eb7",
+    "b": 0,
+    "end": 7147,
+    "st": 7143
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js",
+    "b": 0,
+    "end": 7717,
+    "st": 7151
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js",
+    "b": 0,
+    "end": 8092,
+    "st": 7725
+   }
+  ],
+  "inwin_bytes": 577259,
+  "all_bytes": 577259,
+  "chars": 574
+ },
+ {
+  "window_ms": 5448,
+  "load_ms": 2936,
+  "nav": 19876,
+  "res": [
+   {
+    "u": "http://localhost:8765/data/index.js",
+    "b": 2606,
+    "end": 351,
+    "st": 188
+   },
+   {
+    "u": "http://localhost:8765/assets/style.css?v=aae32522",
+    "b": 76152,
+    "end": 1769,
+    "st": 195
+   },
+   {
+    "u": "http://localhost:8765/assets/nearby.css?v=411a136f",
+    "b": 3972,
+    "end": 403,
+    "st": 195
+   },
+   {
+    "u": "http://localhost:8765/assets/ads/massage/dragon-ad.css?v=c79f816c",
+    "b": 23270,
+    "end": 869,
+    "st": 195
+   },
+   {
+    "u": "http://localhost:8765/data/ads.js",
+    "b": 9421,
+    "end": 636,
+    "st": 246
+   },
+   {
+    "u": "http://localhost:8765/assets/ads/massage/dragon-ad.js?v=286d1e52",
+    "b": 11120,
+    "end": 689,
+    "st": 246
+   },
+   {
+    "u": "http://localhost:8765/assets/topics.js?v=3e951135",
+    "b": 15491,
+    "end": 898,
+    "st": 246
+   },
+   {
+    "u": "http://localhost:8765/assets/prefs.js?v=280ab29a",
+    "b": 9470,
+    "end": 808,
+    "st": 246
+   },
+   {
+    "u": "http://localhost:8765/assets/taste.js?v=788775b8",
+    "b": 9658,
+    "end": 988,
+    "st": 248
+   },
+   {
+    "u": "http://localhost:8765/assets/adsafe.js?v=f83c8d3e",
+    "b": 6010,
+    "end": 951,
+    "st": 248
+   },
+   {
+    "u": "http://localhost:8765/assets/ticker.js?v=8a30ddcf",
+    "b": 26251,
+    "end": 1543,
+    "st": 248
+   },
+   {
+    "u": "http://localhost:8765/assets/app.js?v=c3d4d24f",
+    "b": 84341,
+    "end": 2069,
+    "st": 248
+   },
+   {
+    "u": "http://localhost:8765/assets/social.js?v=2b5b4ab6",
+    "b": 37856,
+    "end": 2293,
+    "st": 249
+   },
+   {
+    "u": "http://localhost:8765/assets/nearby.js?v=89ea569d",
+    "b": 22819,
+    "end": 2218,
+    "st": 254
+   },
+   {
+    "u": "http://localhost:8765/data/2026-10-04-pm.js",
+    "b": 41401,
+    "end": 1790,
+    "st": 358
+   },
+   {
+    "u": "http://localhost:8765/data/korea.json?_=1791153056196",
+    "b": 4570,
+    "end": 2339,
+    "st": 2145
+   },
+   {
+    "u": "http://localhost:8765/data/issues.json?_=2985255",
+    "b": 29008,
+    "end": 2481,
+    "st": 2146
+   },
+   {
+    "u": "http://localhost:8765/data/ticker.json?_=1791153056220",
+    "b": 2813,
+    "end": 2353,
+    "st": 2159
+   },
+   {
+    "u": "https://api.open-meteo.com/v1/forecast?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=temperature_2m,weather_code,is_day&hourly=precipitation_probability&forecast_hours=6",
+    "b": 0,
+    "end": 2841,
+    "st": 2159
+   },
+   {
+    "u": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=pm2_5",
+    "b": 0,
+    "end": 2804,
+    "st": 2159
+   },
+   {
+    "u": "http://localhost:8765/assets/ads/massage/dragon.svg",
+    "b": 86252,
+    "end": 3748,
+    "st": 2879
+   },
+   {
+    "u": "http://localhost:8765/assets/late.css?v=ac98db6c",
+    "b": 20278,
+    "end": 3448,
+    "st": 2986
+   },
+   {
+    "u": "http://localhost:8765/assets/pages.js?v=33fd59c3",
+    "b": 33719,
+    "end": 3591,
+    "st": 2987
+   },
+   {
+    "u": "http://localhost:8765/assets/icons/favicon-32.png",
+    "b": 905,
+    "end": 3238,
+    "st": 3059
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css",
+    "b": 0,
+    "end": 3281,
+    "st": 3238
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.91.woff2",
+    "b": 0,
+    "end": 3338,
+    "st": 3317
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.90.woff2",
+    "b": 0,
+    "end": 3342,
+    "st": 3318
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.89.woff2",
+    "b": 0,
+    "end": 3346,
+    "st": 3318
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.87.woff2",
+    "b": 0,
+    "end": 3347,
+    "st": 3318
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.82.woff2",
+    "b": 0,
+    "end": 3355,
+    "st": 3341
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.88.woff2",
+    "b": 0,
+    "end": 3356,
+    "st": 3344
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.85.woff2",
+    "b": 0,
+    "end": 3360,
+    "st": 3344
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.86.woff2",
+    "b": 0,
+    "end": 3387,
+    "st": 3369
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.79.woff2",
+    "b": 0,
+    "end": 3454,
+    "st": 3436
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.83.woff2",
+    "b": 0,
+    "end": 3455,
+    "st": 3442
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.84.woff2",
+    "b": 0,
+    "end": 3481,
+    "st": 3463
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.81.woff2",
+    "b": 0,
+    "end": 3490,
+    "st": 3472
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.80.woff2",
+    "b": 0,
+    "end": 3505,
+    "st": 3490
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.71.woff2",
+    "b": 0,
+    "end": 3512,
+    "st": 3492
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.78.woff2",
+    "b": 0,
+    "end": 3532,
+    "st": 3518
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.75.woff2",
+    "b": 0,
+    "end": 3535,
+    "st": 3519
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.60.woff2",
+    "b": 0,
+    "end": 3548,
+    "st": 3529
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.76.woff2",
+    "b": 0,
+    "end": 3565,
+    "st": 3549
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.25.woff2",
+    "b": 0,
+    "end": 3567,
+    "st": 3552
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.77.woff2",
+    "b": 0,
+    "end": 3617,
+    "st": 3598
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.26.woff2",
+    "b": 0,
+    "end": 3702,
+    "st": 3687
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.72.woff2",
+    "b": 0,
+    "end": 3704,
+    "st": 3690
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.16.woff2",
+    "b": 0,
+    "end": 3706,
+    "st": 3692
+   },
+   {
+    "u": "http://localhost:8765/assets/places.js?v=494783b6",
+    "b": 0,
+    "end": 4294,
+    "st": 4292
+   },
+   {
+    "u": "http://localhost:8765/assets/fb.js?v=05834eb7",
+    "b": 0,
+    "end": 6944,
+    "st": 6940
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js",
+    "b": 0,
+    "end": 7453,
+    "st": 6948
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js",
+    "b": 0,
+    "end": 7828,
+    "st": 7460
+   }
+  ],
+  "inwin_bytes": 577259,
+  "all_bytes": 577259,
+  "chars": 574
+ },
+ {
+  "window_ms": 5431,
+  "load_ms": 2919,
+  "nav": 19876,
+  "res": [
+   {
+    "u": "http://localhost:8765/data/index.js",
+    "b": 2606,
+    "end": 353,
+    "st": 188
+   },
+   {
+    "u": "http://localhost:8765/assets/style.css?v=aae32522",
+    "b": 76152,
+    "end": 1755,
+    "st": 196
+   },
+   {
+    "u": "http://localhost:8765/assets/nearby.css?v=411a136f",
+    "b": 3972,
+    "end": 405,
+    "st": 196
+   },
+   {
+    "u": "http://localhost:8765/assets/ads/massage/dragon-ad.css?v=c79f816c",
+    "b": 23270,
+    "end": 871,
+    "st": 196
+   },
+   {
+    "u": "http://localhost:8765/data/ads.js",
+    "b": 9421,
+    "end": 638,
+    "st": 250
+   },
+   {
+    "u": "http://localhost:8765/assets/ads/massage/dragon-ad.js?v=286d1e52",
+    "b": 11120,
+    "end": 691,
+    "st": 250
+   },
+   {
+    "u": "http://localhost:8765/assets/topics.js?v=3e951135",
+    "b": 15491,
+    "end": 901,
+    "st": 250
+   },
+   {
+    "u": "http://localhost:8765/assets/prefs.js?v=280ab29a",
+    "b": 9470,
+    "end": 811,
+    "st": 251
+   },
+   {
+    "u": "http://localhost:8765/assets/taste.js?v=788775b8",
+    "b": 9658,
+    "end": 991,
+    "st": 251
+   },
+   {
+    "u": "http://localhost:8765/assets/adsafe.js?v=f83c8d3e",
+    "b": 6010,
+    "end": 953,
+    "st": 251
+   },
+   {
+    "u": "http://localhost:8765/assets/ticker.js?v=8a30ddcf",
+    "b": 26251,
+    "end": 1546,
+    "st": 251
+   },
+   {
+    "u": "http://localhost:8765/assets/app.js?v=c3d4d24f",
+    "b": 84341,
+    "end": 2100,
+    "st": 251
+   },
+   {
+    "u": "http://localhost:8765/assets/social.js?v=2b5b4ab6",
+    "b": 37856,
+    "end": 2326,
+    "st": 251
+   },
+   {
+    "u": "http://localhost:8765/assets/nearby.js?v=89ea569d",
+    "b": 22819,
+    "end": 2220,
+    "st": 256
+   },
+   {
+    "u": "http://localhost:8765/data/2026-10-04-pm.js",
+    "b": 41401,
+    "end": 1793,
+    "st": 362
+   },
+   {
+    "u": "http://localhost:8765/data/korea.json?_=1791153066763",
+    "b": 4570,
+    "end": 2333,
+    "st": 2126
+   },
+   {
+    "u": "http://localhost:8765/data/issues.json?_=2985255",
+    "b": 29008,
+    "end": 2468,
+    "st": 2127
+   },
+   {
+    "u": "http://localhost:8765/assets/ads/massage/dragon.svg",
+    "b": 86252,
+    "end": 3773,
+    "st": 2871
+   },
+   {
+    "u": "http://localhost:8765/data/ticker.json?_=1791153067526",
+    "b": 2813,
+    "end": 3060,
+    "st": 2881
+   },
+   {
+    "u": "https://api.open-meteo.com/v1/forecast?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=temperature_2m,weather_code,is_day&hourly=precipitation_probability&forecast_hours=6",
+    "b": 0,
+    "end": 3563,
+    "st": 2882
+   },
+   {
+    "u": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=pm2_5",
+    "b": 0,
+    "end": 3510,
+    "st": 2882
+   },
+   {
+    "u": "http://localhost:8765/assets/late.css?v=ac98db6c",
+    "b": 20278,
+    "end": 3398,
+    "st": 2927
+   },
+   {
+    "u": "http://localhost:8765/assets/pages.js?v=33fd59c3",
+    "b": 33719,
+    "end": 3541,
+    "st": 2927
+   },
+   {
+    "u": "http://localhost:8765/assets/icons/favicon-32.png",
+    "b": 905,
+    "end": 3158,
+    "st": 2983
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css",
+    "b": 0,
+    "end": 3266,
+    "st": 3219
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.91.woff2",
+    "b": 0,
+    "end": 3325,
+    "st": 3302
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.90.woff2",
+    "b": 0,
+    "end": 3328,
+    "st": 3303
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.89.woff2",
+    "b": 0,
+    "end": 3331,
+    "st": 3303
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.87.woff2",
+    "b": 0,
+    "end": 3333,
+    "st": 3303
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.82.woff2",
+    "b": 0,
+    "end": 3341,
+    "st": 3326
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.88.woff2",
+    "b": 0,
+    "end": 3343,
+    "st": 3328
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.85.woff2",
+    "b": 0,
+    "end": 3346,
+    "st": 3328
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.86.woff2",
+    "b": 0,
+    "end": 3377,
+    "st": 3354
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.79.woff2",
+    "b": 0,
+    "end": 3448,
+    "st": 3429
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.83.woff2",
+    "b": 0,
+    "end": 3458,
+    "st": 3439
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.84.woff2",
+    "b": 0,
+    "end": 3479,
+    "st": 3459
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.81.woff2",
+    "b": 0,
+    "end": 3486,
+    "st": 3467
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.80.woff2",
+    "b": 0,
+    "end": 3501,
+    "st": 3485
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.71.woff2",
+    "b": 0,
+    "end": 3505,
+    "st": 3487
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.78.woff2",
+    "b": 0,
+    "end": 3529,
+    "st": 3515
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.75.woff2",
+    "b": 0,
+    "end": 3533,
+    "st": 3516
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.60.woff2",
+    "b": 0,
+    "end": 3541,
+    "st": 3522
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.76.woff2",
+    "b": 0,
+    "end": 3560,
+    "st": 3542
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.25.woff2",
+    "b": 0,
+    "end": 3561,
+    "st": 3545
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.77.woff2",
+    "b": 0,
+    "end": 3601,
+    "st": 3582
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.26.woff2",
+    "b": 0,
+    "end": 3702,
+    "st": 3682
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.72.woff2",
+    "b": 0,
+    "end": 3704,
+    "st": 3687
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.16.woff2",
+    "b": 0,
+    "end": 3708,
+    "st": 3688
+   },
+   {
+    "u": "http://localhost:8765/assets/places.js?v=494783b6",
+    "b": 0,
+    "end": 4305,
+    "st": 4302
+   },
+   {
+    "u": "http://localhost:8765/assets/fb.js?v=05834eb7",
+    "b": 0,
+    "end": 6926,
+    "st": 6922
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js",
+    "b": 0,
+    "end": 7477,
+    "st": 6930
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js",
+    "b": 0,
+    "end": 7853,
+    "st": 7484
+   }
+  ],
+  "inwin_bytes": 577259,
+  "all_bytes": 577259,
+  "chars": 574
+ }
+]

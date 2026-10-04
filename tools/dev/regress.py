@@ -113,6 +113,20 @@ async def main():
                     opened = await pq.evaluate("()=>{const b=document.querySelector('.dq-line'); return !!b && b.getAttribute('aria-expanded')==='true' && b.closest('.talk').classList.contains('is-open');}")
                 except Exception as ex: opened = "클릭 실패: %s" % str(ex)[:80]
             rec(shown > 0 and dq2 == shown and opened is True, "💬 승인된 질문 그리기 기능(가장 최근 승인 판) — 승인 기사 카드마다 질문 줄 + 펼치기", "판 %s 승인 %d · 화면 승인 카드 %d · 질문 줄 %d · 펼침 %s" % (info["ok"], len(info["okIds"]), shown, dq2, opened))
+            # 2026-10-05(Max 05:23 ②): 승인된 질문 기사는 모두 '허용된 자리'에 있어야 함 — ① 피드 카드 ② 주요 뉴스 TOP 카드(highlights, 피드에서 일부러 뺌 '주요 뉴스 제외') ③ 내 주제 밖 기사 = 그 주제 탭.
+            #  ②③ 은 눌렀을 때(TOP 카드 data-open → openStory = 주 주제 탭으로 옮겨 카드 펼침) 질문 줄이 보여야 함. 어디에도 없으면 실패
+            pl = await pq.evaluate("""ids=>{const feed=[...document.querySelectorAll('#feed .card')].map(c=>c.id), top=[...document.querySelectorAll('#topGrid [data-open]')].map(c=>c.getAttribute('data-open'));
+                return {feed: ids.filter(i=>feed.includes(i)), top: ids.filter(i=>!feed.includes(i)&&top.includes(i)), other: ids.filter(i=>!feed.includes(i)&&!top.includes(i))}}""", info["okIds"])
+            reach = {}
+            for sid in pl["top"] + pl["other"]:
+                await pq.goto(URL + ("&" if "?" in URL else "?") + "e=" + info["ok"] + "&_=" + str(int(time.time())), wait_until="load"); await pq.wait_for_timeout(1500)
+                if sid in pl["top"]: await pq.click('#topGrid [data-open="%s"]' % sid)
+                else: await pq.evaluate("id=>TNApp.openStory(id)", sid)
+                await pq.wait_for_timeout(900)
+                reach[sid] = await pq.evaluate("id=>{const c=document.getElementById(id), b=c&&c.querySelector('.dq-line'); return !!(c&&c.classList.contains('is-open')&&b&&b.offsetParent!==null)}", sid)
+            okpl = len(pl["feed"]) + len(reach) == len(info["okIds"]) and all(reach.values())
+            rec(okpl, "💬 승인된 질문 기사는 모두 허용된 자리에 있음(피드 카드 · 주요 뉴스 TOP 카드 · 내 주제 밖 = 주제 탭) — TOP·주제 탭 기사는 누르면 카드 펼침 + 질문 줄 보임",
+                "판 %s 승인 %d = 피드 %d + TOP %s + 주제 탭 %s · 눌러서 질문 보임 %s" % (info["ok"], len(info["okIds"]), len(pl["feed"]), pl["top"], pl["other"], reach))
             await pq.close()
         else:
             rec(False, "💬 승인된 질문 그리기 기능 — 승인된 질문이 있는 판을 못 찾음", info)
@@ -476,6 +490,22 @@ async def main():
             await c3.close()
         except Exception as e:
             rec(False, "광고 클릭 수 꺼짐 점검 실행 실패", str(e)[:160])
+        # 2026-10-05(Max 05:23 ③): 받은 양 정상 범위. 클래식 197KB(04:23)→241KB(05:19)는 코드 변화가 아니라 글꼴 조각(Pretendard unicode-range,
+        #  화면 글자에 따라 받는 조각)이 perf.py 창(load 뒤 2.5초) 끝에 걸렸다 안 걸렸다 한 것(글꼴 제외는 5회 모두 199KB). → 비교는 '글꼴 제외'로:
+        #  글꼴 제외 150~240KB = 통과(10-05 05:3x 라이브: 클래식 199·모던 215KB, +약 10~20% 여유) / 글꼴 조각은 글자 따라 달라서 실패로 안 봄(1,000KB 넘으면 참고)
+        try:
+            c4 = await b.new_context(viewport={"width": 390, "height": 844}); await guard(c4); p4 = await c4.new_page()
+            await p4.goto(URL + ("&" if "?" in URL else "?") + "_=" + str(int(time.time())), wait_until="load"); await p4.wait_for_timeout(4000)
+            bb = await p4.evaluate("""()=>{const n=performance.getEntriesByType('navigation')[0], rs=performance.getEntriesByType('resource'), isF=r=>/pretendard/i.test(r.name)&&/[.]woff2?/.test(r.name);
+                return {nf: rs.filter(r=>!isF(r)).reduce((a,r)=>a+(r.transferSize||0), n.transferSize||0), f: rs.filter(isF).reduce((a,r)=>a+(r.transferSize||0),0), fn: rs.filter(r=>isF(r)&&r.transferSize>0).length}}""")
+            nfk, fk = round(bb["nf"] / 1024), round(bb["f"] / 1024)
+            okb = 150 <= nfk <= 240
+            if "github.io" not in URL: okb = None   # 로컬 서버(python http.server)는 압축 안 함 → 범위는 라이브(GitHub Pages, gzip) 기준이라 참고만
+            rec(okb if (okb is not True or fk <= 1000) else None, "받은 양 정상 범위 — 글꼴 제외 150~240KB(글꼴 조각은 화면 글자 따라 달라서 따로 표시, 1,000KB 넘으면 참고)",
+                {"글꼴 제외KB": nfk, "글꼴 조각": "%d개 %dKB" % (bb["fn"], fk)})
+            await c4.close()
+        except Exception as e:
+            rec(False, "받은 양 점검 실행 실패", str(e)[:160])
         rec(FS["blocked"] == 0 or None, "자동 점검이 실서버(Firestore)에 반응·신고를 안 씀(이 기기 스위치 끔 + 쓰기 요청 차단)", "막은 쓰기 요청 %d개" % FS["blocked"])
         await b.close()
     if OUT: pathlib.Path(OUT).write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")

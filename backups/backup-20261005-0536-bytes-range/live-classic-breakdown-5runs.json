@@ -1,0 +1,1612 @@
+[
+ {
+  "window_ms": 4873,
+  "load_ms": 2358,
+  "nav": 7885,
+  "res": [
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/index.js",
+    "b": 746,
+    "end": 522,
+    "st": 365
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/style.css?v=aae32522",
+    "b": 19230,
+    "end": 1031,
+    "st": 366
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/nearby.css?v=411a136f",
+    "b": 2000,
+    "end": 626,
+    "st": 367
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon-ad.css?v=c79f816c",
+    "b": 6740,
+    "end": 821,
+    "st": 367
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/ads.js",
+    "b": 2195,
+    "end": 641,
+    "st": 375
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon-ad.js?v=286d1e52",
+    "b": 4921,
+    "end": 776,
+    "st": 376
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/topics.js?v=3e951135",
+    "b": 6380,
+    "end": 836,
+    "st": 376
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/prefs.js?v=280ab29a",
+    "b": 3970,
+    "end": 739,
+    "st": 376
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/taste.js?v=788775b8",
+    "b": 4072,
+    "end": 731,
+    "st": 377
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/adsafe.js?v=f83c8d3e",
+    "b": 2821,
+    "end": 671,
+    "st": 377
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/app.js?v=c3d4d24f",
+    "b": 27211,
+    "end": 1091,
+    "st": 377
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ticker.js?v=8a30ddcf",
+    "b": 10041,
+    "end": 896,
+    "st": 377
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/social.js?v=2b5b4ab6",
+    "b": 13190,
+    "end": 1300,
+    "st": 377
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/nearby.js?v=89ea569d",
+    "b": 8339,
+    "end": 1278,
+    "st": 377
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/2026-10-04-pm.js",
+    "b": 16095,
+    "end": 1039,
+    "st": 531
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/korea.json?_=1791152927240",
+    "b": 2677,
+    "end": 1684,
+    "st": 1512
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/issues.json?_=2985254",
+    "b": 7516,
+    "end": 1714,
+    "st": 1514
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon.svg",
+    "b": 17409,
+    "end": 2621,
+    "st": 2310
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/ticker.json?_=1791152928061",
+    "b": 1310,
+    "end": 2487,
+    "st": 2326
+   },
+   {
+    "u": "https://api.open-meteo.com/v1/forecast?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=temperature_2m,weather_code,is_day&hourly=precipitation_probability&forecast_hours=6",
+    "b": 0,
+    "end": 3049,
+    "st": 2327
+   },
+   {
+    "u": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=pm2_5",
+    "b": 0,
+    "end": 2981,
+    "st": 2328
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/late.css?v=ac98db6c",
+    "b": 5736,
+    "end": 2606,
+    "st": 2367
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/pages.js?v=33fd59c3",
+    "b": 11705,
+    "end": 2651,
+    "st": 2368
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/icons/favicon-32.png",
+    "b": 905,
+    "end": 2591,
+    "st": 2414
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css",
+    "b": 12793,
+    "end": 3070,
+    "st": 2666
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/places.js?v=494783b6",
+    "b": 8444,
+    "end": 2861,
+    "st": 2668
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.90.woff2",
+    "b": 21152,
+    "end": 4954,
+    "st": 3121
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.89.woff2",
+    "b": 22164,
+    "end": 5238,
+    "st": 3121
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.91.woff2",
+    "b": 38296,
+    "end": 6379,
+    "st": 3121
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.87.woff2",
+    "b": 24964,
+    "end": 5470,
+    "st": 3121
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.82.woff2",
+    "b": 26800,
+    "end": 5794,
+    "st": 3152
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.88.woff2",
+    "b": 25940,
+    "end": 5861,
+    "st": 3154
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.85.woff2",
+    "b": 25404,
+    "end": 5718,
+    "st": 3155
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.86.woff2",
+    "b": 26016,
+    "end": 5936,
+    "st": 3183
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.79.woff2",
+    "b": 26524,
+    "end": 6116,
+    "st": 3270
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.83.woff2",
+    "b": 27264,
+    "end": 6213,
+    "st": 3279
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.84.woff2",
+    "b": 24792,
+    "end": 6079,
+    "st": 3303
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.81.woff2",
+    "b": 26600,
+    "end": 6184,
+    "st": 3310
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.80.woff2",
+    "b": 29096,
+    "end": 6326,
+    "st": 3330
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.71.woff2",
+    "b": 28624,
+    "end": 6281,
+    "st": 3331
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.78.woff2",
+    "b": 26848,
+    "end": 6221,
+    "st": 3353
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.75.woff2",
+    "b": 20296,
+    "end": 5771,
+    "st": 3354
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.60.woff2",
+    "b": 38076,
+    "end": 6529,
+    "st": 3360
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.76.woff2",
+    "b": 25224,
+    "end": 6154,
+    "st": 3373
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.25.woff2",
+    "b": 42332,
+    "end": 6596,
+    "st": 3379
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.77.woff2",
+    "b": 26344,
+    "end": 6266,
+    "st": 3415
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.26.woff2",
+    "b": 40624,
+    "end": 6581,
+    "st": 3515
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.72.woff2",
+    "b": 19808,
+    "end": 5950,
+    "st": 3519
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.16.woff2",
+    "b": 38216,
+    "end": 6566,
+    "st": 3519
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/fb.js?v=05834eb7",
+    "b": 0,
+    "end": 6985,
+    "st": 6884
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js",
+    "b": 0,
+    "end": 7526,
+    "st": 6990
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js",
+    "b": 0,
+    "end": 7901,
+    "st": 7533
+   }
+  ],
+  "inwin_bytes": 204331,
+  "all_bytes": 855735,
+  "chars": 574
+ },
+ {
+  "window_ms": 5264,
+  "load_ms": 2382,
+  "nav": 7885,
+  "res": [
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/index.js",
+    "b": 746,
+    "end": 513,
+    "st": 359
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/nearby.css?v=411a136f",
+    "b": 2000,
+    "end": 619,
+    "st": 360
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/style.css?v=aae32522",
+    "b": 19230,
+    "end": 1024,
+    "st": 360
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon-ad.css?v=c79f816c",
+    "b": 6740,
+    "end": 805,
+    "st": 360
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/ads.js",
+    "b": 2195,
+    "end": 648,
+    "st": 367
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/prefs.js?v=280ab29a",
+    "b": 3970,
+    "end": 716,
+    "st": 367
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon-ad.js?v=286d1e52",
+    "b": 4921,
+    "end": 769,
+    "st": 367
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/topics.js?v=3e951135",
+    "b": 6380,
+    "end": 821,
+    "st": 367
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/taste.js?v=788775b8",
+    "b": 4072,
+    "end": 724,
+    "st": 367
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/adsafe.js?v=f83c8d3e",
+    "b": 2821,
+    "end": 671,
+    "st": 368
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ticker.js?v=8a30ddcf",
+    "b": 10041,
+    "end": 904,
+    "st": 368
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/app.js?v=c3d4d24f",
+    "b": 27211,
+    "end": 1083,
+    "st": 368
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/social.js?v=2b5b4ab6",
+    "b": 13190,
+    "end": 1293,
+    "st": 368
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/nearby.js?v=89ea569d",
+    "b": 8339,
+    "end": 1271,
+    "st": 369
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/2026-10-04-pm.js",
+    "b": 16095,
+    "end": 1038,
+    "st": 520
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/korea.json?_=1791152937266",
+    "b": 2677,
+    "end": 1713,
+    "st": 1539
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/issues.json?_=2985254",
+    "b": 7516,
+    "end": 1743,
+    "st": 1541
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon.svg",
+    "b": 17409,
+    "end": 2576,
+    "st": 2328
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/ticker.json?_=1791152938084",
+    "b": 1310,
+    "end": 2500,
+    "st": 2339
+   },
+   {
+    "u": "https://api.open-meteo.com/v1/forecast?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=temperature_2m,weather_code,is_day&hourly=precipitation_probability&forecast_hours=6",
+    "b": 0,
+    "end": 3011,
+    "st": 2341
+   },
+   {
+    "u": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=pm2_5",
+    "b": 0,
+    "end": 2982,
+    "st": 2341
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/late.css?v=ac98db6c",
+    "b": 5736,
+    "end": 2658,
+    "st": 2442
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/pages.js?v=33fd59c3",
+    "b": 11705,
+    "end": 2688,
+    "st": 2442
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/icons/favicon-32.png",
+    "b": 905,
+    "end": 2628,
+    "st": 2456
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css",
+    "b": 12793,
+    "end": 3048,
+    "st": 2683
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/places.js?v=494783b6",
+    "b": 8444,
+    "end": 2883,
+    "st": 2693
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.91.woff2",
+    "b": 38296,
+    "end": 6273,
+    "st": 3087
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.90.woff2",
+    "b": 21152,
+    "end": 4855,
+    "st": 3087
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.89.woff2",
+    "b": 22164,
+    "end": 4938,
+    "st": 3088
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.87.woff2",
+    "b": 24964,
+    "end": 5238,
+    "st": 3088
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.82.woff2",
+    "b": 26800,
+    "end": 5695,
+    "st": 3134
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.88.woff2",
+    "b": 25940,
+    "end": 5711,
+    "st": 3138
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.85.woff2",
+    "b": 25404,
+    "end": 5605,
+    "st": 3138
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.86.woff2",
+    "b": 26016,
+    "end": 5868,
+    "st": 3187
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.79.woff2",
+    "b": 26524,
+    "end": 6093,
+    "st": 3305
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.83.woff2",
+    "b": 27264,
+    "end": 6198,
+    "st": 3313
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.84.woff2",
+    "b": 24792,
+    "end": 6048,
+    "st": 3331
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.81.woff2",
+    "b": 26600,
+    "end": 6161,
+    "st": 3343
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.80.woff2",
+    "b": 29096,
+    "end": 6303,
+    "st": 3361
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.71.woff2",
+    "b": 28624,
+    "end": 6258,
+    "st": 3362
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.78.woff2",
+    "b": 26848,
+    "end": 6191,
+    "st": 3384
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.75.woff2",
+    "b": 20296,
+    "end": 5770,
+    "st": 3385
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.60.woff2",
+    "b": 38076,
+    "end": 6491,
+    "st": 3390
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.76.woff2",
+    "b": 25224,
+    "end": 6130,
+    "st": 3402
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.25.woff2",
+    "b": 42332,
+    "end": 6559,
+    "st": 3406
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.77.woff2",
+    "b": 26344,
+    "end": 6243,
+    "st": 3447
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.26.woff2",
+    "b": 40624,
+    "end": 6551,
+    "st": 3550
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.72.woff2",
+    "b": 19808,
+    "end": 5943,
+    "st": 3554
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.16.woff2",
+    "b": 38216,
+    "end": 6536,
+    "st": 3555
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/fb.js?v=05834eb7",
+    "b": 0,
+    "end": 6949,
+    "st": 6851
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js",
+    "b": 0,
+    "end": 7518,
+    "st": 6954
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js",
+    "b": 0,
+    "end": 7893,
+    "st": 7527
+   }
+  ],
+  "inwin_bytes": 272611,
+  "all_bytes": 855735,
+  "chars": 574
+ },
+ {
+  "window_ms": 4762,
+  "load_ms": 2248,
+  "nav": 7885,
+  "res": [
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/index.js",
+    "b": 746,
+    "end": 533,
+    "st": 367
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/style.css?v=aae32522",
+    "b": 19230,
+    "end": 1035,
+    "st": 368
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/nearby.css?v=411a136f",
+    "b": 2000,
+    "end": 555,
+    "st": 368
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon-ad.css?v=c79f816c",
+    "b": 6740,
+    "end": 826,
+    "st": 368
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/ads.js",
+    "b": 2195,
+    "end": 638,
+    "st": 379
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon-ad.js?v=286d1e52",
+    "b": 4921,
+    "end": 788,
+    "st": 379
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/prefs.js?v=280ab29a",
+    "b": 3970,
+    "end": 736,
+    "st": 379
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/topics.js?v=3e951135",
+    "b": 6380,
+    "end": 833,
+    "st": 379
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/adsafe.js?v=f83c8d3e",
+    "b": 2821,
+    "end": 661,
+    "st": 379
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/taste.js?v=788775b8",
+    "b": 4072,
+    "end": 743,
+    "st": 379
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/app.js?v=c3d4d24f",
+    "b": 27211,
+    "end": 1095,
+    "st": 379
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ticker.js?v=8a30ddcf",
+    "b": 10041,
+    "end": 908,
+    "st": 380
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/social.js?v=2b5b4ab6",
+    "b": 13190,
+    "end": 1306,
+    "st": 380
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/nearby.js?v=89ea569d",
+    "b": 8339,
+    "end": 1276,
+    "st": 380
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/2026-10-04-pm.js",
+    "b": 16095,
+    "end": 1050,
+    "st": 542
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/korea.json?_=1791152947571",
+    "b": 2677,
+    "end": 1606,
+    "st": 1431
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/issues.json?_=2985254",
+    "b": 7516,
+    "end": 1636,
+    "st": 1431
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon.svg",
+    "b": 17409,
+    "end": 2438,
+    "st": 2194
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/ticker.json?_=1791152948343",
+    "b": 1310,
+    "end": 2363,
+    "st": 2203
+   },
+   {
+    "u": "https://api.open-meteo.com/v1/forecast?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=temperature_2m,weather_code,is_day&hourly=precipitation_probability&forecast_hours=6",
+    "b": 0,
+    "end": 2813,
+    "st": 2205
+   },
+   {
+    "u": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=pm2_5",
+    "b": 0,
+    "end": 2858,
+    "st": 2205
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/late.css?v=ac98db6c",
+    "b": 5736,
+    "end": 2506,
+    "st": 2293
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/pages.js?v=33fd59c3",
+    "b": 11705,
+    "end": 2542,
+    "st": 2294
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/icons/favicon-32.png",
+    "b": 905,
+    "end": 2483,
+    "st": 2309
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/places.js?v=494783b6",
+    "b": 8444,
+    "end": 2738,
+    "st": 2548
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css",
+    "b": 12793,
+    "end": 2806,
+    "st": 2550
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.91.woff2",
+    "b": 38296,
+    "end": 6130,
+    "st": 2843
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.90.woff2",
+    "b": 21152,
+    "end": 4860,
+    "st": 2843
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.89.woff2",
+    "b": 22164,
+    "end": 4928,
+    "st": 2844
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.87.woff2",
+    "b": 24964,
+    "end": 5318,
+    "st": 2844
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.82.woff2",
+    "b": 26800,
+    "end": 5693,
+    "st": 2868
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.88.woff2",
+    "b": 25940,
+    "end": 5595,
+    "st": 2871
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.85.woff2",
+    "b": 25404,
+    "end": 5453,
+    "st": 2871
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.86.woff2",
+    "b": 26016,
+    "end": 5707,
+    "st": 2905
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.79.woff2",
+    "b": 26524,
+    "end": 5851,
+    "st": 2992
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.83.woff2",
+    "b": 27264,
+    "end": 5963,
+    "st": 2999
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.84.woff2",
+    "b": 24792,
+    "end": 5813,
+    "st": 3018
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.81.woff2",
+    "b": 26600,
+    "end": 5926,
+    "st": 3025
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.80.woff2",
+    "b": 29096,
+    "end": 6068,
+    "st": 3041
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.71.woff2",
+    "b": 28624,
+    "end": 6076,
+    "st": 3042
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.78.woff2",
+    "b": 26848,
+    "end": 6023,
+    "st": 3057
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.75.woff2",
+    "b": 20296,
+    "end": 5490,
+    "st": 3058
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.60.woff2",
+    "b": 38076,
+    "end": 6278,
+    "st": 3060
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.76.woff2",
+    "b": 25224,
+    "end": 5880,
+    "st": 3074
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.25.woff2",
+    "b": 42332,
+    "end": 6354,
+    "st": 3077
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.77.woff2",
+    "b": 26344,
+    "end": 6001,
+    "st": 3109
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.26.woff2",
+    "b": 40624,
+    "end": 6345,
+    "st": 3212
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.72.woff2",
+    "b": 19808,
+    "end": 5671,
+    "st": 3213
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.16.woff2",
+    "b": 38216,
+    "end": 6315,
+    "st": 3216
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/fb.js?v=05834eb7",
+    "b": 0,
+    "end": 6685,
+    "st": 6616
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js",
+    "b": 0,
+    "end": 7253,
+    "st": 6692
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js",
+    "b": 0,
+    "end": 7628,
+    "st": 7263
+   }
+  ],
+  "inwin_bytes": 204331,
+  "all_bytes": 855735,
+  "chars": 574
+ },
+ {
+  "window_ms": 4789,
+  "load_ms": 2277,
+  "nav": 7885,
+  "res": [
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/index.js",
+    "b": 746,
+    "end": 510,
+    "st": 348
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/style.css?v=aae32522",
+    "b": 19230,
+    "end": 1020,
+    "st": 351
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/nearby.css?v=411a136f",
+    "b": 2000,
+    "end": 615,
+    "st": 351
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon-ad.css?v=c79f816c",
+    "b": 6740,
+    "end": 810,
+    "st": 352
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/ads.js",
+    "b": 2195,
+    "end": 622,
+    "st": 361
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon-ad.js?v=286d1e52",
+    "b": 4921,
+    "end": 765,
+    "st": 361
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/taste.js?v=788775b8",
+    "b": 4072,
+    "end": 712,
+    "st": 361
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/prefs.js?v=280ab29a",
+    "b": 3970,
+    "end": 727,
+    "st": 361
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/topics.js?v=3e951135",
+    "b": 6380,
+    "end": 840,
+    "st": 361
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/adsafe.js?v=f83c8d3e",
+    "b": 2821,
+    "end": 637,
+    "st": 362
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ticker.js?v=8a30ddcf",
+    "b": 10041,
+    "end": 884,
+    "st": 362
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/app.js?v=c3d4d24f",
+    "b": 27211,
+    "end": 1080,
+    "st": 362
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/nearby.js?v=89ea569d",
+    "b": 8339,
+    "end": 1259,
+    "st": 362
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/social.js?v=2b5b4ab6",
+    "b": 13190,
+    "end": 1290,
+    "st": 362
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/2026-10-04-pm.js",
+    "b": 16095,
+    "end": 1034,
+    "st": 519
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/korea.json?_=1791152957419",
+    "b": 2677,
+    "end": 1575,
+    "st": 1400
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/issues.json?_=2985254",
+    "b": 7516,
+    "end": 1605,
+    "st": 1401
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon.svg",
+    "b": 17409,
+    "end": 2475,
+    "st": 2225
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/ticker.json?_=1791152958261",
+    "b": 1310,
+    "end": 2400,
+    "st": 2235
+   },
+   {
+    "u": "https://api.open-meteo.com/v1/forecast?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=temperature_2m,weather_code,is_day&hourly=precipitation_probability&forecast_hours=6",
+    "b": 0,
+    "end": 2910,
+    "st": 2237
+   },
+   {
+    "u": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=pm2_5",
+    "b": 0,
+    "end": 2924,
+    "st": 2237
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/late.css?v=ac98db6c",
+    "b": 5736,
+    "end": 2542,
+    "st": 2321
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/pages.js?v=33fd59c3",
+    "b": 11705,
+    "end": 2572,
+    "st": 2322
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/icons/favicon-32.png",
+    "b": 905,
+    "end": 2504,
+    "st": 2335
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/places.js?v=494783b6",
+    "b": 8444,
+    "end": 2775,
+    "st": 2576
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css",
+    "b": 12793,
+    "end": 2834,
+    "st": 2576
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.91.woff2",
+    "b": 38296,
+    "end": 6142,
+    "st": 2874
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.89.woff2",
+    "b": 22164,
+    "end": 4942,
+    "st": 2874
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.90.woff2",
+    "b": 21152,
+    "end": 4972,
+    "st": 2874
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.87.woff2",
+    "b": 24964,
+    "end": 5244,
+    "st": 2875
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.82.woff2",
+    "b": 26800,
+    "end": 5760,
+    "st": 2910
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.88.woff2",
+    "b": 25940,
+    "end": 5655,
+    "st": 2913
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.85.woff2",
+    "b": 25404,
+    "end": 5534,
+    "st": 2913
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.86.woff2",
+    "b": 26016,
+    "end": 5752,
+    "st": 2938
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.79.woff2",
+    "b": 26524,
+    "end": 5887,
+    "st": 3009
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.83.woff2",
+    "b": 27264,
+    "end": 5984,
+    "st": 3019
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.84.woff2",
+    "b": 24792,
+    "end": 5842,
+    "st": 3038
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.81.woff2",
+    "b": 26600,
+    "end": 5947,
+    "st": 3045
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.80.woff2",
+    "b": 29096,
+    "end": 6097,
+    "st": 3072
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.71.woff2",
+    "b": 28624,
+    "end": 6105,
+    "st": 3073
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.78.woff2",
+    "b": 26848,
+    "end": 5993,
+    "st": 3092
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.75.woff2",
+    "b": 20296,
+    "end": 5520,
+    "st": 3093
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.60.woff2",
+    "b": 38076,
+    "end": 6300,
+    "st": 3097
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.76.woff2",
+    "b": 25224,
+    "end": 5917,
+    "st": 3108
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.25.woff2",
+    "b": 42332,
+    "end": 6375,
+    "st": 3111
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.77.woff2",
+    "b": 26344,
+    "end": 6037,
+    "st": 3144
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.26.woff2",
+    "b": 40624,
+    "end": 6368,
+    "st": 3241
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.72.woff2",
+    "b": 19808,
+    "end": 5700,
+    "st": 3245
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.16.woff2",
+    "b": 38216,
+    "end": 6337,
+    "st": 3247
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/fb.js?v=05834eb7",
+    "b": 0,
+    "end": 6742,
+    "st": 6667
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js",
+    "b": 0,
+    "end": 7244,
+    "st": 6747
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js",
+    "b": 0,
+    "end": 7620,
+    "st": 7255
+   }
+  ],
+  "inwin_bytes": 204331,
+  "all_bytes": 855735,
+  "chars": 574
+ },
+ {
+  "window_ms": 4669,
+  "load_ms": 2158,
+  "nav": 7885,
+  "res": [
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/index.js",
+    "b": 746,
+    "end": 496,
+    "st": 330
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/style.css?v=aae32522",
+    "b": 19230,
+    "end": 983,
+    "st": 332
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/nearby.css?v=411a136f",
+    "b": 2000,
+    "end": 593,
+    "st": 332
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon-ad.css?v=c79f816c",
+    "b": 6740,
+    "end": 787,
+    "st": 332
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/ads.js",
+    "b": 2195,
+    "end": 660,
+    "st": 338
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon-ad.js?v=286d1e52",
+    "b": 4921,
+    "end": 765,
+    "st": 338
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/topics.js?v=3e951135",
+    "b": 6380,
+    "end": 818,
+    "st": 339
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/prefs.js?v=280ab29a",
+    "b": 3970,
+    "end": 713,
+    "st": 339
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/taste.js?v=788775b8",
+    "b": 4072,
+    "end": 720,
+    "st": 339
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/adsafe.js?v=f83c8d3e",
+    "b": 2821,
+    "end": 608,
+    "st": 340
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/app.js?v=c3d4d24f",
+    "b": 27211,
+    "end": 1058,
+    "st": 340
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ticker.js?v=8a30ddcf",
+    "b": 10041,
+    "end": 878,
+    "st": 340
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/social.js?v=2b5b4ab6",
+    "b": 13190,
+    "end": 1253,
+    "st": 341
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/nearby.js?v=89ea569d",
+    "b": 8339,
+    "end": 1230,
+    "st": 341
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/2026-10-04-pm.js",
+    "b": 16095,
+    "end": 1013,
+    "st": 504
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/korea.json?_=1791152967288",
+    "b": 2677,
+    "end": 1523,
+    "st": 1352
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/issues.json?_=2985254",
+    "b": 7516,
+    "end": 1552,
+    "st": 1353
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/ads/massage/dragon.svg",
+    "b": 17409,
+    "end": 2348,
+    "st": 2105
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/data/ticker.json?_=1791152968058",
+    "b": 1310,
+    "end": 2273,
+    "st": 2114
+   },
+   {
+    "u": "https://api.open-meteo.com/v1/forecast?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=temperature_2m,weather_code,is_day&hourly=precipitation_probability&forecast_hours=6",
+    "b": 0,
+    "end": 3007,
+    "st": 2115
+   },
+   {
+    "u": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=12.9236&longitude=100.8825&timezone=Asia%2FBangkok&current=pm2_5",
+    "b": 0,
+    "end": 2753,
+    "st": 2116
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/late.css?v=ac98db6c",
+    "b": 5736,
+    "end": 2415,
+    "st": 2204
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/pages.js?v=33fd59c3",
+    "b": 11705,
+    "end": 2454,
+    "st": 2205
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/icons/favicon-32.png",
+    "b": 905,
+    "end": 2385,
+    "st": 2215
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/places.js?v=494783b6",
+    "b": 8444,
+    "end": 2670,
+    "st": 2459
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css",
+    "b": 12793,
+    "end": 2722,
+    "st": 2460
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.91.woff2",
+    "b": 38296,
+    "end": 6074,
+    "st": 2757
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.90.woff2",
+    "b": 21152,
+    "end": 4860,
+    "st": 2757
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.89.woff2",
+    "b": 22164,
+    "end": 4868,
+    "st": 2758
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.87.woff2",
+    "b": 24964,
+    "end": 5302,
+    "st": 2758
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.82.woff2",
+    "b": 26800,
+    "end": 5670,
+    "st": 2785
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.88.woff2",
+    "b": 25940,
+    "end": 5565,
+    "st": 2788
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.85.woff2",
+    "b": 25404,
+    "end": 5430,
+    "st": 2788
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.86.woff2",
+    "b": 26016,
+    "end": 5639,
+    "st": 2815
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.79.woff2",
+    "b": 26524,
+    "end": 5775,
+    "st": 2885
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.83.woff2",
+    "b": 27264,
+    "end": 5872,
+    "st": 2892
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.84.woff2",
+    "b": 24792,
+    "end": 5730,
+    "st": 2912
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.81.woff2",
+    "b": 26600,
+    "end": 5843,
+    "st": 2923
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.80.woff2",
+    "b": 29096,
+    "end": 5992,
+    "st": 2944
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.71.woff2",
+    "b": 28624,
+    "end": 6000,
+    "st": 2946
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.78.woff2",
+    "b": 26848,
+    "end": 5948,
+    "st": 2964
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.75.woff2",
+    "b": 20296,
+    "end": 5407,
+    "st": 2964
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.60.woff2",
+    "b": 38076,
+    "end": 6202,
+    "st": 2968
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.76.woff2",
+    "b": 25224,
+    "end": 5805,
+    "st": 2980
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.25.woff2",
+    "b": 42332,
+    "end": 6269,
+    "st": 2984
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.77.woff2",
+    "b": 26344,
+    "end": 5925,
+    "st": 3022
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.26.woff2",
+    "b": 40624,
+    "end": 6278,
+    "st": 3119
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.72.woff2",
+    "b": 19808,
+    "end": 5595,
+    "st": 3127
+   },
+   {
+    "u": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.16.woff2",
+    "b": 38216,
+    "end": 6247,
+    "st": 3129
+   },
+   {
+    "u": "https://p-max168.github.io/thai-news-kr/assets/fb.js?v=05834eb7",
+    "b": 0,
+    "end": 6696,
+    "st": 6616
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js",
+    "b": 0,
+    "end": 7208,
+    "st": 6702
+   },
+   {
+    "u": "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js",
+    "b": 0,
+    "end": 7582,
+    "st": 7216
+   }
+  ],
+  "inwin_bytes": 204331,
+  "all_bytes": 855735,
+  "chars": 574
+ }
+]

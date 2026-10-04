@@ -1,0 +1,4 @@
+{"approved": 20, "highlights": ["wt1", "vi2", "st1"], "feedCards": 17, "topCards": ["wt1", "vi2", "st1"], "inFeed": 17, "inTop": ["st1", "vi2", "wt1"], "nowhere": [], "feedCount": "17건 (주요 뉴스 제외)"}
+wt1 {"tab": "날씨·교통10", "card": true, "open": true, "dq": true, "dqVisible": true}
+vi2 {"tab": "외국인·비자2", "card": true, "open": true, "dq": true, "dqVisible": true}
+st1 {"tab": "남부1", "card": true, "open": true, "dq": true, "dqVisible": true}

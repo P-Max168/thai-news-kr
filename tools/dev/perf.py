@@ -8,7 +8,7 @@ N = int(sys.argv[2]) if len(sys.argv) > 2 else 5
 JS = """()=>new Promise(res=>{let lcp=0,cls=0;new PerformanceObserver(l=>{for(const e of l.getEntries())lcp=e.startTime}).observe({type:'largest-contentful-paint',buffered:true});
 new PerformanceObserver(l=>{for(const e of l.getEntries())if(!e.hadRecentInput)cls+=e.value}).observe({type:'layout-shift',buffered:true});
 setTimeout(()=>{const n=performance.getEntriesByType('navigation')[0];const p=performance.getEntriesByType('paint').find(x=>x.name==='first-contentful-paint');
-const feed=document.querySelector('#feed .card, #sheet:not([hidden]) button');res({fcp:p?p.startTime:0,lcp,cls,dcl:n.domContentLoadedEventEnd,load:n.loadEventEnd,bytes:performance.getEntriesByType('resource').reduce((a,r)=>a+(r.transferSize||0),n.transferSize||0)})},2500)})"""
+const feed=document.querySelector('#feed .card, #sheet:not([hidden]) button');res({fcp:p?p.startTime:0,lcp,cls,dcl:n.domContentLoadedEventEnd,load:n.loadEventEnd,bytes:performance.getEntriesByType('resource').reduce((a,r)=>a+(r.transferSize||0),n.transferSize||0),fontb:performance.getEntriesByType('resource').filter(r=>/pretendard/i.test(r.name)&&/[.]woff2?/.test(r.name)).reduce((a,r)=>a+(r.transferSize||0),0),fontn:performance.getEntriesByType('resource').filter(r=>/pretendard/i.test(r.name)&&/[.]woff2?/.test(r.name)&&r.transferSize>0).length})},2500)})"""
 async def one(b, cold=True):
     ctx = await b.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True, locale="ko-KR")
     pg = await ctx.new_page(); cdp = await ctx.new_cdp_session(pg)
@@ -32,4 +32,9 @@ async def main():
     med = {k: statistics.median([r[k] for r in rs]) for k in rs[0]}
     print("느린 4G(150ms·1.6Mbps)+CPU×4, %d회 중앙값: 첫 화면(FCP) %.2f초 · 가장 큰 요소(LCP) %.2f초 · 첫 기사 카드 %.2f초 · DOM 준비 %.2f초 · load %.2f초 · CLS %.3f · 받은 양 %dKB"
           % (N, med["fcp"]/1000, med["lcp"]/1000, med["feed"]/1000, med["dcl"]/1000, med["load"]/1000, med["cls"], med["bytes"]/1024))
+    # 2026-10-05(Max 05:23 ③): '받은 양'은 load 뒤 2.5초 안에 끝난 요청만 셈 → 글꼴 조각(Pretendard, 화면 글자에 따라 받는 unicode-range 조각)이
+    #  그 창 끝에 걸리면 회마다 0~수십 KB 씩 오락가락(클래식 04:23 197KB → 05:19 241KB 가 이것). 비교는 '글꼴 제외'로
+    print("   받은 양 쪼개기: 글꼴 제외 중앙값 %dKB(회마다 %s) · 창 안에 들어온 글꼴 조각 %s개 %sKB — 글꼴 조각은 화면 글자·도착 시각에 따라 달라짐(비교는 글꼴 제외로)"
+          % (statistics.median([(r["bytes"] - r["fontb"]) / 1024 for r in rs]), "/".join("%d" % ((r["bytes"] - r["fontb"]) / 1024) for r in rs),
+             "/".join(str(r["fontn"]) for r in rs), "/".join("%d" % (r["fontb"] / 1024) for r in rs)))
 asyncio.run(main())
