@@ -1,6 +1,6 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-05T01:19:58+07:00",
+ "updated_at": "2026-10-05T04:20:54+07:00",
  "items": [
   {
    "title": "조희대, 국감 증인 불출석…민주 “그럴거면 사퇴” 국힘 “겁박정치”",
@@ -9,34 +9,28 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9XaFBrRk1iemVpSWRFWlpXLVJ6UkdzajJyb1c0aDc0c1NKSkpxZFd1aDE0azZ5b0VUVHdpSTFld3JUNkFTdjdFckdyclViV1dLR1lkX2dNVHFXdFFmVzk5NzZlcFBDUGZQU2FLenhvY2J3VGsy?oc=5"
   },
   {
+   "title": "[오늘 날씨] 대체공휴일 오전 빗방울, 오후 구름 많음...이번 주 주간예보는?",
+   "source": "headlinejeju.co.kr",
+   "time": "2026-10-05T04:05:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1icWh3QllXQ1V2bWVvXzBZanVmMkFJaUN4X1g3M0RWbWpZV0ZqdXc4OC1nRzRNS1V1U2ZIU2FyYk9tNTFUbmhsNWZoUXh6djhqU3FmY25HbXFIYW1JcG5YbzBPMzhRUmx2aThpbFZreXRGWUU?oc=5"
+  },
+  {
    "title": "중수청 시험대 될 ‘1호 수사’…법조계, 중대경제범죄에 무게",
    "source": "한겨레",
    "time": "2026-10-04T20:13:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE96Wk1CaFpEQTllX1I5WkJTUWxhN3hlS1ppdTB6YnlMVWdaMVhLOHlzSnMtekJ3bDl1V0R1bXRoVzhGUE9RNHhoRUYyNTc4bEtyYVY1bUNoRGdfWUo2M2RGTHZvaFY1enJrTVpOWGl3MTZ2UQ?oc=5"
   },
   {
-   "title": "우크라 전쟁영웅 \"이재명, 젤렌스키 위협 못해\"…한국 비판",
-   "source": "한국경제",
-   "time": "2026-10-04T17:15:05+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE51aFNhOVlFaUt0bVJwRzNxcEFmYkw5amFNbEJtdFdmNnRic1lybmJOUDlUMnduWkt6c1g3SnNMMUw4MTIyTElJc0lORVdHV1BBbEVPR01xTjM3dw?oc=5"
-  },
-  {
-   "title": "부캉이는 왜 북항을 떠나지 않을까···연구자들조차 ‘의문’인 미스테리",
-   "source": "경향신문",
-   "time": "2026-10-04T14:23:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0xNlB4bXRIUXZYRjlKbnlQcU44aG8yU2lhSExQcEZxcll5Unk5ZnNHeEx5cEpmZkdKOC03RVVTNUhhNDFWdzYwQlRfUE5lNEE3MWJQQ1hhN0RHd9IBX0FVX3lxTE0zd1hFYkhSZmlfTDRWOTVxOFVyc1U2N3RBdWxLdTQzZlByd3B6ZlJENHI1V0E3WkwxMXN2Wk9MV2hlT1RYTkQxd19QNXZ6aEJSQVVVa0pBWTVVSU1uTy1j?oc=5"
-  },
-  {
-   "title": "유해진 집 앞에 몰려간 보수단체…‘암살자(들)’ 무대 인사도 취소",
+   "title": "“영화 비판 아닌 선 넘은 인신 공격”…‘암살자(들)’ 논란에 영화감독조합 우려",
    "source": "한겨레",
-   "time": "2026-10-04T20:13:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBodVdYMVFZd2xiNDUtWTBydFFjbUlLeXZZWFRkSDdITEhBZWNfdW1YMWVSMklMNk0xUm5DN2xNNGRXM2xLLV91NDRreDlEdHRHcVA1bDVZcG5TVms4NTBNdXVvU3VzVTRxS3NlTVJ5MWsyUQ?oc=5"
+   "time": "2026-10-04T16:52:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5LR3NZcVZkaGVVMGhNT2Y2c3hFaFNidzNjSGFxQ1R3a2RWSXNyY0F0bExBTWdacTBCVTFqLUtpN0Z2VVZCTnpOZm45NFkyelNSVlNXU3VhWFN4MmE3Zk1NX2pDTXdhRl81dlpCY3dTWUNFQQ?oc=5"
   },
   {
-   "title": "민주 \"장동혁 정치는 고함치는 것 밖에 없나\"…국힘 \"이재명 정권에 대한 분노 느껴\"",
-   "source": "연합뉴스TV",
-   "time": "2026-10-04T15:57:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBqanVwNlp4V1NCNl9UNHBfNGRUdm9tRVdpaWxjVWIxZUtmOFAyS0JLR240aG01V2FkSGUtZVp1cHgwdmtqc3habWttMmkxeFZYSnpZM2JfMjlSQlpHbW0taWhQSWdIb3M?oc=5"
+   "title": "떠나지 않는 '부캉이' 식지 않는 인기…누적 방문객 90만명",
+   "source": "연합뉴스",
+   "time": "2026-10-04T18:36:05+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFAzdU9PaHNsVl9wZDFfZUdidVNKSVBDUTBHUF95S3VjSEdtaS1xX3VsRXhJU0h6UzhBT0FQNVhTdGdSdW5VZzJ1b3dLTnZHeUJSYmZHUFo0RW9ZX0JfRmw1atIBYEFVX3lxTFAzdU9PaHNsVl9wZDFfZUdidVNKSVBDUTBHUF95S3VjSEdtaS1xX3VsRXhJU0h6UzhBT0FQNVhTdGdSdW5VZzJ1b3dLTnZHeUJSYmZHUFo0RW9ZX0JfRmw1ag?oc=5"
   },
   {
    "title": "김정은 ‘핵 고도화’ 강조…미국에 ‘비핵화 의제 불가’ 메시지",
@@ -45,22 +39,28 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9aSVROd1loZzAtTGtWaURVbUhWWjNwMjBjTlhxTk50alJVZ2dnSnRGV0toT3Z6MmwwV01lZEZUWXd1b0NQV0s5bkVHRU1mYlVTbTFvTmtxb3VRbzQ1dm4tTzVoN1hnOC1zTzg3UWRzRHR1YnJ5?oc=5"
   },
   {
+   "title": "“부정선거” 주워담은 트럼프…관세 위협·현금살포 던지며 “사전투표 하라”",
+   "source": "한겨레",
+   "time": "2026-10-04T18:36:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFAyMUtZc0UyY3RXNG5aZ2QzN0VCa2pZd0pJVkx3eFB4LTFtSUVQSzR5MkliaTNDbFRENm5JdWJycWdENWRKWG8xQ3dPbjctbXgwak9LZUpvN05GQXh5RjBnTjdlWkZPZTRQMENZbVVaYw?oc=5"
+  },
+  {
+   "title": "곽상언, '盧금품수수' 한동훈에 \"감히 모두 팩트라 주장‥보여달라\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-03T17:37:44+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFByaWM1czVSbldmdWxnS21XbzRlSGlTVk4zM2tfcmt2X0xqYkkyNWVzaE1mU0NoZnFvSm5MM2pMTW1uaDRnS1FPRkRhN1ItQmFma0hmbE1iNTR4UFdxM05VNWRDbkZRLVhhNmFjRWMxdXJlZHctaG15eNIBeEFVX3lxTFBvd2xFZlgzcmdRdVpsME5feDBNMjRIUmpqYV9SRGVOOXc5ZXVRUGZYR0hYcWNPd2w2RGE5SEdzN1YxbXhHSnlJQzVfSWluVW8yZGoxSW41SEpPRm00S0FIRFNqdjB0NnpUUHl5Vmp5Q0U2U0ZEQlE3Uw?oc=5"
+  },
+  {
+   "title": "우크라 전쟁영웅 \"이재명, 젤렌스키 위협 못해\"…한국 비판",
+   "source": "한국경제",
+   "time": "2026-10-04T17:15:05+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE51aFNhOVlFaUt0bVJwRzNxcEFmYkw5amFNbEJtdFdmNnRic1lybmJOUDlUMnduWkt6c1g3SnNMMUw4MTIyTElJc0lORVdHV1BBbEVPR01xTjM3dw?oc=5"
+  },
+  {
    "title": "김상욱 울산시장 ‘선거법 위반’ 혐의 경찰 조사…“충분히 소명”",
    "source": "한겨레",
    "time": "2026-10-04T14:16:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9LX21ER2Utbmt6bU90UXFjMC02QkdlMXZ4amlUcTRRaHU2RG1OLThHV0p6bk5tbHh6T1RNaC1LOGliWlBZU0ptOTB3SWV5NXg2MEJRdFdYcmFDU1ktaDN4MVpNSjA?oc=5"
-  },
-  {
-   "title": "민주 \"검찰 체제서 민생 사건 캐비닛에...국힘 반성부터\"",
-   "source": "YTN",
-   "time": "2026-10-04T15:19:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE52RGRHblk4SkY3ZWlUWkxIQ2c1emxzejBwdTV6XzF3QkthSm5FQWZPdlZmNmZZbVRKNkxmeEZvelNHT0s0U0ZLQzJla0FrMXlKM3Y4X2EyX0t0Nk1ReHc?oc=5"
-  },
-  {
-   "title": "평택 주택가 공원서 한밤중 외국인 패싸움…각목 들고 발길질",
-   "source": "연합뉴스",
-   "time": "2026-10-04T15:39:26+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9EcTZTSzFGMTkweDFKYmhnczFaMFNUcUN6VkJrZkttTnhnZkNzZ0EtUXJtLTlXS3poT3JXc0ppVm1aZjFRUXJQSkZBTnJHdXU1RnlNMXktbDdDYTTSAWBBVV95cUxPQ2hiMDBBdW9yRldWNDFQczFKR19IZFhvdnlsQnJPamxHX2std3ZTek0xNF9VRHpZSTJrUDE1MEFwQ0pjVEpCdmVrOWY3blhCZnJrRjhDMFVRVXRyOWpPRUY?oc=5"
   }
  ]
 };
