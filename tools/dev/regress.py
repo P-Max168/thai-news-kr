@@ -79,7 +79,15 @@ async def main():
         await pg.evaluate("document.querySelectorAll('#feed .card:not(.is-open) .card__head').forEach(b=>b.click())"); await pg.wait_for_timeout(400)
         th = await pg.evaluate("document.body.innerText")   # 모든 기사를 펼친 상태
         found = THAI.findall(th)
-        rec(not found, "화면에 태국 문자 없음(메인, 기사 전부 펼침)", "".join(found[:20]))
+        where = ""
+        if found:   # 어디에 있는지(기사 id·요소·앞뒤 글) — 고칠 곳을 바로 찾게
+            locs = await pg.evaluate(r"""()=>{const re=/[\u0E00-\u0E3E\u0E40-\u0E7F]+/, out=[]; const w=document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+              while(w.nextNode()){const n=w.currentNode, m=n.textContent.match(re); if(!m) continue; const el=n.parentElement; if(!el.getClientRects().length) continue;
+                const c=el.closest('[data-id],[id]'); const t=n.textContent, i=t.indexOf(m[0]);
+                out.push((c?(c.getAttribute('data-id')||'#'+c.id):'?')+' '+el.tagName.toLowerCase()+(el.className?'.'+String(el.className).split(' ')[0]:'')+' “…'+t.slice(Math.max(0,i-12),i+m[0].length+6)+'…”');}
+              return out.slice(0,6);}""")
+            where = " @ " + " / ".join(locs)
+        rec(not found, "화면에 태국 문자 없음(메인, 기사 전부 펼침)", "".join(found[:20]) + where)
         meta = await pg.evaluate("[...document.querySelectorAll('time, .meta, .km, .k-card__m, .tk-ft, .cm, [class*=\"time\"], [class*=\"date\"]')].map(e=>e.innerText).join(' | ')")
         rel = re.findall(r"\d+\s*(?:분|시간|일)\s*전|방금", meta)
         rec(not rel, "상대 시간('N시간 전') 없음 — 실제 날짜만(메인, 기사 전부 펼침)", rel[:5])

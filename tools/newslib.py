@@ -67,6 +67,30 @@ def cjk_check(data):
         if isinstance(d, dict): chk((s["id"], "discussion"), [d.get("question") or "", d.get("operator_comment") or ""])
     br = data.get("briefing")
     chk("briefing", [b.get("text") or "" for b in br] if isinstance(br, list) else (br or ""))
+# 화면에 보이는 글에 태국 문자 금지(฿ U+0E3F 만 허용). title_th·원문 URL 처럼 화면에 안 나오는 필드는 검사 안 함.
+#   2026-10-04 저녁판 요약에 '이민국(สตม.)'·'재난방지국(ปภ.)'·키워드 'ปภ.' 가 들어가 라이브 화면에 태국 글자가 보였던 일 → 판 저장 때 막음
+THAI_SHOWN_RE = re.compile(r"[\u0E00-\u0E3E\u0E40-\u0E7F]+")
+
+
+def thai_check(data):
+    """화면에 보이는 필드(기사 제목·요약·배경·후속·지역·그래서 나는?·추천 댓글·키워드·이슈 이름·오늘의 질문·브리핑·한국 뉴스 제목)에
+    태국 문자가 있으면 예외. 기관 약칭은 한국어(+로마자)로: 예 สตม. → 태국 이민국, ปภ. → 재난방지청(DDPM)."""
+    def chk(where, v):
+        for t in (v if isinstance(v, list) else [v]):
+            m = THAI_SHOWN_RE.search(t) if isinstance(t, str) else None
+            assert not m, (where, "화면에 태국 문자 금지(฿ 만 허용) — 한국어/로마자로 고칠 것(TRANSLATION_RULES)", t[max(0, m.start() - 12):m.end() + 8])
+    for s in data.get("stories", []):
+        for k in KO_FIELDS + ("tags",):
+            if k in s: chk((s["id"], k), s[k])
+        if isinstance(s.get("issue"), dict): chk((s["id"], "issue.title"), s["issue"].get("title"))
+        d = s.get("discussion")
+        if isinstance(d, dict): chk((s["id"], "discussion"), [d.get("question") or "", d.get("operator_comment") or ""])
+    br = data.get("briefing")
+    chk("briefing", [b.get("text") or "" for b in br] if isinstance(br, list) else (br or ""))
+    for i, k in enumerate(data.get("korea_top") or []):
+        if isinstance(k, dict): chk(("korea_top", i), k.get("headline") or "")
+
+
 # 추천 댓글은 독자 본인이 올리는 문장 — 겪지 않은 경험을 지어내게 만드는 표현 금지
 FAKE_EXP_RE = re.compile(r"저도\s*(거기|그\s*동네|근처|여기)\s*(살|사는|살아)|제가\s*(직접|가\s*봤|가봤|겪|봤)|저도\s*(겪|당했|가\s*봤|가봤|다녀왔|봤어)|우리\s*(집|동네)도|저희\s*(집|동네|가게)")
 LINK_RE = re.compile(r"https?://|www\.|\.(com|net|org|co|th|me|ly)\b", re.I)
@@ -244,6 +268,7 @@ def validate(data):
         assert h in ids, "highlights 에 없는 id: " + h
     assert len(data["highlights"]) == 3, "highlights 는 3개"
     cjk_check(data)
+    thai_check(data)
     br = data.get("briefing")
     if new:
         assert isinstance(br, list), "새 형식 briefing 은 [{topic, text, story_id}] 목록 (newslib.B 사용)"

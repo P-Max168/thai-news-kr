@@ -1,0 +1,3 @@
+- 바뀐 것: 10-04 저녁판 화면의 태국 글자 3곳을 한국어로(vi2 요약 '태국 이민국(สตม.)' → '태국 이민국', lf1 요약 '재난방지국(ปภ.)' → '재난방지청(DDPM)', lf1 키워드 'ปภ.' → '재난방지청') + 브리핑 첫 줄을 방콕(bk1, TOP 1) → 날씨(wt1)로 순서만 바꿈 + 판 저장 검사(newslib.thai_check)·regress 태국 글자 위치 표시
+- 왜: 라이브 regress 실패 2개 — 태국 글자가 TOP 3 카드(#topGrid)·vi2 펼친 요약에 보임 / 브리핑 첫 줄(bk1)을 누르면 기사 3개짜리 '방콕' 탭으로 바뀌어 큰 배너·기사 사이 광고가 안 나와 광고 3자리(아침판 ea1 맨 앞으로 옮긴 것과 같은 방식). 사진: before-* = 고치기 전 라이브, after-* = 고친 뒤 라이브
+- 되돌리는 법: `git checkout backup-20261004-2007-thai-ad-fix -- tools/newslib.py tools/dev/regress.py tools/editions/2026-10-04-pm.py data/2026-10-04-pm.json data/2026-10-04-pm.js` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
