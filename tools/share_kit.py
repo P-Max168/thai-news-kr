@@ -37,8 +37,6 @@ TOPICS = {  # assets/topics.js 와 같은 값(이모지·색)
     "life": ("생활·물가·부동산", "🛒", "#0c8f6a"), "travel": ("여행·맛집", "🍜", "#e67700"),
     "ent": ("연예·스포츠·SNS", "💬", "#c2255c"), "weather": ("날씨·교통", "🌦️", "#0ca678"),
 }
-DECO = {"east": "〰", "bangkok": "曼", "north": "⛰", "south": "☀", "poleco": "政", "society": "社", "visa": "✈",
-        "life": "%", "travel": "旅", "ent": "#", "weather": "☂"}
 LEGACY = {"politics": "poleco", "economy": "poleco", "society": "society", "visa": "visa", "sns": "ent", "local": "east"}
 ALIAS = {"pattaya": "east", "sriracha": "east"}   # 2026-10-03 통합(옛 판 데이터 → 동부)
 RX_PLACE = {
@@ -132,63 +130,68 @@ def date_label(data, meta):
 
 
 # ---------------------------------------------------------------- HTML
+# 모던 모양(2026-10-05, DESIGN_THEME.md 와 같은 값): 옅은 회색 바탕 #F2F4F6 · 흰 카드(모서리 = 휴대폰 16px × --u) ·
+# 강조색 하나 #1B64DA · 글자 회색 단계 #191F28 / #4E5968 / #5F6B7A · 아이콘만 #8B95A1 ·
+# 그라데이션·물결 장식·남색 헤더·테두리·주제별 여러 색 없음 · 주제 칩은 글자만, 📍 등은 선 아이콘(assets/modern-icons.svg)
+ACCENT = "#1B64DA"
+_ICONS = None
+
+
+def icon(name):
+    """assets/modern-icons.svg 의 Lucide 아이콘을 글 속 SVG 로(크기 = 1em, 색 = currentColor)."""
+    global _ICONS
+    if _ICONS is None:
+        src = (ROOT / "assets/modern-icons.svg").read_text(encoding="utf-8")
+        _ICONS = {m[1]: m[2] for m in re.finditer(r'<symbol id="i-([\w-]+)"[^>]*>(.*?)</symbol>', src, re.S)}
+    return ('<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+            'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg>' % _ICONS[name])
+
+
 BASE_CSS = """
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:%(W)dpx;height:%(H)dpx;overflow:hidden}
-body{font-family:"Pretendard","Pretendard Variable","Noto Sans CJK KR","Noto Sans KR","Noto Color Emoji",sans-serif;
-  background:#f4f5f7;color:#16181d;word-break:keep-all;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased}
+body{font-family:"Pretendard","Pretendard Variable","Noto Sans CJK KR","Noto Sans KR",sans-serif;
+  background:#F2F4F6;color:#191F28;word-break:keep-all;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased}
 .page{width:%(W)dpx;height:%(H)dpx;display:flex;flex-direction:column}
-.mast{background:#0b2a4a;color:#fff;display:flex;align-items:center;gap:calc(var(--u)*12px);box-shadow:0 2px 10px rgba(0,0,0,.12)}
-.mark{flex:0 0 auto;border-radius:calc(var(--u)*11px);
+.ic{width:1em;height:1em;flex:0 0 auto;vertical-align:-.12em}
+.mast{background:#fff;color:#191F28;display:flex;align-items:center;gap:calc(var(--u)*10px)}
+.mark{flex:0 0 auto;border-radius:calc(var(--u)*8px);
   background:linear-gradient(180deg,#ef3340 0 16.6%%,#fff 16.6%% 33.3%%,#2d2a6e 33.3%% 66.6%%,#fff 66.6%% 83.3%%,#ef3340 83.3%%);
-  box-shadow:0 0 0 calc(var(--u)*2px) rgba(255,255,255,.18),0 2px 6px rgba(0,0,0,.25)}
+  box-shadow:inset 0 0 0 calc(var(--u)*1px) rgba(0,0,0,.08)}
 .btext{display:flex;flex-direction:column;line-height:1.2}
-.btext strong{font-weight:800;letter-spacing:-.02em}
-.btext small{opacity:.72}
+.btext strong{font-weight:800;letter-spacing:-.02em;color:#191F28}
+.btext small{color:#5F6B7A;font-weight:500}
 .dl{margin-left:auto;text-align:right;line-height:1.25}
-.dl .d{font-weight:600;opacity:.95;white-space:nowrap}
-.dl .t{display:block;opacity:.7;font-weight:400}
-.edtag{font-weight:800;color:#f5b700}
-.subbar{background:#123a63}
-.top-card{position:relative;overflow:hidden;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;
-  box-shadow:0 1px 2px rgba(16,24,40,.05),0 4px 14px rgba(16,24,40,.06)}
-.top-card .deco{position:absolute;right:-.06em;top:-.1em;line-height:1;opacity:.13;font-weight:900}
-.top-card>*:not(.deco){position:relative}
+.dl .d{font-weight:700;color:#191F28;white-space:nowrap}
+.dl .t{display:block;color:#5F6B7A;font-weight:500}
+.edtag{font-weight:800;color:#1B64DA}
+.card{background:#fff;border-radius:calc(var(--u)*16px);box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.top-card{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
 .badges{display:flex;flex-wrap:wrap;gap:.45em;align-items:center}
-.rank{font-weight:800;background:#f5b700;color:#3a2a00;border-radius:999px;line-height:1.4}
-.chip{display:inline-flex;align-items:center;gap:.3em;font-weight:700;border-radius:999px;line-height:1.4;white-space:nowrap;background:rgba(255,255,255,.22);color:#fff}
-.top-card h3{font-weight:800;letter-spacing:-.02em}
-.top-card p{opacity:.9;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
-.top-card .meta{color:rgba(255,255,255,.78)} .top-card .meta b{color:#fff}
-.briefing{background:linear-gradient(135deg,#fff 0%%,#fff7e6 100%%);border:1px solid #f3e2b8;
-  box-shadow:0 1px 2px rgba(16,24,40,.05),0 4px 14px rgba(16,24,40,.06);display:flex;flex-direction:column;overflow:hidden}
+.rank{font-weight:700;background:#1B64DA;color:#fff;border-radius:999px;line-height:1.4}
+.chip{display:inline-flex;align-items:center;gap:.25em;font-weight:600;border-radius:999px;line-height:1.4;white-space:nowrap;
+  background:#F2F4F6;color:#4E5968}
+.chip .ic{color:#8B95A1}
+.top-card h3{font-weight:800;letter-spacing:-.025em;color:#191F28}
+.top-card p{color:#4E5968;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
+.top-card .meta{color:#5F6B7A} .top-card .meta b{color:#4E5968;font-weight:600}
+.briefing{display:flex;flex-direction:column;overflow:hidden}
 .bhead{display:flex;align-items:center;gap:.6em}
-.bbadge{background:#f5b700;color:#3a2a00;font-weight:800;border-radius:999px;white-space:nowrap}
-.btitle{font-weight:700;color:#8a6d1f}
+.bbadge{background:#E8F0FD;color:#1B64DA;font-weight:700;border-radius:999px;white-space:nowrap}
+.btitle{font-weight:600;color:#5F6B7A}
+.btitle .bcount{color:#1B64DA;font-weight:700}
 ul{list-style:none}
-li+li{border-top:1px solid #f1e6c8}
 li{display:flex;align-items:flex-start;gap:.5em}
-.btx{flex:1;line-height:1.5;color:#3a3f4a}
-.btx b{color:#16181d;font-weight:800;background:linear-gradient(transparent 62%%,rgba(245,183,0,.32) 0)}
-.bchip{display:inline-flex;align-items:center;gap:.2em;font-weight:800;color:var(--tc);background:#fff;border:2px solid var(--tc);
-  border-radius:999px;padding:0 .6em 0 .45em;margin-right:.45em;white-space:nowrap;line-height:1.55;vertical-align:.08em}
-.go{color:#c9a64a;font-weight:700;line-height:1.2}
-.foot{display:flex;align-items:center;justify-content:space-between;background:#0b2a4a;color:#fff}
-.foot .url{font-weight:800;letter-spacing:-.01em}
-.foot .url i{font-style:normal;opacity:.6;margin-right:.35em}
-.foot .upd{opacity:.8;font-weight:600}
+.btx{flex:1;line-height:1.5;color:#4E5968}
+.btx b{color:#191F28;font-weight:700}
+.bchip{display:inline-block;font-weight:600;color:#4E5968;background:#F2F4F6;border-radius:999px;padding:0 .6em;margin-right:.45em;
+  white-space:nowrap;line-height:1.6;vertical-align:.08em}
+.go{color:#8B95A1;line-height:1.5;display:flex;align-items:center}
+.foot{display:flex;align-items:center;justify-content:space-between;background:#fff;color:#191F28}
+.foot .url{font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:.4em}
+.foot .url .ic{color:#1B64DA}
+.foot .upd{color:#5F6B7A;font-weight:500}
 """
-
-
-def shade(hexc, f):
-    n = int(hexc[1:], 16)
-    r, g, b = n >> 16, (n >> 8) & 255, n & 255
-    m = (lambda c: round(c * (1 + f))) if f < 0 else (lambda c: round(c + (255 - c) * f))
-    return "rgb(%d,%d,%d)" % (m(r), m(g), m(b))
-
-
-def top_bg(color):
-    return "radial-gradient(120%% 90%% at 100%% 0%%,%s 0,%s 55%%,%s 100%%)" % (shade(color, .25), shade(color, -.25), shade(color, -.6))
 
 
 def fmt_time(iso):
@@ -199,9 +202,9 @@ def fmt_time(iso):
 def badge_html(s, i, hl, tp):
     t = TOPICS[tp[s["id"]]["topic"]]
     rank = ("TOP %d" % (hl.index(s["id"]) + 1)) if s["id"] in hl else "이번 판 주목"
-    out = '<span class="rank">%s</span><span class="chip">%s %s</span>' % (e(rank), t[1], e(t[0]))
+    out = '<span class="rank">%s</span><span class="chip">%s</span>' % (e(rank), e(t[0]))
     if s.get("region") and s["region"].strip() != t[0]:
-        out += '<span class="chip">📍 %s</span>' % e(s["region"])
+        out += '<span class="chip">%s%s</span>' % (icon("map-pin"), e(s["region"]))
     return out
 
 
@@ -209,8 +212,8 @@ def brief_li(s, tp, show_go=True):
     t = TOPICS[tp[s["id"]]["topic"]]
     a, b = split_head(s["headline"])
     rest = (" " + e(b)) if b else ""
-    return ('<li><span class="btx"><span class="bchip" style="--tc:%s"><span>%s</span>%s</span><b>%s</b><span class="rest">%s</span></span>%s</li>'
-            % (t[2], t[1], e(t[0]), e(a), rest, '<span class="go">›</span>' if show_go else ""))
+    return ('<li><span class="btx"><span class="bchip">%s</span><b>%s</b><span class="rest">%s</span></span>%s</li>'
+            % (e(t[0]), e(a), rest, ('<span class="go">%s</span>' % icon("chevron-right")) if show_go else ""))
 
 
 FIT_JS = """
@@ -258,93 +261,86 @@ def card_html(data, meta, chosen, tp):
     m, d, wd, edn = date_label(data, meta)
     hl = data.get("highlights") or []
     main, rest = chosen[0], chosen[1:]
-    t = TOPICS[tp[main["id"]]["topic"]]
     a, b = split_head(main["headline"])
     css = BASE_CSS % {"W": 1080, "H": 1350} + """
 :root{--u:2.4;--k:1}
-.mast{padding:46px 56px 40px}
-.mark{width:104px;height:104px}
-.btext strong{font-size:56px}.btext small{font-size:29px;margin-top:8px}
+.mast{padding:44px 56px 40px}
+.mark{width:92px;height:92px}
+.btext strong{font-size:54px}.btext small{font-size:29px;margin-top:8px}
 .dl .d{font-size:36px}.dl .t{font-size:27px;margin-top:6px}
-.subbar{height:14px}
-.body{flex:1;display:flex;flex-direction:column;gap:30px;padding:36px 48px 34px;min-height:0}
-.top-card{border-radius:36px;padding:44px 48px 40px;min-height:430px;flex:0 0 auto;font-size:30px}
-.top-card .deco{font-size:430px}
+.body{flex:1;display:flex;flex-direction:column;gap:28px;padding:36px 44px 36px;min-height:0}
+.top-card{padding:46px 50px 44px;min-height:400px;flex:0 0 auto;font-size:30px}
 .rank{font-size:28px;padding:5px 20px}.chip{font-size:28px;padding:5px 18px}
-.top-card h3{font-size:calc(var(--k)*62px);line-height:1.3;margin:22px 0 16px}
-.top-card p{font-size:calc(var(--k)*33px);line-height:1.45;-webkit-line-clamp:2;margin-bottom:18px}
+.top-card h3{font-size:calc(var(--k)*62px);line-height:1.3;margin:24px 0 16px}
+.top-card p{font-size:calc(var(--k)*33px);line-height:1.5;-webkit-line-clamp:2;margin-bottom:20px}
 .top-card .meta{font-size:26px}
-.briefing{flex:1;min-height:0;border-radius:36px;padding:34px 40px 14px}
-.bhead{margin-bottom:10px}
+.briefing{flex:1;min-height:0;padding:38px 46px 18px}
+.bhead{margin-bottom:8px}
 .bbadge{font-size:30px;padding:7px 22px}.btitle{font-size:30px}
 ul{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:space-around}
 li{padding:calc(var(--k)*18px) 0}
 .btx{font-size:calc(var(--k)*39px)}
-.btx .rest{font-size:.82em;color:#6b7280}
-.bchip{font-size:calc(var(--k)*29px)}
-.go{font-size:calc(var(--k)*52px)}
-.foot{padding:30px 56px 34px}
-.foot{gap:24px}.foot .url{font-size:31px}.foot .upd{font-size:26px;white-space:nowrap}
+.btx .rest{font-size:.82em;color:#5F6B7A}
+.bchip{font-size:calc(var(--k)*28px)}
+.go{font-size:calc(var(--k)*40px)}
+.foot{padding:30px 56px 34px;gap:24px}.foot .url{font-size:31px}.foot .upd{font-size:26px;white-space:nowrap}
 """
     return """<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>%s</style></head><body><div class="page">
 <header class="mast"><span class="mark"></span><span class="btext"><strong>태국 뉴스 한눈에</strong><small>파타야에서 읽는 오늘의 태국</small></span>
 <span class="dl"><span class="d">%d월 %d일 %s요일</span><span class="t"><b class="edtag">%s</b> · 방콕 시간 기준</span></span></header>
-<div class="subbar"></div>
 <main class="body">
-<article class="top-card" style="background:%s" data-fit><span class="deco">%s</span>
+<article class="card top-card" data-fit>
 <div class="badges">%s</div><h3>%s</h3>%s<div class="meta"><b>%s</b> · %s</div></article>
-<section class="briefing"><div class="bhead"><span class="bbadge">%s</span><span class="btitle">이번 판 주요 소식 <span class="bcount">%d</span>건</span></div>
+<section class="card briefing"><div class="bhead"><span class="bbadge">%s</span><span class="btitle">이번 판 주요 소식 <span class="bcount">%d</span>건</span></div>
 <ul data-fit>%s</ul></section>
 </main>
-<footer class="foot"><span class="url"><i>🔗</i>%s</span><span class="upd">%s</span></footer>
+<footer class="foot"><span class="url">%s%s</span><span class="upd">%s</span></footer>
 </div></body></html>""" % (
-        css, m, d, e(wd), e(edn), top_bg(t[2]), DECO.get(tp[main["id"]]["topic"], ""), badge_html(main, 0, hl, tp),
+        css, m, d, e(wd), e(edn), badge_html(main, 0, hl, tp),
         e(a), ("<p>%s</p>" % e(b)) if b else ("<p>%s</p>" % e((main.get("summary") or [""])[0])),
         e(main.get("source", "")), e(fmt_time(main.get("published"))),
         BRIEF_BADGE.get(data.get("edition"), "오늘의 브리핑"), len(rest), "".join(brief_li(s, tp) for s in rest),
-        SHORT, UPDATE_LINE)
+        icon("link"), SHORT, UPDATE_LINE)
 
 
 def og_html(data, meta, chosen, tp):
     m, d, wd, edn = date_label(data, meta)
     hl = data.get("highlights") or []
     main, rest = chosen[0], chosen[1:3]
-    t = TOPICS[tp[main["id"]]["topic"]]
     a, _ = split_head(main["headline"])
     css = BASE_CSS % {"W": 1200, "H": 630} + """
 :root{--u:1.9;--k:1}
-.mast{padding:26px 44px 24px}
-.mark{width:76px;height:76px}
-.btext strong{font-size:44px}.btext small{font-size:22px;margin-top:5px}
-.edbig{margin-left:auto;background:#f5b700;color:#3a2a00;font-weight:800;font-size:34px;padding:8px 26px;border-radius:999px;white-space:nowrap}
-.subbar{height:8px}
-.body{flex:1;display:grid;grid-template-columns:1.08fr 1fr;gap:24px;padding:26px 40px 22px;min-height:0}
-.top-card{border-radius:26px;padding:28px 30px 26px;font-size:22px;min-height:0}
-.top-card .deco{font-size:300px}
+.mast{padding:24px 44px 22px}
+.mark{width:68px;height:68px}
+.btext strong{font-size:42px}.btext small{font-size:22px;margin-top:5px}
+.edbig{margin-left:auto;background:#1B64DA;color:#fff;font-weight:700;font-size:32px;padding:8px 26px;border-radius:999px;white-space:nowrap}
+.body{flex:1;display:grid;grid-template-columns:1.08fr 1fr;gap:22px;padding:24px 40px 24px;min-height:0}
+.top-card{padding:30px 32px 28px;font-size:22px;min-height:0}
 .rank{font-size:21px;padding:3px 14px}.chip{font-size:21px;padding:3px 13px}
-.top-card h3{font-size:calc(var(--k)*44px);line-height:1.28;margin-top:14px}
-.briefing{border-radius:26px;padding:22px 26px 8px;min-height:0}
+.top-card h3{font-size:calc(var(--k)*44px);line-height:1.3;margin-top:16px}
+.briefing{padding:24px 28px 10px;min-height:0}
 .bbadge{font-size:22px;padding:4px 16px}.btitle{font-size:22px}
 ul{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-around}
 li{padding:10px 0}
-.btx{font-size:calc(var(--k)*32px);line-height:1.42}
-.bchip{font-size:calc(var(--k)*23px)}
+.btx{font-size:calc(var(--k)*31px);line-height:1.42}
+.bchip{font-size:calc(var(--k)*22px)}
 .foot{padding:14px 44px 16px}
 .foot .url{font-size:25px}.foot .upd{font-size:22px}
 """
     return """<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>%s</style></head><body><div class="page">
 <header class="mast"><span class="mark"></span><span class="btext"><strong>태국 뉴스 한눈에</strong><small>파타야에서 읽는 오늘의 태국</small></span>
-<span class="edbig">%d월 %d일(%s) %s</span></header><div class="subbar"></div>
+<span class="edbig">%d월 %d일(%s) %s</span></header>
 <main class="body">
-<article class="top-card" style="background:%s" data-fit><span class="deco">%s</span><div class="badges">%s</div><h3>%s</h3></article>
-<section class="briefing"><div class="bhead"><span class="bbadge">%s</span><span class="btitle">한국어로 정리한 현지 소식</span></div>
+<article class="card top-card" data-fit><div class="badges">%s</div><h3>%s</h3></article>
+<section class="card briefing"><div class="bhead"><span class="bbadge">%s</span><span class="btitle">한국어로 정리한 현지 소식</span></div>
 <ul data-fit>%s</ul></section></main>
-<footer class="foot"><span class="url"><i>🔗</i>%s</span><span class="upd">%s</span></footer>
+<footer class="foot"><span class="url">%s%s</span><span class="upd">%s</span></footer>
 </div></body></html>""" % (
-        css, m, d, e(wd), e(edn), top_bg(t[2]), DECO.get(tp[main["id"]]["topic"], ""),
+        css, m, d, e(wd), e(edn),
         badge_html(dict(main, region=None), 0, hl, tp), e(a),
         BRIEF_BADGE.get(data.get("edition"), "오늘의 브리핑"),
-        "".join(brief_li(dict(s, headline=split_head(s["headline"])[0]), tp, False) for s in rest), SHORT, UPDATE_LINE)
+        "".join(brief_li(dict(s, headline=split_head(s["headline"])[0]), tp, False) for s in rest),
+        icon("link"), SHORT, UPDATE_LINE)
 
 
 def _rel(pth):
@@ -483,6 +479,10 @@ def main():
     _bad = [k for k, v in _texts.items() if "฿" in v]
     if _bad:
         sys.exit("'฿' 금지(%s) — 글에서는 '바트'로(TRANSLATION_RULES)" % ", ".join(_bad))
+    # 태국 글자(฿ 말고 U+0E00–U+0E7F) 도 카드·OG·카톡 문구·판 미리보기에 없어야 함(화면 규칙과 같음)
+    _thai = [k for k, v in _texts.items() if re.search(r"[\u0E00-\u0E3E\u0E40-\u0E7F]", v)]
+    if _thai:
+        sys.exit("태국 글자 금지(%s) — 한국어·영어 약칭·로마자로(TRANSLATION_RULES)" % ", ".join(_thai))
     ch, oh = share / (eid + "-card.html"), share / (eid + "-og.html")
     ch.write_text(card_html(data, meta, chosen, tp), encoding="utf-8")
     oh.write_text(og_html(data, meta, chosen, tp), encoding="utf-8")

@@ -15,6 +15,7 @@
   예: https://p-max168.github.io/thai-news-kr/?theme=classic · https://p-max168.github.io/thai-news-kr/?theme=classic#places
 - 지금(2단계, 10-05 00:26 방콕부터)은 `"modern"` — 모든 방문자가 모던 디자인.
 - 휴대폰 상단 색: index.html 기본값은 모던에 맞춤(`apple-mobile-web-app-status-bar-style` = `default` 진한 글자, `theme-color` = #ffffff). classic 일 때는 스위치 스크립트가 페이지를 열 때 `black-translucent`·#0b2a4a 로 바꿈. manifest.json(theme_color #ffffff, background_color #F2F4F6)은 실행 중 못 바꿔서 기본(모던)을 따름.
+- 공유 카드·링크 미리보기 그림(tools/share_kit.py → share/<판>.png, og/<판>.png)도 모던 모양(2026-10-05 00:39~, 태그 `backup-20261005-0039-share-card-modern`): 흰 헤더·#F2F4F6 바탕·흰 카드(모서리 = 16px × 그림 배율 --u)·강조색 #1B64DA 하나·글자 #191F28/#4E5968/#5F6B7A·아이콘 #8B95A1, 주제 칩 글자만, 📍·🔗·› 는 assets/modern-icons.svg 선 아이콘. 스위치와 상관없음(그림이라 classic 으로 못 바꿈). 10-05 아침판 전에 올라간 og/ 그림은 예전 남색 그대로.
 - 따로 떨어진 쪽(404.html·offline.html·안내 4쪽 tools/legal_pages.py·판 미리보기 tools/share_kit.py → e/<판>/)은 스위치와 상관없이 모던 모양(파일 안 CSS). 예전 모양이 필요하면 태그 `backup-20261005-0018-modern-on` 에서 그 파일들을 되돌림.
 
 ## 모던 테마 파일(따로 떨어진 층)

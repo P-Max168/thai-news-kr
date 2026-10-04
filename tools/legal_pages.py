@@ -8,6 +8,8 @@ DRAFT = True
 UPDATED = "2026-10-03"
 SITE = "태국 뉴스 한눈에"
 
+# 초안 띠 아이콘 = assets/modern-icons.svg 의 Lucide pen-line(예전 📝 이모지 대신, 2026-10-05)
+DRAFT_ICON = ('<svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 21h8" /><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /></svg>')
 CSS = """
 :root{color-scheme:light}
 *{box-sizing:border-box}
@@ -15,7 +17,8 @@ body{margin:0;font:16px/1.7 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Ne
 header{background:#fff;color:#191F28;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));box-shadow:0 1px 0 rgba(0,0,0,.05)}
 header a{color:#191F28;text-decoration:none;font-weight:700}
 main{max-width:720px;margin:0 auto;padding:16px 16px 40px}
-.draft{background:#fff;border-radius:14px;padding:12px 16px;font-size:.875rem;margin:0 0 14px;color:#4E5968}
+.draft{background:#fff;border-radius:14px;padding:12px 16px;font-size:.875rem;margin:0 0 14px;color:#4E5968;display:flex;gap:8px;align-items:flex-start;line-height:1.5}
+.draft .ic{flex:0 0 auto;margin-top:3px;color:#8B95A1}
 h1{font-size:1.5rem;line-height:1.35;margin:6px 0 4px;letter-spacing:-.5px}
 .upd{color:#5F6B7A;font-size:.875rem;margin:0 0 16px}
 section{background:#fff;border-radius:16px;padding:18px 18px;margin:0 0 12px}
@@ -68,7 +71,7 @@ NAV = [("privacy.html", "개인정보 처리방침"), ("terms.html", "이용약�
 def render(fn, title, secs):
     nav = "".join('<a href="%s"%s>%s</a>' % (f, ' aria-current="page"' if f == fn else "", t) for f, t in NAV)
     body = "".join("<section><h2>%s</h2>%s</section>" % (html.escape(h), b) for h, b in secs)
-    draft = '<p class="draft">📝 <b>초안</b>이에요 — 운영자 확인 전이라 [대괄호] 칸은 아직 정해지지 않았어요.</p>' if DRAFT else ""
+    draft = '<p class="draft">%s<span><b>초안</b>이에요 — 운영자 확인 전이라 [대괄호] 칸은 아직 정해지지 않았어요.</span></p>' % DRAFT_ICON if DRAFT else ""
     return """<!doctype html>
 <html lang="ko">
 <head>

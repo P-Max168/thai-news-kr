@@ -1,0 +1,3 @@
+- 바뀐 것: 공유 카드(1080×1350)·링크 미리보기 OG(1200×630) 틀을 모던 모양으로(tools/share_kit.py) — 흰 헤더·옅은 회색 바탕 #F2F4F6·흰 카드(휴대폰 16px 모서리 비율)·강조색 하나 #1B64DA·글자 회색 단계, 남색 헤더·그라데이션·물결 장식·주제별 색·노란 형광펜 없앰, 주제 칩은 글자만, 📍·🔗·› 는 선 아이콘. 맞춤(넘침 없음)·'฿' 검사 그대로 + 태국 글자 검사 추가. 안내 4쪽 '초안' 띠의 📝 → 선 아이콘(pen-line). 이미 올라간 og/·e/ 그림은 안 바꿈(다음 판 10-05 07:08 부터 새 틀)
+- 왜: 사이트가 10-05 00:26 부터 모던 기본인데 공유 카드·OG 만 예전 남색이라 안 맞음(민구님 후속 요청 00:39)
+- 되돌리는 법: `git checkout backup-20261005-0039-share-card-modern -- tools/share_kit.py tools/legal_pages.py about.html contact.html privacy.html terms.html` → 커밋 → push (force 금지). 이미 새 틀로 만든 og/<판>.png 는 그 판에 `python3 tools/share_kit.py <판>` 다시 돌리고 배포
