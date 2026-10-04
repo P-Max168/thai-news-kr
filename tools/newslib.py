@@ -80,11 +80,13 @@ def thai_check(data):
             m = THAI_SHOWN_RE.search(t) if isinstance(t, str) else None
             assert not m, (where, "화면에 태국 문자 금지(฿ 만 허용) — 한국어/로마자로 고칠 것(TRANSLATION_RULES)", t[max(0, m.start() - 12):m.end() + 8])
     for s in data.get("stories", []):
-        for k in KO_FIELDS + ("tags",):
-            if k in s: chk((s["id"], k), s[k])
-        if isinstance(s.get("issue"), dict): chk((s["id"], "issue.title"), s["issue"].get("title"))
+        # source(매체 이름)는 카드 아래·출처 목록에 그대로 보임 → 'MGR Online (매니저 온라인)' 처럼 (2026-10-04 추가)
+        for k in KO_FIELDS + ("tags", "source"):
+            if k in s: chk((s.get("id"), k), s[k])
+        chk((s.get("id"), "related.source"), [r.get("source") or "" for r in s.get("related") or [] if isinstance(r, dict)])
+        if isinstance(s.get("issue"), dict): chk((s.get("id"), "issue.title"), s["issue"].get("title"))
         d = s.get("discussion")
-        if isinstance(d, dict): chk((s["id"], "discussion"), [d.get("question") or "", d.get("operator_comment") or ""])
+        if isinstance(d, dict): chk((s.get("id"), "discussion"), [d.get("question") or "", d.get("operator_comment") or ""])
     br = data.get("briefing")
     chk("briefing", [b.get("text") or "" for b in br] if isinstance(br, list) else (br or ""))
     for i, k in enumerate(data.get("korea_top") or []):
@@ -485,8 +487,8 @@ if __name__ == "__main__":
         # python3 tools/newslib.py check data/<id>.json … : 저장된 판 검증 + 구성 점검
         for f in sys.argv[2:]:
             d = json.loads(pathlib.Path(f).read_text(encoding="utf-8"))
-            if "id" not in d:   # 2026-09-29-early 같은 초기 형식
-                print("건너뜀(초기 형식, id 없음):", f); continue
+            if "id" not in d:   # 2026-09-29-early 같은 초기 형식 — 화면 태국 문자 검사만
+                thai_check(d); print("건너뜀(초기 형식, id 없음 — 태국 문자 검사만 통과):", f); continue
             validate(d)
             print("OK", f, "새 형식" if is_new_format(d) else "옛 형식", "| 경고:", coverage_report(d) or "없음")
     else:

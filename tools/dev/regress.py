@@ -47,6 +47,12 @@ async def main():
         # 한국 뉴스
         k = await pg.evaluate("[...document.querySelectorAll('#korea .korea__list > li:not(.k-ad)')].filter(l=>l.offsetParent!==null).length")
         rec(k >= 3, "🇰🇷 한국 주요 뉴스", "보이는 항목 %d" % k)
+        # 광고 — 시작 화면(⭐ 내 피드)에서 셈. 브리핑 줄을 누르면 기사 수가 적은 주제 탭으로 바뀔 수 있어(큰 배너·기사 사이 광고 없음)
+        #   그 뒤에 세면 판마다 결과가 달라짐 → 브리핑 누르기 전에 셈(2026-10-04)
+        ads = await pg.evaluate("""()=>[...document.querySelectorAll('[data-ad-slot]:not([hidden]), .ad-slot--feed')].filter(e=>e.offsetParent!==null||e.closest('#drawer')).map(e=>({id:e.getAttribute('data-ad-slot')||'infeed', dm: !!e.querySelector('.dm-ad'), img: !!e.querySelector('img, picture'), art: [...e.querySelectorAll('.dm-ad__art')].every(i=>i.getAttribute('src')&&/dragon\.svg/.test(i.getAttribute('src'))), gr: /평점|Google \d/.test(e.textContent), tag: !!e.querySelector('.dm-target') && /이 자리 추천 업종/.test(e.querySelector('.dm-target').textContent), tel: !!e.querySelector('a[href="tel:+66807365211"]')}))""")
+        bad = [a["id"] for a in ads if not (a["dm"] and a["img"] and a["art"] and a["tag"] and not a["gr"])]
+        rec(len(ads) >= 4 and not bad, "광고 자리 = 드래곤 배너 + 같은 그림(dragon.svg) + 📢 추천 업종, 구글 평점 없음", "%d자리, 문제: %s" % (len(ads), bad or "없음"))
+        rec(any(a["tel"] for a in ads), "전화 링크 tel:+66807365211")
         # 브리핑 → 기사 열림
         n_brief = await pg.locator("#briefing .brief-line[data-open]").count()
         if n_brief:
@@ -69,11 +75,6 @@ async def main():
             rec(st > 0 and bool(toast.strip()), "🙌 더 보여줘 / 🙅 덜 보여줘", toast.strip()[:40])
             await pg.locator("#feed .card [data-vote='1'][aria-pressed='true']").first.click(); await pg.wait_for_timeout(300)   # 취소(원상복구)
         else: rec(False, "🙌 더 보여줘 / 🙅 덜 보여줘", "버튼 없음")
-        # 광고
-        ads = await pg.evaluate("""()=>[...document.querySelectorAll('[data-ad-slot]:not([hidden]), .ad-slot--feed')].filter(e=>e.offsetParent!==null||e.closest('#drawer')).map(e=>({id:e.getAttribute('data-ad-slot')||'infeed', dm: !!e.querySelector('.dm-ad'), img: !!e.querySelector('img, picture'), art: [...e.querySelectorAll('.dm-ad__art')].every(i=>i.getAttribute('src')&&/dragon\.svg/.test(i.getAttribute('src'))), gr: /평점|Google \d/.test(e.textContent), tag: !!e.querySelector('.dm-target') && /이 자리 추천 업종/.test(e.querySelector('.dm-target').textContent), tel: !!e.querySelector('a[href="tel:+66807365211"]')}))""")
-        bad = [a["id"] for a in ads if not (a["dm"] and a["img"] and a["art"] and a["tag"] and not a["gr"])]
-        rec(len(ads) >= 4 and not bad, "광고 자리 = 드래곤 배너 + 같은 그림(dragon.svg) + 📢 추천 업종, 구글 평점 없음", "%d자리, 문제: %s" % (len(ads), bad or "없음"))
-        rec(any(a["tel"] for a in ads), "전화 링크 tel:+66807365211")
         # 태국 문자·원화
         await pg.goto(URL + ("&" if "?" in URL else "?") + "tab=all&_=" + str(int(time.time())), wait_until="networkidle"); await pg.wait_for_timeout(600)
         await pg.evaluate("document.querySelectorAll('#feed .card:not(.is-open) .card__head').forEach(b=>b.click())"); await pg.wait_for_timeout(400)
