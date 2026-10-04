@@ -414,6 +414,17 @@ async def main():
         ok_ob = ob.get("auto_sheet") is False and ob.get("hello", 0) > 0 and ob.get("closed") and ob.get("cards", 0) > 0 and (ob["personas"] == 5 if not ob2 else ob["regions"] == 5)
         rec(ok_ob, "첫 방문: 창 저절로 안 뜸 + '👋 고르기' 한 줄 → 시작 화면(%s)" % ("2단계" if ob2 else "예전 '어떤 분이세요?' — 2단계는 보류"), ob)
         await c2.close()
+        # 2026-10-05: 헤더 '빠른 정보' 최악 경우(PM2.5 '매우 나쁨'·두 자리 월/일·6자리 금값 등 가짜 시험값을 화면에만 넣음) — 320·360·412 넘침 0
+        try:
+            sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent)); import header_worst as HW
+            hw = {}
+            for wdt in (320, 360, 412):
+                m = await HW.worst(b, URL, wdt)
+                hw[wdt] = {"넘침px": m and m["over"], "칸안넘침": m and m["tiles"], "칸": m and m["n"], "매우나쁨": m and m["vbad"], "단계": m and m["fit"], "높이": m and m["h"]}
+            okhw = all(v["넘침px"] == 0 and v["칸안넘침"] == 0 and v["칸"] == 4 and v["매우나쁨"] for v in hw.values())
+            rec(okhw, "헤더 빠른 정보 최악 경우('매우 나쁨'·가장 긴 값) 320·360·412 — 넘침 0, 칸 4개(단계 = 넘칠 때만 켠 줄이기 단계 수, 5 = 2줄)", hw)
+        except Exception as e:
+            rec(False, "헤더 빠른 정보 최악 경우 점검 실행 실패", str(e)[:160])
         rec(FS["blocked"] == 0 or None, "자동 점검이 실서버(Firestore)에 반응·신고를 안 씀(이 기기 스위치 끔 + 쓰기 요청 차단)", "막은 쓰기 요청 %d개" % FS["blocked"])
         await b.close()
     if OUT: pathlib.Path(OUT).write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")

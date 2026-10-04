@@ -133,6 +133,13 @@
     var d = f(Math.min.apply(null, t));
     return d + " " + o.hour.replace(/^24$/, "00") + ":" + o.minute;
   }
+  // 화면용 조회 시각 HTML: 'M/D ' 를 span 으로 — 오늘 날짜면 tk-d--today(헤더가 넘칠 때만 숨김, 3단계). 읽어 주기·출처 창엔 그대로 날짜
+  function clockHTML(list) {
+    var c = clock(list); if (!c) return "";
+    var o = {}; new Intl.DateTimeFormat("en-US", { timeZone: TZ, month: "numeric", day: "numeric" }).formatToParts(new Date()).forEach(function (p) { o[p.type] = p.value; });
+    var i = c.indexOf(" "), d = c.slice(0, i);
+    return '<span class="tk-d' + (d === o.month + "/" + o.day ? " tk-d--today" : "") + '">' + d + " </span>" + c.slice(i + 1);
+  }
   function n2(x) { return Number(x).toLocaleString("ko-KR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 
   // 상자 = 두 줄([라벨용 글, 화면 HTML] 두 개). 한 줄이 없으면 그 줄만 빠지고, 둘 다 없으면 상자를 안 그림
@@ -144,15 +151,15 @@
       lines.map(function (l) { return '<span class="' + (l[2] || "tk-ln") + '">' + l[1] + "</span>"; }).join("") + "</span></button>";
   }
   // 화면 = 'M/D HH:MM'(날짜를 넣으면서 칸이 넓어져 화면 글자 '조회'는 뺌 — 읽어 주기·출처 창엔 그대로 '조회')
-  function ft(list) { var c = clock(list); return c ? [c + " 조회", c] : null; }
+  function ft(list) { var c = clock(list); return c ? [c + " 조회", clockHTML(list)] : null; }
   var renderLater = false;
   function render() {
     // 속도(2026-10-03 18:25, 검수 지시): 첫 기사 카드가 그려지기 전에는 칩을 채우지 않음 — 자리는 index.html 의 빈 상자 4개가 잡고 있음
     if (!window.__tnLate && window.TNAfterFirst) { if (!renderLater) { renderLater = true; window.TNAfterFirst(function () { renderLater = false; render(); }); } return; }
     var f = fxOK(), u = usdtOK(), w = wxOK(), g = goldOK(), a = aqOK(), o = fuelOK(), h = [];
     h.push(tile("fx", [
-      f && ["1바트 " + f.THB_KRW.toFixed(1) + "원", "1바트 = <b>" + f.THB_KRW.toFixed(1) + "원</b>"],
-      f && f.USD_THB > 0 && ["1달러 " + f.USD_THB.toFixed(1) + "바트", "1달러 = <b>" + f.USD_THB.toFixed(1) + '<small class="tk-u">฿</small></b>']
+      f && ["1바트 " + f.THB_KRW.toFixed(1) + "원", "1바트<i class=\"tk-eq\"> =</i> <b>" + f.THB_KRW.toFixed(1) + "원</b>"],
+      f && f.USD_THB > 0 && ["1달러 " + f.USD_THB.toFixed(1) + "바트", "1달러<i class=\"tk-eq\"> =</i> <b>" + f.USD_THB.toFixed(1) + '<small class="tk-u">฿</small></b>']
     ], ft([f && ms(f.fetched_at)])));
     // v5(운영자 요청 10-03 10:25): 테더는 환율 바로 옆 자기 상자 — '1USDT' / 큰 글자 '33.5฿' / 조회 시각
     h.push(tile("usdt", [
@@ -164,10 +171,10 @@
       w && [REGIONS[w.rg].name + " " + Math.round(w.t) + "도 " + ic[1] + (w.rain != null ? " 강수확률 " + w.rain + "%" : ""),
         '<span class="tk-i" aria-hidden="true">' + ic[0] + "</span><b>" + Math.round(w.t) + "°</b>" +
         (w.rain != null ? '<span class="tk-rain">☔' + w.rain + "%</span>" : "")],
-      a && ["미세먼지 PM2.5 " + Math.round(a.pm) + " " + lv.t, '<span class="tk-l">PM2.5</span><b>' + Math.round(a.pm) + '</b><span class="tk-lv tk-lv--' + lv.k + '">' + lv.t + "</span>"]
+      a && ["미세먼지 PM2.5 " + Math.round(a.pm) + " " + lv.t, '<span class="tk-l tk-pm">PM2.5</span><b>' + Math.round(a.pm) + '</b><span class="tk-lv tk-lv--' + lv.k + '">' + lv.t + "</span>"]
     ], (function () {   // 지역 이름은 맨 아래 조회 줄 앞에(첫 줄 폭 줄이기 — 운영자 요청 10-03: 날씨 상자 잘림)
       var c = clock([w && w.at, a && a.at]), rn = REGIONS[(w || a || {}).rg || region()].name;
-      return c ? [rn + " " + c + " 조회", '<span class="tk-rg">' + rn + "</span>" + c] : null;
+      return c ? [rn + " " + c + " 조회", '<span class="tk-rg">' + rn + "</span>" + clockHTML([w && w.at, a && a.at])] : null;
     })()));
     h.push(tile("price", [
       g && ["금시세 금괴 1바트 " + n0(g.bar_sell) + "바트", '<span class="tk-l">금</span><b>' + n0(g.bar_sell) + '<small class="tk-u">฿</small></b>'],
@@ -181,7 +188,20 @@
   }
 
   // 다 들어가면 오른쪽 흐림 표시 없음, 넘치면(옆으로 밀어야 하면) 흐림 표시
-  function fitMark() { box.classList.remove("is-overflow"); box.classList.toggle("is-overflow", box.scrollWidth > box.clientWidth + 1); }
+  // 2026-10-05(Max 04:30): 가장 긴 값(PM2.5 '매우 나쁨'·두 자리 월/일·6자리 금값…)이 겹치면 360px 에서 칸 4개가 넘쳐 옆으로 밀어야 했음.
+  // 원인 = 칸 폭이 글 길이대로만 정해지고 줄일 장치가 없었음(글자는 이미 11px 바닥). → 넘칠 때만 아래 단계를 하나씩 켜서 들어가면 멈춤(글자 크기는 안 줄임):
+  //   1 칸 사이·안쪽 여백 줄이기  2 '1바트 = 40.2원' → '1바트 40.2원'('=' 빼기)  3 조회 시각이 오늘이면 날짜 빼고 시각만(어제 것은 날짜 그대로)
+  //   4 날씨 칸의 'PM2.5' 글씨·지역 이름 숨기기(읽어 주기·작은 창엔 그대로)  5 마지막 수단: 칸 4개를 2줄(2×2)로. 그래도 넘치면 예전처럼 옆으로 밀기 + 흐림
+  var FIT = ["tk-fit1", "tk-fit2", "tk-fit3", "tk-fit4", "tk-fit5"];
+  function fitMark() {
+    var row = box.parentElement || box;
+    FIT.forEach(function (c) { row.classList.remove(c); });
+    box.classList.remove("is-overflow");
+    var over = function () { return box.scrollWidth > box.clientWidth; };   // 1px 도 넘침으로(오른쪽 끝 잘림 방지)
+    for (var i = 0; i < FIT.length && box.children.length && over(); i++) row.classList.add(FIT[i]);
+    box.setAttribute("data-fit", String(i));
+    box.classList.toggle("is-overflow", over());
+  }
   window.addEventListener("resize", fitMark);
   // 속도(17:45): document.fonts.ready 는 읽기만 해도 스타일 계산을 강제 → 첫 기사 카드 뒤에
   (window.TNAfterFirst || function (f) { f(); })(function () { if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitMark); });

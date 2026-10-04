@@ -941,3 +941,12 @@ body.drawer-open{overflow:hidden}
   #ticker .tk-tile .tk-u,#ticker .tk-tile[data-tk="price"] .tk-u{font-size:.88em}
   #ticker .tk-tile .tk-ft{font-size:clamp(.625rem,2.75vw,.75rem)}
 }
+/* 헤더 '빠른 정보' 넘침 단계(2026-10-05, ticker.js fitMark 가 넘칠 때만 하나씩 켬 — 글자 크기는 그대로) */
+.tk-fit1 .ticker{gap:2px}
+.tk-fit1 #ticker .tk-chip.tk-tile,.tk-fit1 #ticker .tk-chip.tk-tile[data-tk]{padding-left:1px;padding-right:1px}
+.tk-fit2 .tk-eq{display:none}
+.tk-fit2 .tk-tile[data-tk="fx"] .tk-ln{gap:3px}
+.tk-fit3 .tk-d--today{display:none}
+.tk-fit4 .tk-pm,.tk-fit4 .tk-tile[data-tk="env"] .tk-rg{display:none}
+.tk-fit5 .ticker{flex-wrap:wrap;overflow-x:visible;row-gap:3px}
+.tk-fit5 .ticker>.tk-tile{flex:1 1 calc(50% - 2px)}
