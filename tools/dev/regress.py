@@ -77,11 +77,44 @@ async def main():
             rec(opened > 0, "브리핑 줄 누르면 기사 펼침", "브리핑 %d줄" % n_brief)
         else: rec(False, "브리핑 줄 누르면 기사 펼침", "브리핑 줄 없음")
         # 오늘의 질문·댓글
+        # 2026-10-05(Max 04:30): 예전엔 '질문 0 = 실패'로 늘 빨간 줄 → 진짜 실패가 묻힘. 오늘의 질문은 운영자 승인(tools/discussion.py apply) 뒤에만 보이는 게 정상.
+        #  ① 지금 판: 승인된 질문 수(E, 판 데이터) vs 화면 질문 줄(dq). E>0 인데 dq 0 = 실패 / E=0 이고 승인 대기 초안(정본 drafts/discussion/<판>.json, .gitignore — 이 상자에만) 있으면 '참고' / 초안도 없으면 실패
+        #  ② 기능: 가장 최근 '승인된 질문이 있는 판'을 열어 승인된 기사 카드마다 질문 줄이 그려지는지 + 펼치기
         dq = await pg.locator(".dq-line").count(); cm = await pg.locator("[data-cmts]").count()
-        rec(dq > 0 and cm > 0, "💬 오늘의 질문·댓글 자리", "질문 %d · 댓글 칸 %d" % (dq, cm))
-        if dq:
-            await pg.locator(".dq-line").first.click(); await pg.wait_for_timeout(500)
-            rec(await pg.locator(".talk.is-open").count() > 0, "오늘의 질문 펼치기")
+        info = await pg.evaluate("""async()=>{const ed=(window.TNApp&&TNApp.edId&&TNApp.edId())||(window.NEWS_INDEX||{}).latest; const eds=((window.NEWS_INDEX||{}).editions||[]).map(e=>e.id);
+          const appr=async id=>{try{const r=await fetch('data/'+id+'.json?_='+Date.now()); const d=await r.json(); return (d.stories||[]).filter(s=>s.discussion&&s.discussion.approved===true&&s.discussion.question).map(s=>s.id);}catch(e){return null}};
+          const cur=await appr(ed); let ok=null, okIds=[]; for(const id of eds){ if(id===ed) continue; const a=await appr(id); if(a&&a.length){ok=id; okIds=a; break;} }
+          return {ed, E: cur===null?-1:cur.length, ok, okIds};}""")
+        ed = info["ed"]; E = info["E"]
+        drafts = [pathlib.Path("/workspace/thai-news-portal/drafts/discussion/%s.json" % ed), pathlib.Path(__file__).resolve().parents[2] / "drafts" / "discussion" / ("%s.json" % ed)]
+        nd = 0
+        for f in drafts:
+            if f.exists():
+                try:
+                    j = json.loads(f.read_text(encoding="utf-8")); nd = len(j if isinstance(j, list) else (j.get("items") or j.get("stories") or []))
+                except Exception: nd = -1
+                break
+        if cm == 0: rec(False, "💬 댓글 칸", "판 %s 댓글 칸 0" % ed)
+        if E > 0: rec(dq > 0, "💬 오늘의 질문 — 지금 판 승인된 질문이 화면에 보임", "판 %s 승인 %d · 화면 질문 줄 %d · 댓글 칸 %d" % (ed, E, dq, cm))
+        elif E == 0 and nd > 0: rec(None, "💬 오늘의 질문 0 = 정상(지금 판 질문은 운영자 승인 대기)", "판 %s 승인 0 · 승인 대기 초안 %d건(drafts/discussion/%s.json) · 댓글 칸 %d" % (ed, nd, ed, cm))
+        else: rec(False, "💬 오늘의 질문 — 지금 판에 승인된 질문도, 승인 대기 초안도 없음(초안 단계가 안 돌았을 수 있음)", "판 %s 승인 %d · 초안 %s · 댓글 칸 %d" % (ed, E, nd if nd else "없음", cm))
+        if info["ok"]:
+            pq = await ctx.new_page()
+            await pq.goto(URL + ("&" if "?" in URL else "?") + "e=" + info["ok"] + "&_=" + str(int(time.time())), wait_until="load"); await pq.wait_for_timeout(2500)
+            shown = await pq.evaluate("ids=>[...document.querySelectorAll('#feed .card')].filter(c=>ids.includes(c.id)).length", info["okIds"])
+            dq2 = await pq.locator(".dq-line").count()
+            opened = False
+            if dq2:
+                # 질문 줄은 카드 본문 안 → 그 카드를 먼저 펼친 뒤 질문 줄 누름(안 보이는 줄 클릭으로 30초 멈춤 방지)
+                await pq.evaluate("()=>{const b=document.querySelector('.dq-line'); const c=b&&b.closest('.card'); if(c&&!c.classList.contains('is-open')) c.querySelector('.card__head').click();}"); await pq.wait_for_timeout(400)
+                try:
+                    await pq.locator(".dq-line").first.click(timeout=5000); await pq.wait_for_timeout(500)
+                    opened = await pq.evaluate("()=>{const b=document.querySelector('.dq-line'); return !!b && b.getAttribute('aria-expanded')==='true' && b.closest('.talk').classList.contains('is-open');}")
+                except Exception as ex: opened = "클릭 실패: %s" % str(ex)[:80]
+            rec(shown > 0 and dq2 == shown and opened is True, "💬 승인된 질문 그리기 기능(가장 최근 승인 판) — 승인 기사 카드마다 질문 줄 + 펼치기", "판 %s 승인 %d · 화면 승인 카드 %d · 질문 줄 %d · 펼침 %s" % (info["ok"], len(info["okIds"]), shown, dq2, opened))
+            await pq.close()
+        else:
+            rec(False, "💬 승인된 질문 그리기 기능 — 승인된 질문이 있는 판을 못 찾음", info)
         # 🙌/🙅
         up = pg.locator("#feed .card [data-vote='1']").first
         if await up.count():
