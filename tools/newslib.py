@@ -67,18 +67,21 @@ def cjk_check(data):
         if isinstance(d, dict): chk((s["id"], "discussion"), [d.get("question") or "", d.get("operator_comment") or ""])
     br = data.get("briefing")
     chk("briefing", [b.get("text") or "" for b in br] if isinstance(br, list) else (br or ""))
-# 화면에 보이는 글에 태국 문자 금지(฿ U+0E3F 만 허용). title_th·원문 URL 처럼 화면에 안 나오는 필드는 검사 안 함.
+# 화면에 보이는 글에 태국 문자 금지. title_th·원문 URL 처럼 화면에 안 나오는 필드는 검사 안 함.
+#   ฿(U+0E3F)도 판 글에서는 금지(2026-10-04 21:41 Max 승인) — ฿ 는 헤더 숫자 칸(assets/ticker.js .tk-u)에만, 글에서는 '350바트(약 14,068원)'.
 #   2026-10-04 저녁판 요약에 '이민국(สตม.)'·'재난방지국(ปภ.)'·키워드 'ปภ.' 가 들어가 라이브 화면에 태국 글자가 보였던 일 → 판 저장 때 막음
 THAI_SHOWN_RE = re.compile(r"[\u0E00-\u0E3E\u0E40-\u0E7F]+")
 
 
 def thai_check(data):
-    """화면에 보이는 필드(기사 제목·요약·배경·후속·지역·그래서 나는?·추천 댓글·키워드·이슈 이름·오늘의 질문·브리핑·한국 뉴스 제목)에
-    태국 문자가 있으면 예외. 기관 약칭은 한국어(+로마자)로: 예 สตม. → 태국 이민국, ปภ. → 재난방지청(DDPM)."""
+    """화면에 보이는 필드(기사 제목·요약·배경·후속·지역·그래서 나는?·추천 댓글·키워드·매체 이름·이슈 이름·오늘의 질문·브리핑·한국 뉴스 제목)에
+    태국 문자나 '฿' 가 있으면 예외. 기관 약칭은 한국어(+로마자)로: 예 สตม. → 태국 이민국, ปภ. → 재난방지청(DDPM)."""
     def chk(where, v):
         for t in (v if isinstance(v, list) else [v]):
             m = THAI_SHOWN_RE.search(t) if isinstance(t, str) else None
-            assert not m, (where, "화면에 태국 문자 금지(฿ 만 허용) — 한국어/로마자로 고칠 것(TRANSLATION_RULES)", t[max(0, m.start() - 12):m.end() + 8])
+            assert not m, (where, "화면에 태국 문자 금지 — 한국어/로마자로 고칠 것(TRANSLATION_RULES)", t[max(0, m.start() - 12):m.end() + 8])
+            i = t.find("฿") if isinstance(t, str) else -1
+            assert i < 0, (where, "'฿' 금지 — 글에서는 '바트'(예 350바트(약 14,068원)), ฿ 는 헤더 숫자 칸에만(TRANSLATION_RULES)", t[max(0, i - 12):i + 8])
     for s in data.get("stories", []):
         # source(매체 이름)는 카드 아래·출처 목록에 그대로 보임 → 'MGR Online (매니저 온라인)' 처럼 (2026-10-04 추가)
         for k in KO_FIELDS + ("tags", "source"):

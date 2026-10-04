@@ -476,6 +476,13 @@ def main():
     ed_url = SITE + "e/%s/" % eid
     img_url = SITE + "og/%s.png" % eid
 
+    # ฿ 는 사이트 헤더 숫자 칸에만(2026-10-04) — 카드·OG·카톡 문구·판 미리보기 글에는 '바트'
+    _texts = {"카드": card_html(data, meta, chosen, tp), "OG": og_html(data, meta, chosen, tp),
+              "카톡 문구": message(data, meta, chosen, tp, ed_url, not a.no_main_link),
+              "판 미리보기": edition_page(data, meta, chosen, tp, ed_url, img_url)[0]}
+    _bad = [k for k, v in _texts.items() if "฿" in v]
+    if _bad:
+        sys.exit("'฿' 금지(%s) — 글에서는 '바트'로(TRANSLATION_RULES)" % ", ".join(_bad))
     ch, oh = share / (eid + "-card.html"), share / (eid + "-og.html")
     ch.write_text(card_html(data, meta, chosen, tp), encoding="utf-8")
     oh.write_text(og_html(data, meta, chosen, tp), encoding="utf-8")

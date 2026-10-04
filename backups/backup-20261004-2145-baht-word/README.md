@@ -1,0 +1,3 @@
+- 바뀐 것: '฿' 는 헤더 숫자 칸(환율·USDT·금·휘발유 값 옆 작은 단위, assets/ticker.js .tk-u)에만 — 규칙을 tools/TRANSLATION_RULES.md·README 에 적고, 막는 검사 3곳 추가(newslib.thai_check = 판 글에 ฿ 있으면 저장 실패 / share_kit.py = 카드·OG·카톡 문구·판 미리보기에 ฿ 있으면 멈춤 / regress = 라이브 메인·서랍·가게·임대·구인·승인함·하트·내 주변에서 헤더 칸 밖 ฿ 찾으면 실패). 화면 글은 원래 '바트'라 바꾼 글자 0개(사진 before = after)
+- 왜: Max(앱 개발 권한) 21:41 승인 — '฿ 는 헤더 숫자 칸에만, 나머지 모든 글은 바트'. 저장소·판 데이터 13개·가게·임대·광고·공유 카드 html·카톡 문구 전체 검색 + 라이브 화면 360·412 전수 확인에서 헤더 칸 4개 말고는 ฿ 없음
+- 되돌리는 법: `git checkout backup-20261004-2145-baht-word -- tools/newslib.py tools/share_kit.py tools/dev/regress.py tools/TRANSLATION_RULES.md README.md REGRESSION_CHECKLIST.md` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)

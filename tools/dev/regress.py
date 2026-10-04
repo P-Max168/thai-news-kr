@@ -321,6 +321,26 @@ async def main():
             except Exception as e:
                 r404 = {"err": str(e)[:80]}
             rec(r404.get("st") == 404 and r404.get("ko"), "없는 주소 = 한국어 404 쪽('페이지를 찾을 수 없어요' + 오늘의 뉴스 버튼)", r404)
+        # ฿ 는 헤더 숫자 칸(#ticker .tk-u)에만(2026-10-04 Max 승인) — 기사·브리핑·서랍·가게·임대·구인·승인함·내 주변·하트 화면 글은 '바트'
+        BAHT_JS = r"""()=>{const out=[]; let hdr=0; const w=document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+          while(w.nextNode()){const n=w.currentNode, t=n.textContent; if(t.indexOf('฿')<0) continue; const el=n.parentElement; if(!el.getClientRects().length) continue;
+            if(el.closest('#ticker .tk-u')){hdr++; continue;} const c=el.closest('[data-id],[id]'); const i=t.indexOf('฿');
+            out.push((c?(c.getAttribute('data-id')||'#'+c.id):'?')+' '+el.tagName.toLowerCase()+' “…'+t.slice(Math.max(0,i-14),i+6)+'…”');}
+          document.querySelectorAll('[aria-label*="฿"],[title*="฿"],[alt*="฿"],[placeholder*="฿"]').forEach(e=>{ if(!e.closest('#ticker .tk-u')) out.push('속성 '+e.tagName.toLowerCase()); });
+          return {hdr, out};}"""
+        bh = {"hdr": 0, "out": []}
+        for rt in ["?tab=all", "#places", "#rent", "#jobs", "#approve", "#hearts", "#nearby/food"]:
+            try:
+                await pg.goto("about:blank")
+                await pg.goto(URL + ("?tab=all&_=%d" % time.time() if rt.startswith("?") else "?_=%d%s" % (time.time(), rt)), wait_until="networkidle"); await pg.wait_for_timeout(900)
+                if rt.startswith("?"):
+                    await pg.evaluate("document.querySelectorAll('#feed .card:not(.is-open) .card__head').forEach(b=>b.click())"); await pg.wait_for_timeout(400)
+                    r = await pg.evaluate(BAHT_JS); bh["hdr"] = r["hdr"]; bh["out"] += ["메인 " + x for x in r["out"]]
+                    await pg.click("#menuBtn"); await pg.wait_for_timeout(400); rt = "서랍"
+                r = await pg.evaluate(BAHT_JS); bh["out"] += [rt + " " + x for x in r["out"]]
+            except Exception as e:
+                bh["out"].append("%s 열기 실패 %s" % (rt, str(e)[:60]))
+        rec(not bh["out"] and bh["hdr"] > 0, "'฿' 는 헤더 숫자 칸에만(메인·서랍·가게·임대·구인·승인함·하트·내 주변 글은 '바트')", "헤더 칸 ฿ %d개, 밖 %d곳 %s" % (bh["hdr"], len(bh["out"]), bh["out"][:6]))
         # 첫 방문 시작 화면(새 방문자): 보류 중엔 예전 '어떤 분이세요?'(페르소나 5개), 켜지면 2단계
         c2 = await b.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True, timezone_id="Asia/Bangkok", locale="ko-KR")
         p2 = await c2.new_page()
