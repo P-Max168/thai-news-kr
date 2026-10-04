@@ -7,6 +7,7 @@
           --n 5               카드에 넣을 기사 수(3~5, 기본 5) / 메시지는 앞 3건
           --no-main-link      메시지에서 포털 메인 링크 줄 빼기
           --no-publish        og/·e/ 는 건드리지 않고 share/ 만 만들기
+          --out DIR           share/ 대신 DIR 에 만들기(시험용, --no-publish 포함 — share/·og/·e/ 안 건드림)
 
 만드는 파일
   share/<id>.png        1080x1350 세로 카드(오픈채팅에 사진으로 올리기)
@@ -216,15 +217,39 @@ FIT_JS = """
 async () => {
   await document.fonts.ready;
   const root = document.documentElement;
-  const over = () => [...document.querySelectorAll('[data-fit]')].some(el => el.scrollHeight > el.clientHeight + 1);
+  // 넘침 = 내용이 상자보다 큼(scrollHeight) 또는 자식이 상자 밖으로 나감(가운데 정렬로 위·아래로 넘치는 경우까지)
+  const over = () => [...document.querySelectorAll('[data-fit]')].some(el => {
+    if (el.scrollHeight > el.clientHeight + 1) return true;
+    const r = el.getBoundingClientRect();
+    return [...el.children].some(c => { if (getComputedStyle(c).position === 'absolute') return false;  // 장식 글자(.deco) 제외
+      const b = c.getBoundingClientRect(); return b.bottom > r.bottom + 1 || b.top < r.top - 1; });
+  });
   const shrink = () => { let k = 1; root.style.setProperty('--k', '1');
     while (over() && k > 0.72) { k -= 0.02; root.style.setProperty('--k', k.toFixed(2)); } return k; };
-  let k = shrink();
-  // 글자를 0.9 배 아래로 줄여야 들어가면 목록의 부가 설명(… 뒤)을 빼고 다시 맞춤
-  if (k < 0.9 && document.querySelector('.rest')) {
-    document.querySelectorAll('.rest').forEach(x => x.style.display = 'none'); k = shrink();
+  const rests = () => document.querySelectorAll('.rest');
+  const fit = () => {
+    rests().forEach(x => x.style.display = '');
+    let k = shrink();
+    // 글자를 0.9 배 아래로 줄여야 들어가면 목록의 부가 설명(… 뒤)을 빼고 다시 맞춤
+    if (k < 0.9 && rests().length) { rests().forEach(x => x.style.display = 'none'); k = shrink(); }
+    return k;
+  };
+  let k = fit(), dropped = 0;
+  // 그래도 넘치면(잘림) 브리핑 목록 맨 아래 줄부터 하나씩 빼고 처음부터 다시 맞춤(최소 2줄은 남김) — 절대 잘린 채로 두지 않음
+  const items = () => document.querySelectorAll('ul[data-fit] > li');
+  while (over() && items().length > 2) {
+    items()[items().length - 1].remove(); dropped++;
+    const c = document.querySelector('.bcount'); if (c) c.textContent = items().length;
+    k = fit();
   }
-  return {k, over: over()};
+  // 마지막 수단: 줄 수를 줄여도 넘치면 각 줄을 N줄까지만 보이고 끝을 '…' 로(N = 4→1)
+  let clamp = 0;
+  for (let n = 4; n >= 1 && over(); n--) {
+    clamp = n;
+    document.querySelectorAll('ul[data-fit] .btx').forEach(x => Object.assign(x.style,
+      {display: '-webkit-box', webkitBoxOrient: 'vertical', webkitLineClamp: String(n), overflow: 'hidden'}));
+  }
+  return {k, over: over(), dropped, lines: items().length, clamp};
 }
 """
 
@@ -253,11 +278,11 @@ def card_html(data, meta, chosen, tp):
 .bhead{margin-bottom:10px}
 .bbadge{font-size:30px;padding:7px 22px}.btitle{font-size:30px}
 ul{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:space-around}
-li{padding:18px 0}
+li{padding:calc(var(--k)*18px) 0}
 .btx{font-size:calc(var(--k)*39px)}
 .btx .rest{font-size:.82em;color:#6b7280}
 .bchip{font-size:calc(var(--k)*29px)}
-.go{font-size:52px}
+.go{font-size:calc(var(--k)*52px)}
 .foot{padding:30px 56px 34px}
 .foot{gap:24px}.foot .url{font-size:31px}.foot .upd{font-size:26px;white-space:nowrap}
 """
@@ -268,7 +293,7 @@ li{padding:18px 0}
 <main class="body">
 <article class="top-card" style="background:%s" data-fit><span class="deco">%s</span>
 <div class="badges">%s</div><h3>%s</h3>%s<div class="meta"><b>%s</b> · %s</div></article>
-<section class="briefing"><div class="bhead"><span class="bbadge">%s</span><span class="btitle">이번 판 주요 소식 %d건</span></div>
+<section class="briefing"><div class="bhead"><span class="bbadge">%s</span><span class="btitle">이번 판 주요 소식 <span class="bcount">%d</span>건</span></div>
 <ul data-fit>%s</ul></section>
 </main>
 <footer class="foot"><span class="url"><i>🔗</i>%s</span><span class="upd">%s</span></footer>
@@ -322,6 +347,13 @@ li{padding:10px 0}
         "".join(brief_li(dict(s, headline=split_head(s["headline"])[0]), tp, False) for s in rest), SHORT, UPDATE_LINE)
 
 
+def _rel(pth):
+    try:
+        return pth.resolve().relative_to(ROOT)
+    except ValueError:
+        return pth
+
+
 async def render(jobs):
     from playwright.async_api import async_playwright
     async with async_playwright() as p:
@@ -334,7 +366,10 @@ async def render(jobs):
             await pg.goto(html_path.as_uri())
             res = await pg.evaluate(FIT_JS)
             await pg.screenshot(path=str(png), clip={"x": 0, "y": 0, "width": w, "height": h})
-            print("saved %s (%dx%d, 글자 배율 %.2f%s)" % (png.relative_to(ROOT), w, h, res["k"], ", 넘침!" if res["over"] else ""))
+            drop = (", 브리핑 %d줄 뺌(남은 %d줄)" % (res["dropped"], res["lines"])) if res.get("dropped") else ""
+            if res.get("clamp"):
+                drop += ", 긴 줄 %d줄까지만(…)" % res["clamp"]
+            print("saved %s (%dx%d, 글자 배율 %.2f%s%s)" % (_rel(png), w, h, res["k"], drop, ", 넘침!" if res["over"] else ""))
             await pg.close()
         await b.close()
 
@@ -423,15 +458,21 @@ def main():
     ap.add_argument("--n", type=int, default=5)
     ap.add_argument("--no-main-link", action="store_true")
     ap.add_argument("--no-publish", action="store_true")
+    ap.add_argument("--out", default="")
     a = ap.parse_args()
+    if a.out:
+        a.no_publish = True
     n = min(5, max(3, a.n))
     idx, meta, data = load(a.edition)
     eid = data["id"]
     tp = story_topics(data)
     chosen = pick(data, tp, n, [x.strip() for x in a.pick.split(",") if x.strip()] or None)
-    ensure_gitignore()
-    share = ROOT / "share"
-    share.mkdir(exist_ok=True)
+    if a.out:
+        share = pathlib.Path(a.out).resolve()
+    else:
+        ensure_gitignore()
+        share = ROOT / "share"
+    share.mkdir(parents=True, exist_ok=True)
     ed_url = SITE + "e/%s/" % eid
     img_url = SITE + "og/%s.png" % eid
 
@@ -460,7 +501,7 @@ def main():
         print("saved e/%s/index.html" % eid)
 
     print("\n기사:", ", ".join("%s(%s)" % (s["id"], tp[s["id"]]["topic"]) for s in chosen))
-    print("\n----- share/%s.txt (%d자) -----\n%s" % (eid, len(msg.rstrip("\n")), msg))
+    print("\n----- %s/%s.txt (%d자) -----\n%s" % (_rel(share), eid, len(msg.rstrip("\n")), msg))
 
 
 if __name__ == "__main__":
