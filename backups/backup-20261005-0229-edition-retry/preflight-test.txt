@@ -1,0 +1,4 @@
+10-05 01:57:33 START selftest-dev pid=1400596 head=5895fae
+10-05 01:57:35 OK    selftest-dev 올리지 않은 변경 3개 → stash('preflight …', git stash list 로 확인) | 오늘 아침판 2026-10-05-am: 없음
+10-05 02:27:56 START test-stale pid=1429505 head=1a47a88
+10-05 02:27:57 OK    test-stale  | 오늘 아침판 2026-10-05-am: 없음 · 라이브: 정상: 라이브 최신 판 2026-10-04-pm (기대 2026-10-04-pm 이상)

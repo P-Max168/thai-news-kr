@@ -87,12 +87,19 @@
     return m ? (+m[2]) + "월 " + (+m[3]) + "일 " + { am: "아침판", pm: "저녁판", early: "새벽판" }[m[4]] : (id || "");
   }
   /* 다른 기기에서 누른 하트는 제목을 모름 → 그 판 파일(data/<판>.js)을 읽어 채움 */
-  function fill(ed) {
-    if (loading[ed] || !/^\d{4}-\d{2}-\d{2}-(am|pm|early)$/.test(ed)) return;
+  /* 판 파일 자동 재시도(2026-10-05): 일시적 네트워크 실패면 1초·3초·9초 뒤 3번까지 다시(주소에 ?r=N — 캐시된 실패를 피함), 그래도 안 되면 예전처럼 'err' 표시. 무한 반복 없음 */
+  var RETRY = [1000, 3000, 9000];
+  function fill(ed, n) {
+    n = n || 0;
+    if ((!n && loading[ed]) || !/^\d{4}-\d{2}-\d{2}-(am|pm|early)$/.test(ed)) return;
     loading[ed] = 1;
-    var sc = document.createElement("script"); sc.src = "data/" + ed + ".js"; sc.async = true;
+    var sc = document.createElement("script"); sc.src = "data/" + ed + ".js" + (n ? "?r=" + n : ""); sc.async = true;
     sc.onload = function () { if (cur === "hearts" || cur === "admin") paint(); };
-    sc.onerror = function () { loading[ed] = "err"; if (cur === "hearts" || cur === "admin") paint(); };
+    sc.onerror = function () {
+      if (sc.parentNode) sc.parentNode.removeChild(sc);
+      if (n < RETRY.length) { setTimeout(function () { fill(ed, n + 1); }, RETRY[n]); return; }
+      loading[ed] = "err"; if (cur === "hearts" || cur === "admin") paint();
+    };
     document.head.appendChild(sc);
   }
   function metaOf(h) {
@@ -159,7 +166,14 @@
     if (!force && AD.err && AD.errDays === key) return;   // 실패하면 '다시 시도'를 누를 때까지 다시 부르지 않음(무한 재시도 방지)
     if (!window.TNSocial || !TNSocial.adminStats) { AD.err = "load"; return; }
     AD.busy = true; AD.err = null;
-    TNSocial.adminStats(sinceOf(key)).then(function (rows) { AD.data[key] = { t: Date.now(), rows: rows }; })
+    // 일시적 네트워크 실패만 1초·3초 뒤 2번 더(2026-10-05). 권한 거부(규칙 미게시)는 다시 해도 같으니 바로 안내
+    var tryStats = function (n) {
+      return TNSocial.adminStats(sinceOf(key)).catch(function (e) {
+        if (n >= 2 || /permission/i.test((e && (e.code || e.message)) || "")) throw e;
+        return new Promise(function (ok) { setTimeout(ok, n ? 3000 : 1000); }).then(function () { return tryStats(n + 1); });
+      });
+    };
+    tryStats(0).then(function (rows) { AD.data[key] = { t: Date.now(), rows: rows }; })
       .catch(function (e) { AD.err = /permission/i.test((e && (e.code || e.message)) || "") ? "perm" : "net"; AD.errDays = key; })
       .then(function () { AD.busy = false; if (cur === "admin") paint(); });
   }
@@ -242,8 +256,11 @@
   function apLoad(force) {
     if (AP.busy || (AP.doc && !force) || (AP.err && !force)) return;
     AP.busy = true; AP.err = null;
-    fetch("data/pending.json?_=" + Date.now(), { cache: "no-store" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function (d) { AP.doc = d; }).catch(function () { AP.err = "net"; })
+    var tryGet = function (n) {   // 일시 실패면 1초·3초 뒤 2번 더(2026-10-05), 그래도 안 되면 '다시 시도' 버튼
+      return fetch("data/pending.json?_=" + Date.now(), { cache: "no-store" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .catch(function (e) { if (n >= 2) throw e; return new Promise(function (ok) { setTimeout(ok, n ? 3000 : 1000); }).then(function () { return tryGet(n + 1); }); });
+    };
+    tryGet(0).then(function (d) { AP.doc = d; }).catch(function () { AP.err = "net"; })
       .then(function () { AP.busy = false; if (cur === "approve") paint(); });
   }
   function md(t) {

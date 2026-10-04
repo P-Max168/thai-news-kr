@@ -9,6 +9,7 @@
 #   3) 멈춘 rebase/merge/cherry-pick 취소  4) main 브랜치로       5) 올리지 않은 추적 파일 변경 → stash(버리지 않음)
 #   6) fetch + pull --rebase(3번 재시도)   7) 디스크 ≥2GB·메모리 여유 ≥500MB·인터넷(github·news.google) 확인
 #   8) python3·playwright·node 확인        9) 오늘 판 상태(있는지) 한 줄
+#  10) 라이브 최신 판 30분 넘게 늦음 → /workspace/logs/edition-stale.txt 한 줄(tools/edition_stale.py, 빌드는 안 막음)
 # 끝: 문제 없으면 'PREFLIGHT OK'(exit 0), 고칠 수 없는 문제면 'PREFLIGHT FAIL: 이유'(exit 1) — 이때 판 빌드를 하지 말고 Max 에게 알림.
 set -uo pipefail
 cd "$(dirname "$0")/.." || exit 1
@@ -68,6 +69,8 @@ command -v node >/dev/null || FIX+=("node 없음(주제 계산은 간단 매핑�
 # 9) 오늘 판 상태
 d=$(TZ=Asia/Bangkok date +%F); h=$(TZ=Asia/Bangkok date +%H)
 st="오늘 아침판 ${d}-am: $([ -f data/${d}-am.json ] && echo 있음 || echo 없음)"
+# 10) 라이브 최신 판이 예정(07:08·18:08)보다 30분 넘게 늦었는지 — 늦으면 /workspace/logs/edition-stale.txt 에 한 줄(빌드를 막지는 않음, 2026-10-05)
+stale="$(timeout 60 python3 tools/edition_stale.py 2>&1 | tail -n1)"; say "라이브 판: $stale"; st="$st · 라이브: ${stale:0:80}"
 [ "$h" -ge 18 ] && st="$st · 저녁판 ${d}-pm: $([ -f data/${d}-pm.json ] && echo 있음 || echo 없음)"
 
 for x in "${FIX[@]}"; do say "고침: $x"; done
