@@ -1,0 +1,6 @@
+{
+ "_readme": "📇 가게 카드 폐업 신고·폐업 확인 기록(2026-10-05). 신고 원문(Firestore reports)은 운영자만 읽음 → 숫자만 여기(저장소에 올린 기록)와 Firestore placeflags(공개 읽기·운영자만 쓰기)에. 지우지 않음 — 되돌릴 땐 st 를 빈칸으로. flags: {가게 id: {n: 폐업 신고 수, st: \"closed\"(운영자 폐업 확인) | \"\", at: YYYY-MM-DD, note}}",
+ "fs_live": false,
+ "fs_live_note": "Firestore placeflags 규칙(firestore.rules)이 게시되면 true 로 — 그 전엔 읽기가 403 이라 화면이 안 읽음(LOGIN_TODO '대기')",
+ "flags": {}
+}

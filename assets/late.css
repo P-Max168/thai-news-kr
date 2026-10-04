@@ -172,6 +172,17 @@
 .pc__fs{display:block;margin-top:2px;font-size:.7812rem;color:var(--muted,#5f6672);font-weight:500}
 .pc__fs a{color:inherit;text-decoration:underline}
 .pc__old{display:inline-block;padding:1px 8px;border-radius:999px;background:#5f4b00;color:#fff;font-size:.8125rem;font-weight:800;margin-right:4px}
+/* 믿음 규칙(2026-10-05): 폐업 신고·영업 확인 안 됨 배지 + 맨 아래 접힌 칸(오래된 정보·폐업 보관함) */
+.pc__closed,.pc__unv{display:inline-block;padding:1px 8px;border-radius:999px;color:#fff;font-size:.8125rem;font-weight:800;margin-right:4px}
+.pc__closed{background:#9b1c1c}.pc__unv{background:#4a5260}
+.pc__warn--x{background:#fdecec;border-color:#f3b4b4;color:#7a1414}.pc__warn--unv{background:#f3f5f8;border-color:#d7dde6;color:#3a3f4a}
+.pc--closed{opacity:.92}
+.pc-intro__s{display:block;margin-top:4px;font-size:.875rem;color:var(--muted,#5f6672)}
+.pc-fold{margin:14px 0 0;border:1px solid var(--line,#d7dde6);border-radius:14px;background:#f7f8fa}
+.pc-fold > summary{cursor:pointer;min-height:48px;padding:12px 14px;font-weight:800;font-size:.9688rem;line-height:1.45;list-style-position:inside}
+.pc-fold > summary small{display:block;font-weight:600;font-size:.8438rem;color:var(--muted,#5f6672)}
+.pc-fold > .pc-list{padding:0 8px 10px}
+.pc__info dt small{font-weight:600;font-size:.75rem;color:var(--muted,#5f6672)}
 /* 🛡️ 승인함 — 광고 옆 민감 기사 기준 (2026-10-03) */
 .as-sum,.as-mid,.as-none,.as-man{font-size:.9375rem;line-height:1.6;margin:6px 0}
 .as-list{margin:8px 0;padding-left:20px;display:flex;flex-direction:column;gap:10px}
