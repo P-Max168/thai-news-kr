@@ -506,6 +506,14 @@ async def main():
             await c4.close()
         except Exception as e:
             rec(False, "받은 양 점검 실행 실패", str(e)[:160])
+        # 2026-10-05(Max 06:28 ①): 승인함(#approve) 대기 = data/pending.json items 뿐(drafts/discussion 은 안 읽음). 게시된 질문이 대기에 끼면 실패
+        #  (점검 본체 = tools/dev/pending_check.py, 일부러 깨뜨린 시험: pending_check.py --break-test → 실패)
+        try:
+            sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent)); import pending_check
+            _base = URL.split("?")[0]; _pub = pending_check.published(_base); _ok, _info = pending_check.check(pending_check.get(_base, "data/pending.json"), _pub)
+            rec(_ok if _pub else None, "게시된 질문은 승인함 대기에 없음(승인함 = data/pending.json, 게시된 질문·운영자 댓글이 대기 항목에 있으면 실패)", _info)
+        except Exception as e:
+            rec(False, "게시된 질문 승인함 점검 실행 실패", str(e)[:160])
         rec(FS["blocked"] == 0 or None, "자동 점검이 실서버(Firestore)에 반응·신고를 안 씀(이 기기 스위치 끔 + 쓰기 요청 차단)", "막은 쓰기 요청 %d개" % FS["blocked"])
         await b.close()
     if OUT: pathlib.Path(OUT).write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
