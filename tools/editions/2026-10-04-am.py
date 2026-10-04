@@ -58,7 +58,7 @@ dict(id="ea3", topic="east", secondary=["travel"], region="파타야(비치)",
 
 # ───────────── 방콕 ─────────────
 dict(id="bk1", topic="bangkok", secondary=["society"], region="방콕(통러)",
- headline="방콕 통러서 음주운전 SUV가 길 건너던 태국·독일 20대 여성 2명 치어 숨지게 해",
+ headline="방콕 통러 음주운전 사고로 길 건너던 태국·독일 여성 2명 숨져",
  summary=[
   "3일 새벽 3시 12분경 방콕 왓타나(Watthana) 구 통러(Thong Lor) 소이 3 부근 도로에서 길을 건너던 태국인 티티마(Thitima, 23)와 독일인 미셸(Michelle, 22)이 회색 MG HS 하이브리드 SUV에 치였다. 두 사람은 각각 수쿰윗 병원과 사미띠웻 병원으로 옮겨졌으나 숨졌다.",
   "운전자 끄릿(Krit, 28)의 혈중알코올 농도는 145mg%로 측정됐다. 경찰은 음주운전으로 사람을 숨지게 한 혐의로 입건했다고 Khaosod English와 Matichon이 전했다."
