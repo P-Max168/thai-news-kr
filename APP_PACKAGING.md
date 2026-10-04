@@ -25,6 +25,15 @@
 - iOS 심사: '웹사이트를 감싼 것뿐'이면 거절될 수 있음(앱 심사 지침 4.2) → 오프라인 읽기·바로가기·알림 같은 앱다운 기능이 있어야 유리.
 - 명령(노드가 있는 컴퓨터에서): `npm i @capacitor/core @capacitor/cli @capacitor/android @capacitor/ios` → `npx cap init "태국 뉴스 한눈에" kr.thainews.app --web-dir www` → `npx cap add android` / `ios` → Android Studio / Xcode 로 빌드. **이 저장소엔 node_modules 를 넣지 않음**(별도 폴더 권장).
 
+## 광고: 웹 = AdSense, 앱 = AdMob (2026-10-04 메모 — 아직 아무것도 안 붙임)
+- **웹(지금 사이트)**: 구글 광고를 붙인다면 AdSense(심사 대기·준비는 승인함 #4·#5). 지금 광고 자리는 전부 직접 판 '광고' 띠 붙은 카드(드래곤 스웨디시)이고 구글 광고 코드는 없음.
+- **Android·iOS 앱**: 앱 안 광고는 **AdMob**(Google Mobile Ads SDK)이 정식 길. AdSense 정책은 'AdSense 코드를 앱에 넣는 것'을 막고, 앱 안 웹 화면에서 AdSense 를 보이려면 정해진 방식만 허용:
+  - 길 1(PWABuilder·TWA)은 크롬 화면이라 허용 목록에 있음(Chrome Custom Tabs·Trusted Web Activity).
+  - 길 2(Capacitor 웹뷰)는 'WebView API for Ads'(웹뷰를 Mobile Ads SDK 에 등록, Android SDK 20.6.0 이상) 를 붙이거나, 웹 광고 대신 AdMob 광고를 화면 옆에 둬야 함.
+  - 출처: AdSense 프로그램 정책 'Technical requirements for web content viewing frames for apps' https://support.google.com/adsense/answer/48182 , https://developers.google.com/admob/android/browser/webview/api-for-ads (2026-10-04 12:05 방콕 확인).
+- **앱 내기 전에 꼭 확인(미확인)**: AdMob 정책·제한(광고 배치 포함: 광고를 누르기 쉬운 버튼 옆에 두지 않기, 내용과 광고 구분 등 — https://support.google.com/admob/answer/6128543 )과 동의 받기(웹뷰 안 동의는 따로 받아야 함).
+- **민구님 규칙 그대로**: 화면을 덮는 전면 광고(interstitial)·앱 열 때 광고(app open)·떠 있는 광고·소리 나는 광고 **안 씀**. 배너·카드형만, 모든 광고에 '광고' 표시. 보상형도 안 씀.
+
 ## 비용(LOGIN_TODO)
 - Google Play 개발자 계정: 1회 25달러.
 - Apple Developer Program: **연 99달러**(iOS 앱 필수) + 맥(Xcode) 필요.

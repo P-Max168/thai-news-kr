@@ -1,0 +1,3 @@
+- 바뀐 것: 아래 탭 5개(홈·업소·일자리·렌트·My) + 주제 칩 한 줄(9개, 고른 칩 ✓) 시안 — 주소에 ?mock=tabs 일 때만 보임, 기본 화면 그대로, '+ 글쓰기' 떠 있는 버튼 없음. 승인함 #12(data/pending.json p12) 추가
+- 왜: Max 디자인 지시 5번 — 결정 전이라 시안만(떠 있는 아래 막대는 '떠 있는 요소 금지'와 부딪혀 민구님 결정 필요)
+- 되돌리는 법: `git checkout backup-20261004-1157-tabs-chips-mockup -- .` → `git checkout origin/main -- data/` → 커밋 → push (force 금지, BACKUPS.md 맨 위 설명 참고)
