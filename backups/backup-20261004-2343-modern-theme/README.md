@@ -1,0 +1,3 @@
+- 바뀐 것: 모던 테마(토스·당근 느낌) 1단계 — 구조는 그대로, 느낌만 바꾼 별도 층(assets/modern.css · assets/modern.js · assets/modern-icons.svg 선 아이콘 · 자체 호스팅 Pretendard assets/fonts/pretendard)을 `?theme=modern` 미리보기로만 켬. 기본 화면은 그대로(before = 지금 기본, after = ?theme=modern, compare-* = 나란히, 360·412, 홈·홈 긴 사진·펼친 기사·서랍·#places·가게 카드·메인 광고)
+- 왜: 민구님 요청(Max 전달 10-04 23:39) '싸이월드·예전 다음 카페처럼 올드 → 세련되고 모던하게, 토스·당근 참고, 구조 말고 느낌만'
+- 되돌리는 법: 한 줄 — index.html 의 `window.TN_THEME="classic"` 그대로 두면 모던은 받지도 않음(지금 상태). 파일까지 지우려면 `git checkout backup-20261004-2343-modern-theme -- index.html sw.js tools/stamp_assets.py` + `git rm -r assets/modern.css assets/modern.js assets/modern-icons.svg assets/fonts tools/modern DESIGN_THEME.md` → 커밋 → push (force 금지)
