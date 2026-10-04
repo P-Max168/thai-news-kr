@@ -76,9 +76,13 @@
     if (FX !== null) return; FX = 0;
     fetch("data/ticker.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { var f = j && j.fx; if (f && f.THB_KRW > 0) { FX = f.THB_KRW; TNPages.refresh(); } }, function () {});
   }
-  function priceKo(p) {
-    if (p == null) return "확인 안 됨";
-    return Number(p).toLocaleString("ko-KR") + "바트" + (FX ? " (약 " + (Math.round(p * FX / 100) * 100).toLocaleString("ko-KR") + "원)" : "");
+  // 가격 먼저(2026-10-04 Max 디자인 지시 4번): 카드 맨 위 굵은 바트 + 원화(헤더와 같은 환율 data/ticker.json fx.THB_KRW, 원 단위 반올림). 모르면 '가격 확인 안 됨' — 지어내지 않음
+  function krw(thb) { return FX ? Math.round(thb * FX).toLocaleString("ko-KR") + "원" : ""; }
+  function priceTop(thb, label, srcHTML) {
+    if (thb == null || !(Number(thb) >= 0)) return '<p class="pc__price pc__price--na">💰 가격 확인 안 됨' + (srcHTML || "") + "</p>";
+    var k = krw(Number(thb));
+    return '<p class="pc__price">' + (label ? '<span class="pc__price-l">' + esc(label) + "</span> " : "") + "<b>" + Number(thb).toLocaleString("ko-KR") + "바트</b>" +
+      (k ? ' <span class="pc__krw">약 ' + k + "</span>" : "") + (srcHTML || "") + "</p>";
   }
 
   function load() {
@@ -110,10 +114,10 @@
     var kakao = DATA.report_kakao_url;
     return '<article class="pc" data-pc="' + esc(p.id) + '">' +
       '<div class="pc__top"><span class="pc__cat">' + c.e + " " + esc(p.cat_ko) + "</span>" + stHTML + "</div>" +
+      priceTop(p.price_thb, p.price_label || "", fs(p, "price")) +
       '<h3 class="pc__name">' + esc(p.name) + "</h3>" + (kind ? '<p class="pc__kind">' + esc(kind) + "</p>" : "") + kr + old +
       '<dl class="pc__info">' +
         "<div><dt>🕒 영업시간</dt><dd>" + esc(hoursKo(p.hours, p._oh)) + fs(p, "hours") + "</dd></div>" +
-        "<div><dt>💰 가격</dt><dd" + (p.price_thb == null ? ' class="pc__na"' : "") + ">" + esc(priceKo(p.price_thb)) + fs(p, "price") + "</dd></div>" +
         "<div><dt>🧾 가격 VAT 별도</dt><dd" + (p.vat_extra == null ? ' class="pc__na"' : "") + ">" + (p.vat_extra === true ? "별도(가격에 VAT 안 들어 있음)" : p.vat_extra === false ? "포함" : "확인 안 됨") + fs(p, "vat") + "</dd></div>" +
         (go ? "<div><dt>📍 동네</dt><dd>" + esc(p.area) + "<small>정확한 위치·주소는 아래 '구글 지도에서 보기'</small>" + fs(p, "area") + "</dd></div>"
             : "<div><dt>📍 주소</dt><dd" + (p.address ? "" : ' class="pc__na"') + ">" + esc(p.address || "확인 안 됨(지도 버튼으로 위치 보기)") + fs(p, "address") + "</dd></div>") +
@@ -184,12 +188,11 @@
     var s = x.src, f = '<small class="pc__fs"><a href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">' + esc(s.by) + " ↗</a> · " + esc(s.at) + " 확인</small>";
     var na = '<small class="pc__fs">확인한 출처에 없음</small>';
     var room = x.beds === 0 ? "스튜디오(원룸)" : x.beds + "침실";
-    var krw = FX ? " (약 " + (Math.round(x.rent_thb * FX / 1000) * 1000).toLocaleString("ko-KR") + "원)" : "";
     var map = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(x.name + " Pattaya");
     return '<article class="pc rc" data-rc="' + esc(x.id) + '"><div class="pc__top"><span class="pc__cat">🏠 콘도 임대</span><span class="pc__open">' + esc(room) + "</span></div>" +
+      priceTop(x.rent_thb, "월세", f) +
       '<h3 class="pc__name">' + esc(x.name) + "</h3>" + (x.old ? '<p class="pc__warn"><span class="pc__old">🕰️ 오래된 정보</span> 2023년 전에 올라온 매물이에요.</p>' : "") +
       '<dl class="pc__info">' +
-        "<div><dt>💰 월세</dt><dd><b>" + x.rent_thb.toLocaleString("ko-KR") + "바트</b>" + esc(krw) + f + "</dd></div>" +
         "<div><dt>📐 면적</dt><dd>" + esc(String(x.sqm)) + "㎡ (약 " + esc(String(x.pyeong)) + "평)" + f + "</dd></div>" +
         "<div><dt>📍 지역</dt><dd>" + esc(x.area) + f + "</dd></div>" +
         "<div><dt>🧾 보증금·관리비·계약 기간</dt><dd class=\"pc__na\">확인 안 됨" + na + "</dd></div>" +

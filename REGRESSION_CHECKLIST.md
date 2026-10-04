@@ -47,3 +47,4 @@
 | 41 | 🕒 실제 날짜만: 기사 시각 '10/4 09:14'(방콕), 한국 뉴스 머리 '10/4 09:15', 헤더 4칸 맨 아래 'M/D HH:MM' — 'N분/시간 전' 없음 | `tools/dev/regress.py`('상대 시간 없음'·헤더 날짜 4개) |
 | 42 | 🔍 확대: viewport 에 user-scalable=no·maximum-scale 없음, 글자 크기 = rem(광고 그림 dragon-ad.css 만 px — 정해진 광고 크기 안 그림이라 고정) | `tools/dev/regress.py` |
 | 43 | 🔠 큰 글자(html 120%·150%, 360px): 9화면(첫 화면·서랍·기사·#places·#nearby/food·#hearts·#jobs·#rent·#approve) 가로 넘침·버튼 잘림 0 — 헤더 칸·5칸 줄(내 주변·동네·종류 바꾸기)은 원래 크기(헤더 일부 110%)까지만 커짐 | `python3 tools/dev/bigtext.py [URL] --shots 폴더` + 사진 |
+| 44 | 💰 가격 먼저(가게 카드·임대 카드): 카드 맨 위(종류 줄 바로 아래) 굵은 '350바트 약 14,068원'(헤더와 같은 환율 data/ticker.json, 원 단위 반올림) 또는 '💰 가격 확인 안 됨' — 지어낸 가격 없음 | `tools/dev/regress.py`(가게 카드 줄 price) + 사진 |

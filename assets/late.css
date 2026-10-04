@@ -212,3 +212,9 @@
 .pc__info div{display:flex;flex-wrap:wrap;column-gap:8px;row-gap:0}
 .pc__info dt{flex:0 0 7.95em}
 .pc__info dd{flex:1 1 10.5em;min-width:0}
+/* 💰 가격 먼저(2026-10-04): 카드 맨 위 굵은 바트 + 원화, 모르면 '가격 확인 안 됨'(회색) */
+.pc__price{margin:6px 0 4px;font-size:1rem;line-height:1.35;color:var(--ink,#16181d);font-variant-numeric:tabular-nums}
+.pc__price b{font-size:1.3125rem;font-weight:800;letter-spacing:-.3px}
+.pc__price-l{font-size:.875rem;font-weight:700;color:var(--ink-2,#3a3f4a)}
+.pc__krw{font-size:.9375rem;font-weight:700;color:var(--ink-2,#3a3f4a);white-space:nowrap}
+.pc__price--na{font-size:.9375rem;font-weight:700;color:var(--muted,#5f6672)}
