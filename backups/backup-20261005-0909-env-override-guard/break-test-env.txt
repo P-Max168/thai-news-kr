@@ -1,0 +1,15 @@
+== 시험 변수 차단 부숴 보기 2026-10-05 09:07:00 +07 — 가짜 정본 /tmp/cg2/canon · 가짜 origin /tmp/cg2/o.git · 진짜 정본 HEAD efffcc8(읽기만)
+1 CANON_DIR=/tmp/x(TNK_TEST 없음) ship.sh → 거부 기대(exit 9) → exit 9 | 배포 거부: 시험용 환경 변수가 남아 있음 — CANON_DIR=/tmp/x (TNK_TEST=1 없음). 'env -u CANON_DIR -u TNK_LOGDIR -u CANON_NO_FETCH' 로 다시 
+1b TNK_LOGDIR=/tmp/y 만(TNK_TEST 없음) ship.sh → 거부 기대(exit 9) → exit 9 | 배포 거부: 시험용 환경 변수가 남아 있음 — TNK_LOGDIR=/tmp/y (TNK_TEST=1 없음). 'env -u CANON_DIR -u TNK_LOGDIR -u CANON_NO_FETCH' 로 다시 
+   가짜 origin 에 push 됐나: 393d0cf  (시작 393d0cf)
+2 CANON_DIR=/tmp/x TNK_LOGDIR=/tmp/y(TNK_TEST 없음) canon_guard → 진짜 정본 검사 기대 → exit 0 | 경고: CANON_DIR=/tmp/x 무시(TNK_TEST=1 없음) → 진짜 정본 /workspace/thai-news-portal 검사 경고: TNK_LOGDIR=/tmp/y 무시(TNK_TEST=1 없음) → /workspace/logs CANON GUARD OK (t2 · /workspace/thai-news-portal · HEAD efffcc8 · ahead 0 · 깨끗) 
+3 CANON_DIR=/tmp/cg2/canon(rebase 중, TNK_TEST 없음) canon_guard → 가짜 무시·진짜 OK 기대 → exit 0 | 경고: CANON_DIR=/tmp/cg2/canon 무시(TNK_TEST=1 없음) → 진짜 정본 /workspace/thai-news-portal 검사 CANON GUARD OK (t3 · /workspace/thai-news-portal · HEAD efffcc8 · ahead 0 · 깨끗) 
+4 TNK_TEST=1 CANON_DIR=/tmp/cg2/canon(rebase 중) canon_guard → 가짜 정본 FAIL 기대 → exit 1 | CANON GUARD FAIL: rebase 진행 중  (기록: /tmp/cg2/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대로 적을 것 
+5 TNK_TEST=1 ship.sh(가짜 정본 rebase 중) → exit 7 기대 → exit 7 | TNK_TEST=1 — 시험 모드: 정본 /tmp/cg2/canon CANON GUARD FAIL: rebase 진행 중  (기록: /tmp/cg2/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대로 적을 것 
+6 TNK_TEST=1 preflight.sh(가짜 정본 안, rebase 중) → exit 1 기대 → exit 1 | CANON GUARD FAIL: rebase 진행 중  (기록: /tmp/cg2/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대로 적을 것 PREFLIGHT FAIL: 정본 상태(위 CANON GUARD 줄) — 판 빌드 하지 말고 Max 에게 알림 
+7 TNK_TEST=1 가짜 정본 깨끗 canon_guard → 가짜 경로 OK 기대 → exit 0 | CANON GUARD OK (t7 · /tmp/cg2/canon · HEAD 393d0cf · ahead 0 · 깨끗) 
+8 TNK_TEST=1 ship.sh 깨끗 → 가짜 origin 에 push + 가짜 정본 pull 기대(라이브 대기는 60초에 끊음) → exit 124 | TNK_TEST=1 — 시험 모드: 정본 /tmp/cg2/canon CANON GUARD OK (ship · /tmp/cg2/canon · HEAD 393d0cf · ahead 0 · 깨끗) push: 6a9552e 시험 커밋 정본 체크아웃 갱신 
+   가짜 origin main: 6a9552e 시험 커밋 · 가짜 정본 HEAD: 6a9552e 시험 커밋 · 진짜 정본 HEAD: efffcc8(시작 efffcc8)
+9 regress 줄: CANON_DIR=/tmp/cg2/canon(rebase 중, TNK_TEST 없음) → 진짜 정본 통과 + 무시 표시 기대 → 통과 | CANON GUARD OK (regress · /workspace/thai-news-portal · HEAD efffcc8 · ahead 0 · 깨끗) · 남은 시험 변수 CANON_DIR 무시(TNK_TEST 없음)
+9 regress 줄: TNK_TEST=1 CANON_DIR=/tmp/cg2/canon(rebase 중) → 실패 기대 → 실패 | CANON GUARD FAIL: rebase 진행 중  (기록: /tmp/cg2/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대로 적을 것 · TNK_TEST=1 시험 모드
+-- 진짜 /workspace/logs: canon-alert.txt 없음 · automation.log 8줄(시험 전 8줄) → 시험이 진짜 기록에 안 씀

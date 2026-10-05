@@ -1,0 +1,3 @@
+바뀐 것: 시험용 환경 변수(CANON_DIR·TNK_LOGDIR·CANON_NO_FETCH)는 TNK_TEST=1 이 같이 있을 때만 씀 — canon_guard·preflight·edition_stale·fetch_korea 는 없으면 무시하고 진짜 경로, ship.sh 는 남아 있으면 배포 거부(exit 9), regress 정본 줄은 안 넘김. 화면 변화 없음(사진 대신 부숴 보기 break-test-env.txt · change.patch).
+왜: 10-05 08:51 배포에서 08:43 부숴 보기 때 export 한 CANON_DIR=/tmp/cg/canon 이 셸에 남아 ship.sh·regress 의 정본 검사가 가짜 정본을 봤음(진짜 정본은 깨끗했지만 검사 결과가 무효).
+되돌리는 법: `git checkout backup-20261005-0909-env-override-guard -- tools/canon_guard.sh tools/preflight.sh tools/edition_stale.py tools/fetch_korea.py tools/dev/ship.sh tools/dev/regress.py` → 커밋 → push(force 금지)

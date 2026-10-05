@@ -1,0 +1,9 @@
+393d0cf 2026-10-05 09:06:29 +0700 시험용 환경 변수(CANON_DIR·TNK_LOGDIR·CANON_NO_FETCH)는 TNK_TEST=1 일 때만 — canon_guard·preflight·edition_stale·fetch_korea 는 없으면 무시(진짜 경로), ship.sh 는 남아 있으면 배포 거부(exit 9), regress 정본 줄은 넘기지 않음
+
+ tools/canon_guard.sh   | 19 +++++++++++++++----
+ tools/dev/regress.py   | 12 +++++++++---
+ tools/dev/ship.sh      | 11 ++++++++++-
+ tools/edition_stale.py |  2 +-
+ tools/fetch_korea.py   |  2 +-
+ tools/preflight.sh     |  3 ++-
+ 6 files changed, 38 insertions(+), 11 deletions(-)
