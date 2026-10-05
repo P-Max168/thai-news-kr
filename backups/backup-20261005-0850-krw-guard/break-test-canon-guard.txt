@@ -1,0 +1,23 @@
+== 정본 검사 부숴 보기 2026-10-05 08:43:40 +07 — 가짜 정본 /tmp/cg/canon(origin=/tmp/cg/origin.git), 로그 /tmp/cg/logs
+OK 0 깨끗 → canon_guard → exit 0 | CANON GUARD OK (test · /tmp/cg/canon · HEAD f0aecd1 · ahead 0 · 깨끗) 
+OK 1 rebase 중(가짜 .git/rebase-merge) → canon_guard → exit 1 | CANON GUARD FAIL: rebase 진행 중  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대로 적을 것 
+OK 1 rebase 중 → preflight.sh(판 빌드 입구) → exit 1 | CANON GUARD FAIL: rebase 진행 중  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대로 적을 것 PREFLIGHT FAIL: 정본 상태(위 CANON GUARD 줄) — 판 빌드 �
+OK 1 rebase 중 → ship.sh(dev 클론에서) → exit 7 | CANON GUARD FAIL: rebase 진행 중  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대로 적을 것 정본 상태가 깨끗하지 않아 배포 안 함(push 전). 정�
+OK 1 rebase 중 → fetch_korea --standalone(정본) → exit 1 | CANON GUARD FAIL: rebase 진행 중  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대로 적을 것 한국 뉴스 갱신 안 함 — 정본 상태(위 CANON GUARD 줄) 
+OK 2 앞섬 1커밋 → canon_guard → exit 1 | CANON GUARD FAIL: origin 보다 1커밋 앞섬(정본에 직접 커밋함: 34f9924 정본에 직접 커밋(시험);)  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대�
+OK 2 앞섬 1커밋 → preflight.sh → exit 1 | CANON GUARD FAIL: origin 보다 1커밋 앞섬(정본에 직접 커밋함: 34f9924 정본에 직접 커밋(시험);)  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대�
+OK 2 앞섬 1커밋 → ship.sh → exit 7 | CANON GUARD FAIL: origin 보다 1커밋 앞섬(정본에 직접 커밋함: 34f9924 정본에 직접 커밋(시험);)  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대�
+OK 3 추적 안 된 파일 → canon_guard → exit 1 | CANON GUARD FAIL: 바뀐/추적 안 된 파일 1개: ?? x.txt;  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대로 적을 것 
+OK 3 추적 안 된 파일 → preflight.sh → exit 1 | CANON GUARD FAIL: 바뀐/추적 안 된 파일 1개: ?? x.txt;  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대로 적을 것 PREFLIGHT FAIL: 정본 상태(위 CANON G
+OK 3 추적 안 된 파일 → ship.sh → exit 7 | CANON GUARD FAIL: 바뀐/추적 안 된 파일 1개: ?? x.txt;  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대로 적을 것 정본 상태가 깨끗하지 않아 배�
+OK 3 추적 안 된 파일 → fetch_korea --standalone → exit 1 | CANON GUARD FAIL: 바뀐/추적 안 된 파일 1개: ?? x.txt;  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대로 적을 것 한국 뉴스 갱신 안 함 — 정본 �
+OK 4 merge 중(MERGE_HEAD) → canon_guard → exit 1 | CANON GUARD FAIL: merge 진행 중  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대로 적을 것 
+OK 5 다시 깨끗 → canon_guard → exit 0 | CANON GUARD OK (test · /tmp/cg/canon · HEAD f0aecd1 · ahead 0 · 깨끗) 
+-- 알림 파일 /tmp/cg/logs/canon-alert.txt 줄 수: 12 · automation.log ALERT 줄: 12
+10-05 08:43:41 korea-update 정본 /tmp/cg/canon: 바뀐/추적 안 된 파일 1개: ?? x.txt; — 아무것도 안 고침, 사람이 정리 뒤 다시 실행
+10-05 08:43:41 test 정본 /tmp/cg/canon: merge 진행 중 — 아무것도 안 고침, 사람이 정리 뒤 다시 실행
+통과 · regress 줄 깨끗 | CANON GUARD OK (regress · /tmp/cg/canon · HEAD f0aecd1 · ahead 0 · 깨끗)
+실패 · regress 줄 rebase 중 | CANON GUARD FAIL: rebase 진행 중  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그대로 적을 것
+실패 · regress 줄 추적 안 된 파일 | CANON GUARD FAIL: 바뀐/추적 안 된 파일 1개: ?? x.txt;  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 실행의 보고에 이 줄을 그
+실패 · regress 줄 앞섬 1 | CANON GUARD FAIL: origin 보다 1커밋 앞섬(정본에 직접 커밋함: 78306c4 t;)  (기록: /tmp/cg/logs/canon-alert.txt · automation.log) — 멈춤. 이 
+통과 · regress 줄 다시 깨끗 | CANON GUARD OK (regress · /tmp/cg/canon · HEAD f0aecd1 · ahead 0 · 깨끗)

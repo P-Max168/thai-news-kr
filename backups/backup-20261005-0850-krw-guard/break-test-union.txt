@@ -1,0 +1,10 @@
+== union 병합 시험 2026-10-05 08:44:15 +07 — /tmp/ut (origin o.git = tnk-krw f0aecd1, .gitattributes 있음)
+1 union 있음: 두 클론이 DEV_LOG·BACKUPS 끝에 따로 붙임 → pull --rebase exit 0 · 충돌 표시 DEV_LOG.md:0 BACKUPS.md:0  · A·B 줄 둘 다: 2/2 · BACKUPS 2/2 · log_check: log_check: OK (.)
+2 대조(union 끔 = 예전 그대로): 같은 상황 → pull --rebase exit 1 · 충돌 표시 1개 (= 08:30 정본·08:13 가게와 같은 충돌)
+4 실제: 가게 클론 08:3x rebase(union) 뒤 되살아난 07:35·07:45 줄 상태(지우기 전 커밋 HEAD~1)로 log_check:
+   log_check: 문제 2건 (/tmp/lc)
+(4 = git 이 실제로 옛 줄을 되살린 경우 — log_check 가 잡음 → ship.sh 는 push 전 exit 8)
+   FAIL DEV_LOG.md:178 옛 줄이 되살아남(고친 판 169줄) - 10-05 07:35 · 🛠 아침판 빌드 중 스크린샷 점검 — **원인 → 재발 방지 장치**: 127.
+   FAIL DEV_LOG.md:179 옛 줄이 되살아남(고친 판 170줄) - 10-05 07:45 · 🛠 배포 검증 'FAIL (want 2026-10-05-am)' — **원인 →
+   log_check: 문제 2건 (/tmp/lc)
+   (위 FAIL 2줄 = 4번 결과)

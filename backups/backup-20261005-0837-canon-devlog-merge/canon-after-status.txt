@@ -1,0 +1,8 @@
+2026-10-05 08:48:40 +07 — 정리 뒤
+2cb6878 📇 가게 카드 믿음 규칙 + 조사 등급(Max 06:33·06:55): 영업 확인 
+4a26887 백업 backup-20261005-0846-shop-trust: 가게 카드 믿음 규칙·조사 등급
+2b6dba1 DEV_LOG: union 병합으로 되살아난 옛 07:35·07:45 줄 지움(정본은 07:
+push: e4ad892..7a9b8b3 main -> main (exit 0, 08:38:02 date 출력 직후)
+On branch main
+Your branch is up to date with 'origin/main'.
+
