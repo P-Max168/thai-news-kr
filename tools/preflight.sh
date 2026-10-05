@@ -13,7 +13,8 @@
 # 끝: 문제 없으면 'PREFLIGHT OK'(exit 0), 고칠 수 없는 문제면 'PREFLIGHT FAIL: 이유'(exit 1) — 이때 판 빌드를 하지 말고 Max 에게 알림.
 set -uo pipefail
 cd "$(dirname "$0")/.." || exit 1
-LOGDIR="${TNK_LOGDIR:-/workspace/logs}"; LOG="$LOGDIR/automation.log"; mkdir -p "$LOGDIR" 2>/dev/null || true
+LOGDIR=/workspace/logs; [ "${TNK_TEST:-}" = "1" ] && LOGDIR="${TNK_LOGDIR:-/workspace/logs}"   # 시험 덮어쓰기는 TNK_TEST=1 일 때만(2026-10-05)
+LOG="$LOGDIR/automation.log"; mkdir -p "$LOGDIR" 2>/dev/null || true
 now() { TZ=Asia/Bangkok date '+%m-%d %H:%M:%S'; }
 jlog() { echo "$(now) $*" >> "$LOG" 2>/dev/null || true; }
 

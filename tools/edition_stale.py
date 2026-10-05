@@ -9,7 +9,7 @@ import datetime as dt, json, os, random, re, sys, urllib.request
 
 BKK = dt.timezone(dt.timedelta(hours=7))
 SITE = os.environ.get("TNK_SITE", "https://p-max168.github.io/thai-news-kr/")
-LOG = os.path.join(os.environ.get("TNK_LOGDIR", "/workspace/logs"), "edition-stale.txt")
+LOG = os.path.join(os.environ.get("TNK_LOGDIR", "/workspace/logs") if os.environ.get("TNK_TEST") == "1" else "/workspace/logs", "edition-stale.txt")   # 덮어쓰기는 TNK_TEST=1 일 때만(2026-10-05)
 SLOTS = [("am", 7, 8), ("pm", 18, 8)]
 GRACE = 30
 

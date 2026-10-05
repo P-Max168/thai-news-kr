@@ -4,6 +4,15 @@
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 MSG="$1"
+# 시험용 환경 변수가 남아 있으면 배포 안 함(2026-10-05): 08:51 배포 때 부숴 보기에서 export 한 CANON_DIR=/tmp/cg/canon 이 남아
+#   정본 검사가 가짜 정본을 봤음. 시험 덮어쓰기(CANON_DIR·TNK_LOGDIR·CANON_NO_FETCH)는 TNK_TEST=1 이 같이 있을 때만(가짜 origin 시험용).
+#   진짜 배포는 깨끗한 환경으로: env -u CANON_DIR -u TNK_LOGDIR -u CANON_NO_FETCH bash tools/dev/ship.sh "…"
+OVR="$(for v in CANON_DIR TNK_LOGDIR CANON_NO_FETCH; do [ -n "${!v:-}" ] && printf '%s=%s ' "$v" "${!v}"; done; true)"
+if [ -n "$OVR" ] && [ "${TNK_TEST:-}" != "1" ]; then
+  echo "배포 거부: 시험용 환경 변수가 남아 있음 — ${OVR}(TNK_TEST=1 없음). 'env -u CANON_DIR -u TNK_LOGDIR -u CANON_NO_FETCH' 로 다시" >&2; exit 9
+fi
+CANON=/workspace/thai-news-portal; [ "${TNK_TEST:-}" = "1" ] && CANON="${CANON_DIR:-$CANON}"
+[ "${TNK_TEST:-}" = "1" ] && echo "TNK_TEST=1 — 시험 모드: 정본 $CANON" >&2
 # 07:05–08:10(방콕) push 금지(정기 아침판 시간) — 사람이 잊어도 여기서 막음(2026-10-05)
 hm=$(TZ=Asia/Bangkok date +%H%M); if [ "$hm" -ge 0705 ] && [ "$hm" -le 0810 ]; then echo "지금 $(TZ=Asia/Bangkok date +%H:%M) — 07:05~08:10 은 push 금지(아침판). 08:10 뒤에 다시" >&2; exit 4; fi
 # 정본 체크아웃 검사(2026-10-05): 정본이 rebase/merge 중·앞섬·바뀐/추적 안 된 파일이면 push 전에 멈춤(아무것도 안 고침, canon-alert.txt + automation.log)
@@ -32,7 +41,7 @@ done
 echo "push: $(git log -1 --oneline)"
 # 정본 체크아웃 갱신 — 실패하면 크게 알리고 끝에 exit 5(10-05 03:33: 정본에 같은 이름의 추적 안 된 파일이 있어 pull 이 멈췄는데 조용히 넘어감 → 07:08 정기 실행이 옛 코드로 돌 뻔)
 CANON_FAIL=""
-if ( cd /workspace/thai-news-portal && git pull -q --rebase --autostash ) 2>/tmp/ship-canon.err; then echo "정본 체크아웃 갱신"
+if ( cd "$CANON" && git pull -q --rebase --autostash ) 2>/tmp/ship-canon.err; then echo "정본 체크아웃 갱신"
 else CANON_FAIL=1; echo "‼️ 정본 체크아웃(/workspace/thai-news-portal) 갱신 실패 — 아래 이유를 고친 뒤 그 폴더에서 git pull --rebase --autostash" >&2; head -5 /tmp/ship-canon.err >&2; fi
 # 라이브 반영 대기(app.js·sw.js·index.html 이 로컬과 같아질 때까지, 최대 6분)
 # 앱 셸 3개 + 이번 커밋에서 바뀐 파일(최대 5개, data/·backups/ 제외) — stamp 가 안 바뀌는 변경(예: 광고 css 만)도 실제로 확인
