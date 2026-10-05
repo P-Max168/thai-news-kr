@@ -6,7 +6,7 @@
 #     → 앞으로는 시작·끝을 /workspace/logs/automation.log 에 남기고, 빌드를 막을 수 있는 상자 쪽 문제를 먼저 스스로 고친다.
 # 하는 일(정본 체크아웃 = 이 파일이 있는 저장소):
 #   1) 실행 기록 START 한 줄          2) 10분 넘은 git 잠금 파일 지움(git 프로세스가 살아 있으면 안 지움)
-#   3) 멈춘 rebase/merge/cherry-pick 취소  4) main 브랜치로       5) 올리지 않은 추적 파일 변경 → stash(버리지 않음)
+#   3) 정본 검사(tools/canon_guard.sh: rebase/merge 중·main 아님·앞섬·바뀐/추적 안 된 파일 → 고치지 않고 FAIL + /workspace/logs/canon-alert.txt)  4) main 브랜치로
 #   6) fetch + pull --rebase(3번 재시도)   7) 디스크 ≥2GB·메모리 여유 ≥500MB·인터넷(github·news.google) 확인
 #   8) python3·playwright·node 확인        9) 오늘 판 상태(있는지) 한 줄
 #  10) 라이브 최신 판 30분 넘게 늦음 → /workspace/logs/edition-stale.txt 한 줄(tools/edition_stale.py, 빌드는 안 막음)
@@ -31,19 +31,17 @@ if ! pgrep -x git >/dev/null 2>&1; then
     if [ -e "$f" ] && [ -n "$(find "$f" -mmin +10 2>/dev/null)" ]; then rm -f "$f" && FIX+=("오래된 잠금 $f 지움"); fi
   done
 fi
-# 3) 멈춘 작업
-[ -d .git/rebase-merge ] || [ -d .git/rebase-apply ] && { git rebase --abort >/dev/null 2>&1 && FIX+=("멈춘 rebase 취소"); }
-[ -f .git/MERGE_HEAD ] && { git merge --abort >/dev/null 2>&1 && FIX+=("멈춘 merge 취소"); }
-[ -f .git/CHERRY_PICK_HEAD ] && { git cherry-pick --abort >/dev/null 2>&1 && FIX+=("멈춘 cherry-pick 취소"); }
+# 3) 정본 상태 검사(2026-10-05 바꿈): rebase/merge 중 · main 아님 · origin 보다 앞섬 · 바뀐/추적 안 된 파일 → 고치지 않고 바로 멈춤 + 알림
+#    (예전엔 멈춘 rebase 를 말없이 abort·변경을 stash 하고 넘어갔음 → 10-05 08:30 정본 DEV_LOG 충돌을 아무도 못 봄. tools/canon_guard.sh)
+#    헤더 시세·한국 뉴스 파일 4개만 먼저 원격 것으로 되돌림(Actions 가 정답, 예전과 같음)
+for f in data/korea.json data/korea.js data/ticker.json data/ticker.js; do git checkout -q -- "$f" 2>/dev/null || true; done
+if ! CANON_DIR="$(pwd)" bash tools/canon_guard.sh "$JOB"; then
+  echo "PREFLIGHT FAIL: 정본 상태(위 CANON GUARD 줄) — 판 빌드 하지 말고 Max 에게 알림"; jlog "FAIL  $JOB 정본 상태(canon-alert.txt)"; exit 1
+fi
 # 4) main
 b=$(git symbolic-ref --short -q HEAD || echo DETACHED)
 if [ "$b" != "main" ]; then git checkout -q main 2>/dev/null && FIX+=("브랜치 $b → main") || FAIL+=("main 으로 못 바꿈(지금 $b)"); fi
-# 5) 올리지 않은 추적 파일 변경(헤더 시세·한국 뉴스 파일은 원격 것이 정답이라 그냥 되돌림)
-for f in data/korea.json data/korea.js data/ticker.json data/ticker.js; do git checkout -q -- "$f" 2>/dev/null || true; done
-if ! git diff --quiet || ! git diff --cached --quiet; then
-  n=$(git status --porcelain --untracked-files=no | wc -l)
-  if git stash push -q -m "preflight $(now) $JOB"; then FIX+=("올리지 않은 변경 ${n}개 → stash('preflight …', git stash list 로 확인)"); else FAIL+=("올리지 않은 변경을 stash 못 함"); fi
-fi
+# 5) (2026-10-05) 올리지 않은 변경 stash 는 없앰 — 3) 의 정본 검사가 멈추고 알림
 # 6) 원격과 맞추기
 ok=""
 for i in 1 2 3; do

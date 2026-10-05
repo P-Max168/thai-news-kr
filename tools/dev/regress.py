@@ -3,7 +3,7 @@
   python3 tools/dev/regress.py [URL] [--json out.json]
 결과: 항목마다 '통과/실패/참고' 한 줄(한국어). 실패가 있으면 exit 1.
 뉴스 정기 실행과 무관(개발 점검용). 첫 방문 시작 화면은 저장값을 미리 넣어 건너뜀(온보딩 자체는 따로 점검)."""
-import urllib.parse, urllib.request, asyncio, json, re, sys, time, pathlib
+import urllib.parse, urllib.request, asyncio, json, re, sys, time, pathlib, subprocess
 from playwright.async_api import async_playwright
 
 URL = next((a for a in sys.argv[1:] if a.startswith("http")), "https://p-max168.github.io/thai-news-kr/")
@@ -603,6 +603,13 @@ async def main():
             rec(_gok, "최신 판 업데이트 시각(generated) = 실제 만든 시각(미래 아님 · 커밋과 15분 안 · index.json 같음)", _gmsg)
         except Exception as e:
             rec(False, "판 generated 시각 점검 실행 실패", str(e)[:160])
+        # 2026-10-05: 정본 체크아웃(/workspace/thai-news-portal) = 받기만 하는 곳 — rebase/merge 중·main 아님·origin 보다 앞섬·바뀐/추적 안 된 파일이면 실패(tools/canon_guard.sh, 아무것도 안 고침)
+        try:
+            _cg = subprocess.run(["bash", str(pathlib.Path(__file__).resolve().parents[1] / "canon_guard.sh"), "regress"], capture_output=True, text=True, timeout=90)
+            _cgo = (_cg.stdout or _cg.stderr).strip().splitlines()[-1:] or [""]
+            rec(None if "SKIP" in _cgo[0] else _cg.returncode == 0, "정본 체크아웃 깨끗함(rebase/merge 중 아님 · main · origin 보다 앞서지 않음 · 바뀐/추적 안 된 파일 없음)", _cgo[0][:200])
+        except Exception as e:
+            rec(False, "정본 체크아웃 검사 실행 실패", str(e)[:160])
         rec(FS["blocked"] == 0 or None, "자동 점검이 실서버(Firestore)에 반응·신고를 안 씀(이 기기 스위치 끔 + 쓰기 요청 차단)", "막은 쓰기 요청 %d개" % FS["blocked"])
         await b.close()
     if OUT: pathlib.Path(OUT).write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")

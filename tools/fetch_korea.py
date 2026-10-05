@@ -217,6 +217,13 @@ def standalone():
 
 def main():
     if "--standalone" in sys.argv:
+        # 2026-10-05: 상자(box)의 정본 체크아웃에서 한국 뉴스 갱신을 돌릴 때는 먼저 정본 상태 검사(rebase 중·앞섬·바뀐 파일이면 멈춤·알림).
+        #   GitHub Actions(korea.yml)는 새 체크아웃에서 돌고 같은 실행에서 바로 push 하므로 검사 안 함.
+        import os, subprocess
+        if not os.environ.get("GITHUB_ACTIONS") and ROOT.resolve() == pathlib.Path(os.environ.get("CANON_DIR", "/workspace/thai-news-portal")).resolve():
+            r = subprocess.run(["bash", str(ROOT / "tools" / "canon_guard.sh"), "korea-update"])
+            if r.returncode != 0:
+                sys.exit("한국 뉴스 갱신 안 함 — 정본 상태(위 CANON GUARD 줄)")
         return standalone()
     if len(sys.argv) < 2:
         sys.exit(__doc__)

@@ -1,0 +1,4 @@
+# 2026-10-05: DEV_LOG·BACKUPS 는 모든 작업이 파일 끝에 줄을 붙임 → 두 클론이 따로 붙이면 rebase 때마다 충돌(정본 08:30·가게 클론 08:13).
+# git 기본 union 병합 = 충돌 없이 양쪽 줄을 다 남김. 단 이미 있는 줄을 고치면 옛 줄도 되살아남 → tools/dev/log_check.py 가 잡음(옛 줄은 고치지 말고 새 줄로)
+DEV_LOG.md merge=union
+BACKUPS.md merge=union

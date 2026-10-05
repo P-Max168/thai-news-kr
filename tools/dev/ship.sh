@@ -6,6 +6,9 @@ cd "$(dirname "$0")/../.."
 MSG="$1"
 # 07:05–08:10(방콕) push 금지(정기 아침판 시간) — 사람이 잊어도 여기서 막음(2026-10-05)
 hm=$(TZ=Asia/Bangkok date +%H%M); if [ "$hm" -ge 0705 ] && [ "$hm" -le 0810 ]; then echo "지금 $(TZ=Asia/Bangkok date +%H:%M) — 07:05~08:10 은 push 금지(아침판). 08:10 뒤에 다시" >&2; exit 4; fi
+# 정본 체크아웃 검사(2026-10-05): 정본이 rebase/merge 중·앞섬·바뀐/추적 안 된 파일이면 push 전에 멈춤(아무것도 안 고침, canon-alert.txt + automation.log)
+#   10-05 08:30: 정본에 직접 커밋된 DEV_LOG 줄 때문에 push 뒤 정본 pull 이 rebase 중간에 멈췄음(ship exit 1) → 이제 push 전에 막음
+bash tools/canon_guard.sh ship || { echo "정본 상태가 깨끗하지 않아 배포 안 함(push 전). 정본을 먼저 정리" >&2; exit 7; }
 KOREA_FILES="data/korea.json data/korea.js data/ticker.json data/ticker.js"
 for f in $KOREA_FILES; do git checkout -q -- "$f" 2>/dev/null || true; done
 python3 tools/pending.py >/dev/null 2>&1 || true   # 승인함 목록(PENDING_APPROVAL.md → data/pending.json)
@@ -20,6 +23,8 @@ for i in 1 2 3 4; do
   fi
   python3 tools/stamp_assets.py >/dev/null
   if ! git diff --quiet; then git add index.html sw.js assets/social.js; git commit -q -m "stamp: 앱 셸 버전 다시 맞춤"; fi
+  # 2026-10-05: union 병합(.gitattributes) 뒤 DEV_LOG·BACKUPS 에 충돌 표시·같은 줄 두 번·되살아난 옛 줄이 있으면 push 안 함
+  python3 tools/dev/log_check.py || { echo "DEV_LOG/BACKUPS 병합 점검 실패 — push 안 함(위 FAIL 줄 고친 뒤 다시)" >&2; exit 8; }
   if git push -q origin main; then ok=1; break; fi
   sleep $((i*5))
 done
