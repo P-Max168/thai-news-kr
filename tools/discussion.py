@@ -16,6 +16,7 @@
         tools/discussions/<판 id>.json 에 저장(판을 다시 만들어도 newslib.write_edition 이 자동으로 다시 합침)
         + data/<판 id>.json|js 의 기사에 discussion={question, operator_comment, approved:true} 반영.
   python3 tools/discussion.py clear <판 id>             # 그 판의 오늘의 질문 모두 빼기
+  python3 tools/discussion.py mark-applied <판 id> [--at ISO]  # 게시된 항목을 초안 파일에 approved:true + applied_at 로 표시(글 그대로)
 화면: approved 가 true 인 것만, 그 기사 댓글 위에 '💬 오늘의 질문' 상자 + '운영자' 배지 고정 댓글.
 """
 import json, pathlib, sys
@@ -96,6 +97,27 @@ def apply(eid, approved_path):
     (APPLIED / (eid + ".json")).write_text(json.dumps(keep, ensure_ascii=False, indent=1), encoding="utf-8")
     newslib.write_edition(d, merge_discussions=False, keep_generated=True)
     print("적용:", n, "건 →", eid)
+    mark_applied(eid, newslib.build_stamp())
+
+
+def mark_applied(eid, at):
+    """초안 파일(drafts/discussion/<판>.json, .gitignore)에도 '게시됨' 표시 — 게시된 항목만 approved:true + applied_at(실제 적용 시각).
+    2026-10-05(Max 06:55 승인): 06:09 게시 59건 뒤에도 초안이 approved:false 로 남아 '대기'처럼 보였음. 글(question·operator_comment)은 그대로.
+    게시 여부 = tools/discussions/<판>.json 에 같은 id·같은 글이 있는 것. 초안 파일이 없으면(개발 폴더) 아무것도 안 함."""
+    fn = DRAFTS / (eid + ".json"); af = APPLIED / (eid + ".json")
+    if not fn.exists() or not af.exists():
+        print("초안 표시: 건너뜀(초안 또는 적용 파일 없음)", eid); return 0
+    items = json.loads(fn.read_text(encoding="utf-8"))
+    ap = {x["id"]: x for x in json.loads(af.read_text(encoding="utf-8"))}
+    n = 0
+    for x in items:
+        a = ap.get(x.get("id"))
+        if a and (x.get("question") or "").strip() == a["question"] and (x.get("operator_comment") or "").strip() == a["operator_comment"]:
+            if x.get("approved") is not True or not x.get("applied_at"):
+                x["approved"] = True; x["applied_at"] = x.get("applied_at") or at; n += 1
+    fn.write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8")
+    print("초안 표시: %d건 approved:true + applied_at=%s → %s" % (n, at, fn))
+    return n
 
 
 def clear(eid):
@@ -117,6 +139,8 @@ if __name__ == "__main__":
         show(a[1])
     elif len(a) >= 3 and a[0] == "apply":
         apply(a[1], a[2])
+    elif len(a) >= 2 and a[0] == "mark-applied":   # 이미 게시한 판 정리: mark-applied <판 id> [--at 실제 적용 시각(ISO)]
+        mark_applied(a[1], a[a.index("--at") + 1] if "--at" in a else newslib.build_stamp())
     elif len(a) >= 2 and a[0] == "clear":
         clear(a[1])
     else:
