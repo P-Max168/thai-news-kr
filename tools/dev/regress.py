@@ -325,52 +325,80 @@ async def main():
             pc = {"err": str(e)[:100]}
         rec((lambda q: q.get("n") == 5 and q.get("same") and 0 < q.get("east", 0) < pc.get("all", 0) == q.get("back"))(pc.get("sub", {})) and pc.get("vat") is True and pc.get("price") is True and pc.get("excl") is False and pc.get("all", 0) >= 40 and 0 < pc.get("pet", 0) < 30 and pc.get("kr", 0) >= 10 and pc.get("bkk", {}).get("n", 0) >= 20 and pc["bkk"].get("kr") == pc["bkk"].get("n") and pc["bkk"].get("osm") and pc["bkk"].get("thai") is False and pc.get("sri", 0) >= 1 and pc.get("gm", {}).get("n", 0) >= 20 and pc.get("gm", {}).get("bad") == 0 and pc.get("krsrc") and pc.get("oldlast") and pc.get("thai") is False and pc.get("src"),
             "📇 가게 카드 — 지역 3곳(파타야·시라차·방콕 OSM 한식·한인) · 한식·한인 10곳+(칸마다 출처·확인일, 구글 지도 가게는 이름·동네·링크만 — 전화·시간·평점 없음)·오래된 정보 맨 뒤·종류 필터·태국 문자 없음", pc)
-        # ⑦-2 가게 카드 믿음 규칙(2026-10-05 Max 06:33 — 사장님 '폐업한 곳이 너무 많다, 확인했다고 적어 놓고'): 지역 3곳 모두
-        #   (가) 확인 기록(verified_by + verified_at)이 없는 가게 카드·안내 글에 '실제로 확인'·'최종 확인'·'확인함' 이 있으면 실패
-        #   (나) 기준 날(현장 확인 날, 없으면 지도 정보 고친 날)이 오늘(방콕) − 730일보다 앞인 가게에 🕰️ 배지가 없으면(또는 맨 아래 접힌 칸 밖이면) 실패 — 기대값은 여기서 데이터로 따로 계산
-        #   (다) '🟢 지금 영업 중·곧 닫아요·지금 닫힘' 은 2년 안 현장 확인 날이 있거나 운영자 확인한 가게만
+        # ⑦-2 가게 카드 믿음 규칙(2026-10-05 Max 06:33·06:55 — 사장님 '폐업한 곳이 너무 많다, 확인했다고 적어 놓고'): 지역 3곳 모두, 기대값은 여기서 데이터(JSON)로 따로 계산
+        #   (가) 조사 기록(verified_status='영업 확인' + verified_by + verified_at + verified_source_url)이 없는 가게 카드·안내 글에 '실제로 확인'·'최종 확인'·'확인함' 이 있으면 실패
+        #   (나) 지도 기준 날(현장 확인 날, 없으면 지도 정보 고친 날 — 구글 지도 가게는 없음) < 오늘(방콕) − 730일 인 가게: 🕰️ 배지 + 자리(영업 확인 = 본 목록 / 폐업 의심 = 맨 아래 칸 / 보관함 / 나머지 = 오래된 정보 접힌 칸)
+        #   (다) 초록불('🟢 지금 영업 중·곧 닫아요·지금 닫힘' + data-pc-ok)은 '영업 확인' 90일 안(폐업 의심·보관함·폐업 신고됨 아님)만 + 화면 함수 openOK 가 89일 전 확인 = 켬, 91일 전 = 끔
+        #   (라) 폐업 보관함 가게(data/places-flags.json st=closed)는 기본 화면에서 닫힌 보관함 칸 안에만, '지금 영업 중만 보기'에서는 아예 없음 / 폐업 의심은 맨 아래 칸(.pc-sus)
         import datetime as _dt
-        ob = (_dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date() - _dt.timedelta(days=730)).isoformat()
+        _td = _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
+        ob = (_td - _dt.timedelta(days=730)).isoformat(); fb = (_td - _dt.timedelta(days=90)).isoformat()
         tr = {}
         try:
+            with urllib.request.urlopen(URL.split("?")[0].rstrip("/") + "/data/places-flags.json?_=%d" % int(time.time()), timeout=20) as rr:
+                FL = json.loads(rr.read().decode("utf-8")).get("flags") or {}
             await pg.evaluate("TNPages.open('places')"); await pg.wait_for_timeout(1200)
             for rg in ("pattaya", "sriracha", "bangkok"):
                 await pg.click('[data-pc-region="%s"]' % rg); await pg.wait_for_timeout(1500)
                 if await pg.locator('[data-pc-cat="all"][aria-pressed="false"]').count(): await pg.click('[data-pc-cat="all"]'); await pg.wait_for_timeout(300)
                 if await pg.locator('[data-pc-open][aria-pressed="true"]').count(): await pg.click('[data-pc-open]'); await pg.wait_for_timeout(300)
                 if await pg.locator('[data-pc-sub][aria-pressed="true"]').count(): await pg.click('[data-pc-sub][aria-pressed="true"]'); await pg.wait_for_timeout(300)
-                dom = await pg.evaluate("""()=>{const p=document.getElementById('tnPage');return {intro:(p.querySelector('.pc-intro')||{}).textContent||'',
-                  cards:[...p.querySelectorAll('.pc[data-pc]')].map(c=>({id:c.dataset.pc,txt:c.textContent,old:!!c.querySelector('.pc__old'),fold:!!c.closest('.pc-fold--old'),
-                    st:(c.querySelector('.pc__top .pc__open')||{}).textContent||''}))}}""")
+                JS = """()=>{const p=document.getElementById('tnPage');return {intro:(p.querySelector('.pc-intro')||{}).textContent||'',
+                  archOpen:!!p.querySelector('.pc-fold--arch[open]'), last:[...p.querySelectorAll('.pc-list > .pc')].slice(-1).map(c=>c.dataset.pc)[0]||'',
+                  cards:[...p.querySelectorAll('.pc[data-pc]')].map(c=>({id:c.dataset.pc,txt:c.textContent,old:!!c.querySelector('.pc__old:not(.pc__rc)'),
+                    at:c.closest('.pc-fold--old')?'old':c.closest('.pc-fold--arch')?'arch':c.closest('.pc-sus')?'sus':'main', ok:c.hasAttribute('data-pc-ok'),
+                    st:(c.querySelector('.pc__top .pc__open')||{}).textContent||''}))}}"""
+                dom = await pg.evaluate(JS)
                 with urllib.request.urlopen(URL.split("?")[0].rstrip("/") + "/data/places-%s.json?_=%d" % (rg, int(time.time())), timeout=20) as rr:
                     data = json.loads(rr.read().decode("utf-8"))
-                byid = {c["id"]: c for c in dom["cards"]}
-                ver = lambda q: bool(q.get("verified_by") and q.get("verified_at"))
-                def base(q):
-                    d = [str(q.get("verified_at") or "")[:10] if ver(q) else "", q.get("osm_check") or ("" if q.get("gmaps_only") else (q.get("osm_edit") or ""))]
-                    return max(d) or None
+                P = data["places"]; byid = {c["id"]: c for c in dom["cards"]}
+                rec_ = lambda q: bool(q.get("verified_status") and q.get("verified_by") and q.get("verified_at") and q.get("verified_source_url"))
+                ver = lambda q: rec_(q) and q["verified_status"] == "영업 확인"
+                sus = lambda q: rec_(q) and q["verified_status"] == "폐업 의심"
+                arc = lambda q: (FL.get(q["id"]) or {}).get("st") == "closed"
+                rep = lambda q: (FL.get(q["id"]) or {}).get("n", 0) >= 2
+                base = lambda q: None if q.get("gmaps_only") else (q.get("osm_check") or q.get("osm_edit") or None)
                 BAD = re.compile(r"실제로 확인|최종 확인|확인함")
-                badw = [q["id"] for q in data["places"] if not ver(q) and q["id"] in byid and BAD.search(byid[q["id"]]["txt"])] + (["(안내 글)"] if BAD.search(dom["intro"]) else [])
-                olds = [q for q in data["places"] if base(q) and base(q) < ob]
-                miss = [q["id"] for q in olds if q["id"] not in byid or not byid[q["id"]]["old"] or not byid[q["id"]]["fold"]]
-                okopen = {q["id"] for q in data["places"] if ver(q) or (q.get("osm_check") and q["osm_check"] >= ob)}
-                badopen = [c["id"] for c in dom["cards"] if re.search(r"지금 영업 중|곧 닫아요|지금 닫힘", c["st"]) and c["id"] not in okopen]
-                tr[rg] = {"n": len(data["places"]), "cards": len(dom["cards"]), "old": len(olds), "badge": sum(1 for c in dom["cards"] if c["old"]), "miss": miss[:5], "nmiss": len(miss),
-                          "badw": badw[:5], "nbadw": len(badw), "badopen": badopen[:5], "nbadopen": len(badopen), "openok": len(okopen)}
+                badw = [q["id"] for q in P if not ver(q) and q["id"] in byid and BAD.search(byid[q["id"]]["txt"])] + (["(안내 글)"] if BAD.search(dom["intro"]) else [])
+                olds = [q for q in P if base(q) and base(q) < ob]
+                where = lambda q: "arch" if arc(q) else "sus" if sus(q) else "main" if ver(q) else "old"
+                miss = [q["id"] for q in olds if q["id"] not in byid or not byid[q["id"]]["old"] or byid[q["id"]]["at"] != where(q)]
+                okopen = {q["id"] for q in P if ver(q) and str(q["verified_at"])[:10] >= fb and not sus(q) and not arc(q) and not rep(q)}
+                badopen = [c["id"] for c in dom["cards"] if (c["ok"] or re.search(r"지금 영업 중|곧 닫아요|지금 닫힘", c["st"])) and c["id"] not in okopen]
+                nok = sum(1 for c in dom["cards"] if c["ok"])
+                vq = next((q for q in P if ver(q) and not sus(q) and not arc(q) and not rep(q)), None)
+                unit = None
+                if vq:
+                    d89 = (_td - _dt.timedelta(days=89)).isoformat() + " 12:00"; d91 = (_td - _dt.timedelta(days=91)).isoformat() + " 12:00"
+                    unit = await pg.evaluate("([p,a,b])=>[TNPlaces.openOK(Object.assign({},p,{verified_at:a})),TNPlaces.openOK(Object.assign({},p,{verified_at:b})),TNPlaces.openOK(Object.assign({},p,{verified_status:'확인 불가'}))]", [vq, d89, d91])
+                arch_ids = {q["id"] for q in P if arc(q)}
+                archbad = [i for i in arch_ids if i not in byid or byid[i]["at"] != "arch"] + [c["id"] for c in dom["cards"] if c["at"] == "arch" and c["id"] not in arch_ids] + (["(보관함 열림)"] if dom["archOpen"] else [])
+                susbad = [q["id"] for q in P if sus(q) and not arc(q) and (q["id"] not in byid or byid[q["id"]]["at"] != "sus")]
+                await pg.click('[data-pc-open]'); await pg.wait_for_timeout(400)
+                dom2 = await pg.evaluate(JS)
+                await pg.click('[data-pc-open]'); await pg.wait_for_timeout(300)
+                archbad += ["영업중만:" + c["id"] for c in dom2["cards"] if c["id"] in arch_ids or c["at"] == "arch"]
+                badopen += ["영업중만:" + c["id"] for c in dom2["cards"] if c["id"] not in okopen]
+                tr[rg] = {"n": len(P), "cards": len(dom["cards"]), "old": len(olds), "badge": sum(1 for c in dom["cards"] if c["old"]), "miss": miss[:5], "nmiss": len(miss),
+                          "badw": badw[:5], "nbadw": len(badw), "badopen": badopen[:5], "nbadopen": len(badopen), "openok": len(okopen), "green": nok, "unit": unit,
+                          "arch": len(arch_ids), "archbad": archbad[:5], "sus": len([q for q in P if sus(q) and not arc(q)]), "susbad": susbad[:5], "openonly": len(dom2["cards"])}
             await pg.click('[data-pc-region="pattaya"]'); await pg.wait_for_timeout(800)
             await pg.evaluate("TNPages.close()"); await pg.wait_for_timeout(400)
         except Exception as e:
             tr = {"err": str(e)[:120]}
         okr = "err" not in tr and len(tr) == 3
         rec(okr and all(v["nbadw"] == 0 and v["cards"] == v["n"] for v in tr.values()),
-            "📇 가게 카드 — 확인 기록(verified_by+verified_at) 없는 가게에 '실제로 확인'·'최종 확인'·'확인함' 문구 없음(파타야·시라차·방콕)",
-            {k: (v if "err" in tr else {"카드": v["cards"], "문구 걸림": v["nbadw"], "예": v["badw"]}) for k, v in tr.items()} if "err" not in tr else tr)
+            "📇 가게 카드 — 조사 기록(영업 확인+누가+언제+근거 링크) 없는 가게에 '실제로 확인'·'최종 확인'·'확인함' 문구 없음(파타야·시라차·방콕)",
+            {k: {"카드": v["cards"], "문구 걸림": v["nbadw"], "예": v["badw"]} for k, v in tr.items()} if okr else tr)
         rec(okr and all(v["nmiss"] == 0 for v in tr.values()),
-            "📇 가게 카드 — 2년 넘은 정보(기준 날 < 오늘−730일 = %s)는 전부 🕰️ 배지 + 맨 아래 접힌 칸(파타야·시라차·방콕)" % ob,
+            "📇 가게 카드 — 지도 정보 2년 넘음(기준 날 < 오늘−730일 = %s)은 전부 🕰️ 배지 + 제자리(영업 확인 = 본 목록 · 폐업 의심 = 맨 아래 · 보관함 · 나머지 = 접힌 칸)(파타야·시라차·방콕)" % ob,
             {k: {"2년 넘음": v["old"], "배지": v["badge"], "빠짐": v["nmiss"], "예": v["miss"]} for k, v in tr.items()} if okr else tr)
-        rec(okr and all(v["nbadopen"] == 0 for v in tr.values()),
-            "📇 가게 카드 — '🟢 지금 영업 중'·닫힘 표시는 2년 안 현장 확인·운영자 확인 가게만(나머지는 '영업시간(지도 기준)')",
-            {k: {"보여도 되는 곳": v["openok"], "어긴 곳": v["nbadopen"], "예": v["badopen"]} for k, v in tr.items()} if okr else tr)
+        rec(okr and all(v["nbadopen"] == 0 and (v["unit"] is None or v["unit"] == [True, False, False]) for v in tr.values()) and any(v["unit"] for v in tr.values()),
+            "📇 가게 카드 — 초록불(🟢 지금 영업 중·닫힘 표시)은 '영업 확인' %s일 안 가게만(이후 = 꺼짐·재확인 필요, 89일 전 켬 · 91일 전 끔 · 확인 불가 끔)(기준 %s)" % (90, fb),
+            {k: {"켜도 되는 곳": v["openok"], "켜진 곳": v["green"], "어긴 곳": v["nbadopen"], "예": v["badopen"], "89/91일·확인불가": v["unit"]} for k, v in tr.items()} if okr else tr)
+        rec(okr and all(not v["archbad"] and not v["susbad"] for v in tr.values()),
+            "📇 가게 카드 — 폐업 보관함 가게는 기본 목록·'지금 영업 중만 보기'에 없음(닫힌 보관함 칸 안에만) · ⚠️ 폐업 의심은 맨 아래 칸",
+            {k: {"보관함": v["arch"], "어긴 곳": v["archbad"], "폐업 의심": v["sus"], "자리 틀림": v["susbad"], "영업중만 카드": v["openonly"]} for k, v in tr.items()} if okr else tr)
         # 🧑‍💼 구인판 시안(#jobs): 주소로만 열림, 예시 6개(모두 '예시' 표시), 광고 1칸, 입력·올리기 없음, 메뉴 링크 없음
         try:
             await pg.evaluate("location.hash='#jobs'"); await pg.wait_for_timeout(2500)
