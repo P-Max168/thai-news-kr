@@ -1,0 +1,7 @@
+pattaya {"n": 58, "old": 39, "inFold": 6, "foldOpen": false, "unv": 23, "ver": 30, "sus": 5, "ok": 0, "rechk": 30, "today": "2027-01-13", "mainN": 47, "susSec": 4, "arch": 1, "lastSec": "pc-fold pc-fold--old / pc-sus / pc-fold pc-fold--arch", "openShown": 0, "openNow": 0, "badWord": [], "intro": "파타야 — 지도에 등록된 가게 57곳, 영업 여부는 확인 안 됨(가기 전에 전화로 확인)", "thai": false, "over": 0}
+sriracha {"n": 2, "old": 2, "inFold": 2, "foldOpen": false, "unv": 2, "ver": 0, "sus": 0, "ok": 0, "rechk": 0, "today": "2027-01-13", "mainN": 0, "susSec": 0, "arch": 0, "lastSec": "pc-fold pc-fold--old", "openShown": 0, "openNow": 0, "badWord": [], "intro": "시라차 — 지도에 등록된 가게 2곳, 영업 여부는 확인 안 됨(가기 전에 전화로 확인)", "thai": false, "over": 0}
+bangkok {"n": 34, "old": 28, "inFold": 28, "foldOpen": false, "unv": 34, "ver": 0, "sus": 0, "ok": 0, "rechk": 0, "today": "2027-01-13", "mainN": 6, "susSec": 0, "arch": 0, "lastSec": "pc-fold pc-fold--old", "openShown": 0, "openNow": 0, "badWord": [], "intro": "방콕 — 지도에 등록된 가게 34곳, 영업 여부는 확인 안 됨(가기 전에 전화로 확인)", "thai": false, "over": 0}
+order osm-,osm-,osm-,osm-,osm-,osm-,osm-,osm-,osm-,osm-,osm-,osm-,osm-,osm-,osm-,gmap,gmap,gmap,gmap,gmap,gmap,gmap,gmap,gmap,gmap,gmap,gmap,gmap,gmap,gmap,osm-,osm-,osm-,osm-,osm-,osm-,gmap,gmap,gmap,gmap,gmap,gmap,gmap,gmap,gmap,gmap,gmap,osm-,osm-,gmap,gmap
+place types 정보 틀림|링크 깨짐|화면 이상|기타|🚫 폐업·없어짐
+local q [{"id":"place:osm-node-13834194401","kind":"place","type":"etc","memo":"[폐업·없어짐] 문 닫힘","url":"http://127.0.0.1:8765/","ed":"2026-10-04-pm","t":1799798446560,"sent":false}]
+firestore requests [] console errors []
