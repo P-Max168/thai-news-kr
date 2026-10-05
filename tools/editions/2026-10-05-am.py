@@ -332,7 +332,7 @@ korea_top = [
 data = dict(
   id="2026-10-05-am", date="2026-10-05", edition="am", edition_label="아침판",
   weekday="월요일", timezone="Asia/Bangkok (UTC+7)",
-  generated="2026-10-05T07:55:00+07:00",
+  # generated: 손으로 쓴 07:55(예정 시각)였음 → write_edition 이 실제 만든 시각을 넣음(2026-10-05 고침, 실제 07:23:46)
   coverage="2026-10-04 저녁판(18:25) 이후 ~ 10-05 아침(약 07:30 BKK), 저녁판에 빠진 10-04 오후 보도 포함. tools/collect.py --hours 14: 1,134건, 262개 소스 중 254개 정상(Workpoint 연예·Bright TV 403, PR Bangkok SSL 오류, 일부 GN 0건). 원문 확인: Bangkok Biz News·77 Khaoded·FM91·Isranews·Bangkok Post·Khaosod English·Chiang Rai Times·Khaosod·The Thaiger·Matichon·Thairath·Post Today·Naewna·Thansettakij·Siamsport·Thai PBS. 제외: 이전 판에 이미 실린 통러 음주운전·파타야 검문 도주 차량·파타야 지갑 반납·푸껫 배달 기사 절도, Google News 날짜와 달리 오래된 The Standard 기사들, 발행 시각을 확인 못 한 치앙마이 PRD 수문 방류 기사. X 트렌드 없음. 환율 1바트=40.19원(직전 판과 같은 공시).",
   previous="2026-10-04-pm",
   briefing=briefing,

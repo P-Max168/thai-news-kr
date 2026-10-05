@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """판 'generated'(업데이트 시각) 점검 — 2026-10-05: 10-05 아침판이 손으로 쓴 예정 시각 07:55 로 나감(실제 07:23).
-실패: ① generated 가 지금보다 미래(1분 넘게) ② 그 generated 값을 처음 담은 커밋 시각(아직 커밋 전이면 파일 수정 시각)과 15분 넘게 차이.
+실패: ① generated 가 지금보다 미래(1분 넘게) ② 그 generated 값을 처음 담은 커밋 시각(아직 커밋 전이면 파일 수정 시각)·판 파일을 처음 만든 커밋 시각 중 가까운 쪽과 15분 넘게 차이.
   python3 tools/gen_time_check.py [판 id]            # 기본 = data/index.json 의 latest (저장소 안 파일 기준)
   python3 tools/gen_time_check.py --break-test       # 시험: 미래 값 → 실패 · 20분 차이 → 실패 · 맞는 값 → 통과
 regress(tools/dev/regress.py)·verify_live(tools/verify_live.py) 가 같이 씀."""
@@ -59,6 +59,15 @@ def check(eid=None, generated=None, root=ROOT, index_generated=None):
     if generated is None:
         generated = json.loads((root / "data" / (eid + ".json")).read_text(encoding="utf-8")).get("generated", "")
     ref, kind = ref_time(eid, generated, root)
+    # 판을 처음 만든 커밋(파일이 처음 생긴 커밋)도 기준 — 나중에 실제 시각으로 '고쳐 넣은' 값은 고친 커밋이 아니라 처음 만든 시각과 맞아야 함
+    first = [l for l in git("log", "--format=%H %cI", "--", "data/%s.json" % eid, root=root).split("\n") if l.strip()]
+    if first and ref is not None:
+        h, t = first[-1].split(" ", 1); ft = datetime.fromisoformat(t.strip())
+        try:
+            g = datetime.fromisoformat(generated)
+            if abs(g - ft) < abs(g - ref): ref, kind = ft, "처음 만든 커밋 " + h[:7]
+        except Exception:
+            pass
     ok, msg = judge(generated, ref, ref_kind=kind)
     if index_generated is not None and index_generated != generated:
         ok, msg = False, msg + " · index.json generated %s ≠ 판 %s" % (index_generated, generated)
