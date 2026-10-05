@@ -94,7 +94,7 @@ def apply(eid, approved_path):
     keep = [dict(id=x["id"], question=x["question"].strip(), operator_comment=x["operator_comment"].strip(), approved=True)
             for x in ok if x.get("question") and x.get("operator_comment")]
     (APPLIED / (eid + ".json")).write_text(json.dumps(keep, ensure_ascii=False, indent=1), encoding="utf-8")
-    newslib.write_edition(d, merge_discussions=False)
+    newslib.write_edition(d, merge_discussions=False, keep_generated=True)
     print("적용:", n, "건 →", eid)
 
 
@@ -105,7 +105,7 @@ def clear(eid):
     f = APPLIED / (eid + ".json")
     if f.exists():
         f.unlink()
-    newslib.write_edition(d, merge_discussions=False)
+    newslib.write_edition(d, merge_discussions=False, keep_generated=True)
     print("오늘의 질문 모두 뺌:", eid)
 
 

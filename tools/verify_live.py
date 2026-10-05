@@ -101,6 +101,19 @@ async def main():
           and info.get("visaCards", 0) == info["visaStories"]          # 외국인·비자 탭 렌더 확인
           and info["xtrendGone"] and info.get("drawerXtrendGone") and info["loginBtn"] and info.get("drawer")
           and info["sw"] is True and isinstance(info["manifest"], dict) and info["manifest"]["ok"])
+    # 2026-10-05: 판 'generated'(업데이트 시각) 점검 — 미래 시각이거나 그 값을 담은 커밋(커밋 전이면 파일 시각)과 15분 넘게 차이면 FAIL
+    #  (10-05 아침판: 손으로 쓴 07:55 가 나감, 실제 07:23). 라이브 data/<판>.json·index.json 값으로, 비교 시각은 이 저장소 git.
+    try:
+        import urllib.request
+        sys.path.insert(0, str(ROOT / "tools")); import gen_time_check
+        base = URL.split("?")[0].rstrip("/") + "/"; ts = str(int(time.time()))
+        lg = json.loads(urllib.request.urlopen(base + "data/%s.json?_=%s" % (WANT, ts), timeout=30).read().decode("utf-8")).get("generated", "")
+        li = next((e.get("generated") for e in json.loads(urllib.request.urlopen(base + "data/index.json?_=" + ts, timeout=30).read().decode("utf-8")).get("editions", []) if e.get("id") == WANT), None)
+        gok, gmsg = gen_time_check.check(WANT, generated=lg, root=ROOT, index_generated=li)
+    except Exception as e:
+        gok, gmsg = False, "점검 실행 실패: %s" % str(e)[:120]
+    print("generated:", "OK" if gok else ("FAIL" if gok is False else "참고"), gmsg)
+    ok = ok and gok is not False
     print("OK" if ok else "FAIL (want %s)" % WANT)
     return 0 if ok else 1
 

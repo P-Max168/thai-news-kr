@@ -56,7 +56,7 @@ korea_top = [
 data = dict(
   id="YYYY-MM-DD-am", date="YYYY-MM-DD", edition="am", edition_label="아침판",   # ※ 실행한 날(방콕) + am|pm
   weekday="※요일", timezone="Asia/Bangkok (UTC+7)",
-  generated="※2026-01-01T07:30:00+07:00",
+  # generated 는 쓰지 않음 — write_edition 이 실제 만든 시각을 자동으로 넣음(손으로 쓰면 무시, 2026-10-05)
   coverage="※ 수집 범위 설명",
   previous="※ 직전 판 id (data/index.json 의 latest)",
   briefing=briefing,

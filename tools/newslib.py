@@ -372,9 +372,24 @@ def normalize_topics(data):
     return fixed
 
 
-def write_edition(data, merge_discussions=True):
+def build_stamp():
+    """판을 실제로 만든 시각(방콕, 초 단위) — 'generated' 는 이것만 씀(손으로 쓰지 않음)."""
+    from datetime import timezone, timedelta
+    return datetime.now(timezone(timedelta(hours=7))).isoformat(timespec="seconds")
+
+
+def write_edition(data, merge_discussions=True, keep_generated=False):
     """data/<id>.json + data/<id>.js 저장 후 index 재생성.
-    tools/discussions/<id>.json(운영자가 승인한 💬 오늘의 질문, tools/discussion.py apply)이 있으면 다시 합친다."""
+    tools/discussions/<id>.json(운영자가 승인한 💬 오늘의 질문, tools/discussion.py apply)이 있으면 다시 합친다.
+    2026-10-05: 'generated'(업데이트 시각·'몇 시간 전' 기준) = 판을 만든 실제 시각(build_stamp)을 여기서 자동으로 넣는다.
+      10-05 아침판에서 tools/editions/<id>.py 에 손으로 쓴 예정 시각 07:55 가 그대로 나가 실제(07:23)보다 미래 시각이 보였음 →
+      판 파일에 손으로 쓴 generated 는 무시(경고). keep_generated=True = 이미 만든 판을 다시 저장할 때만(discussion.py apply/clear 등) 원래 값 유지."""
+    if not keep_generated:
+        real = build_stamp()
+        hand = data.get("generated")
+        if hand and hand != real:
+            print("점검(경고): 판 파일에 손으로 쓴 generated(%s)는 무시 → 실제 만든 시각 %s 로 저장" % (hand, real), file=sys.stderr)
+        data["generated"] = real
     if merge_discussions:
         f = pathlib.Path(__file__).resolve().parent / "discussions" / (data["id"] + ".json")
         if f.exists():
