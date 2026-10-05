@@ -1,18 +1,12 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-05T21:57:56+07:00",
+ "updated_at": "2026-10-05T23:55:30+07:00",
  "items": [
   {
-   "title": "북 지뢰 매설 추정지역 여러곳…군 “모두 무력화가 원칙”",
+   "title": "‘북한군 지뢰’ 매설 추정지 여럿…군 “모두 제거 원칙”",
    "source": "한겨레",
-   "time": "2026-10-05T20:33:00+07:00",
+   "time": "2026-10-05T22:30:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1iX2tlN2hHdnhVLXlMQ0VfREV6ZGVicnYxWlVqWmFhN3dfbk9ub0dkaGVobk5va21wUEIwdUVWT2lkTUctdlZSN1hrb21iaW5nUHU0OWlRVmpENzFQTWs2Ri1QTGI1aDRPU0g0a04tTkJ5RlVu?oc=5"
-  },
-  {
-   "title": "조희대 국감 불출석에…與 \"예외 없어야\" 野 \"국회의 횡포\"",
-   "source": "조선일보",
-   "time": "2026-10-05T14:22:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNM2dMUXdseW83TDROblV0ai10bUxWSUxtQ3FhVTRCSmg2X3kzbU9VOVZ5YUxpaC1HN0VsalFiWmJ5UTU0bTY1MHduMzBLMjBGc2FQNzZIR1RORlVGcHZmSHBpbWRHQk5vZXZtR3dNc1VLX1JPb21aaTNMYktxMUNxREJRTkp2QQ?oc=5"
   },
   {
    "title": "'盧 수사' 與-한동훈 2라운드…\"석고대죄하라\"·\"성역화 말라\"",
@@ -27,16 +21,22 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBKQW9zSi1GckQ2VXlYQ1NhWmVoLWRZb3pOUFZXV2hObHdnRWtqRnNkTVJ5ZlNWNTc4MUs5NGxGV1pMbjJoc1ZkWXJoMnlPSV9taTJSNlVuVGNyd9IBX0FVX3lxTE5lZzFvWFlCZHRRbHhUTkJEMEJOSGwwdGJNWkNFM1ZCS1hwdzYxSU4tWjRqMnh0YmxEZ2xldXJ1N2FZa3pyRkE3enQ2MjRldUdZbThaQU1CcGVuVklJdVFv?oc=5"
   },
   {
-   "title": "[속보] 군 “북, MDL 이남 지뢰 설치로 우리 장병 부상 당했다고 최종 판단”",
+   "title": "이재명 정부 2년 차 국정감사 시작…주요 현안 검증대",
    "source": "KBS 뉴스",
-   "time": "2026-10-05T14:07:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9ySlZXR3VfbjNkWGpSUWtyS1M0aVk2eFFHZHdodUt1ejV5dXpsaExpYXk1Y2NLSm9pUWNxMTRQMkRIc0t5bVVPcktJY21GZXEwRXlnbUN1MGdzb3c?oc=5"
+   "time": "2026-10-05T23:11:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE0weG0tVFRoREQzQmNhVWc5NWRFbWNHUm9PeTRLbTJMeWVYU3ZBZ25Canl4OGpCektKQmlkdEE5STM4SmFlTXMtZXRpWkxpNG5qUkhmWG0xZ3F2bFk?oc=5"
   },
   {
-   "title": "경부고속도로서 레미콘 가드레일 추돌 후 전도…운전자 숨져",
-   "source": "연합뉴스",
-   "time": "2026-10-05T14:59:34+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1Ma3FzS1hhbnBCdUFJbUUwVFR5dlViVjBuUVRsVVFCZl8ycHh2elpVZ3A4NEtWakpTOVdfQ2htRWtIcE5aQUdFZC1wTlRUOVVmVVRKMVZtczNLWFnSAWBBVV95cUxOVHdhNnlSVHhNT201LXN0U28zdldsdGpfVEhLVGpVOUxZUDN1SVRRb1Q4U1FmWENabnFzNG5HYkU5UGF1bG52WjRMa0I3TTdER0ZIaHRxWnlBdFUyNXJrMUk?oc=5"
+   "title": "출범 중수청, 당분간 ‘수기’로 사건 관리…아직 자체 시스템 없어",
+   "source": "동아일보",
+   "time": "2026-10-05T19:26:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE13aHotYkppMV9HUHNQSjVOQTVNdjVpTHBvOVc5WldBZEJ6dlNuZlRQdlkyaHhtYmRBaV85ZzNMX2VKd1dpZ29qdlo5a1NSbzA4cnBzcVpzM1hNdDlNMGppcUtDMGJMVUZkcUk3YVE0YlN0cmdjTXfSAWZBVV95cUxQVDZIdzBHazEtSW5HUmJJNlJyaTZwN2l6THNpaTA2bEhyaEZheDgxR3dlSjNLTHJrYm1POFU2VjQwYnh2b0hocGFlc29kT1FPVUJhc3BXVDhkZl9HaHJnX2JGX2NpT0E?oc=5"
+  },
+  {
+   "title": "그물 끌어올리다 ‘기우뚱’…어선 전복 2명 실종",
+   "source": "KBS 뉴스",
+   "time": "2026-10-05T19:10:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE41R3dYSUMtd0s3cGJIQ1JMUXA4MkMxUmpySWpONVdhbFQ3bnJmdEZjclN3TWJ0VFhUeXd5YTFJc0kxTWlXV1BsbXJLc0FJb2E3Q3F4S3dJM2FyVG8?oc=5"
   },
   {
    "title": "이 대통령, 조국·유시민 과거 영상 공유하며 ‘검찰개혁 비판’에 직접 반박",
@@ -45,10 +45,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE81VGhPMFpKUzFsdjFDbHNjczUxZjNyM3VEaVdfOHF0dHRONkFPMURoQnJremhVRG9ETWtkU1VDMkgydjRWSUk2Q005WklSN0RhZTlneEV5cVZ1d9IBX0FVX3lxTE1LNWdaRS16bG5PTXJEX1NTRURBOUhFcXN5czZKcHQ3aC15Rzg1aWg1N1RqbXc0MVh6TmJPSzhRUXZQRXRsbTNaQlRCRUVOX2FhQmV6VXlkWkc3RzJsRTRn?oc=5"
   },
   {
-   "title": "임은정 ‘검찰 폐지’ 책임 동료들에게 돌리며 “김지용 자격 없다”",
+   "title": "식당에서 밥 먹다 날벼락... 화물차 돌진에 15명 부상",
    "source": "조선일보",
-   "time": "2026-10-05T10:34:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQMjV1cVFZN0NRUWo3UXcwRTBFNzhzN0I0OWF5NnVtZ2o2NlBhbEhFNUktSmJFWjV6WUFET1p0bUhqdHY0TU51N0lic05sdUdrX2NMSV9LQWszUlNFLWN6WWZGajB6dnV5b3hBcWpQSzM0WkU3OHFiMlhtcDlpSjVYRy0wMkdjUVU?oc=5"
+   "time": "2026-10-05T19:14:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPZmE2TXFBWUlJbV8tQS14SXVDVlVZXy1fMEJTRktLVjhXV3pEdWhXUjV0Tk9UWmpmR09qNWYyNUFmRloxUFozUm5USmRRei1qTFdXNUtpdGZPM2NuR1VjNk5ySTgyLS16UFlzdndWbENHR3NuYTV4NV8tbkdfa1JjYlJZaXdxbWtoM2hqX2s0MlI?oc=5"
   },
   {
    "title": "트럼프 \"여론조사, 항상 MAGA 과소평가\"…지지층 투표 독려",
@@ -57,10 +57,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5xLVlVaDNiTUQ5N19HS0JNV2R6eFIxZGYtdDMxOVA3SFhsQUVtTWdTVXdPcGJPNnFBLUI1MVE1dmxlSzVzT2RBVDFDMzlmRmUtaHVFcG5JTzZtYTJiQy1KMXRVanNLN3M?oc=5"
   },
   {
-   "title": "부산시, 되돌아 온 ‘부캉이’ 지켜보기로…스스로 나갈 가능성은?",
-   "source": "한겨레",
-   "time": "2026-10-05T14:31:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFA5WkNEeGdQQ3A5SjkxYVV2Vi1kbE5kWGFiS2FMY18ydk9tRTZ5RlJ1dFRaNEFIa1hIRFloaFRuNXo2dm9wYTNwRjh4Tl9XTmttMml3ejJCSURid3VvdzNxaVlGNWI?oc=5"
+   "title": "길에서 어깨 부딪쳤다고…70대 집 쫓아가 살해한 20대",
+   "source": "한국경제",
+   "time": "2026-10-05T17:16:17+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBwbFlwdnNLeElzcTNzcHV3SVJCOE9sWXNWb095U05HZE4wRWRNaXdKY0FDNWgxS3c2UFYwcE9mWXB2ZnRicE8xdGN3N2VIaEVkUFA3bWdRWlNnQQ?oc=5"
   }
  ]
 };
