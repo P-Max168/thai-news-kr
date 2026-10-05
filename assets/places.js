@@ -155,7 +155,7 @@
     else if (repd) warn += '<p class="pc__warn pc__warn--x"><span class="pc__closed">🚫 폐업 신고됨</span> 독자 폐업 신고 ' + (+flag(p).n) + "건 — 운영자가 아직 확인 안 했어요. 가기 전에 꼭 전화로 확인하세요.</p>";
     if (old) warn += '<p class="pc__warn"><span class="pc__old">🕰️ 오래된 정보</span> 지도 정보가 ' + esc(b) + (p.osm_check ? "에 현장 확인된 뒤" : "에 고쳐진 뒤") + " 2년 넘게 바뀐 기록이 없어요" +
       (ver ? "(영업은 아래 조사에서 확인 — 영업시간·전화는 다를 수 있어요)." : ". 문을 닫았을 수 있으니 가기 전에 전화로 확인하세요.") + "</p>";
-    if (rc) warn += '<p class="pc__warn"><span class="pc__old">🔁 재확인 필요</span> 영업 확인이 ' + OPEN_DAYS + "일 넘게 지났어요(" + esc(String(p.verified_at).slice(0, 10)) + "). 가기 전에 전화로 확인하세요.</p>";
+    if (rc) warn += '<p class="pc__warn"><span class="pc__old pc__rc">🔁 재확인 필요</span> 영업 확인이 ' + OPEN_DAYS + "일 넘게 지났어요(" + esc(String(p.verified_at).slice(0, 10)) + "). 가기 전에 전화로 확인하세요.</p>";
     else if (p.gmaps_only && !ver && !sus && !old) warn += '<p class="pc__warn pc__warn--unv"><span class="pc__unv">❔ 영업 확인 안 됨</span> 구글 지도에서 이름만 본 곳이에요. 지금 영업하는지는 확인 안 됐어요.</p>';
     // 어디서·언제 확인했는지(조사 기록이 있을 때만 — 근거 링크·확인 시각 그대로)
     var vsrc = hasRec(p) ? '<small class="pc__fs"><a href="' + esc(p.verified_source_url) + '" target="_blank" rel="noopener nofollow">' + (/google\./.test(p.verified_source_url) ? "Google 지도" : "근거") + " ↗</a> · " + esc(p.verified_at) + " · " + esc(p.verified_by) + "</small>" +

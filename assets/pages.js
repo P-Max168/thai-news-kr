@@ -360,6 +360,32 @@
       '<ol class="ap-list rp-list">' + li + "</ol>" +
       (txt ? '<p class="ap-txt" id="pfTxt">가게 폐업 기록(data/places-flags.json 에 올려 줘):\n' + esc(txt) + '</p><button type="button" class="cta" data-pf-copy>📋 기록 복사</button>' : "") + "</details>";
   }
+  /* 🔁 가게 재확인 줄(2026-10-05 Max 06:55 지시 7번): '영업 확인'이 90일(places.js OPEN_DAYS) 지난 가게 = 화면 초록불 꺼짐 + '재확인 필요' → 여기 목록으로.
+   *   매일 자동(가게 데이터 3개를 운영자 화면에서만 읽어 계산). ⚠️ 폐업 의심 가게도 같이(전화·현장 확인 대상) */
+  var RC = { rows: null, busy: false };
+  function rcLoad() {
+    if (RC.rows || RC.busy) return; RC.busy = true;
+    var days = (window.TNPlaces && TNPlaces.OPEN_DAYS) || 90, cut = new Date(Date.now() + 7 * 3600e3 - days * 864e5).toISOString().slice(0, 10), out = [];
+    Promise.all(["pattaya", "sriracha", "bangkok", "flags"].map(function (r) { return fetch("data/places-" + r + ".json", { cache: "no-cache" }).then(function (x) { return x.ok ? x.json() : null; }).catch(function () { return null; }); }))
+      .then(function (ds) {
+        var fl = (ds.pop() || {}).flags || {};
+        ds.forEach(function (d) { (d && d.places || []).forEach(function (p) {
+          if ((fl[p.id] || {}).st === "closed") return; /* 이미 보관함 */
+          var rec = p.verified_status && p.verified_by && p.verified_at && p.verified_source_url;
+          if (rec && p.verified_status === "영업 확인" && String(p.verified_at).slice(0, 10) < cut) out.push({ k: "🔁 재확인 필요", r: d.region_ko, p: p });
+          else if (rec && p.verified_status === "폐업 의심") out.push({ k: "⚠️ 폐업 의심", r: d.region_ko, p: p });
+        }); });
+        RC.rows = out; RC.days = days;
+      }).then(function () { RC.busy = false; if (cur === "approve") paint(); });
+  }
+  function rcHTML() {
+    rcLoad();
+    if (!RC.rows) return "";
+    return '<details class="as-near rc-sec"><summary>🔁 가게 재확인 ' + RC.rows.length + "곳(영업 확인 " + RC.days + "일 지남 " + RC.rows.filter(function (x) { return /재확인/.test(x.k); }).length + " · 폐업 의심 " + RC.rows.filter(function (x) { return /의심/.test(x.k); }).length + ")</summary>" +
+      (RC.rows.length ? '<ol class="ap-list rp-list">' + RC.rows.map(function (x) { return '<li class="rp-item"><div class="ap-top"><span class="ap-kind">' + esc(x.r) + '</span><span class="rp-type">' + esc(x.k) + '</span><span class="ap-st">' + esc(String(x.p.verified_at || "")) + "</span></div>" +
+        '<p class="rp-memo">' + esc(x.p.name) + '</p><p class="ap-where"><a href="' + esc(x.p.verified_source_url) + '" target="_blank" rel="noopener nofollow">근거 ↗</a> · <code>' + esc(x.p.id) + "</code></p></li>"; }).join("") + "</ol>" : '<p class="as-sum">재확인할 가게가 없어요 🙂</p>') +
+      '<p class="as-sum">전화·방문으로 확인한 뒤 봇에게 \'가게 ○○ 영업 확인(언제·어떻게)\' 또는 \'폐업 확인\'이라고 알려 주세요.</p></details>';
+  }
   function repHTML() {
     rpLoad(false);
     var loc = []; try { loc = JSON.parse(localStorage.getItem("tnk.rep.q") || "[]") || []; } catch (e) {}
@@ -372,7 +398,7 @@
     var tst = test.length ? '<details class="as-near rp-test"><summary>🧪 시험 신고 ' + test.length + "건(메모가 '[테스트]'로 시작 — 진짜 신고 아님, 규칙상 지울 수 없어 따로 모음)</summary><ol class=\"ap-list rp-list\">" + test.map(function (x) { return rpRow(x, x.at); }).join("") + "</ol></details>" : "";
     var mine = loc.length ? '<details class="as-near"><summary>이 기기에 저장된 신고 ' + loc.length + "건(서버 저장 실패 — 메일로 보냈을 수 있음)</summary><ol class=\"ap-list rp-list\">" + loc.slice().reverse().map(function (x) { return rpRow(x, x.t); }).join("") + "</ol></details>" : "";
     return '<section class="ad-sec rp-sec" id="reports" aria-labelledby="rpH"><h3 class="ad-h" id="rpH">⚠️ 오류 신고함 <small>(최근 30일)</small></h3>' +
-      '<p class="as-sum">기사·가게 카드·광고의 <b>오류 신고</b>가 여기 모여요. <b>자동으로 고치거나 지우지 않아요</b> — 보고 고칠 것을 봇에게 알려 주세요.</p>' + (RP.rows ? pfHTML(real) : "") + srv + tst + mine + "</section>";
+      '<p class="as-sum">기사·가게 카드·광고의 <b>오류 신고</b>가 여기 모여요. <b>자동으로 고치거나 지우지 않아요</b> — 보고 고칠 것을 봇에게 알려 주세요.</p>' + (RP.rows ? pfHTML(real) : "") + rcHTML() + srv + tst + mine + "</section>";
   }
   register("approve", {
     title: "✅ 관리자 승인함",
