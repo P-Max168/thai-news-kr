@@ -14,6 +14,19 @@ OUT = (sys.argv[2] if len(sys.argv) > 2 else str(ROOT / "screenshots")).rstrip("
 LATEST = json.loads((ROOT / "data/index.json").read_text(encoding="utf-8"))["latest"]
 fails = []
 
+# 2026-10-05: 8765 포트를 다른 작업 폴더(tnk-shops) 서버가 쓰고 있어 엉뚱한 사이트를 점검하고도 ALL OK 가 나온 일이 있었다.
+# → 점검 대상 서버의 data/index.json latest 가 이 저장소와 같은지 먼저 확인하고, 다르면 바로 멈춘다.
+if BASE.startswith("http://127.0.0.1") or BASE.startswith("http://localhost"):
+    import urllib.request
+    try:
+        _srv = json.loads(urllib.request.urlopen(BASE + "data/index.json", timeout=10).read().decode("utf-8"))["latest"]
+    except Exception as e:
+        _srv = "ERR " + str(e)
+    if _srv != LATEST:
+        print(f"FAIL: {BASE} 의 최신 판({_srv})이 이 저장소({LATEST})와 다름 — 다른 폴더 서버일 수 있음. "
+              f"이 저장소에서 빈 포트로 서버를 띄우고 URL 을 넘길 것: python3 tools/screenshot.py http://127.0.0.1:<포트>/")
+        sys.exit(1)
+
 
 async def drawer(pg):
     """☰ 메뉴(서랍) 열기 — 주제 목록·내 주제 설정은 서랍 안에 있음"""

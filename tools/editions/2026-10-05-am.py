@@ -1,0 +1,346 @@
+# -*- coding: utf-8 -*-
+"""2026-10-05 아침판 (정기 07:08).
+2026-10-04 저녁판(18:25) 이후 ~ 10-05 아침(약 07:30 BKK) 보도 + 저녁판에 빠진 10-04 오후 보도.
+모든 내용은 raw/2026-10-05-am/ 에 저장한 RSS·원문에서 확인한 것만 사용. trends 없음."""
+import sys, pathlib
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
+from newslib import write_edition, B, KR
+
+stories = [
+# ───────────── 동부(촌부리·라용) ─────────────
+dict(id="ea1", topic="east", secondary=["weather"], region="촌부리(판통·파나니콤)",
+ headline="동부 저수지 62곳 저수율 100.23%…태국 관개청, 촌부리 판통·파나니콤 하류 주민에 주의",
+ summary=[
+  "태국 관개청(Royal Irrigation Department)은 4일 촌부리 제9 관개사무소에서 동부 물 관리 회의를 열고, 관할 대형·중형 저수지 62곳의 저수량이 약 26억500만㎥로 정상 저수 용량의 100.23%에 이르렀다고 밝혔다.",
+  "관개청은 촌부리 클롱루앙 랏차촐라톤(Khlong Luang Ratchacholathon) 저수지 물을 단계적으로 방류하도록 지시하고, 하류 위험 지역인 판통(Phan Thong)·파나니콤(Phanat Nikhom) 군 주민에게 앞으로 이어질 비에 대비하라고 알렸다고 방콕비즈뉴스가 전했다."
+ ],
+ context="저수지가 꽉 찬 상태에서는 비가 조금만 더 와도 방류량이 늘어 하류 수위가 오른다. 판통·파나니콤은 아마타시티 공단과 가까운 지역이다.",
+ source="Bangkok Biz News (방콕비즈뉴스)", url="https://www.bangkokbiznews.com/news/news-update/1254954",
+ title_th="รับมือน้ำท่วมภาคตะวันออก อ่างเก็บน้ำทะลุ 100% เฝ้าระวัง ชลบุรี",
+ published="2026-10-04T17:43:00+07:00",
+ tags=["촌부리","저수지","관개청","판통","파나니콤"],
+ impact=["날씨·재해"], for_me="판통·파나니콤·아마타 쪽에 살거나 출퇴근한다면 이번 주 비 소식과 방류 안내를 함께 확인하세요.",
+ also=[],
+ issue=dict(id="2026-floods-amata", title="아마타시티 촌부리 공단 침수"),
+ quick_replies=["판통 쪽 지금 물 어떤가요?", "방류 소식 계속 알려주세요", "아마타 출퇴근 길 괜찮나요?"]),
+
+dict(id="ea2", topic="east", secondary=["travel"], region="파타야(농눅 정원)",
+ headline="파타야 농눅 정원 사진 공모전 66개 상 시상…대상 ‘빗속의 촉촉함’ 상금 10만 바트(약 401만9,000원)",
+ summary=[
+  "파타야의 농눅 정원(Nong Nooch World Pattaya)은 4일 오후 2시 ‘웅장한 농눅’ 사진 공모전 시상식을 열고 일반 부문 58개 상과 심사위원 특별상 8개 등 모두 66개 상을 줬다. 깜폰 딴삿짜(Kampon Tansacha) 농눅 정원 회장이 상을 전달했다.",
+  "일반 사진 부문 대상은 싹차이 르언캄(Sakchai Ruenkham)의 ‘빗속의 촉촉함(Chum Cham Klang Sai Fon)’이 받아 상금 10만 바트(약 401만9,000원)를 받았다고 77khaoded가 전했다."
+ ],
+ context="농눅 정원은 파타야 남쪽 싸따힙 방향 쑤쿰윗 도로변의 대형 정원·관광지로, 정원 풍경과 공연으로 알려져 있다.",
+ source="77 Khaoded (77 카오뎃)", url="https://77kaoded.news/04/10/2026/travel/sangk/74651/",
+ title_th="นงนุช เวิลด์ พัทยา มอบ 66 รางวัลประกวดภาพ “อลังการนงนุช” ผลงาน “ชุ่มฉ่ำกลางสายฝน” คว้าแชมป์รับ 1 แสน",
+ published="2026-10-04T17:24:00+07:00",
+ tags=["파타야","농눅 정원","사진 공모전","관광"],
+ impact=[], for_me="",
+ also=[],
+ issue=None,
+ quick_replies=["농눅 정원 가 보신 분 계세요?", "수상작 사진 보고 싶네요", "비 그치면 가 볼 만하겠어요"]),
+
+# ───────────── 방콕 ─────────────
+dict(id="bk1", topic="bangkok", secondary=["society","visa"], region="방콕(후아이꽝)·파타야",
+ headline="‘파타야로 서류봉투 배달’ 수상히 여긴 라이더가 경찰에…케타민 나와 후아이꽝 콘도서 베트남인 2명 검거",
+ summary=[
+  "방콕 후아이꽝(Huai Khwang) 경찰서는 2일 33세 배달 라이더 ‘뱅’(가명)의 신고를 받고 수사에 나섰다. 그는 모르는 남성에게 서류봉투를 파타야로 배달해 달라는 의뢰를 받았는데, 콘도에서 만난 남성의 태도가 수상해 직접 경찰서로 가져왔고, 경찰이 열어 보니 케타민이 들어 있었다.",
+  "경찰은 프라차랏 밤펜(Pracharat Bamphen) 소이 18의 한 숙소에서 베트남 국적 남성 2명(가명 ‘보’·‘또’)을 붙잡고 케타민 8봉지, 전자담배 액상 카트리지 15개, 저울 2대, 알약 압착기 1대 등을 압수했다고 FM91이 전했다."
+ ],
+ context="모르는 사람이 맡기는 봉투·택배 배달은 마약 운반에 이용될 수 있다. 태국에서는 마약 소지·운반 처벌이 매우 무겁다.",
+ source="FM91 Trafficpro (FM91 트래픽프로)", url="https://www.fm91bkk.com/newsarticle/79899",
+ title_th="ไรเดอร์เซนส์ไว รับพัสดุมีพิรุธ ขึ้นโรงพักแกะพิสูจน์ พบซุกเคตามีน สืบฯ ห้วยขวาง บุกเข้ารวบ 2 หนุ่มเวียดนาม",
+ published="2026-10-05T00:24:00+07:00",
+ tags=["방콕","후아이꽝","라이더","케타민","베트남인"],
+ impact=["치안"], for_me="모르는 사람이 내용물을 숨기는 봉투·택배를 대신 보내거나 받아 달라고 하면 거절하세요. 마약 운반에 휘말릴 수 있습니다.",
+ also=[],
+ issue=None,
+ quick_replies=["라이더 분 대단하네요", "모르는 택배는 절대 받지 말아야겠어요", "파타야로 보내려던 거라니 무섭네요"]),
+
+dict(id="bk2", topic="bangkok", secondary=["poleco","travel"], region="방콕(민부리)",
+ headline="방콕 놀이공원 ‘시암 파크’ 5년 연속 적자…창업자 매각 선언 뒤 공개된 재무제표, 지난해 손실 1억4,565만 바트(약 58억5,355만 원)",
+ summary=[
+  "이스라뉴스는 상무부 사업개발국 자료를 확인해, 시암 파크(Siam Park City)를 운영하는 ‘시암 파크 방콕’사가 2021~2025년 5년 내리 적자를 냈다고 4일 보도했다. 창업자 차이왓 르앙아몬러트(Chaiwat Leuangamornlert) 회장이 2026년 홍수로 수억 바트 규모 피해를 봤다며 100억 바트(약 4,019억 원)대에 팔겠다고 밝힌 뒤다.",
+  "2025년 매출은 약 2억5,475만 바트(약 102억3,820만 원), 순손실은 약 1억4,565만 바트(약 58억5,355만 원)였다. 5년 누적 순손실은 약 5억6,270만 바트(약 226억1,475만 원)이고, 2025년 말 부채 총액(약 14억6,271만 바트)이 자산 총액(약 13억678만 바트)보다 많았다."
+ ],
+ context="시암 파크(옛 쑤언 싸얌)는 방콕 동부 민부리 쪽 대형 워터파크·놀이공원이다. 매각이 실제로 성사됐는지는 확인 안 됨.",
+ source="Isranews (이스라뉴스)", url="https://www.isranews.org/article/isranews-news/149350-politicsss-584.html",
+ title_th="เปิดงบ 'สวนสยาม' ขาดทุน 5 ปีติดต่อ หลัง ประกาศขาย 'สยามพาร์ค' หมื่นล้าน เซ่น พิษ 'น้ำท่วม 69'",
+ published="2026-10-04T13:36:00+07:00",
+ tags=["방콕","시암 파크","놀이공원","적자","매각"],
+ impact=[], for_me="시암 파크 방문 계획이 있다면 홍수 뒤 운영 여부를 공식 채널에서 먼저 확인하세요.",
+ also=[],
+ issue=dict(id="2026-floods-bangkok-east", title="방콕 동부(라드끄라방·롬끌라오) 침수"),
+ quick_replies=["어릴 때 가던 곳인데 아쉽네요", "정말 팔릴까요?", "지금 영업은 하나요?"]),
+
+dict(id="bk3", topic="bangkok", secondary=["weather","society"], region="방콕·수도권",
+ headline="홍수로 18개 주 의료기관 141곳 피해·50곳 진료 중단…방콕 랏끄라방에 야전병원, MRT 주차장 9일까지 무료",
+ summary=[
+  "태국 보건부 솜럭 쯩스만(Somlerk Jeungsmarn) 사무차관은 4일 홍수로 18개 주 의료기관 141곳이 피해를 입어 50곳이 진료를 멈췄고 91곳은 다시 문을 열었다고 밝혔다. 방콕 랏끄라방 주택단지 학교와 쁘라찐부리 반쌍 병원에는 야전병원이 차려졌다.",
+  "피팟 랏차낏쁘라칸(Phiphat Ratchakitprakarn) 교통부 장관은 3일 기준 도로 319곳이 침수 피해를 입어 119곳이 통행 불가라고 했다. 육상교통청은 자동차 업체·서비스센터 29곳과 손잡고 침수 차량 부품 최대 30%·공임 최대 40% 할인과 무료 점검을 제공하며, 태국 대중교통공사(MRTA)의 쿠콧·민부리·방야이 등 주차장 8곳 무료 운영도 9일까지 늘렸다고 방콕포스트가 전했다."
+ ],
+ context="침수 차량 할인은 업체별 조건이 다를 수 있으니 서비스센터에 직접 문의하는 편이 정확하다.",
+ source="Bangkok Post (방콕포스트)", url="https://www.bangkokpost.com/thailand/general/3331369/flooding-forces-50-health-facilities-to-halt-services",
+ title_th="Flooding forces 50 health facilities to halt services",
+ published="2026-10-05T04:56:00+07:00",
+ tags=["홍수","의료기관","야전병원","침수 차량","MRT 주차장"],
+ impact=["날씨·재해","교통·사고"], for_me="차가 침수됐다면 정비 전에 브랜드 서비스센터에 할인 대상인지 물어보고, MRT 역 주차장은 9일까지 무료로 쓸 수 있습니다.",
+ also=[],
+ issue=dict(id="2026-floods-bangkok-east", title="방콕 동부(라드끄라방·롬끌라오) 침수"),
+ quick_replies=["침수 차 할인 정보 고마워요", "MRT 주차 무료 연장 좋네요", "랏끄라방 쪽 병원 괜찮나요?"]),
+
+# ───────────── 북부 ─────────────
+dict(id="no1", topic="north", secondary=["society","visa"], region="딱(매솟)",
+ headline="매솟 노동자 숙소 불, 봉제공장으로 번져…미얀마 노동자 70여 명 대피·1명 팔 화상",
+ summary=[
+  "4일 오전 9시께 딱(Tak) 주 매솟(Mae Sot) 시내 매솟 병원 근처 왓루앙 마을에서 노동자 숙소 10여 칸에 불이 나 바로 옆 봉제공장으로 번졌다. 공장 안에서 일하던 미얀마 노동자 남녀 70여 명이 급히 빠져나왔다고 Khaosod English가 전했다.",
+  "오래된 목조 건물이 밀집한 지역이라 불길이 빠르게 번졌고, 소방차 약 10대가 1시간 넘게 진화했다. 노동자 1명이 팔 윗부분에 화상을 입었고 사망자는 없었다. FM91은 피해액을 500만 바트(약 2억95만 원) 이상으로 추정했다."
+ ],
+ context="매솟은 미얀마 국경 도시로 미얀마 노동자가 많은 봉제·공장 지대다.",
+ source="Khaosod English (카오솟 잉글리시)", url="https://www.khaosodenglish.com/news/2026/10/04/fire-spreads-from-workers-quarters-to-garment-factory-in-mae-sot-injuring-one/",
+ title_th="Fire spreads from workers' quarters to garment factory in Mae Sot, injuring one",
+ published="2026-10-04T11:36:00+07:00",
+ tags=["매솟","딱","화재","봉제공장","미얀마 노동자"],
+ impact=[], for_me="",
+ also=[dict(source="FM91", url="https://fm91bkk.com/newsarticle/79880")],
+ issue=None,
+ quick_replies=["큰 인명 피해 없어 다행이에요", "목조 건물 밀집지 불 무섭네요", "다친 분 빨리 회복하시길"]),
+
+dict(id="no2", topic="north", secondary=["weather"], region="치앙라이·북부",
+ headline="치앙라이 등 북부 ‘급류 경계’…태국 기상청 “8~13일 또 비·강풍”, 중국발 찬 공기 영향",
+ summary=[
+  "치앙라이타임스는 5일 태국 기상청(TMD)이 8~13일 북부에 다시 비와 강한 바람을 예보했다며, 상습 침수 지역인 치앙라이 등 북부가 경계 태세라고 전했다.",
+  "중국에서 내려오는 찬 고기압이 북부·동북부 위쪽을 덮으면서 덥고 습한 공기와 부딪혀 강한 뇌우가 생기고, 남서 몬순까지 겹쳐 비가 쌓일 수 있다는 설명이다. 이미 땅이 젖어 있어 보통 비에도 급류·산지 유출수 위험이 크다며 하천 주변 주민에게 대비를 당부했다."
+ ],
+ context="오늘(5일)도 기상청 8호 경보에서 치앙마이·치앙라이 등 북부에 강한 비가 예보됐다(아래 날씨 기사 참고).",
+ source="Chiang Rai Times (치앙라이타임스)", url="https://www.chiangraitimes.com/weather/heavy-rain-forcasted/",
+ title_th="Heavy rain forecasted",
+ published="2026-10-05T06:28:00+07:00",
+ tags=["치앙라이","북부","급류","기상청","찬 공기"],
+ impact=["날씨·재해"], for_me="이번 주 치앙마이·치앙라이 여행이나 산간 이동 계획이 있다면 8~13일 일정은 날씨를 보고 유연하게 잡으세요.",
+ also=[],
+ issue=dict(id="2026-rain-warnings-oct", title="10월 초 비 경보(4~7일·11~14일)"),
+ quick_replies=["치앙라이 사시는 분들 조심하세요", "다음 주 여행 미뤄야 할까요?", "북부는 언제쯤 비가 그칠까요?"]),
+
+# ───────────── 남부 ─────────────
+dict(id="st1", topic="south", secondary=["travel","visa"], region="푸껫(빠똥)",
+ headline="푸껫 빠똥 호텔서 35세 미국인 관광객 숨진 채 발견…체크아웃 당일, 몸싸움 흔적 없어",
+ summary=[
+  "4일 오후 2시께 푸껫 빠똥(Patong) 랏우팃 200삐 거리의 한 호텔 객실 침대에서 미국인 관광객 스미스 그레이 앨런(Smith Gray Allen, 35)이 숨진 채 발견됐다고 카오솟이 전했다.",
+  "경찰은 객실에 물건을 뒤진 흔적이나 다른 사람이 없었고, 그가 혼자 묵었으며 이날 체크아웃할 예정이었다고 밝혔다. 시신은 와치라 푸껫 병원으로 옮겨졌고, 경찰은 미국 대사관을 통해 유족에게 알렸다. 사망 원인은 조사 중이다."
+ ],
+ context="",
+ source="Khaosod (카오솟)", url="https://www.khaosod.co.th/around-thailand/news_10425014",
+ title_th="ผงะ! นักท่องเที่ยวอเมริกัน เสียชีวิตคาเตียงในโรงแรมย่านป่าตอง",
+ published="2026-10-04T20:31:00+07:00",
+ tags=["푸껫","빠똥","미국인 관광객","사망","호텔"],
+ impact=[], for_me="",
+ also=[],
+ issue=None,
+ quick_replies=["삼가 고인의 명복을 빕니다", "사인이 밝혀지길 바랍니다", "혼자 여행할 땐 연락처 꼭 남겨야겠어요"]),
+
+dict(id="st2", topic="south", secondary=["society"], region="나라티왓(르쏘)",
+ headline="나라티왓서 휴가 중 경찰관, 9개월 딸 안고 있다 총격 받아…“반군 매복 공격” 추정",
+ summary=[
+  "2일 밤 9시 9분께 나라티왓(Narathiwat) 르쏘(Rueso) 군 쑤와리 면 집 앞 현관에서 아내·생후 9개월 딸과 식사하던 37세 경찰관이 총 두 발을 맞았다. 그는 딸을 안고 있었고, 턱 왼쪽이 스치고 목·오른쪽 어깨에 파편 상처를 입었지만 생명에는 지장이 없다.",
+  "수사팀은 3일 집에서 약 70m 떨어진 운하 건너 고무농장에서 5.56mm 탄피 2개와 여러 발자국을 찾았다. 남부 국경 지역 보안 당국은 보안 요원을 노린 매복 공격으로 보고 있다고 The Thaiger가 Amarin TV를 인용해 전했다."
+ ],
+ context="나라티왓·얄라·빳따니 남부 국경 3개 주는 분리주의 무장 공격이 이어지는 지역으로, 한국 외교부 여행경보 대상 지역이기도 하다.",
+ source="The Thaiger (더 타이거)", url="https://thethaiger.com/hot-news/crime/narathiwat-shooting-police-officer-insurgent-ambush",
+ title_th="Police officer shot in suspected insurgent ambush in Narathiwat",
+ published="2026-10-04T14:39:00+07:00",
+ tags=["나라티왓","르쏘","총격","경찰관","남부 국경"],
+ impact=["치안"], for_me="남부 국경 3개 주(나라티왓·얄라·빳따니)는 여행을 피하는 편이 안전합니다.",
+ also=[],
+ issue=None,
+ quick_replies=["아기가 무사해서 다행이에요", "남부 국경은 여전히 위험하네요", "경찰관 빨리 회복하시길"]),
+
+# ───────────── 외국인·비자 ─────────────
+dict(id="vi1", topic="visa", secondary=["south","society"], region="송클라(핫야이)",
+ headline="송클라 이민국·관광경찰, 40km 추격 끝 ‘중국인 밀입국’ 차량 붙잡아…캄보디아→말레이시아 경유로, 태국인 3명 체포",
+ summary=[
+  "태국 이민국 6지구 대변인은 4일 송클라(Songkhla) 이민국이 관광경찰과 함께 캄보디아에서 넘어온 중국인을 태국을 거쳐 말레이시아로 빼돌리려던 차량 2대를 적발해 태국인 3명을 체포하고 차량 2대를 압수했다고 밝혔다.",
+  "빠르게 달리던 차량을 40km 넘게 쫓아 핫야이(Hat Yai) 클롱래 면 롭부리라멧 도로에서 뒤차를 세웠다. 운전한 35세 여성과 동승한 35세 여성(둘 다 가명)은 여권 없는 중국인을 태워 왔다고 자백했다고 마띠촌이 전했다."
+ ],
+ context="태국 이민국은 최근 불법 입국 알선 조직을 끝까지 추적하라는 지시를 내렸다. 여권·체류 서류는 늘 지니고 다니는 편이 좋다.",
+ source="Matichon (마띠촌)", url="https://www.matichon.co.th/local/news_5918933",
+ title_th="ตม.สงขลา ผนึกกำลังตำรวจท่องเที่ยว ไล่ล่าขบวนรถขนจีนเถื่อน 40 กม.",
+ published="2026-10-04T19:49:00+07:00",
+ tags=["송클라","핫야이","이민국","밀입국","중국인"],
+ impact=["비자·체류"], for_me="남부 국경 쪽을 차로 다닐 때 검문이 잦을 수 있으니 여권(또는 사본)과 비자 서류를 챙기세요.",
+ also=[dict(source="Thairath (타이랏)", url="https://www.thairath.co.th/news/crime/2964071")],
+ issue=None,
+ quick_replies=["40km 추격이라니 영화 같네요", "핫야이 쪽 검문 많아지겠네요", "남은 차 한 대는 잡혔나요?"]),
+
+dict(id="vi2", topic="visa", secondary=["society"], region="사뭇사콘(마하차이)",
+ headline="중국서 3억5,000만 바트(약 140억6,650만 원) 갈취 혐의 수배 중국인 여성, 사뭇사콘서 검거…체류 허가 취소·송환",
+ summary=[
+  "중국 랴오닝성 다롄 공안이 9월 17일 수배한 중국인 여성 장(Zhang, 46)이 사뭇사콘(Samut Sakhon) 마하차이 지역의 한 아파트에서 붙잡혔다. 주태국 중국대사관이 태국 경찰과 이민국에 소재 파악과 송환을 요청했다.",
+  "중국 수사당국은 장 씨가 2022년 4월부터 공범들과 다이쑤(Dyesoo)사 등의 제품에 불법 첨가물이 있다며 더우인·웨이보에 퍼뜨리겠다고 협박해 7,000만 위안, 약 3억5,000만 바트(약 140억6,650만 원)를 요구했다고 본다. 그는 유효한 비자로 체류 중이었지만 이민국이 체류 허가를 취소하고 송환 절차에 들어갔다고 The Thaiger가 전했다."
+ ],
+ context="태국 이민국은 본국 수배자의 체류 허가를 취소하고 송환하는 일이 잦다. 비자가 유효해도 범죄 혐의가 있으면 체류 허가가 바로 취소될 수 있다.",
+ source="The Thaiger (더 타이거)", url="https://thethaiger.com/hot-news/crime/chinese-woman-extortion-case-arrested-thailand",
+ title_th="Chinese woman wanted over extortion case arrested in Thailand",
+ published="2026-10-04T15:16:00+07:00",
+ tags=["이민국","중국인","갈취","사뭇사콘","송환"],
+ impact=["비자·체류"], for_me="",
+ also=[],
+ issue=None,
+ quick_replies=["태국이 도피처가 되면 안 되죠", "비자 있어도 바로 취소되는군요", "송환까지 얼마나 걸릴까요?"]),
+
+# ───────────── 정치·경제 ─────────────
+dict(id="pe1", topic="poleco", secondary=[], region="전국",
+ headline="랑시만 롬 “정부 불신임 토론, 국회 사무처 동원해 막을까 우려”…야당 “자료 역대급” 수자다 의원 부부 자금 출처도 따진다",
+ summary=[
+  "국민당(People's Party) 비례대표 랑시만 롬(Rangsiman Rome) 의원은 야당들이 정부 불신임 토론 안건 제출을 위해 자료를 모으고 있으며, 그 양이 역사적일 만큼 많다고 밝혔다. 다만 국회 사무처의 법 해석을 이용해 정부가 안건 제출을 막으려 할 수 있다고 우려했다.",
+  "야당은 제출 시기, 토론 대상 장관 수, 토론자 수와 시간 등을 아직 조율 중이다. 랑시만 의원은 또 수자다 짱 땐사납(Suchada Zhang Thansap) 의원과 남편을 하원 법률위원회에 불러 자금 출처가 돈세탁과 관련이 있는지 따지겠다고 했다고 포스트투데이가 전했다."
+ ],
+ context="불신임 토론 일정이 확정되면 정국이 한동안 이 이슈에 쏠릴 가능성이 있다. 실제 제출 시기는 확인 안 됨.",
+ source="Post Today (포스트투데이)", url="https://www.posttoday.com/politics/749895",
+ title_th="โรม หวั่นศึกซักฟอก รัฐบาลใช้ฝ่ายประจำสกัด จ่อเชิญสุชาดา-สามี แจงที่มาเงิน",
+ published="2026-10-05T05:44:00+07:00",
+ tags=["랑시만 롬","국민당","불신임 토론","야당","국회"],
+ impact=[], for_me="",
+ also=[],
+ issue=None,
+ quick_replies=["불신임 토론 언제쯤일까요?", "정국 또 시끄러워지겠네요", "결과 나오면 정리해 주세요"]),
+
+dict(id="pe2", topic="poleco", secondary=["travel"], region="전국",
+ headline="“4분기 태국 관광 반등” 증권가 전망…8월 외국인 관광객 3% 감소로 6월(-21%)보다 크게 회복, 러시아 +2%·중동 +15%",
+ summary=[
+  "방콕포스트는 성수기를 앞두고 4분기 태국 관광 전망이 밝아지고 있다는 증권사 분석을 전했다. CGS 인터내셔널 증권(태국)의 타나폰 찌라따나낏(Thanapol Jiratanakij) 애널리스트는 8월 외국인 관광객이 1년 전보다 3% 줄어 6월 21% 감소보다 크게 나아졌다고 했다.",
+  "8월 유럽·러시아·중동 관광객은 각각 1%·2%·15% 늘었다. 동남아 관광객은 13% 줄었는데, 캄보디아 국경 긴장과 2025년 11월 홍수 뒤 핫야이 관광 부진으로 말레이시아 관광객이 줄어든 영향이라고 했다. 메이뱅크 증권은 중동 분쟁으로 중국인 여행객이 아시아 근거리 여행지를 선호해 태국이 수혜를 볼 것으로 봤다."
+ ],
+ context="전망은 증권사 분석이며 실제 4분기 수치는 아직 확인 안 됨.",
+ source="Bangkok Post (방콕포스트)", url="https://www.bangkokpost.com/business/general/3331544/analysts-predict-q4-tourism-bonanza",
+ title_th="Analysts predict Q4 tourism bonanza",
+ published="2026-10-05T04:48:00+07:00",
+ tags=["관광","4분기","외국인 관광객","증권사","성수기"],
+ impact=[], for_me="성수기(11~12월) 파타야·푸껫 숙소와 항공권은 일찍 알아보는 편이 유리할 수 있습니다.",
+ also=[],
+ issue=None,
+ quick_replies=["파타야도 손님 늘었으면 좋겠어요", "중국 손님 많이 오려나요?", "성수기 숙소 미리 잡아야겠네요"]),
+
+# ───────────── 생활·물가 ─────────────
+dict(id="lf1", topic="life", secondary=["weather"], region="전국",
+ headline="홍수에 채소값 ‘두 배’…태국 상무장관, 수출업체에 2~3주간 수출 30~50% 늦춰 달라 요청",
+ summary=[
+  "쑤파찌 쑤탐판(Supachee Sutampun) 부총리 겸 상무장관은 4일 재난방지청에서 홍수 지역 채소·달걀 등 쉽게 상하는 식품의 품귀와 가격 상승을 지켜보고 있다며, 수출업체에 최소 30~50%, 2~3주 동안 수출을 늦춰 국내 물량을 먼저 챙겨 달라고 요청했다고 밝혔다.",
+  "달걀 생산자 협회와 대형 마트·도매상에는 매주 물량을 국내상거래국에 보고하도록 했고, 사재기나 지나친 가격 인상은 단속하겠다고 했다. 물이 깊은 쁘라찐부리·싸깨오에는 국방부 차량으로 구호물품을 보냈다. 얄라 등에서는 채소 재배지가 침수돼 값이 두 배로 뛰고 일부는 품귀라고 내나가 전했다."
+ ],
+ context="",
+ source="Naewna (내나)", url="https://www.naewna.com/n/business-world/commerce-industry/95361/",
+ title_th="ผักราคาพุ่ง ‘ศุภจี’คุมเข้มสินค้า",
+ published="2026-10-05T06:00:00+07:00",
+ tags=["채소값","달걀","상무부","수출","물가"],
+ impact=["환율·물가"], for_me="채소·달걀값이 당분간 오를 수 있어요. 상무부는 사재기·지나친 가격 인상을 단속하겠다고 했습니다.",
+ also=[],
+ issue=dict(id="2026-egg-supply", title="달걀 품귀·가격"),
+ quick_replies=["요즘 채소값 정말 올랐어요", "달걀은 어디가 싸요?", "수출 줄이면 값 좀 내려갈까요?"]),
+
+# ───────────── 여행·맛집 ─────────────
+dict(id="tr1", topic="travel", secondary=["east","life"], region="파타야 등 6곳",
+ headline="PTT 주유소에 저가 호텔…OR·센타라 합작, 파타야·푸껫·핫야이 등 6곳 시범 2027~28년 개장",
+ summary=[
+  "PTT 석유·소매사업(OR)이 센타라 호텔앤리조트(Centara)와 합작사 ‘핏스톱 호텔(Pit Stop Hotel)’을 세워 PTT 주유소 등에 저가 호텔을 짓는다. 지분은 OR 49%, 센타라 51%다.",
+  "첫 시범 호텔 6곳은 돈므앙(방콕)·아유타야·파타야·깐짜나부리·핫야이·푸껫에 들어서며 투자액은 7억~10억 바트(약 281억3,300만~401억9,000만 원)로 추산된다. OR은 하루 약 390만 명인 주유소 방문객을 500만 명으로 늘리는 전략의 하나라고 방콕포스트가 전했다."
+ ],
+ context="",
+ source="Bangkok Post (방콕포스트)", url="https://www.bangkokpost.com/business/general/3331190/or-centara-plan-budget-hotels",
+ title_th="OR, Centara plan budget hotels",
+ published="2026-10-04T19:33:00+07:00",
+ tags=["OR","센타라","저가 호텔","PTT 주유소","파타야"],
+ impact=[], for_me="장거리 자동차 여행 때 주유소 숙박 선택지가 생길 수 있지만, 개장은 2027~28년 예정입니다.",
+ also=[],
+ issue=None,
+ quick_replies=["로드트립할 때 좋겠네요", "파타야는 어느 주유소일까요?", "가격대가 궁금해요"]),
+
+dict(id="tr2", topic="travel", secondary=["bangkok"], region="방콕(수완나품)",
+ headline="수완나품 수하물 대란 뒤엔 ‘일용·프리랜서 지상직’…홍수에 출근 못 해 인력 부족, 타이항공 49% 지분 외주사 도마",
+ summary=[
+  "The Thaiger는 수완나품 공항 수하물 적체와 신규 항공화물 접수 일시 중단의 배경으로 정규 계약 없이 일당·프리랜서로 일하는 외주 지상 조업 인력 문제가 지목된다고 4일 보도했다. 홍수가 계기였지만, 일부 임시 인력이 출근하지 않았고 회사가 이를 강제하기 어려웠다는 것이다.",
+  "이 외주사는 2010년 타이항공 업무 인력 공급을 위해 세워졌고, 타이항공이 49%, 푸껫 공항 케이터링(PACCO)이 51%를 갖고 있다. 타이항공 구조조정 때 줄어든 직원 업무를 외주 인력이 맡으며 비중이 커졌다. 일부 이사가 타이항공 출신이라 이해 충돌 의문도 나오지만, 이는 추가 확인이 필요한 사항이다."
+ ],
+ context="타이항공은 수하물 적체를 4일까지 해소하겠다고 밝힌 바 있다(어제 저녁판). 실제 해소 여부는 확인 안 됨.",
+ update="어제 저녁판(타이항공 ‘미처리 수하물 1,092개, 4일까지 소진’) 이후, 적체 원인으로 외주 지상직 인력 구조가 지목됨.",
+ source="The Thaiger (더 타이거)", url="https://thethaiger.com/news/national/suvarnabhumi-baggage-backlog-tied-to-outsourced-ground-staff",
+ title_th="Suvarnabhumi baggage backlog tied to outsourced ground staff",
+ published="2026-10-04T09:00:00+07:00",
+ tags=["수완나품","타이항공","수하물","외주","지상 조업"],
+ impact=["교통·사고"], for_me="이번 주 수완나품에서 타이항공을 탄다면 귀중품·상비약은 기내 가방에 넣고, 위탁 수하물은 최소로 줄이세요.",
+ also=[],
+ issue=dict(id="2026-floods-airport-thai", title="수완나품·타이항공 홍수 차질"),
+ quick_replies=["짐 늦게 받은 분 계세요?", "결국 인력 문제였군요", "지금은 정상인가요?"]),
+
+# ───────────── 연예·스포츠 ─────────────
+dict(id="en1", topic="ent", secondary=[], region="자카르타(인도네시아)",
+ headline="태국 축구 대표팀, 오늘 밤 8시 인도네시아와 FIFA 아세안컵 결승…7만7,193석 원정 경기장 매진",
+ summary=[
+  "앤서니 허드슨(Anthony Hudson) 감독이 이끄는 태국 축구 대표팀이 5일 밤 8시(태국 시간) 인도네시아 자카르타 겔로라 붕 카르노 경기장에서 인도네시아와 FIFA 아세안컵 2026 결승을 치른다. 태국은 B조 1위, 개최국 인도네시아는 A조 1위로 올라왔다. 중계는 DAZN 웹사이트·앱(로그인 필요)이다.",
+  "시암스포츠에 따르면 인도네시아 공식 예매 사이트는 7만7,193석이 모두 팔렸다고 밝혔고, 주최 측은 보안을 최고 수준으로 높였다. 태국은 4일 저녁 마지막 공식 훈련을 했으며 부상자는 없다고 전해졌다."
+ ],
+ context="태국은 이 대회 조별리그 3경기에서 2승 1패(마지막 경기 필리핀에 1-2 패)였다고 탄세타낏이 정리했다.",
+ source="Thansettakij (탄세타낏)", url="https://www.thansettakij.com/sport/670653",
+ title_th="บอลไทยวันนี้ อินโดนีเซีย พบ ทีมชาติไทย นัดชิง FIFA ASEAN CUP 2026",
+ published="2026-10-05T01:00:00+07:00",
+ tags=["태국 축구 대표팀","아세안컵","인도네시아","결승","허드슨"],
+ impact=[], for_me="오늘 밤 8시 경기라 펍·식당 단체 응원으로 붐빌 수 있어요.",
+ also=[dict(source="Siamsport (시암스포츠)", url="https://www.siamsport.co.th/football-thailand/thai-national/110285/")],
+ issue=dict(id="2026-asean-cup", title="FIFA 아세안컵 2026 태국 대표팀"),
+ quick_replies=["태국 화이팅!", "어디서 단체 응원하나요?", "원정 매진이라니 쉽지 않겠네요"]),
+
+# ───────────── 날씨·교통 ─────────────
+dict(id="wt1", topic="weather", secondary=["bangkok","east"], region="전국(북·중·동부·방콕)",
+ headline="태국 기상청 8호 경보…오늘(5일) 51개 주·방콕 강한 비, 깜팽펫·수코타이는 매우 강한 비",
+ summary=[
+  "태국 기상청은 5일 8호 기상 경보를 내고 5~7일 태국 북부·중부 위쪽에 뇌우와 강한 돌풍, 곳에 따라 매우 강한 비가 내린다고 밝혔다. 5~6일은 북부·중부·방콕과 주변·동부·남부 위쪽이, 7일은 북부·중부 서쪽이 영향권이다.",
+  "오늘 매우 강한 비는 깜팽펫(Kamphaeng Phet)·수코타이(Sukhothai)에, 강한 비는 치앙마이·치앙라이 등 북부, 방콕과 주변, 동부의 촌부리·라용·차층사오·쁘라찐부리·싸깨오·나콘나욕, 남부의 푸껫·끄라비 등에 예보됐다. 늦은 우기에 중국에서 내려온 찬 고기압이 원인이라고 타이PBS가 전했다."
+ ],
+ context="",
+ update="어제 아침판의 6호 경보 이후 8호로 갱신, 오늘 강한 비 예보 지역 목록이 새로 나옴.",
+ source="Thai PBS (타이PBS)", url="https://www.thaipbs.or.th/news/content/559146",
+ title_th="ประกาศ ฉ.8 เตือน 51 จังหวัด-กทม.ฝนตกหนักถึงหนักมาก 5 ต.ค.",
+ published="2026-10-05T06:48:00+07:00",
+ tags=["기상청","8호 경보","강한 비","방콕","촌부리"],
+ impact=["날씨·재해","교통·사고"], for_me="오늘 촌부리·방콕 퇴근길은 비로 막힐 수 있으니 우산을 챙기고 침수 잦은 길은 피하세요.",
+ also=[],
+ issue=dict(id="2026-rain-warnings-oct", title="10월 초 비 경보(4~7일·11~14일)"),
+ quick_replies=["파타야도 오늘 비 오나요?", "우산 꼭 챙기세요", "이번 주 내내 비네요"]),
+]
+
+briefing = [
+  B("weather", "태국 기상청 **8호 경보**…오늘 51개 주·방콕 강한 비, 촌부리·라용 포함", "wt1"),
+  B("east", "동부 저수지 62곳 저수율 **100.23%**…판통·파나니콤 하류 주의", "ea1"),
+  B("ent", "태국 축구 대표팀 오늘 밤 **8시** 인도네시아와 아세안컵 결승", "en1"),
+  B("bangkok", "라이더 신고로 케타민 적발…‘**파타야**행 봉투’ 맡긴 베트남인 2명 검거", "bk1"),
+  B("life", "채소값 **두 배**…상무장관, 수출 30~50% 늦춰 달라 요청", "lf1"),
+  B("visa", "송클라 이민국 **40km** 추격…중국인 밀입국 차량 적발, 태국인 3명 체포", "vi1"),
+]
+
+korea_top = [
+  KR("중수청 시험대 될 ‘1호 수사’…법조계, 중대경제범죄에 무게", "한겨레", "https://www.hani.co.kr/arti/society/society_general/1280879.html", "2026-10-04T20:13:00+07:00"),
+  KR("유해진 집 앞에 몰려간 보수단체…‘암살자(들)’ 무대 인사도 취소", "한겨레", "https://www.hani.co.kr/arti/society/society_general/1280871.html", "2026-10-04T20:13:00+07:00"),
+  KR("나고야 아시안게임 폐막 ‘운영 미숙, 대한민국 종합 3위’", "KBS", "https://news.kbs.co.kr/news/view.do?ncd=8677413", "2026-10-04T18:04:00+07:00"),
+  KR("유승민, ‘아시안게임 군면제 논란’에 “제도 문제, 폐지 옳다”", "한국경제", "https://www.hankyung.com/article/2026100428087", "2026-10-04T18:53:00+07:00"),
+  KR("AI ‘아텍스’, 해킹 도구로 악용 정황…애초 보안점검 위해 개발", "한겨레", "https://www.hani.co.kr/arti/economy/it/1280877.html", "2026-10-04T20:13:00+07:00"),
+  KR("“50년 만의 기현상” 美·日·유럽 국채금리 급등한 뜻밖 이유", "중앙일보", "https://www.joongang.co.kr/article/25467012", "2026-10-05T03:01:00+07:00"),
+  KR("플라이두바이 부기장, 고의 추락 의도 시인…SNS엔 알카에다 등 테러조직 관련 게시물", "동아일보", "https://www.donga.com/news/Inter/article/all/20261004/134784154/2", "2026-10-04T23:40:00+07:00"),
+  KR("이란 “미국, 7가지 조건 수용 안 하면 호르무즈 해협 재개방 없어”", "경향신문", "https://www.khan.co.kr/article/202610042240001", "2026-10-04T20:40:00+07:00"),
+  KR("“부정선거” 주워담은 트럼프…관세 위협·현금살포 던지며 “사전투표 하라”", "한겨레", "https://www.hani.co.kr/arti/international/america/1280821.html", "2026-10-04T18:36:00+07:00"),
+]
+
+data = dict(
+  id="2026-10-05-am", date="2026-10-05", edition="am", edition_label="아침판",
+  weekday="월요일", timezone="Asia/Bangkok (UTC+7)",
+  generated="2026-10-05T07:55:00+07:00",
+  coverage="2026-10-04 저녁판(18:25) 이후 ~ 10-05 아침(약 07:30 BKK), 저녁판에 빠진 10-04 오후 보도 포함. tools/collect.py --hours 14: 1,134건, 262개 소스 중 254개 정상(Workpoint 연예·Bright TV 403, PR Bangkok SSL 오류, 일부 GN 0건). 원문 확인: Bangkok Biz News·77 Khaoded·FM91·Isranews·Bangkok Post·Khaosod English·Chiang Rai Times·Khaosod·The Thaiger·Matichon·Thairath·Post Today·Naewna·Thansettakij·Siamsport·Thai PBS. 제외: 이전 판에 이미 실린 통러 음주운전·파타야 검문 도주 차량·파타야 지갑 반납·푸껫 배달 기사 절도, Google News 날짜와 달리 오래된 The Standard 기사들, 발행 시각을 확인 못 한 치앙마이 PRD 수문 방류 기사. X 트렌드 없음. 환율 1바트=40.19원(직전 판과 같은 공시).",
+  previous="2026-10-04-pm",
+  briefing=briefing,
+  highlights=["wt1", "ea1", "en1"],
+  stories=stories, korea_top=korea_top,
+  fx=dict(THB_KRW=40.19, note="1바트 = 40.19원(이 판의 모든 원화 환산에 사용, 정수로 반올림)",
+          source="open.er-api.com (2026-10-05 07:15 BKK 조회, 공시 기준시각 2026-10-04 00:02 UTC, 40.1937 → 판 환율 40.19)"),
+)
+
+if __name__ == "__main__":
+    write_edition(data)
