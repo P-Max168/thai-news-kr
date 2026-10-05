@@ -96,6 +96,110 @@ def thai_check(data):
         if isinstance(k, dict): chk(("korea_top", i), k.get("headline") or "")
 
 
+# ---- 바트 → 원 환산(2026-10-05 추가) -------------------------------------------------
+# 규칙(Mingoo 확인): 판 글의 바트 금액마다 바로 뒤에 원화 환산 '(약 N원)', 판 하나 = 환율 하나(data fx.THB_KRW).
+# 10-05 아침판 '(약 14억6,271만 바트)'·'(약 13억678만 바트)' 가 원화 없이 라이브에 나감 → 원인: 이 검사(baht_ok)가
+# for_me·quick_replies 에만 걸려 있었고 제목·요약·배경·후속·브리핑·오늘의 질문은 판 저장 때 안 봤음. 이제 krw_check 가 전부 보고 실패시킴.
+#   금액 형식: 350 / 1,200 / 0.75 / 50만 / 1만6,000 / 13억678만 / 14억6,271만 / 3조2,000억 / 범위 300~500 · 1만~2만
+KRW_FROM = "2026-10-02-pm"   # fx.THB_KRW 가 판에 들어간 첫 판 — 이 판부터 krw_check 실패 = 판 저장 실패
+_NUM = r"\d[\d,]*(?:\.\d+)?"
+_AMT = r"(?=\d)(?:%s\s*[조억만]\s*)*(?:%s)?" % (_NUM, _NUM)
+BAHT_AMT_RE = re.compile(r"(?<![\d,.])(%s)(?:\s*[~\-–]\s*(%s))?\s*바트" % (_AMT, _AMT))
+# 금액 뒤 원화: '바트(약 4만190원)' · '바트(약 281억~401억 원)' · 괄호 안 금액이면 '바트, 약 587억8,631만 원)' · 굵게 '**110억 바트(약 …원)**'
+KRW_AFTER_RE = re.compile(r"\**\s*(?:\(\s*|,\s*)약\s*[\d조억만,.\s~\-–]*원")
+# 원 → 바트 역환산('1,000만 원(약 25만 바트)')은 이미 원화가 앞에 있으므로 통과
+KRW_BEFORE_RE = re.compile(r"원\s*\(\s*약\s*$")
+
+
+def ko_amount(s):
+    """'14억6,271만' → 1462710000, '1만6,000' → 16000, '0.75' → 0.75, '3조2,000억' → 3.2e12. 숫자 없으면 None."""
+    s = re.sub(r"[\s,]", "", s or "")
+    if not re.search(r"\d", s):
+        return None
+    total, units = 0.0, {"조": 10 ** 12, "억": 10 ** 8, "만": 10 ** 4}
+    for num, u in re.findall(r"(\d+(?:\.\d+)?)([조억만]?)", s):
+        total += float(num) * units.get(u, 1)
+    return total
+
+
+def _man(n):
+    """0~9999 → '4,190' 처럼 쉼표."""
+    return "{:,}".format(int(n))
+
+
+def krw_text(won):
+    """원 금액 → 판 표기(10-04·10-05 판과 같은 방식). 1조 이상 = 억 단위 반올림('1조208억 원'),
+    1억 이상 = 만 단위 반올림('587억8,631만 원'), 1억 미만 = 원 단위 반올림('401만9,000원' · '4만190원' · '8,038원')."""
+    w = int(round(won))
+    if w >= 10 ** 12:
+        e = int(round(w / 10 ** 8)); jo, eok = divmod(e, 10 ** 4)
+        return "%d조%s원" % (jo, (_man(eok) + "억 ") if eok else " ")
+    if w >= 10 ** 8:
+        m = int(round(w / 10 ** 4)); eok, man = divmod(m, 10 ** 4)
+        return "%s억%s원" % (_man(eok), (_man(man) + "만 ") if man else " ")
+    if w >= 10 ** 4:
+        man, rest = divmod(w, 10 ** 4)
+        return "%s만%s원" % (_man(man), _man(rest) if rest else " ")
+    return "%s원" % _man(w)
+
+
+def krw_for(amount_text, rate):
+    """'13억678만' + 40.19 → '약 525억1,949만 원'. 범위 '300~500' → '약 1만2,057~2만95원'."""
+    parts = re.split(r"\s*[~\-–]\s*", amount_text.strip())
+    vals = [ko_amount(p) for p in parts]
+    if len(vals) == 2 and re.search(r"[조억만]\s*$", parts[1]) and not re.search(r"[조억만]", parts[0]):
+        u = re.search(r"([조억만])\s*$", parts[1]).group(1)   # '1~2만' → 앞 숫자도 만
+        vals[0] = ko_amount(parts[0] + u)
+    return "약 " + "~".join(krw_text(v * rate).replace(" 원", "").replace("원", "") for v in vals[:-1]) + \
+        ("~" if len(vals) > 1 else "") + krw_text(vals[-1] * rate)
+
+
+def _shown_texts(data):
+    """화면에 보이는 판 글 (where, text) — thai_check 와 같은 범위(한국 뉴스 제목·키워드·매체 이름은 남의 글이라 제외)."""
+    for s in data.get("stories", []):
+        for k in KO_FIELDS:
+            v = s.get(k)
+            for i, t in enumerate(v if isinstance(v, list) else [v]):
+                if isinstance(t, str): yield (s.get("id"), k, i), t
+        if isinstance(s.get("issue"), dict): yield (s.get("id"), "issue.title"), s["issue"].get("title") or ""
+        d = s.get("discussion")
+        if isinstance(d, dict):
+            for k in ("question", "operator_comment"):
+                if d.get(k): yield (s.get("id"), "discussion." + k), d[k]
+    br = data.get("briefing")
+    for i, b in enumerate(br if isinstance(br, list) else [{"text": br or ""}]):
+        yield ("briefing", i), (b.get("text") or "") if isinstance(b, dict) else str(b)
+
+
+def krw_missing(data):
+    """원화 환산이 없는 바트 금액 → [(where, '금액 바트', '넣을 글', 앞뒤 글)]. 넣을 글은 판 환율(fx.THB_KRW)로 계산."""
+    rate = (data.get("fx") or {}).get("THB_KRW")
+    out = []
+    for where, t in _shown_texts(data):
+        for m in BAHT_AMT_RE.finditer(t):
+            k = KRW_AFTER_RE.match(t, m.end())
+            if k and re.search(r"\d\.\d", k.group(0)):
+                out.append((where, m.group(0), "원화는 정수로(소수점 없이): " + krw_for(m.group(0)[:-2].strip(), rate) if rate else "원화는 정수로", k.group(0)))
+                continue
+            if k or KRW_BEFORE_RE.search(t[:m.start()]):
+                continue
+            amt = m.group(0)[:-2].strip()
+            inside = t[m.end():m.end() + 1] == ")"
+            sug = ((", " if inside else "(") + krw_for(amt, rate) + ("" if inside else ")")) if rate else "(환율 fx.THB_KRW 없음)"
+            out.append((where, m.group(0), sug, t[max(0, m.start() - 12):m.end() + 8]))
+    return out
+
+
+def krw_check(data):
+    """KRW_FROM 판부터: 바트 금액에 원화 환산이 하나라도 없으면 예외(판 저장 실패). 넣을 글을 메시지에 같이 보여 줌."""
+    if _ed_key(data.get("id", "")) < _ed_key(KRW_FROM):
+        return
+    rate = (data.get("fx") or {}).get("THB_KRW")
+    miss = krw_missing(data)
+    assert not miss, ("바트 금액 %d건에 원화 환산 없음 — 판 환율 %s 로 '바트' 바로 뒤에 넣을 것(TRANSLATION_RULES: 바트마다 (약 N원))" % (len(miss), rate),
+                      ["%s: '%s' 뒤에 '%s' ← …%s…" % (w, a, g, c) for w, a, g, c in miss])
+
+
 # 추천 댓글은 독자 본인이 올리는 문장 — 겪지 않은 경험을 지어내게 만드는 표현 금지
 FAKE_EXP_RE = re.compile(r"저도\s*(거기|그\s*동네|근처|여기)\s*(살|사는|살아)|제가\s*(직접|가\s*봤|가봤|겪|봤)|저도\s*(겪|당했|가\s*봤|가봤|다녀왔|봤어)|우리\s*(집|동네)도|저희\s*(집|동네|가게)")
 LINK_RE = re.compile(r"https?://|www\.|\.(com|net|org|co|th|me|ly)\b", re.I)
@@ -274,6 +378,7 @@ def validate(data):
     assert len(data["highlights"]) == 3, "highlights 는 3개"
     cjk_check(data)
     thai_check(data)
+    krw_check(data)   # 2026-10-05: 바트 금액마다 원화 환산(없으면 판 저장 실패)
     br = data.get("briefing")
     if new:
         assert isinstance(br, list), "새 형식 briefing 은 [{topic, text, story_id}] 목록 (newslib.B 사용)"

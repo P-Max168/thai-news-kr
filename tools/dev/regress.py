@@ -157,10 +157,14 @@ async def main():
         rel = re.findall(r"\d+\s*(?:분|시간|일)\s*전|방금", meta)
         rec(not rel, "상대 시간('N시간 전') 없음 — 실제 날짜만(메인, 기사 전부 펼침)", rel[:5])
         krw = await pg.evaluate(r"""()=>{const d=(window.NEWS_DATA||{})[(window.NEWS_INDEX||{}).latest]; if(!d) return null; let miss=[], n=0;
-          const txt=d.stories.map(s=>[s.headline].concat(s.summary||[], s.for_me||'', s.context||'').join(' ')).join(' \n ');
-          const re=/(\d[\d,.]*\s?(?:만|억)?\s?(?:바트|฿))/g; let m; while((m=re.exec(txt))){ n++; const after=txt.slice(m.index, m.index+m[0].length+30); if(!/원/.test(after.slice(m[0].length))) miss.push(after.slice(0,40)); }
+          // 2026-10-05: 섞인 단위(13억678만)·범위(300~500)를 한 금액으로, 원화는 '바트' 바로 뒤 '(약 …원)' 또는 괄호 안 ', 약 …원' 만 인정(newslib.krw_check 와 같은 규칙)
+          const txt=d.stories.map(s=>[s.headline].concat(s.summary||[], s.for_me||'', s.context||'', s.update||'', s.quick_replies||[], (s.discussion&&s.discussion.question)||'', (s.discussion&&s.discussion.operator_comment)||'').join(' \n ')).concat(Array.isArray(d.briefing)?d.briefing.map(b=>(b&&b.text)||''):[String(d.briefing||'')]).join(' \n ');
+          const A='(?:\\d[\\d,]*(?:\\.\\d+)?\\s*[조억만]\\s*)*(?:\\d[\\d,]*(?:\\.\\d+)?)?';
+          const re=new RegExp('(?<![\\d,.])(?=\\d)'+A+'(?:\\s*[~\\-–]\\s*(?=\\d)'+A+')?\\s*(?:바트|฿)','g'); let m;
+          while((m=re.exec(txt))){ n++; const after=txt.slice(m.index+m[0].length), before=txt.slice(0,m.index);
+            if(!/^\**\s*(?:\(\s*|,\s*)약\s*[\d조억만,.\s~\-–]*원/.test(after) && !/원\s*\(\s*약\s*$/.test(before)) miss.push(txt.slice(Math.max(0,m.index-12), m.index+m[0].length+12)); }
           return {n, miss: miss.slice(0,5), nmiss: miss.length}}""")
-        if krw: rec(krw["nmiss"] == 0 if krw["n"] else None, "바트 금액 옆 원화 병기(최신 판 기사)", "%d건 중 원화 없음 %d %s" % (krw["n"], krw["nmiss"], krw["miss"]))
+        if krw: rec(krw["nmiss"] == 0 if krw["n"] else None, "바트 금액 옆 원화 병기(최신 판 기사·브리핑·질문, 섞인 단위 13억678만 포함)", "%d건 중 원화 없음 %d %s" % (krw["n"], krw["nmiss"], krw["miss"]))
         # 서랍 + 주제 11개
         await pg.click("#menuBtn"); await pg.wait_for_timeout(500)
         dr = await pg.evaluate("""()=>({open: document.getElementById('drawer').classList.contains('is-open'), items: [...document.querySelectorAll('#drawer button, #drawer a')].filter(e=>e.offsetParent!==null).length, txt: document.getElementById('drawer').innerText,
