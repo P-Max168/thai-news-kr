@@ -304,7 +304,8 @@ async def main():
             pc["krsrc"] = await pg.evaluate("[...document.querySelectorAll('#tnPage .pc')].every(c=>c.querySelectorAll('.pc__fs').length>=5 && /한식·한인/.test(c.textContent))")
             pc["gm"] = await pg.evaluate("(()=>{const g=[...document.querySelectorAll('#tnPage .pc')].filter(c=>/구글 지도에서 보기/.test(c.textContent));return {n:g.length,bad:g.filter(c=>c.querySelector('a[href^=\"tel:\"]')||/\\+66|★|평점/.test(c.textContent)).length}})()")
             await pg.click('[data-pc-cat="all"]'); await pg.wait_for_timeout(300); pc["all"] = await pg.locator("#tnPage .pc").count()
-            pc["oldlast"] = await pg.evaluate("(()=>{const o=[...document.querySelectorAll('#tnPage .pc')].map(c=>!!c.querySelector('.pc__old'));const f=o.indexOf(true);return f>0&&o.slice(f).every(Boolean)})()")
+            # 2026-10-05 06:55: 오래된 정보 중 영업 확인 안 된 곳 = 본 목록 뒤 접힌 칸(영업 확인된 곳은 배지 달고 본 목록, 폐업 의심은 그 아래 칸 — ⑦-2 (나)가 자리 자세히 검사)
+            pc["oldlast"] = await pg.evaluate("(()=>{const f=document.querySelector('#tnPage .pc-fold--old');if(!f)return false;const m=[...document.querySelectorAll('#tnPage .pc-list > .pc')].filter(c=>!c.closest('.pc-fold,.pc-sus'));return m.length>0&&[...f.querySelectorAll('.pc')].every(c=>c.querySelector('.pc__old:not(.pc__rc)'))&&m.every(c=>c.compareDocumentPosition(f)&4)})()")
             pc["price"] = await pg.evaluate("(()=>{const c=[...document.querySelectorAll('#tnPage .pc')];return c.length>0&&c.every(e=>{const p=e.querySelector('.pc__top + .pc__price');return p&&(/가격 확인 안 됨/.test(p.textContent)||/[\\d,]+바트 약 [\\d,]+원/.test(p.textContent))})})()")
             pc["vat"] = await pg.evaluate("(()=>{const c=[...document.querySelectorAll('#tnPage .pc')];return c.length>0&&c.every(e=>/가격 VAT 별도/.test(e.textContent))})()")
             pc["excl"] = await pg.evaluate("/cannabis|대마|casino|카지노|도박|erotic|성인용/i.test(document.getElementById('tnPage').textContent)")
@@ -324,7 +325,7 @@ async def main():
         except Exception as e:
             pc = {"err": str(e)[:100]}
         rec((lambda q: q.get("n") == 5 and q.get("same") and 0 < q.get("east", 0) < pc.get("all", 0) == q.get("back"))(pc.get("sub", {})) and pc.get("vat") is True and pc.get("price") is True and pc.get("excl") is False and pc.get("all", 0) >= 40 and 0 < pc.get("pet", 0) < 30 and pc.get("kr", 0) >= 10 and pc.get("bkk", {}).get("n", 0) >= 20 and pc["bkk"].get("kr") == pc["bkk"].get("n") and pc["bkk"].get("osm") and pc["bkk"].get("thai") is False and pc.get("sri", 0) >= 1 and pc.get("gm", {}).get("n", 0) >= 20 and pc.get("gm", {}).get("bad") == 0 and pc.get("krsrc") and pc.get("oldlast") and pc.get("thai") is False and pc.get("src"),
-            "📇 가게 카드 — 지역 3곳(파타야·시라차·방콕 OSM 한식·한인) · 한식·한인 10곳+(칸마다 출처·확인일, 구글 지도 가게는 이름·동네·링크만 — 전화·시간·평점 없음)·오래된 정보 맨 뒤·종류 필터·태국 문자 없음", pc)
+            "📇 가게 카드 — 지역 3곳(파타야·시라차·방콕 OSM 한식·한인) · 한식·한인 10곳+(칸마다 출처·확인일, 구글 지도 가게는 이름·동네·링크만 — 전화·시간·평점 없음)·오래된 정보(영업 확인 안 된 곳) 본 목록 뒤 접힌 칸·종류 필터·태국 문자 없음", pc)
         # ⑦-2 가게 카드 믿음 규칙(2026-10-05 Max 06:33·06:55 — 사장님 '폐업한 곳이 너무 많다, 확인했다고 적어 놓고'): 지역 3곳 모두, 기대값은 여기서 데이터(JSON)로 따로 계산
         #   (가) 조사 기록(verified_status='영업 확인' + verified_by + verified_at + verified_source_url)이 없는 가게 카드·안내 글에 '실제로 확인'·'최종 확인'·'확인함' 이 있으면 실패
         #   (나) 지도 기준 날(현장 확인 날, 없으면 지도 정보 고친 날 — 구글 지도 가게는 없음) < 오늘(방콕) − 730일 인 가게: 🕰️ 배지 + 자리(영업 확인 = 본 목록 / 폐업 의심 = 맨 아래 칸 / 보관함 / 나머지 = 오래된 정보 접힌 칸)
