@@ -106,7 +106,7 @@ def mark_applied(eid, at):
     게시 여부 = tools/discussions/<판>.json 에 같은 id·같은 글이 있는 것. 초안 파일이 없으면(개발 폴더) 아무것도 안 함."""
     fn = DRAFTS / (eid + ".json"); af = APPLIED / (eid + ".json")
     if not fn.exists() or not af.exists():
-        print("초안 표시: 건너뜀(초안 또는 적용 파일 없음)", eid); return 0
+        print("초안 표시: 건너뜀(초안 또는 적용 파일 없음)", eid); refresh_inbox(); return 0
     items = json.loads(fn.read_text(encoding="utf-8"))
     ap = {x["id"]: x for x in json.loads(af.read_text(encoding="utf-8"))}
     n = 0
@@ -117,7 +117,15 @@ def mark_applied(eid, at):
                 x["approved"] = True; x["applied_at"] = x.get("applied_at") or at; n += 1
     fn.write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8")
     print("초안 표시: %d건 approved:true + applied_at=%s → %s" % (n, at, fn))
+    refresh_inbox()
     return n
+
+
+def refresh_inbox():
+    """승인함 목록(data/pending.json) 다시 만들기 — 게시된 질문 묶음이 '대기'에 남지 않게(2026-10-05 D). 실패해도 apply 는 그대로"""
+    import subprocess
+    r = subprocess.run([sys.executable, str(ROOT / "tools" / "pending.py")], capture_output=True, text=True)
+    print("승인함 목록:", (r.stdout or r.stderr).strip()[:120])
 
 
 def clear(eid):
