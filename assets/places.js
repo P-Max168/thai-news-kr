@@ -213,7 +213,7 @@
       var c = CATS.filter(function (x) { return x.id === cat; })[0];
       var rg = REGS.filter(function (x) { return x.id === region; })[0];
       var head = '<div class="pc-filter pc-region" role="group" aria-label="지역">' + REGS.map(function (x) {
-          return '<button type="button" class="pc-f" data-pc-region="' + x.id + '" aria-pressed="' + (x.id === region) + '">📍 ' + esc(x.t) + (CACHE[x.id] ? " <small>" + CACHE[x.id].places.length + "</small>" : "") + "</button>"; }).join("") + "</div>" +
+          return '<button type="button" class="pc-f" data-pc-region="' + x.id + '" aria-pressed="' + (x.id === region) + '">📍 ' + esc(x.t) + (CACHE[x.id] ? " <small>" + CACHE[x.id].places.filter(function (p) { return !archived(p); }).length + "</small>" : "") + "</button>"; }).join("") + "</div>" +
         (subs ? '<div class="pc-filter pc-subs" role="group" aria-label="파타야 동네">' + subs.map(function (x) {
           var parts = x.t.split("·"), k = all0.filter(function (p) { return p.sub === x.id; }).length;
           return '<button type="button" class="pc-f" data-pc-sub="' + x.id + '" aria-pressed="' + (x.id === sub) + '" title="' + esc(x.t) + '">' + esc(parts[0]) + (parts[1] ? "<small class=\"pc-subs__2\">" + esc(parts[1]) + "</small>" : "") + " <small>" + k + "</small></button>"; }).join("") + "</div>" +
