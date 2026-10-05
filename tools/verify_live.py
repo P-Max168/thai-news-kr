@@ -31,7 +31,15 @@ async def main():
         resp = await pg.goto(url, wait_until="networkidle")
         await pg.evaluate("document.fonts.ready")
         await pg.wait_for_timeout(800)
-        onboarding = await pg.is_visible("#sheet [data-persona]")
+        # 2026-10-05: 10-04 11:56(e5da9a7) 부터 FIRST_SHEET_AUTO=false — 첫 방문 창이 저절로 안 뜨고 피드 위 '고르기'로 연다.
+        # 예전 검사(창이 저절로 떠야 통과)가 그대로라 그 뒤 배포마다 'FAIL (want …)' 이 났다 → 지금 설계대로 검사:
+        # ① 창이 저절로 안 뜸 ② '고르기' 버튼 있음 ③ 누르면 페르소나 창이 뜸.
+        auto_sheet = await pg.is_visible("#sheet")
+        ob_btn = await pg.locator("[data-ob-start]").count()
+        if not auto_sheet and ob_btn:
+            await pg.locator("[data-ob-start]").first.click()
+            await pg.wait_for_timeout(400)
+        onboarding = (not auto_sheet) and ob_btn >= 1 and await pg.is_visible("#sheet [data-persona]")
         pathlib.Path(SHOT).parent.mkdir(parents=True, exist_ok=True)
         if onboarding:
             await pg.screenshot(path=SHOT.replace(".png", "-onboarding.png"))
