@@ -151,7 +151,7 @@
     var kind = [p.kind].concat(p.cuisine || []).filter(Boolean).join(" · ");
     var b = basis(p), warn = "";
     if (arch) warn += '<p class="pc__warn pc__warn--x"><span class="pc__closed">🗄️ 폐업 보관함</span> ' + (flag(p).note ? esc(flag(p).note) : "운영자가 폐업으로 확인했어요") + (flag(p).at ? " (" + esc(flag(p).at) + ")" : "") + ". 기록으로만 남겨 둬요.</p>";
-    else if (sus) warn += '<p class="pc__warn pc__warn--x"><span class="pc__closed">⚠️ 폐업 의심</span> 가기 전 전화 확인 — 조사에서 문 닫았을 수 있다는 근거가 나왔어요(아래 조사 결과).</p>';
+    else if (sus) warn += '<p class="pc__warn pc__warn--x"><span class="pc__closed">⚠️ 폐업 의심, 가기 전 전화 확인</span> 조사에서 문 닫았을 수 있다는 근거가 나왔어요(아래 조사 결과).</p>';
     else if (repd) warn += '<p class="pc__warn pc__warn--x"><span class="pc__closed">🚫 폐업 신고됨</span> 독자 폐업 신고 ' + (+flag(p).n) + "건 — 운영자가 아직 확인 안 했어요. 가기 전에 꼭 전화로 확인하세요.</p>";
     if (old) warn += '<p class="pc__warn"><span class="pc__old">🕰️ 오래된 정보</span> 지도 정보가 ' + esc(b) + (p.osm_check ? "에 현장 확인된 뒤" : "에 고쳐진 뒤") + " 2년 넘게 바뀐 기록이 없어요" +
       (ver ? "(영업은 아래 조사에서 확인 — 영업시간·전화는 다를 수 있어요)." : ". 문을 닫았을 수 있으니 가기 전에 전화로 확인하세요.") + "</p>";
