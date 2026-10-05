@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-05T17:55:14+07:00",
+ "updated_at": "2026-10-05T20:01:32+07:00",
  "items": [
   {
-   "title": "[속보] 합참 “북, 군사분계선 이남 지뢰 설치해 우리 장병 부상 최종 판단”",
-   "source": "한겨레",
-   "time": "2026-10-05T14:31:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1YT3hLcGVKVEFXMDloc3paeHR1VjhMZmRDQXJFTHJLaEhVbnFXeVZCYk5FUnhEQlgxejlvTnVPQi1MUzhXVmphMW9SNlZnZUVfMEhVZjFlN09KQS12SU1LMlU4ZGJtM0d2d3NQdU5GSzNSUHpt?oc=5"
+   "title": "軍 “북한 지뢰로 우리 장병 부상 최종 판단… 진심으로 사과하라”",
+   "source": "미디어오늘",
+   "time": "2026-10-05T14:44:56+07:00",
+   "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBpa2FGQVgwQzE4T0JDeVZ4YWNPalo5YXVQUHBtSklMWVhuNHBwVGJoV0pRNVpZdWpPYzFKY2tZcVdSNDZwVjFLM0FvX2QyTmdxVGlWampLbE5pWmxLTGlTYW9DYnpfbzJKS3EwczdkSUU?oc=5"
   },
   {
-   "title": "젤렌스키 “한국이 북한군 포로 송환 요청”···‘비공개 합의 논란’ 언급은 없었다",
+   "title": "조희대 국감 불출석에…與 \"예외 없어야\" 野 \"국회의 횡포\"",
+   "source": "조선일보",
+   "time": "2026-10-05T14:22:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNM2dMUXdseW83TDROblV0ai10bUxWSUxtQ3FhVTRCSmg2X3kzbU9VOVZ5YUxpaC1HN0VsalFiWmJ5UTU0bTY1MHduMzBLMjBGc2FQNzZIR1RORlVGcHZmSHBpbWRHQk5vZXZtR3dNc1VLX1JPb21aaTNMYktxMUNxREJRTkp2QQ?oc=5"
+  },
+  {
+   "title": "'국힘 집회' 띄우며 李 맹비난‥우크라 사과 대신 역공?",
+   "source": "MBC 뉴스",
+   "time": "2026-10-05T12:51:16+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBfZFlZd1RGTl9ZdE9fVUoyNmRNUVhUMWdWMTJ6MXhDS1VPdno4VGVxQjBFTzI3UHN0Y1BTbTJ3RklLWVE5ck81MjJHLUVQeHl0cGl2bjBMeExBZXl3RW9yQnBGR0tXelJJZmVyTjRTX0FneEJE0gF0QVVfeXFMTWlWUlV2b1BGVUVRMDRIZzdBTFAtcW10ZFM4aXpFRjNTZUZVaHJ5Um9zcE9ZNTBRUWx6Z2JfNkw1ZW5ETkJNUHZDWjh5VFU4djY4ZFFyUGI2OHBUeFNJU1FXWDVxdXVnZ0l3aUFYOVY3eTlvQnY?oc=5"
+  },
+  {
+   "title": "경부고속도로서 레미콘 가드레일 추돌 후 전도…운전자 숨져",
+   "source": "연합뉴스",
+   "time": "2026-10-05T14:59:34+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1Ma3FzS1hhbnBCdUFJbUUwVFR5dlViVjBuUVRsVVFCZl8ycHh2elpVZ3A4NEtWakpTOVdfQ2htRWtIcE5aQUdFZC1wTlRUOVVmVVRKMVZtczNLWFnSAWBBVV95cUxOVHdhNnlSVHhNT201LXN0U28zdldsdGpfVEhLVGpVOUxZUDN1SVRRb1Q4U1FmWENabnFzNG5HYkU5UGF1bG52WjRMa0I3TTdER0ZIaHRxWnlBdFUyNXJrMUk?oc=5"
+  },
+  {
+   "title": "임은정 ‘검찰 폐지’ 책임 동료들에게 돌리며 “김지용 자격 없다”",
+   "source": "조선일보",
+   "time": "2026-10-05T10:34:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQMjV1cVFZN0NRUWo3UXcwRTBFNzhzN0I0OWF5NnVtZ2o2NlBhbEhFNUktSmJFWjV6WUFET1p0bUhqdHY0TU51N0lic05sdUdrX2NMSV9LQWszUlNFLWN6WWZGajB6dnV5b3hBcWpQSzM0WkU3OHFiMlhtcDlpSjVYRy0wMkdjUVU?oc=5"
+  },
+  {
+   "title": "이 대통령, 조국·유시민 과거 영상 공유하며 ‘검찰개혁 비판’에 직접 반박",
    "source": "경향신문",
-   "time": "2026-10-05T12:57:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1XWDVtZU5CUnB2NUtyRGRYdkdFQjBhS3JtQUh5bzFyd0Q2NWJod1pxeHk5YzVTQUhqR3BiSkpZcklvRHJrTl85Ri1uZmc5cjFGX3lIVjdqT0d2Z9IBX0FVX3lxTE1Eb0pVUEJLUHJvN0lXUVktSWh0Uk1kTWpLel94UGlMbnNPcXBUc3F3OWVrbkxxMElka3VFZHV5bDltaUZpOWpORmt3eGRIeHRzQXoyLWt3cmNJSFpudWlz?oc=5"
+   "time": "2026-10-05T14:25:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE81VGhPMFpKUzFsdjFDbHNjczUxZjNyM3VEaVdfOHF0dHRONkFPMURoQnJremhVRG9ETWtkU1VDMkgydjRWSUk2Q005WklSN0RhZTlneEV5cVZ1d9IBX0FVX3lxTE1LNWdaRS16bG5PTXJEX1NTRURBOUhFcXN5czZKcHQ3aC15Rzg1aWg1N1RqbXc0MVh6TmJPSzhRUXZQRXRsbTNaQlRCRUVOX2FhQmV6VXlkWkc3RzJsRTRn?oc=5"
   },
   {
-   "title": "부산시, 되돌아 온 ‘부캉이’ 지켜보기로…스스로 나갈 가능성은?",
-   "source": "한겨레",
-   "time": "2026-10-05T14:31:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFA5WkNEeGdQQ3A5SjkxYVV2Vi1kbE5kWGFiS2FMY18ydk9tRTZ5RlJ1dFRaNEFIa1hIRFloaFRuNXo2dm9wYTNwRjh4Tl9XTmttMml3ejJCSURid3VvdzNxaVlGNWI?oc=5"
+   "title": "그물 넘어 돌아온 부캉이, 당분간 지켜보기로",
+   "source": "동아일보",
+   "time": "2026-10-04T23:40:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1EanpiMjZWNVVWQVJEWHF5MjNsXzU0NEIxdTNDTzdfdzVNUnRJc0NkZFRHWEN5a2lDd2lPOEJsNjI3YlZoS1I5aEszQVFvUlp5UW5oYThoeElaa3Ixak5laFhZVFNZcWlyNmRfU0hwSXEzbjNH0gFmQVVfeXFMT2pSMnNNRmVQRUVHaUNWMnBGV3gxUnlkd00wRmk0TG5DWmh0Q04yVGU1N3lEdkw2Qk9qM1pqOWVobkd0VnpVM1VUYU0wVDctQk9FeXZOYzZrZG5MY3AwaGh4bVFzcHl3?oc=5"
   },
   {
-   "title": "국힘 장동혁 \"이재명 대통령, 북한에 납작 엎드려 평화 구걸\"",
-   "source": "뉴스핌",
-   "time": "2026-10-05T12:01:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9wSUUwNWs1M0g0Y3hUMzdOeXpQWWlnZ1JTSklwMEU0ZkN2aV9wT1RnQ05VQkNpQ3lYVmdlVHhTd2dqNk9QbmZqVXFTZndVX2VLVURJTXdLZWFxbzZr?oc=5"
+   "title": "트럼프 \"여론조사, 항상 MAGA 과소평가\"…지지층 투표 독려",
+   "source": "연합뉴스TV",
+   "time": "2026-10-05T02:08:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5xLVlVaDNiTUQ5N19HS0JNV2R6eFIxZGYtdDMxOVA3SFhsQUVtTWdTVXdPcGJPNnFBLUI1MVE1dmxlSzVzT2RBVDFDMzlmRmUtaHVFcG5JTzZtYTJiQy1KMXRVanNLN3M?oc=5"
   },
   {
-   "title": "국민의힘 “민주당, 조희대 국감 출석 요구는 ‘국회 갑질’”",
+   "title": "식당에서 밥 먹다 날벼락... 화물차 돌진에 15명 부상",
+   "source": "조선일보",
+   "time": "2026-10-05T15:34:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPZmE2TXFBWUlJbV8tQS14SXVDVlVZXy1fMEJTRktLVjhXV3pEdWhXUjV0Tk9UWmpmR09qNWYyNUFmRloxUFozUm5USmRRei1qTFdXNUtpdGZPM2NuR1VjNk5ySTgyLS16UFlzdndWbENHR3NuYTV4NV8tbkdfa1JjYlJZaXdxbWtoM2hqX2s0MlI?oc=5"
+  },
+  {
+   "title": "그물 끌어올리다 ‘기우뚱’…어선 전복 2명 실종",
    "source": "KBS 뉴스",
-   "time": "2026-10-05T11:14:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFB2ZjVwVjIwUGNvUXUzRGJ3SkI1eTBzMnZ2OXN2MDhsMVhPdzdPa1pnSE80dWdoQkVuMnBDcll3dzdxVkFPVDBWN1BYTFNwOU9BeTdiSzk0YjJ5Nmc?oc=5"
-  },
-  {
-   "title": "한동훈 '노무현' 소환…김어준·곽상언과 전방위 설전",
-   "source": "한국경제",
-   "time": "2026-10-05T13:47:29+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1CMDZOY19CZUQtVGpzcGhrTGNTazhhbHpqYTZtNWt1MW11VjBDR2hCVkV6cjcxcXdENGZJLTlLNV90Uk1LUDNQSDd2SEpBLWNKRnptZkY1aWFsdw?oc=5"
-  },
-  {
-   "title": "충남 아산서 덤프트럭이 사다리차 들이받아…3명 사상",
-   "source": "KBS 뉴스",
-   "time": "2026-10-05T09:32:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBnZ054OF90bFBUN05tbTFaUlNlVE9HQmpCcjFWOWtqSFFuM01BYnhha2N4dktBMVppUWhwVllxQnRXR3Z1X3c3SXlscjdtQUlOU2EzWnJQRUppZmc?oc=5"
-  },
-  {
-   "title": "이 대통령, 검찰개혁 ‘강경파’에 잇단 경고…“인사·수사 좌지우지 말라”",
-   "source": "한겨레",
-   "time": "2026-10-05T14:47:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1YbUcweWgtTGJEb0tsLUlNX0FCWGQyZTlmOXhxVUtKS095S3ZoY1FGbmhCUF9DMndVYjgwMTM0VmlRUC1uazNDQ3BxUGgxczJfeGt0cGdFWUFwc1o3ajQzSGRrTWtNdGZQaG1F?oc=5"
-  },
-  {
-   "title": "찬 바람 불어 체감온도 ‘뚝’…낮 기온 5도 더 낮아져 최고 24도",
-   "source": "한겨레",
-   "time": "2026-10-05T09:04:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE82dUEtTDJRM0hfOUhxYkdvaWZaMFBpUnVNM3V3Y0RtMjFPWW9ZcVVBbTlMT3UxNlZEN1dqWE1Hd2VKM3prMTdPYVFfcDBXLVhSelAtUUptUTlBWGZqeHFqLWR1SGx5b0hmWkYwTg?oc=5"
-  },
-  {
-   "title": "[속보] 노벨생리의학상에 ‘광유전학’ 연구 칼 다이서로스 등 3명",
-   "source": "한겨레",
-   "time": "2026-10-05T16:47:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9DYXFzSVdPOXhRQ1ZWTFFraUJJeDBRdzlIY0lfSHhfY2E4eTFTZWJURkI4VzBIMWMtelo0SG11bzN6YWZLUDRvRmxRMzN2dE9mTHhMd2hSN1JxMnRkazRXREFkYk9ldw?oc=5"
+   "time": "2026-10-05T19:10:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE41R3dYSUMtd0s3cGJIQ1JMUXA4MkMxUmpySWpONVdhbFQ3bnJmdEZjclN3TWJ0VFhUeXd5YTFJc0kxTWlXV1BsbXJLc0FJb2E3Q3F4S3dJM2FyVG8?oc=5"
   }
  ]
 };
