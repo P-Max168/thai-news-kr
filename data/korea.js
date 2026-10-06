@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-06T09:54:18+07:00",
+ "updated_at": "2026-10-06T11:54:35+07:00",
  "items": [
   {
-   "title": "‘북한군 지뢰’ 매설 추정지 여럿…군 “모두 제거 원칙”",
+   "title": "증인선서 거부한 조희대…서영교 “정당한 이유 없다면 후속 조치”",
    "source": "한겨레",
-   "time": "2026-10-06T06:13:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1iX2tlN2hHdnhVLXlMQ0VfREV6ZGVicnYxWlVqWmFhN3dfbk9ub0dkaGVobk5va21wUEIwdUVWT2lkTUctdlZSN1hrb21iaW5nUHU0OWlRVmpENzFQTWs2Ri1QTGI1aDRPU0g0a04tTkJ5RlVu?oc=5"
+   "time": "2026-10-06T10:05:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9rX3pCLURvbEpTX1VQWjVTa1FFMDktYlZNSHRSRVljZkdzaGZpRUs0bzdqZTVlNE8zSFFBQndMQVhyZWtZbmhlaC1DREViWExIZHRYNEo5VUVCeHk1TUc1LUkyc3ZqcU9ZYmRDbk9LcmUxTjVj?oc=5"
   },
   {
-   "title": "\"국감서 말하겠다\"는 조희대…재제청 갈등 '태풍의 눈'",
-   "source": "다음뉴스",
-   "time": "2026-10-05T22:02:17+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5ieHVXOWJHT0pPcDVVSGE5MzhLTzYzdUFrT0lmNkd6QnQ0emZxUFh4eWxzNzVzWHpIUDFrVkppRU1zNnozVDdBX3kxaVJmNG8?oc=5"
-  },
-  {
-   "title": "누리호, 오전 6시 10분 발사대로 이송 시작…기립 본격화",
-   "source": "한국경제",
-   "time": "2026-10-06T04:35:25+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFB0NFk0dFVOeE9WU2daYXpJc080WF9yZzBRemxjLTIzcUhEYUZBRmxhUllwU2g0WlJVRlA0OEpVekVGSEc2d2RzaUd2STdCdG5VbXZBV0NCS1U1Zw?oc=5"
-  },
-  {
-   "title": "출범 나흘 중수청 여전히 정비중… “고소-고발장 수기 접수”",
-   "source": "동아일보",
-   "time": "2026-10-06T02:30:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE13OTZmNW5uWl82N3gxU1FmdVRlYmdna09NRHljUW5mVFV6SnBETjZIVTNkSS1mdmV1bnl0TVg4N3hpS0pieEVMQ0RMRVRUTXNIZ1AwSFl0bWR0M2d2ZTBvYXBqR0x5WHk2Vk45WU9MMTUtRGZiamfSAWZBVV95cUxQekRMcDhxWUtJLVZZNUxENG5oQ3JsejBuelVKRE5MVHdYaXVWNjBtZnZsUXFVa0xjeW5tWVVfWWRVaktFSzJDbWU5ZHNzVzdlMjYzaXZBTHl2RXh5YmI2dFUzVGJfMVE?oc=5"
-  },
-  {
-   "title": "날씨 아침 기온 뚝, 큰 일교차 주의",
-   "source": "KBS 뉴스",
-   "time": "2026-10-06T03:45:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1jM2FHTUlnSHZPY2ZRYVlSOGJnUmYtclJSVkF4a01pSWxuX0sydzkyaFF1dTNBX1hzeXJYUHpMZWxsWkxBdFZfN1J3eXplanZ0UkVfUThpN0RPaDg?oc=5"
-  },
-  {
-   "title": "이 대통령, 강경파에 경고수위 높여도…김용민·혁신당 ‘재반박’",
-   "source": "한겨레",
-   "time": "2026-10-06T06:12:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5ZWERnaWJFUXRsMXl1bzdfSTFYdTR5c1lhcDJNUjB4dHdZZk5hRDhZdFV4aFRKZlRPcVZ3dG5mamtjd0laeTJsaGR4VEl1LUtJUEpUcHR4R1NNQ0YxTHJFWnVJUUpxdUtqelFJ?oc=5"
-  },
-  {
-   "title": "식당에서 밥 먹다 날벼락... 화물차 돌진에 15명 부상",
+   "title": "[발사D-1]누리호, 발사대 도착…최종 발사 시간은 내일 오전 결정",
    "source": "조선일보",
-   "time": "2026-10-05T19:14:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPZmE2TXFBWUlJbV8tQS14SXVDVlVZXy1fMEJTRktLVjhXV3pEdWhXUjV0Tk9UWmpmR09qNWYyNUFmRloxUFozUm5USmRRei1qTFdXNUtpdGZPM2NuR1VjNk5ySTgyLS16UFlzdndWbENHR3NuYTV4NV8tbkdfa1JjYlJZaXdxbWtoM2hqX2s0MlI?oc=5"
+   "time": "2026-10-06T06:32:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNSExsNWtia0ZJVkxzOE13Qmw3LXFDSTZCUFZLRlpJRF9STUh5Zm5Db2FvVzZSd2VYRDRwY0NtYkJ5WVpVdzFaRE56T01aUEZUMXpEQTQwUmZZYmJVZXMxYVpDMElUMjJBcmtNYk1ZLUVuQjlqZ3RlWXF2NlBqaXpqTGlSRQ?oc=5"
   },
   {
-   "title": "그물 끌어올리다 ‘기우뚱’…어선 전복 2명 실종",
-   "source": "KBS 뉴스",
-   "time": "2026-10-05T19:10:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE41R3dYSUMtd0s3cGJIQ1JMUXA4MkMxUmpySWpONVdhbFQ3bnJmdEZjclN3TWJ0VFhUeXd5YTFJc0kxTWlXV1BsbXJLc0FJb2E3Q3F4S3dJM2FyVG8?oc=5"
+   "title": "강신철 국방 “DMZ 북한 지뢰 제거는 역사상 처음…단호한 대응”",
+   "source": "한겨레",
+   "time": "2026-10-06T10:07:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBKbTZVQ3ZzYXFjc19UX09KSHdQVVctUHJnWktmMXZZcE0tMzgtLXZhVnJPV0VVaG1INFJ6cGxCWE1ob1RrOE9UNFRjRVVUMEE0Y2t6cTNuaEpUNGtuZ2Q3S25lVDBWaTRf?oc=5"
+  },
+  {
+   "title": "[속보] 조희대 \"대법관 공석 장기화로 국민께 심려끼쳐 송구\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-06T08:20:34+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE94S2JrYzVlUmViWURMeUdHZkhYb01FUm9lcjNMMW5kV1VGdGV3bjl1MngyNENnamplcXV2UDA4U1o4eFY2dDZhRlJmak8yQW9yMVBUYXRzcHBBUjhteWVzWldrUUJwcVJlQ3d0TUk5NEFBMkgwQlhn0gF3QVVfeXFMUEJ1REdWSTBfWW5uam5neWdPakxlUUotSGswMnF1MkxpSHA3dVplSzd2dTQ1MXpqRmJWTlFITDUyMDZBcHpwckYyQlRuWU9uUVRBdW1yRV9iZ2M3LUtYR0FLR0pnVTA2Y3ZTd0d2LTFDczA5eEFfTTA?oc=5"
   },
   {
    "title": "민주, 한동훈·주진우에 “소인배 정치꾼…쌍둥이처럼 닮아” 비판",
    "source": "한겨레",
-   "time": "2026-10-06T06:26:05+07:00",
+   "time": "2026-10-05T14:31:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9Ddm5kVHluQVNmMjZrekNTcnRiMTRDRTRWTVEtNHFsZl83X0RBTTBVTGhuRkhNU09YLTJIUnpnbUU5bUd4bXZCYUl5N1dQZ2t0UnZQYnlWYkd0ejJtSG03NVVESlRqNm1zODBfRWRxa2ZBUVQ5?oc=5"
   },
   {
-   "title": "부산시, 되돌아 온 ‘부캉이’ 지켜보기로…스스로 나갈 가능성은?",
+   "title": "이형일 \"서울 아파트값 상승, 무겁게 느껴…인허가·착공은 40% 증가\"",
+   "source": "연합인포맥스",
+   "time": "2026-10-06T10:07:02+07:00",
+   "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE93cDBzeFc4SVF5c0RHRjB6djR2cXpwbWxWUUtrRTAtb2REM0JrUGZyUGtmaHBnb25pcE5vdkxVLTZUbGEzaHoyUFdOcDBFMU1IMW5feFNzX2RZLTVQbUhyYmxiWTUtWkpzdTdTaFNDSjA?oc=5"
+  },
+  {
+   "title": "찬 바람 불어 체감온도 ‘뚝’…낮 기온 5도 더 낮아져 최고 24도",
    "source": "한겨레",
-   "time": "2026-10-06T06:31:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFA5WkNEeGdQQ3A5SjkxYVV2Vi1kbE5kWGFiS2FMY18ydk9tRTZ5RlJ1dFRaNEFIa1hIRFloaFRuNXo2dm9wYTNwRjh4Tl9XTmttMml3ejJCSURid3VvdzNxaVlGNWI?oc=5"
+   "time": "2026-10-05T09:04:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE82dUEtTDJRM0hfOUhxYkdvaWZaMFBpUnVNM3V3Y0RtMjFPWW9ZcVVBbTlMT3UxNlZEN1dqWE1Hd2VKM3prMTdPYVFfcDBXLVhSelAtUUptUTlBWGZqeHFqLWR1SGx5b0hmWkYwTg?oc=5"
+  },
+  {
+   "title": "이 대통령, 조국·유시민 과거 영상 공유하며 ‘검찰개혁 비판’에 직접 반박",
+   "source": "경향신문",
+   "time": "2026-10-05T14:25:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE81VGhPMFpKUzFsdjFDbHNjczUxZjNyM3VEaVdfOHF0dHRONkFPMURoQnJremhVRG9ETWtkU1VDMkgydjRWSUk2Q005WklSN0RhZTlneEV5cVZ1d9IBX0FVX3lxTE1LNWdaRS16bG5PTXJEX1NTRURBOUhFcXN5czZKcHQ3aC15Rzg1aWg1N1RqbXc0MVh6TmJPSzhRUXZQRXRsbTNaQlRCRUVOX2FhQmV6VXlkWkc3RzJsRTRn?oc=5"
+  },
+  {
+   "title": "제주 전복 어선 실종자 1명 발견…한국인 선장 추정",
+   "source": "한겨레",
+   "time": "2026-10-06T08:58:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9XWE5NeGZwTE9ZSWRjYk1JNS1rcHFzRjI3UFJGaEdqSUZ2U2VVbDFVcDE2bkkzSkNpaDFENmk5UTUxZWx4WFJudklGZlBfM2U2eVI4UzVhNEMzaVM4dlJn?oc=5"
+  },
+  {
+   "title": "김재섭, '정원오 출장 의혹 제기' 경찰 출석‥\"발언 중 허위 없어\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-06T08:12:09+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9ZQm40WUhZeUJmSl9vOXhobzZRXzlVcU9XTm10Mng0RXRqcTFvc0JaV1VNRDN2amlrTTE2bnZoU2RIVE55OTdMR3c2M2dyMTFQTG91QnBxLVhudGVoV3V4cllWUWhneTNJbm53ZmJ1NTNWaFZVTkI40gF3QVVfeXFMT0NJUHo4dmtoMWtRdnpBNENCb3JHd0dzU0M0QmFwLWV3LWtoRkhXWFNoX0I5OEQ0TURQSGVucF9Nbk4wS3VVUDlKWGlZb09hZUtXdzV0R1FrWVlPbURuakdaS0V2WVV5SDRMMmFOdnBFaUZ6MnBEdzQ?oc=5"
   }
  ]
 };
