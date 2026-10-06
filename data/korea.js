@@ -1,7 +1,13 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-06T07:58:54+07:00",
+ "updated_at": "2026-10-06T09:54:18+07:00",
  "items": [
+  {
+   "title": "‘북한군 지뢰’ 매설 추정지 여럿…군 “모두 제거 원칙”",
+   "source": "한겨레",
+   "time": "2026-10-06T06:13:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1iX2tlN2hHdnhVLXlMQ0VfREV6ZGVicnYxWlVqWmFhN3dfbk9ub0dkaGVobk5va21wUEIwdUVWT2lkTUctdlZSN1hrb21iaW5nUHU0OWlRVmpENzFQTWs2Ri1QTGI1aDRPU0g0a04tTkJ5RlVu?oc=5"
+  },
   {
    "title": "\"국감서 말하겠다\"는 조희대…재제청 갈등 '태풍의 눈'",
    "source": "다음뉴스",
@@ -9,16 +15,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5ieHVXOWJHT0pPcDVVSGE5MzhLTzYzdUFrT0lmNkd6QnQ0emZxUFh4eWxzNzVzWHpIUDFrVkppRU1zNnozVDdBX3kxaVJmNG8?oc=5"
   },
   {
-   "title": "“위성 15기 차례로 내리세요”…누리호의 ‘위성 하차’ 작전",
-   "source": "KBS 뉴스",
-   "time": "2026-10-06T05:01:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFByYXBqb2hrbzhZMG9FRXhNTE5PVGR6eEh1enZIeDJONzNSQkpRSThUdzQ3cVlyN0ZFcDc1Wkw5dEF1Q1p1dnBFRHZYZjk4Z0NsRHVwZmFEYXluTkg0NEk0aF9LcWQyUQ?oc=5"
-  },
-  {
-   "title": "그물 끌어올리다 ‘기우뚱’…어선 전복 2명 실종",
-   "source": "KBS 뉴스",
-   "time": "2026-10-05T19:10:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE41R3dYSUMtd0s3cGJIQ1JMUXA4MkMxUmpySWpONVdhbFQ3bnJmdEZjclN3TWJ0VFhUeXd5YTFJc0kxTWlXV1BsbXJLc0FJb2E3Q3F4S3dJM2FyVG8?oc=5"
+   "title": "누리호, 오전 6시 10분 발사대로 이송 시작…기립 본격화",
+   "source": "한국경제",
+   "time": "2026-10-06T04:35:25+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFB0NFk0dFVOeE9WU2daYXpJc080WF9yZzBRemxjLTIzcUhEYUZBRmxhUllwU2g0WlJVRlA0OEpVekVGSEc2d2RzaUd2STdCdG5VbXZBV0NCS1U1Zw?oc=5"
   },
   {
    "title": "출범 나흘 중수청 여전히 정비중… “고소-고발장 수기 접수”",
@@ -27,16 +27,16 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE13OTZmNW5uWl82N3gxU1FmdVRlYmdna09NRHljUW5mVFV6SnBETjZIVTNkSS1mdmV1bnl0TVg4N3hpS0pieEVMQ0RMRVRUTXNIZ1AwSFl0bWR0M2d2ZTBvYXBqR0x5WHk2Vk45WU9MMTUtRGZiamfSAWZBVV95cUxQekRMcDhxWUtJLVZZNUxENG5oQ3JsejBuelVKRE5MVHdYaXVWNjBtZnZsUXFVa0xjeW5tWVVfWWRVaktFSzJDbWU5ZHNzVzdlMjYzaXZBTHl2RXh5YmI2dFUzVGJfMVE?oc=5"
   },
   {
-   "title": "[속보] 군 “북한, 자발적 제거 안 하면 제거 작전 지속”···DMZ 사고 현장 북한 지뢰지대 제거",
-   "source": "경향신문",
-   "time": "2026-10-05T14:16:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1BUEtJS0k4a0FiRE5jajRiQVVZdk5zeWJrbjN1Z1hmTmhMekFJOW1rTThMaVVGNDZEd3VuOUpMNEgyWk9MQ1o2MGFHVjdaaWdja1ctUUI2Z0NqZ9IBX0FVX3lxTE1sUTYxTHRjQldUT21qTDRoa0NGYWFRN2xFNl9aMHU3WnJKd2lGUTZfMGVSQWJiWGJxTnFlUjBKRjdwbl9saXFLUlRGTGxOUW5odDRwb21US0ItQi1LWF9n?oc=5"
+   "title": "날씨 아침 기온 뚝, 큰 일교차 주의",
+   "source": "KBS 뉴스",
+   "time": "2026-10-06T03:45:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1jM2FHTUlnSHZPY2ZRYVlSOGJnUmYtclJSVkF4a01pSWxuX0sydzkyaFF1dTNBX1hzeXJYUHpMZWxsWkxBdFZfN1J3eXplanZ0UkVfUThpN0RPaDg?oc=5"
   },
   {
-   "title": "[르포] ‘100년 철옹성’ 캔자스의 균열…트럼프에 등 돌리는 ‘팜벨트’",
+   "title": "이 대통령, 강경파에 경고수위 높여도…김용민·혁신당 ‘재반박’",
    "source": "한겨레",
    "time": "2026-10-06T06:12:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFA4ZWhGWXd0Rm5oR2NRUnNmem1CU0JCbWk5dkR6SWtoeC1Oa2ZHNXRMaGtZQ3VrV1hpTmV6elJyTUdqQTlISkM5WlNfMnpkaUJTREJOdlBTNXh2ZWtkQTRwOVYwcEVoQTlHT29yWDl1NA?oc=5"
+   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5ZWERnaWJFUXRsMXl1bzdfSTFYdTR5c1lhcDJNUjB4dHdZZk5hRDhZdFV4aFRKZlRPcVZ3dG5mamtjd0laeTJsaGR4VEl1LUtJUEpUcHR4R1NNQ0YxTHJFWnVJUUpxdUtqelFJ?oc=5"
   },
   {
    "title": "식당에서 밥 먹다 날벼락... 화물차 돌진에 15명 부상",
@@ -45,22 +45,22 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPZmE2TXFBWUlJbV8tQS14SXVDVlVZXy1fMEJTRktLVjhXV3pEdWhXUjV0Tk9UWmpmR09qNWYyNUFmRloxUFozUm5USmRRei1qTFdXNUtpdGZPM2NuR1VjNk5ySTgyLS16UFlzdndWbENHR3NuYTV4NV8tbkdfa1JjYlJZaXdxbWtoM2hqX2s0MlI?oc=5"
   },
   {
-   "title": "임은정 ‘검찰 폐지’ 책임 동료들에게 돌리며 “김지용 자격 없다”",
-   "source": "조선일보",
-   "time": "2026-10-05T10:34:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQMjV1cVFZN0NRUWo3UXcwRTBFNzhzN0I0OWF5NnVtZ2o2NlBhbEhFNUktSmJFWjV6WUFET1p0bUhqdHY0TU51N0lic05sdUdrX2NMSV9LQWszUlNFLWN6WWZGajB6dnV5b3hBcWpQSzM0WkU3OHFiMlhtcDlpSjVYRy0wMkdjUVU?oc=5"
+   "title": "그물 끌어올리다 ‘기우뚱’…어선 전복 2명 실종",
+   "source": "KBS 뉴스",
+   "time": "2026-10-05T19:10:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE41R3dYSUMtd0s3cGJIQ1JMUXA4MkMxUmpySWpONVdhbFQ3bnJmdEZjclN3TWJ0VFhUeXd5YTFJc0kxTWlXV1BsbXJLc0FJb2E3Q3F4S3dJM2FyVG8?oc=5"
   },
   {
-   "title": "이 대통령, 조국·유시민 과거 영상 공유하며 ‘검찰개혁 비판’에 직접 반박",
-   "source": "경향신문",
-   "time": "2026-10-05T14:25:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE81VGhPMFpKUzFsdjFDbHNjczUxZjNyM3VEaVdfOHF0dHRONkFPMURoQnJremhVRG9ETWtkU1VDMkgydjRWSUk2Q005WklSN0RhZTlneEV5cVZ1d9IBX0FVX3lxTE1LNWdaRS16bG5PTXJEX1NTRURBOUhFcXN5czZKcHQ3aC15Rzg1aWg1N1RqbXc0MVh6TmJPSzhRUXZQRXRsbTNaQlRCRUVOX2FhQmV6VXlkWkc3RzJsRTRn?oc=5"
+   "title": "민주, 한동훈·주진우에 “소인배 정치꾼…쌍둥이처럼 닮아” 비판",
+   "source": "한겨레",
+   "time": "2026-10-06T06:26:05+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9Ddm5kVHluQVNmMjZrekNTcnRiMTRDRTRWTVEtNHFsZl83X0RBTTBVTGhuRkhNU09YLTJIUnpnbUU5bUd4bXZCYUl5N1dQZ2t0UnZQYnlWYkd0ejJtSG03NVVESlRqNm1zODBfRWRxa2ZBUVQ5?oc=5"
   },
   {
-   "title": "“盧 신화 조작” 거론 한동훈에, 與 “모독 말라”",
-   "source": "동아일보",
-   "time": "2026-10-06T02:30:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5JVlNEaFBSNTNiaFlWbHk1RmllWWJOaFc3NnRweHRLV1h6NkdYR3V4dHk3ZnJCWVN3a1EzcVd0SkdRWlhfdThrbUF6Nlh3WGtnbEpIc2twUEdyVUV3eEZ6MlhzemZwYXR3bUZYdXdDamVFSjdfWExr0gFmQVVfeXFMTjVfOTFoSDB4WGtlR1UzVFo0d3lub0tKaU51RXo5WXdhLXdsaUprWldBeElvSjF5TUV5cTdMZGJfWm0tZGtWSUd2SG1TMy1YUzVCS0hucURxSXhaVExYb3A5Y25hWmF3?oc=5"
+   "title": "부산시, 되돌아 온 ‘부캉이’ 지켜보기로…스스로 나갈 가능성은?",
+   "source": "한겨레",
+   "time": "2026-10-06T06:31:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFA5WkNEeGdQQ3A5SjkxYVV2Vi1kbE5kWGFiS2FMY18ydk9tRTZ5RlJ1dFRaNEFIa1hIRFloaFRuNXo2dm9wYTNwRjh4Tl9XTmttMml3ejJCSURid3VvdzNxaVlGNWI?oc=5"
   }
  ]
 };
