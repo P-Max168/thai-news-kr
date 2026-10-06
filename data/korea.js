@@ -1,24 +1,30 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-06T13:58:57+07:00",
+ "updated_at": "2026-10-06T15:55:32+07:00",
  "items": [
   {
-   "title": "조희대 “국회·대통령, 대법원장 제청에 전혀 관여할 수 없다”",
+   "title": "원고 준비한 조희대 “국회·대통령, 대법원장 제청에 관여 못해”",
+   "source": "한겨레",
+   "time": "2026-10-06T13:22:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5hRFRkSWtDdzNub0pIbkpfRFkzdnFHZjdJSVREYnpYSjZiTmlNS3U3MVZkSGxJMkdubnQ5U0pLenBYRndhajBXMmtybHZEUmtFTG1XNlRabEEwdjhrcDViZV9NbEdSTGs5eEE?oc=5"
+  },
+  {
+   "title": "조희대, '업추비 인원 부풀리기' 논란 사과 \"국민께 송구\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-06T13:06:14+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1XOVRteEJndUZGdjJlNU96UDRyNWJPV05ndTlhOEZSRGZiZFFlbmJsdlRIQlRwcnJPVXpVMjlOSkFTWU80NTJTVmQ0c2RKN0cwMU1adzRZbnN2S1EzUnBNMkJZSXN3cXZEazQ0QjY3cWlWVnNiR3YwedIBeEFVX3lxTE83bnVxR29fYWJZc1FNWlFjcEZ0SXRuTkx1Z1lEQURaT1FqVXZyZlV1NW9Lald6OEtHb2g4VlVMS0lxREtNQnFWVW9PbTJubGIzSkJjbFBkS0xGbzU2R0VJWkVLb21nTjU2QTg2Q0dPN1c0MERuYllNSw?oc=5"
+  },
+  {
+   "title": "‘부캉이’는 무태상어 아닌 흑상어였다···“고등어·전갱이 잘 먹어”",
    "source": "경향신문",
-   "time": "2026-10-06T12:47:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1USC1uaEtyNEdKRFdtQTJvS054Z1B5ZWFVbEFqTWR4OW8tLWRGbHZROU5SUUdESjliQk9GeW1VZ2F1d1NhSTVIUnRzYjFHeVZvZGs1cTVQSWE5d9IBX0FVX3lxTE5raDBtVC01aW8zWXVzVHJHLTl6ODhVT3VRNzJiQnlpY0xVdTJSQUNBSF83alNxVkdOQzItN015b1JpOFVfMndHNUhLeWNCOHNPVWl3eFhSdWpfeUNBQ0F3?oc=5"
+   "time": "2026-10-06T14:21:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5OZ2VXU0pNMUs0NnRSV04wakZQeXlibEtqcmVsdVdPTGR5akZiaVl6LXlkV2ZWcmpXRGxsaW1VY2FZMHdibzdreVB5aEpmcFU4TngyLUt5bFRUd9IBX0FVX3lxTE1xcWpwMVlFbW9RUGhvMExKc01hcjV5VlNoNzdEcmx0eE03SlNyX21Jazc2TU1FWjBXWWVwUmVpSmstNmR3WkEzQkl0dmhMbk1fTWtmWGRadTc2Y213R184?oc=5"
   },
   {
-   "title": "군 \"유엔사와 MDL 일치화…올초부터 TF 구성해 논의\"",
-   "source": "연합뉴스TV",
-   "time": "2026-10-06T12:35:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5uS0FzZW9uWGZaSEc4a014SDJKOVI2VFA3b3J4SmtIZ2JsTzNXS0YtWHpEVTNHOWZaUUVQZkdiZktnNnRnTi12WHhfMDV1R3lZdG9HNF8yNVhKOW83dVcweC1Bdm0zaFk?oc=5"
-  },
-  {
-   "title": "[날씨] 출근길 가을 추위, 낮에도 선선…일교차 유의",
-   "source": "연합뉴스TV",
-   "time": "2026-10-06T12:40:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5BQU8yeXZBdkdmVUxaQXJuUy1yTkpNRTQ1UWRLeS0yeWU3UU9KbnNDRzBnVWk2MDJzOHFjYXNvc0U4X1pZMjN0eUl5cWhHMDQ4ZlptQWpYLUtRanRfUUtDak5ZSlg2X3M?oc=5"
+   "title": "제주 해상 전복 어선, 만선 입항 중 높은 너울성 파도에 휘청···해경 “수사 중”",
+   "source": "경향신문",
+   "time": "2026-10-06T13:36:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBOQTZudXBpWUVZUzVLSlFTczBGYUtKNHcxbE1fY3FzTmFDZjgyckNSa0Q5QVRtanc2NzhLSXZlRzA2ME5NZFNEMmlsdXk1UFZUeE5yb3g4VFZRQdIBX0FVX3lxTE5CMXNrY2ljbWs4VzBHQnhrVUFibWNZYlVWQUlqWjRTcW9pLWxqWHdxcjNfV3IwX2JFOGFLcHNZSzBPMG1HMFlHbktOaUM2R0M0ZTY5SVZKcFQyUG5FeWVj?oc=5"
   },
   {
    "title": "누리호 5차 발사 D-1…발사대에 수직으로 ‘기립’ 절차 돌입",
@@ -27,40 +33,34 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5aUC1WNFA3RkROUzFZNGU5SHEwUTF1dTVXV3ZCWjhOUzFDcWlFaUdYelNxcTEtOENmcHNmb0ZZYm02dDVEcFh0bi1vNy1idEpVRXJXU3Z0MkFZVktHczJpS1RibnQyWWRLclRXcFJrVmxHQQ?oc=5"
   },
   {
-   "title": "임은정 “‘민주주의 깃발’ 광주 부임 책임감…‘공정과 절제’로 지휘하겠다”",
-   "source": "한겨레",
-   "time": "2026-10-06T08:59:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9USmllNHZJTUlhM2p1MnI0eEIxTFVkZW9XQWZBamc3QVhocTgwS3k0U3hYWFJBa25rSVo0YWhyRTZmVmhHVmItYWxSdWdaTEVGX0VZUUM2al84TzJ2ZGV3aQ?oc=5"
+   "title": "강신철 “북한지뢰 제거 작전, DMZ 역사상 처음…필요조치 계속할 것”",
+   "source": "경향신문",
+   "time": "2026-10-06T08:39:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE02aUlEY0pGd2lnNFNyMEU4a0dLUnNCQzdWanNZUms1X2xwWlowZWU3d2ZlTVlwRlFtZVhNS1F2NUZHdkFjTEtVMVhjdjdmMlBRR1d1ZmJ3NFE2Zw?oc=5"
   },
   {
-   "title": "제주 전복 어선 실종자 1명 발견…한국인 선장 추정",
-   "source": "한겨레",
-   "time": "2026-10-06T08:58:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9XWE5NeGZwTE9ZSWRjYk1JNS1rcHFzRjI3UFJGaEdqSUZ2U2VVbDFVcDE2bkkzSkNpaDFENmk5UTUxZWx4WFJudklGZlBfM2U2eVI4UzVhNEMzaVM4dlJn?oc=5"
-  },
-  {
-   "title": "이 대통령 “중수청, 내편 네편 여야 없이 ‘힘 있는 자들’ 엄정 수사해야”",
-   "source": "한겨레",
-   "time": "2026-10-06T11:30:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFB0LTBONVd2OFE5X1pDcTF1YnY0RlpPWmxYaVE4dDFNRXdoSzFnLWNVbV9pZ1J6VDBwUm15clhtcVRFUG93cXJ0T2dIVFBkR3hfZ3FWeTRIVTJyLTgxU0dEckg0Nmh0TXNya1lZ?oc=5"
-  },
-  {
-   "title": "‘암살자(들)’ 유해진 쪽 “인신공격·신변위협 매우 엄중…자료 수집중”",
-   "source": "한겨레",
-   "time": "2026-10-05T14:32:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE83Qm1HeXVzOVFIX2h6bUhxWXM2SllESTVIQWl5WElxaUZRVXZSTGlrcVlWQnpYQll5NVhnTDFCN0VkQzVxVm1qU3BsSi1IYUpLOC1LcVIxUWJqdmJtd0ZUTEdsZ0JWTmxEV251YWszSzBPZw?oc=5"
-  },
-  {
-   "title": "[뉴스레터K] 국민의힘 “형사사법체계 개편으로 치안 붕괴 우려”",
+   "title": "[전격시사] 신지호 전 국회의원 - “‘노무현 신화 기생’ 민주당 정치를 때리는 것” “곽상언, 유체이탈 화법 안돼” 한동훈, 왜 지금 노무현 소환?",
    "source": "KBS 뉴스",
-   "time": "2026-10-06T09:34:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBiRkJSNFFpVDNFTUNSMmt5T19BZmZ6X2YxcnBQMUNWS2E3TE5WR0x3NjgxQS1TWDhXLUFfMGJ1ZDY1dlVhS3FzMjBLX28wanQtcnJRd0JuU1kxX0U?oc=5"
+   "time": "2026-10-06T08:08:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9rMWlmOGtjQXFoTDRvcGhPYXpjN2pXd0VDNFFZUTI0XzB0NHk2bEU0MGNTS2JPdDRaalpQMnZ6WWMxRGRvQXk3aVdCYWFjNUlWeUkxTEswQ0VEcTA?oc=5"
   },
   {
-   "title": "서울 외국인 관광객 소비 ‘쑥’…방문객 증가율의 2.8배",
-   "source": "한국경제",
-   "time": "2026-10-06T06:25:42+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9QVmgxVUVSZGRmU2NLX01DZ3llTkJtVE1TRUtTRG5fWm5FNTVwekU1bVQ3MUlCV3VpczV1U3RYZmlpdEIzQTNGT29COHduQ19Ka1RWRjNzdEhVZw?oc=5"
+   "title": "李, 검찰청 폐지에 \"없는 죄 뒤집어씌우더니...국민의 역사적 결단\"",
+   "source": "조선일보",
+   "time": "2026-10-06T08:56:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOQUxUT1JQQlZjaXVNcFdPTjdGNjYyNHRFbHB0SlNxNFBNOWlOTkZYX1NfVXpBcmJNNVo3UldYaTY2cXVLU0hZZDBKYmpXUHhNZjEyU2lrYmdyR1ItY05ENHN5OHdaYjZpam9GRjVKUnZHYWZUandoUzFqenowemJLbEl3am1XcGdqOTUyRzRLVVo?oc=5"
+  },
+  {
+   "title": "강원산지 올가을 첫 한파특보...내일 전국 최저 2~14도",
+   "source": "조선일보",
+   "time": "2026-10-06T08:31:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPeHlVREFzX1dzell1U2pqLWFvSk5OdVQ5MGRkSUc3REI1ZC1OUkJzSENwUC05ZzFpaWlhc0JyR1VmTzItMU1OYkJKdTFNRnZ3akFxZTNMTjU4UFpYSFdVZHEzSUE1TUxkU3h4SlNlRUMwSGZLZUg5RGZfRzdsNkdWMHF1MF9JRWNGWmtuRzNUNUx3Tjd6RWJj?oc=5"
+  },
+  {
+   "title": "울산 안과병원서 두 살배기 마취 중 심정지…경찰 수사",
+   "source": "다음뉴스",
+   "time": "2026-10-06T14:42:58+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE44U3dXeUlGNzAzZ2dWM1RLV2xMY3AxYUdvMlBLTVhVQlVjektMMzVYQjI5UDZDeENlV2VTbVhfZ1F5ZkVkRlJtTlBsTkZMcWs?oc=5"
   }
  ]
 };
