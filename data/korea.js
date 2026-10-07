@@ -1,24 +1,18 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-08T03:54:39+07:00",
+ "updated_at": "2026-10-08T05:53:55+07:00",
  "items": [
   {
-   "title": "윤석열 ‘명태균 무상 여론조사’ 2심서 무죄…재판부 같은 오세훈 선고 촉각",
+   "title": "누리호 4연속 궤도 진입 성공…“군집위성 수송 능력 확인”",
    "source": "한겨레",
-   "time": "2026-10-07T19:11:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBSNmVNcUhfdUpyRURCbXk3MWkxUXBvaDVBNE13eVV0cHQxRlFuN2ZVejVKdUJWbWkwUG40REd5ZXZNMndBaUQ2ajVDdHMtSkJ5MGJ4MWllU1NhSXhoNnpQRzlqSl8zYWFZajdXMjhqOGR3QQ?oc=5"
+   "time": "2026-10-08T00:40:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9udXQ1YmNpaXZ1M0tXSjBUNXRnOTUtY25rWnNkdUs1MkExZFdKeVo3dU1va1NTeFZNZm5ZR2FQaHE1QUhGQ0dRWUhVQ05ldmoxY2JPR3M1UHY3TmJqTzRMWFdJLW83UGlWeUtJQ00zUXlKQQ?oc=5"
   },
   {
-   "title": "역대 최다 위성 ‘로켓 배송’ ‘대량 수송’ 시대 연 누리호",
-   "source": "경향신문",
-   "time": "2026-10-07T20:05:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE10Y1JCTm05dzJwZ1hkLUxNc1FjSnVWdk5Yd01TSllENDYtekQ2QTFpRHhBUmNCOUpFVDBHMy16V1ZXS0NmNW85VWJZZ0lqckpLZ2RqOFlQOEx4Z9IBX0FVX3lxTE5ZbV8tajV6MVRXQm5NSnJWbE9TSzdNSVFHMV9RQUUwMkg2ZHhXNTJNZFhKd243ZzlFWWc4cHFwZ3QyN3JSeDJ4bzRzd2RxeGpwMkdid19MMlRjT1BpS0dB?oc=5"
-  },
-  {
-   "title": "청와대, ‘러시아 석유 공급’ 우크라 주장에 “사실과 다르고 부적절”",
+   "title": "재제청 거부 조희대, 재제청 요구 청와대…대법관 공백 ‘출구 난망’",
    "source": "한겨레",
-   "time": "2026-10-07T20:15:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE16LVkxdzRvWS1FRmlMTVR0NTJwNUFhS2UtUGU0VURmYTZWdm5EbnNRNl9xamxxNG53VUZTWDR0akJrZTRLeVBQRk85Y2ZkbWNyS29jck5zVGwtbE5EYjVvUG40cUJRQW5zQ1o4?oc=5"
+   "time": "2026-10-08T03:00:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1fWkkzd1pab1FCTlVIVkNjZm10V3d3ZWFJM2NDdTlFU09CU3FPQUhFZVItWmkwWEpxTkw4UmsyRHhqa3hhcUV6TmtOS3hJNGt4MHlWSlFpUmhmR1psVXFNRnMtVVdoQWpPMFlN?oc=5"
   },
   {
    "title": "“패노메논 왜 총선 전에? 대통령 지지율 올리려고?” 따진 국힘 의원에···박진영 “나라 위한 일 아니면 안 한다”",
@@ -27,22 +21,28 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1lRkRnUUhoa3pkMU1jVnBVVVY4TkhiWnBLWFZxODlGYldLcTV2MzFfSWdMSUZxR0pQRjY3WDNrV2FlX09lb2ZRWjNyY2RjOVMzUDZITUNTSjhhd9IBX0FVX3lxTFBfV3N5RFV4UVdwTG1xd0VQMlo2OEp3RktRWUthLXpoSUhvY05SaVVmUVVmcGtzU0dpWkxyTU1ISnpCcUM0U1hFaXB1T05hVzBXMEJZZTFCYWNjRXM2TFc0?oc=5"
   },
   {
-   "title": "외교부, ‘북 지뢰 대응’ “제반 방안 추진 실익 검토 중”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-07T17:39:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5fTjJrUHd4WHRBSGZfbEdyLVFOTXRlbVJnWDNjU0xBN3NtZ2JQYU1qTFRkMTZwZ3lNSjBFN0hoM1IyY29YaXAtM1htQ1k1OUh6b2RmaEs5V1ZEVVU?oc=5"
-  },
-  {
-   "title": "이화영 전 부지사 측 \"가석방 해달라… 李에 화 많이 났다\"",
-   "source": "조선일보",
-   "time": "2026-10-07T11:58:36+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQVkVlbXNfRElIQ1hVa1BUVG9IR0hBRW54SlJ6YVhEZ0J6LVB5Qmg1QWpQTnRUTktNRDdydzNyX0h2c2JiWDdEbzBjQ1JYTGplTzFnTDB0TGU2SkdPaWZJendLMEo3YUdLOUNvY1ljQ3hqUjJzLUtSd1JlTjB5NkZKaEtCM0dWOTg?oc=5"
-  },
-  {
-   "title": "[날씨] 절기상 '한로' 전국 맑고 큰 일교차‥강원 산지엔 얼음",
+   "title": "[단독] '尹·명태균 무죄' 2심 재판부 \"尹-김건희, 정치적 공동체\"",
    "source": "MBC 뉴스",
-   "time": "2026-10-07T22:00:32+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE8xVW9wU2VzQko1VWtIWEVFalljUUxVVmpVbHdJU2VSSTQ3dWFnOGthZ1FrY0o3T3MwNmZlTEdwTFBFYmJmS3BjcEpmc0JOd1BTNXV4RktYRmI4SFNoM1lnejV1dGhpNzJfc1B4dnFvWGY5MjFQbFpV0gF3QVVfeXFMTUVQNkRXUkhmRC1PZm1mS3FWTnlvYkdsSTlrZnRaUndOdTBkU1czenR0aGxBUGs2MWpNdE40TS05MExwTnBFY2YtZ0NwQk5SUV90UlNla2V4U0k2WE1SWEk3QzhLeUNWOHpNNUFMNDgxWWp3R1I3dlU?oc=5"
+   "time": "2026-10-07T17:41:45+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE81LVo2SlFYUkRsN3dOTmFWZGFwbWgtdWN1SFF5cFptSkl4N0t2ZlVXN1pfREhqRVB2U0w3U3RqRUVQc25OQzBqS0YwVXRrcGpQSVlzS0hEMzZkN1hYREgwTFlSM2lqVWtQcDBsbXNkeWUxZ0phOFdr0gF3QVVfeXFMUGNueDFDRmx6ejhnc1gxeGZybXJqdGU5UHJYdGxGNVZEOEJ5TTJZSTFKWTNlZWxnZmhkeHNuWE9sN3dPa1pZcy0zMkFkeVhDb2t3dnhUei1rSjdCX1k1V2Q3bVE1RGhla2pReHpxUzZNcjJpUXJjX0U?oc=5"
+  },
+  {
+   "title": "우크라 \"韓, 러시아에 경유 수출\"...靑 \"사실과 다르고 부적절한 주장\"",
+   "source": "조선일보",
+   "time": "2026-10-07T17:49:25+07:00",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOSXNWdkdKX1EtbXNCY2x6RlI0UF85anhDS1l0RGdyT08ySjVURThyeDZ0b0lOWVVBQkE3UGpPcUZrWU8zVlhTVUlRVUlUWWYtRTBIWDk1aTJuRDkwTWdwR192WklNeDRBX2JJdjZGUHBacnZueUNsX0N5Tkt2TTFmVVcxT1NYUnhsSTlJUmdxSEU?oc=5"
+  },
+  {
+   "title": "노벨화학상 받은 日 소아이... \"장보다 소식 들었다, 가장 짜릿한 날\"",
+   "source": "조선일보",
+   "time": "2026-10-07T21:43:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQaU1NVkN4ZTFaZktJZlRCUG5rMjRkRWliTUd5Mk5VY0hJc0Q3UkFTcmYxSVc5OTdrZUdFWlRiTm41UjFvQWFnbDVVOVhlOUVjWlpwRF9WT1pQRWVnSkFCeml4R01pU0xlWVNnRERUQ2l4M1BfbUFKQ01tZWNNeFBNN0t1U3lhanFDQ181dHM0d2tYa3FKTjgzWGVBZmdPdw?oc=5"
+  },
+  {
+   "title": "박정희 고향 구미 극장서 영화 '암살자(들)' 상영 중단",
+   "source": "노컷뉴스",
+   "time": "2026-10-07T07:50:18+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5FdU9tS3QycmtueUQ2MHo2NjU2NEdjUGl2MUhzVkdSNDZZbWxWYTRKMlRWOHE2NlZwdmxFallxSUEtSXBPaUNzMEhFbklLS2VDNWc?oc=5"
   },
   {
    "title": "여의도순복음교회 \"성도 85만명 이름·생년월일 등 유출 의심\"",
