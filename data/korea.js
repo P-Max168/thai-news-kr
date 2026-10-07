@@ -1,24 +1,18 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-07T21:55:35+07:00",
+ "updated_at": "2026-10-08T00:05:26+07:00",
  "items": [
   {
-   "title": "역대 최다 위성 ‘로켓 배송’ ‘대량 수송’ 시대 연 누리호",
-   "source": "경향신문",
-   "time": "2026-10-07T20:05:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE10Y1JCTm05dzJwZ1hkLUxNc1FjSnVWdk5Yd01TSllENDYtekQ2QTFpRHhBUmNCOUpFVDBHMy16V1ZXS0NmNW85VWJZZ0lqckpLZ2RqOFlQOEx4Z9IBX0FVX3lxTE5ZbV8tajV6MVRXQm5NSnJWbE9TSzdNSVFHMV9RQUUwMkg2ZHhXNTJNZFhKd243ZzlFWWc4cHFwZ3QyN3JSeDJ4bzRzd2RxeGpwMkdid19MMlRjT1BpS0dB?oc=5"
-  },
-  {
-   "title": "[단독] '尹·명태균 무죄' 2심 재판부 \"尹-김건희, 정치적 공동체\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-07T17:41:45+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE81LVo2SlFYUkRsN3dOTmFWZGFwbWgtdWN1SFF5cFptSkl4N0t2ZlVXN1pfREhqRVB2U0w3U3RqRUVQc25OQzBqS0YwVXRrcGpQSVlzS0hEMzZkN1hYREgwTFlSM2lqVWtQcDBsbXNkeWUxZ0phOFdr0gF3QVVfeXFMUGNueDFDRmx6ejhnc1gxeGZybXJqdGU5UHJYdGxGNVZEOEJ5TTJZSTFKWTNlZWxnZmhkeHNuWE9sN3dPa1pZcy0zMkFkeVhDb2t3dnhUei1rSjdCX1k1V2Q3bVE1RGhla2pReHpxUzZNcjJpUXJjX0U?oc=5"
-  },
-  {
-   "title": "‘국감 출석’ 박진영 “패노메논 특혜? 몇백억 손해…상표권 독점 의도 없어”",
+   "title": "윤석열 ‘명태균 무상 여론조사’ 2심서 무죄…재판부 같은 오세훈 선고 촉각",
    "source": "한겨레",
-   "time": "2026-10-07T16:33:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1GT1M5MnlvbmtLdUZfYVpSZ05GbTVINlNRdVNyT21sQm9DYVBMbGxJclJSRU9GX3ZvR1NoSzh2TVhzU1Z4WjVHQll5R0dXRE13SlN5N0JCQVNPX190XzJtVDFYWHg?oc=5"
+   "time": "2026-10-07T21:41:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBSNmVNcUhfdUpyRURCbXk3MWkxUXBvaDVBNE13eVV0cHQxRlFuN2ZVejVKdUJWbWkwUG40REd5ZXZNMndBaUQ2ajVDdHMtSkJ5MGJ4MWllU1NhSXhoNnpQRzlqSl8zYWFZajdXMjhqOGR3QQ?oc=5"
+  },
+  {
+   "title": "국감장 선 박진영 ‘패노메논’ 특혜의혹에 “안 하면 2~3배 더 번다···상표권 JYP에 남을 일 없어”",
+   "source": "경향신문",
+   "time": "2026-10-07T14:27:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1lRkRnUUhoa3pkMU1jVnBVVVY4TkhiWnBLWFZxODlGYldLcTV2MzFfSWdMSUZxR0pQRjY3WDNrV2FlX09lb2ZRWjNyY2RjOVMzUDZITUNTSjhhd9IBX0FVX3lxTFBfV3N5RFV4UVdwTG1xd0VQMlo2OEp3RktRWUthLXpoSUhvY05SaVVmUVVmcGtzU0dpWkxyTU1ISnpCcUM0U1hFaXB1T05hVzBXMEJZZTFCYWNjRXM2TFc0?oc=5"
   },
   {
    "title": "청와대, ‘러시아 석유 공급’ 우크라 주장에 “사실과 다르고 부적절”",
@@ -27,16 +21,28 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE16LVkxdzRvWS1FRmlMTVR0NTJwNUFhS2UtUGU0VURmYTZWdm5EbnNRNl9xamxxNG53VUZTWDR0akJrZTRLeVBQRk85Y2ZkbWNyS29jck5zVGwtbE5EYjVvUG40cUJRQW5zQ1o4?oc=5"
   },
   {
+   "title": "[단독] ‘부캉이’ 주둥이 인근에 상처···미국 상어 전문가 “그물 구조 적절, 나라면 다시 시도”",
+   "source": "경향신문",
+   "time": "2026-10-07T15:57:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFA2QUZfUWV0aUM4T1FqSDRMcGZaVFFXT1M2QWlUd0tJaV95bWVyNWNGdEF2Z005ZUtZcHBSZWhXYUFGOGUwNS1uc0FZQ09ZNFBCY1dzOEw4SF9lUdIBX0FVX3lxTFAxOFNLNGN4dFFfS2szRWNSeEYzb2h2R3RKRnlvWWp2XzBnT2ZySWRoUGJJTFBHaXA5dXFhTXlrUENFMWRyWDBxbW1vU2s3VUtvdXA3bVhMaXpabkpVQXdv?oc=5"
+  },
+  {
+   "title": "누리호 4연속 궤도 진입 성공…“군집위성 수송 능력 확인”",
+   "source": "한겨레",
+   "time": "2026-10-07T20:16:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9udXQ1YmNpaXZ1M0tXSjBUNXRnOTUtY25rWnNkdUs1MkExZFdKeVo3dU1va1NTeFZNZm5ZR2FQaHE1QUhGQ0dRWUhVQ05ldmoxY2JPR3M1UHY3TmJqTzRMWFdJLW83UGlWeUtJQ00zUXlKQQ?oc=5"
+  },
+  {
    "title": "최휘영 “창작 제약 있어선 안 돼”…국감서도 ‘암살자(들)’ 공방",
    "source": "경향신문",
    "time": "2026-10-07T20:01:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9ENGNwZkJYaFZzdWJidlh5SGhES1VKNlVFcnJfX3pMT3ZRaHdWUElhdGZ2Rl9OWWo3c2RacWFnVkJodVdFRVp2ZzNKWVNiNTVSUWtaSDJHTkRlUdIBX0FVX3lxTFBVazhDQWVsYTdmWG5vbldBQUdrNFQ5LXVxNVZ3NXBxUllkemNQQi04dTlla0xVcTljWmRRdG5TT1Q4NzhhdFFfcHJqMjByY3JscFkwclEtbzlRWmZoTWNZ?oc=5"
   },
   {
-   "title": "이화영 전 부지사 측 \"가석방 해달라… 李에 화 많이 났다\"",
-   "source": "조선일보",
-   "time": "2026-10-07T11:58:36+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQVkVlbXNfRElIQ1hVa1BUVG9IR0hBRW54SlJ6YVhEZ0J6LVB5Qmg1QWpQTnRUTktNRDdydzNyX0h2c2JiWDdEbzBjQ1JYTGplTzFnTDB0TGU2SkdPaWZJendLMEo3YUdLOUNvY1ljQ3hqUjJzLUtSd1JlTjB5NkZKaEtCM0dWOTg?oc=5"
+   "title": "이화영 쪽 가석방 공개 요구…“이 대통령에게 섭섭”",
+   "source": "한겨레",
+   "time": "2026-10-07T16:09:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5FM1ViZmlLR2E3Y2FaWW9FQ1ZKTEU4SzRocmpvVjVwV2k4Z3JpV3lHcVhwbkdmUlZFM01kS0pqLV9CaGJnVXU3Q3RpR2d0WVBMdE95NGQySjgwbHA5NnRvMEFEaw?oc=5"
   },
   {
    "title": "경찰, 민주당 경기도당 압수수색‥'수원시장 불법 당원 모집' 의혹",
@@ -45,22 +51,16 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5KUl91VFVuQ3BlcEVUNVYxNzlDTTNnOFNyaVJiMDc3M2ZlOXpLSTJlNUF6d1d6WGpxUkpfNXkzY0RLdV9VSWpHSGFWa1RVNXdGX256QUdPTHowSGd0alVPelY3NnIyMFp0dml0THdHZ2tocjZ6Wnd30gF3QVVfeXFMTjhCLTBTOFViSlIyeGFwVWpaNllMWUYycTVybXhHR1M4Yklhc1hBRFpwU2FQNDBPcXl0bjFodWZVS3g5RHZxVWN5SThaM1ZhRlcteXhwYXRzWDZOdnFUQ0thTWZtYXVsSnlILTFmWXl1c2tpNUJCN3M?oc=5"
   },
   {
-   "title": "'허위 업무추진비' 왜? 조희대 \"못 먹어본 음식 먹고 싶다는 구성원 소망\" 때문",
-   "source": "뉴스타파",
-   "time": "2026-10-06T19:30:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTFBSUGw0bW02b0FqUnh3LVhiVi1HYmp0NFRkSE1hanNpcHROMlRZZVFtZllHS1Vhcy1GUkEtR2RjVkFhbHFpS3J5YzZ3?oc=5"
-  },
-  {
-   "title": "[단독] ‘부캉이’ 주둥이 인근에 상처···미국 상어 전문가 “그물 구조 적절, 나라면 다시 시도”",
-   "source": "경향신문",
-   "time": "2026-10-07T15:57:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFA2QUZfUWV0aUM4T1FqSDRMcGZaVFFXT1M2QWlUd0tJaV95bWVyNWNGdEF2Z005ZUtZcHBSZWhXYUFGOGUwNS1uc0FZQ09ZNFBCY1dzOEw4SF9lUdIBX0FVX3lxTFAxOFNLNGN4dFFfS2szRWNSeEYzb2h2R3RKRnlvWWp2XzBnT2ZySWRoUGJJTFBHaXA5dXFhTXlrUENFMWRyWDBxbW1vU2s3VUtvdXA3bVhMaXpabkpVQXdv?oc=5"
-  },
-  {
    "title": "여의도순복음교회 \"성도 85만명 이름·생년월일 등 유출 의심\"",
    "source": "연합뉴스",
    "time": "2026-10-07T07:58:55+07:00",
    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9tdTdvc040VFRmTmp3bHNfejJWLTRrdG5rd0NCcWlEUE11VzZlVy1ib0hRUC1EZ1lNbkdMcW1OUkdNSjV6SEYxXzlqT3VkdkdiSWJfdVNYdUdmUGvSAWBBVV95cUxOX1ZkYlJKcjVMTTl0UlRFcGszYUJrLVdoRWhOZWRGYjlfRnZYS2dIdjBDU1VINW90a0dPd2RkV1hvcGlNZllBcTVGbFFLV3lPYm5wekVrTGtsTXFUclg2UXc?oc=5"
+  },
+  {
+   "title": "[날씨] 절기상 '한로' 전국 맑고 큰 일교차‥강원 산지엔 얼음",
+   "source": "MBC 뉴스",
+   "time": "2026-10-07T22:00:32+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE8xVW9wU2VzQko1VWtIWEVFalljUUxVVmpVbHdJU2VSSTQ3dWFnOGthZ1FrY0o3T3MwNmZlTEdwTFBFYmJmS3BjcEpmc0JOd1BTNXV4RktYRmI4SFNoM1lnejV1dGhpNzJfc1B4dnFvWGY5MjFQbFpV0gF3QVVfeXFMTUVQNkRXUkhmRC1PZm1mS3FWTnlvYkdsSTlrZnRaUndOdTBkU1czenR0aGxBUGs2MWpNdE40TS05MExwTnBFY2YtZ0NwQk5SUV90UlNla2V4U0k2WE1SWEk3QzhLeUNWOHpNNUFMNDgxWWp3R1I3dlU?oc=5"
   }
  ]
 };
