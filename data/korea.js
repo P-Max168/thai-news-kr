@@ -1,48 +1,30 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-08T21:57:21+07:00",
+ "updated_at": "2026-10-08T23:57:45+07:00",
  "items": [
   {
-   "title": "[속보] 외교부 “주 우크라이나 한국 대사 소환 결정”···‘북한군 포로 공개’ 강경 대응",
+   "title": "정부 “주우크라 대사 소환”…‘외교 단절’까지 염두 초강수",
+   "source": "한겨레",
+   "time": "2026-10-08T20:12:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1PZk5ra3NJNzZWQ1Z6enBiREszZEpJYWFGaXV5MDZKZHVSTFJuR0FUU3RfZDM5cGgzS1dXb1lXbjdLTUo3bEczWjhvUTFVcV9ReUZad1ltd0Vjc21CUmUyRngxdTFyTlpyTTl0YW84R04zTU9H?oc=5"
+  },
+  {
+   "title": "극초음속 미사일 최초 시험발사 성공…이 대통령, 직접 참관",
    "source": "경향신문",
-   "time": "2026-10-08T18:20:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1za203QWlaRVdtVS00SGtUNGF5a2YyZjNnY1FUV3Izb2dacjgxREdILXVFUVhSUThGaHA0dmowWFJZc3ROV1BzUk1EaDV2X25oY091YXM5Yi0zQdIBX0FVX3lxTE05d01YTEtMSDJaRG9UZGJmQ2RaQm9aZ2RfaTl3N0R1b1F6MmNNVmIwLTNZNTlMUGNVX2prbGI2aFJfUndMY0hldU43UTVCSkEtNzE5Ym9ya1JVNDJiN2Rn?oc=5"
+   "time": "2026-10-08T20:11:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBLamw1bHFqckRyRUNFMHB5QTcta056VzJzUXVEOHF0N1B5UlF3el9QZWtyWnFFaDJVQkpIX0JPX1I0VlVjOXNQZmhIb1REczhDenM0NUxpVGVOUdIBX0FVX3lxTFBNTG15ZHpkZFhOeXdwMXlsbVRMRUNleGc3T0pQTlhreHlWZXdwanF1VHRxYldiY3VEb0JfQjFwS1R6bFM2bElta3haN1d5UWtZLXQtZGlLazBRbWVEM1ZB?oc=5"
   },
   {
-   "title": "이 대통령, 극초음속 미사일 성공에 “자주국방은 기술로 증명된다”",
-   "source": "한겨레",
-   "time": "2026-10-08T20:08:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBRNHBTMEFsVXRGWmoyNE5aUlp6b0FiTGdqbkRpd0lELWhjOU85azRpT2VZc2daUm85ajRiaVVCMHJCc19fMXd0dFMwV09yMG1XcFZqc2FOTktjMjBmM1JSaGVEMlBlZ0Zsa0RZ?oc=5"
+   "title": "추미애 “김지용 부적격”, 김민석 “절제가 필요해”, 김지용 “공정한 수사”",
+   "source": "경향신문",
+   "time": "2026-10-08T19:58:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5ycTdvMkR0OEtqT1VpMDFkdlpsQjluTGoweURrOU9rRjdTT3g0TFRNeGhjZkw1b3lIeTRDRGkyR3hrejN1T1U4cFhFMmMzbnBTV3gzVlVVaUlwd9IBX0FVX3lxTE03VmQ4TWRKSUpVZTdoZDJSak5WMk5jWDB2b1AzTkxVY2RJMGFReHB2a0NoVVNfLWVXbFE2ZUFZS3ljd0RYU3p3Z0FoRmh5YXVWYTk2aGhVaUJGWFFtOGNF?oc=5"
   },
   {
-   "title": "한동훈 딸 수사 국제공조 요청, 검찰이 불송부…법무차관 \"진상 확인\"",
-   "source": "노컷뉴스",
-   "time": "2026-10-08T12:22:29+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1vWWI5NS1sb3N0dzhuYksyemZqLVdoRG5CM0Eza3IzQ3JKUGt1TEpNVEUxQnE0SmZ6QTgwZWtnTmlkLUZEU0VmVll5V0ZzLVdhUVE?oc=5"
-  },
-  {
-   "title": "경찰은 '혐의없음', 공소청은 '기소'…10대 성폭행 사건 뒤집혔다",
-   "source": "노컷뉴스",
-   "time": "2026-10-08T11:42:29+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBsbldzNl9LTURHc0J6MDRnVm5fS2hQVlFfaEc2ZTRxVEM3M2ZQaEdVZDdKempvTDJ1RVZRRGJoekVWQjRCWlFPN296bU5mdldUa2c?oc=5"
-  },
-  {
-   "title": "박진영, 국감 출석에 '파격 시스루'…재킷 안 상의에 '깜짝'",
-   "source": "한국경제",
-   "time": "2026-10-08T07:04:51+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9yYkY3RkduekxBWVoyMmYtd2lCWW5GSUJ3aVM2WHBmY3JEbzJpak90WnBEalJiTFF5SG1oU3dOUERqZm5UYXFOV19zUzg1dUhLZDZ5RDlyeFh3UQ?oc=5"
-  },
-  {
-   "title": "김지용 중수청장 후보자 “수사 정치화 청산하고 내란 범죄 척결”",
-   "source": "한겨레",
-   "time": "2026-10-08T12:12:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9qTVE2OFdISkNNZ2VFcmQtcDhnNFY0R2xmNmlKMTdiOEkzbDFXUUJwZ1FraHNnTTVjWFIxZ1lKelRFa0hjLXA0by1lRFNSZDREMFBnZUxydWllSjhVc29jeFlCMC1hOGE2aVlYYnloRmhBUQ?oc=5"
-  },
-  {
-   "title": "\"美국방부, 중부사령부에 이란 대규모 군사작전 재개 준비 지시\"",
+   "title": "[날씨] 한글날 일교차 15도‥내륙 지역 가시거리 1km 미만 안개",
    "source": "MBC 뉴스",
-   "time": "2026-10-08T14:45:14+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBoLTNjZUZfR054SDVLNzE5ckRIMUlXT2dpSDhUbThpeUE2ZmhiVDFNY3JqeXdVeEhHZXhzRmk4bjhrQTRndS1tNlcxdmQ0eEc0UmJmcHFVUl9kanB3b2FDVDM4OVhSQ2JCYzd5SzdaZFo2Nktt0gF0QVVfeXFMTldjc3h2QlFYcHc0b0xQdFZzWVhGdGdtX2RfbkQ5VDdaNXNPeFZTdEJrN2NJOThWLXI0MGUxS2NHd1VlTUpvTF9YWG1mQzdJQ0xTSDJLMzJhOGpraU5ZVUtxQ01mdEk5emhNdDV0dlNIcFRNNFQ?oc=5"
+   "time": "2026-10-08T22:00:21+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFAtTmx1RG1aRUR1TWpYTndMN2otNkpRU0ozTV8xOWpMSk9xdGdCclRfZ0xCTkcwMTVRMV9rdFVvX0JyQTFkQmJva0pOVC1ieVB2dHpyT0U4WTlILTBGZnY4c0szQTJFcWRvWm5Vckthd2VtUEdaQzJN0gF3QVVfeXFMTlU0ZXBjVFhvS2N1b2lrMnhqQUVOUWZGaTZpTUx3RjlEdGpseTRENFRFWkphc2tfcTJFTlY0QjBGV3lrSFRKNjJlRmZnVlNNSzI2UUZNUUtfbjRjUDY2Rk1YRGdHV3JNRktaZFJGSnFlZTdFeko3Umc?oc=5"
   },
   {
    "title": "4번째 CPTPP 가입 시도, 또 무산…1년 밀리면 6조 '기회 손실'",
@@ -51,16 +33,34 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9lVVVVVTg4VVpqTVc3TjNLSHE1SXJCZVRLcEJOczZ0MFlHY3UzRVhUYmpmY3lxM0V3MWQybjBQRVI4SXNBSmVPVTNvWWc4dVhxMWNMOGJJVkZOQQ?oc=5"
   },
   {
-   "title": "김여정, 대북 의료장비 지원 방침에 \"또다른 광대극\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-08T11:41:52+07:00",
-   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE83ZTgzWF9CU3BFaVpYMnJ0WUlORGJVU1puQTk4c2VreEhTQ3cxRzRXVHVUa3U4WVFES0l5T29pcGlyaEl6RUgxN1ZZbjNITTZUYUF0Sm05X1ctbGNMNUN3Ull1WVFrb0pYZXp5S2ZwSXd4VTNHZGRMNtIBeEFVX3lxTE9Rc1FFMXZJRU5JckREb1lnM0VfVGVuSmlpcTA5UDVGRW1VQTlFVWZwdHJOQU5HYk5KbS16ZlY4UHBzSkdFMmlfSS1oRTRRUVlDQkRQNWotb1dYOWszdHQzNEdBVjRMckNEQU91MC1CZEQyWHFoa0x4SQ?oc=5"
+   "title": "법원 \"尹·김건희 정치적 공동체…명태균 위해 김영선 공천 관여\"",
+   "source": "연합뉴스",
+   "time": "2026-10-08T04:00:01+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFA5b0I5QmNlUmNzblVwbmdEY210cW5kRUhxV0dqWmNXRDhDTGlHdzRzaTNhMVkxVDF5NTBEd1paT2hFWDV4MHdJRl9rc0YtdTFLa2VsV1ZCUVFjTmPSAWBBVV95cUxPV2xmWTNaSzhsZV9uZlFwbkZuSjVBUnRGc3hIU19hbzN4d3lsdW52T19pWFBCS19rV2Z4Yko2NDBWOGdWOHVHbnBqQ3lrX28tNE9NdWE2UGh5dHRWaHJ1cks?oc=5"
   },
   {
-   "title": "'김창민 감독 폭행 살인' 피고인 2명에 공소청 징역 20·15년 구형",
-   "source": "MBC 뉴스",
-   "time": "2026-10-08T16:18:43+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBaYWVRQWhlcF94WFY3eVZUQnZxTEc5cWxSOElvaEVkRTIzTFh4aVd1LXg0bkdnY1d2dzRCSFd2ZEE2V1pYZkg2SWdMWTF2a3NZZE9BUzZLZFEzUkUzRzBoamQ4Y2pJa2JPU2VkWGttLVE2VDNEYXVF0gF3QVVfeXFMTU1XRGpNU0NtUzFvNnBaamlkTE85MXZhYU9PVzJiXzhDeTI1NUtOemNNQ25PdDZVRFFqMTRsVkZPM3QtODJ5VkZtV0RpTDh5LWZTLTNOeHRQUHRKMFVQaEFQWlJHUnVtNldCNDhMY1RqazFyWFNSVUk?oc=5"
+   "title": "트럼프 \"이란과 생산적 대화 중…중간선거 전 공격 없다\"",
+   "source": "뉴스핌",
+   "time": "2026-10-08T23:32:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9NRk15eUNpQk9iZWhjTWtyY3ZHazU4Qk1MdGVGb0tKcmtDdElNZ1NDUTRyS2RhUmJ5MlB5VkdrSFdLZTVTdzRUSTQ1QVpnOEh1eGRYRF9vVE1IaWZU?oc=5"
+  },
+  {
+   "title": "“텃밭 비상” 트럼프 한달새 3번째 텍사스행… 공화후보 12명은 홈피서 ‘대통령 흔적’ 지워",
+   "source": "동아일보",
+   "time": "2026-10-08T23:40:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1aZ1E3amUtQ0E0TG9vQnJ3WlZpZ2FsSGRUY1FoYjJrdEl4c3Nla01lV3dreXV6MW1NSi1oaFlUc2ZTNnRCTVFzcDNjMXpSVFkyRmI1ellpQTBNelZvbExTcW16aE9ON3MxZlozVUJIV0laNHfSAWZBVV95cUxQQ1k1Qms3N0hkak1RYmFoWXlfaFhKTEQxLUpVb0ZHdEdrZ0RIdk5RUXZ2cnQyRVR3QkRMSHY4bkJ6R3ZER1RSVmQ0b252WTVwdGhvdFR3LWY4TmZUN21faEM1YnhraWc?oc=5"
+  },
+  {
+   "title": "법무차관 “이 대통령 공소 취소 지휘 않겠다”…후속 조처엔 여지 남겨",
+   "source": "한겨레",
+   "time": "2026-10-08T18:03:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1lZk45Y2tIN3lNZndnNzRRSlFwaFl6Y1habzB6YkNqMnlKOGw3YkFZX2NhM2ZVODNBMVQ1VTVPN29BSHJmMkMtS3k4bHRqUFZCRG5OaUlfTTlDTTEwNl9iVUxaTi1MMURpYUlyWF9USUFzZw?oc=5"
+  },
+  {
+   "title": "여야, 기노위 국감서 기상청 질타…\"거제폭우 대응 미흡\"",
+   "source": "연합뉴스TV",
+   "time": "2026-10-08T21:06:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5pYnF1ZWl4NUdlU0IyX1ZPSWNuN2djUkxyRXc1V1BuZ2RIVjVoZVcwc3I1aGVJcWJrM3MtUHNCa2x5aHRlVDRPZGF5dWdpSkRGczZJaVA0dHdfcDJodkphbWVuN241enM?oc=5"
   }
  ]
 };
