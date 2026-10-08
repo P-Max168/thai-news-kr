@@ -1,24 +1,12 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-08T05:53:55+07:00",
+ "updated_at": "2026-10-08T08:01:47+07:00",
  "items": [
   {
-   "title": "누리호 4연속 궤도 진입 성공…“군집위성 수송 능력 확인”",
-   "source": "한겨레",
-   "time": "2026-10-08T00:40:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9udXQ1YmNpaXZ1M0tXSjBUNXRnOTUtY25rWnNkdUs1MkExZFdKeVo3dU1va1NTeFZNZm5ZR2FQaHE1QUhGQ0dRWUhVQ05ldmoxY2JPR3M1UHY3TmJqTzRMWFdJLW83UGlWeUtJQ00zUXlKQQ?oc=5"
-  },
-  {
-   "title": "재제청 거부 조희대, 재제청 요구 청와대…대법관 공백 ‘출구 난망’",
-   "source": "한겨레",
-   "time": "2026-10-08T03:00:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1fWkkzd1pab1FCTlVIVkNjZm10V3d3ZWFJM2NDdTlFU09CU3FPQUhFZVItWmkwWEpxTkw4UmsyRHhqa3hhcUV6TmtOS3hJNGt4MHlWSlFpUmhmR1psVXFNRnMtVVdoQWpPMFlN?oc=5"
-  },
-  {
-   "title": "“패노메논 왜 총선 전에? 대통령 지지율 올리려고?” 따진 국힘 의원에···박진영 “나라 위한 일 아니면 안 한다”",
-   "source": "경향신문",
-   "time": "2026-10-07T14:27:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1lRkRnUUhoa3pkMU1jVnBVVVY4TkhiWnBLWFZxODlGYldLcTV2MzFfSWdMSUZxR0pQRjY3WDNrV2FlX09lb2ZRWjNyY2RjOVMzUDZITUNTSjhhd9IBX0FVX3lxTFBfV3N5RFV4UVdwTG1xd0VQMlo2OEp3RktRWUthLXpoSUhvY05SaVVmUVVmcGtzU0dpWkxyTU1ISnpCcUM0U1hFaXB1T05hVzBXMEJZZTFCYWNjRXM2TFc0?oc=5"
+   "title": "한로로 아니고 ‘한로’…두 계절 오가는 날씨",
+   "source": "KBS 뉴스",
+   "time": "2026-10-08T07:21:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE8tcEZaSE5IMmN1ZU5TaFdueGFtWUs1VWYyb3FVMEE5aDNxbm53Y2dDWXp3MDdCd2xVaGdHNUhVdmpRelF3NERQN25tTWRJVGVBNGd1cURvdUxtR3c?oc=5"
   },
   {
    "title": "[단독] '尹·명태균 무죄' 2심 재판부 \"尹-김건희, 정치적 공동체\"",
@@ -27,16 +15,28 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE81LVo2SlFYUkRsN3dOTmFWZGFwbWgtdWN1SFF5cFptSkl4N0t2ZlVXN1pfREhqRVB2U0w3U3RqRUVQc25OQzBqS0YwVXRrcGpQSVlzS0hEMzZkN1hYREgwTFlSM2lqVWtQcDBsbXNkeWUxZ0phOFdr0gF3QVVfeXFMUGNueDFDRmx6ejhnc1gxeGZybXJqdGU5UHJYdGxGNVZEOEJ5TTJZSTFKWTNlZWxnZmhkeHNuWE9sN3dPa1pZcy0zMkFkeVhDb2t3dnhUei1rSjdCX1k1V2Q3bVE1RGhla2pReHpxUzZNcjJpUXJjX0U?oc=5"
   },
   {
-   "title": "우크라 \"韓, 러시아에 경유 수출\"...靑 \"사실과 다르고 부적절한 주장\"",
-   "source": "조선일보",
-   "time": "2026-10-07T17:49:25+07:00",
-   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOSXNWdkdKX1EtbXNCY2x6RlI0UF85anhDS1l0RGdyT08ySjVURThyeDZ0b0lOWVVBQkE3UGpPcUZrWU8zVlhTVUlRVUlUWWYtRTBIWDk1aTJuRDkwTWdwR192WklNeDRBX2JJdjZGUHBacnZueUNsX0N5Tkt2TTFmVVcxT1NYUnhsSTlJUmdxSEU?oc=5"
+   "title": "‘청와대 재제청 요구→조희대 거부’ 무한 반복…대법관 공백 ‘출구 난망’",
+   "source": "한겨레",
+   "time": "2026-10-08T04:42:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1fWkkzd1pab1FCTlVIVkNjZm10V3d3ZWFJM2NDdTlFU09CU3FPQUhFZVItWmkwWEpxTkw4UmsyRHhqa3hhcUV6TmtOS3hJNGt4MHlWSlFpUmhmR1psVXFNRnMtVVdoQWpPMFlN?oc=5"
   },
   {
-   "title": "노벨화학상 받은 日 소아이... \"장보다 소식 들었다, 가장 짜릿한 날\"",
-   "source": "조선일보",
-   "time": "2026-10-07T21:43:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQaU1NVkN4ZTFaZktJZlRCUG5rMjRkRWliTUd5Mk5VY0hJc0Q3UkFTcmYxSVc5OTdrZUdFWlRiTm41UjFvQWFnbDVVOVhlOUVjWlpwRF9WT1pQRWVnSkFCeml4R01pU0xlWVNnRERUQ2l4M1BfbUFKQ01tZWNNeFBNN0t1U3lhanFDQ181dHM0d2tYa3FKTjgzWGVBZmdPdw?oc=5"
+   "title": "\"JYP에 남는 것 없다\"…박진영 해명에도 남은 패노메논 과제",
+   "source": "한국경제",
+   "time": "2026-10-07T13:44:32+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9BVTZ4enlQR2tmd3QtczgtMGFURHh5bE9jLXJRS1ROMFA5czhGNU5falNRajdlMmRQYzZScDZCV3owSHV6Y0U3LTlycm5sbFE3a3AzUlRoaFBqQQ?oc=5"
+  },
+  {
+   "title": "청와대, ‘러시아 석유 공급’ 우크라 주장에 “사실과 다르고 부적절”",
+   "source": "한겨레",
+   "time": "2026-10-07T20:15:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE16LVkxdzRvWS1FRmlMTVR0NTJwNUFhS2UtUGU0VURmYTZWdm5EbnNRNl9xamxxNG53VUZTWDR0akJrZTRLeVBQRk85Y2ZkbWNyS29jck5zVGwtbE5EYjVvUG40cUJRQW5zQ1o4?oc=5"
+  },
+  {
+   "title": "李, 밤 12시-새벽 1시20분에도 SNS 글… 이틀에 한번꼴 한밤 올려",
+   "source": "동아일보",
+   "time": "2026-10-08T02:30:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5TdFI1UElNMWo4RC1XOEpYckZNQUFGNE1uQXM4NVlkdlZZUi01WHpZTEpwY3BFbHlSS3FJRnlCNzhrS2VoWFdqX3dHQ3h3T2Z6REtSS0RxM3QxbkRlZFFndTVQYWZHU0tNNEhOZC1lcVRBMUVJMnln0gFmQVVfeXFMT1lnQzNrSENXWGgxNjVldE9nb1dhTk53WkxJRWR6dDR1Q0IwRWlTcVkxZTd0SHJTOXcwWXlfS3FjeWwydkpKM3Jma21TcXE0MlFhTE5XMFkyeXpJckhEb3ZLQ0tpV0hB?oc=5"
   },
   {
    "title": "박정희 고향 구미 극장서 영화 '암살자(들)' 상영 중단",
@@ -45,22 +45,22 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5FdU9tS3QycmtueUQ2MHo2NjU2NEdjUGl2MUhzVkdSNDZZbWxWYTRKMlRWOHE2NlZwdmxFallxSUEtSXBPaUNzMEhFbklLS2VDNWc?oc=5"
   },
   {
-   "title": "여의도순복음교회 \"성도 85만명 이름·생년월일 등 유출 의심\"",
-   "source": "연합뉴스",
-   "time": "2026-10-07T07:58:55+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9tdTdvc040VFRmTmp3bHNfejJWLTRrdG5rd0NCcWlEUE11VzZlVy1ib0hRUC1EZ1lNbkdMcW1OUkdNSjV6SEYxXzlqT3VkdkdiSWJfdVNYdUdmUGvSAWBBVV95cUxOX1ZkYlJKcjVMTTl0UlRFcGszYUJrLVdoRWhOZWRGYjlfRnZYS2dIdjBDU1VINW90a0dPd2RkV1hvcGlNZllBcTVGbFFLV3lPYm5wekVrTGtsTXFUclg2UXc?oc=5"
-  },
-  {
-   "title": "'허위 업무추진비' 왜? 조희대 \"못 먹어본 음식 먹고 싶다는 구성원 소망\" 때문",
-   "source": "뉴스타파",
-   "time": "2026-10-06T19:30:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTFBSUGw0bW02b0FqUnh3LVhiVi1HYmp0NFRkSE1hanNpcHROMlRZZVFtZllHS1Vhcy1GUkEtR2RjVkFhbHFpS3J5YzZ3?oc=5"
-  },
-  {
    "title": "美격전지 중간선거 사전투표 돌입… 트럼프도 독려 나서",
    "source": "동아일보",
    "time": "2026-10-08T02:30:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBaLW5VX2hDQlJZSlQ4Q010VmdnVnRYTy1BSENuTXV3eHNVT0t1SlBEYmlPbEtDaWRJeTRyNlNHZEFEeHd2NmF4NjA3WVNDQ1R1UHNvOEhEaVZ1NXBjbnQxVW50SkVuejExblRXWDByY0dYV1HSAWZBVV95cUxQaE8wVlFsYXhVZXpIWWZULW9xZUR6OXJPSjdJTTloQndPdHJ1ejUzQzR2c0VtMlNXWXVfNjVpdHEwR052b3VGTHRBV0R1MTBMNWJpanJyT1dCTUxJZkx6SmsxTjV5SWc?oc=5"
+  },
+  {
+   "title": "국정감사 3일차…레버리지 ETF·미래대응기금·DMZ 지뢰 등 쟁점",
+   "source": "KBS 뉴스",
+   "time": "2026-10-08T04:03:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE4tUERZRlo2X09pQzdkRWhDbkI2SkpWZGhvUW1mRkdzNUNGc2l1RVlnSkVLQm1GanFWNk1YTUtZMmdRcFlURmFvMFhPLTVoc3RWb2kyY2ticm1QOGM?oc=5"
+  },
+  {
+   "title": "러시아, 푸틴 생일에 우크라 전역 공습…어린이 5명 등 최소 25명 사망",
+   "source": "한겨레",
+   "time": "2026-10-08T05:59:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOR2VNN2RqTi12dHFlQkNRRlV2b2YzSlB4bkNvd1QzZ2Y0QjBDaUFXVHl6N2o4YUZ0cXdnWkZhNnZWSnBHbTVOSVphaVBuNWhsR1FiNWpSQXIxVDFySE91VjUxWnZlYWtkbE94Q2VySXdTb1BtOWRfNTBWZlVSRDliUVBn?oc=5"
   }
  ]
 };
