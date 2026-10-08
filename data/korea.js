@@ -1,7 +1,25 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-08T11:55:30+07:00",
+ "updated_at": "2026-10-08T14:01:41+07:00",
  "items": [
+  {
+   "title": "김여정 “한국 의료지원 구상, 또 광대극…관계 개선하려면 존중 보여야”",
+   "source": "한겨레",
+   "time": "2026-10-08T12:14:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1vMV9HNmNad1ZVSkY1VEhpajZObFhMV0J3MUU2cElqOUV4dFU3N3JvQ0VLQUtJTElsWXJKTGlVRHE2c21DZVU1Y3dKSzV2dzhiZ3RZSWNnb0NCM2NkdkUzdnVrRmdKNm1RUW5PcFdYZFRuYWxh?oc=5"
+  },
+  {
+   "title": "‘국감장 시스루’ 박진영에…“솔직히 말하겠단 의지가 패션으로”",
+   "source": "한겨레",
+   "time": "2026-10-08T09:36:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFAtU3JCQ2pNOWF1S3ZhNm42SjdzRnRGbjNvSXR0T0VVb1lMbHFlc2ZXQUV6ZUtpOUVxRW43VnZJYnlidXpTRTRCNDhRMXVrdUZNUERZVGZfR3E2SjJxMVh4YUxZR0hkUlY1WlVEdXJGaFRueGRF?oc=5"
+  },
+  {
+   "title": "군 \"北추가도발 억제 대비태세 강화…DMZ 작전수행체계 재정비\"",
+   "source": "연합뉴스TV",
+   "time": "2026-10-08T09:34:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5sUUtmcEhPSVlOTkg4aE53eUhmWlVvUGVJaGpiem5LeDhYUzBsZUpWUEpSTFlSRjZqYVdHN1dxRGMzSUFlRjdIeDY2RjNoLWxlSlQ4cF9LUmtHRHFvTjJzendMYXY4Rkk?oc=5"
+  },
   {
    "title": "[속보]정부, 농민들 반발에 농지조사 큰 폭 후퇴···관행적 임대·휴경, 농지은행 안 맡겨도 처분 안 한다",
    "source": "경향신문",
@@ -9,58 +27,40 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE52OG5TMk13bEpfQ0dzRVNJempPZlJIMDkzOHNIaFh3TGFGQ19VR1o5Q051Y29IU0NKTnYzNjBhajRKT2tobENyVENOYUFDVmtLQUh6TEN4elU1UdIBX0FVX3lxTE9MVlc5Y1huY3FBaWpFcTg2TU1OMXE2cVhhcmh0RUZpdXl6LWFCYkRaX2hoSlBWM0p2czlOWUpLTDQ5WXhoWmh1a3B0VW5qQUxaZ0s4czRUOGpFUzA5eko4?oc=5"
   },
   {
-   "title": "국감장에 ‘시스루’ 입고 온 박진영에 “파격” vs “직분과 안 맞아”···국회서 이색 패션으로 눈길 끈 사람들",
+   "title": "조국, ‘한동훈 딸 수사’ 검찰 중단 보도에 “이래놓고 온 가족 베었다”",
+   "source": "주간경향",
+   "time": "2026-10-08T13:10:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBNUE5ibzBKOUNaMkZlWWNaOHBYRHJya1lUd2VzV2ExLUhBNWxRdXRhWHBtcmRRX3Q0R3VtSm1teVFIaW9KV2gzeVBRNEI4R0FlNVl6RnIzeXc3cW51dHc?oc=5"
+  },
+  {
+   "title": "정부, ‘대러 석유제품 수출’ 우크라 주장 반박…“전면 불허 중”",
+   "source": "한겨레",
+   "time": "2026-10-08T10:29:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBrbFhFZ0ZCc01ZcUI0alVYdUZvcHk0YWtDblMzYXI3OGhWLURtalpLWVRqUXFrVXh1Xy1uRXk0ejF6NlhFV2RqQWNvUEJwWUFERWNWQkRTSzA3anNWYWlUQVRlUW1jNkk3RjZXamR1bV9zOW04?oc=5"
+  },
+  {
+   "title": "장동혁 \"민주당, 조희대 상대로 선서 강요·감금‥의회 내란\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-08T08:09:15+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE0yLTdGbDIwTFhFNlVueVBHRnpVYVVLMHhpTVRwc010Q0l5UkhyZzAwMXF3VmZlajdXVlR5d3hPVE5xYnlMdTFBT2JZSTRSNElCcC0zc2VMMzIxbmtIbjFNNlRHdzBOREh1OE9la1Y0cFIyNDhZM2R2YtIBeEFVX3lxTE9za2ViTk9SblZjblIzamgzU2pOZnUyaW1sZVVyQllXYnhEUlVzU2QxSURtNUpYcmlNdHRKdXlzLTJlelJhZ1ExUDBWcHd1d254Q1V3NHBkRHJBcnpHU3Z5VEJzaHlNR2psUnJVcEJkOHVtNmhHb2VQag?oc=5"
+  },
+  {
+   "title": "'내란 가담' 징역 12년 김현태, 법원에 보석 청구‥위헌심판도 요청",
+   "source": "MBC 뉴스",
+   "time": "2026-10-08T11:17:33+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5SMTBEZXNxLTJoaHozNUFUd2ZNT0JsZ19ZYzJOT21Xbjd1N2tZaGZ5dkxQN2hrOGxNTVF5X2Z3LW1FU1N6MHMwVXlUVzZiOFNQMDBnOGRWZWc5ekpkbnVjZy1DMV9ZaC03ajRPUTNpME90aGFQbXpZ0gF3QVVfeXFMTVFSOFBBT3FyTGQ3el9STkxxX21XZl9pU0hhOWtzcXRZeXMtNGE5cGI1U0FhQjBSTjVGTHBXTEtQRGRXSVZ6bV96NWFkUV9fTU50RzV0VkpXQjZmaVI5dWFmcjhPSGZiMWE5WnBaNmRBOTdxUjAzNW8?oc=5"
+  },
+  {
+   "title": "주점 10대 알바생 목숨 끊게 한 성폭행 사건···공소청, 경찰의 ‘무혐의’ 뒤집고 업주 기소",
    "source": "경향신문",
-   "time": "2026-10-08T08:02:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1mUUg4ZWVIVFE0OFI2ejVwYy1LTFNsWENGY2s3SGlwNG5YcFZRS0g1VUxJZjRiaTJMOGQ1M21GaXJZV0NNOXZSUnlFeDY4NTJFN2N3NXJweE1mQdIBX0FVX3lxTFAtc01TaUVCY3EtbzFuSVBWdkg3dWlXLVNoWUVWNHRZQ2hUY3BOcTR5RDVWaWVNY1ZqdzZIamZEcXlCNl9yTV9PVTJ6LXo0ZmRPRmh6a1QzUDBEVnRkMk9V?oc=5"
+   "time": "2026-10-08T09:19:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFAwSDNuUlg1NTdidVdWVEdDbVNDbm5DVVZqS2VKRHRlTGljcDU4YWlFTjZRX2RyUkVHdEU2cUdqb2NlRzFJTlZ5VDBrb01WcmdlVWlzVThaVTUxZw?oc=5"
   },
   {
-   "title": "불빛 때문에 상처 부캉이…’랜턴 빌런’ 쫓는 자경단 등장",
-   "source": "연합뉴스TV",
-   "time": "2026-10-08T08:30:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9ieUVxa0ZfYU9uSjZDdjhHS2Y5ZmoweWY0amhWTzdzOHlpMHpJOWIydUVubjRIbHlnclhYT0FaSzhoRVJWMVgxRjBfUVI2RVh3RFRabFZFTEV3d21hUGNGRTlzbkg3UDA?oc=5"
-  },
-  {
-   "title": "공소청, '알바생 성폭행' 안산 주점 사장 기소‥경찰 판단 뒤집어",
+   "title": "박홍근 \"미래대응기금 '쌈짓돈' 주장은 정치 공세‥미래 살리는 기금이라고 생각\"",
    "source": "MBC 뉴스",
-   "time": "2026-10-08T09:27:53+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9Qd3NZU2RMWXdZbkNkajhkM2ZPNXllcnJOWl9nTWZiNUlBNi0xSWZnSEZjR2VfSm14SG1TTjFLZ1BnLUlWWWdWR3VlYk5FT1hma0dFWFNscTNmdzFjczYtc1RIWEtSVnlXbmtoQ2xGblJWam9yV2xv0gF3QVVfeXFMUHpHVXVLUTYzcHpCOUNGd2VhUlF0US1MRzRmZDFhbzVQYllIcGM2ZmNyUldTb3hHOWlKNVlRVHJ1Uk1XRng0WXRtZ3BrejZPOHVaNjJOR041MkNydTloQXplX0RSaC1aSzJVNmlpMHlPSi1ENDlRQ2c?oc=5"
-  },
-  {
-   "title": "윤석열 ‘명태균 무상 여론조사’ 2심서 무죄…재판부 같은 오세훈 선고 촉각",
-   "source": "한겨레",
-   "time": "2026-10-07T22:53:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBSNmVNcUhfdUpyRURCbXk3MWkxUXBvaDVBNE13eVV0cHQxRlFuN2ZVejVKdUJWbWkwUG40REd5ZXZNMndBaUQ2ajVDdHMtSkJ5MGJ4MWllU1NhSXhoNnpQRzlqSl8zYWFZajdXMjhqOGR3QQ?oc=5"
-  },
-  {
-   "title": "[속보] 김여정 “의료장비지원은 또 다른 광대극…한국과 무엇 주고받을 일 없어”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-08T11:01:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE04M0N6ZVptNzdfcW9uc0VPWnUzbWFUVjk5ZnRHWF9BRFU5clRhT3RxZGFINzgzVVVzdkxnSmREX21lQm5jQ21GVnJIbUxUSkhDOTl4eExTSkY5Mkk?oc=5"
-  },
-  {
-   "title": "이 대통령, 이집트 대통령에 자전거 선물…할랄 갈비구이도",
-   "source": "한겨레",
-   "time": "2026-10-08T08:07:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5VVUFTdkJPUkVaSzVibGJGUXNIT1NZeTF3d2FYMzFOTVBPRWx5Z0JwV0YzUWxLQ3JNTW85RmJCXzRSWUE0ZS1ERDNyZlpGR0RYU0NXZDhwcnlVX1NBRDFueUZUOVJZN1dNTUE0?oc=5"
-  },
-  {
-   "title": "‘청와대 재제청 요구→조희대 거부’ 무한 반복…대법관 공백 ‘출구 난망’",
-   "source": "한겨레",
-   "time": "2026-10-08T04:42:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1fWkkzd1pab1FCTlVIVkNjZm10V3d3ZWFJM2NDdTlFU09CU3FPQUhFZVItWmkwWEpxTkw4UmsyRHhqa3hhcUV6TmtOS3hJNGt4MHlWSlFpUmhmR1psVXFNRnMtVVdoQWpPMFlN?oc=5"
-  },
-  {
-   "title": "푸틴 생일 맞은 러시아, 우크라 공습‥어린이 5명 포함 최소 25명 사망",
-   "source": "MBC 뉴스",
-   "time": "2026-10-08T07:57:04+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1RNW5JYm1YNWYydVFFaWJOVVgxeF91cXNBTGNDOXg3TmlPOVMtUG84TzNYc1FrczVIQngyY1ZERnJ4YUY0eW9RalRlazV4aVVMSnlPTWcyWnM1YjFUS3AtaUt0VTAyY2F0OUdWU3hwX29CMzdv0gF0QVVfeXFMTjlGTEdGc20xcmg3RGdEeE45RnR4Y2x6dHJleDFmb0RuNUZxVmpIcGl0ZUlSaTRvQmVCZFJjd0RrdG1xcVBVaGNLUTViVG5jQldHaWdpMW5SdTQzMEpia1VPSDl6TzdNbUNsQjB2X05EOExuNFQ?oc=5"
-  },
-  {
-   "title": "산업부, CPTPP 관련 서비스·지식재산권 업계 의견 수렴",
-   "source": "KBS 뉴스",
-   "time": "2026-10-08T08:49:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE92SlBJZGMtWkNTZHMtNTZQaTl5REJ3Sy1Fa1VDMjk2VXZLWm5VYkRrNEpyYXM2NnVwRVVPZ2RXU2NCVzJuQnRxdDVva0ZHTTRTUEtQSWg0SkFWazQ?oc=5"
+   "time": "2026-10-08T11:29:04+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9rSUVHVWsxb0xpR0FUVXQ4THc1U2pXZ1VEM2lIbVU5M1VjdGFzNVJKSm54Rk5wVmQ5TjJNcWtDSW9pbzdFZVA2SldIVXk5Tl94OF9ZT0U2bVlQX1ZsSmlDdFN1SEZUak90Tk8tTW5ZSmlSamxB0gF0QVVfeXFMT1B1ME1FUEQ0UDREUjlseVh0TmQtbWpYRGFVQ3Y3QW9iVWFrbG0xbW5PbmVNLTRUR2duWFFkcUxYVEwwTWR5NkxialpWdkJaVmhuVE45Sy1jUnIxYWxRRW5Del8zSFVWcEdONktkRWlKbmh6WWg?oc=5"
   }
  ]
 };
