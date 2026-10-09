@@ -1,30 +1,36 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-09T17:55:35+07:00",
+ "updated_at": "2026-10-09T20:00:29+07:00",
  "items": [
   {
-   "title": "이 대통령 “능력 안되면서 큰자리 요구, 개혁 명분으로 내부 공격”…여권 강경파 작심 비판",
-   "source": "경향신문",
-   "time": "2026-10-09T11:16:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5RWlgtakxsZzNMYl93QU1fczlJeFdEZllEbkhkQUFSNjk3OFlhemkzU2pwM0VtNVZ4MXZ0dGpVc3Ywd3lYRnNMQTRtLTVwdzVEVU03Tk9qNXJhZ9IBX0FVX3lxTE94VEtxVjlFaEZXN0JOVHZENDFhVXhiMzVkcXlmSmp4dmhTZlBibm16M1Jwb1AxZUdrY1RqbFo5WUZPcVA2RjRYUGRMdk11NndVX3pzZmszNHRLNGZ2QnlN?oc=5"
-  },
-  {
-   "title": "北 지뢰지대 이어 철책도 군사분계선 이남 설치 정황",
-   "source": "MBC 뉴스",
-   "time": "2026-10-09T10:35:28+07:00",
-   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1Nb0x5V2pCc1pUamJfbUVoTjZHNjlBbWt3MHgwb0QwaHliRlA2MDBIRTVVUXZJYXFxNExPUVpwV1ZCbTdoUUV0NDI4MFpOZzlMN2xjUVB1N0VZaDB0WDB3b0hpNEw3Y1NtQlRrZXpQdmQtNGpnRTROV9IBeEFVX3lxTE5mU2dUS3RfWU9pc3lUWVk2Qy1pSjJURlBfLU0wM3FJRkU3eFdPUUdOQy1YcHZZaF93eThibTh6d1NZN1ZERndrV0ZOcU5GazdmNDMyYTlwellNNFpBRDlOTUhwbWUtbzZQSHFlelZxdk9hTHp3OTVuRA?oc=5"
-  },
-  {
-   "title": "나경원, 젤렌스키에 서한…“북한군 포로 한국행 허용에 감사”",
+   "title": "한국, 유엔서 북한에 공개 사과 요구…“DMZ 지뢰 매설은 정전협정 위반”",
    "source": "한겨레",
-   "time": "2026-10-09T13:57:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1XRHlDWFBMNDhkbnRUNXZDN0lFeUtOMDl1cUxnT3F2NEt4aEhEbzhJeUNmdVgzZHNhbkU5WDVEVkJmOS1TS1hZQ2huZnBCQU1wYm5uRG9FWVJ2aUVyTEtpUzJfNzBDcWdaYjRyVUxLY3pPUmJL?oc=5"
+   "time": "2026-10-09T15:28:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOeEVIYnk3ZEZnOGZLaFdKWm9oZ1JKaGl6cmtucVh2YnhxcV9NdjN3M0ZZZm91d0hDOWw0aEFfMkxUUk1sSkM0QXVaRUxaZmtadGdqdjduZDlweTJERXJtdEhaLVo0QTZKZUN6TFpNMWtFcGZZTGZqeEo3eHBSNjM3Rk5n?oc=5"
   },
   {
-   "title": "추미애 \"김지용, 한동훈 휴대전화 포렌식 막아…결정적 증거 은폐\"",
+   "title": "국민의힘, 주우크라 한국대사 소환에 “초강경 조치는 북한에 해야”",
+   "source": "KBS 뉴스",
+   "time": "2026-10-09T16:05:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE8wRTEyY0tkc1draFBoaTZPTC01dGRnWkhfd2RMWl9VaEYweGVwbF9qdXNoRkU1aTZCY0RIaUNpd05peFNVRHhUVjA2SEdBeUZuX1BnSXo3ZkpVNFk?oc=5"
+  },
+  {
+   "title": "정청래, '美 비자 보류' 공방 자제 촉구‥\"국익에 도움 안 돼\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-09T13:16:16+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5xSkNXRlIwVmlseWp3YzJXX3pKOVF4LURSWjNEV19pVFZpY0VSMEEwT0Y1by1FQ1ZrekIxZ3ZXQ2hHMEttX3o1ZnpvOEgxUV9mcGEtT19TYXR1ZFFJd1ppb1JEM3RQYk9HRl9rRGVPUkJyMF9lcVFvMtIBeEFVX3lxTE9HdDNrSFZqUjduX2dXNXJ4dFpqVmpwTVE1eENFM3NQSVdKYV8zZjA0VFFrc0tlSWpfeXZ0Z0FlMHZ0SDFVUWx6ZFdNNnpxY09BZWMxYmc3d1JFcU5EU0xTOF9sRnF5eTFNUWk1WWZZZW1hRXFlMkg4cg?oc=5"
+  },
+  {
+   "title": "’나주 부부 살해’ 50대 구속…법원 “도주 우려“",
    "source": "연합뉴스TV",
-   "time": "2026-10-09T09:14:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9xaUNMM29scnJZSUJ1LTZjWm5ZVS1aTUhQQmlva2lpeU83ZzFfNkFGLU5lV2JtZ29qRExSVmRXaEJtektXakhnemZiTHRYQ3JnTXBWaWxhU0oxc196Z1NUY19YVXJRRFk?oc=5"
+   "time": "2026-10-09T16:41:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE84Z3ZYSmg3VHlXOXJyRUpCWHBpSVVrZXliWkVaVng3ZGQxb1IwOEhuOW5hU3RwWTlnejlhVHBlSzRyMGlzM0pRM1FUNVNMSmYwS1hzVFJXMkctcXNZNlhsejgtQ1dObHM?oc=5"
+  },
+  {
+   "title": "이 대통령, 여권 강경파 겨냥 “능력 안 되면서…개혁 내세워 내부 공격”",
+   "source": "한겨레",
+   "time": "2026-10-09T18:28:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1zeFZ3bmRfOXktZGc3S3d6TlhnSVBDandWa0lMTTNPT2RpSUhCWGZBREo1SVMwdnRQdWJGMVd5amVQUWlRbzlOZ3M1QXRGT3VMaDZQb1BlYUJNV0tQMWNMWmtNNjgxc0FlQXc0?oc=5"
   },
   {
    "title": "부산 상어 '부캉이' 한글날 연휴 첫날도 인기몰이…22일째 체류",
@@ -33,22 +39,16 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBHX3ByNUlUdkZDYk5yeGgtTlNXZThRUUx0S3pHZlJLWGxIejg2Sm1meEZtWUh0eElVVGY3ME1oV0UyaEV1YVhiaXZ3alhPSmFUQU8yZTZBNkFQcGN1VGYzQ9IBYEFVX3lxTFBHX3ByNUlUdkZDYk5yeGgtTlNXZThRUUx0S3pHZlJLWGxIejg2Sm1meEZtWUh0eElVVGY3ME1oV0UyaEV1YVhiaXZ3alhPSmFUQU8yZTZBNkFQcGN1VGYzQw?oc=5"
   },
   {
-   "title": "김태규 “부엉이바위 긁혔냐” 질의 방해…손솔 “남탓 전에 사과부터”",
-   "source": "한겨레",
-   "time": "2026-10-09T14:48:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBTdFlMcURualE3d2pjTmZpS3JMWTRuQ2ZlXzh4MWJCQ3ZPTnQ2LWVCRmlBQ1VKRkJUMG5sdklySVp6d0ZCMGFCbXktX3dtRTlod1Rid2NuQXNoUVJTa1NSOW52VXoxYnJBZDgyeEJyR1hfMUM0?oc=5"
-  },
-  {
-   "title": "정청래 美 비자 보류에…野 \"한미관계 치명적 파탄\"",
+   "title": "미군 12명 살해한 과격 무슬림 前장교... 美국방부 \"총살형 생중계\"",
    "source": "조선일보",
-   "time": "2026-10-09T09:51:39+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxON3JKUFdtb3lnUktORzdCdHk1NHcxV0pNd29WZmN4VnVhVXlYVkhWUEtVU3ZXYjlCSlJUZXJ6SWRWWWQxSWdXQ2JRTy03QnhsM3hEZDNvTnhCam9CS3VyV1dUX1dYc1c0SEpJdXJnaDQtN2dCaWR0SmlUWjg4emRGVl9JbFZzZw?oc=5"
+   "time": "2026-10-09T15:40:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPbXFPcTRPbDVMUEh0aGV4aXB1cUp0SDFPSXhJS0RGQ2VWbDZNX1Q4Mi1QV2lEZnZueFRpb2RMdjBjMzJWUkVydjkzbEhpTnJ2ZnR5NkZrM2VxRk1OSXpFS1FiZ185N3VENnJMc2xWMjRDSGNtTFZrNkxZcEtGdGF2UWVIWS01RU9mSUxpWno0T19URHhQZkpEZmNGalJMQQ?oc=5"
   },
   {
-   "title": "“미 국방부, 이란 ’3일 집중공격’ 계획 준비…트럼프 제동“",
-   "source": "연합뉴스TV",
-   "time": "2026-10-09T14:08:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9VOFF0U2RGUE5DZzBfY3ZldlMwUkJSUHVwWVA5NEhEY051cldtWFR4OFVHOFVlUF9EZDUyclVrQ2NFeW5XQ1ZkTno3UE0zQnBqLTFxYkNoQl9Lc0JJUmZkQTJsV3VtSlk?oc=5"
+   "title": "뉴욕증시 프리뷰, 미 지수 선물 상승…트럼프 이란 공격 유예에 유가 하락, 기술주 반등",
+   "source": "뉴스핌",
+   "time": "2026-10-09T19:16:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5BcUQ5Ymo5a0I4aHR3Tl95amRjMmVfSUhyMjRVdVdxbWtmcWp2c3VSdVVkWF9VaF9LUlhBeUJGeXdxVTEtb21XZnZQbjh2MVRvOW9aaHdJQnNCTXBf?oc=5"
   },
   {
    "title": "김여정 “한국 쓰레기들…” 14시간 만에 또 의료장비 지원 비난 입장문",
@@ -57,10 +57,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1HVlAwNURfTUVKaHZMYlV3S2NISTFXZzhYM3I5ZHYzQzk1Q1ZSM3dHbEZQQ1MwbnNfRGgzOU9xNlJjMjlkRXBqN0pOLWM1cXZSVTUyak9jYkJWZHBOZWh5cWc2YlJoZ1hhTnJOMnJQb04wWGRz?oc=5"
   },
   {
-   "title": "교원 3단체, 대규모 집회‥\"무고성 아동학대 신고 방지법 제정하라\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-09T13:30:54+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBsbkVlMkZCVktsUnBuRTRtZlVINTFoalNEd3NrRGFQMjVENG9yTkdxYU1DaHRYMVBNN0ZiRUdXWkxVRFhxYTZDWEsxenRRQTY4UGc4TUlvWUpDZkdhTkhodHBySUVSNVJhOEpobXBiWGY3bUxveEJJ0gF3QVVfeXFMTWlSWGxXYnhrRi1yZVZrT1NLTFVNZTlpaXNUZzRBNEo1TEg0Tm45ZVNSbW42OHVGMGs0R001Z2lhU0NNNERZVHl2dk1fcnQ2MjVDSlJMaWkzY2ppUlI0WHNBd1BUbkFkelNQZHI2NGVNNXFoTHdrSkk?oc=5"
+   "title": "화창한 한글날 연휴…내일 제주부터 비",
+   "source": "KBS 뉴스",
+   "time": "2026-10-09T12:12:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFA4RURCRmJ1aVRldktfQnRORl9jV182bXVscWVaX1UzeEpKVTZUaVMyUDM3NG1zd2VncTFXS3RUSDZYaU9oVGUwQ3NJSGRsS01nY2tWYnhFbHMxeDA?oc=5"
   }
  ]
 };
