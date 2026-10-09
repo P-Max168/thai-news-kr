@@ -1,7 +1,13 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-10T01:56:52+07:00",
+ "updated_at": "2026-10-10T03:55:31+07:00",
  "items": [
+  {
+   "title": "“지뢰 사과하라” 면전에서 요구하자, 北대사 “정동영도…”",
+   "source": "동아일보",
+   "time": "2026-10-09T17:49:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5yZEZTcDc1RG42Y3BkLThiVDdnWkx6UU1QVFRiMEx0MGhGVXFyeWZWZ3BNb3FwVDBLUk1qRUlnZndEckJpMmVOWTM2NVBPM3RiU3pldVcwb2Y3NUU3VTRvengwV2IzRm9aa1V3YVBOQklLTy16dDBz0gFmQVVfeXFMT1pyU3VIVzFHLUdheGtpdUVYNVZydGdnazBrY19CVTVJbE9xX2Q0Q0V3YTJ2VWVFNDJsTjI2bDdRUnpMY2d3MFRTSjJ0UGdRMWVzZmhaYlp2QzFPalNaU1hod1NoOUxn?oc=5"
+  },
   {
    "title": "‘국정원 불신 보도’ ‘정청래 비자 발급 보류’ 한·미동맹 이상 기류에…청와대, 대응 수위 고심",
    "source": "경향신문",
@@ -9,10 +15,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBLRFBoRi1VNHpSRTh6Zi1MV3RHMnZHUkVlWHEzUUVIcXJvdmZBRkFrSHF3OGwwWkZaRTU2QXFfX2dZM1FyUkVqRnA0d0xfN0dVWVd4T3VXQXpOQdIBX0FVX3lxTE1nRGg2bzd4NGptdFc0Q2dGWGc5cnpuUFNvdGY1OTVlVEtEM1hoTTVpVjhHYjB4MHlLS21QN0ozZ3dLTEptMzE5S054OERzbGhMZlVDRE82dFdBZ2VzM1VB?oc=5"
   },
   {
-   "title": "“지뢰 사과하라” 면전에서 요구하자, 北대사 “정동영도…”",
-   "source": "동아일보",
-   "time": "2026-10-09T17:49:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5yZEZTcDc1RG42Y3BkLThiVDdnWkx6UU1QVFRiMEx0MGhGVXFyeWZWZ3BNb3FwVDBLUk1qRUlnZndEckJpMmVOWTM2NVBPM3RiU3pldVcwb2Y3NUU3VTRvengwV2IzRm9aa1V3YVBOQklLTy16dDBz0gFmQVVfeXFMT1pyU3VIVzFHLUdheGtpdUVYNVZydGdnazBrY19CVTVJbE9xX2Q0Q0V3YTJ2VWVFNDJsTjI2bDdRUnpMY2d3MFRTSjJ0UGdRMWVzZmhaYlp2QzFPalNaU1hod1NoOUxn?oc=5"
+   "title": "흐린 가을 주말…제주와 남부에는 비",
+   "source": "KBS 뉴스",
+   "time": "2026-10-10T03:02:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1XUjByc3lwYWJQNFhjSmQwWjIwRnhIbU5rNXJKWDFIcWV3dUdsMm5pb2lzSS1ibWxsdndON25oaUlfWkwwRVlhT1pVcUhCeHlSdnlsckw5TWtPWHc?oc=5"
   },
   {
    "title": "“북한 복합타격 훈련…드론 통합은 우크라이나 전훈일 수 있어”",
@@ -21,33 +27,27 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQOEVhdlBWREJENlh0bV8zcHYyTDN1T1NjMHVuU19EdFFOWF94RzAtdkdISjd6MUltVzIwN0k3UnNKYzh3c2VzbVhncGltdTRkYWdMcC1wUHlUc1JxRzZEVTd6UXVBbHphTDctUG81U3BYbURHamxLTWNwbUJDaDF3cjZZc9IBhgFBVV95cUxNcktCWkhjNzFDeDhGMjBhVjRzRXMzRTN1RC02c1gtVnZXbGlINmtGRE9kMzNkODNOTHctZDNmNU5uN1ZuTlRUZ2ZMVkdtN05uUjFpam90cVNmT0ZhSUc5cXNsbkF1NnVSYkY1QlpfbXUwSnE3ZDE5SnBEeU5BaEtrT2VlQzBXZw?oc=5"
   },
   {
-   "title": "[날씨] 일교차 큰 가을 날씨‥남부·제주 흐리고 비",
-   "source": "MBC 뉴스",
-   "time": "2026-10-09T22:02:22+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBWbXB2Z09ZVWxDZnpoQ1ZqLVNoOVVwNDdxRGRhZlJfWWhDdnQ5elFSN1dxempfTVcza0d1dTA5RHRMNFVqM2NzdkRjX2pqeE1uV1oxQXE3ZHlUaktjMnRuMml5WTZua3F1WjBHenZRM000OUlDbERr0gF3QVVfeXFMUFI4LVRYRGRnZTJaZktaSUphbmM0VnBxbUZKU2RVSUpMM09PbnhwMFdXZDdHRmg2VGVlWXNMdzFMNXdJaEo4WGZicS15XzRlQjVneEl6YzBZNnFmdkFsSDlKY0lFX1pNSEx3cFFOWEJ0elg2aWpfV3M?oc=5"
-  },
-  {
-   "title": "민주당 지지율 35%... 李정부 출범후 최저",
+   "title": "나주서 부부 살해 50대 구속… 경찰, 신상공개 검토",
    "source": "조선일보",
-   "time": "2026-10-09T11:54:44+07:00",
-   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNTk1TeXVXcUM4VDNqQUpsZENROEVFNnpXSllJckpTLWh1djBiVzh5QW5ndzYza0FKa3poN3A3N3pmZkhmcm5PSWtGOGFrTWdyZ05SSlJpbF9DdG9veDBhZzhZdmw1SzcyeHdrajBzQkpKVDBIUUljMXNubkdDQnBmRUh3dy1xWl8yZGNLZ0pLS2k?oc=5"
+   "time": "2026-10-09T17:22:27+07:00",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNVlZkRndQanUyVzFkQ0YzSHIzMmFSNjRFTER4U0hZZWJUQlRvUGlrY2NYM1piS3BkZ2VTVnVJSWJLcTJkVzlzdHQ5dlpQWXhsQkF4RTF5V3Zud0gzWFZLUmtoMkpSQ1ZlYTc3WnM1RFNSTGVkVXNOcVJKaG56dzRBSmVpem9WN1BWLW9mSEcwQmE?oc=5"
   },
   {
-   "title": "한글날도 '부캉이' 구경 인파‥북항친수공원 방문객 120만명 돌파",
-   "source": "MBC 뉴스",
-   "time": "2026-10-09T18:50:42+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE80Y1JFd0FVM1BzRFdMRm96Y201SnlaUWRWWXZMeDZVWm54cnRqd2FHR19TWjUxRUIzRjd4S3Zjd3BzR3BtamVkeHVxUG1aVC10MDdXZ1JGeUgzYW13Y1NHd0JkMXk3UDZsNlFFanE2LTlheEJPdjRr0gF3QVVfeXFMT20xMTRtTExOVm9zQWthR0V5SlNOU3BlbnBvRnFDaXFHM1lFaUl2Z0k0MDFfR2ZUb2lwc0IzSExqWHdEV0RzZENRZ1Qyc3JmajhzY1hoSjVKdnNleTRUYVlVOU5lN0U5c2FGWHQtUlNUMVZmcDVBVU0?oc=5"
+   "title": "李대통령 지지율 37%…與 35%로 현 정부 출범 뒤 최저치[한국갤럽]",
+   "source": "연합뉴스",
+   "time": "2026-10-09T09:20:38+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE0yMlZxckJicmpsZnhZbEpRZ1VWczhRaFJ0d1I5NnZYMlROWmNEZ1ljSkRURjFhRl9KNTQtQmpUUVB2aFJVQmtGWGdCaVpTdEtRYi03WURhcG1zUm_SAWBBVV95cUxQMkcteDRjQnpaSmJ6MVZqTnJhODdWMVZEOHU5YWR0ZWhCclk4b2ZJRFduRzVPdGpRSjV4YkJkVHNjTy1pVXlaTmtwUHEyV1B6MVFUTWhBMF9oY1pOaEhtRTI?oc=5"
   },
   {
-   "title": "’나주 부부 살해’ 50대 구속…법원 “도주 우려“",
-   "source": "연합뉴스TV",
-   "time": "2026-10-09T16:41:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE84Z3ZYSmg3VHlXOXJyRUpCWHBpSVVrZXliWkVaVng3ZGQxb1IwOEhuOW5hU3RwWTlnejlhVHBlSzRyMGlzM0pRM1FUNVNMSmYwS1hzVFJXMkctcXNZNlhsejgtQ1dObHM?oc=5"
+   "title": "부산 상어 '부캉이' 한글날 연휴 첫날도 인기몰이…22일째 체류",
+   "source": "연합뉴스",
+   "time": "2026-10-09T12:37:25+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBHX3ByNUlUdkZDYk5yeGgtTlNXZThRUUx0S3pHZlJLWGxIejg2Sm1meEZtWUh0eElVVGY3ME1oV0UyaEV1YVhiaXZ3alhPSmFUQU8yZTZBNkFQcGN1VGYzQ9IBYEFVX3lxTFBHX3ByNUlUdkZDYk5yeGgtTlNXZThRUUx0S3pHZlJLWGxIejg2Sm1meEZtWUh0eElVVGY3ME1oV0UyaEV1YVhiaXZ3alhPSmFUQU8yZTZBNkFQcGN1VGYzQw?oc=5"
   },
   {
    "title": "미군 13명 살해한 과격 무슬림 前장교... 美국방부 \"총살형 생중계\"",
    "source": "조선일보",
-   "time": "2026-10-09T17:56:18+07:00",
+   "time": "2026-10-09T14:21:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPbXFPcTRPbDVMUEh0aGV4aXB1cUp0SDFPSXhJS0RGQ2VWbDZNX1Q4Mi1QV2lEZnZueFRpb2RMdjBjMzJWUkVydjkzbEhpTnJ2ZnR5NkZrM2VxRk1OSXpFS1FiZ185N3VENnJMc2xWMjRDSGNtTFZrNkxZcEtGdGF2UWVIWS01RU9mSUxpWno0T19URHhQZkpEZmNGalJMQQ?oc=5"
   },
   {
