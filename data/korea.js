@@ -1,18 +1,24 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-09T08:04:10+07:00",
+ "updated_at": "2026-10-09T09:54:36+07:00",
  "items": [
   {
-   "title": "주우크라 대사 소환에 우크라 외교부 “감정보다 외교 우선해야”",
+   "title": "주우크라 대사 소환에···우크라 외교부 “감정보다 외교 우선해야”",
    "source": "경향신문",
    "time": "2026-10-09T06:32:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1qZG8xUnVENHY5Skdta3FkRVFhMzZGU0R1Z01IUW5kLVF6bTkxZWJkMWR0RFVLb2p4SFByT1lUNnZZcFNab1ZjT2NJWEFRcmQxa0VzdzlHRzBZd9IBX0FVX3lxTE95NktMRndHSk9aS2swNkdxYmlQdWJGaGlRdkdqdXUwcGtHakJaWGZGSkhlTWlQbUZrQy1fS01lVzVRUGttUFduNnFoZ1V6T056TTRzU2dkRHhoM0h1bVZj?oc=5"
   },
   {
-   "title": "이 대통령, 극초음속 미사일 성공에 “자주국방은 기술로 증명된다”",
-   "source": "한겨레",
-   "time": "2026-10-08T20:08:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBRNHBTMEFsVXRGWmoyNE5aUlp6b0FiTGdqbkRpd0lELWhjOU85azRpT2VZc2daUm85ajRiaVVCMHJCc19fMXd0dFMwV09yMG1XcFZqc2FOTktjMjBmM1JSaGVEMlBlZ0Zsa0RZ?oc=5"
+   "title": "한 총리 “한글, 세계인 사랑받고 AI 시대 가치 이어가도록 할 것”",
+   "source": "KBS 뉴스",
+   "time": "2026-10-09T09:32:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9UN2hnaDVmOWtwRnNqbnUzNTVuWDNob3F4d1RiN3BSLU1MbXBOUXJvRlZ1MVpTd3lrZTh1Qjkzbkk0YlNpSXpjd2lwbzdFemJIYnE1V0pZNEZvN2M?oc=5"
+  },
+  {
+   "title": "한동훈 딸 수사 '미 공조 요청'‥검찰에 가로막혀",
+   "source": "MBC 뉴스",
+   "time": "2026-10-09T05:24:08+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5ZeUlhUXNHSkpjWGxTelhyQWJvUGNwck14NDJaSDF0SEg1c0NSTzV1YlFxUldOVVFCMUROZlRMY21WNExMd3pPNUZTcDhSTjE2aThfc05kYVZNLW8xUzlYcW5IUUo0WXBiYUxmei1MR1lnX19SNGFjdERB0gF6QVVfeXFMTmExNGxiZkgwcm0yQzB3WkVQNjNTby1PTkU3ek5hd085eWlub3V0RzRrUjcxeWVIMnItSUtRRFJTVy1tYVdJWlI5OHQ5SF9Da1hJQU5RT3VXNVVlcXhzeGJhR1BiYWgyTFB3X1hYQWtNdHRMeWp0ZFFXdWc?oc=5"
   },
   {
    "title": "‘미, 국정원 불신’ 잇단 보도에…국정원 “국익 훼손말라”",
@@ -21,46 +27,40 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFB3M2RtV1pldTM5S2pJbXBDQmFqN3dzWmdib0lJNExwNnplRnUwb0pfdGFmVEZpSkpWVHVvS0RpZnhOYlE1NHNaaEhSX2dhTkFsa0l3ejJXSzdpUdIBX0FVX3lxTFA2SmVPbnB4S01CemxrdFlHN2xla1hOcXB5eTdOMFBiRWNGa2FYZ2pYQnk4ZE4xMzBNOENiZEZTRWpZWV9XZEhNVWtLOVN1RWhnODY3REE5WTBiRXI5V2ZV?oc=5"
   },
   {
-   "title": "차지훈 주유엔 한국대사 “DMZ 지뢰 폭발 사고, 명백한 정전협정 위반”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-09T02:54:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9WYmxGQTk4WmxybjlkLTZvVngwdUM5YXA1M3JNUlRqY2JTZ0ExQjVxejFDMVJTV2trQmY0OGhOZ2k5LXB3aDZTMGpRNWhHbEdtdHRRMkhtd2NfRFU?oc=5"
+   "title": "추미애 “김지용, ‘한동훈 아이폰’ 포렌식 비용 4억 승인 안해 수사 막아”",
+   "source": "경향신문",
+   "time": "2026-10-09T07:45:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5UOXZuZFhESkFweWg4ZkpGczROemNOekVibS1nMHkzU3Y2aTNWNU1vNFd4ZjRuaHRDODFfM2pmSGRlRFdpR0Izem9pT01BYmhodVRJVGs2V3V4Z9IBX0FVX3lxTE9KSG8wVzYzQXl6Y0VkNGVaNWVmbjN4ZjVUYTZjMmM3ZmdSSFJ1M1VlNHR1Q2ZTMnpRV0dXdnBlcEFuM3VLcU12VFdBcFFiWE00OUFRVENUUnd3MVJ6QUVj?oc=5"
   },
   {
-   "title": "한동훈 딸 수사 국제공조 요청, 검찰이 불송부…법무차관 \"진상 확인\"",
-   "source": "노컷뉴스",
-   "time": "2026-10-08T12:22:29+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1vWWI5NS1sb3N0dzhuYksyemZqLVdoRG5CM0Eza3IzQ3JKUGt1TEpNVEUxQnE0SmZ6QTgwZWtnTmlkLUZEU0VmVll5V0ZzLVdhUVE?oc=5"
+   "title": "군 \"北추가도발 억제 대비태세 강화…DMZ 작전수행체계 재정비\"",
+   "source": "연합뉴스TV",
+   "time": "2026-10-08T09:34:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5sUUtmcEhPSVlOTkg4aE53eUhmWlVvUGVJaGpiem5LeDhYUzBsZUpWUEpSTFlSRjZqYVdHN1dxRGMzSUFlRjdIeDY2RjNoLWxlSlQ4cF9LUmtHRHFvTjJzendMYXY4Rkk?oc=5"
   },
   {
-   "title": "[날씨] 한글날 일교차 15도‥내륙 지역 가시거리 1km 미만 안개",
-   "source": "MBC 뉴스",
-   "time": "2026-10-08T22:00:21+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFAtTmx1RG1aRUR1TWpYTndMN2otNkpRU0ozTV8xOWpMSk9xdGdCclRfZ0xCTkcwMTVRMV9rdFVvX0JyQTFkQmJva0pOVC1ieVB2dHpyT0U4WTlILTBGZnY4c0szQTJFcWRvWm5Vckthd2VtUEdaQzJN0gF3QVVfeXFMTlU0ZXBjVFhvS2N1b2lrMnhqQUVOUWZGaTZpTUx3RjlEdGpseTRENFRFWkphc2tfcTJFTlY0QjBGV3lrSFRKNjJlRmZnVlNNSzI2UUZNUUtfbjRjUDY2Rk1YRGdHV3JNRktaZFJGSnFlZTdFeko3Umc?oc=5"
-  },
-  {
-   "title": "\"美국방부, 중부사령부에 이란 대규모 군사작전 재개 준비 지시\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-08T14:45:14+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBoLTNjZUZfR054SDVLNzE5ckRIMUlXT2dpSDhUbThpeUE2ZmhiVDFNY3JqeXdVeEhHZXhzRmk4bjhrQTRndS1tNlcxdmQ0eEc0UmJmcHFVUl9kanB3b2FDVDM4OVhSQ2JCYzd5SzdaZFo2Nktt0gF0QVVfeXFMTldjc3h2QlFYcHc0b0xQdFZzWVhGdGdtX2RfbkQ5VDdaNXNPeFZTdEJrN2NJOThWLXI0MGUxS2NHd1VlTUpvTF9YWG1mQzdJQ0xTSDJLMzJhOGpraU5ZVUtxQ01mdEk5emhNdDV0dlNIcFRNNFQ?oc=5"
-  },
-  {
-   "title": "정청래, 미국행 비자 발급 보류돼…‘유럽국감’ 가는 걸로 바꿔",
+   "title": "민주 지지율 35%, 정부 출범 뒤 최저…이 대통령 부정평가 5%p↓ [갤럽]",
    "source": "한겨레",
-   "time": "2026-10-08T20:14:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1HQWFzcUNnOWxSOWlNeVZ5SVJta2VZbnI4MXNnc2lXWEtOVFBacm1fTi1idllrNVdVdV9CTTVoR1gtTHNSci1acFZYdGVIYmhQZjRpZGVMc1BqcUpQaENobHZWRjF0ejIwRHBoa1Itc2JNLWxI?oc=5"
+   "time": "2026-10-09T09:02:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1KTmFYUnczaGtvUW1HSS1qNjhZRjVhaDdHdlgtMWVzTWRVZGRnbkRqSUUxUFI2d3NfVUg1MDZ2dWUwWGZDSGJRSXBEaUk0SC03bUFpWjR3TWVVM2EtLTN5VWdqZjVqeUtZX0ZBSXpBZXN3YnBf?oc=5"
   },
   {
-   "title": "허위 종결 경찰의 ‘반복된 거짓말’…공소장 입수해 보니",
-   "source": "KBS 뉴스",
-   "time": "2026-10-09T06:02:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1rb3lxdzhIZjR6cGwzSFIycERLSDBuYlNJVExnVEZjUFg0aDlhckd0S00ySGFfUU5yNjFsSm0xWFVhTUJxZEl3b0hydTh6NGRqa28wVWZoVHBUc28?oc=5"
+   "title": "가석방 요구한 이화영… 李정부 들어 454번 외부 접견",
+   "source": "조선일보",
+   "time": "2026-10-08T22:51:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNU3loWGZteUc5eGdwbWZGaTMzczRQMkRHek5sRjFtNFlZWDlnMTRhVXk1enpwV2Exem5tTm95ZlRCc1BjTnpPeXhlTzVwWWFvUkVJM2xDZmYtUmk0X09BZERLZ3BlYXBraWdrSkI0RzNRMkhMQXhhS2hOdGlwSkhPZXQwZm95MVk?oc=5"
   },
   {
-   "title": "[현장영상] 한글날과 백 살 동갑?…손끝의 한글 ‘훈맹정음’",
-   "source": "KBS 뉴스",
-   "time": "2026-10-09T05:01:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFAxdXVBNS1LaTYwSm1seVI5emxIbklSN0ViSXZTbzhzaFYtU0Z4WTd5Z1duZVBVODFfazduZmNMVndtUjliSzRnb1NIM1RIZjB5cVlhZVlaT2N6VzA?oc=5"
+   "title": "[속보] 극초음속 활공비행체 최초 시험발사 성공…李대통령 참관",
+   "source": "연합뉴스",
+   "time": "2026-10-08T15:38:08+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE0wX1RabmloSkdtcTVuZWxScGRBUkFFWDV6WWlKajJVYTRTTFRGcG5xUTZJM0Nwem9RU0p1NU1jWTB2R0U0MHpsbWVEX05mT0p4cGtBYk1mZVBoQUnSAWBBVV95cUxNSk1mSUcySW5qb2pSRTNkV3ZQRHBzNUR4N252WUNGdks1Wk9UN0Z6MHlpSnVEb0NrRGxRWGtia1R0SEQyVXhPOEE0NFFQZEtYa2UtUHVyZGJjaWVpZjdkY0I?oc=5"
+  },
+  {
+   "title": "조희대 대법원장의 ‘소망’ 업무추진비 식당 지도 공개",
+   "source": "뉴스타파",
+   "time": "2026-10-08T14:50:46+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE4zVXk4NDVZS1pyN1RDaXZxclJSSmFJUy03QV9hQ3hQR1BGTE1iQ2hYSFJnWDlFT3B5MWJMbnJzRUdjUF9zVmtsOU9R?oc=5"
   }
  ]
 };
