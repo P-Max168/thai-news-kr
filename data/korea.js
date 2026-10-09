@@ -1,7 +1,13 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-09T15:56:35+07:00",
+ "updated_at": "2026-10-09T17:55:35+07:00",
  "items": [
+  {
+   "title": "이 대통령 “능력 안되면서 큰자리 요구, 개혁 명분으로 내부 공격”…여권 강경파 작심 비판",
+   "source": "경향신문",
+   "time": "2026-10-09T11:16:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5RWlgtakxsZzNMYl93QU1fczlJeFdEZllEbkhkQUFSNjk3OFlhemkzU2pwM0VtNVZ4MXZ0dGpVc3Ywd3lYRnNMQTRtLTVwdzVEVU03Tk9qNXJhZ9IBX0FVX3lxTE94VEtxVjlFaEZXN0JOVHZENDFhVXhiMzVkcXlmSmp4dmhTZlBibm16M1Jwb1AxZUdrY1RqbFo5WUZPcVA2RjRYUGRMdk11NndVX3pzZmszNHRLNGZ2QnlN?oc=5"
+  },
   {
    "title": "北 지뢰지대 이어 철책도 군사분계선 이남 설치 정황",
    "source": "MBC 뉴스",
@@ -9,16 +15,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1Nb0x5V2pCc1pUamJfbUVoTjZHNjlBbWt3MHgwb0QwaHliRlA2MDBIRTVVUXZJYXFxNExPUVpwV1ZCbTdoUUV0NDI4MFpOZzlMN2xjUVB1N0VZaDB0WDB3b0hpNEw3Y1NtQlRrZXpQdmQtNGpnRTROV9IBeEFVX3lxTE5mU2dUS3RfWU9pc3lUWVk2Qy1pSjJURlBfLU0wM3FJRkU3eFdPUUdOQy1YcHZZaF93eThibTh6d1NZN1ZERndrV0ZOcU5GazdmNDMyYTlwellNNFpBRDlOTUhwbWUtbzZQSHFlelZxdk9hTHp3OTVuRA?oc=5"
   },
   {
-   "title": "민주 “한동훈, 남 비방은 속사포면서…본인·가족 의혹은 회피”",
+   "title": "나경원, 젤렌스키에 서한…“북한군 포로 한국행 허용에 감사”",
    "source": "한겨레",
-   "time": "2026-10-09T14:50:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE55OVVGMVNBUEw2dXRIV3RWdF9ldkh6ekZVSm1xU2RUVFV0eklnZ2pmclFZT0U0YnAyUEY0VEhRRzJPQl92S2o2bGd3TVlqR2lZMktwWHNvX2paZTJFZDY0eFlQaXJSSlc0eVpJQlAwTUgwZkUy?oc=5"
-  },
-  {
-   "title": "[단독]“국정원 왜 그러냐”… 트럼프 최측근 러트닉, 직접 美불만 표출",
-   "source": "동아일보",
-   "time": "2026-10-08T23:40:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9ZMXdWeGRzaDVONFhfUFRaQ0ZlV1NGVjlGVFFYUkJjSUxQbUt4bFo5TUxEWnd5Vlpxbi1Db0NxM0J4R3g1X2xKWDJPMlZrLU51RHFzUmpQNmpIZ0x1RUQwRmpjWVJHWTduMl9mbXcxZ2ZYN2JJRFZn?oc=5"
+   "time": "2026-10-09T13:57:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1XRHlDWFBMNDhkbnRUNXZDN0lFeUtOMDl1cUxnT3F2NEt4aEhEbzhJeUNmdVgzZHNhbkU5WDVEVkJmOS1TS1hZQ2huZnBCQU1wYm5uRG9FWVJ2aUVyTEtpUzJfNzBDcWdaYjRyVUxLY3pPUmJL?oc=5"
   },
   {
    "title": "추미애 \"김지용, 한동훈 휴대전화 포렌식 막아…결정적 증거 은폐\"",
@@ -27,22 +27,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9xaUNMM29scnJZSUJ1LTZjWm5ZVS1aTUhQQmlva2lpeU83ZzFfNkFGLU5lV2JtZ29qRExSVmRXaEJtektXakhnemZiTHRYQ3JnTXBWaWxhU0oxc196Z1NUY19YVXJRRFk?oc=5"
   },
   {
-   "title": "민주당 지지율 35%, 정부 출범 후 최저···이 대통령 지지율은 변동 없이 37%[한국갤럽]",
-   "source": "경향신문",
-   "time": "2026-10-09T08:27:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9DbjAwaHNhWml2Ylp6TVF4TU9pcHppTWtnY0JhbkIzVFVzWVM4ak5VU2NzcEdjOHYwRWVBcDk5UVhQV1NLNGNZMFdZNmk0RGhlRVpZX1YtbVlrQdIBX0FVX3lxTE94TUN4N1JjVWVKZ1ZueHZRXzUtYjA5SFp1US1hSjVCU3VDLUdvTDhrQmhjV2EybFlNVVNCUS1qZnRUWldPQjFPQkVwSndWNjhQeGhEbVY1TVRGUFlCVXdj?oc=5"
-  },
-  {
-   "title": "김여정 “한국 쓰레기들…” 14시간 만에 또 의료장비 지원 비난 입장문",
-   "source": "한겨레",
-   "time": "2026-10-09T14:50:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1HVlAwNURfTUVKaHZMYlV3S2NISTFXZzhYM3I5ZHYzQzk1Q1ZSM3dHbEZQQ1MwbnNfRGgzOU9xNlJjMjlkRXBqN0pOLWM1cXZSVTUyak9jYkJWZHBOZWh5cWc2YlJoZ1hhTnJOMnJQb04wWGRz?oc=5"
-  },
-  {
-   "title": "이 대통령 “능력 안되면서 큰자리 요구, 개혁 명분으로 내부 공격”…여권 강경파 작심 비판",
-   "source": "경향신문",
-   "time": "2026-10-09T11:16:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5RWlgtakxsZzNMYl93QU1fczlJeFdEZllEbkhkQUFSNjk3OFlhemkzU2pwM0VtNVZ4MXZ0dGpVc3Ywd3lYRnNMQTRtLTVwdzVEVU03Tk9qNXJhZ9IBX0FVX3lxTE94VEtxVjlFaEZXN0JOVHZENDFhVXhiMzVkcXlmSmp4dmhTZlBibm16M1Jwb1AxZUdrY1RqbFo5WUZPcVA2RjRYUGRMdk11NndVX3pzZmszNHRLNGZ2QnlN?oc=5"
+   "title": "부산 상어 '부캉이' 한글날 연휴 첫날도 인기몰이…22일째 체류",
+   "source": "연합뉴스",
+   "time": "2026-10-09T12:37:25+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBHX3ByNUlUdkZDYk5yeGgtTlNXZThRUUx0S3pHZlJLWGxIejg2Sm1meEZtWUh0eElVVGY3ME1oV0UyaEV1YVhiaXZ3alhPSmFUQU8yZTZBNkFQcGN1VGYzQ9IBYEFVX3lxTFBHX3ByNUlUdkZDYk5yeGgtTlNXZThRUUx0S3pHZlJLWGxIejg2Sm1meEZtWUh0eElVVGY3ME1oV0UyaEV1YVhiaXZ3alhPSmFUQU8yZTZBNkFQcGN1VGYzQw?oc=5"
   },
   {
    "title": "김태규 “부엉이바위 긁혔냐” 질의 방해…손솔 “남탓 전에 사과부터”",
@@ -57,10 +45,22 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxON3JKUFdtb3lnUktORzdCdHk1NHcxV0pNd29WZmN4VnVhVXlYVkhWUEtVU3ZXYjlCSlJUZXJ6SWRWWWQxSWdXQ2JRTy03QnhsM3hEZDNvTnhCam9CS3VyV1dUX1dYc1c0SEpJdXJnaDQtN2dCaWR0SmlUWjg4emRGVl9JbFZzZw?oc=5"
   },
   {
-   "title": "조희대 대법원장의 ‘소망’ 업무추진비 식당 지도 공개",
-   "source": "뉴스타파",
-   "time": "2026-10-08T14:50:46+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE4zVXk4NDVZS1pyN1RDaXZxclJSSmFJUy03QV9hQ3hQR1BGTE1iQ2hYSFJnWDlFT3B5MWJMbnJzRUdjUF9zVmtsOU9R?oc=5"
+   "title": "“미 국방부, 이란 ’3일 집중공격’ 계획 준비…트럼프 제동“",
+   "source": "연합뉴스TV",
+   "time": "2026-10-09T14:08:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9VOFF0U2RGUE5DZzBfY3ZldlMwUkJSUHVwWVA5NEhEY051cldtWFR4OFVHOFVlUF9EZDUyclVrQ2NFeW5XQ1ZkTno3UE0zQnBqLTFxYkNoQl9Lc0JJUmZkQTJsV3VtSlk?oc=5"
+  },
+  {
+   "title": "김여정 “한국 쓰레기들…” 14시간 만에 또 의료장비 지원 비난 입장문",
+   "source": "한겨레",
+   "time": "2026-10-09T14:50:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1HVlAwNURfTUVKaHZMYlV3S2NISTFXZzhYM3I5ZHYzQzk1Q1ZSM3dHbEZQQ1MwbnNfRGgzOU9xNlJjMjlkRXBqN0pOLWM1cXZSVTUyak9jYkJWZHBOZWh5cWc2YlJoZ1hhTnJOMnJQb04wWGRz?oc=5"
+  },
+  {
+   "title": "교원 3단체, 대규모 집회‥\"무고성 아동학대 신고 방지법 제정하라\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-09T13:30:54+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBsbkVlMkZCVktsUnBuRTRtZlVINTFoalNEd3NrRGFQMjVENG9yTkdxYU1DaHRYMVBNN0ZiRUdXWkxVRFhxYTZDWEsxenRRQTY4UGc4TUlvWUpDZkdhTkhodHBySUVSNVJhOEpobXBiWGY3bUxveEJJ0gF3QVVfeXFMTWlSWGxXYnhrRi1yZVZrT1NLTFVNZTlpaXNUZzRBNEo1TEg0Tm45ZVNSbW42OHVGMGs0R001Z2lhU0NNNERZVHl2dk1fcnQ2MjVDSlJMaWkzY2ppUlI0WHNBd1BUbkFkelNQZHI2NGVNNXFoTHdrSkk?oc=5"
   }
  ]
 };
