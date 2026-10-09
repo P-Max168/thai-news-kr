@@ -1,13 +1,7 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-09T11:55:27+07:00",
+ "updated_at": "2026-10-09T14:02:01+07:00",
  "items": [
-  {
-   "title": "정부, '러트닉, 김정관에 국정원 불신 전달' 보도에 \"사실 아냐\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-09T09:21:11+07:00",
-   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9nNDI3UmRnY2Z0OTNzZ0dfMVVncnlQQV9jVVN1YmZ0V3UyRlIzVWx0eVpfa2JKM2o2VXZfeDJ5Y1BvcURXZWpna0phZXRZYW4wLVRyTjdaUEFlWmhQZ3ZWdnl5dlVJcGF3WXd4aVN6dEpuOFUyWUgzVNIBeEFVX3lxTE45S09oa0dyR3lUNEtTTEJ0cU9qaHJ3QVJzakRwbDZIQ3BLTjlCSUV3alZKUkxkMWdwbmpSRnFGeXhSMTR4bGxSVDR6VUJCamVWLUwyd0lJT09xckZROHlQNDIwWnhZdlAwci1Pd0YyNlN6V194TjlWZg?oc=5"
-  },
   {
    "title": "훈민정음 반포 580돌.가갸날 100년...\"소멸위기 제주어, 미래세대 자산으로\"",
    "source": "헤드라인제주",
@@ -15,16 +9,22 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9Xd3VGQ2FKX0U1NWsyd29uaHVLX2pDcGRHQVlnQUY3dGNoTGhJRE9HbmplRTBFLWllaXZ5VjVwM29xWTBvbWg5STd2U3k0OGxhYWxwNFVNcGw2LU9rcEs1aDJKckJrN24yeGNvMkJCQWxXMXM?oc=5"
   },
   {
-   "title": "김여정 “한국 쓰레기들…” 14시간 만에 또 의료장비 지원 비난 입장문",
-   "source": "한겨레",
-   "time": "2026-10-09T09:27:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1HVlAwNURfTUVKaHZMYlV3S2NISTFXZzhYM3I5ZHYzQzk1Q1ZSM3dHbEZQQ1MwbnNfRGgzOU9xNlJjMjlkRXBqN0pOLWM1cXZSVTUyak9jYkJWZHBOZWh5cWc2YlJoZ1hhTnJOMnJQb04wWGRz?oc=5"
+   "title": "이 대통령 \"능력도 안 되면서 큰 자리 요구‥개혁 내세워 내부 공격\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-09T11:50:46+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9iUjlxTmFwVXZ3MzBNazJJNmV6MHZIVHFBZjh4aGQ5TFJlQ29jLUZ3VzVZTHdOV1FnempXTlc5ZnBWT29ob0std2N6XzgyZFVpQ3gyNTZHYlphZ3BSdGFyQ0t5YTJUb2tPMDhveF81ZGxvNUNPdTV5bNIBeEFVX3lxTFBJcHdjblBfdU0wd0l1NU5RQnZPQ0wtaHdWSmladGpFZVh6YjRMTDBobVdmbUZCUkxfejVwNThmWFlpaHZpa3owVmkyWUplai13VHdTSUZXNE43bDJISEktdUp0T1ctclgycWc5R0xPYWFYXzhTaTVOTA?oc=5"
   },
   {
-   "title": "이 대통령 지지율, 변동 없이 37%…민주당 지지율 35%, 정부 출범 후 최저[한국갤럽]",
-   "source": "경향신문",
-   "time": "2026-10-09T08:27:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9DbjAwaHNhWml2Ylp6TVF4TU9pcHppTWtnY0JhbkIzVFVzWVM4ak5VU2NzcEdjOHYwRWVBcDk5UVhQV1NLNGNZMFdZNmk0RGhlRVpZX1YtbVlrQdIBX0FVX3lxTE94TUN4N1JjVWVKZ1ZueHZRXzUtYjA5SFp1US1hSjVCU3VDLUdvTDhrQmhjV2EybFlNVVNCUS1qZnRUWldPQjFPQkVwSndWNjhQeGhEbVY1TVRGUFlCVXdj?oc=5"
+   "title": "나경원, 젤렌스키에 서한 “북한군 포로 한국행 허용에 깊은 감사”",
+   "source": "한겨레",
+   "time": "2026-10-09T13:39:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1XRHlDWFBMNDhkbnRUNXZDN0lFeUtOMDl1cUxnT3F2NEt4aEhEbzhJeUNmdVgzZHNhbkU5WDVEVkJmOS1TS1hZQ2huZnBCQU1wYm5uRG9FWVJ2aUVyTEtpUzJfNzBDcWdaYjRyVUxLY3pPUmJL?oc=5"
+  },
+  {
+   "title": "김여정 “한국 쓰레기들…” 14시간 만에 또 의료장비 지원 비난 입장문",
+   "source": "한겨레",
+   "time": "2026-10-09T11:28:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1HVlAwNURfTUVKaHZMYlV3S2NISTFXZzhYM3I5ZHYzQzk1Q1ZSM3dHbEZQQ1MwbnNfRGgzOU9xNlJjMjlkRXBqN0pOLWM1cXZSVTUyak9jYkJWZHBOZWh5cWc2YlJoZ1hhTnJOMnJQb04wWGRz?oc=5"
   },
   {
    "title": "“한동훈 장관 때, 딸 수사 국제공조 불송부…직권남용 수사감” 박균택 직격",
@@ -33,34 +33,34 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1talJxMHA5N200U0YtZmtGWkN5bWZYVnpVTHhKLUVrQ0pwVWlsZHdpVHl0TjZTMXBzUV9PSU9NZXZmdXJzMldTTnBoTnphMWZLcHl3cGFrN1VHS2R2RHJsMTA3QkNFbmtURE8tSnZuVlYzd0s3?oc=5"
   },
   {
-   "title": "정청래 미국 비자 ‘지연’...나경원 “한미동맹의 파탄”, 안철수 “이재명 정부 거부”",
-   "source": "한겨레",
-   "time": "2026-10-09T09:03:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1jS3ljR3lUUDAzWld4TElYamU4VlBPWHctdkg2dzZRTktVSW4tVGd1Ulg0SUxkQkVYZDE1NVZUeDNPRzdaRFNpVjhicTYtTkpXNTVkcFpJMHhYUGJvRHlic1pDRXpVbEVVSmR4dXdnQlNwSjhl?oc=5"
+   "title": "민주당 지지율 35%, 정부 출범 후 최저···이 대통령 지지율은 변동 없이 37%[한국갤럽]",
+   "source": "경향신문",
+   "time": "2026-10-09T08:27:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9DbjAwaHNhWml2Ylp6TVF4TU9pcHppTWtnY0JhbkIzVFVzWVM4ak5VU2NzcEdjOHYwRWVBcDk5UVhQV1NLNGNZMFdZNmk0RGhlRVpZX1YtbVlrQdIBX0FVX3lxTE94TUN4N1JjVWVKZ1ZueHZRXzUtYjA5SFp1US1hSjVCU3VDLUdvTDhrQmhjV2EybFlNVVNCUS1qZnRUWldPQjFPQkVwSndWNjhQeGhEbVY1TVRGUFlCVXdj?oc=5"
   },
   {
-   "title": "하차 요구받고 택시 기사 살해한 20대 징역 35년 확정",
+   "title": "산업부, '러트닉, 김정관에 국정원 불신 전달' 보도에 \"사실 아냐\"",
    "source": "MBC 뉴스",
-   "time": "2026-10-09T07:50:22+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBvWndudmMyV2ZTTkd0TDdGZEQwWENWYkZLUkVWRy1mbFFzQzN4MWN0cjViNXRfQmlFdnZwdHRzaWtOU0NpWnJhRVV3NVduaEdqOUdTay15TmwtRlUzVVI3T1cxYzBzTkFUcnh0MGJTZXJGTFpHU09n0gF3QVVfeXFMT2FRSmVPME43TmZsQjQtNUR0NFY1MWdYdTNiZ0FxYXJoZ1o0cmhqQjFpYWp5MjRNNmJ1dnlIQlJ0SXdhMWZ1Q3l2NW9rS2d0MnJreExnZThBS0hsZm9jYnpGZVdWQ2VPMGg3dTNRRUFkY1ZUZHBEMW8?oc=5"
+   "time": "2026-10-09T09:35:58+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBTeFJsM1FzaGJvVGt5RnFWZnNYckh4T0JYeUptRFZFSDZwZWdRTXQzNjRVT2FQdndTeEYtSmJkSGpXRktCcm9xS3RMRWxXZnp1RFJ1ZVl6Y2lhell2N01TTjJnUmhQa3NYOTdTUVpZYXpkSXM40gF0QVVfeXFMTW5vRHEyaUlWVHlJeENNaE9rbC0tOUhNbmRFMHNkbkFYeHlJOWpjS1g5WHlnRzRFOVE0YzJFR3B6cDhoZXpuRDVpWGU5bWcxTm1IMjRVY3BVZmp1UG9nYlRaM0pubEpSWXAzdkNOS3BGa3BLalQ?oc=5"
+  },
+  {
+   "title": "北 지뢰지대 이어 철책도 군사분계선 이남 설치 정황",
+   "source": "MBC 뉴스",
+   "time": "2026-10-09T10:35:28+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1Nb0x5V2pCc1pUamJfbUVoTjZHNjlBbWt3MHgwb0QwaHliRlA2MDBIRTVVUXZJYXFxNExPUVpwV1ZCbTdoUUV0NDI4MFpOZzlMN2xjUVB1N0VZaDB0WDB3b0hpNEw3Y1NtQlRrZXpQdmQtNGpnRTROV9IBeEFVX3lxTE5mU2dUS3RfWU9pc3lUWVk2Qy1pSjJURlBfLU0wM3FJRkU3eFdPUUdOQy1YcHZZaF93eThibTh6d1NZN1ZERndrV0ZOcU5GazdmNDMyYTlwellNNFpBRDlOTUhwbWUtbzZQSHFlelZxdk9hTHp3OTVuRA?oc=5"
+  },
+  {
+   "title": "추미애 “김지용, ‘한동훈 아이폰’ 포렌식 비용 4억 승인 안해 수사 막아”",
+   "source": "경향신문",
+   "time": "2026-10-09T07:45:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5UOXZuZFhESkFweWg4ZkpGczROemNOekVibS1nMHkzU3Y2aTNWNU1vNFd4ZjRuaHRDODFfM2pmSGRlRFdpR0Izem9pT01BYmhodVRJVGs2V3V4Z9IBX0FVX3lxTE9KSG8wVzYzQXl6Y0VkNGVaNWVmbjN4ZjVUYTZjMmM3ZmdSSFJ1M1VlNHR1Q2ZTMnpRV0dXdnBlcEFuM3VLcU12VFdBcFFiWE00OUFRVENUUnd3MVJ6QUVj?oc=5"
   },
   {
    "title": "진보당 손솔, '부엉이바위' 김태규 발언에 \"의원 자격 없어\"",
    "source": "MBC 뉴스",
    "time": "2026-10-09T09:19:08+07:00",
    "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE05Vm5qb3p0Um9qcU54cGtlOEw2MmRUYkJRaHQ1allSLWI5MEVoa2ExaVU5Ul9hakIyNXk1TnBMQnVjWDRMRHNGb1VjODR3QkdxcWZURXhLQU1XR0t1eFIyVmZkNXdoQ19MNmxMbDlNU2phV21iREJFMtIBeEFVX3lxTFBXZV9KU0NKSFFRYkR3Y1pxQ2ItMmRSenB6OHNScjFGTzMtMDJYVGRZNHJ3U2ZHeExiNjI1ajNVOTk5eWlqemJrWGdGWGF6ZDJ1YXFYWFhFLWdRN1JJVHlTbUVxQnJPcUd1Y2hIcnJFSHl2ZDNhcnoyNw?oc=5"
-  },
-  {
-   "title": "대법원장·행정처장 침묵 깨고 적극 대응, 강 대 강 전환에 법원 내부 우려도",
-   "source": "경향신문",
-   "time": "2026-10-09T09:02:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFA2UHlYUDd0SEdGZF8tZ0JST2NUUFRIWUJhcXh4N2JVVy00dHVEV1ppUDJGc2s4VGtwS0l4SDlNb1lCSnlVX0VpTzB0ZVBZTWVRU0pSS200V29Zd9IBX0FVX3lxTE5fYzhWODE4VGRnTG15N3VJMUJJOHJxMUxVbjAzdE1VZW5KVEx6ZXp0UUs0dTY0ZXhOZ1UwNUxkTjF4Z1pJcHNsMFJLdW5YU1BrMnhmN2V4UG5qZHR0azJ3?oc=5"
-  },
-  {
-   "title": "李대통령 “능력 안되면서 큰자리 요구하다 안 되니 내부 공격”",
-   "source": "국제신문",
-   "time": "2026-10-09T11:15:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPYlV1RnhJWUZaM2h3TmVMX1FtbGNjVmNiNDliX2laT2Y2QTZxdC1GM2llcW50QmctalBaelVsazFqMXdVbmpuNUtxVDd5bjltWjdMcVMxVmtTX0hXWW1BdVEtTm5PbXo0bk9xN3pYd3ZnbkxFOTR3YXpDSzNuUXlrMk5GVG04aE5XYi1SVE9INGwySmIt?oc=5"
   }
  ]
 };
