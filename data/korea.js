@@ -1,48 +1,48 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-10T23:54:20+07:00",
+ "updated_at": "2026-10-11T01:54:50+07:00",
  "items": [
   {
    "title": "일요일 낮 최고 28도, 일교차 ‘최대 15도’…전국 내륙 중심 소나기",
    "source": "한겨레",
-   "time": "2026-10-10T17:58:00+07:00",
+   "time": "2026-10-10T19:46:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE40T3RWZmVwR2Q2bXRjSXVRUXR2Y3E0SVFWQWZralVuTVl2TkFxMW5mLU5JRklCQ0dCd0dPZUVBWkZSdzk2TUNUWlV0RllSZEJ2R05jN21UekVURHJDeVBQVDE0TFRnX2FCWEVwNWYxOEJIZw?oc=5"
   },
   {
-   "title": "靑, 국산 극초음속 미사일 발사 성공 장면 공개",
+   "title": "한글날 연휴 둘째날 부캉이 구경객 6만명…누적 127만명",
    "source": "연합뉴스TV",
-   "time": "2026-10-10T07:51:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBUcVhVQWxmNlVtSjU2V3N6RU1tQW9IZERZRGxuRWRfOUFkWS1oYUJaNFFFNlpaNU9YdmJlY0lXSDJTMmduSUNPSDhBNmE3bzM3NDRjSFJwMzY5bGxjOTdpOE1qNTFLM00?oc=5"
+   "time": "2026-10-10T20:13:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9CQ09FQTlMXzBEb3RlX0JycVpIR2tHS0JOcW84V2VKZXJxaXFacnNta3pzQngxd1JITzBSdURYOFdpVnRqTWdPeW51SkJOeVB3M00xZjl5ZEdyU0RSTzgxMkpTbkNhT28?oc=5"
   },
   {
-   "title": "주우크라 대사 소환 귀국…‘포로 한국행’ 공개에 정부, 18년 만의 강경 조치",
-   "source": "한겨레",
-   "time": "2026-10-10T18:08:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5oT2FfS0FJdVAzZDBSQk9fZ3ZOeDJ1X0p4aXRzRm1IZEtPUkY0TVJuZTZkV21zdEpZeFVZWUJaNE4yYUswdk9kekxQVFpSTmpncUJfaF9QMEVROC1vMHo4aDU2Z1VMSWRyNW04?oc=5"
+   "title": "李 “품격없다 비난해도 SNS 소통·삶의 현장 방문 계속할 것”",
+   "source": "동아일보",
+   "time": "2026-10-10T21:04:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1JcWotVUNISTlHVzhVeG9iaTlwRUVocG5BazRhc3AwTjNzUHZrQ1o5MV95SGFnOEV5S2p4djEwSjNOd254SUZzTDFGdU84S3ZJWkIzWENyUlNsU3VXcGZhWkRoTUhRTGJBdWhIMTRRMWpIeDdsbkdR0gFmQVVfeXFMTUVlWllITFFsbFM4TWg5dHM1a1p3aVhVTkVITVhBSmhJaUpuSllHZTBGeHZWRjZ1dXlVbjBZV0VreFFqR0d3NkMxSFhhcVdVT3R4TERTUlpWWmUwbGVZUEN5LVBnM1VB?oc=5"
   },
   {
-   "title": "민주 “남의 딸 탈탈 털던 한동훈, 딸 수사는 덮었나” 연일 공세…한 “망상”",
-   "source": "한겨레",
-   "time": "2026-10-10T19:47:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5RWUxpdzVDbS0yZU5IT0kza1dZOGxBcTJYcDZJbkNNWS1Wc3BDVmNsSkc5MHVxbk5tRExMR3hpRDFYNDM0aG9lRC1ETlRPdWlaRUZKaU5Wd2NTd2dLZXo4ZjZVMlY4d1BsSERSWXBsZzRHMC03?oc=5"
-  },
-  {
-   "title": "노벨상 못 탄 트럼프 격분…“8개 종전시키고, 한국-북한 전쟁도 막고 있는데”",
-   "source": "한겨레",
-   "time": "2026-10-10T19:47:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBTZDRGbUxpaTVjWUJlM1VMS3UxWEpKWmhlbkkwVW9uczBleGpLa2hJMm9md1AwSVJZNWxuX0VZZWxYdC1aQjFwSGJOZDUtMHBYbGktQ0N5cHVvbWtnQ0l4Nl9YckRxeDRJQlZNZXJXaw?oc=5"
-  },
-  {
-   "title": "이 대통령, 대구 마트 천장 붕괴사고 관련 \"인명 구조에 총력 다하라\" 지시",
+   "title": "민주당 \"한동훈, 딸 사건 덮었나\"‥연일 '딸 허위 스펙' 수사 개입 의혹 공세",
    "source": "MBC 뉴스",
-   "time": "2026-10-10T10:47:42+07:00",
-   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFAtNlRvYnZILXdNbWMzWUdBVENPWDJBWEpmSHRFbVF2RHRVaGxKV182dksxaXdibUM1M09xUDNFWXdLei1vUUQ1Y0I2QWN3SmpMZGc0QXZwdXAxUTZkSUl3d0tfbjRXSE1LNThYRmFwTzdJLVlBb24xLdIBeEFVX3lxTFBJZ1ZPMl8zTTlOa0d3bENROTNsd3pfMnE2ZmlxcWFQLVRkWVFlZHZmUkVmSDhkMGZDUEF6MmpNNlhSRzFucjFMeWpTSGRmRlpDVTMwTWVSYmZtZi1mTXJqSVFsaEdKYWFBOHZoVElmcUxMb0M2bWw2Zw?oc=5"
+   "time": "2026-10-10T10:49:24+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5Bc3c1cWpva05paWV1WTE4d2tneUptZHQ2ZFUtOEo3T0lUaWRxeWszWmxvSll5ODhKSmlGeWFTQi1BcEpNNU5MdkJDaXB4QXRaQlczZzd1SjAxU09yM0UyZVV4WU9LU09Lb2t3NUFjZHV4a0VleGRHZtIBeEFVX3lxTE1ub1JJREFVeXdvSWZTUFpFRldfenI3QTdSMXEwOHVFcW5aRHFjYzcxOWFUYkR6S1FFLUc0YlJFZjRQT013dUdHR0EzbmZuMVNYV1EwcHRNTllmQmNPc3ppM3JKNmpmOUROWENuME9lZmZYWDgwb1FkRA?oc=5"
   },
   {
-   "title": "홍준표 “비난 각오하고 김부겸 밀었는데, 대구시민 내 진심 몰라줘···TK 몰락 가슴 아프다”",
+   "title": "[속보] 박기창 주우크라이나 한국 대사 결국 귀국···정부 ‘본국 소환’ 결정 이틀 만",
    "source": "경향신문",
-   "time": "2026-10-10T17:56:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE44RlZ5d0xNWUZiMGNLVzBkSVl3TjlPUVJEbThycU9xYnA1c2Y4Zjk0dHdiSEZkTkJiZm11VURhV0ZfRUVCa3kxdXNjTzQ5amxqNWJxUzRGQXRyUdIBX0FVX3lxTFBOOVIyMk1DWU1nVEg4YWk2TWl4UDNER0g1NXJwY1l5N2RNaTlYMnlwbi0wR1hoWWUtUWt6bEtHUEk1Z3FyVlZ0Zm5xeU9BVXhHVUlqUFZ6T2VCNG5zclNj?oc=5"
+   "time": "2026-10-10T08:12:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE14ZEhZZ25icUt6OHloOEItRHpVX0ZuRHdhZG5ISG50R0Nya1BDbHFvZGpmd1A2YUtubWQ5OWRkNkFiRzJNamdacTZ0QXl2RGMtZXEyVnk2aFZJUdIBX0FVX3lxTE1tSWxDOTk3VjdUS2tzWmFxNVFWaVZwR1BKRkFVNGJCVU1CYjhsdVJqd2RweGR5YzBRcGRmdmRQUWhhLTdKRVRSUkROWUlQazVBU01aeWh3TjhOMy1idEs0?oc=5"
+  },
+  {
+   "title": "‘노벨상 불발’ 트럼프, 완전 뿔났다···“내가 한국·북한 전쟁도 막고있어, 우리가 노벨상 8개 받았어야”",
+   "source": "경향신문",
+   "time": "2026-10-10T10:22:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBDbFpLOTc4eXp3dy1WNnU2cFRWTC03U2NSekpDRmtxTlR0SmFqN2plZnFGLVFrYlZDUHFkc09MZlRtSkRVaG9JdDhPM3VqVG9BeXhqbTJfWWNSZ9IBX0FVX3lxTFBCMlhSUFVkc3hKdnB1UUJjM2RVVVBMX1h3akVaVG44a1NzSkNSV1RHZ0YwYUs4TGtnSjQxNjg3UmRKazc3VjlzaHlDOUxNbzQzNVJMTG9KRFBSZGk3cWhR?oc=5"
+  },
+  {
+   "title": "李대통령, 대구 마트 천장 붕괴에 \"인명 구조 총력\" 지시",
+   "source": "조선일보",
+   "time": "2026-10-10T10:29:05+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPWk9XWjdwUHJweThtQWhZSHJ4aGdFb3N0WS1QTWI1OWh1WUZiR3dfV2VkbUZOXzdiLWJLSHB0VVhmTXg3MjBLeGJ1c0thak9GQUtfUUM1bk5jLVdiaHdqUWo4SjN1ZzJKUW91dWFDSnhCUnB2T29JLVZjeE45RTd3d0VSRkRLRDUz?oc=5"
   },
   {
    "title": "선비라던 조희대 범죄 의혹만 7개…“수사·탄핵 쌍끌이” 주장 증폭 [논썰]",
@@ -51,16 +51,16 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1xNk1nSTFRdEZiY0JZMC1kTEV4aVNJdmVEbDVLR05DWHRpc19UMktVUkdrZDRkQ1VYb24zRVFNRkd4c0tTRlJkd0lsWHdpeTVxNkpTSFNkZXlFdmd2c29GUVRfUk1uUjNPT0xwTzhkb296X0tQ?oc=5"
   },
   {
-   "title": "한미 정보 공유 갈등 속…미 고위 “한국, 정보·방첩 분야 동맹 기준 준수해야”",
-   "source": "한겨레",
-   "time": "2026-10-10T15:06:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE41aVJrWHVIY2JfRkc3UXBmMEdIWXFBbnRtOEw0YTJGYmR5TlR0bUZ0VTdKdmlpWXkxck1EeV9NbjB1VkFCMVRZNFJKRFRXMVZmVnh6SWdZT2tYRDBXbWZzQzd5Zml2VzVkOUViRFJQRQ?oc=5"
+   "title": "네팔 대홍수 실종자 5000명 곧 사망 처리... 유족 보상 길 열려",
+   "source": "조선일보",
+   "time": "2026-10-10T14:13:28+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQcF9ueHBud1lmUWdzUTNTYllFRi1QMVpwWWltZjFFT1kyZDVYMnBLa1BMS3hvdmxJaDBLQTJPeWl6NmdhQUc5MDA4VkY5RkJ3OGlaVWZoYlpvYTNmX280QUhKc29uTzRhLWU4NkV6aHQxdF9qcktlbFBwT3VOaDhHV1ZNMDVQb2c?oc=5"
   },
   {
-   "title": "네팔, 대홍수 실종자 5285명 사망 선고 임박",
-   "source": "천지일보",
-   "time": "2026-10-10T16:11:15+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFA5Mml6ZUg3Qjdtdl9CNFREX0UtZmxWdkJOYnF2bDQyZW9LYjdOQ0pieVE1LXd1dnlhQWJNRHRhbDNNS3E2YWpxUjllbUNQWW4wcmIyX1k5SkhYZFJGUWl3S0QydVhBb29Ub3c?oc=5"
+   "title": "[속보]만취해 ‘시속 150㎞’ 도주 20대, 오토바이 추돌…50대 사망",
+   "source": "문화일보",
+   "time": "2026-10-10T16:11:07+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFA4UE1EeHNfM0J0eGhxZTJ0V0JqNUZLU1R6TjNXeXQtZEYxZERHU2VtQy14TUVxbm1wVE5nVlRsWjJvMXFxTGpsRnpkZ0FqX0VS?oc=5"
   }
  ]
 };
