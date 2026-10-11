@@ -1,0 +1,12 @@
+# automation.log START 줄·마지막 줄 (2026-10-11 08:28:32 +07)
+1:10-05 01:58:56 START smoke-test pid=1401624 head=3f91e71
+4:10-05 07:09:56 START am-build pid=1697957 head=285f67b
+9:10-11 07:38:49 START backup-check pid=736385 head=f6ac579
+--- 마지막 5줄
+10-05 07:27:03 END   am-build ok 
+10-11 07:38:49 START backup-check pid=736385 head=f6ac579
+10-11 07:38:59 OK    backup-check  | 오늘 아침판 2026-10-11-am: 없음 · 라이브: 늦음: 기대 2026-10-11-am, 라이브 2026-10-05-am, 30분 지남 (기록함)
+10-11 07:48:38 END   deploy ok exit=0 8127d56
+10-11 07:49:01 END   deploy ok exit=0 8f1fd6a
+--- 10-05 07:27 am-build 뒤 다음 START 는 10-11 07:38 backup-check: 그 사이 07:08·18:08·07:38·18:38 START 0줄 = 예약 실행이 상자에 안 옴
+--- 오늘 18:08 저녁판 START/END: 08:28 기준 아직 확인 불가(18:08 전). 실행기가 돌면 automation.log 에 'START pm-build' 줄

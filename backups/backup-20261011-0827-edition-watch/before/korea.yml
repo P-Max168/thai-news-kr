@@ -1,6 +1,6 @@
 # 🇰🇷 '오늘의 한국 주요 뉴스' 10건 갱신(판과 무관) — data/korea.json + data/korea.js
 # + 💱 헤더 시세 칩 데이터(바트→원 환율·태국 금시세) — data/ticker.json + data/ticker.js (tools/fetch_ticker.py)
-# 2시간마다(하루 12번) + 예비 4번(하루 16번, 아래 schedule 참고) tools/fetch_korea.py --standalone 실행 → 바뀌었을 때만 봇 이름으로 커밋·push.
+# 2시간마다(하루 12번) tools/fetch_korea.py --standalone 실행 → 바뀌었을 때만 봇 이름으로 커밋·push.
 # GitHub Pages 는 main 브랜치 루트 배포(legacy)라 push 하면 다시 배포된다(90초 안에 빌드가 안 보일 때만 Pages 빌드 요청).
 #
 # 시각(방콕, UTC+7): 매일 01:47 03:47 05:47 07:47 09:47 11:47 13:47 15:47 17:47 19:47 21:47 23:47
@@ -12,9 +12,6 @@ name: korea-news
 on:
   schedule:
     - cron: "47 */2 * * *"
-    # (2026-10-11) 예비 실행 4번 추가: 방콕 02:17 08:17 14:17 20:17(UTC 19·01·07·13시 :17). 10-03~10-06 에 예약이 2~4번 연속 빠져
-    #   최대 9시간 갱신 없음(10-04 00:15→09:15) → 2시간 간격과 엇갈린 시각에 한 번 더. 바뀐 게 없으면 커밋 안 하므로 부담 작음
-    - cron: "17 1-23/6 * * *"
   workflow_dispatch:
     inputs:
       force:

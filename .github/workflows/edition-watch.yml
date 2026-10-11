@@ -1,0 +1,44 @@
+# 🛎️ 판 공백 감시(2026-10-11) — 상자·Grok Bot 루틴 실행기와 다른 고장점(GitHub 서버에서 실행)
+# 10-05~10-11: 정기 07:08·18:08 빌드와 07:38·18:38 대체 루틴이 같은 실행기를 써서 6일 같이 멈췄고, 경보도 상자 안 파일에만 남았음.
+# 라이브 data/index.json 의 latest·generated 를 보고, 기대 판(예정 07:08·18:08 방콕 + 90분 = 08:38·19:38 까지)보다 옛 판이면
+#   GitHub 이슈(라벨 edition-gap, @P-Max168 언급 → 메일 알림)를 엶. 같은 공백이면 한 번만, 정상으로 돌아오면 자동으로 닫음.
+#   새 이슈를 연 실행은 빨간색(exit 1)으로 끝나서 예약 실행 실패 메일도 한 번 감(이미 알린 공백·정상은 초록).
+# 시각: 매시간 :50 (UTC '50 * * * *' = 방콕 매시 :50) + 허용 직후 08:41·19:41 방콕(UTC 01:41·12:41).
+#   GitHub 예약 실행은 늦거나 빠질 수 있어서 매시간 — 한두 번 빠져도 다음 시간에 잡음. 읽기만(저장소·사이트 안 바꿈), 이슈만 씀.
+# 손으로 시험: Actions → edition-watch → Run workflow (dry_run 켜면 이슈 안 열고 본문만 출력)
+name: edition-watch
+
+on:
+  schedule:
+    - cron: "50 * * * *"
+    - cron: "41 1,12 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "이슈를 열지 않고 결과·본문만 출력"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: edition-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      TZ: Asia/Bangkok
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          sparse-checkout: tools/edition_watch.py
+          sparse-checkout-cone-mode: false
+      - name: 라이브 판 공백 확인(→ 늦으면 이슈)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 tools/edition_watch.py ${{ inputs.dry_run && '--dry-run' || '' }}
