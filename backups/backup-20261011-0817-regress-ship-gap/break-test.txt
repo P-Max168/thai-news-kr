@@ -1,0 +1,15 @@
+# 부숴 보기 10-11 08:17 +07
+## 1) regress 민감 TOP1 줄 (263줄 두 줄만 떼어 /tmp/rt 에서 실행)
+민감 TOP1(라이브 10-11-am vi1) → PASS (기대 PASS) · 예전 규칙(is False)으론 FAIL
+비민감 TOP1 + back.flag True → FAIL (기대 FAIL)
+비민감 TOP1 + back.flag False → PASS (기대 PASS)
+## 2) ship.sh CHECK_FILES (임시 git /tmp/shipt, set -euo pipefail)
+data/ js+json 만 바뀐 마지막 커밋: 예전 exit=1 / 새 exit=0, CHECK_FILES=[sw.js assets/app.js index.html]
+data/ json 만: 예전 exit=1 / 새 exit=0
+css+data: 새 exit=0, assets/app.css 포함(다른 파일은 그대로 확인)
+## 3) edition_stale 여러 판 공백 (TNK_TEST=1 TNK_LOGDIR=/tmp/gt/*, --now·--latest 흉내)
+라이브 10-05-am, 지금 10-11 07:45 → exit 1, edition-gaps.txt 12판(10-05-pm~10-11-am), stale 에 공백 줄+늦음 줄, 다시 실행해도 줄 안 늘어남
+라이브 10-10-pm(1판 늦음) → exit 1, 예전 늦음 한 줄만, edition-gaps.txt 안 만듦
+라이브 10-11-am → exit 0 정상, 파일 없음
+18:40 라이브 10-10-pm → 2판 공백(10-11-am, 10-11-pm) 경보
+TNK_TEST 없이 --latest 주면 무시하고 진짜 라이브 읽음(정상 10-11-am, 파일 안 씀)

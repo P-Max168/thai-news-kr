@@ -44,9 +44,8 @@ CANON_FAIL=""
 if ( cd "$CANON" && git pull -q --rebase --autostash ) 2>/tmp/ship-canon.err; then echo "정본 체크아웃 갱신"
 else CANON_FAIL=1; echo "‼️ 정본 체크아웃(/workspace/thai-news-portal) 갱신 실패 — 아래 이유를 고친 뒤 그 폴더에서 git pull --rebase --autostash" >&2; head -5 /tmp/ship-canon.err >&2; fi
 # 라이브 반영 대기(app.js·sw.js·index.html 이 로컬과 같아질 때까지, 최대 6분)
-# (10-11) 마지막 커밋이 data/ 만 바꾸면 grep 이 0줄 → pipefail 로 push 성공 뒤 exit 1(라이브 대기 건너뜀) → 두 grep 모두 '|| true' 로 0줄도 정상(.json 만 바뀐 커밋은 첫 grep 도 0줄)
 # 앱 셸 3개 + 이번 커밋에서 바뀐 파일(최대 5개, data/·backups/ 제외) — stamp 가 안 바뀌는 변경(예: 광고 css 만)도 실제로 확인
-CHECK_FILES="sw.js assets/app.js index.html $(git diff --name-only HEAD~1 HEAD 2>/dev/null | { grep -E '\.(js|css|html|md|sh|py)$' || true; } | { grep -vE '^(data|backups)/' || true; } | head -5 | tr '\n' ' ')"
+CHECK_FILES="sw.js assets/app.js index.html $(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep -E '\.(js|css|html|md|sh|py)$' | grep -vE '^(data|backups)/' | head -5 | tr '\n' ' ')"
 wait_live() {
   for i in $(seq 1 36); do
     ts=$(date +%s); same=1

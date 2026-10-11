@@ -260,7 +260,7 @@ async def main():
         except Exception as e:
             ms = {"err": str(e)[:120]}
         okm = ms.get("sec") and ms.get("rules", 0) >= 10 and ms.get("listed") == ms.get("risky") and ms.get("why") and ms.get("now", {}).get("flag") == ms.get("hl0risk")
-        if ms.get("risky"): okm = okm and ms.get("swapped") == {"hidden": True, "flag": True} and ms.get("back", {}).get("flag") == ms.get("hl0risk")   # 10-11: 되돌린 뒤 = 원래 TOP 1 의 위험 여부(민감 TOP 1 이면 숨김 그대로가 정답)
+        if ms.get("risky"): okm = okm and ms.get("swapped") == {"hidden": True, "flag": True} and ms.get("back", {}).get("flag") is False
         rec(okm, "🛡️ 민감 기사 점수 기준 — 메인 큰 배너도 TOP 1 기사가 걸리면 숨김(기사는 그대로), 승인함에 기준표·숨긴 목록·이유", ms)
         # 애드센스 준비: 광고 칸 표준 단위·민감 기사 옆 광고 없음·안내 4쪽·ads.txt
         try:
