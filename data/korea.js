@@ -1,6 +1,6 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-12T01:55:56+07:00",
+ "updated_at": "2026-10-12T02:33:33+07:00",
  "items": [
   {
    "title": "미 “동맹 기준 준수를”…한 “신뢰 굳건”",
@@ -21,10 +21,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE43SmZFRW9qYVl1bk9qWkIzbnFPS0o5emgxVzE5aGhQdDBaTnA3bGM1NEZPUDVpdE5sTWd5OWFsUFZRVkF5U0IzYlBrUTZqZTRsSm52UEhBSU5WMDDSAWBBVV95cUxPLU45aW1ZTDhYN2tzdGlJdXl6LUpHaG1RYlY0RERQVWtjWHdMX0tmXzRpbGZNdkRna2tlZWFtdzJOTjRTM3luREkzd3A5dnI5X0FreG1oOXdXUlhONU56Ujk?oc=5"
   },
   {
-   "title": "‘길 잃은 의제 설정’ 민주당, 지지율 35%…이재명 정부 들어 최저",
-   "source": "경향신문",
-   "time": "2026-10-11T19:10:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE03dEduZVAtaDc3T3NManh1UHlrYjluSEhvak9qZk41S2NaSHRNMHlxS1FGN2ZENzJxcFVCWlZhc1NwdHg5NXdMNG5FTHNsZVhQQkpjSzdtOHVYQdIBX0FVX3lxTE1CdmY4bXd1MWdGWXdhcmotenZBeURhUVFVTmROZWhGUkNremtwdGJ2QTRnSTRFempGZXBIeENhMTdIbFI1bm9WUEF6RDE0bHlJZXU5YlRDUTFhVFB1RUI0?oc=5"
+   "title": "오늘 중부·경북 내륙 소나기…내일부터 추워져",
+   "source": "KBS 뉴스",
+   "time": "2026-10-11T22:06:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE4yTGY4RzA0empILXZBa0R5WGpqUlJlUEJNcDRVTUZyZEFRTnkyamNSd3dmQ2JqQURWMURfazdMLVhaYW1OSEdPblg5TmxEVWFBY0h3dmdieThtNWs?oc=5"
   },
   {
    "title": "李대통령, SNS 행보비판에 정면돌파…박원순·노무현 소환",
@@ -39,28 +39,28 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQV1BWZXFBVFlDTmJnVE1xbzVEN3k5WFY3WmwyUmhKNGtXUEh5SjJHTTlqN1F5UjlwdG1pWXoyTWRLVTZRUklOZkNZOWpBTV9xRlRKaXJHc3R3dXUyRnhHMU9aUEFXMVd5cFVJMmk0SXg3N3ZsVk9IREMyU1pJYmpmbGMyWGxlZw?oc=5"
   },
   {
-   "title": "장모 살해하고 아내는 납치해 도주…이혼 소송 중인 20대 체포",
-   "source": "한겨레",
-   "time": "2026-10-11T18:06:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9JQWZhN25MZENweF9mcS12anl1OUlOY2FyQ1ZpWWowcDQ2Xy1UTFpkYmNkSktqZXlGUWtjV09wLWpGNExLSFhyVmNmekpfd24zLW9NWmgyNlBQc1lxeXFZRG9qUGZ4MWRfanBfcHVDY1RSUQ?oc=5"
+   "title": "장모 살해하고 아내 태워 도주한 20대 남성 체포",
+   "source": "MBC 뉴스",
+   "time": "2026-10-11T12:11:58+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBiRFpmTFN2VDREeVFiYllSdE0xNnQ4XzVFUHNJN1dlbklBWHN0S0dfeTBQeGZETkJ4eWZJbFlaRUw5M3Rlb2ZpU084N2hOOVIwbWhzYXVuVlMzRURIRGs2Z0k1aS10X1RtbngwSGlYdkphWFBod1JB0gF3QVVfeXFMT3NXTjNueG9rSHFOTGstQWF3Z3VsNW8tOVg0MHJmaWUtWmNXcWJpNElYeHJ0aGFUb0tUb2g5dXlKbHNoZjFoTHBfMXpMLTJnQ2c4blg4Q1E0SGhlbEpXRXY0SXBkUHF4RU4zNjJlTjh2NnhDUi1HZEE?oc=5"
   },
   {
-   "title": "민주 \"한동훈 딸 논문, 케냐인이 대신 썼나…즉각 재수사해야\" 연일 공세",
-   "source": "연합뉴스TV",
-   "time": "2026-10-11T10:57:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFA0SVVSXzlXMlpWdkFnOEM0LXZrcWRDUW95TzFlektxaU85ZFlhWGh3dmhNeG91djRhT2E4MmladjE5NXF1R2pFNExhUmwyVEVzYzR2UDkxdEdsMmU2bGdQRWk1Z1NsVlk?oc=5"
+   "title": "‘길 잃은 의제 설정’ 민주당, 지지율 35%…이재명 정부 들어 최저",
+   "source": "경향신문",
+   "time": "2026-10-11T19:10:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE03dEduZVAtaDc3T3NManh1UHlrYjluSEhvak9qZk41S2NaSHRNMHlxS1FGN2ZENzJxcFVCWlZhc1NwdHg5NXdMNG5FTHNsZVhQQkpjSzdtOHVYQdIBX0FVX3lxTE1CdmY4bXd1MWdGWXdhcmotenZBeURhUVFVTmROZWhGUkNremtwdGJ2QTRnSTRFempGZXBIeENhMTdIbFI1bm9WUEF6RDE0bHlJZXU5YlRDUTFhVFB1RUI0?oc=5"
+  },
+  {
+   "title": "“한동훈 딸 행위, 사회에 큰 해악”…4년 전 연구자들 성명 낸 까닭",
+   "source": "한겨레",
+   "time": "2026-10-11T23:10:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5qaHVld3poYUxvYlhxV3dDaDZJTmpjZVZQNlROeHVxZFRvY3BacXVvdXM0M1E0blV3TUdYX2FtbDcxMXVic0thcTltbzd5emVVUWZDUEVBdFp0UjE3MlNBeWpnTktJNTRyRWxxeE4zX3BtV0Zi?oc=5"
   },
   {
    "title": "국정감사 2주 차 시작…행안위 경찰청·외통위 주미대사관 국감 쟁점 예상",
    "source": "KBS 뉴스",
    "time": "2026-10-11T23:01:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBrNkozbG1JTXBoVUVVOE1KOXVfdmZ5MEo1bG9ONGE1dk1VOGg4bEphLW04SndzY1NvaGgzLVd0VDhoRjNMSHZDVzc2SnpISVhmTkxoVFBZZmNvakE?oc=5"
-  },
-  {
-   "title": "아버지가 준 수억 주식 탕진, 질책 두려워 살해한 딸",
-   "source": "조선일보",
-   "time": "2026-10-11T20:52:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQX19IbldYOGxvZU50Qjl0UGxQeUp3UW9pdGhhSEZDenAzZGlYMmtnTVJMZEVLYkdUTzdaR2FkZEdvN05KR0VNX3RZb1hIM3ZuTU1ja04yRGw2ZVN6ODlUcmx0bEs5WGtMUF9PakJRLUY2TXZXT3A2eXprcmJiNXFaSkFhc1pFTFFLQ0hkV2ZuSVZubjJobWc?oc=5"
   }
  ]
 };
