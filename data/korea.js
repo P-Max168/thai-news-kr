@@ -1,18 +1,24 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-11T21:54:05+07:00",
+ "updated_at": "2026-10-11T23:54:47+07:00",
  "items": [
   {
    "title": "임은정에 ‘감찰 카드’ 꺼낸 정부…김지용 청문회 앞 ‘내홍 매듭’ 의도",
    "source": "한겨레",
-   "time": "2026-10-11T18:10:00+07:00",
+   "time": "2026-10-11T19:19:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBBVk53SFVqQThydUJIY2RmVlhrUEd3ZDBoYlhJN0Uyd0NUTWZjV3V4THZ4Z1U2cGNmZmR1ZzRxSTBtM1Q1UlFlZXg5X3RvOXpHQVFiTWhmTU5kbWpRcEdremg5aExjeUJ4Z3c?oc=5"
   },
   {
-   "title": "민주당 “한동훈 딸 논문 케냐인이 대신 썼나” 대필 의혹 공세…김민석·한동훈·조국 ‘자녀 소환 전쟁’",
+   "title": "미 “동맹 기준 준수를”…한 “신뢰 굳건”",
    "source": "경향신문",
-   "time": "2026-10-11T14:07:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE05cGFOeE1heHRtQmpMcXFrY0tqRm1JdmkwdERLc1h2clV4TVNnaHRXYUpuVDh6NktXYWRYalpHVGtIN3Yza1RGcG1Za1R5SkZJMEloUE1RaHpDZ9IBX0FVX3lxTFB1dElvWTdLcmZTM2lTcXlsOFVzMWg2Z2cyaXpPTi1jTXl2T3hCbFF2LXMzZS1GNk9Nd1JzeGwxMjlKeWw1VzZCQ05waWZhWWl1SWo0Mk43b3BXLXJlVWtz?oc=5"
+   "time": "2026-10-11T19:42:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1WWHN1ZkczU0ZGV1hpLTRiaFI0RGE5X1VUcGlodWd1QTV1UlhKM01ySFpMTmNTcDlObFlKRlhlNkVRcXR4ZHlsQk5Hem1DUG5IMW9NMDEta25uUdIBX0FVX3lxTE0wcEtfaVJJRWlXS3NaejFYRm1kWnBjZkdLVzBtWmJHMGFMa3pkM3o1SjQ3SFl2eU9FMm9PWXlJVEVrTTZJZ1M4WC1RSWRnLXpmU2ZBekh1TGs3Y2ZxdjE0?oc=5"
+  },
+  {
+   "title": "민주당 \"한동훈, 막말로 질문 못 피해‥'딸 논문 대필' 벤슨은 누구?\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-11T12:51:49+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1pWWNiM19NZmZxS2J5dElWZjhOTnh5aV9uaVhOQmI2a1c1Y0p3ZWlaYUxOdVo1eFg3eEhNRlR0Z0FMS1hQdkZ0MTRoMHRGeDlUXzRhUEY0RXU1WDE1NXE3V0RpeThWZGNMMzd3NjB0LVFWZnFfNDBic9IBeEFVX3lxTE9LTURBMHhRQkVLb2paem50X0tHVWRXY0ZMZjdhSHVwLWk1ZVFFOEYyczdTZnVmcDcyUUhKQ3ppZmlrbUJsSlo1ZUpRNGJrVnotQS1nbGxxV0htVzR3Q1BzRUhYZHJWZzRPV202UGo1OGVndUxLcW5Tbw?oc=5"
   },
   {
    "title": "청, 대통령 휴일 일정 이례적 공개…“골프장서 대구 사고 보고받고 지시”",
@@ -21,46 +27,40 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1CazZZaVNFNFFzSUpON2FNRVJpS1RBSjZjSjYzSkNrS2JhNmEzQjN5dHZfNndQaUpTblY4bzVITV9pSVVDQWozSFNYZWtqNzRoS1dzVEVXQ1BMUnkxOW1Xc2ltYzloSE5ZMW1j?oc=5"
   },
   {
-   "title": "국힘 “한·미 동맹 파탄”…정동영·이종석 해임 촉구",
-   "source": "경향신문",
-   "time": "2026-10-11T19:28:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0zMWJDbGFxMTFtdEMtR1BmWFk5VDV5b0hiZWIxMWQ2SGVZNXpTNThZMjRUcFFIVURXR1MwNUZGNXFEcGc0MzBneE9BRGtmTUhJTkNYVDZFX1hGd9IBX0FVX3lxTE9fdTk1NnNacVYzOFpkRkhXSE8wSzR4ckc0V25qb0xzc2NXcFFONm9fQW9keWR6WUY2TmxKd25wSWE2MGhwclpLVzBKZUFDS2VIYkFoNUd6dmVWR2tFelZF?oc=5"
+   "title": "[단독]'장모 살해' 20대男, 앞서 '아내 찾아달라' 경찰에 신고",
+   "source": "노컷뉴스",
+   "time": "2026-10-11T12:48:26+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE0ybS1jMzJiYUJES2xvbmphYmZtWm9hakVjNEFOWEItMkVlVGRUY1VQeWNyTGl1Y0IwZFczMzY3V01obnN1bHduMnNhQmhfdUVDeVE?oc=5"
   },
   {
-   "title": "이혼 소송 중 장모 살해... 경찰 신변보호는 무용지물",
-   "source": "조선일보",
-   "time": "2026-10-11T17:57:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxORmp5ZnY2ZTZzYV84dUxZRk9Wd1hQemZnMXprSnJqeHFNMmlrRmlWQ1U4Ti0ybnZXV2dDdFlQbm8xbGVHR1luSHpIdkdWaW1reXl6eWlBMXZxbE1vbmdrYmVMOVZDcnZoQ3N3SjR0X2xUblUtUlBzcWV1WWJnREIwVXlPNEhvOHdldkhzSHZuYjQ?oc=5"
+   "title": "이 대통령 “품격 없다 비난해도 SNS 소통 계속할 것···조롱 당한 노무현 전 대통령 떠올라”",
+   "source": "경향신문",
+   "time": "2026-10-11T08:13:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE02VDF2Ykl6azY4Z2hMY3oxWXZGVUZBMy1pOEdzNmZmZ1ZCQ1pwai1zMVdBRjE4Rm9FdXcyVE5sRXc3cVpiMGlKdmtGaTZqbWE4SDhHZmR3YzVLd9IBX0FVX3lxTE0ySkJVSTlPb2tOenpaeXA3YzlhVUN3aGtRYUdKM0t0S2hnNTVralJwM0ZLWk5KT0xlbFRyel9taDJVSmV6bW0xU2lDOHFWdDZDRE9WVnQwYlp3NWtDQVdv?oc=5"
   },
   {
-   "title": "‘길 잃은 의제 설정’ 민주당, 지지율 35%…이재명 정부 들어 최저",
-   "source": "경향신문",
-   "time": "2026-10-11T19:10:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE03dEduZVAtaDc3T3NManh1UHlrYjluSEhvak9qZk41S2NaSHRNMHlxS1FGN2ZENzJxcFVCWlZhc1NwdHg5NXdMNG5FTHNsZVhQQkpjSzdtOHVYQdIBX0FVX3lxTE1CdmY4bXd1MWdGWXdhcmotenZBeURhUVFVTmROZWhGUkNremtwdGJ2QTRnSTRFempGZXBIeENhMTdIbFI1bm9WUEF6RDE0bHlJZXU5YlRDUTFhVFB1RUI0?oc=5"
+   "title": "미 재무, '푸틴과 경유 합의' 비판 속출하자 \"미국민에 좋은 일\"",
+   "source": "YTN",
+   "time": "2026-10-11T23:08:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFB1akJGZ2VYQmMtRXFfaWJHNUs3aDNtc2o1QmhMNTcybjgxa0FnUnczM011bG9EcHUyM2RkVEQ0SUZxeDl5cmtjNXBDNEk3LXZMd3ByT3lNZUtkMlVXRUE?oc=5"
   },
   {
    "title": "정의당 “이 대통령, 박원순 추억…성폭력 피해자 생각 안 났느냐”",
    "source": "한겨레",
-   "time": "2026-10-11T17:09:00+07:00",
+   "time": "2026-10-11T18:36:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE05Y1RnRXI4ejh6WnZ5bUdXMkY3cG5oV016OGlRazdkU0N1b0d3Mnk1OThVWHNvMGJ4M2RaNnNnZHlmVjVxNmJuZFFJdUViSGlTRExhRklORTJNcDQ0dl9HYV82OElfY1NOemNUSkpDRXNhYlNi?oc=5"
   },
   {
-   "title": "[단독]‘38명 부상’ 대구 천장 붕괴사고 건물, 7년 전부터 “무너질 것 같았다”",
-   "source": "경향신문",
-   "time": "2026-10-11T13:51:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE80eGdvS3dvb1lEaHl0OWFYUFh5cnpFQzVOZTNyMndpUHhjdXdBTlVHa1VtSk14TG5oZEtTV3RvTjBsWDZISEM2V3VYMi1EWDNzZVJ1TFc0dkdXUdIBX0FVX3lxTFBub0tCYlB1X0RqXzdZWVpSZTlFR0NCQXZXcVIxSzRaLXhCd0VOblh1NXhOUlRrZ2RMYmZwZF8yZk1HS3N4WWxvSkc5MWtZcTQwa09KYmc3WjJpbWtBaDdZ?oc=5"
+   "title": "메시지 줄이고 현장행보 강화 모색하나…金, 최저 지지율에 고심",
+   "source": "연합뉴스",
+   "time": "2026-10-11T04:35:01+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1QcnAwM2c0SlVLRDQ1dmczUHdQNGFHQXIzZnlSQ2piNmtSUFVpUTQzOFFORXE4WTUzRFRRM2YyNjJ2N0c2ZEVzajdialZmYmVvbC00ZXBNQ3RvU1Jnb1pQVtIBYEFVX3lxTE1QcnAwM2c0SlVLRDQ1dmczUHdQNGFHQXIzZnlSQ2piNmtSUFVpUTQzOFFORXE4WTUzRFRRM2YyNjJ2N0c2ZEVzajdialZmYmVvbC00ZXBNQ3RvU1Jnb1pQVg?oc=5"
   },
   {
-   "title": "이 대통령 \"혈세로 호사 누리며 서민 복지 예산 삭감\"…추미애 저격?",
-   "source": "연합뉴스TV",
-   "time": "2026-10-11T11:34:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5yQjE2MFphOGdNa2RXamR5UG4yc09fT2taQVhOLWg2UzN5aVNDWndrSUtOTmxzUkkzUjYxWDA5SVlOdGptV0g2c1Nob3VZN3I1Uk5IM2pMQlZXLXdsb2FHa3BMRW51STA?oc=5"
-  },
-  {
-   "title": "“투자금 잃고 겁나서”…딸이 휘두른 둔기에 아버지 숨져",
+   "title": "[단독] “투자금 잃고 겁나서”…딸이 휘두른 둔기에 아버지 숨져",
    "source": "KBS 뉴스",
-   "time": "2026-10-11T19:55:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBnZTRLWnQteEpKSmFsRWlQMVNSaUo3RkFnZGEySng1LVBRSFY4bG9XZjVFdmZ1THBaVzhDWVJsOTl5OFhQRWpkdTNtS2lPYjJxVWh4Q1JuSlA2YTR6d01KNU5BU05nZw?oc=5"
+   "time": "2026-10-11T19:17:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1JVTdxalRQanhHMXBydU1STDl1cVpjUXRRb05NaktJc250UXVvclhzZlIyUUQycDZUXzVHdU9uLVEwTERVa2RlTG1sMGpLLUlLMFU0RGxTaEV4V1k?oc=5"
   }
  ]
 };
