@@ -211,3 +211,7 @@
   - **확인한 것**: git stash list 0줄(tnk-dev·정본) · 정본 rebase 중 아님·ahead 0 · 라이브 index.json latest 2026-10-11-am(generated 2026-10-11T07:46:20+07:00) · edition-watch 예약 실행 2회 success(10-11 08:54·08:56 BKK, GitHub API)
   - **미확인**: 정기 실행기가 10-05 이후 왜 안 왔는지(근본 원인) · 09:28 댓글 점검 성공은 루틴 실행 기록 기준(automation.log 에는 줄 없음) · 오늘 18:08 저녁판이 정기로 도착할지(18:25 별도 확인 루틴)
 <!-- collab-handoff -->
+- 10-11 18:51 · 💬 [낮음·판 콘텐츠] **10-11 저녁판 '💬 오늘의 질문'·운영자 첫 댓글 20건 게시**(민구님 채팅 승인 '전부 OK, 20건 다 올려 줘', 백업 태그 `backup-20261011-1850-discussion-1011pm`) — 초안 drafts/discussion/2026-10-11-pm.json(정본, .gitignore) 글 그대로 `tools/discussion.py apply` → data/2026-10-11-pm.json|js 기사 20/20 discussion(approved:true) + tools/discussions/2026-10-11-pm.json, 초안 approved:true·applied_at 2026-10-11T18:50:37+07:00. 판 generated(18:20:47)·기사 글 그대로, 지난 판 재생성 안 함, workflows·tools·화면 코드 안 건드림
+  - **확인한 것**: 초안 글 = 판 데이터 글 20/20 일치 · discussion 빼면 판 데이터 = 게시 전과 같음 · newslib check OK(경고 없음) · 질문·댓글 태국 문자 0·฿ 0 · 승인함(data/pending.json)에서 dq-2026-10-11-pm 빠지고 dq-2026-10-05-am·dq-2026-10-11-am 은 대기로 남음 · 라이브 결과는 배포 뒤 아래 줄
+  - **미확인**: 실제 휴대폰 화면 · 독자 댓글 동작(Firestore 쪽은 이번에 안 건드림)
+<!-- discussion-1011pm -->
