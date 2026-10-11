@@ -216,3 +216,7 @@
   - **미확인**: 실제 휴대폰 화면 · 독자 댓글 동작(Firestore 쪽은 이번에 안 건드림)
   - **라이브 확인(10-11 18:53)**: ship.sh exit 0 · push 32d8a17 · 정본 갱신 · 라이브 반영 18:51 · 라이브 data/2026-10-11-pm.json sha256 = 로컬(b19e3362…) · discussion approved 20/20 · e/2026-10-11-pm/ HTTP 200 · 360px 화면(?ed=2026-10-11-pm)에 '💬 오늘의 질문' 줄 표시(backups/backup-20261011-1850-discussion-1011pm/live-1011pm-dq-360.jpg)
 <!-- discussion-1011pm -->
+- 10-11 18:59 · 💬 [낮음·판 콘텐츠] **10-05 아침판 18건 + 10-11 아침판 16건 '💬 오늘의 질문'·운영자 첫 댓글 게시**(민구님 채팅 승인 '다 올려, 다 올려', 백업 태그 `backup-20261011-1859-discussion-am-rest`) — 초안 drafts/discussion/<판>.json(정본, .gitignore, 읽기·approved 표시만) 글 그대로 `tools/discussion.py apply`(초안 approved:false 라 같은 글에 approved:true 만 붙인 목록 backups/backup-20261011-1859-discussion-am-rest/approved-<판>.json 으로 넘김) → data/2026-10-05-am.json|js 18/18·data/2026-10-11-am.json|js 16/16 discussion(approved:true) + tools/discussions/<판>.json, 초안 approved:true·applied_at 2026-10-11T18:59:12+07:00. 첫 apply 시도(18:59:07)는 초안이 approved:false 라 0건 적용(변경 없음) → 위 목록으로 다시. 판 generated(10-05 07:23:46·10-11 07:46:20)·기사 글 그대로, 지난 판 재생성 안 함, workflows·tools·화면 코드 안 건드림
+  - **확인한 것**: 초안 글 = 판 데이터 글 34/34 일치 · discussion 빼면 판 데이터 = 게시 전과 같음 · newslib check OK 2판(경고: 기사 수 18·16건뿐) · 질문·댓글 태국 문자 0·฿ 0 · 승인함 data/pending.json: 게시 전 15건(p1~p13 + dq-2026-10-05-am·dq-2026-10-11-am) → 13건(p1~p13 그대로, 다른 판·항목 빠짐 없음) · 정본 git status 깨끗(초안 파일은 .gitignore) · 라이브 결과는 배포 뒤 아래 줄
+  - **미확인**: 실제 휴대폰 화면 · 독자 댓글 동작(Firestore 쪽은 이번에 안 건드림)
+<!-- discussion-am-rest -->
