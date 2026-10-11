@@ -1,24 +1,30 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-11T19:58:33+07:00",
+ "updated_at": "2026-10-11T20:34:45+07:00",
  "items": [
-  {
-   "title": "중수청장 후보 비판한 임은정… 행안장관 \"감찰 지시할 것\"",
-   "source": "조선일보",
-   "time": "2026-10-11T12:32:36+07:00",
-   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNaXBWU1pqdWRuWVlacVIxVlNnU0RTcFZrLVVFTUFqREd3bmIxdDctakVDaENEeFBkT0sxbFdmNnFUWVVMN2kxVW04U1RWZDBLTklsTHFGZUozNE15OVRYUUhRTUROdHd6REwtdXJHTGpmdFA5bGRYQ1c0TVlmaVVGNzR0NGNHVEpqSmdQRjg4UFE?oc=5"
-  },
-  {
-   "title": "“한동훈 딸 행위, 사회에 큰 해악”…4년 전 연구자들 성명 낸 까닭",
-   "source": "한겨레",
-   "time": "2026-10-11T18:35:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5qaHVld3poYUxvYlhxV3dDaDZJTmpjZVZQNlROeHVxZFRvY3BacXVvdXM0M1E0blV3TUdYX2FtbDcxMXVic0thcTltbzd5emVVUWZDUEVBdFp0UjE3MlNBeWpnTktJNTRyRWxxeE4zX3BtV0Zi?oc=5"
-  },
   {
    "title": "청, 대통령 휴일 일정 이례적 공개…“골프장서 대구 사고 보고받고 지시”",
    "source": "한겨레",
    "time": "2026-10-11T18:44:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1CazZZaVNFNFFzSUpON2FNRVJpS1RBSjZjSjYzSkNrS2JhNmEzQjN5dHZfNndQaUpTblY4bzVITV9pSVVDQWozSFNYZWtqNzRoS1dzVEVXQ1BMUnkxOW1Xc2ltYzloSE5ZMW1j?oc=5"
+  },
+  {
+   "title": "민주당 \"한동훈, 막말로 질문 못 피해‥'딸 논문 대필' 벤슨은 누구?\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-11T12:51:49+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1pWWNiM19NZmZxS2J5dElWZjhOTnh5aV9uaVhOQmI2a1c1Y0p3ZWlaYUxOdVo1eFg3eEhNRlR0Z0FMS1hQdkZ0MTRoMHRGeDlUXzRhUEY0RXU1WDE1NXE3V0RpeThWZGNMMzd3NjB0LVFWZnFfNDBic9IBeEFVX3lxTE9LTURBMHhRQkVLb2paem50X0tHVWRXY0ZMZjdhSHVwLWk1ZVFFOEYyczdTZnVmcDcyUUhKQ3ppZmlrbUJsSlo1ZUpRNGJrVnotQS1nbGxxV0htVzR3Q1BzRUhYZHJWZzRPV202UGo1OGVndUxLcW5Tbw?oc=5"
+  },
+  {
+   "title": "이 대통령, SNS·생중계 회의로 ‘정책 드라이브’ 걸다 급브레이크 반복",
+   "source": "한겨레",
+   "time": "2026-10-11T15:09:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9ZREUtV3hidHEyWFhBRjNHNzA0UXNaeGJ5RlhjUDJ3RXVyS2tYTUdkVTBSOHZucFZnRVlLQVVqbTJCNjR2c1Bzblo2eG5SdGxaME5DbVZGa1NpTW15ZGhobG82bmtCaFhPcjdnUUV3V29pdw?oc=5"
+  },
+  {
+   "title": "‘길 잃은 의제 설정’ 민주당, 지지율 35%…이재명 정부 들어 최저",
+   "source": "경향신문",
+   "time": "2026-10-11T19:10:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE03dEduZVAtaDc3T3NManh1UHlrYjluSEhvak9qZk41S2NaSHRNMHlxS1FGN2ZENzJxcFVCWlZhc1NwdHg5NXdMNG5FTHNsZVhQQkpjSzdtOHVYQdIBX0FVX3lxTE1CdmY4bXd1MWdGWXdhcmotenZBeURhUVFVTmROZWhGUkNremtwdGJ2QTRnSTRFempGZXBIeENhMTdIbFI1bm9WUEF6RDE0bHlJZXU5YlRDUTFhVFB1RUI0?oc=5"
   },
   {
    "title": "국힘 “한·미 동맹 파탄”…정동영·이종석 해임 촉구",
@@ -27,10 +33,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0zMWJDbGFxMTFtdEMtR1BmWFk5VDV5b0hiZWIxMWQ2SGVZNXpTNThZMjRUcFFIVURXR1MwNUZGNXFEcGc0MzBneE9BRGtmTUhJTkNYVDZFX1hGd9IBX0FVX3lxTE9fdTk1NnNacVYzOFpkRkhXSE8wSzR4ckc0V25qb0xzc2NXcFFONm9fQW9keWR6WUY2TmxKd25wSWE2MGhwclpLVzBKZUFDS2VIYkFoNUd6dmVWR2tFelZF?oc=5"
   },
   {
-   "title": "이 대통령 “품격 없다 비난해도 SNS 소통 계속할 것···조롱 당한 노무현 전 대통령 떠올라”",
-   "source": "경향신문",
-   "time": "2026-10-11T08:13:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE02VDF2Ykl6azY4Z2hMY3oxWXZGVUZBMy1pOEdzNmZmZ1ZCQ1pwai1zMVdBRjE4Rm9FdXcyVE5sRXc3cVpiMGlKdmtGaTZqbWE4SDhHZmR3YzVLd9IBX0FVX3lxTE0ySkJVSTlPb2tOenpaeXA3YzlhVUN3aGtRYUdKM0t0S2hnNTVralJwM0ZLWk5KT0xlbFRyel9taDJVSmV6bW0xU2lDOHFWdDZDRE9WVnQwYlp3NWtDQVdv?oc=5"
+   "title": "임은정 “중수청 1호 감찰 대상 돼 안타깝고 서글퍼…잘 대처하겠다”",
+   "source": "한겨레",
+   "time": "2026-10-11T15:09:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9EQVVoQU1kQjBxUEliMERKUktPV3ZIek94cUpPdThfeGptYlVGWE9NQ0tVRXljcllZNGZSSmQxNk0xU09nNU9ZenZpblpaaHppb0JnQzdWR2Vvb2NKd3VGOVBBLWVwUENoUUFVZjFxLS00Zw?oc=5"
   },
   {
    "title": "[단독]'장모 살해' 20대男, 앞서 '아내 찾아달라' 경찰에 신고",
@@ -39,28 +45,22 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE0ybS1jMzJiYUJES2xvbmphYmZtWm9hakVjNEFOWEItMkVlVGRUY1VQeWNyTGl1Y0IwZFczMzY3V01obnN1bHduMnNhQmhfdUVDeVE?oc=5"
   },
   {
-   "title": "생후 2개월 여아 멍든 채 숨져‥40대 친부 살인 혐의 체포",
-   "source": "MBC 뉴스",
-   "time": "2026-10-11T15:31:44+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9uaEZ0QW9qTmZYaVNfZ3JiWnA0S0dpZjN5ZW9KejlNSF9ZenFDdTc2QzE0QmcxZHV2bndTZ0hyeXZNa0NjV1hqQzFNa0szcS02OVJFbnQxMHRVVldicGMzb285ZHdfQ3R0R0ZQS2w3ejhLSnk3dVVF0gF3QVVfeXFMTkhzeWNtWXlDMWNCazBzNTcwMklCclJib2JrOXh6MWdGcjZ3OUgya2lVbFNJQWNqdDRwRGRFSGViR3hIZlZNODBHUHlJNDlRYXNSeURRazR2WGwzUGtfUm10Nkk0V1RKX05rVXJjSDRRVWI2ZkJsOFE?oc=5"
+   "title": "[속보]정의당 “李대통령, 성폭력 가해자 ‘박원순 미화’ 사과하라”",
+   "source": "문화일보",
+   "time": "2026-10-11T17:09:42+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5pblprQVpIM09JTktpN0NFLWpTWVVoNi1DZ2QxYzN2dzFrOEVSX0NCZmYtb1pMTnU5cWVXUndkanZFNnlPSXVlRFQ0Rno3ZVV6?oc=5"
   },
   {
-   "title": "李 “서민 복지 예산 삭감하는 사람이 그들의 삶 이해하겠나” 추미애 저격? - 조선비즈",
-   "source": "Chosunbiz",
-   "time": "2026-10-11T11:06:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNVkNQUlRBbGMwZWRlNVBmeFFDczZJSHZOM3dORV9YeWs5NGZNdll4XzNSTmFxXzhZUV8tT2R5eHY0ZFBBTHRZTDVDV0JCMlpNOWFDT3ZyZktxUkR6V3M2cUNfWmlMcDdsVGxEcUlYdWJTX0RLN1NWNXlhYTRVdzlOcXlpYVF6ek43QXVuVHpqaG9pcGZxQTRDNnRn0gGuAUFVX3lxTE1YR3UwUlhWeWl2Ynd6WmpDeWVqNWptMzYxRW9SMWRNZUhLSjJnQ0c0WmYxcW0zLWhYVzMxNWQ2c3BENVd5UzlRZTUxcUNnRWdZWHRBZGRoV0VNNDdjODJyX3R6OXJQdm55YUFULXQ0aGdfc2p3MmZ1MmRoeDVsUXMxb3FGYkNCQjFSQ3VfVi10Y3FNM3BIcGg2ZzkzX2czOWk4RExaU18zcktRelpNQQ?oc=5"
+   "title": "이 대통령 \"혈세로 호사 누리며 서민 복지 예산 삭감\"…추미애 저격?",
+   "source": "연합뉴스TV",
+   "time": "2026-10-11T11:34:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5yQjE2MFphOGdNa2RXamR5UG4yc09fT2taQVhOLWg2UzN5aVNDWndrSUtOTmxzUkkzUjYxWDA5SVlOdGptV0g2c1Nob3VZN3I1Uk5IM2pMQlZXLXdsb2FHa3BMRW51STA?oc=5"
   },
   {
-   "title": "미 국방부, 이란전 사망자 집계 수정‥공식 사망 21명으로 늘어",
-   "source": "MBC 뉴스",
-   "time": "2026-10-11T13:06:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE0ybF9zYzlGQjlZQXBoS0dXb21FWkRRa0IwSWFCX0VKTFVOQkpZLUlkMWNtbGx5ZVphamJwMnhiMVV5ZmsydG92ZF9IR05xcGRjR094WnBCZ1RXVW1mV19OUHRORDVoZXB4U2xIUjB5TkU3LTM10gF0QVVfeXFMTWxXWHJISGp5cEFHYUVzQnYxdFhuRUxYUl9USnhDbWlTTUNUTlFYTXVfdFNodWtqa3JrMXF6RGpUSkt6WTJlSHB6NEdfbWlocl9YVHFJVVE0eWk3OVM5SlRHRmZfbGotMFY4WUJHcEZoTlZ6dWQ?oc=5"
-  },
-  {
-   "title": "정의당 “이 대통령, 박원순 추억…성폭력 피해자 생각 안 났느냐”",
-   "source": "한겨레",
-   "time": "2026-10-11T16:57:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE05Y1RnRXI4ejh6WnZ5bUdXMkY3cG5oV016OGlRazdkU0N1b0d3Mnk1OThVWHNvMGJ4M2RaNnNnZHlmVjVxNmJuZFFJdUViSGlTRExhRklORTJNcDQ0dl9HYV82OElfY1NOemNUSkpDRXNhYlNi?oc=5"
+   "title": "[단독]‘38명 부상’ 대구 천장 붕괴사고 건물, 7년 전부터 “무너질 것 같았다”",
+   "source": "경향신문",
+   "time": "2026-10-11T13:51:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE80eGdvS3dvb1lEaHl0OWFYUFh5cnpFQzVOZTNyMndpUHhjdXdBTlVHa1VtSk14TG5oZEtTV3RvTjBsWDZISEM2V3VYMi1EWDNzZVJ1TFc0dkdXUdIBX0FVX3lxTFBub0tCYlB1X0RqXzdZWVpSZTlFR0NCQXZXcVIxSzRaLXhCd0VOblh1NXhOUlRrZ2RMYmZwZF8yZk1HS3N4WWxvSkc5MWtZcTQwa09KYmc3WjJpbWtBaDdZ?oc=5"
   }
  ]
 };
