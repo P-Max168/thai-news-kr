@@ -214,4 +214,5 @@
 - 10-11 18:51 · 💬 [낮음·판 콘텐츠] **10-11 저녁판 '💬 오늘의 질문'·운영자 첫 댓글 20건 게시**(민구님 채팅 승인 '전부 OK, 20건 다 올려 줘', 백업 태그 `backup-20261011-1850-discussion-1011pm`) — 초안 drafts/discussion/2026-10-11-pm.json(정본, .gitignore) 글 그대로 `tools/discussion.py apply` → data/2026-10-11-pm.json|js 기사 20/20 discussion(approved:true) + tools/discussions/2026-10-11-pm.json, 초안 approved:true·applied_at 2026-10-11T18:50:37+07:00. 판 generated(18:20:47)·기사 글 그대로, 지난 판 재생성 안 함, workflows·tools·화면 코드 안 건드림
   - **확인한 것**: 초안 글 = 판 데이터 글 20/20 일치 · discussion 빼면 판 데이터 = 게시 전과 같음 · newslib check OK(경고 없음) · 질문·댓글 태국 문자 0·฿ 0 · 승인함(data/pending.json)에서 dq-2026-10-11-pm 빠지고 dq-2026-10-05-am·dq-2026-10-11-am 은 대기로 남음 · 라이브 결과는 배포 뒤 아래 줄
   - **미확인**: 실제 휴대폰 화면 · 독자 댓글 동작(Firestore 쪽은 이번에 안 건드림)
+  - **라이브 확인(10-11 18:53)**: ship.sh exit 0 · push 32d8a17 · 정본 갱신 · 라이브 반영 18:51 · 라이브 data/2026-10-11-pm.json sha256 = 로컬(b19e3362…) · discussion approved 20/20 · e/2026-10-11-pm/ HTTP 200 · 360px 화면(?ed=2026-10-11-pm)에 '💬 오늘의 질문' 줄 표시(backups/backup-20261011-1850-discussion-1011pm/live-1011pm-dq-360.jpg)
 <!-- discussion-1011pm -->
