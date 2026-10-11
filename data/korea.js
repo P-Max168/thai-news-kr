@@ -1,24 +1,24 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-11T14:35:16+07:00",
+ "updated_at": "2026-10-11T15:54:10+07:00",
  "items": [
-  {
-   "title": "중수청장 후보 비판한 임은정… 행안장관 \"감찰 지시할 것\"",
-   "source": "조선일보",
-   "time": "2026-10-11T10:11:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNaXBWU1pqdWRuWVlacVIxVlNnU0RTcFZrLVVFTUFqREd3bmIxdDctakVDaENEeFBkT0sxbFdmNnFUWVVMN2kxVW04U1RWZDBLTklsTHFGZUozNE15OVRYUUhRTUROdHd6REwtdXJHTGpmdFA5bGRYQ1c0TVlmaVVGNzR0NGNHVEpqSmdQRjg4UFE?oc=5"
-  },
   {
    "title": "이 대통령, SNS·생중계 회의로 ‘정책 드라이브’ 걸다 급브레이크 반복",
    "source": "한겨레",
-   "time": "2026-10-11T14:12:00+07:00",
+   "time": "2026-10-11T15:09:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9ZREUtV3hidHEyWFhBRjNHNzA0UXNaeGJ5RlhjUDJ3RXVyS2tYTUdkVTBSOHZucFZnRVlLQVVqbTJCNjR2c1Bzblo2eG5SdGxaME5DbVZGa1NpTW15ZGhobG82bmtCaFhPcjdnUUV3V29pdw?oc=5"
   },
   {
-   "title": "국민의힘 주진우 “대통령, 대구 붕괴 사고 당시 ‘황제 골프’”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-11T12:48:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1WRmdOcWxJaFp6OHNxTEVjVXZSeFljOU9CaTFTQUY2RnJVUlh5bm93ZTVrZWR6WE44NWljdlluWmhuRnRaeVB5aDIzWWx1V01Hb3puN255SWNSOUk?oc=5"
+   "title": "靑 \"李대통령, 가족과 골프...대구 붕괴사고 보고받고 현장서 지시\"",
+   "source": "조선일보",
+   "time": "2026-10-11T12:11:31+07:00",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNUFVsSGp2REhidEVKbTBfTnl4V1BvVWc0RTJ6aFYwZVhhckZ5WVVoek1IX1g1dHdCVDNaYW9ObVJHRXVsRldaY2F6WXdfckUwMmxFREtnWEptUGxnLWgyTWd3bXBhaU9vUWtPOUZfSlZhQ1I5eFJJVzdMNkNMT2hTTnlhOTRXTEpmLURLSU9GTHE?oc=5"
+  },
+  {
+   "title": "윤호중 행안장관, ‘김지용 반대’ 임은정 감찰 지시…범여권 파열음에 중수청 내부 단속",
+   "source": "경향신문",
+   "time": "2026-10-11T14:26:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9BZG50ZmZIZWJkdllGNEZnb1dzMmRiNTNqa1BwV0pQT25SM1hYelZoWGVMODM0VHFhenlXUzJiTXVjZjNUSEUzeURJbVRoSUlRbnBzT1h1OUdRd9IBX0FVX3lxTFBBZzZHZXYwWG1jWWxrZ01pNk1sTkkxU2VDNTZjUkJZUGxjQldmOGFJcGFjbDZRUG4tcmk4cjBXMWlic0MySmNTZjdaN1NWSFRUN3FoRkNxQktYMjBXRVl3?oc=5"
   },
   {
    "title": "이 대통령 \"혈세로 호사 누리며 서민 복지 예산 삭감\"…추미애 저격?",
@@ -27,40 +27,40 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5yQjE2MFphOGdNa2RXamR5UG4yc09fT2taQVhOLWg2UzN5aVNDWndrSUtOTmxzUkkzUjYxWDA5SVlOdGptV0g2c1Nob3VZN3I1Uk5IM2pMQlZXLXdsb2FHa3BMRW51STA?oc=5"
   },
   {
+   "title": "민주당, “한동훈 딸 논문 케냐인이 대신 썼나” 대필 의혹 공세…김민석·한동훈·조국 ‘자녀 소환 전쟁’",
+   "source": "경향신문",
+   "time": "2026-10-11T14:07:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE05cGFOeE1heHRtQmpMcXFrY0tqRm1JdmkwdERLc1h2clV4TVNnaHRXYUpuVDh6NktXYWRYalpHVGtIN3Yza1RGcG1Za1R5SkZJMEloUE1RaHpDZ9IBX0FVX3lxTFB1dElvWTdLcmZTM2lTcXlsOFVzMWg2Z2cyaXpPTi1jTXl2T3hCbFF2LXMzZS1GNk9Nd1JzeGwxMjlKeWw1VzZCQ05waWZhWWl1SWo0Mk43b3BXLXJlVWtz?oc=5"
+  },
+  {
+   "title": "이혼 소송 중 장모 살해하고 도주… 경찰, 신변보호 요청에도 못 막았다",
+   "source": "조선일보",
+   "time": "2026-10-11T12:55:40+07:00",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxORmp5ZnY2ZTZzYV84dUxZRk9Wd1hQemZnMXprSnJqeHFNMmlrRmlWQ1U4Ti0ybnZXV2dDdFlQbm8xbGVHR1luSHpIdkdWaW1reXl6eWlBMXZxbE1vbmdrYmVMOVZDcnZoQ3N3SjR0X2xUblUtUlBzcWV1WWJnREIwVXlPNEhvOHdldkhzSHZuYjQ?oc=5"
+  },
+  {
    "title": "나경원 ‘젤렌스키 감사 편지’에 민주 “극우적 몸부림 가여워”",
    "source": "한겨레",
    "time": "2026-10-11T08:55:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFB6V2lkbmJBT1dVVXBSOW5sX2xnVjEzRW44a0FROFMyaVplNmxkdWU0V1J4VzJ2TGh4SFJKZjB5Qm5rRVNPZ1BRZ2tFS1I4UWRTaHN1bUwtakZkc1psRl9MUjhrWGlPU2hHMWthZ3ZBOTc2emNR?oc=5"
   },
   {
-   "title": "경찰, 대구 상가 붕괴 현장 감식…관리 부실 책임 여부 확인",
-   "source": "조선일보",
-   "time": "2026-10-11T07:53:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQZk1CaVNlVVZwcFFYRUdYa3hWbnJQRDc3aHkwVm5taTY1NWhESElPNjRQM1BNLUthRm1xcmNIblVIRGhzbmY4MnE4NWFUaXc3d1VUbVlsUWlHUGtSQVlGekU4ODVRcnBhRVRzREh0SFMtX3hwVHJ3ZDBGaktfWDNTc0llZEVlZw?oc=5"
+   "title": "메시지 줄이고 현장행보 강화 모색하나…金, 최저 지지율에 고심",
+   "source": "연합뉴스",
+   "time": "2026-10-11T04:35:01+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1QcnAwM2c0SlVLRDQ1dmczUHdQNGFHQXIzZnlSQ2piNmtSUFVpUTQzOFFORXE4WTUzRFRRM2YyNjJ2N0c2ZEVzajdialZmYmVvbC00ZXBNQ3RvU1Jnb1pQVtIBYEFVX3lxTE1QcnAwM2c0SlVLRDQ1dmczUHdQNGFHQXIzZnlSQ2piNmtSUFVpUTQzOFFORXE4WTUzRFRRM2YyNjJ2N0c2ZEVzajdialZmYmVvbC00ZXBNQ3RvU1Jnb1pQVg?oc=5"
   },
   {
-   "title": "장동혁 \"곳곳에서 한미동맹 균열‥정동영·이종석 즉각 해임해야\"",
+   "title": "김용민 \"자리 탐하려고 정치한 것 아냐\"‥이 대통령 정면 반박?",
    "source": "MBC 뉴스",
-   "time": "2026-10-11T09:12:14+07:00",
-   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9MQU1WdG9xcjctOU56Uy1jcTNJSUpfMy1EOXpfb0lKcm95d1lyeXU2TW1BdUNEb0VISWdYZlc5ZlFjLWcyWEIxTGZibmxZRzd2dnJZZ0lraVMycTRIZVp5VS1SSjVzdHhoWU1QUDdCc2dUcGdkMkg5WdIBeEFVX3lxTFBNaWRhN0RQNFdFOXVPX3QwNVpKcjQyVmJPeUxJLVJHaHpsQmx6YUN3QlRyMXBSSnZqUUVYTzREbVM2X1dHQmdFd2h3aS10azRDemxVeHJOVnprNEd0dmpsNXNGTXR2Y3FhV0c4ZlBZYmltWFpSbWhSRg?oc=5"
-  },
-  {
-   "title": "내륙 곳곳 소나기에 일교차 15도 안팎 …내일도 내륙에 소나기",
-   "source": "KBS 뉴스",
-   "time": "2026-10-11T12:12:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1HQWpxNWJNNG45bTlJUHJHLUJZczM3Nm9FWGNDUzg2TTcxNVlXSmtxWjNGMUM0WHdXSHNrd1hleV9HVU9icHlXbER2Wm1XWXpNRXF2dElMa1drN3c?oc=5"
+   "time": "2026-10-11T09:24:32+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBHMjhreXVpa0lPVG5ZZTRlYlhQNkduQ2U2Nzl6bHh5Uzdyb0RScWZzaFVxakVEaWxyNWZOZDJxbTNzXy0zbDEzcW5MaXEydktiUC1pY1RYd3N6em54dURra3NsV1pMX1BGY1FLUl9YYWt2bUNYRnFLLdIBeEFVX3lxTE16ZXZXbGZoUDl2aGt3UTB5UHBJZXRfWG11Qk9qeEM0cmFhbE1FLUFMekhHVzdhaWpJWGo5eWU2TmgzcDc4Qi12REdvYTFnSlNTcVljM3pyWHo5c0hkUHhDZTFOZWZQM3d4MDFhZHhPcDlGUHFJNUFjNA?oc=5"
   },
   {
    "title": "민주당 \"장동혁, 조희대 하수인 자처‥모욕받은 건 국민\"",
    "source": "MBC 뉴스",
    "time": "2026-10-11T08:17:54+07:00",
    "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFByTk1FN2VSell3bFdBREVpeDNMa2xBTGxoN0I2QTItTkl6X3B1YXR0a3RIeUtvRVZ1alJUOFBjTmZ5Ry1lMWVpUHFVRVBzUnhWZ3JkZFpjNkdTcXBhSGl5U0JrYTRzelY0M1lTNkM4S2ZVTlhoNGRMbtIBeEFVX3lxTE1ZUzlEc0w0Wnh2LUdmWU1DM2IzV29DVk1HTzhvb21qVlJ4ME5Pd2lVdmwySTMwcmlvZEE1Vk9EemxXT2djNnRpODZZUTR5VDhWVkIzazNxWU5ubl9WcjlKbmNYLWdUa3hheW9qY0RvZUpXUjQ0ZFdIcA?oc=5"
-  },
-  {
-   "title": "김용민 “자리 탐해서 정치한 건 아냐”…이 대통령 비판에 반박",
-   "source": "한겨레",
-   "time": "2026-10-11T08:24:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE8weHRGeHF5RjF3MTZ5ZGhvSUoxdWkya0IwT0puS2dBcU1SQm85Mk45NjVTaGtvaE9lTTYwN21tVEJIdkxmSmFWeVcxVTU1R1ZYYWhkX0l6R1ZjWWV6VmdfcHMtbjVpRUQzVWtJb09UMU1xSVlJ?oc=5"
   }
  ]
 };
