@@ -1,12 +1,12 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-12T03:54:05+07:00",
+ "updated_at": "2026-10-12T05:54:15+07:00",
  "items": [
   {
-   "title": "‘반김지용’ 임은정, 중수청 첫 감찰 대상",
+   "title": "[단독]한동훈 딸 ‘허위 스펙 의혹’ 경찰 수사, 압색영장 신청 전무…배우자만 1회 ‘서면 조사’",
    "source": "경향신문",
-   "time": "2026-10-11T19:42:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5Ib2JFczVpTF9xQ2hVVTd1T0lkTXpaOXhtbHNGaW8xWklMMVlyVXB1aV92eFlSU2FoMDZtWm5mel83WHNUNThqRGhfTzBfZWVfVkVRTEpaVjhvd9IBX0FVX3lxTE05YmFUYVVJR3BiandoXzQyZkF1VXBlZ0xUdUZWTm96TEp3SGFvbU1PMGJpMzN3UnRyVXVjc0h0WTlRT3BSWk9SLUJzUHVtTW5SLTVGcWFhX3I0WHRUT1NF?oc=5"
+   "time": "2026-10-12T04:00:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBLVHpzd3ZjS2x6ODZ4MEFCaFh5SXNHNVJ3d0VWZkJjR3hXSXlhNENhdzhIWjJQSExlM25nck1EMHpIREdUdHU5U3hXTDFoS2ZYbHppS0xIT3VBd9IBX0FVX3lxTE8zMm41WGU1dTJ4ajhLSFNaZm1fQ2pobUl6VDV3cXpqNHdfYzAtVTVOdGZHd3NfUktjZkptLURneUY5U0Y2S1hJOGxCNGRzU1kyN0g4VWg4MlR6UzhiSmFR?oc=5"
   },
   {
    "title": "“품격없다, 권위없다 해도 계속”…이 대통령, ‘SNS 정치’ 정면 돌파",
@@ -15,10 +15,16 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE4yb1NSbzBwVy1vcmUxTzBoZGdIUVFmUGpoT2JHMXlkWnBkR2stbTVfYWpwazF0d3FQaV84NXVGUDdHN3NVZTNFMEJGakRlT09pQ0FWblE1bGU1ZHhKYV9RQmlBZFlDbkZDWlpj?oc=5"
   },
   {
-   "title": "오늘 중부·경북 내륙 소나기…내일부터 추워져",
-   "source": "KBS 뉴스",
-   "time": "2026-10-11T22:06:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE4yTGY4RzA0empILXZBa0R5WGpqUlJlUEJNcDRVTUZyZEFRTnkyamNSd3dmQ2JqQURWMURfazdMLVhaYW1OSEdPblg5TmxEVWFBY0h3dmdieThtNWs?oc=5"
+   "title": "[오늘 날씨] 선선한 가을, 가끔 소나기.비...이번 주 주간예보와 태풍 진로는?",
+   "source": "헤드라인제주",
+   "time": "2026-10-12T04:00:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE16bS1HcEFVUlNlR3pzak05NDhyS1RFV3VNOURqYl9GWGtpWVFkTHVpSVhOR2NmU2U1NER0NDNOX1J1NDBPQ0JZN1A3UlNxekFRQjc4ZTZ3UGRrM0RKUld0eEg2elBaV0ZVRi10UVhZLWJUeDA?oc=5"
+  },
+  {
+   "title": "임은정 “중수청 1호 감찰 대상 돼 안타깝고 서글퍼…잘 대처하겠다”",
+   "source": "한겨레",
+   "time": "2026-10-11T18:36:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9EQVVoQU1kQjBxUEliMERKUktPV3ZIek94cUpPdThfeGptYlVGWE9NQ0tVRXljcllZNGZSSmQxNk0xU09nNU9ZenZpblpaaHppb0JnQzdWR2Vvb2NKd3VGOVBBLWVwUENoUUFVZjFxLS00Zw?oc=5"
   },
   {
    "title": "이혼 소송 중 장모 살해... 경찰 신변보호는 무용지물",
@@ -27,10 +33,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxORmp5ZnY2ZTZzYV84dUxZRk9Wd1hQemZnMXprSnJqeHFNMmlrRmlWQ1U4Ti0ybnZXV2dDdFlQbm8xbGVHR1luSHpIdkdWaW1reXl6eWlBMXZxbE1vbmdrYmVMOVZDcnZoQ3N3SjR0X2xUblUtUlBzcWV1WWJnREIwVXlPNEhvOHdldkhzSHZuYjQ?oc=5"
   },
   {
-   "title": "국힘 \"정동영·이종석, 자주파 아닌 종북파…해임해야\"",
-   "source": "연합뉴스TV",
-   "time": "2026-10-11T12:27:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE43Yk1SaG5NLWlWU1ZwWlpFZ2hranBCQ3BRWFVHdUZiZlJTM0NIbm8yYUdBQUZxX0RBeXBUVTRnRks1b2t2QVVFektkVm8xY2ZZZTR3ZDZvSkFqUDl4WXBNNUpRS0RoTzg?oc=5"
+   "title": "정의당 “이 대통령, 박원순 추억…성폭력 피해자 생각 안 났느냐”",
+   "source": "한겨레",
+   "time": "2026-10-11T18:36:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE05Y1RnRXI4ejh6WnZ5bUdXMkY3cG5oV016OGlRazdkU0N1b0d3Mnk1OThVWHNvMGJ4M2RaNnNnZHlmVjVxNmJuZFFJdUViSGlTRExhRklORTJNcDQ0dl9HYV82OElfY1NOemNUSkpDRXNhYlNi?oc=5"
   },
   {
    "title": "국정감사 2주 차 시작…행안위 경찰청·외통위 주미대사관 국감 쟁점 예상",
@@ -39,28 +45,22 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBrNkozbG1JTXBoVUVVOE1KOXVfdmZ5MEo1bG9ONGE1dk1VOGg4bEphLW04SndzY1NvaGgzLVd0VDhoRjNMSHZDVzc2SnpISVhmTkxoVFBZZmNvakE?oc=5"
   },
   {
-   "title": "청와대 “이 대통령, 어제 골프장서 대구 사고 보고 받아···비공개 일정, 정치적 공방 활용 유감”",
-   "source": "경향신문",
-   "time": "2026-10-11T12:01:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5mQnZ2NUF4MjIwbWJYd0RUMXBNbzJFS1pQWFoyc0U4SkQ5MFFOZ2JqTnM1WjdCVXRhQkVVdjF5RjhQaDJzTjg5X0g5YzZqOGRyc0xkQmlFM3EzQdIBX0FVX3lxTE5qQUV4aDdrVVEwa3BJZS1fOHFkc0xUYndSTmVueW8zVVJpMkVWM3k0MEhTM1ZzOWdnODBSUmNidXM1dlBrWE5VcmQ1bFV1NTFOTlozX0xpSHBlZmtKYXFv?oc=5"
+   "title": "트럼프 “러-우크라, 에너지 휴전 합의”…구체적 내용은 없어",
+   "source": "한겨레",
+   "time": "2026-10-11T23:09:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNVW8zRG1HdElNVUc3eTRHbkFXZVZxV0hBX2ZtLUtwY2xDLUFIR3B5czFvM0xGQlVlQ0QtaGEwQ29ZZVpxeDUxeWNGZzIwcXFveVBFVXlOZk9TMVVWN2V6NG1qenJQNVpPRzhDU2licmRjcDhXZHVoZWJrSHBlVDcxSllB?oc=5"
   },
   {
-   "title": "‘한동훈 딸’을 때리자... ‘김민석 아들’로 반격",
+   "title": "‘부캉이 인파’ 북항 친수공원, 불법 주차 ‘아수라장’",
+   "source": "부산일보",
+   "time": "2026-10-11T15:55:49+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE12YS1tR0NCMkF6eU9ZczdES21fdGJDbTI5WXRxS3lmcDU5OGpEUkNscEgwTjVjWDNudGY1cW5uNW91d0ZxTVU0dzkxc2JGaV9WbXF1MWJNWlBLMFhQMmpGMGdFZlUxWV9iUGZaNWdDVVN1UDlx?oc=5"
+  },
+  {
+   "title": "총살형 생중계 승인에… 교황 \"사형은 인간 존엄성 공격\"",
    "source": "조선일보",
-   "time": "2026-10-11T16:11:10+07:00",
-   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPOTB3eWQtaFNpVXVTRUVjUDIzbW1SdHBCeVhFZmptXzdIOXVuRkk3RUpDSVlvOE5iNmxjX0stWlg1dzdnQzJxVGcwalBTYm9wU0NvT08zcjRPRUl0YTJyaUZMSFZWVzVWT1hhZWFmTU9VOVIxYTVZU19QZFE1YTRrSEt5cG9udll2SnhxUVQzdEs?oc=5"
-  },
-  {
-   "title": "정의당 “이 대통령, 박원순 추억…성폭력 피해자 생각 안 났느냐”",
-   "source": "한겨레",
-   "time": "2026-10-11T18:36:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE05Y1RnRXI4ejh6WnZ5bUdXMkY3cG5oV016OGlRazdkU0N1b0d3Mnk1OThVWHNvMGJ4M2RaNnNnZHlmVjVxNmJuZFFJdUViSGlTRExhRklORTJNcDQ0dl9HYV82OElfY1NOemNUSkpDRXNhYlNi?oc=5"
-  },
-  {
-   "title": "경찰, 두차례 국정원 압수수색…안보실 예산 ‘불법 지원 의혹’ 수사",
-   "source": "한겨레",
-   "time": "2026-10-11T20:04:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBIV1ZPRzVPcTRyVnEyWG1iTDdxRmRTdDl6dnE1enhpcFFubUtwZU05UURXamhnUEFFQ2o2RVEzUEo2ZEZkU2NtcmxIZllTWm9NcHFDLUpibWc3OTh0aVBUdGQ3R3dGMWFWUmU0NFRqSUtWZw?oc=5"
+   "time": "2026-10-11T22:40:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOOGdTRzZSS1BDd0JTaFFxaGFORkY5bFdzdC1yWDd3cjV6SURFN1Y5SFgtSUxhenUxUzdFOS0zZXg4VzdnMXdSYUlRWE9Oajc5UUd2NzBCZ1IyY1JFb0Y3TS13OE55MGw3NVlycllmVW5YRzAtaTA4RG5zQTR3MDlYRkZNb0g?oc=5"
   }
  ]
 };
