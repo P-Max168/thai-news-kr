@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-11T08:01:18+07:00",
+ "updated_at": "2026-10-11T09:54:47+07:00",
  "items": [
   {
-   "title": "\"품격 없다 해도 SNS 계속할 것\"…李, 노무현 떠올린 이유",
-   "source": "한국경제",
-   "time": "2026-10-11T05:39:36+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9jaERTeHJ3N2RWUlU2djZRVW10NHFRWFM4Q3lTdVlDMUltb1U0Qm1vbXRkbzVTR2s1MWZvencwZGVjU0NJYTVlZVVhYTNTejNKTVNtMTJSOHQ3QQ?oc=5"
+   "title": "이 대통령 “‘좌아하게’는 일베 용어 아냐… 폭언 계정은 차단”",
+   "source": "한겨레",
+   "time": "2026-10-11T09:08:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5xRDA4Rnp1MmhKSHJxdGx5S2J1UmlOd0l6M3JJTWNrSkNrZjB5RUNXWEpzX01xWkRkdzNXRVVTaXV0TVZsd2JfZk5qU3l6a0MyTVJRUGhHNEJfTUhIbzFVbnhvSldnV1FYbEZz?oc=5"
   },
   {
-   "title": "[내일날씨] 전국 곳곳 최대 10㎜ 소나기…아침 최저 13도",
+   "title": "[날씨] 연휴 마지막 날 한낮 늦더위...오후부터 곳곳 소나기",
+   "source": "연합뉴스TV",
+   "time": "2026-10-11T09:24:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1FbDZsRzh4SzVTZTJxQXBuRW1DSVRYM05zZHNHanZmb3IzMnFmc18xTnhDWGtaWVN1M1VDXzUtV1lSMjZKWllwYlRZRUlJbHNlRVlucEs0VlBKcTUxWFNBMmhsYjVtaEk?oc=5"
+  },
+  {
+   "title": "이 대통령 \"해외 불법사이트 차단 안 되면 물리적 파괴·폐쇄 명령\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-11T07:18:27+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBlX2ZyajdYV0JJSloxUVlaX0otWmZLMG92VFZwOXJSRVJBWl9xOWExbGNHYldlNmR5UHJWb0RxOEptRkRySWRyVHUyS0FUeUs5ZmNVcGVBRlhyRjJKUFBZRllMRV9OSWk4SXFEVmpUNG5WQzN4cW90ONIBeEFVX3lxTE1OUGhnbl9sUVNTdEdSWlBuOGFMclFEX0pvQ2xMWHNZNDRmV3I2ZWdpWm1DOTVMWVFZb2NCYzJoblAxd24xR2VqSDJKbWNDc0I3X2NyZ3UySERHUFBxVlVnZ2FZRlhxdE9fWWVSNUE5bEhIeWpfejBxaw?oc=5"
+  },
+  {
+   "title": "메시지 줄이고 현장행보 강화 모색하나…金, 최저 지지율에 고심",
    "source": "연합뉴스",
-   "time": "2026-10-11T07:00:01+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBzdURnWE1hcHlqeXpwb2thdkcxTTd3SnlIZzRhazhWam9MeDVPbU1DYi1nY0lZOFl5X2doRjFHbTdTeTVnbzY0aHdGMzIxQ2N0bm1KTHA4cnFWYWPSAWBBVV95cUxPeFNreVcyNDFjaTJuMDJzeE9YMkdBbmtob1diU0xjM1FxYUxrUy1ISkktaGUwaE9KTWJUNjdPdnppdjlJRUNwWjV4TF9KVVNVZ2p1Z0hTVHljTzh3R3BLUFM?oc=5"
+   "time": "2026-10-11T04:35:01+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1QcnAwM2c0SlVLRDQ1dmczUHdQNGFHQXIzZnlSQ2piNmtSUFVpUTQzOFFORXE4WTUzRFRRM2YyNjJ2N0c2ZEVzajdialZmYmVvbC00ZXBNQ3RvU1Jnb1pQVtIBYEFVX3lxTE1QcnAwM2c0SlVLRDQ1dmczUHdQNGFHQXIzZnlSQ2piNmtSUFVpUTQzOFFORXE4WTUzRFRRM2YyNjJ2N0c2ZEVzajdialZmYmVvbC00ZXBNQ3RvU1Jnb1pQVg?oc=5"
+  },
+  {
+   "title": "동료 불륜 알리려다 처벌…법원 \"사생활 침해\"",
+   "source": "SBS 뉴스",
+   "time": "2026-10-11T07:18:44+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1jRnU4dUlsXzVuVzEwQU1OX190RkZ5TGRxTUViNVNSem5JWmJzOUdfOHFndEFwRTlUeFlVbjBiY0lPWTZJZTAxdk1ldEtqTEw4WDdMUFRVcU5LVlRPVDh6OW90NThmNDFUeXc?oc=5"
+  },
+  {
+   "title": "노벨평화상 필라이 \"美 ICC 제재, 용납 못 해\"",
+   "source": "연합뉴스TV",
+   "time": "2026-10-11T08:04:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9IUXV0YlJVSkdhVGxtcnRxTlllZTFtOEQxRURLdkZXRXpzN1JndVRpLW5Mc0lkWVBVS3VBVXdVcU8zOGlFUEthYnE1eXg5ZUoyYWxKemg3SXF4Y0xNa0pXN3dXX2I5Nlk?oc=5"
+  },
+  {
+   "title": "민주당 \"장동혁, 조희대 하수인 자처‥모욕받은 건 국민\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-11T08:17:54+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFByTk1FN2VSell3bFdBREVpeDNMa2xBTGxoN0I2QTItTkl6X3B1YXR0a3RIeUtvRVZ1alJUOFBjTmZ5Ry1lMWVpUHFVRVBzUnhWZ3JkZFpjNkdTcXBhSGl5U0JrYTRzelY0M1lTNkM4S2ZVTlhoNGRMbtIBeEFVX3lxTE1ZUzlEc0w0Wnh2LUdmWU1DM2IzV29DVk1HTzhvb21qVlJ4ME5Pd2lVdmwySTMwcmlvZEE1Vk9EemxXT2djNnRpODZZUTR5VDhWVkIzazNxWU5ubl9WcjlKbmNYLWdUa3hheW9qY0RvZUpXUjQ0ZFdIcA?oc=5"
+  },
+  {
+   "title": "北, 당 창건 81주년 차분히 기념…김정은, 주애와 공연 관람",
+   "source": "연합뉴스TV",
+   "time": "2026-10-11T08:07:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE13amVZVkZ6Rkt2c3JtQVNqOVhjellFbldrYXB6b2EwMUh1SkxEVmNPNnBjY1R2VlVQWUl4aUhXS3BOTzZDRjlMaWVPSmYxRExqZmplcWFHazhzT25TR09VbnhJTFFEejg?oc=5"
+  },
+  {
+   "title": "경찰, 대구 천장 붕괴 사고 전담팀 편성…오늘 합동감식",
+   "source": "연합뉴스TV",
+   "time": "2026-10-11T08:34:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1YMGJkNG1Qbm9ZMDdza3dzdzdtTFQ2Rno1cnNJOThBX2tjeUVyZGJ5S2JFLUtNYTJKVjNXWnlGNHI3eTVkZ2NkalNTWm9NQTFxU0VzcWxoLUh3WHJmSFprMGtwUjNXTFk?oc=5"
   },
   {
    "title": "진도 해상서 70대 남성 바다에 빠져 심정지...해경 구조",
    "source": "국제뉴스",
    "time": "2026-10-11T06:15:13+07:00",
    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5JcE5fc0N1V0JkMEpYSTdrcEVDVkRORDR5SFp6X1dEeFYtRWNvU0JkMEpxa01NQ2U0cGNpcEZoTm1VSW91ZzMwRkJTT0FZZVBDUDQ0RHVIX1pzZHJKYmdvM0UxUFJfbnQyYjhmRUhB?oc=5"
-  },
-  {
-   "title": "국힘 397억원 걸린 尹 선거법사건 2심 마무리…강선우 1심 선고도",
-   "source": "연합뉴스",
-   "time": "2026-10-11T03:30:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE82WGkxVldWcXFEWXpqc2pmd3NEQ0h5TDd6LXQ1T0FiYllLR0paaFk5V2R2YUpvbUlTdE5BZnVaLTRyUEEtdTVERGJRU3k1QmM2TjRIOGdqQzg2RVHSAWBBVV95cUxPQk9RYlJjb0d4d1NYVHNyMDlDck1ZVWlJNFVSWXg2VjJ4TTZkTnhJUENKSENScUMzUS1OMjVIRXhlUENveTktY2xJYXUta1ZPZ2F1Tmtaek10UUZEbFhUbm8?oc=5"
-  },
-  {
-   "title": "홍준표 “비난 각오하고 김부겸 밀었는데, 대구시민 내 진심 몰라줘···TK 몰락 가슴 아프다”",
-   "source": "경향신문",
-   "time": "2026-10-10T17:56:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE44RlZ5d0xNWUZiMGNLVzBkSVl3TjlPUVJEbThycU9xYnA1c2Y4Zjk0dHdiSEZkTkJiZm11VURhV0ZfRUVCa3kxdXNjTzQ5amxqNWJxUzRGQXRyUdIBX0FVX3lxTFBOOVIyMk1DWU1nVEg4YWk2TWl4UDNER0g1NXJwY1l5N2RNaTlYMnlwbi0wR1hoWWUtUWt6bEtHUEk1Z3FyVlZ0Zm5xeU9BVXhHVUlqUFZ6T2VCNG5zclNj?oc=5"
-  },
-  {
-   "title": "노벨상 못 탄 트럼프 격분…“8개 종전시키고, 한국-북한 전쟁도 막고 있는데”",
-   "source": "한겨레",
-   "time": "2026-10-10T19:47:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBTZDRGbUxpaTVjWUJlM1VMS3UxWEpKWmhlbkkwVW9uczBleGpLa2hJMm9md1AwSVJZNWxuX0VZZWxYdC1aQjFwSGJOZDUtMHBYbGktQ0N5cHVvbWtnQ0l4Nl9YckRxeDRJQlZNZXJXaw?oc=5"
-  },
-  {
-   "title": "미국 총살형 생중계 논란 속 교황 “사형은 인간 존엄성 공격”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-11T04:51:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9Md2Rrb2dydzhQZ2pHc25YZEgyR2tEdnNLa0FzY1RScm12N1JfWEtjQ2MyRzFFZS1XTmdtNVZtUzhLX0ZKU2xSMHRpei1xU1VNNUJ5TmVOYV9UZU0?oc=5"
-  },
-  {
-   "title": "“대표 되면 與지지율 상승” 장담했던 김민석… 현실은 ‘뚝’",
-   "source": "조선일보",
-   "time": "2026-10-09T22:41:40+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPQzdnb3dvam9xVWhROG9UTUFRd1V6OFJTTkc0WGpjcUJyVjNPSDI3UVpicmdaeTBPZUlIRXV1cENtS1dqdGlJeWJ1Yk9nbEFqdGt1bmtLdXR1R2N6YXkxVHBDODNldER2eldheU04M2ljdTM4aUZZRHhyNHUxU2kyTElUeEZsZw?oc=5"
-  },
-  {
-   "title": "[속보]트럼프 \"이란 공격 재개할 수도\"",
-   "source": "파이낸셜뉴스",
-   "time": "2026-10-11T00:44:44+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBFaWx0SW5UcklhWnRDQTM3U05QR2IzN0xfNlZZTy1WMHU0WnB5bzhJdlVZVFpQeFd3MnVRMlFzRElwaFJjcjZ4a1Z6RVhKd2tCanVRN1dhWElHZw?oc=5"
-  },
-  {
-   "title": "\"민주당이 이기면 대공황 온다\"…트럼프 중간선거 표심 호소",
-   "source": "한국경제",
-   "time": "2026-10-11T05:52:22+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFAzcUZoZ3dseF9zaE1FQjA4eWFQdGNXblRfSWFsUHpBZDlVQlN6NC1kQzl6c0NwRlA4NGJPNmJMdEt4T0VJMk5VM3V4eHd2MXR6VUc1VEdGYWF3UQ?oc=5"
   }
  ]
 };
