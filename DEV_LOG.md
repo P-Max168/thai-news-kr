@@ -221,3 +221,7 @@
   - **미확인**: 실제 휴대폰 화면 · 독자 댓글 동작(Firestore 쪽은 이번에 안 건드림)
   - **라이브 확인(10-11 19:04)**: ship.sh exit 0 · push 7f15e87 · 정본 갱신(정본 HEAD 7f15e87, 깨끗) · 라이브 data/2026-10-05-am.json sha256 = 로컬(5f83b605…) · data/2026-10-11-am.json sha256 = 로컬(fe90075e…) · discussion approved 18/18·16/16 · e/2026-10-05-am/·e/2026-10-11-am/ HTTP 200 · 360px 화면(전체 주제)에서 '💬 오늘의 질문' 줄이 기사 카드 15/18·13/16 + 맨 위 카드 3·3 열면 표시 = 18/18·16/16, 초안 질문 글 일치 · 펼치면 질문 전문 + 📌 운영자 고정 댓글(backups/backup-20261011-1859-discussion-am-rest/live-1005am-dq-360.jpg, backups/backup-20261011-1859-discussion-am-rest/live-1011am-dq-360.jpg) · 라이브 data/pending.json = p1~p13(dq 대기 0)
 <!-- discussion-am-rest -->
+- 10-12 18:43 · 💬 [낮음·판 콘텐츠] **10-12 아침판 '💬 오늘의 질문'·운영자 첫 댓글 18건 게시**(민구님 채팅 승인 '아침판 18건이랑 저녁판 18건 전부 올려 줘', 백업 태그 `backup-20261012-1843-discussion-1012`) — 정본 초안 글 그대로 approved:true 목록으로 `tools/discussion.py apply` → data/2026-10-12-am.json|js 18/18. **저녁판 18건은 미적용**: apply 가 newslib krw_check 에서 멈춤(exit 1) — ea4·bk1 운영자 댓글에 바트 금액 원화 환산 없음('6,000만 바트', '6억4,942만 바트'). 승인 글을 임의로 바꾸지 않고 보류, 반쯤 생긴 tools/discussions/2026-10-12-pm.json 은 백업 폴더로 옮김. 판 generated·기사 글 그대로, workflows·tools·화면 코드 안 건드림
+  - **확인한 것**: 초안 글 = 판 데이터 글 18/18 · discussion 빼면 판 데이터 = 게시 전과 같음 · newslib check OK(경고: 기사 18건) · 질문·댓글 태국 문자 0·฿ 0 · 승인함 p1~p13 + dq-2026-10-12-pm(대기 유지)
+  - **미확인**: 실제 휴대폰 화면 · 저녁판 2건 원화 넣은 글로 민구님 재승인
+<!-- discussion-1012am -->
