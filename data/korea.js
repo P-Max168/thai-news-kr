@@ -1,12 +1,12 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-13T02:00:13+07:00",
+ "updated_at": "2026-10-13T02:35:51+07:00",
  "items": [
   {
-   "title": "우크라 외무, ’북 포로 한국행 공개’ 논란에 “종결된 사안“",
-   "source": "연합뉴스TV",
-   "time": "2026-10-12T23:22:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9lNmk1WDFTS0U0MGg2Xzd0VFpFSXZ3WDBGZ1ZoUkp4NXk0Mk42VFdPRjhBSHFrVDVJSzJZU3hCU2JWQTNBZE54VXNUYkZVaWs4YkRfaDc5eG5SMVpKM1IzUTZ1MTJyaG8?oc=5"
+   "title": "우크라, ‘북 포로 한국행 공개’ 사과 거부 시사…“종결된 사안”",
+   "source": "한겨레",
+   "time": "2026-10-13T00:17:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBEY2RsYmRvODVwajdyeWxnMS1mbTRJY09kckw2aE9CTmNfTTlhTTAzUE40ZjI3TkpoZzAyNngxbkNMVVpRam1TLURfWHRBTE5xMlF3alRkaENyNm9RVGNUdk5jSmxMY1pRSmpF?oc=5"
   },
   {
    "title": "김지용 청문회 코앞 ‘임은정 감찰’ 개시…여권 내분 지속",
@@ -33,10 +33,22 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNNHB4Vzg1eWxpY2dfeGlJUFBuRHZVUUNYdy10akFMS0ItVXFrT21Od05VN3dKUUdOdExNYkhyTWoxbTdiR3A0TlhwNVk2bGVHczgzdzZCazZLZldqM2RoTnVkSFM0SWVIYUgyNjJoN0JJXzlLM092S3picjM4LWJkMEJoR2V5cE9wVFB6SDdZOHo?oc=5"
   },
   {
+   "title": "강경화 “한미 정보협력, 제일 어려운 현안…백악관 소통도 한계”",
+   "source": "KBS 뉴스",
+   "time": "2026-10-13T02:19:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5iQnpQaVBpSFZONGVnc3NtR3NlaUhmV3lTbS1Ya3pYdG1FaDdkQldzNjdhY1c2bEJRZVBPSWhFWC1kbGNnQzY4NmJZanFTb1plZk80WE5HdUFUbkk?oc=5"
+  },
+  {
    "title": "경찰, 장모 살해하고 아내 납치한 20대 구속영장 신청…계획범죄 여부 조사",
    "source": "연합뉴스TV",
    "time": "2026-10-12T15:44:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1rZUtmY2JHRmlSUUJDalJ2U1ItZlY0UndZU2ZmU2k2Z1ZVSFdzNVVXcGw2S0hjRlAzZGQ4Y0h6dmVlSjZLQzh4UV8wMG03aXJLWGVLVnZnTTZVTEJya0dJU3BZYkhNWlU?oc=5"
+  },
+  {
+   "title": "“한동훈 딸 수사, 김건희 학력 의혹 닮은 꼴” 지적에 경찰청장 대행 “재수사 배제 안 해\"",
+   "source": "한겨레",
+   "time": "2026-10-12T18:08:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBWTGJPcjNWRG1tU0Rvc3pTQTEtR2JiS21qR0tYNXZHbUwyM0NNTVU4bEVoU2kzXzBxbzdReHhCU3RkU3VCQ0RBYlFESjY4bWVLV3hxQUJsa2xCbm5SNVRKVkJlMFJDM2RhbjFQckF4TnBQZw?oc=5"
   },
   {
    "title": "오늘 헌법재판소·공수처·경기도청 국정감사",
@@ -45,22 +57,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1LbjNvczV3M2tadzVJOVVQY29peU9FV3BLXzhaS3JERGd2VUhoZ1hlSnpaSU5FUGJXc3l5dGtIZ0k0NWNtNnc0THRDLXVWczFaR3pna2VCelVYam8?oc=5"
   },
   {
-   "title": "민주, 한동훈 딸 봉사활동 '대필 서명' 의혹 제기‥재수사 촉구",
-   "source": "MBC 뉴스",
-   "time": "2026-10-12T15:01:42+07:00",
-   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9YS1ZRTF9xdGVpbVNWWnpKczRDa2I1N3A4bllxSVNKUzA0VzBZQzJfcVgyT3Zab2dwSlhpRFoyeTdMaWhPT21UbWJnemtwcDFyTENHclpjdG5SUEJoWU12cmhoSEV5SlBJZlF3eU1CSXNfS21CWnhjdtIBeEFVX3lxTE1oMENNaWVweXU2MXZqNFJZc0xRd1NWbHVBdjAwY1NlM0c3Y2ZuMUFYaVJiWF9KVnE4NXhDMEp1V2FVUGgycF9EQng5UFdXOXNBNjc5LXFROFZIRG1lLUxJMC1FajZpUEZJZ0dObWwyVmJMZkFzY2lEOQ?oc=5"
-  },
-  {
-   "title": "이진숙, 국정감사 제척…‘2인 체제 방통위’ 질의해 이해충돌 지적받아",
-   "source": "한겨레",
-   "time": "2026-10-12T18:23:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBhbFR4OW1tQzJfanBtNGRodF9KTGg4VW1Xc0xEcGp4TEFzWTVLQnAwVVNDYmJVZGgteGRIODZCbU5FTVJob0Q2X015Q1A5U05JbVpnR2lndHByUGE5VDNocmJobHI?oc=5"
-  },
-  {
-   "title": "노벨경제학상 미 로버트 홀·마이클 우드퍼드…새 케인스주의 모델 구축",
-   "source": "한겨레",
-   "time": "2026-10-12T20:16:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1OU1ZwZFhGU3ItQWZXSHBNbXhqQm5kRVBNM05tUE5DX05hR3diRVloN1lJZHJmaGlXY0tKcVhMM2tfUTRNeVVNWmZraGVHaHpqRlU4RkhiNUVXQXhWa1ZyWkRSR1EydjVMNlJocHB1WnVaUQ?oc=5"
+   "title": "케인스의 현대적 부활…올해의 노벨경제학상",
+   "source": "한국경제",
+   "time": "2026-10-12T18:02:53+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1lNWt2eFctbmlENGlta1ZuNTUyTGNBMm85WGRZa2JlaFExQXp1M3RqbURFZmVjUllwYXQ3dldWOG5pM19RUDlZanlVSWl5Tms2RFlPbWdhZHpiZw?oc=5"
   }
  ]
 };
