@@ -3,10 +3,10 @@
 
 | 항목 | 내용 |
 |---|---|
-| 마지막으로 확인한 사이트 최신 판 | **2026-10-12-am** (라이브 data/index.json `latest`, 판 generated 2026-10-12T07:26:47+07:00, 18건 · 커밋 af2d285·c4d5c64(공유 키트) · 확인: 2026-10-12 07:31 BKK, Grok) |
-| 정기 실행(07:08/18:08) | **10-12 07:08 정기 아침판 도착(10분 늦게)**: 루틴 발화 07:18 BKK → automation.log `10-12 07:19 START am-build` · edition 커밋 af2d285(07:28 push)·공유 키트 c4d5c64 · verify_live OK. 10-05 이후 처음으로 07:08 정기 아침판이 직접 빌드함(10-11 은 07:38 대체 루틴이 빌드) |
+| 마지막으로 확인한 사이트 최신 판 | **2026-10-12-pm** (라이브 data/index.json `latest`, 판 generated 2026-10-12T18:21:08+07:00, 18건 · 커밋 051cb7b·fab91cd(공유 키트) · 확인: 2026-10-12 18:25 BKK, Grok) |
+| 정기 실행(07:08/18:08) | **10-12 18:08 정기 저녁판 도착**: edition 커밋 051cb7b(18:21 push)·공유 키트 fab91cd · verify_live OK. 아침판도 같은 날 07:08 정기(af2d285·c4d5c64) |
 | 판 지연 | 10-05-pm ~ 10-10-pm **11판 빠짐**(6일 공백, 목록: Grok 서버 /workspace/logs/edition-gaps.txt). **재생성 안 함**(운영자·Max 결정 10-11: 옛 뉴스를 지금 판처럼 올리지 않음) |
-| 진행 중 작업 | (없음) · 10-12-am 💬 오늘의 질문 초안 18건 운영자 승인 대기(미적용) · 다음 판: 10-12-pm 18:08 정기(안 오면 18:38 대체 루틴) |
+| 진행 중 작업 | (없음) · **10-12-pm 💬 오늘의 질문 초안 18건 운영자 승인 대기(미적용)** · 10-12-am 초안 18건도 승인 대기 상태였음(STATUS 아침 기록) |
 
 ## Claude 질문 3개에 대한 Grok 답 (2026-10-11 09:34 BKK)
 근거 원본은 Grok 서버 `/workspace/logs/automation.log`(Claude 접근 불가)라 해당 줄을 그대로 옮긴다.
@@ -21,6 +21,7 @@
   - `10-11 07:48:38 END   deploy ok exit=0 8127d56`
   - `10-11 07:49:01 END   deploy ok exit=0 8f1fd6a`
 - 결론: 마지막 **정기** 성공 = 10-05 07:27(am-build ok). 마지막 **판 배포** 성공 = 10-11 07:49(대체 루틴). 10-11 07:08 정기 아침판은 오늘도 상자에 오지 않음(루틴 실행 기록상 failed, automation.log 에 07:08대 START 없음).
+- **갱신(10-12)**: 10-12 07:08 아침판·18:08 저녁판 모두 정기 빌드 성공(automation.log·커밋 근거).
 
 **2. 10-05 이후 정지 원인**
 - 확인된 사실: 07:08·18:08 정기 루틴과 07:38·18:38 대체 루틴이 **상자 밖 루틴 실행기에서 시작되지 않아** 상자의 preflight 까지 오지 못함(START 줄 자체가 없음 = 상자 안 스크립트가 실패한 게 아니라 실행이 안 옴). 대체 루틴도 같은 실행기를 써서 같이 멈춤.
@@ -35,6 +36,7 @@
 ## 최근 인수인계 (상대 AI가 작업 시작 전에 꼭 읽기 — 새것이 위, 최대 10줄 유지)
 | 시각 | 누가 | 무엇을 바꿨나 | 상대가 알아야 할 것 |
 |---|---|---|---|
+| 2026-10-12 18:25 | Grok | 2026-10-12-pm 저녁판 정기 빌드(18건, 문서·판 데이터만) | 💬 초안 18건 승인 대기(`drafts/discussion/2026-10-12-pm.json`, approved false). fetch_korea TOP RSS 404라 korea_top 은 data/korea.json decode 6건. [Grok→Claude] screenshot 👎 검사 요청은 아침과 동일 대기 |
 | 2026-10-12 07:31 | Grok | 2026-10-12-am 아침판 정기 빌드(18건, 문서·판 데이터만) | `tools/screenshot.py` 👎 재정렬 검사가 이번 판에서 FAIL 1 — 원인: 내 피드 첫 카드가 📌 비자 고정 묶음의 **유일한** 카드(vi2)라 👎 해도 순서가 안 바뀜(화면 정상, 검사 가정 문제). REQUESTS 에 [Grok→Claude] 남김 |
 | 2026-10-11 09:34 | Grok | `collab/` 인수인계 확인, STATUS 질문 3개 답, REQUESTS Claude 요청 완료 처리 (문서만) | 이제 Grok은 workflows·tools(editions 제외)·화면 코드를 직접 고치지 않고 `REQUESTS.md` 에 [Grok→Claude] 로 남김. GROK_PROMPT 5번 '누락 판을 만든다'는 운영자·Max 결정(재생성 안 함)과 충돌 → Grok은 재생성 안 함 |
 | 2026-10-11 08:31 | Grok | **edition-watch 신설**(`.github/workflows/edition-watch.yml` + `tools/edition_watch.py`): 라이브 index.json 의 latest·generated 가 기대 판보다 90분 넘게 늦으면 GitHub 이슈 `edition-gap` 1번(같은 공백은 한 번만). **korea.yml 예비 예약 4번 추가**(Actions 예약 누락 대비). 커밋 30cf391, 백업 `backup-20261011-0827-edition-watch` | **⚠️ 이제 이 둘은 Claude 영역**(workflows·tools). Grok은 직접 안 고침. 미확인: 실제 공백 때 이슈가 열리는지·메일 알림. 같은 날 08:19 regress·ship.sh·edition_stale 수정(cd3b359)도 Claude 영역으로 넘김 |
