@@ -1,12 +1,12 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-13T02:35:51+07:00",
+ "updated_at": "2026-10-13T03:57:46+07:00",
  "items": [
   {
-   "title": "우크라, ‘북 포로 한국행 공개’ 사과 거부 시사…“종결된 사안”",
-   "source": "한겨레",
-   "time": "2026-10-13T00:17:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBEY2RsYmRvODVwajdyeWxnMS1mbTRJY09kckw2aE9CTmNfTTlhTTAzUE40ZjI3TkpoZzAyNngxbkNMVVpRam1TLURfWHRBTE5xMlF3alRkaENyNm9RVGNUdk5jSmxMY1pRSmpF?oc=5"
+   "title": "'본국 소환' 주우크라 대사, 외교장관에 보고‥\"우크라 호응 기대\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-12T14:07:06+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE53UEljdVlBU1hzeDNCaGl2QW5tZFMwTTF4N0tKQ00tbkVTMk9vbHdRRmRmWVpOZ1lRaFVpQnBFSE1kWWZqajlnRjVyS25WS0c4VmhXaFRaTFNDUS02TEt1X1lXODdkRFdjMkEwRms1UVZPdGZQMERFcQ?oc=5"
   },
   {
    "title": "김지용 청문회 코앞 ‘임은정 감찰’ 개시…여권 내분 지속",
@@ -15,28 +15,22 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9Kb3BrTUVHQjBKSGFVbXNuTmJtQWhBSmRtSDBmanZoYS0xYjlKVEJZNnJvNk5OV0s0Z29hZTU5MFptOUVrLTFjSkh5OEtmNGItZkNISmZEbEJxQdIBX0FVX3lxTE9PRTd0SVk1OS1uSUt2bzJHejBfRl8wZk1pU2N0SXdVZ1ZkeDFDdWhZVFNXbmVwYmE1UEdwUGxuNWt3clVPTy1ZaWlKVkgtbl9xMkYxMm1kamo0Z05BYVg4?oc=5"
   },
   {
-   "title": "접근근지 내렸는데 범죄자는 지금근접…또…보호받지 못한 ‘보호 대상자’",
-   "source": "경향신문",
-   "time": "2026-10-12T19:59:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBvYmtIbnVhdEtpQkNmV1RkYjRGNTRsczdOVGo3X2Nya1I3M2FEaEFmSFk0a3g5b0VpNy1YSnN1XzBSMzUtQW9rVHQyZXRqU0VBaEZZUHBOOUlqQdIBX0FVX3lxTE9TNXBSRmtpWkpDT3JJSk41RDlOSlRuMVJQVG04dms3eE1iS0dKTmItODZ0WWtJTjVLVG43TVRBVnhiYmdMbFV5NWxrX01uN1NOTjNmbktfMmpJV1MtZ1Qw?oc=5"
-  },
-  {
-   "title": "李대통령 “체내 납 배출 촉진 주사를 ‘비타민 주사’로 속여 노동자에 투약시킨 DN오토모티브 엄중 대처하라”",
-   "source": "강원일보",
-   "time": "2026-10-12T15:01:38+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5KQmltMENvaEh2d0hnS2I3N1NLNDJKeGNjaDVrV3dNeFVaVHBkcjBfQjlBcElhQVYyMGRVZHB6M3AxLUphZ3BoSW03Q0RHODQ0alJnMFVZWVlrS1k?oc=5"
-  },
-  {
    "title": "與서도 경질론 나온 정동영… \"난 대북 저자세 아닌 정자세\"",
    "source": "조선일보",
    "time": "2026-10-12T18:59:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNNHB4Vzg1eWxpY2dfeGlJUFBuRHZVUUNYdy10akFMS0ItVXFrT21Od05VN3dKUUdOdExNYkhyTWoxbTdiR3A0TlhwNVk2bGVHczgzdzZCazZLZldqM2RoTnVkSFM0SWVIYUgyNjJoN0JJXzlLM092S3picjM4LWJkMEJoR2V5cE9wVFB6SDdZOHo?oc=5"
   },
   {
-   "title": "강경화 “한미 정보협력, 제일 어려운 현안…백악관 소통도 한계”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-13T02:19:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5iQnpQaVBpSFZONGVnc3NtR3NlaUhmV3lTbS1Ya3pYdG1FaDdkQldzNjdhY1c2bEJRZVBPSWhFWC1kbGNnQzY4NmJZanFTb1plZk80WE5HdUFUbkk?oc=5"
+   "title": "李대통령, '중금속 배출 비타민 주사' 의혹에 \"엄중 대응\" 지시",
+   "source": "한국경제",
+   "time": "2026-10-12T11:44:51+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9NQ2x5a0lDX0N4U3dfdFB3VUJoRkt2dm1MTVR2M3lRdXFRMVl3NDNoSVJpSDhJWFd6TWsyU1VPb1doM3lUQzBMbmJnQm5hR1FyX3hqaXlEeHF4QQ?oc=5"
+  },
+  {
+   "title": "강경화 \"한미 정보협력, 제일 어려운 현안‥백악관 소통도 한계\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-13T03:18:21+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9kU0hzeFNmWnBQRzF2NlZCWFIzeFdjN2ZKLWR4dVhtQktHNFNsM3RNQ1RXYkZZOVZ0RTZYa1pHOGJYanA4a05yZUp6RFRZZzFwR05BOUM3T1I0Vm9DX283QWxTcEZXZkRpbFpBYzVEM0lTM1hq0gF0QVVfeXFMTzNxZ1FkMUlMZUFJY2w3Nkx0dG9oVGZOb0tacE1UdWZCTmRvd2E5a0N4WWtpNlNMcVJSVVg5aV9PQ3pnUl9hY1V1TVVMSlRHQVZyNXB4RkdEaGR6R1lvR20zNGRoREFaWnBhb3hCUTQzcGFWaGw?oc=5"
   },
   {
    "title": "경찰, 장모 살해하고 아내 납치한 20대 구속영장 신청…계획범죄 여부 조사",
@@ -45,10 +39,16 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1rZUtmY2JHRmlSUUJDalJ2U1ItZlY0UndZU2ZmU2k2Z1ZVSFdzNVVXcGw2S0hjRlAzZGQ4Y0h6dmVlSjZLQzh4UV8wMG03aXJLWGVLVnZnTTZVTEJya0dJU3BZYkhNWlU?oc=5"
   },
   {
-   "title": "“한동훈 딸 수사, 김건희 학력 의혹 닮은 꼴” 지적에 경찰청장 대행 “재수사 배제 안 해\"",
-   "source": "한겨레",
-   "time": "2026-10-12T18:08:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBWTGJPcjNWRG1tU0Rvc3pTQTEtR2JiS21qR0tYNXZHbUwyM0NNTVU4bEVoU2kzXzBxbzdReHhCU3RkU3VCQ0RBYlFESjY4bWVLV3hxQUJsa2xCbm5SNVRKVkJlMFJDM2RhbjFQckF4TnBQZw?oc=5"
+   "title": "케인스의 현대적 부활…올해의 노벨경제학상",
+   "source": "한국경제",
+   "time": "2026-10-12T18:02:53+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1lNWt2eFctbmlENGlta1ZuNTUyTGNBMm85WGRZa2JlaFExQXp1M3RqbURFZmVjUllwYXQ3dldWOG5pM19RUDlZanlVSWl5Tms2RFlPbWdhZHpiZw?oc=5"
+  },
+  {
+   "title": "네팔서 한국인 24명 체포…관광비자로 종교 프로그램 참여",
+   "source": "연합뉴스TV",
+   "time": "2026-10-12T15:25:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE4zMnNyVWpuT0xLXzBFd3FOX3ZjT0k1TW1iazhaeVYtTWNTRUpLcVNQcnd6X1k3Q0M3TjFmZ2hRVGtpREVLMFlEZHVMUmZKZ0RtbXZJWHdGMEQ3dTVVc0ZSTmlpdGpyWTA?oc=5"
   },
   {
    "title": "오늘 헌법재판소·공수처·경기도청 국정감사",
@@ -57,10 +57,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1LbjNvczV3M2tadzVJOVVQY29peU9FV3BLXzhaS3JERGd2VUhoZ1hlSnpaSU5FUGJXc3l5dGtIZ0k0NWNtNnc0THRDLXVWczFaR3pna2VCelVYam8?oc=5"
   },
   {
-   "title": "케인스의 현대적 부활…올해의 노벨경제학상",
-   "source": "한국경제",
-   "time": "2026-10-12T18:02:53+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1lNWt2eFctbmlENGlta1ZuNTUyTGNBMm85WGRZa2JlaFExQXp1M3RqbURFZmVjUllwYXQ3dldWOG5pM19RUDlZanlVSWl5Tms2RFlPbWdhZHpiZw?oc=5"
+   "title": "또 스토킹 피해자 참변‥스마트워치 있었지만",
+   "source": "MBC 뉴스",
+   "time": "2026-10-12T17:59:40+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE84N0ctRngxWUltbGNDRmNSRTBxRDgwM25xX3Z0enlJNWVuMjQtdXRnR2RmTkJrTmZkSkdKMWJTclZKUWFCZV9wX1A4QlY1SkVHb1BtTllMTXFFM05IaTAyaHhMMjRwdUgzS3NsMF9sTkMzM1VvS3dRctIBeEFVX3lxTE1rb2pIb282NGYzaVowSTVsRktiNlQtUm9TbzZTOWIwMy1tYXhYN1dvNTNKTjZJRmdvUHZKN3J2YlBGMDd3UGlia21nWEJmUndNdlNJQUlyU3BRUHVudVh6WUZKa3RjV0VFOWNWX3NvNEIxTlRydnpNQg?oc=5"
   }
  ]
 };
