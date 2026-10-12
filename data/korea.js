@@ -1,12 +1,12 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-12T11:58:12+07:00",
+ "updated_at": "2026-10-12T14:42:22+07:00",
  "items": [
   {
-   "title": "정동영 “퇴출해야 할 건 색깔론과 편향된 동맹관”…국힘 ‘경질론’ 반박",
+   "title": "한동훈의 ‘딸 전자책, 저작권자가 승낙’ 해명서 빠진 6개월의 흔적",
    "source": "한겨레",
-   "time": "2026-10-12T11:15:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBmVjNXWlk2NEx5LUlzcDhzU3pNQkhWSEEzUWJTeVNycTd2OTVaMmtPUFROX0J6NUZzWVIxMnB0VTl2ZVRPR1NIWDhDZEpQbm9UNUhfRmJPb3N0RnBQMVk4QnE0a1pEWm9wZzJsSGppNjlLdlJI?oc=5"
+   "time": "2026-10-12T13:08:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE95eGJRVHNjRlA1U0syQXkwVTNENVdCcEVFR1VTSWtleVdxZTBMYUJ4cGtpSlA5N3FycGhqOElFbUp2TTJ6WkNkcTREOV9ZNUxSM0hBNDhnWmZ1RERxN2ZqaEtGaW93bTdIUGVxSUg0LWdHZEQx?oc=5"
   },
   {
    "title": "윤호중 행안부 장관 \"임은정, 직위 이용한 정치행동 아닌지 감찰 지시\"",
@@ -15,52 +15,52 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFB3bFFWNDBPVGszd0N3VU1RQkJVS3A1VFl5bmtRc0RsLWdTSGJoSkFuT3JKUE1LY2d2N3FqYmFWTi00aVM3OFNidTZQYjh5X29XNW53SHB3a2Nzc1FwQ21xcDUtcjEtOUZLZ1FhZDVuOVlXY0VWc3VN0gF3QVVfeXFMTy1UY3ZISlh5NDNPNDlRS2hSU3A3ZW42VFdSV292Nm04WHlJenR5a2xUWkZPaVB5MWJyTHd6RHEzV200Tl9aVHpyT01wdGFSZFFKd0VMNDdqaEN2a2hBT3VHd1JWSmpUOE1nTEo3T19XYWM3dGpiWUk?oc=5"
   },
   {
-   "title": "김민석, ‘당내 강경파’ 겨냥 “논리나 타깃 바뀌면서 대통령·당 비판”",
-   "source": "조선일보",
-   "time": "2026-10-12T07:17:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQUXZLbnVlZ2xPME85Tmt5VlkwMkR3X0lkcncxMUt2U1U5dTQzdkphOVFpd0lwdlppWDlQVXdJZVFZSmFReUEwSHc4WlQtczY5OW1oXy11QzlmRFBvRU5QRm5WVzFsc3pfLXk4eG55TFNiVnZJQnd5dkVzdTVqR2kyOFNncEtKUQ?oc=5"
+   "title": "정동영 “퇴출해야 할 건 색깔론과 편향된 동맹관”…국힘 ‘경질론’ 반박",
+   "source": "한겨레",
+   "time": "2026-10-12T13:43:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBmVjNXWlk2NEx5LUlzcDhzU3pNQkhWSEEzUWJTeVNycTd2OTVaMmtPUFROX0J6NUZzWVIxMnB0VTl2ZVRPR1NIWDhDZEpQbm9UNUhfRmJPb3N0RnBQMVk4QnE0a1pEWm9wZzJsSGppNjlLdlJI?oc=5"
   },
   {
-   "title": "경찰청장 대행 “한동훈 딸 의혹, 새 사실관계 드러나면 재수사 가능성 배제 안 해”",
+   "title": "김민석, 임은정 겨냥 “논리와 타깃 바꿔 대통령 공격, 비판도 할 일하며 해야”",
    "source": "경향신문",
-   "time": "2026-10-12T10:01:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBqWmtNdnlzNWRMbDViM2hndHVGM214STdUUnBNRnczMlN6LXIzV0Q1czJkRUJVdmxJMVFYd0szRUNYRWVzUWpaR3hsOHJYZlptZXFfaVRoMHNlZ9IBX0FVX3lxTFBVT2w2TTNuX0dJVVRtM2N3ZHlaS0didmpGbHNBelBOSDBrOHFqSGQ3a19SOGh2SC1wM3RoUENLMG96Qkx0Y3dPaDhsc2JfSHBGNDhIaXRpbnNWVnNkZzFN?oc=5"
+   "time": "2026-10-12T06:19:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBNbUFETGN2VzBDaTFWUVFHbk1VcWZCMVZaRnNBYjNoUW0yUWRvQjg3MDFacmY5RlR6NGx1cUFpSlJLYTY1SmRkNWliNVlyTE9OV3VBcjhERWY1UdIBX0FVX3lxTE1ZakIzRnpQa3BERTNkZXhLXzZWblEyNFlneExhajlwSFpUbTJFUXFlcWplQ1NrMG5FRWFPSWhsTV91MFVXSlRZMWdPYlJDNzRIb1JiUjJCM0s0VktNWDNr?oc=5"
+  },
+  {
+   "title": "‘제주 호텔 앞 스토킹 흉기 살인’…도주 3시간 30분만에 붙잡힌 60대",
+   "source": "조선일보",
+   "time": "2026-10-12T07:13:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNYjVrMVhKNDk1SmVPOE1zV1Rob2xwQmZWSkg5ZzZJMm1IekdyTkhBU0FCUHVpNVdnQ3VGcFNZMHhlWXI1OGFjOUd6cEN6akFaZ1dRSVBCLW1lYkhUUkZMOGlYVHltZm1DWDUzdHYxTG5zZ3BtT3B5dHpVZFRmTEJsRVhkZFA5QQ?oc=5"
+  },
+  {
+   "title": "리얼미터 \"이 대통령 지지율 35.2%…민주 35.5%·국힘 41.3% 오차내 역전\"",
+   "source": "연합뉴스TV",
+   "time": "2026-10-12T06:57:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1aaTBJcEZOY1hjVk85SlNPNERnMGM3RHc3Qno2QWp0NDRxR1VyaUNDTDF3QlNDdkNFX1ZxSUdGeVlHTjhhUHQxakdpYy1iWDRqazk5Sk10R0hrdXowNDlMTGVoUzVYYTg?oc=5"
   },
   {
    "title": "‘이재명 골프’ 국힘 공격에, 민주 “대통령이 역술인이냐”",
    "source": "한겨레",
-   "time": "2026-10-12T08:48:00+07:00",
+   "time": "2026-10-12T11:18:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBaNGRpTDllQUlWM3I1QzR0LTRScnlSMGdQMTNXT0dfcEhQRjkyN1lnV0p2a0RrdkhXLTZiQU1WaHIwNHV1eS1BeDJvRXVWTlcteXU0d2MxU00yTXVtTWYyR1Q2UDRGeEEzWEtYMmQ4emIzSGZW?oc=5"
   },
   {
-   "title": "제주 길거리서 여성 흉기 살해 60대 남성 긴급체포",
+   "title": "북한, 한국군 ‘극초음속 비행체’ 발사 4일 만에 탄도미사일 두 발 발사…“무력 대응으로 분석”",
    "source": "경향신문",
-   "time": "2026-10-12T08:08:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9fZHd2UzJVSUJlZFZwQ3pIM2tTTXFoTkZ2bmFJV0twZmZFQU5EVGJHZ2FBR1ZpMTBYNy1WdGZzaUdINXlZTG5SbTBZQ2NxYlk1aVhJVmR5MlhIZ9IBX0FVX3lxTE5VcjhRd3lDRGluSF9DY2VOczdfOUFFZ2hpSlZPTV9ZVkZwdEhpNjdRRmVSRE4yR1JGUllSdHBUSnVvU0w4bDhDSzhDUmYxSjBQdjFkNkNSZktYWWN5bnkw?oc=5"
+   "time": "2026-10-12T14:16:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBJYkZCMThuejBNckVPcjZYeXlLenBWNWlpMll5RWZMQlFLb3ZUeV9zNUlvSTh2VTBwWFNJY0pIdFFFMl93TnFMcmowYVNuWWNqSmJhdnRDbGRoUdIBX0FVX3lxTFB6OXloNENRbWhpQThrQV94b1FMSi15QkFKcTFqOFNOY0JzY3RibFJ0cDNDZFg4M3E5dE5WV3FjdjNNTVc3dGhRNjZmOWF0YkRQZHd4amhpMTFlUlQxN2xB?oc=5"
+  },
+  {
+   "title": "[속보]김어준“서울여론 안좋아 보궐있어도 어렵다” 서울서 ‘부정’ 최대 67%-여론조사꽃",
+   "source": "문화일보",
+   "time": "2026-10-12T12:41:04+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1LSzFVZGtNSlRMX1ZfbFZDRTBHaGdJb0lzZk9Cd2swZG1iTlNraUxzMU5WZERHd3lMaUVYV2kxZngzNEVaVWhUWUFhTnhWRzdU?oc=5"
   },
   {
    "title": "월요일 최고 29도 ‘더운 가을’…중부 내륙 소나기, 밤부터 전국 비",
    "source": "한겨레",
-   "time": "2026-10-12T09:15:00+07:00",
+   "time": "2026-10-12T11:22:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFA4Y0tYbkFGaUNMQmR1MVl2SEQ4R0xUcmJZdmR1SHBaNm55QjVvUVJ6MHhTOFhDU3hjWHpRYTl0OWNkbTNlMGFYUHNlMVZTbnlUZHhRbFZtYjhGM3k4QXB4LXpWdFNfNWFvTm5lbw?oc=5"
-  },
-  {
-   "title": "李대통령 지지율 35.2%…\"인사·안보·부동산 악재에 하락세\"[리얼미터]",
-   "source": "연합뉴스",
-   "time": "2026-10-12T07:04:32+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFA0bzFXU0QxNjNfOGYtaVF2YmMzSnRrTUNneWExandkM0JGVXZwQTJNVFZ5VmJRR1pWZVJVNWJYaHBhT01oQ1Bubi13MG9uN05laEJpZ2FOLVFYWnfSAWBBVV95cUxOQmU2aHBSZnVqT215RXRSUHE0cmh6d3BTY1M1WU14bnVVZzlvRWFaM19fV3RJOXhzbDZaLWt2MWdSWTV4UzJGS2x5dnJ3ekNsVFRDQVE4ZThSOUs5cElDNnE?oc=5"
-  },
-  {
-   "title": "[단독] 감사원 “대법원장, 격려금 지급 확인”…조희대 ‘거짓해명’ 논란",
-   "source": "한겨레",
-   "time": "2026-10-12T09:15:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1VSmNKMW9kLUltb1JNa3VBM2dWeXJvNDYzVzViT3FMN2N3N0dnZFI5Q2xCZ3huVUtIQTRJMVdfaWxQWVBtTVZ1Zmsxb1VkWjBpSlJ1SXFTQWFURnVCRTdaYVZNaFMtZG1fVFE?oc=5"
-  },
-  {
-   "title": "낮엔 모범생, 밤엔 밈짱…“5·18 혐오·스벅 옹호? 인스타는 그냥 놀이”",
-   "source": "한겨레",
-   "time": "2026-10-12T09:43:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1zMEhGQk9taHZldEFUSDdsNU9xTlBIUUJrTmFpVVJZcXVpRm13S01tTHpYbjk4d0ZGQ2tUamJoMWhkbFhUMWZGS0tyb3d6LWJDWTBLWExiUnRiRE1UeXAwcmd3OVVZRWV0bVJ4cEE1TnBvQQ?oc=5"
   }
  ]
 };
