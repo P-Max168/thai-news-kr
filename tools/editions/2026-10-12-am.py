@@ -1,0 +1,343 @@
+# -*- coding: utf-8 -*-
+"""2026-10-12 아침판 (07:08 정기 루틴 — 07:18 도착, 07:19 preflight OK).
+저녁판(2026-10-11-pm, 약 18:20 BKK) 이후 ~ 10-12 07:20 BKK 보도(외국인·비자 vi1 은 10-09 보도). tools/collect.py --hours 14.
+모든 내용은 raw/2026-10-12-am/art/ 에 저장한 원문에서 확인한 것만 사용. trends 없음."""
+import sys, pathlib
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
+from newslib import write_edition, B, KR, krw_for
+
+FX = 40.01
+def T(n):
+    return "%s바트(%s)" % (n, krw_for(n, FX))
+
+stories = [
+# ───────────── 외국인·비자 ─────────────
+dict(id="vi1", topic="visa", secondary=["bangkok", "poleco"], region="방콕",
+ headline="태국 국세청 등 9개 기관, '귀화한 외국인' 관련 회사 600곳 탈세 점검…방콕 3곳 동시 수색",
+ summary=[
+  "태국 국세청(Revenue Department)은 8일 특별수사국(DSI)·사업개발국·고용국·이민국·토지국·자금세탁방지청(AMLO)·특수경찰 등 8개 기관과 함께 방콕의 목표 장소 3곳을 동시에 수색했다. 외국인이었다가 태국 국적을 얻은 사람이 관련된 법인들이 대상이다.",
+  "국세청은 1차 자료 분석에서 세금을 덜 냈을 위험이 있는 법인이 약 600곳으로 나타났다며, 앞으로 기관별로 조사하고 정보를 맞대어 회사 간 연결 고리를 분석하겠다고 밝혔다. 정부는 이 문제가 경제·사회 안보와도 관련될 수 있다고 봤다고 더 스탠더드가 전했다."
+ ],
+ context="국세청은 태국인·외국인 사업자 모두 세법을 지켜야 하고, 세금 신고를 하지 않으면 사업 허가 갱신에도 영향을 줄 수 있다고 밝혔다. 고의 탈세는 징역 3개월~7년, 벌금 " + T("2,000") + "~" + T("20만") + "이다. 태국에서 법인을 운영한다면 세금 신고 내역을 회계사와 다시 확인해 두자.",
+ source="The Standard (더 스탠더드)", url="https://thestandard.co/revenue-department-foreigners-tax-evasion/",
+ title_th="กรมสรรพากรผนึก 8 หน่วยงาน ลุยตรวจบริษัทมีเอี่ยว ‘ต่างด้าวแปลงสัญชาติไทย’ เสี่ยงหนีภาษี-กระทบความมั่นคง พบเข้าข่ายถึง 600 แห่ง",
+ published="2026-10-09T09:25:00+07:00",
+ tags=["국세청","귀화","탈세","법인","방콕"],
+ impact=["비자·체류"], for_me="외국인 지분이나 귀화자가 얽힌 회사에 대한 정부 합동 점검이 넓어지고 있습니다. 태국에서 사업을 한다면 세금 신고를 빠짐없이 했는지 확인하세요.",
+ also=[],
+ issue=dict(id="nominee-crackdown", title="외국인 노미니(차명) 단속"),
+ quick_replies=["600곳이면 꽤 많네요", "세금 신고 다시 확인해야겠어요", "노미니 단속이랑 같은 흐름인가요?"]),
+
+dict(id="vi2", topic="visa", secondary=["bangkok", "society"], region="방콕(돈므앙)",
+ headline="국내선 짐칸 가방서 신용카드 슬쩍…'기내 소매치기' 중국인 돈므앙 공항서 체포",
+ summary=[
+  "돈므앙 경찰서는 11일 오후 3시께 돈므앙 공항에서 비행기에서 내리던 중국인 쩡위창(Zheng Yu Qiang, 51)을 공항 내 절도·타인 전자카드 부정 사용 혐의 체포영장으로 붙잡았다. 신용카드와 휴대전화 2대, 베트남·일본·홍콩·미국 등 12개국 지폐와 태국 돈 " + T("3만5,950") + " 이상이 압수됐다.",
+  "앞서 5일 치앙라이발 항공편 승객은 돈므앙 도착 직후 중국 광둥성에서 카드가 결제됐다는 알림을 받았다. 확인해 보니 같은 날 3차례 모두 6만2,000홍콩달러(약 " + T("26만5,067") + ")가 결제돼 있었다. 7일에는 치앙마이발 승객이 머리 위 짐칸에 둔 가방에서 현금 " + T("2만5,000") + "과 신용카드를 잃었다고 신고했다고 타이 타블로이드가 전했다."
+ ],
+ context="",
+ source="Thai Tabloid (타이 타블로이드)", url="https://thaitabloid.com/archives/324253",
+ title_th="จับชาวจีนขโมยบัตรเครดิตบนเครื่องบิน สน.ดอนเมือง ผู้เสียหายเงินหาย",
+ published="2026-10-12T03:29:00+07:00",
+ tags=["돈므앙 공항","기내 절도","신용카드","중국인","국내선"],
+ impact=["치안"], for_me="비행기 짐칸에 둔 가방에서 지갑·카드를 노린 범행입니다. 기내에서는 지갑·카드·현금을 몸에 지니고, 카드 결제 알림을 켜 두세요.",
+ also=[],
+ issue=None,
+ quick_replies=["짐칸에 지갑 두면 안 되겠네요", "카드 결제 알림 꼭 켜 두세요", "국내선에서도 이런 일이 있군요"]),
+
+# ───────────── 여행·맛집 ─────────────
+dict(id="tr1", topic="travel", secondary=["bangkok"], region="방콕(수완나품)",
+ headline="방콕발 인천행 아시아나 OZ742, 승객 이상행동에 이륙 직전 회항…지연 출발 예정",
+ summary=[
+  "12일 새벽 1시 35분(현지 시각) 수완나품 공항을 떠날 예정이던 아시아나항공 OZ742편이 활주로로 이동하던 중 회항했다. 승객 목격담에 따르면 이 비행기는 중국 관제 허가가 늦어져 탑승 뒤 1시간가량 계류장에서 기다렸고, 이후 한 승객이 화장실에 들어가 10여 분 동안 승무원 호출에도 나오지 않았다.",
+  "승무원들이 이 승객을 자리로 옮겼지만 비행기는 이륙하지 못하고 게이트로 돌아갔고, 소방차와 구급차가 출동했다. 기장은 기내 방송에서 '응급환자 발생으로 회항한다'고 알렸다. 해당 승객과 일행은 공항에서 내렸고, 항공편은 보안 점검을 다시 거친 뒤 늦게 출발할 예정이라고 한스경제가 단독 보도했다."
+ ],
+ context="",
+ source="한스경제", url="https://www.hansbiz.co.kr/news/articleView.html?idxno=871655",
+ title_th="[단독] 방콕발 인천행 아시아나, 승객 이상행동에 회항",
+ published="2026-10-12T03:47:00+07:00",
+ tags=["아시아나항공","수완나품","인천","회항"],
+ impact=["교통·사고"], for_me="12일 새벽 아시아나 OZ742편을 타는 분이나 마중 나가는 분은 항공사 안내로 바뀐 출발 시각을 확인하세요.",
+ also=[],
+ issue=None,
+ quick_replies=["이 비행기 타신 분 괜찮으세요?", "몇 시에 출발했는지 아시는 분?", "새벽 비행기 지연은 힘들죠"]),
+
+dict(id="tr2", topic="travel", secondary=["bangkok"], region="방콕",
+ headline="폴란드 LOT 항공, 바르샤바~방콕 직항 26년 만에 재개…11월부터 주 6회",
+ summary=[
+  "폴란드 LOT 항공이 7일 바르샤바~방콕 정기 직항을 다시 띄웠다. 2000년 3월 정기편을 접은 뒤 26년 만이다. 첫 편은 보잉 787 드림라이너로 10시간 20분을 날았다.",
+  "지금은 바르샤바 출발이 월·수·토, 방콕 출발(LO66)이 화·목·일 오전 9시 5분이다. 동계 시즌이 시작되는 26일부터 주 5회, 11월 2일부터는 금요일을 뺀 주 6회로 늘어난다. 2027년 하계 시즌(3월 28일~10월 28일)에는 주 3회를 유지한다고 TTR 위클리가 전했다."
+ ],
+ context="",
+ source="TTR Weekly (TTR 위클리)", url="https://www.ttrweekly.com/site/2026/10/lot-returns-to-bangkok-after-20-year-hiatus/",
+ title_th="LOT returns to Bangkok after 20-year hiatus",
+ published="2026-10-12T06:15:00+07:00",
+ tags=["LOT 폴란드항공","바르샤바","방콕","직항"],
+ impact=[], for_me="방콕에서 유럽으로 가는 직항 선택지가 하나 늘었습니다. 동유럽 여행을 계획한다면 비교해 볼 만합니다.",
+ also=[],
+ issue=None,
+ quick_replies=["유럽 직항 늘어서 좋네요", "가격은 어느 정도일까요?", "폴란드 여행 가 보고 싶어요"]),
+
+# ───────────── 동부(촌부리·라용) ─────────────
+dict(id="ea1", topic="east", secondary=["life"], region="파타야(세컨드 로드)",
+ headline="파타야 세컨드 로드 전봇대, 2027년 3월까지 모두 철거…통신선은 11~12월 먼저",
+ summary=[
+  "포라멧 응암피칫(Poramet Ngampichet) 파타야 시장은 8일 센트럴 파타야 앞 세컨드 로드의 전선·통신선 지중화 공사를 점검하고, 남은 전봇대와 공중 전선을 2027년 3월께까지 없앤다고 밝혔다.",
+  "지방전력공사(PEA)는 11월에 도로 동쪽, 12월에 반대쪽 통신선을 걷어 2026년 안에 통신선을 모두 정리하고, 전력선과 전봇대는 2027년 1분기에 철거한다. 세컨드 로드는 9개 도로 지중화 계획 가운데 7번째 구간이며 6개 도로는 이미 전봇대를 없앴다. 서드 로드·사우스 파타야 로드·좀티엔 세컨드 로드도 진행 중이고, 파타야~나끌루아 도로는 시와 PEA가 비용을 반씩 나눌 계획이라고 파타야 메일이 전했다."
+ ],
+ context="",
+ source="Pattaya Mail (파타야 메일)", url="https://www.pattayamail.com/news/pattaya-second-road-power-poles-set-for-removal-by-march-2027-568020",
+ title_th="Pattaya Second Road power poles set for removal by March 2027",
+ published="2026-10-12T03:50:00+07:00",
+ tags=["파타야","세컨드 로드","전선 지중화","지방전력공사"],
+ impact=["교통·사고"], for_me="11~12월 세컨드 로드에서 통신선 철거 공사가 이어집니다. 그 길을 자주 다니면 공사 구간 차선을 조심하세요.",
+ also=[],
+ issue=None,
+ quick_replies=["전봇대 없어지면 훨씬 깔끔하겠네요", "공사 기간에 길 막히겠어요", "서드 로드는 언제 끝나나요?"]),
+
+dict(id="ea2", topic="east", secondary=["travel"], region="파타야",
+ headline="파타야 국제 불꽃축제 11월 27~28일, 재즈 페스티벌 11월 6~7일…연말 행사 일정 점검",
+ summary=[
+  "파타야시 관광·문화위원회는 9일 시청 회의에서 연말 대형 행사 준비 상황을 점검했다. 파타야 재즈 페스티벌은 11월 6~7일, 파타야 국제 불꽃축제는 11월 27~28일에 열리고, 12월 말 새해 카운트다운과 음악 축제·스포츠 행사도 이어진다.",
+  "위원회는 관광 홍보용 탁상 달력 제작과 국내외 '파타야 로드쇼' 개최도 논의했다. 위쳇 농야이(Wichet Nongyai) 위원장은 주민·업계·방문객의 이익을 우선으로 행사를 준비하겠다고 말했다고 파타야 메일이 전했다."
+ ],
+ context="",
+ source="Pattaya Mail (파타야 메일)", url="https://www.pattayamail.com/latestnews/news/pattaya-reviews-plans-for-fireworks-jazz-and-year-end-festivals-568025",
+ title_th="Pattaya reviews plans for fireworks, jazz and year-end festivals",
+ published="2026-10-12T03:30:00+07:00",
+ tags=["파타야","불꽃축제","재즈 페스티벌","카운트다운"],
+ impact=[], for_me="불꽃축제 기간(11월 27~28일) 해변 쪽 숙소와 길은 붐빕니다. 손님이 오거나 나들이를 계획한다면 미리 예약하세요.",
+ also=[],
+ issue=None,
+ quick_replies=["불꽃축제 올해도 기대돼요", "어디서 보면 잘 보이나요?", "그때 숙소 미리 잡아야겠네요"]),
+
+dict(id="ea3", topic="east", secondary=["society"], region="파타야(나끌루아)",
+ headline="파타야 나끌루아 공유지 70라이(약 112,000㎡, 약 33,880평), 주민 쉼터로 바꾸는 방안 검토",
+ summary=[
+  "파타야시는 9일 우티삭 럼낏짜깐(Wuttisak Rermkijakarn) 부시장 주재 회의에서 나끌루아 옛 중국인 묘지 마을 근처, 수쿰윗 파타야 12번 골목 쪽 공유지 약 70라이(약 112,000㎡, 약 33,880평)를 주민 여가 공간으로 쓰는 방안을 논의했다.",
+  "이 땅은 침범된 공유지를 정리하라는 내무부 정책에 따라 방라뭉 군청과 함께 찾은 곳이다. 아이·청소년 야외 활동과 주민 프로그램 공간을 염두에 두고 있지만, 아직 토지국에서 공유지 경계 확인 절차를 밟는 중이라 구체적인 배치와 용도는 정해지지 않았다고 파타야 메일이 전했다."
+ ],
+ context="",
+ source="Pattaya Mail (파타야 메일)", url="https://www.pattayamail.com/news/pattaya-considers-turning-70-rai-of-public-land-in-naklua-into-a-recreational-area-568031",
+ title_th="Pattaya considers turning 70 rai of public land in Naklua into a recreational area",
+ published="2026-10-12T03:48:00+07:00",
+ tags=["파타야","나끌루아","공유지","공원"],
+ impact=[], for_me="",
+ also=[],
+ issue=None,
+ quick_replies=["아이들 놀 곳 생기면 좋겠어요", "공원으로 만들어지면 좋겠네요", "언제쯤 확정될까요?"]),
+
+# ───────────── 정치·경제 ─────────────
+dict(id="pe1", topic="poleco", secondary=["east"], region="촌부리(아마타시티)",
+ headline="촌부리 침수 공단 물 빠져…완성차 공장 14일 조립 재개, 아마타는 관리비 50% 감면",
+ summary=[
+  "9월 말 홍수로 촌부리 아마타시티 공단의 2·3차 부품 협력사들이 멈추면서 토요타·이스즈·포드·닛산·혼다의 생산 일정이 잠시 흔들렸다. 공단의 물이 빠지면서 동부 완성차 공장들은 14일 조립을 다시 시작한다. 조립 공장들은 12일까지 버틸 재고가 있었다.",
+  "태국산업연맹(FTI) 자동차클럽의 수라퐁 파이싯파타나퐁(Surapong Paisitpattanapong) 대변인은 '내연기관 차는 부품이 3만 개가 넘어 하나만 빠져도 출고할 수 없다'고 말했다. 전기차 라인은 배터리·모터 공급망이 달라 영향을 피했다. 아마타는 공단 관리비를 1년 동안 50% 깎거나 면제하고, 10월부터 공업용수 등 요금을 50% 할인한다. 침수 지역 산업 피해는 약 " + T("60억") + "으로 추산된다고 리테일 뉴스 아시아가 전했다."
+ ],
+ context="태국은 2026년 자동차 150만 대 생산(수출 95만 대·내수 55만 대)을 목표로 하고 있다. 부품사들은 앞으로 2주 동안 주말 추가 근무로 재고를 다시 채울 계획이다.",
+ source="Retail News Asia (리테일 뉴스 아시아)", url="https://retailnews.asia/thai-car-plants-prepare-to-restart-as-flood-delays-ease-in-chon-buri",
+ title_th="Thai Car Plants Prepare to Restart as Flood Delays Ease in Chon Buri",
+ published="2026-10-12T02:08:00+07:00",
+ tags=["아마타시티","자동차 공장","홍수","촌부리","부품 공급"],
+ impact=[], for_me="아마타시티·램차방 쪽 협력사에 다니는 분은 이번 주부터 주말 추가 근무 등 일정이 바뀔 수 있습니다.",
+ also=[],
+ issue=dict(id="2026-floods-factories", title="홍수로 멈춘 공장(혼다·토요타 등)"),
+ quick_replies=["물 빠져서 다행이네요", "시라차 공장들도 정상화됐나요?", "부품 하나 때문에 멈추는군요"]),
+
+dict(id="pe2", topic="poleco", secondary=[], region="",
+ headline="태국 증권거래위원회, 비트코인·이더리움 현물 ETF 허용…16일부터 시행",
+ summary=[
+  "태국 증권거래위원회(SEC)가 8일 관련 규정 11건을 발표하고 비트코인·이더리움 현물 상장지수펀드(ETF)를 태국 안에서 만들 수 있게 했다. 새 규정은 16일부터 시행된다. 지금까지 태국 펀드는 해외 현물 ETF에만 투자할 수 있었다.",
+  "펀드는 가격을 그대로 따라가는 패시브 방식이어야 하고, 한 코인 비중을 순자산의 80% 이상으로 유지해야 한다. 자산 보관은 태국 SEC 규제를 받는 업체만, 상장·거래는 태국 증권거래소에서만 가능하다. 투자자는 거래 전에 위험을 이해했다는 확인을 거쳐야 하고, 증권사는 ETF 매수 자금을 빌려줄 수 없다고 디지털투데이가 전했다."
+ ],
+ context="",
+ source="디지털투데이", url="https://www.digitaltoday.co.kr/news/articleView.html?idxno=706254",
+ title_th="태국, 비트코인·이더리움 현물 ETF 허용…오는 16일 시행",
+ published="2026-10-12T06:31:00+07:00",
+ tags=["태국 SEC","비트코인","이더리움","현물 ETF"],
+ impact=[], for_me="",
+ also=[],
+ issue=None,
+ quick_replies=["태국도 현물 ETF 시대네요", "외국인도 살 수 있을까요?", "레버리지 금지는 좋은 것 같아요"]),
+
+# ───────────── 생활·물가 ─────────────
+dict(id="lf1", topic="life", secondary=["poleco"], region="",
+ headline="태국 사회보장위원회 선거, 투표 100만 표 넘어…'진보 사회보장팀' 잠정 개표 크게 앞서",
+ summary=[
+  "11일 치러진 태국 사회보장위원회 위원 선거의 잠정 개표에서 '사회보장 진보팀(Progressive Social Security Team)'이 크게 앞섰다. 이번 선거는 사용자 대표 7명과 가입자 대표 7명 등 위원 14명을 뽑는다.",
+  "사회보장사무소(SSO) 집계판 기준 11일 밤 11시 13분까지 개표된 표는 100만7,422표였다. 가입자 대표 부문은 상위 7명이 12만~13만 표대를 얻었고 8위는 4,989표에 그쳤다. 결과는 아직 비공식이며 개표 완료와 공식 확정을 기다려야 한다고 마티촌이 전했다."
+ ],
+ context="사회보장기금은 태국 직장인 의료·연금 등을 맡는 기금으로, 노동허가를 받고 일하는 외국인도 가입 대상이다.",
+ source="Matichon (마티촌)", url="https://www.matichon.co.th/local/quality-life/news_5928725",
+ title_th="ทะลุล้านแล้ว! ‘ทีมประกันสังคมก้าวหน้า’ คะแนนไม่เป็นทางการนำโด่ง กวาด 14 ที่นั่งบอร์ด สปส.",
+ published="2026-10-11T23:25:00+07:00",
+ tags=["사회보장기금","사회보장위원회","선거","노동자"],
+ impact=[], for_me="태국에서 노동허가를 받고 일하며 사회보장료를 내는 분이라면 새 위원회가 내놓을 정책을 지켜볼 만합니다.",
+ also=[],
+ issue=None,
+ quick_replies=["투표율이 엄청 올랐네요", "외국인 가입자도 투표했나요?", "어떤 정책이 바뀔까요?"]),
+
+dict(id="lf2", topic="life", secondary=["bangkok", "weather"], region="방콕",
+ headline="\"IMF 손님 맞느라 수재민 외면\" 비판에 태국 정부 \"9월 26일부터 대출 지원 중\"",
+ summary=[
+  "태국 민주당 부대표 꼰 짜띠까와닛(Korn Chatikavanij) 전 재무장관은 방콕 클롱찬 주택 단지를 찾아 '많은 주민·소상공인이 아직 일을 다시 시작하지 못했고 사채를 쓴 가게도 있다'며 " + T("20만") + "까지 6개월 무이자·무상환 뒤 2년 동안 연 7%로 갚는 대출을 제안했다. 방콕시에는 주민이 구청에 가지 않아도 되게 마을 천막에서 보상 신청을 받으라고 요구했다.",
+  "랄리다 펀위와타나(Lalida Persvivatana) 정부 부대변인은 정부저축은행(GSB)이 담보 없는 긴급 대출 " + T("2만") + ", 재해 대출 " + T("5만") + "(둘 다 원리금 3개월 유예), 생계 회복 대출 " + T("30만") + "(첫 3개월 무이자, 이후 연 15%, 최장 7년)을 이미 운영 중이라고 반박했다. 다만 대출이 있다고 실제로 받을 수 있는 것은 아니라며 승인율을 지켜보겠다고 인정했다고 방콕포스트가 전했다."
+ ],
+ context="",
+ source="Bangkok Post (방콕포스트)", url="https://www.bangkokpost.com/thailand/general/3335290/govt-denies-neglecting-flood-victims",
+ title_th="Govt denies neglecting flood victims",
+ published="2026-10-12T04:23:00+07:00",
+ tags=["홍수 구호","정부저축은행","대출","방콕","IMF"],
+ impact=["환율·물가","날씨·재해"], for_me="",
+ also=[],
+ issue=dict(id="2026-floods-relief", title="홍수 구호금·재난보험"),
+ quick_replies=["실제로 대출 받기가 어렵다던데요", "수재민 지원이 빨리 됐으면", "연 15%는 꽤 높네요"]),
+
+# ───────────── 날씨·교통 ─────────────
+dict(id="wt1", topic="weather", secondary=["bangkok", "east", "south"], region="",
+ headline="태국 기상청 경보 11호 \"13일 방콕·동부·중부 폭우\"…오늘은 남부, 바다 물결 2m 넘어",
+ summary=[
+  "태국 기상청은 12일 오전 5시 '폭우 경보 11호'를 내고 12일에는 남부, 13일에는 북부 아래쪽·동북부 아래쪽·중부·방콕과 주변 지역·동부·남부에 곳곳 폭우가 내릴 것이라고 밝혔다. 우기 끝 무렵 중국에서 내려온 찬 고기압이 태국 북쪽을 덮고, 동풍·남동풍이 남중국해 습기를 몰고 오기 때문이다.",
+  "기상청은 급류·돌발 홍수, 특히 산비탈 물길 근처와 저지대를 조심하고, 비바람이 칠 때 넓은 곳·큰 나무·약한 광고판 아래를 피하라고 당부했다. 비구름이 있는 안다만해와 타이만은 파도가 2m를 넘어 배를 띄울 때 주의해야 한다. 다음 경보는 12일 오후 5시에 나온다고 카오솟이 전했다."
+ ],
+ context="",
+ source="Khaosod (카오솟)", url="https://www.khaosod.co.th/breaking-news/news_10434010",
+ title_th="กรมอุตุฯ ประกาศฉบับที่ 11 ฝนตกหนักถึงหนักมาก ลมแรง น้ำท่วมฉับพลัน",
+ published="2026-10-12T06:27:00+07:00",
+ tags=["태국 기상청","폭우","방콕","동부","남부"],
+ impact=["날씨·재해"], for_me="13일 공휴일에 방콕·파타야로 나들이 계획이 있다면 우산을 챙기고, 배를 탈 계획이면 파도 예보를 확인하세요.",
+ also=[],
+ issue=dict(id="2026-rain-warnings-oct", title="10월 초 비 경보(4~7일·11~14일)"),
+ quick_replies=["공휴일에 또 비네요", "파타야도 비 많이 올까요?", "배 타는 일정 다시 봐야겠어요"]),
+
+dict(id="wt2", topic="weather", secondary=["bangkok"], region="방콕",
+ headline="13일 공휴일, 방콕 고속도로 3개 노선 63개 요금소 통행료 무료",
+ summary=[
+  "태국 고속도로공사(EXAT)는 공휴일인 13일(화) 고속도로 3개 노선 통행료를 받지 않는다고 12일 밝혔다. 이동 편의를 높이고 비용 부담을 줄이기 위해서다.",
+  "대상은 찰름마하나콘 고속도로(1단계) 21개 요금소, 씨랏 고속도로(2단계) 32개 요금소, 우돈랏타야 고속도로 10개 요금소 등 모두 63곳이라고 타이 PBS가 전했다."
+ ],
+ context="",
+ source="Thai PBS (타이 PBS)", url="https://www.thaipbs.or.th/news/content/570832",
+ title_th="13 ต.ค.69 ขึ้นทางด่วนฟรี 3 สายทาง รวม 63 ด่าน",
+ published="2026-10-12T06:20:00+07:00",
+ tags=["고속도로","통행료 면제","공휴일","방콕"],
+ impact=["교통·사고"], for_me="13일 방콕 시내 고속도로 3개 노선은 무료입니다. 다른 노선(방콕~촌부리 모터웨이 등)은 이번 발표에 들어 있지 않으니 따로 확인하세요.",
+ also=[],
+ issue=None,
+ quick_replies=["무료라 좋네요", "모터웨이도 무료인가요?", "공휴일에 차 많이 막히겠어요"]),
+
+# ───────────── 북부 ─────────────
+dict(id="no1", topic="north", secondary=["society"], region="치앙라이(판)",
+ headline="치앙라이 검문소서 픽업 바닥 비밀 칸에 필로폰(아이스) 350kg…운반비 30만 바트(약 1,200만3,000원)",
+ summary=[
+  "치앙라이 판(Phan)군 경찰은 11일 오전 10시께 파야오 경계의 뿌깽(Pu Kaeng) 마약 검문소에서 치앙라이 시내 쪽에서 오던 방콕 번호판 이스즈 픽업을 세웠다. 겉으로는 이상이 없었지만 운전자 태도가 수상해 정밀 수색한 끝에, 공구로 나사를 풀어야 열리는 짐칸 바닥 비밀 칸에서 1kg짜리 필로폰(아이스) 약 350봉지, 모두 약 350kg을 찾아냈다.",
+  "운전자 워라웃(Worawut, 32)과 동승한 여자친구(33)는 모두 북동부 농카이 출신이다. 이들은 미얀마 국경 매사이(Mae Sai)에서 받은 마약을 사뭇쁘라깐의 받는 사람에게 넘기는 대가로 " + T("30만") + "을 받기로 했다고 진술했다고 톡뉴스 온라인이 전했다."
+ ],
+ context="",
+ source="Talknews Online (톡뉴스 온라인)", url="https://www.talknewsonline.com/News/48962/",
+ title_th="ตำรวจพานรวบหนุ่มสาวหนองคาย ซุกไอซ์ 350 กก. ในช่องลับใต้กระบะ เกือบพ้นด่านเชียงราย รับจ้างขนจากแม่สายส่งสมุทรปราการ 3 แสนบาท",
+ published="2026-10-11T20:01:00+07:00",
+ tags=["치앙라이","필로폰","검문소","매사이","마약"],
+ impact=["치안"], for_me="",
+ also=[],
+ issue=None,
+ quick_replies=["350kg이라니 어마어마하네요", "검문소 경찰 대단하네요", "윗선까지 잡혔으면 좋겠어요"]),
+
+# ───────────── 남부 ─────────────
+dict(id="st1", topic="south", secondary=["travel"], region="푸껫",
+ headline="푸껫 공항 설계 용량 1,250만 명인데 이미 1,700만 명…확장 터미널은 2032년에야",
+ summary=[
+  "푸껫 국제공항은 연간 약 1,250만 명을 처리하도록 설계됐지만 이용객이 이미 1,700만 명을 넘었다. 국제선 터미널 2단계 공사는 내년 시작해 2032년 끝날 예정이고, 완공되면 연 550만 명이 늘어 전체 용량이 약 1,900만 명이 된다.",
+  "2025년 10월~2026년 9월 하루 평균 288편, 4만7,219명이 공항을 이용했다. 성수기에는 하루 5만 명을 넘을 수 있어, 확장 뒤에도 늘어난 용량이 금방 찰 수 있다고 파타야 메일이 전했다."
+ ],
+ context="",
+ source="Pattaya Mail (파타야 메일)", url="https://www.pattayamail.com/latestnews/news/phuket-airport-faces-five-more-years-of-pressure-before-terminal-expansion-opens-568055",
+ title_th="Phuket Airport faces five more years of pressure before terminal expansion opens",
+ published="2026-10-12T02:15:00+07:00",
+ tags=["푸껫 공항","터미널 확장","성수기","관광"],
+ impact=["교통·사고"], for_me="성수기 푸껫 공항은 붐빕니다. 연말에 푸껫에 간다면 공항에 평소보다 일찍 도착하세요.",
+ also=[],
+ issue=None,
+ quick_replies=["푸껫 공항 늘 붐비더라고요", "2032년이면 한참 남았네요", "성수기엔 일찍 가야겠어요"]),
+
+dict(id="st2", topic="south", secondary=["society", "travel"], region="푸껫(시내)",
+ headline="푸껫 채식 축제장 '사격·풍선 다트' 게임은 도박…운영자 1명 체포",
+ summary=[
+  "푸껫 군청 관계자들은 10일 밤 10시 20분께 도박이 벌어진다는 신고를 받고 푸껫 시내 채식 축제장을 점검했다. 손님이 돈을 내고 총알이나 다트를 사 성공하면 인형 등을 받는 사격·풍선 다트 게임이 허가 없는 도박에 해당한다고 보고, 사격 게임 운영자 1명을 체포하고 기구를 압수했다.",
+  "군청은 채식 축제 기간 사당 주변의 도박과 부적절한 행위를 막기 위해 점검을 계속한다고 밝혔다. 별도로 빠똥의 한 작은 가게에서는 감시원과 숨은 출입구까지 갖춘 카드 도박장이 적발돼 4명이 체포됐다고 더 타이거가 전했다."
+ ],
+ context="",
+ source="The Thaiger (더 타이거)", url="https://thethaiger.com/news/phuket/man-arrested-phuket-officials-deem-festival-games-gambling",
+ title_th="Man arrested after Phuket officials deem festival games gambling",
+ published="2026-10-11T17:02:00+07:00",
+ tags=["푸껫","채식 축제","도박","빠똥"],
+ impact=["치안"], for_me="태국에서는 돈을 걸고 상품을 받는 축제 게임도 도박으로 처벌될 수 있습니다. 축제장에서 이런 게임은 피하는 게 안전합니다.",
+ also=[],
+ issue=None,
+ quick_replies=["풍선 다트도 도박이라니 놀랍네요", "축제 게임도 조심해야겠어요", "태국은 도박 단속이 엄하네요"]),
+
+# ───────────── 연예·스포츠 ─────────────
+dict(id="en1", topic="ent", secondary=[], region="",
+ headline="태국 '사프론' 미스 글로벌 2026 우승…태국 첫 왕관",
+ summary=[
+  "11일 방콕 응암웡완 더몰 라이프스토어 MCC홀에서 열린 미스 글로벌 2026에서 태국 대표 사프론 마야 스누크(Saffron Maya Snook)가 우승했다. 태국인이 이 대회 최고 자리에 오른 것은 처음이다. 2위는 미국, 3위 푸에르토리코, 4위 필리핀, 5위 미얀마 대표였다.",
+  "태국·영국 혼혈인 그는 영국 서식스 대학교에서 마케팅·경영·심리학을 1등급 우등으로 마쳤고, 대학 여자 축구팀 주장을 지냈다. 'The Face Thailand' 시즌 6 최종 24인에 오른 적도 있다고 마티촌이 전했다."
+ ],
+ context="",
+ source="Matichon (마티촌)", url="https://www.matichon.co.th/lifestyle/social-women/news_5928744",
+ title_th="มงแรกมาแล้ว! 'ซาฟฟรอน' สาวไทยสร้างประวัติศาสตร์ ผงาดคว้า Miss Global 2026 ครั้งแรกของประเทศ",
+ published="2026-10-12T01:19:00+07:00",
+ tags=["미스 글로벌","사프론","미인대회","태국"],
+ impact=[], for_me="",
+ also=[],
+ issue=None,
+ quick_replies=["축하합니다!", "태국 미인대회 열기 대단하네요", "방콕에서 열렸군요"]),
+
+dict(id="en2", topic="ent", secondary=[], region="",
+ headline="태국 배드민턴 '멧 라차녹', 아크틱 오픈 결승서 덴마크 선수에 첫 패…준우승",
+ summary=[
+  "세계 5위이자 1번 시드인 라차녹 인타논(Ratchanok Intanon)이 11일 핀란드에서 열린 아크틱 오픈 여자 단식 결승에서 덴마크의 미아 블리크펠트(Mia Blichfeldt, 세계 15위)에게 0-2(17-21, 13-21)로 졌다. 앞선 8번 맞대결을 모두 이겼던 상대에게 처음 졌다.",
+  "라차녹은 말레이시아 마스터스에 이어 올해 두 번째 우승을 놓쳤고, 상금 1만9,000달러(약 " + T("63만6,500") + ")를 받았다. 태국 선수들은 13일 개막하는 덴마크 오픈(월드투어 750)에 나선다고 타이 PBS가 전했다."
+ ],
+ context="",
+ source="Thai PBS (타이 PBS)", url="https://www.thaipbs.or.th/news/content/570844",
+ title_th="\"เมย์ รัชนก\" พ่ายเดนมาร์ก คว้ารองแชมป์แบดมินตัน อาร์กติก โอเพน",
+ published="2026-10-12T06:49:00+07:00",
+ tags=["라차녹 인타논","배드민턴","아크틱 오픈","덴마크 오픈"],
+ impact=[], for_me="",
+ also=[],
+ issue=None,
+ quick_replies=["준우승도 대단해요", "덴마크 오픈 응원합니다", "아쉽지만 다음엔 꼭!"]),
+]
+
+briefing = [
+  B("visa", "태국 국세청 등 9개 기관, 귀화 외국인 관련 회사 **600곳** 탈세 점검", "vi1"),
+  B("travel", "방콕발 인천행 **아시아나 OZ742** 승객 이상행동에 회항", "tr1"),
+  B("weather", "기상청 경보 11호, **13일** 방콕·동부·중부 폭우", "wt1"),
+  B("weather", "13일 공휴일 방콕 고속도로 **63개 요금소** 무료", "wt2"),
+  B("poleco", "촌부리 침수 공단 정상화…완성차 공장 **14일** 재가동", "pe1"),
+  B("east", "파타야 불꽃축제 **11월 27~28일**, 재즈 페스티벌 11월 6~7일", "ea2"),
+]
+
+korea_top = [
+  KR("[단독] 한동훈 딸 '허위 스펙 의혹' 경찰 수사, 압색영장 신청 전무…배우자만 1회 '서면 조사'", "경향신문", "https://www.khan.co.kr/article/202610120600071", "2026-10-12T04:00:00+07:00"),
+  KR("\"품격없다, 권위없다 해도 계속\"…이 대통령, 'SNS 정치' 정면 돌파", "한겨레", "https://www.hani.co.kr/arti/politics/bluehouse/1281842.html", "2026-10-11T23:10:00+07:00"),
+  KR("임은정 \"중수청 1호 감찰 대상 돼 안타깝고 서글퍼…잘 대처하겠다\"", "한겨레", "https://www.hani.co.kr/arti/society/society_general/1281797.html", "2026-10-11T18:36:00+07:00"),
+  KR("국정감사 2주 차 시작…행안위 경찰청·외통위 주미대사관 국감 쟁점 예상", "KBS 뉴스", "https://news.kbs.co.kr/news/view.do?ncd=8682673", "2026-10-11T23:01:00+07:00"),
+  KR("트럼프 \"러-우크라, 에너지 휴전 합의\"…구체적 내용은 없어", "한겨레", "https://www.hani.co.kr/arti/international/international_general/1281853.html", "2026-10-11T23:09:00+07:00"),
+  KR("이혼 소송 중 장모 살해... 경찰 신변보호는 무용지물", "조선일보", "https://www.chosun.com/national/national_general/2026/10/11/KYKLLECUKNCX7JJ5QWBBQQZXFE/", "2026-10-11T12:48:00+07:00"),
+]
+
+data = dict(
+  id="2026-10-12-am", date="2026-10-12", edition="am", edition_label="아침판",
+  weekday="월요일", timezone="Asia/Bangkok (UTC+7)",
+  coverage="10-11 저녁판(약 18:20 BKK) 이후 ~ 10-12 07:20 BKK 보도(외국인·비자 vi1 은 10-09 보도). tools/collect.py --hours 14. 원문 확인: The Standard·Thai Tabloid·한스경제·TTR Weekly·Pattaya Mail·Retail News Asia·디지털투데이·Matichon·Bangkok Post·Khaosod·Thai PBS·Talknews Online·The Thaiger. IMF 총회 교통 통제·쁘라친부리 노미니 조사는 저녁판에 실려 뺌. 북부 1건·남부 2건. 한국 주요 뉴스는 2시간마다 갱신되는 data/korea.json 을 쓰고 판 korea_top 은 대체용 6건. X 트렌드 없음. 환율 1바트=40.01원.",
+  previous="2026-10-11-pm",
+  briefing=briefing,
+  highlights=["vi1", "tr1", "wt1"],
+  stories=stories, korea_top=korea_top,
+  fx=dict(THB_KRW=FX, note="1바트 = 40.01원(이 판의 모든 원화 환산에 사용, 정수로 반올림)",
+          source="open.er-api.com (2026-10-12 07:23 BKK 조회, 공시 기준시각 2026-10-12 00:02 UTC, 40.0052 → 판 환율 40.01)"),
+)
+
+if __name__ == "__main__":
+    write_edition(data)
