@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-13T17:58:56+07:00",
+ "updated_at": "2026-10-13T20:07:09+07:00",
  "items": [
   {
-   "title": "인천 대형마트서 전자발찌 착용 60대 흉기 난동 ‘1명 심정지·7명 부상’···가방 속 다량 흉기 발견",
-   "source": "경향신문",
-   "time": "2026-10-13T17:00:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFB2WmNtOVB1bVZMWDNoV0ZQQnBxZTZhT1plUm9PWWxvUm5lT211WkJRXzFTaUU2SHZyLWQ1YnpWLVVlRnVNVWl3RURjUW01NTA3Sm5rUVBPQTlaZ9IBX0FVX3lxTE9WWVdKeVl0WlN1RGJHa0dQOXFCazBLZWhvay1CLVo3RUJWbkJDQnRLZ1owSkZPS0Z3QTVZR0xMclp3M3BkVHFFcEVwd2FYTHRETnllZ0hmVEFrblVXNmgw?oc=5"
-  },
-  {
-   "title": "특검, ‘대선 허위사실 공표 혐의’ 윤석열 항소심서도 당선무효형 구형",
+   "title": "[속보] 이 대통령, 인천경찰청 찾아 대형마트 흉기 난동 사건 보고받아",
    "source": "한겨레",
-   "time": "2026-10-13T12:44:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBHZ3hUeXlZcERRVkFnUDFtUl9MWjBPWmhaelBmV0VqYU42dnctOW1RMExQcHhFN0dOOXAyX2lFYUtNQnNCX1JVM25OZ1pwZnJZSW9DN19MTGppblZBcDZGV1YtQWdsdGF6T3R4R3JzM1hudw?oc=5"
+   "time": "2026-10-13T19:22:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE43eEgyQkpJTnFsbjkxYUxOX1IzT0NaT1BnaVpjM1ZadVFtby1nSXFVOTlmeHFLaWZRM1VGNzB0WGtUVUxOMFBCQ2lMeEZvVU1fbXJLQUFNU3d5QTVuTlNMejdDNWJ3TF8zTkNR?oc=5"
   },
   {
-   "title": "연대·시립대 수시 논술 발칵…’AI 스마트 안경’ 잇따라 적발",
-   "source": "연합뉴스TV",
-   "time": "2026-10-13T15:44:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1jVHRsaFlySWdFbWc2czlzTVh0YWgzLUw5V2QyMlhnWWlIR3FTM3VMa1Z1QU9TWkJHWlBGYjBpelFxMzRmXy1oSnAzcVBTR1JHN3lJWWxfV2RPb01iTnZpS3B6TXRiQWM?oc=5"
+   "title": "금융위·외교부·감사원 세종 '총집결'…44개 기관 2차 대이동 막 올랐다",
+   "source": "대전일보",
+   "time": "2026-10-13T12:07:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBMV0Z3TkItYzJCWDZJSGFCb29YZDBvN2hNdEJ4ZlBLUnFiWUVYcGN3M002aDdxSXE0dmNoSFlBeDE1LURDZklrOWd6cWl0WWtPZ1ROdnY2MzhjUlFKbkhPbDNrWmpTZGUtQlZZQXBKd9IBc0FVX3lxTE54SVR5aTZraDNDOWhWeFBWZDNQc010TnZfRUZxUXBvZnF0VVhGdWlKUGY5cWVhbnh2cWJlaFJaSmNlaTJxVDNBTDJMeEY2SWREQzFJc2dVdkdsQ3N6bmZyeWdvZTlTcDA2VnZNMjhTXzJ6dms?oc=5"
   },
   {
-   "title": "국감서 폭발한 與與 갈등... 추미애 ‘재정 비상’ 때렸다",
+   "title": "특검, 尹 선거법 2심도 ‘당선무효형’ 요청… 尹 “이런 식이면 선거 왜 하나”",
    "source": "조선일보",
-   "time": "2026-10-13T12:33:21+07:00",
-   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQN0RZaWVHXzVDWkhmSEZYZmd3RHRtay1VYTJUTU1PQkc0ZVh6cnBBdWtlWGJ1eGF5U2FKbDRwdWlRZ3NMM3lpWHFUR1dlWGt5Q1A3QUVMUGt4N25Gckt5VWtXM1MyWW82TmRiNEF0b0c5QWEtWDBsamdWTktTOFNOLU9yWXZRWUxGUEROQ09aREQ?oc=5"
+   "time": "2026-10-13T13:34:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQeThHd2J5S0RFZVcwSno5V3JvUGNSMHBLc1F3MWZUSVYwb2xydTBxa0luTV9sMXJfcW9QZW1DWGVta2lIeF9VMnlWSWxldUJpcU5rcU91VmN1TTZIOGxTcWpvR2REMEFHLVhzc0F2T0EyMkpPSE1qeUtEQXZCU1lwU29HSkx1M28?oc=5"
   },
   {
-   "title": "'장모 살인·아내 납치' 부실 대응 논란에‥경찰 감찰 착수",
-   "source": "MBC 뉴스",
-   "time": "2026-10-13T17:22:27+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1Zclc3STliVWNjUEpKQ0RZandHMUJoRmlFQ3JPQnl1QlMtLVc2ZGtQVkhlQURUaHB0Q29lRk0tdW9TUm9BNm9GVThVNlRFXzhiMkdkcFpEaE5mNVJEMnp5b1dEbkxTZXNBX2p0NlpreTBBNU9xMnhR0gF3QVVfeXFMUG00YmVpMWxGUVB2WmJaSmMwVXdQLTctc0ZtYm80N29WbTRuWGNLX0NfN1pCUHFrTWIyb2gtczRsbTVrOXFtZnVsaXF4MkF3X1JoYXA4NmNzOFRWMlNCSFZBYUgzLTlIOXMyQl9ZMnhGZkZuT2JGS1U?oc=5"
-  },
-  {
-   "title": "외제차 매장서 허리띠로 직원 폭행한 기업 임원 체포",
-   "source": "동아일보",
-   "time": "2026-10-13T14:24:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1CVUNoNlcteTB0U1JiTnYyWWhrdjBpVWFYWEZqOVdDMmY2RV9HQnNobHdoNzEtQWptcFAwQkpmZEcwbUhwZkFSVHVMS1hNa1I5empkdmtVU2lza09TZS1vQnpFTlUxTDYxLVl2eGU5b1lwTFFzR2fSAWZBVV95cUxQNjBTOUZkdHpVSFJyWGRmdnhKUjFpaVhhbXJyMENvbmIzREtncW5PakF0eVNEd2JQNG1kdTkwOWlIUXpNUGE5aE5EcDJRWFBlQUo3OFRwTGhaUEZtbWlEVDh6b0w3Unc?oc=5"
-  },
-  {
-   "title": "중수청장 후보자 “임은정 공개 비판, 조직 기강 무너뜨리는 행위”",
+   "title": "추미애 “페북 글, 퇴근 뒤 쓴다…도정 소홀함 없어” 국감 오른 ‘SNS 정치’",
    "source": "한겨레",
-   "time": "2026-10-13T12:16:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE05Wk1MWDI3T2dkSkVvVlZwQ3hLM25kRzA1Tk45cndvM09mRFBxd1lXOEdoMjVTeUVmMDlOWWJHeDhwTzRLZnZhbW00VFp4YkpWdHd1a0JiakxGeTJzLVl1UnBOM1ZIRTd2SjN5OEJlX3JOQQ?oc=5"
+   "time": "2026-10-13T12:50:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE4wQjJmVDhzb3hYMXo2dGtVc0pJN2lQeFh4Y3dSZTVIdEFyd2dtOXpiWXRDbktTMGtvblluNDZIeG9mN2JleHRBWDAyeDdrUVNRc1lUSlpyNkNDWU15c0FVV3Zwaw?oc=5"
   },
   {
-   "title": "비만치료제 투여 후 시력 손상 의심…국내서도 1건 신고",
-   "source": "KBS 뉴스",
-   "time": "2026-10-13T15:52:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE13aUE2VkFZcFJXY1JPU1NnSnVnMF96MWNhQlY0YVZnczR4OUpJd1ZvYlhQdW1nd1JkblRFSF9TZ0lGdHNpNVN6M0tpdkR3X2pQSm1ya2EyWlhXUmM?oc=5"
+   "title": "달리기 대회서 20대女 사망에… '마라톤 거목' 황영조가 한 말",
+   "source": "한국일보",
+   "time": "2026-10-13T13:53:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBNT1l5LUxfQjNUOTIwSDRwdGt0MDBBZXZzVjQwa1RMV21NTTNxOHVMNS1ydjgzZ0wxRlJkY0xPSzVkcDYydUt1SWxRR1FBbVpmMjU0WkJFeW5La1NZSlREczBuVUJuU19vTVdQbGJn0gFzQVVfeXFMTzFCN2tGdVpYMjI0a1Z0emhBR3pPWUZjRXlnRTdpTlRwY0lxTnhPb1dpc2gwekFNYm9LVW1PRnFuRm12eDNzRDkzWkZSUVA2T0VsTUx6UDRHQ0dZM3Z2U2pSbzhWdUxUUXRHaEQ5UldldTFuTQ?oc=5"
   },
   {
-   "title": "금융위·개보위 내년 세종행…44개 기관·공무원 1만명 이전 추진",
-   "source": "한국경제",
-   "time": "2026-10-13T12:44:28+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1ZWWVTMzJyMU0xUmcxTGoxWUhUN0d0LUFvMmZZcDNYREFaSDVka0xTc2RjdktIMlBreUVsYUFLVnhFY0FHdGhKTUI4Ym5LLUl1TU1FdV9NRUV0dw?oc=5"
+   "title": "\"날짜 정해 주사 맞으라 재촉\"…DN오토모티브 노동자 증언",
+   "source": "연합뉴스",
+   "time": "2026-10-13T15:28:11+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBQN3lwWjVMSW82QzVvRmJzd0FHbk82V2Z6YktBRzR5NXNMcmx6T1NkVElfcVo4b19GQzVxOVUwMk40cGxiVEFuTFdWdFNPX3oxQVpPejBYRmNaXzjSAWBBVV95cUxQWUlVcFpzX0tkTmluMWVxSm1td3JIczNpTkg4cmZyOHhOY210TFA2end0TXpidWhRZGZwR2F0WnRrcF9sRVFsQl9MeFNKb3VsZEE1Sks0SWdwTkRZWU00eU8?oc=5"
   },
   {
-   "title": "“0.99달러 저작권 마타도어”?...한동훈 해명에 빠진 사실들",
-   "source": "뉴스타파",
-   "time": "2026-10-13T15:45:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE5BUVlURlJISWJHeU43ckZKQ2Jfb3pUUllPX1E0VkpVTFBMbVQwdmZjcUM2S0RJMkVGZkN5cjVDQm9IU1pvUTE3OU5n?oc=5"
+   "title": "李와 각 세우며 대권 행보?... 추미애 \"여의도지사는 오해\"",
+   "source": "조선일보",
+   "time": "2026-10-13T14:52:34+07:00",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPYk1XOTVfUWJQdnI4V3FsNVg5MjlMQTc4N055QmwxWkJGTXdaanFYMU5OcWJiSzVOVE5ZclBrT0hvbGNqTV9iQXZNbE0tbk9qQWdlYWhuc3RsRTRPVHl0Z2Voa2ZkNENieTVuN3ZYX1cwSEJjMjlkeGdvRkVXVS1kb2pkT2hSSkgxcHF3RFJuc1M?oc=5"
+  },
+  {
+   "title": "우크라 외무, 北포로 한국행 공개 논란에 \"종결된 사안\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-13T08:09:39+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE15cDBxTGs2M2Q5bmNVNDJDMUVoTUF0aTlGS0ZrY3lMNUxUWWRxLWZTUldmRUhHV3pXQTJPSlFRRmhpbUNBOWJNeEhEV1NjRXktSUtPSFkybVFQRWZ3X1M2YkRxQ0pkZmtoN1BXbS1XZE81QmN20gF0QVVfeXFMT0lEdnhHM3ZEU2s3U3BJcTRHMGpuYmZYOW45M3N1ZmJTRDF5ZUV3UDlYRTV1VkdnZzBkb2s0bTZkeG1GZU1BeDM3M3hkYVA0SGExNWx3WGZVd0luZWc3R21xalRjU0JrVUlGYXU2aml0V1hnU1o?oc=5"
+  },
+  {
+   "title": "이혼 소송 중 ‘장모 살해·아내 납치’ 20대 남성 구속",
+   "source": "한겨레",
+   "time": "2026-10-13T17:17:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE8yd0FjTk9LMWVGVGgwT1F5aHA4ZnhBY01GUTYwWEZWTTRHWC1EMWdfY1UwOUJkd1ZiNzVONnU0Q000b1B5NFo5U2hVdjRBWFBObmVETDJaajltYTRMNkh2eTI2UEhDbTJtelZHYmgzUl84QQ?oc=5"
+  },
+  {
+   "title": "‘신천지 당원 가입’ 정황 확인…민주당, 전대 앙금 또 휘젓나",
+   "source": "경향신문",
+   "time": "2026-10-13T19:37:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE11c0NxZy1qVk90Z2F4OWp4aDRnWjBEN09aS0V0WGFqb1dNakI5S29sTzJJeF9feWo0ZjVoOTMwSm9BUTVwdDBVNVZDMU5jQUhvR1FHMU10SFdDUdIBX0FVX3lxTE1BM3dkNFpXZ0FBbDYxZk83aVA0cmp1anJfY0RRc2JRX0xURUhqNDNyajNNM0ZFc1NjS01UQUZINVRNeVhERDMta2RXTG1hcW9fY05DTGo2NWtid2MwdUZV?oc=5"
   }
  ]
 };
