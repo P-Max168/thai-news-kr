@@ -3,7 +3,7 @@
 
 | 항목 | 내용 |
 |---|---|
-| 마지막으로 확인한 사이트 최신 판 | **2026-10-12-pm** (라이브 data/index.json `latest`, 판 generated 2026-10-12T18:21:08+07:00, 18건 · 커밋 051cb7b·fab91cd(공유 키트) · 확인: 2026-10-12 18:25 BKK, Grok) |
+| 마지막으로 확인한 사이트 최신 판 | **2026-10-13-am** (라이브 data/index.json `latest`, 판 generated 2026-10-13T07:26:11+07:00, 19건 · 커밋 5ecb389·7bb288d(공유 키트) · 확인: 2026-10-13 07:33 BKK, Grok) |
 | 정기 실행(07:08/18:08) | **10-12 18:08 정기 저녁판 도착**: edition 커밋 051cb7b(18:21 push)·공유 키트 fab91cd · verify_live OK. 아침판도 같은 날 07:08 정기(af2d285·c4d5c64) |
 | 판 지연 | 10-05-pm ~ 10-10-pm **11판 빠짐**(6일 공백, 목록: Grok 서버 /workspace/logs/edition-gaps.txt). **재생성 안 함**(운영자·Max 결정 10-11: 옛 뉴스를 지금 판처럼 올리지 않음) |
 | 진행 중 작업 | (없음) · **10-12-pm 💬 오늘의 질문 초안 18건 운영자 승인 대기(미적용)** · 10-12-am 초안 18건도 승인 대기 상태였음(STATUS 아침 기록) |
@@ -36,6 +36,7 @@
 ## 최근 인수인계 (상대 AI가 작업 시작 전에 꼭 읽기 — 새것이 위, 최대 10줄 유지)
 | 시각 | 누가 | 무엇을 바꿨나 | 상대가 알아야 할 것 |
 |---|---|---|---|
+| 2026-10-13 07:33 | Grok | 2026-10-13-am 아침판 정기 빌드(19건, 문서·판 데이터만) | 💬 초안 19건 승인 대기(`drafts/discussion/2026-10-13-am.json`, approved false). 판 환율 39.68 — ticker.json(40.0052)이 오래돼 open.er-api 직접 조회값 사용(fx.source 기록). 새 issue id 는 issues.json(Claude 영역)이라 추가 안 함. screenshot 👎 FAIL 1 은 알려진 거짓 실패(vi3 비자 고정 묶음 단독). 10-12-pm ea3 요약에 오타 '다시  Imp대해' 남아 있음(옛 판, 미수정). |
 | 2026-10-12 18:25 | Grok | 2026-10-12-pm 저녁판 정기 빌드(18건, 문서·판 데이터만) | 💬 초안 18건 승인 대기(`drafts/discussion/2026-10-12-pm.json`, approved false). fetch_korea TOP RSS 404라 korea_top 은 data/korea.json decode 6건. [Grok→Claude] screenshot 👎 검사 요청은 아침과 동일 대기 |
 | 2026-10-12 07:31 | Grok | 2026-10-12-am 아침판 정기 빌드(18건, 문서·판 데이터만) | `tools/screenshot.py` 👎 재정렬 검사가 이번 판에서 FAIL 1 — 원인: 내 피드 첫 카드가 📌 비자 고정 묶음의 **유일한** 카드(vi2)라 👎 해도 순서가 안 바뀜(화면 정상, 검사 가정 문제). REQUESTS 에 [Grok→Claude] 남김 |
 | 2026-10-11 09:34 | Grok | `collab/` 인수인계 확인, STATUS 질문 3개 답, REQUESTS Claude 요청 완료 처리 (문서만) | 이제 Grok은 workflows·tools(editions 제외)·화면 코드를 직접 고치지 않고 `REQUESTS.md` 에 [Grok→Claude] 로 남김. GROK_PROMPT 5번 '누락 판을 만든다'는 운영자·Max 결정(재생성 안 함)과 충돌 → Grok은 재생성 안 함 |
