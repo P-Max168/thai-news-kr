@@ -3,10 +3,10 @@
 
 | 항목 | 내용 |
 |---|---|
-| 마지막으로 확인한 사이트 최신 판 | **2026-10-13-am** (라이브 data/index.json `latest`, 판 generated 2026-10-13T07:26:11+07:00, 19건 · 커밋 5ecb389·7bb288d(공유 키트) · 확인: 2026-10-13 07:33 BKK, Grok) |
-| 정기 실행(07:08/18:08) | **10-12 18:08 정기 저녁판 도착**: edition 커밋 051cb7b(18:21 push)·공유 키트 fab91cd · verify_live OK. 아침판도 같은 날 07:08 정기(af2d285·c4d5c64) |
+| 마지막으로 확인한 사이트 최신 판 | **2026-10-13-pm** (라이브 data/index.json `latest`, 판 generated 2026-10-13T18:27:56+07:00, 20건 · 커밋 940cc3a·705232a(공유 키트) · 확인: 2026-10-13 18:30 BKK, Grok — verify_live OK, e/2026-10-13-pm/ 200) |
+| 정기 실행(07:08/18:08) | **10-13 18:08 정기 저녁판 도착**: edition 커밋 940cc3a(18:28 push)·공유 키트 705232a(18:29 push) · verify_live OK. 같은 날 07:08 아침판도 정기(5ecb389·7bb288d) |
 | 판 지연 | 10-05-pm ~ 10-10-pm **11판 빠짐**(6일 공백, 목록: Grok 서버 /workspace/logs/edition-gaps.txt). **재생성 안 함**(운영자·Max 결정 10-11: 옛 뉴스를 지금 판처럼 올리지 않음) |
-| 진행 중 작업 | (없음) · **10-12-pm 💬 오늘의 질문 초안 18건 운영자 승인 대기(미적용)** · 10-12-am 초안 18건도 승인 대기 상태였음(STATUS 아침 기록) |
+| 진행 중 작업 | (없음) · **10-13-pm 💬 오늘의 질문 초안 20건 운영자 승인 대기(미적용, `drafts/discussion/2026-10-13-pm.json`)** · 10-13-am 19건은 승인·게시됨(4b350de) |
 
 ## Claude 질문 3개에 대한 Grok 답 (2026-10-11 09:34 BKK)
 근거 원본은 Grok 서버 `/workspace/logs/automation.log`(Claude 접근 불가)라 해당 줄을 그대로 옮긴다.
@@ -36,6 +36,7 @@
 ## 최근 인수인계 (상대 AI가 작업 시작 전에 꼭 읽기 — 새것이 위, 최대 10줄 유지)
 | 시각 | 누가 | 무엇을 바꿨나 | 상대가 알아야 할 것 |
 |---|---|---|---|
+| 2026-10-13 18:31 | Grok | 2026-10-13-pm 저녁판 정기 빌드(20건, 문서·판 데이터만) | 💬 초안 20건 승인 대기(approved false). 환율 39.68 = ticker.json fx(공시 06:57, 17:58 조회, 신선). 아침판 후속 2건(출국세 vi3·라용 전자 폐기물 ea4)은 issues.json 에 이슈 id 가 없어 `issue=None`+`update` 로만 연결 → REQUESTS 에 이슈 id 추가 요청. screenshot.py 이번엔 ALL OK(👎 거짓 실패 안 남). fetch_korea 후보 수집은 됐지만 korea_top 은 data/korea.json(17:58) 6건 decode |
 | 2026-10-13 07:33 | Grok | 2026-10-13-am 아침판 정기 빌드(19건, 문서·판 데이터만) | 💬 초안 19건 승인 대기(`drafts/discussion/2026-10-13-am.json`, approved false). 판 환율 39.68 — ticker.json(40.0052)이 오래돼 open.er-api 직접 조회값 사용(fx.source 기록). 새 issue id 는 issues.json(Claude 영역)이라 추가 안 함. screenshot 👎 FAIL 1 은 알려진 거짓 실패(vi3 비자 고정 묶음 단독). 10-12-pm ea3 요약에 오타 '다시  Imp대해' 남아 있음(옛 판, 미수정). |
 | 2026-10-12 18:25 | Grok | 2026-10-12-pm 저녁판 정기 빌드(18건, 문서·판 데이터만) | 💬 초안 18건 승인 대기(`drafts/discussion/2026-10-12-pm.json`, approved false). fetch_korea TOP RSS 404라 korea_top 은 data/korea.json decode 6건. [Grok→Claude] screenshot 👎 검사 요청은 아침과 동일 대기 |
 | 2026-10-12 07:31 | Grok | 2026-10-12-am 아침판 정기 빌드(18건, 문서·판 데이터만) | `tools/screenshot.py` 👎 재정렬 검사가 이번 판에서 FAIL 1 — 원인: 내 피드 첫 카드가 📌 비자 고정 묶음의 **유일한** 카드(vi2)라 👎 해도 순서가 안 바뀜(화면 정상, 검사 가정 문제). REQUESTS 에 [Grok→Claude] 남김 |
