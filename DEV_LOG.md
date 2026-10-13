@@ -225,3 +225,6 @@
   - **확인한 것**: 초안 글 = 판 데이터 글 18/18 · discussion 빼면 판 데이터 = 게시 전과 같음 · newslib check OK(경고: 기사 18건) · 질문·댓글 태국 문자 0·฿ 0 · 승인함 p1~p13 + dq-2026-10-12-pm(대기 유지)
   - **미확인**: 실제 휴대폰 화면 · 저녁판 2건 원화 넣은 글로 민구님 재승인
 <!-- discussion-1012am -->
+- 10-13 14:53 · 💬 [낮음·판 콘텐츠] **10-13 아침판 '💬 오늘의 질문'·운영자 첫 댓글 19건 게시**(민구님 채팅 승인 'ok', 백업 태그 `backup-20261013-1453-discussion-1013am`) — 정본 초안 글 그대로 approved:true 목록으로 `tools/discussion.py apply`(exit 0, krw_check 통과) → data/2026-10-13-am.json|js 19/19 + tools/discussions/2026-10-13-am.json, 정본 초안 approved:true·applied_at 2026-10-13T14:53:15+07:00. 판 generated·기사 글 그대로, workflows·tools·화면 코드 안 건드림
+  - **확인한 것**: 초안 글 = 판 데이터 글 19/19 · discussion 빼면 판 데이터 = 게시 전과 같음 · newslib check OK(경고: 기사 19건) · 질문·댓글 태국 문자 0·฿ 0 · 승인함 p1~p13 + dq-2026-10-12-pm(보류 유지)
+  - **미확인**: 실제 휴대폰 화면 · 라이브 결과는 배포 뒤 확인(채팅 보고)
