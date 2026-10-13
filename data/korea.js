@@ -1,6 +1,6 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-14T04:08:14+07:00",
+ "updated_at": "2026-10-14T06:04:29+07:00",
  "items": [
   {
    "title": "이 대통령 “흉악범죄 대응 체계 강화…중대범죄 위험 정신질환자 대책 필요”",
@@ -21,10 +21,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQeThHd2J5S0RFZVcwSno5V3JvUGNSMHBLc1F3MWZUSVYwb2xydTBxa0luTV9sMXJfcW9QZW1DWGVta2lIeF9VMnlWSWxldUJpcU5rcU91VmN1TTZIOGxTcWpvR2REMEFHLVhzc0F2T0EyMkpPSE1qeUtEQXZCU1lwU29HSkx1M28?oc=5"
   },
   {
-   "title": "[기자수첩] 돈은 어디서 나오는가…경기도 국감이 남긴 질문",
-   "source": "한국경제",
-   "time": "2026-10-13T21:31:18+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1rOXN3akZJLXF1UmZFeVR5Q1h2QlFGM1M2TVRDa0xvUDZSRDVIWXVUWXdOY3hYZTN6Rmx5bTBzUlFfeVZLaFJNc1JIUXFmYVRpb0VZcXRnYndvZw?oc=5"
+   "title": "유엔 국감서 ’북한 지뢰’ 대응 공방…유엔대사 “안보리 대응 미정“",
+   "source": "연합뉴스TV",
+   "time": "2026-10-14T04:44:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBDT3ZpUWRqXzJ1VGUxeGRHbEhwak11NVBmZktjdm5yb0RtMlMxLTQ0bEdUMG9abC1BQ0k0ai0tZDlwZk14d3lZSFNxODI5UWliaS0zbmdkTjJvZDNRYUVvZmJ1Ylh5ZlE?oc=5"
   },
   {
    "title": "국감장서도 김지용 때린 추미애 “친윤 검사…중수청장 부적합”",
@@ -33,22 +33,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBrX0RRYVJsMzQ3NUtkcFZxUmxLS3ZmMTRtY05kb0dpeDVuTENyVjBnZ2FQNXhKUU05aGdmaXI2aFRTMTBCS2VISHZ1Qll0U2hVaUtNcnltdjZsd9IBX0FVX3lxTE56cnRHYmx4T1pjNWZTa0hzdXJ4a0VsbGkyMXlTN1lZQnpGdU5QMXh4cnktSlZyZWdJMXNHREFuanR3T3Zldk9jbDZzRExCb19LQUdlX2tMeWFpUUloaS13?oc=5"
   },
   {
-   "title": "강경화 “한·미 정보 협력 문제 해소 안 돼…백악관과 소통 한계”",
-   "source": "경향신문",
-   "time": "2026-10-13T19:55:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9fdTRFNGNtLTE3STRzS3ExM0tGcmxZZ1RPMjZ3NGVwcVVIYWlWWkdLUzdwN2RGaGJlX3pRT2dGNk9Gbnl3aUh3RlpXS2NPNFhuOXUwLTNkQXJHd9IBX0FVX3lxTE9Hb3QxTW5lNlJLQnFwZi0xVnNBMEM3TzNtcGFfTVd3ZGJTWDhpVW93OGlhdndUU29JU0Y4WUQwUnZMUXBKMHBPbVpaR3hvbmJodno2Sm50VmZrSUYyTU9V?oc=5"
-  },
-  {
-   "title": "[날씨] 아침 기온 '뚝'‥전국 맑고 쌀쌀",
-   "source": "MBC 뉴스",
-   "time": "2026-10-13T22:00:36+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE56TVZJVUd6Qk1xaEVnZ0Z1MGJBSXRtUVh6RVV0a2xIbnJ5SFZ3MjFlTEhOcTdlc1Q5SmYtLWJtUE5ZZktQSWJjYXZRRU5lTzlQTEI2RG8wUEl0YTAxYklycXdycVhPSnQ5MURpU0VIQ1hrM3Y3alow0gF3QVVfeXFMUFhIOEQtbXhuMXpGRUNTYU5PamJtSERqaWZiYUkwTTZKVUphdW5LbnV2ejZENkl2azE2SmthU0sxbDRhZTZleWNCNjc4WFV3LWd0RzgzRWpHaDNmVjFJWmtpZEV4emJNcm5kY0dHTzl4djF0b1JtSkk?oc=5"
-  },
-  {
-   "title": "李대통령, 한미관계 언급하며 \"굴종적 태도 지양해야\"",
+   "title": "[단독] 美 DNI가 ‘정보공유 제한’ 결정… 李, 정동영·이종석 경질론 선 그어",
    "source": "조선일보",
-   "time": "2026-10-13T10:02:38+07:00",
-   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOakdHcmFDTXBTdm9uVVdIaUp0ZHlqMldqTk1fUEZIT0NYN1lreHJGNC1CaDF5c0xXOFVnWUR2Q19TNlQ5dVAxNDZTNEFVUEUxazRlbDN1YXozcFNlcTAzNVJKRDJiM01nN2xrSThLWUpwdGYzblg2RTQwb1hXT2ZiT2gyYU1Rel9VUjVJaGNmc18?oc=5"
+   "time": "2026-10-14T03:00:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxORUxjVnJDQjk3WU9KdllpN3hRcnRSUWNGUDlKc1NQSlZtaHBVWVlGTW1zQ1ROQUJzal9kS1ZJUFF0eGhzS0xEQVZETXpGN1pNTTVxUEtyRlFrYkxLV1MtQ3QtY1Vld0pJbGQ0SWtvMkdCWWYxX0hJNkNmdEhYTURDRDhyaktRSjJGZTJOMUpobkg?oc=5"
   },
   {
    "title": "마라톤 결승선 앞두고 숨진 카이스트 대학원생…SNS 추모 물결",
@@ -57,10 +45,22 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1nRG1XbzVKbGFySjZMU1FFZ1FHOHNKYjVQNk1nbGdVeE1WYnhXWTdZNGVORlFMMnp1YVppbTZXVDVOY2JJTG96MjhrVkhVN0ZGMmVqUWZOZ05jUQ?oc=5"
   },
   {
-   "title": "외제차 매장서 허리띠로 직원 폭행한 기업 임원 체포",
-   "source": "동아일보",
-   "time": "2026-10-13T14:24:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1CVUNoNlcteTB0U1JiTnYyWWhrdjBpVWFYWEZqOVdDMmY2RV9HQnNobHdoNzEtQWptcFAwQkpmZEcwbUhwZkFSVHVMS1hNa1I5empkdmtVU2lza09TZS1vQnpFTlUxTDYxLVl2eGU5b1lwTFFzR2fSAWZBVV95cUxQNjBTOUZkdHpVSFJyWGRmdnhKUjFpaVhhbXJyMENvbmIzREtncW5PakF0eVNEd2JQNG1kdTkwOWlIUXpNUGE5aE5EcDJRWFBlQUo3OFRwTGhaUEZtbWlEVDh6b0w3Unc?oc=5"
+   "title": "김지용, 인사 공개 비판 임은정에 “언동 각별히 유의해야”",
+   "source": "경향신문",
+   "time": "2026-10-13T19:41:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5ZUWk3R1BZRWw5emo5QTNnX0ZUYnZSWWRfNTQ5OFdlUHNjOVZGOHZkZF8ySXQzYXFCOVhjd1o2ck84VXVHWURRd0l5N29CTEJUQzNZblNOelpyQdIBX0FVX3lxTE14Q0FaS0pxVjhFcTFLM3VqbXI4ZWtGMnZMb3NZVlp6SVV5eE41aUF5aVhqRDAxMkpIQXc4NXk1NUFsbnpvaXRRNW03VndicmMyWnQxSVdfdXBQZ04zdXdZ?oc=5"
+  },
+  {
+   "title": "‘1억 공천헌금’ 강선우·김경 오늘 1심 선고",
+   "source": "KBS 뉴스",
+   "time": "2026-10-13T23:08:03+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9OMTJjTVhPZGVoOGRvak5nSXZ5eFEtZjNaVVJmaVJPSHV1OUpCczlucVNqdTBYZjZLbHo4d1U5aDJpUFAzTmIyYnJtS0RjUGZYV2g3Y2N2OG1CWFk?oc=5"
+  },
+  {
+   "title": "“한반도 다영역부대로 다층감지…지도서 베이징·서울 선그어보라”",
+   "source": "KBS 뉴스",
+   "time": "2026-10-14T01:31:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1aQnNfaV9oa0E3WTNwRkZUTDI4TDdseXM2ckVHYXV4TlhGcmVlelRwMFRidFBsRXJDeVM0MzlfV1N3eUpzUWZQUlZzTGRoVEdpLWZYMnNYX0NsREE?oc=5"
   }
  ]
 };
