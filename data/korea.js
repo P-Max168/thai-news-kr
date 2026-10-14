@@ -1,25 +1,7 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-14T14:21:13+07:00",
+ "updated_at": "2026-10-14T14:54:57+07:00",
  "items": [
-  {
-   "title": "[속보]신임 대통령 비서실장에 임광현 국세청장",
-   "source": "동아일보",
-   "time": "2026-10-14T11:45:15+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE96ZzNVeGNPUjZvdzRDYW1sUjFWZzhCT2dTVnNYVXZrSkkxYkNzV1Z3bFJXNHlCTGcxLXE4ZlRyOTJ3b2RuRGJ3VU0tM1E0N1NUaFFNZzBnalNMZ0VRVjZBQ0VhcmNWdzBrM2kxMXQ0MV9vMlgwWGJr0gFmQVVfeXFMTVFQQzI5SGpBZnJlN3UxdUZReXlNdm1SYVZ5LUgyRWpEWVhhZ2dxdmlFNHZhZUJoMXJROENYRG5yTDExSFhEZk1pTHUxVWEzZjMtYUhwdC1EMHp6RDNqeDBUMDBFVjNn?oc=5"
-  },
-  {
-   "title": "중수청장 후보자, ‘정치검사 1호’ “윤석열…한동훈도 포함”",
-   "source": "한겨레",
-   "time": "2026-10-14T13:00:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBTNDNuZF90TTI1cnFCUnZTNlZvME1YaVp2Z0UxLWdmeF9QZVJuZzZTWVI0RGZkUm1sOV9GR0VrNVZ5WEFyVWhyZEpudjlQQkozTmRMaFk0Y1BPbTlGaWF6TlVkczRLSHdDaDQ5bG4tNHI2MmVW?oc=5"
-  },
-  {
-   "title": "출산율 대신 ‘삶의 질’ 내건 정부 인구전략···“미래 세대 대응 전략은 부족”",
-   "source": "경향신문",
-   "time": "2026-10-14T13:24:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9ZVEc5VFVPWW1fbEUwY1FYM1dmcUdHN3VrYzBjYXo4ZEpFU2tBQ3EzQmVfYnNHUVVRUnJfdWhNUHc4ZG1WSXk1d0x6T3ExOTA2U1hudGVzVDVuQdIBX0FVX3lxTE5STlNlTDUxVW5LQWN0SUt5aDFtVndPMkdmM3FPWjJVWHJBUVI1bHo1UUFBQVNrSENUMG5uYzFCYXFpLWFuNW5jMUFqUkJNTVlQd3NSRVRJSnVkS0xLYV8w?oc=5"
-  },
   {
    "title": "[속보] '1억 공천헌금' 강선우 1심 징역 2년 6개월·김경 징역 1년",
    "source": "MBC 뉴스",
@@ -27,16 +9,16 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5URzd0ak8yMHJHUmhlRmh2aW40RXZqMEk5LUtwTFc3ODJHOHl6cWo2ZjM2LUpLeHZ1cGFxbjB4ZW5qTzJWdTNnbTMzd0Nhb2NxUl9PV293c1BxOHc0UTBLX1Z3dnFDempjcTJIbVZfWnBNQzJURmlV0gF3QVVfeXFMTUJpdmZyRmEwaUZHY3M2RDFja01PR2N6SFZjRXRmZUF4OU9WZGpvdlRUaFZjUUxOWjFVdU9EWWRDX2RUeU9jNjRCTGRzNjV3cFV2Y1ZURHRKdmx0OExSZTZYX1lVd1VLWVhsNGVfZnRNTFZaTDRvRGc?oc=5"
   },
   {
-   "title": "[속보] '인천 흉기 난동' 최 씨 \"뉴스거리 만들려고 범행\" 오늘 중 구속영장 신청",
-   "source": "MBC 뉴스",
-   "time": "2026-10-14T13:34:19+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE4xc0J0Y2djN1RrUG9wdjJVSEMzS2g3bTVvc1pqcmxHamNkNjd4Rjdma05UMklLT1duY2dmc3UyQmxnNEd6Y0QxYjlDVkt1YkhVMk02eUhpWTMxaUxWeHd3emkyNW9rX0tFN0tObzkxQkppQTVHT25N0gF3QVVfeXFMT3UtWXRxbV85eUNBWW02WjhZcG1xaldjU1N2Vl9CVUoyNUVmTG95UGR4X096MDZOWWdKX2VmMzdvOTBubVlsVkJqZENEN1NvUmxmSTd2alhRYXV5cjhzenFfdGdyN0JqQjAySDF0RWpmZXFBRU1Gekk?oc=5"
+   "title": "이 대통령, 신임 비서실장에 조세전문가 임광현 국세청장 이례적 발탁",
+   "source": "경향신문",
+   "time": "2026-10-14T13:51:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE82d3lkaWRMeWo0aS16bXJZOWxpMmZGMi1iS0Z2dmRpNzFGTnMtVGZEQUNDTGhLSHUyMmpWRnAzMFpLNkxFYWl0NDg1eThPalRTNVM2RkNtV3NDZ9IBX0FVX3lxTE9zWG5fN2d5ZDM3ZmFYZTBtS3dFeFZkdWh6cE84U0ZjNmRQQmExOEhKOUV4R2JnR1JSa25VU2tYLWh6cmtjVUoyRHZsTl93MHVTY05ZaVVGYzlFdVQwM1I4?oc=5"
   },
   {
-   "title": "국회 국방위, ‘北 지뢰 도발’ 규탄 결의안 채택",
-   "source": "조선일보",
-   "time": "2026-10-14T08:56:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQcTBTR2lualhoN3ZYRFZzaDdJRE1LMTNvN09mRzNfdDhxYW9TOU1xUDhlUkpqRlVfYjBfYXViUkpjMVB5ajU1eFlFdVhQaXYwTEtIdHozTEkweTFmbzBUaUVVTzlIMk5sSjlDb1FYb3pGTERpdG9MLTdFbkk0OHVwMTl5Y2hIQQ?oc=5"
+   "title": "중수청장 후보자, ‘정치검사 1호’ “윤석열…한동훈도 포함”",
+   "source": "한겨레",
+   "time": "2026-10-14T13:38:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBTNDNuZF90TTI1cnFCUnZTNlZvME1YaVp2Z0UxLWdmeF9QZVJuZzZTWVI0RGZkUm1sOV9GR0VrNVZ5WEFyVWhyZEpudjlQQkozTmRMaFk0Y1BPbTlGaWF6TlVkczRLSHdDaDQ5bG4tNHI2MmVW?oc=5"
   },
   {
    "title": "주한美사령관 “지도서 베이징~서울 선 그어보라”…주한미군, 中견제 확대 시사",
@@ -45,10 +27,22 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE0xMWE5dXhWTEJES0NjLUFyYTNUQnFDMlZJdG41cnlUOW1nNURJWndMRWJrQm9zVHVtYWc2c2xfZkgxYWdzUWtCMkp0S181SG8yODFIZTlRQXdDaUF2T1ZsaE5YZUlzWE5nNFNvVm5pTUhaV1nSAWZBVV95cUxPUHBKdnFReEEzOFNVeHVSY3dlaUdRQ25YZ0U1VVQwb3ZXeW1WSWZHVnpyOEhnRVRVdUY3ajltMmdiTzBzYjdCRC1VXzhFZzVpTW51QlppWEJHdnV2U2VMaTNiZmtTWHc?oc=5"
   },
   {
-   "title": "“CPTPP 발효 후 ‘비회원국’ 한국 수출품 48%는 경쟁력 하락”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-14T09:45:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE56VjhjXzRoRHdSZzkyVnloYkRVeWNqVkhNOG9HZlItX0NlV080RDVFSU9PcHdGa2tKUDctR0ZsbDVuNzluVmVvTzYwak1WbGNHMUY0dmJicDJHTjQ?oc=5"
+   "title": "[속보] '인천 흉기 난동' 최 씨 \"뉴스거리 만들려고 범행\" 오늘 중 구속영장 신청",
+   "source": "MBC 뉴스",
+   "time": "2026-10-14T13:34:19+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE4xc0J0Y2djN1RrUG9wdjJVSEMzS2g3bTVvc1pqcmxHamNkNjd4Rjdma05UMklLT1duY2dmc3UyQmxnNEd6Y0QxYjlDVkt1YkhVMk02eUhpWTMxaUxWeHd3emkyNW9rX0tFN0tObzkxQkppQTVHT25N0gF3QVVfeXFMT3UtWXRxbV85eUNBWW02WjhZcG1xaldjU1N2Vl9CVUoyNUVmTG95UGR4X096MDZOWWdKX2VmMzdvOTBubVlsVkJqZENEN1NvUmxmSTd2alhRYXV5cjhzenFfdGdyN0JqQjAySDF0RWpmZXFBRU1Gekk?oc=5"
+  },
+  {
+   "title": "울산 석화업체 저장탱크서 ‘펑펑’…화재로 작업자 10여명 대피",
+   "source": "한겨레",
+   "time": "2026-10-14T09:09:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1iQzFJUDE1bFZETjUxSW0tRDdFVnp5RzRTN0hTTnE5REpxTWZSN1RQcjJaLUxZRkUwME1iSERaWTFRT25hdlpHSjM5cDhJT2pQMU5rbVZMckx6YUhGbGVjZGF2Nmk?oc=5"
+  },
+  {
+   "title": "국회 국방위, ‘北 지뢰 도발’ 규탄 결의안 채택",
+   "source": "조선일보",
+   "time": "2026-10-14T08:56:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQcTBTR2lualhoN3ZYRFZzaDdJRE1LMTNvN09mRzNfdDhxYW9TOU1xUDhlUkpqRlVfYjBfYXViUkpjMVB5ajU1eFlFdVhQaXYwTEtIdHozTEkweTFmbzBUaUVVTzlIMk5sSjlDb1FYb3pGTERpdG9MLTdFbkk0OHVwMTl5Y2hIQQ?oc=5"
   },
   {
    "title": "’나주 부부 살해’ 피의자는 53살 박용수…경찰, 신상 공개",
@@ -57,10 +51,16 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9nU1UyemJ0TGsxNG85S2RvRlZfWXhIU05lajVXUE1kTENxNFA2ZWl4aGJXb1p3ZElCZlNiZklLY2RoNk1Ud2t1ejMwcmlZTG40SGVLY0tQTVlYS01Wd3ZpNVFKalZ1MTQ?oc=5"
   },
   {
-   "title": "안철수, 외교·통일·국방부 ‘세종 이전’ 발표에 “북한에 수도 헌납할 건가”",
-   "source": "경향신문",
-   "time": "2026-10-14T06:24:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBMeFo1WV9RWkgyZDc5OXRoaXJ1bFpqQXpITG9QQmxicVNnbnNKSHAzWUNXZjF0bVJ3VmExV2t0ZUtnQTNzc1lEZXlNYlY3R3podHp0d2JRTVJlZ9IBX0FVX3lxTE8tam1RNHk4a2JrTHJFd0FRWExJSlNWeU1UeEs5MnNqbGdUYkFFSVpqRnYyX0VVbV9sUHJBbmY4TkJueFBPQlhxRkwwczlWMU1neC1Ga3lOUm4wa2FPVzlV?oc=5"
+   "title": "'尹 비화폰 삭제' 박종준 전 경호처장 2심 징역형‥1심 무죄 뒤집혀",
+   "source": "MBC 뉴스",
+   "time": "2026-10-14T13:44:29+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE4yS19JendCbGpWdW11Mll3YnExWWJ4clJpa0lHbXJrUmVPZ2xveC0xN2xCWlJPLVd3anh2dXRla3BRWHFYUmVOLVlVLWhjSjR4ZTFXY0FnXzF4SWIwU1BwOGpFTjBuY3FCMk1OTkVTNmtRcWlueXZv0gF3QVVfeXFMTXZqdlJQeHl1N0hQNFBUZnExVGxSMnY0V1VzYkRpelRUVVR1NXczZlpKcU11QkgzV0NGaUxVMGxVNVpybjJYNjhNYWROVHJLYTVfa0s4ZEZkQkFjRWpGMUtNbm9kbXZIbzFGcjRVU1dCbDBaeU1DMzg?oc=5"
+  },
+  {
+   "title": "“CPTPP 발효 후 ‘비회원국’ 한국 수출품 48%는 경쟁력 하락”",
+   "source": "KBS 뉴스",
+   "time": "2026-10-14T09:45:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE56VjhjXzRoRHdSZzkyVnloYkRVeWNqVkhNOG9HZlItX0NlV080RDVFSU9PcHdGa2tKUDctR0ZsbDVuNzluVmVvTzYwak1WbGNHMUY0dmJicDJHTjQ?oc=5"
   }
  ]
 };
