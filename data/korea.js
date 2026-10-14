@@ -1,6 +1,6 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-15T02:14:13+07:00",
+ "updated_at": "2026-10-15T02:50:12+07:00",
  "items": [
   {
    "title": "여당도 김지용 행적 “비겁” 질타…김 “정치검사 1호는 윤석열”",
@@ -21,22 +21,16 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFAyNnB0Y001SVRjRFJpcDlodEFFOEdZTjhpUXU4dmprSXdDZHpJLTRZVUpwS2JTZklDelF3alNqUW1tdFpfaEJGemR3S0tNVkxPNndYRThidzROQjZXZGd1N01hV3E1eTg4QVJYeDRIYU5xaUF2aEHSAWZBVV95cUxQNFI1dHk1VUZ2bl8zSnNDbXh4QmlRblVWeDRPZGFPY01FMkJ1RENvOFo2YWg4U2I3TDRsS3dqczY1X0dydlM0VTA4Q05nTGJoVEVLcl92bDNTVDlZczg1Um1lTkpuT0E?oc=5"
   },
   {
-   "title": "[2026 국정감사] “농지 매물 쏟아질텐데”…‘농지은행’ 매입 역량·예산 도마",
-   "source": "농민신문",
-   "time": "2026-10-14T17:52:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFB0elpjYWdRYTBSSmJkZXFpb1hfV2NVdFl6MGVSdGZzM2VZcmYxSmVydkQyZ3Izc1FvS0E5ZmU3a1hXZTZHU0J0QktsbmNqNUZNYy12RkxyTmJ1dw?oc=5"
-  },
-  {
    "title": "아침에 쌀쌀…내륙 서리, 동해안 너울 주의",
    "source": "KBS 뉴스",
    "time": "2026-10-14T22:01:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9CWDc1SEM3VG0tTDdCZ242MEM1dUhLdHgtNk5HM0dTMVk4Sk85RF8xVy04d3NIWUhybE9acDlWWEpIMnZGd2NzQTByREdPSS1XUTRaQXloX3pzTkU?oc=5"
   },
   {
-   "title": "'1억 공천헌금' 강선우 1심 실형·재구속…\"엄중 처벌 필요\"",
-   "source": "연합뉴스",
-   "time": "2026-10-14T17:15:51+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1acU5RdlNmU3JPSHdrZXdVOXRJOWhQR0FPSmo3cGpsQXhRN0Z3MVNIT29GT3BpVnJMdE5scW42UHlMb1FpcUU4elZKWGl3NnBzdjFNRlo4Q2RSY2PSAWBBVV95cUxQME1NeVVlaU13cS1WcVdoVFkyNHZHMm40d0pSVVU3M1dhU2Z5QzFxT0l5cWplZFFPZGZEUFZqQkVkMWRNUXFOQ3Z4Q05fTDFKVFBUb3BRV1laOXFPWFk5bDA?oc=5"
+   "title": "강선우, 김경에 ‘김병기 찬스’ 제공... “원하는 면접 질문 텔레로 보내라”",
+   "source": "조선일보",
+   "time": "2026-10-14T20:22:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOM3FzZWVFV0VLQ1p5ZTctendqenlEbnY0NUs1NENRTG1fNVBQck1GLXJpeWo0bm1oNzQ1RGxSTHVOYTR0eV9YTGtaS1NwRlFEZkowZnMzanFabGYxblZLSkg1cGNwWmVJWGtpVTBWdjhhSWVjQzZLcGVCZDJfM2N3aGJZa2lmREE?oc=5"
   },
   {
    "title": "“소방관 명예 짓밟았다” 분노…‘재정 빨대’ 발언 추미애 지사 규탄",
@@ -61,6 +55,12 @@ window.KOREA_NEWS = {
    "source": "한겨레",
    "time": "2026-10-14T18:50:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOZGRQZEVfSnlWN2U3Y2Y1M2l6TTZGcXhkOHFkYUZjQnNrazhuVVlMWHFORnRWM3RtZWVkaDc5YkNfQnhpZHBYaGxna3JSdHhYQkQ4a3RYNDc1ZjM0S0pnRFBETDdYNktYTGhjWXJrQ2pnb1lFdUdYbjU4UDh0dVJVeWR3?oc=5"
+  },
+  {
+   "title": "“1년 넘게 감금·폭행에 강제 혼인”…‘장모 살인’ 피해 유족 분노",
+   "source": "한겨레",
+   "time": "2026-10-14T15:52:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFB0ZS1qbTV4WXZ4UGZSVDRYUWw2RVVhYWRxa0RFT1V1d1kxWWVVTXBCOEVrM3l0bzdHdTJTZ0Z0UnJpejlGZTAzOVFHVTdMNk5wNnpEWTJvMWlQZjAzeXpUZ0NJRTl4WDhVVmdLem04UGxxdw?oc=5"
   }
  ]
 };
