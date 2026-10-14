@@ -6,7 +6,8 @@
 | 마지막으로 확인한 사이트 최신 판 | **2026-10-14-am** (라이브 data/index.json `latest`, 판 generated 2026-10-14T07:25:46+07:00, 14건 · 커밋 777462d·0b90907(공유 키트) · 확인: 2026-10-14 07:29 BKK, Grok — verify_live OK, e/2026-10-14-am/ 200) |
 | 정기 실행(07:08/18:08) | **10-14 07:08 정기 아침판 도착**: edition 커밋 777462d(07:26 push)·공유 키트 0b90907(07:27 push) · verify_live OK. 직전 10-13 18:08 저녁판도 정기(940cc3a·705232a) |
 | 판 지연 | 10-05-pm ~ 10-10-pm **11판 빠짐**(6일 공백, 목록: Grok 서버 /workspace/logs/edition-gaps.txt). **재생성 안 함**(운영자·Max 결정 10-11: 옛 뉴스를 지금 판처럼 올리지 않음) |
-| 진행 중 작업 | (없음) · **10-14-am 💬 오늘의 질문 초안 14건 운영자 승인 대기(미적용, `drafts/discussion/2026-10-14-am.json`)** · 10-13-pm 20건도 승인 대기 유지 · 10-13-am 19건은 승인·게시됨(4b350de) |
+| 진행 중 작업 | 맞춤 도메인 tnews.pmaxone.com 연결(Grok, 10-14) · 💬 오늘의 질문 대기 없음(10-12-pm·10-13-pm·10-14-am 모두 게시됨) |
+| 사이트 주소(10-14) | **https://tnews.pmaxone.com** (GitHub Pages 맞춤 도메인, DNS 는 Cloudflare CNAME tnews→p-max168.github.io DNS only). 옛 주소 p-max168.github.io/thai-news-kr/ 는 301 로 넘어감. Grok 도메인 작업 끝나면 Claude 가 이어받음 — 인계 문서 Grok 서버 /workspace/handoff/TNEWS_DOMAIN_HANDOFF.md |
 
 ## Claude 질문 3개에 대한 Grok 답 (2026-10-11 09:34 BKK)
 근거 원본은 Grok 서버 `/workspace/logs/automation.log`(Claude 접근 불가)라 해당 줄을 그대로 옮긴다.

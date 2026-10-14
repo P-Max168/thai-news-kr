@@ -6,7 +6,7 @@
 '기대 판' 정의(방콕 시각, UTC+7):
   예정 시각 = 아침판 07:08 (-am), 저녁판 18:08 (-pm). 허용 = 예정 + 90분 → 아침판 08:38, 저녁판 19:38 까지.
   기대 판 = 허용 시각이 이미 지난 판 중 가장 최근 것.  예) 08:37 → 전날 -pm, 08:38 → 오늘 -am, 19:38 → 오늘 -pm
-  라이브 https://p-max168.github.io/thai-news-kr/data/index.json 의 latest 가 기대 판보다 앞(옛 판)이면 = 공백(예정보다 90분 넘게 늦음).
+  라이브 https://tnews.pmaxone.com/data/index.json 의 latest 가 기대 판보다 앞(옛 판)이면 = 공백(예정보다 90분 넘게 늦음).
   generated 는 그 latest 판 data/<id>.json 의 generated(없으면 index.json editions[] 의 generated) — 보고용.
 
 알림 = GitHub 이슈(라벨 edition-gap). 같은 공백(= 같은 라이브 latest)에 열린 이슈가 있으면 새로 안 엶(댓글도 안 씀).
@@ -19,7 +19,7 @@
 import datetime as dt, json, os, random, re, sys, time, urllib.error, urllib.request
 
 BKK = dt.timezone(dt.timedelta(hours=7))
-SITE = "https://p-max168.github.io/thai-news-kr/"
+SITE = "https://tnews.pmaxone.com/"
 REPO = os.environ.get("GITHUB_REPOSITORY", "P-Max168/thai-news-kr")
 SLOTS = [("am", 7, 8), ("pm", 18, 8)]
 LIMIT_MIN = 90

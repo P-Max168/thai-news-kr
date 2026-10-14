@@ -5,7 +5,7 @@
   - 2026-10-05(Max 05:23 ③): 클래식 받은 양 197→241KB 원인 찾기용으로 만듦"""
 import asyncio, sys, json, time, re, statistics, collections
 from playwright.async_api import async_playwright
-URL = sys.argv[1] if len(sys.argv) > 1 else "https://p-max168.github.io/thai-news-kr/"
+URL = sys.argv[1] if len(sys.argv) > 1 else "https://tnews.pmaxone.com/"
 N = int(sys.argv[2]) if len(sys.argv) > 2 else 3
 OUT = sys.argv[3] if len(sys.argv) > 3 else None
 def kind(u):

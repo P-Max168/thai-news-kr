@@ -8,7 +8,7 @@ a = sys.argv[1:]
 def opt(k, d):
     if k in a: i = a.index(k); v = a[i + 1]; del a[i:i + 2]; return v
     return d
-W = int(opt("--w", "360")); F = opt("--font", None); URL = opt("--url", "https://p-max168.github.io/thai-news-kr/")
+W = int(opt("--w", "360")); F = opt("--font", None); URL = opt("--url", "https://tnews.pmaxone.com/")
 FIRST = "--first" in a; a = [x for x in a if x != "--first"]
 OUT, HASH, SEL = a[0], a[1], (a[2] if len(a) > 2 else None)
 SEED = """(()=>{ if(!localStorage.getItem('tnk.profile.v1')) localStorage.setItem('tnk.profile.v1', JSON.stringify({v:1,onboarded:true,persona:'pattaya',topics:['east','visa','life','weather','society'],region:'east',interests:['life'],taste:{w:{},votes:{},vf:{}},ui:{installHintUntil:Date.now()+864e5},updatedAt:1,settingsAt:1})); })()"""

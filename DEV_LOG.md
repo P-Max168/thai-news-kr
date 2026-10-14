@@ -235,3 +235,7 @@
 - 10-14 09:16 · 💬 [낮음·판 콘텐츠] **10-12 저녁판 18건 '💬 오늘의 질문'·운영자 첫 댓글 게시**(민구님 채팅 승인 '원화 추가해서 18건 다 올려', 백업 태그 `backup-20261014-0916-discussion-1012pm`) — ea4·bk1 운영자 댓글에만 원화 추가(판 환율 40.01: '6,000만 바트(약 24억60만 원)', '6억4,942만 바트(약 259억8,329만 원)'), 나머지 글 그대로 approved:true 로 `tools/discussion.py apply` exit 0(krw_check 통과) + pending.py rebuild → 승인함 13건(dq-2026-10-12-pm 빠짐). workflows·tools·화면 코드 안 건드림
   - **확인한 것**: discussion 빼면 판 데이터 = 게시 전과 같음 · discussion 18/18
   - **미확인**: 실제 휴대폰 화면 · 라이브 결과는 배포 뒤 확인(채팅 보고)
+<!-- tnews-domain -->
+- 10-14 09:40 · 🌐 [중간·도메인] **맞춤 도메인 https://tnews.pmaxone.com 연결**(민구님 직접 지시, 백업 태그 `backup-20261014-0937-tnews-domain`) — Cloudflare DNS 에 CNAME tnews → p-max168.github.io (DNS only) 1개만 추가(다른 레코드·네임서버 안 건드림). 루트 `CNAME` 파일 추가, 404.html 홈 링크 '/', index.html og:url·og:image·twitter:image 새 주소, share_kit.py SITE/SHORT, deploy.sh LIVE_URL, ship.sh 라이브 확인 주소(LIVE_BASE·LIVE_CURL_OPTS), edition_watch/edition_stale/verify_live, tools/dev 기본 URL 상수, firestore.rules:149 새 주소 허용(옛 주소 유지). 이미 만든 e/·data/ 는 그대로(옛 주소는 GitHub 가 301 로 넘김). 호스팅은 GitHub Pages 그대로
+  - **확인한 것**: DNS 응답 CNAME p-max168.github.io(dns.google) · newslib check OK · 파이썬/셸 문법 OK
+  - **미확인**: 인증서 발급·HTTPS 강제, firestore.rules 배포, Firebase Auth 승인 도메인 — 배포 뒤 확인(채팅 보고·handoff)

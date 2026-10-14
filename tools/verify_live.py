@@ -9,7 +9,7 @@ import asyncio, sys, json, pathlib, time
 from playwright.async_api import async_playwright
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-URL = sys.argv[1] if len(sys.argv) > 1 else "https://p-max168.github.io/thai-news-kr/"
+URL = sys.argv[1] if len(sys.argv) > 1 else "https://tnews.pmaxone.com/"
 WANT = sys.argv[2] if len(sys.argv) > 2 else json.loads((ROOT / "data/index.json").read_text(encoding="utf-8"))["latest"]
 SHOT = sys.argv[3] if len(sys.argv) > 3 else str(ROOT / "screenshots/live-mobile-390.png")
 

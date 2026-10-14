@@ -64,7 +64,7 @@ async def worst(browser, url, width, theme="", shot=None):
     return m
 
 async def main():
-    url = next((a for a in sys.argv[1:] if a.startswith("http")), "https://p-max168.github.io/thai-news-kr/")
+    url = next((a for a in sys.argv[1:] if a.startswith("http")), "https://tnews.pmaxone.com/")
     shots = sys.argv[sys.argv.index("--shots") + 1] if "--shots" in sys.argv else None
     pre = sys.argv[sys.argv.index("--pre") + 1] if "--pre" in sys.argv else "worst"
     async with async_playwright() as p:

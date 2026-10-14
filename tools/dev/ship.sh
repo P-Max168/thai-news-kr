@@ -52,7 +52,8 @@ wait_live() {
     ts=$(date +%s); same=1
     for f in $CHECK_FILES; do
       [ -f "$f" ] || continue
-      [ "$(curl -fsS "https://p-max168.github.io/thai-news-kr/$f?_=$ts" 2>/dev/null | sha256sum | cut -c1-16)" = "$(sha256sum $f | cut -c1-16)" ] || same=0
+      # (10-14) 맞춤 도메인 tnews.pmaxone.com — LIVE_BASE 로 주소 바꾸기 가능, LIVE_CURL_OPTS="-k" = 인증서 발급 전 첫 배포용(평소엔 비움)
+      [ "$(curl -fsSL ${LIVE_CURL_OPTS:-} "${LIVE_BASE:-https://tnews.pmaxone.com/}$f?_=$ts" 2>/dev/null | sha256sum | cut -c1-16)" = "$(sha256sum $f | cut -c1-16)" ] || same=0
     done
     [ $same = 1 ] && return 0
     sleep 10

@@ -41,7 +41,7 @@ def check(pending_doc, pub):
 
 if __name__ == "__main__":
     a = [x for x in sys.argv[1:] if not x.startswith("--")]
-    base = a[0] if a else "https://p-max168.github.io/thai-news-kr/"
+    base = a[0] if a else "https://tnews.pmaxone.com/"
     base = base.split("?")[0]
     pub = published(base); doc = get(base, "data/pending.json")
     if "--break-test" in sys.argv and pub:

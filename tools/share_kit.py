@@ -26,8 +26,8 @@ share/ 는 .gitignore(올리지 않음). og/ e/ 는 사이트에 올릴 파일(�
 import argparse, asyncio, html, json, pathlib, re, shutil, subprocess, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SITE = "https://p-max168.github.io/thai-news-kr/"
-SHORT = "p-max168.github.io/thai-news-kr"
+SITE = "https://tnews.pmaxone.com/"
+SHORT = "tnews.pmaxone.com"
 UPDATE_LINE = "매일 아침 7시·저녁 6시 업데이트"
 
 TOPICS = {  # assets/topics.js 와 같은 값(이모지·색)

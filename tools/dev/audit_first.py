@@ -5,7 +5,7 @@
   python3 tools/dev/audit_first.py [URL]"""
 import asyncio, sys, time, json
 from playwright.async_api import async_playwright
-URL = next((a for a in sys.argv[1:] if a.startswith("http")), "https://p-max168.github.io/thai-news-kr/")
+URL = next((a for a in sys.argv[1:] if a.startswith("http")), "https://tnews.pmaxone.com/")
 SEED = """(()=>{ if(!localStorage.getItem('tnk.profile.v1')) localStorage.setItem('tnk.profile.v1', JSON.stringify({v:1,onboarded:true,persona:'pattaya',topics:['east','visa','life','weather','society'],region:'east',interests:['life'],taste:{w:{},votes:{},vf:{}},ui:{},updatedAt:1,settingsAt:1})); })()"""
 IOS = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1"
 FIXED = """()=>[...document.querySelectorAll('body *')].filter(e=>{const s=getComputedStyle(e);if(!/fixed|sticky/.test(s.position)||s.display==='none'||s.visibility==='hidden'||+s.opacity===0)return false;const r=e.getBoundingClientRect();return r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight&&!e.closest('.masthead')&&!e.closest('.masthead *')}).map(e=>{const r=e.getBoundingClientRect();return (e.id?'#'+e.id:'.'+String(e.className).split(' ')[0])+' '+Math.round(r.width)+'x'+Math.round(r.height)+' '+(e.innerText||'').trim().replace(/\\s+/g,' ').slice(0,30)})"""

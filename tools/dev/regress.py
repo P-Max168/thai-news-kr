@@ -6,7 +6,7 @@
 import urllib.parse, urllib.request, asyncio, json, re, sys, time, pathlib, subprocess, os
 from playwright.async_api import async_playwright
 
-URL = next((a for a in sys.argv[1:] if a.startswith("http")), "https://p-max168.github.io/thai-news-kr/")
+URL = next((a for a in sys.argv[1:] if a.startswith("http")), "https://tnews.pmaxone.com/")
 OUT = sys.argv[sys.argv.index("--json") + 1] if "--json" in sys.argv else None
 THAI = re.compile(r"[\u0E00-\u0E3E\u0E40-\u0E7F]")   # ฿(U+0E3F)는 허용
 SEED = """(()=>{ if(!localStorage.getItem('tnk.profile.v1')) localStorage.setItem('tnk.profile.v1', JSON.stringify({v:1,onboarded:true,persona:'pattaya',topics:['east','visa','life','weather','society'],region:'east',interests:['life'],taste:{w:{},votes:{},vf:{}},ui:{installHintUntil:Date.now()+864e5},updatedAt:1,settingsAt:1})); })()"""

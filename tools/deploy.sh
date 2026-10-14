@@ -10,7 +10,7 @@ cd "$(dirname "$0")/.."
 _deploy_end() { local c=$?; bash tools/preflight.sh end deploy "$([ $c -eq 0 ] && echo ok || echo fail)" "exit=$c $(git rev-parse --short HEAD 2>/dev/null)" >/dev/null 2>&1 || true; }
 trap _deploy_end EXIT
 
-LIVE_URL="${LIVE_URL:-https://p-max168.github.io/thai-news-kr/}"
+LIVE_URL="${LIVE_URL:-https://tnews.pmaxone.com/}"
 TIMEOUT="${DEPLOY_TIMEOUT:-900}"   # 라이브 반영 대기(초)
 
 LATEST=$(python3 -c 'import json;print(json.load(open("data/index.json",encoding="utf-8"))["latest"])')

@@ -9,7 +9,7 @@ import asyncio, sys, time, pathlib
 from playwright.async_api import async_playwright
 
 args = [a for a in sys.argv[1:]]
-URL = "https://p-max168.github.io/thai-news-kr/"
+URL = "https://tnews.pmaxone.com/"
 if "--url" in args:
     i = args.index("--url"); URL = args[i + 1]; del args[i:i + 2]
 W, FONT = 390, None

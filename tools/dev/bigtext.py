@@ -6,7 +6,7 @@
 import asyncio, sys, time, pathlib, json
 from playwright.async_api import async_playwright
 args = sys.argv[1:]
-URL = next((a for a in args if a.startswith("http")), "https://p-max168.github.io/thai-news-kr/")
+URL = next((a for a in args if a.startswith("http")), "https://tnews.pmaxone.com/")
 W = int(args[args.index("--w") + 1]) if "--w" in args else 360
 SHOTS = pathlib.Path(args[args.index("--shots") + 1]) if "--shots" in args else None
 SEED = """(()=>{ if(!localStorage.getItem('tnk.profile.v1')) localStorage.setItem('tnk.profile.v1', JSON.stringify({v:1,onboarded:true,persona:'pattaya',topics:['east','visa','life','weather','society'],region:'east',interests:['life'],taste:{w:{},votes:{},vf:{}},ui:{installHintUntil:Date.now()+864e5},updatedAt:1,settingsAt:1})); })()"""

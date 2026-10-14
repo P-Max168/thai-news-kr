@@ -3,7 +3,7 @@
   python3 tools/dev/perf.py [URL] [회수]"""
 import asyncio, sys, statistics, time
 from playwright.async_api import async_playwright
-URL = sys.argv[1] if len(sys.argv) > 1 else "https://p-max168.github.io/thai-news-kr/"
+URL = sys.argv[1] if len(sys.argv) > 1 else "https://tnews.pmaxone.com/"
 N = int(sys.argv[2]) if len(sys.argv) > 2 else 5
 JS = """()=>new Promise(res=>{let lcp=0,cls=0;new PerformanceObserver(l=>{for(const e of l.getEntries())lcp=e.startTime}).observe({type:'largest-contentful-paint',buffered:true});
 new PerformanceObserver(l=>{for(const e of l.getEntries())if(!e.hadRecentInput)cls+=e.value}).observe({type:'layout-shift',buffered:true});

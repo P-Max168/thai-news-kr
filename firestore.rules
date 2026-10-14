@@ -146,7 +146,7 @@ service cloud.firestore {
         && d.kind in ['article', 'place', 'rent', 'ad']
         && d.type in ['wrong', 'link', 'screen', 'etc', 'closed']   // 'closed' = 🚫 폐업·없어짐(2026-10-05 추가 · ⏳ 게시 전)
         && (!('memo' in d) || (d.memo is string && d.memo.size() <= 80))
-        && d.url is string && d.url.size() <= 300 && d.url.matches('^https://p-max168[.]github[.]io/thai-news-kr/.*')
+        && d.url is string && d.url.size() <= 300 && (d.url.matches('^https://p-max168[.]github[.]io/thai-news-kr/.*') || d.url.matches('^https://tnews[.]pmaxone[.]com/.*'))
         && (!('ed' in d) || (d.ed is string && d.ed.size() <= 20))
         && d.at == request.time;
     }
