@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-14T10:07:28+07:00",
+ "updated_at": "2026-10-14T12:09:09+07:00",
  "items": [
   {
-   "title": "‘친윤’ 딱지에 임은정 감찰까지…김지용, 중수청장 문턱서 여권 시험대",
-   "source": "매일경제",
-   "time": "2026-10-14T06:25:51+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFB5Ulpra180eDhnbGhwZHkxRHNGUmI1R2QtZWJabTJHZFdaSjdtLUphT1V3YnZ1QlhVUHNUT1VCbm1FcTlpOVFvbkNmNVZZYll5bWdIR2FR?oc=5"
+   "title": "김지용 중수청장 후보자 \"약자 대상 범죄 보완수사 빈틈없이\"",
+   "source": "조선일보",
+   "time": "2026-10-14T08:38:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOWDAyc0pLOVZPN3dxaGNJSDktUzVjOTRkSTUtQ2hsXzBsSllVNTdsRVlLNEgyNkR2eW9POXB5Qy1LZk5Ic1otbEF1OWV6dDVycGRPWHp2YXJ0eFo0T2NySGdoNlJURzUteTZ5YWNDNmJjX2VKWUg4NHE4REY2dndWd2UtbmUtb0E?oc=5"
   },
   {
-   "title": "‘나주 부부 살해’ 피의자 신상 공개…52세 박용수",
+   "title": "[속보] 이 대통령, 비서실장에 임광현 국세청장 임명",
+   "source": "한겨레",
+   "time": "2026-10-14T11:30:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE9fbVBuMTh4a1J4UTNJdXBJejdlZHFqWnNpTE5BSXFZMXRSamdTTnJwWlM3TGtvRmFla0I4aUF5YzdILWxwbTZZTnRtbkJnUkFFMmVOek45a3gzd1J3TEFSV25hOGh4Y3hHRU1r?oc=5"
+  },
+  {
+   "title": "주한美사령관 “지도서 베이징~서울 선 그어보라”…주한미군, 中견제 확대 시사",
+   "source": "동아일보",
+   "time": "2026-10-14T08:29:28+07:00",
+   "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE0xMWE5dXhWTEJES0NjLUFyYTNUQnFDMlZJdG41cnlUOW1nNURJWndMRWJrQm9zVHVtYWc2c2xfZkgxYWdzUWtCMkp0S181SG8yODFIZTlRQXdDaUF2T1ZsaE5YZUlzWE5nNFNvVm5pTUhaV1nSAWZBVV95cUxPUHBKdnFReEEzOFNVeHVSY3dlaUdRQ25YZ0U1VVQwb3ZXeW1WSWZHVnpyOEhnRVRVdUY3ajltMmdiTzBzYjdCRC1VXzhFZzVpTW51QlppWEJHdnV2U2VMaTNiZmtTWHc?oc=5"
+  },
+  {
+   "title": "'나주 부부 살해' 피의자는 53살 박용수",
+   "source": "MBC 뉴스",
+   "time": "2026-10-14T08:16:45+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9yeGxYdm1tWFh0cXBwSzVCRmxqUHFKNTk0b0FURnRoelU5VkdzTTh4SUsydkVySzdBSXhRMWF4MHhhV3YwcnBUSEZuZ1Y1eDYzdE5PSnh3ZFVBS216TnlXOWVVdWxvMWFQZDZYQ2Z0aXBjMlVCd0lR0gF3QVVfeXFMTWpab0dUU1pSQ3RfNlFpdjJLLUUtbTBkclE2a3MzcU9JNkFrWmh0eEhZV1BURVR3OUVWWlA2NG1kWnY2dUkzeGdrajByc2ZmOUJWbGtpQm53dGwtZklVSUJWamk3empxS3NBX3FCNVhWaGczSEdtRGs?oc=5"
+  },
+  {
+   "title": "아침 최저 5도, 체감온도 더 쌀쌀…어제보다 5~10도 낮아",
+   "source": "한겨레",
+   "time": "2026-10-14T07:24:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFB4VFJick9Db1djcmQwSGtodlVlclI2Z1hQZXRrWHR0Q3FwQlUxR29mUTl6OUpBMGEtaXhYN3BhOHVMZThqbzZqUEluMXRxYU41V2NDOEt3aDdIZ050TVdoMlFxSTdSVFBhcVZjSw?oc=5"
+  },
+  {
+   "title": "지지율 떨어지는 소리에 '충격' 받은 민주당... '네 탓' 공방에 분열 악순환",
+   "source": "한국일보",
+   "time": "2026-10-14T02:30:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5yS2FvXzhtMFRETEhnci1OTy1Fa2RvREljNl9sS3hucW54OGVhWTRBU3NJc2RoclI4NUV0Sk1JampwZDF3cUF0YVh1dUctT2FMa3ItNi0zdGJjQTRJWE5UQlFwVm5vQmMtTWtmUGlR0gFzQVVfeXFMTXNrbzdIdjVlQnAxTWZYX1p1Zm04VGliOE1pcGZQX2NLSjZkOVFMRmh5ZUNBSkwzQXd3bUxlR0lMZS1rVWNON1lsY2hwUFFnOW1RYno5QWRqM3M5SGs3Y0VaYXVidDdUOThHU0FUUmtPNGMzOA?oc=5"
+  },
+  {
+   "title": "울산 석화업체 저장탱크서 ‘펑펑’…화재로 작업자 10여명 대피",
+   "source": "한겨레",
+   "time": "2026-10-14T09:09:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1iQzFJUDE1bFZETjUxSW0tRDdFVnp5RzRTN0hTTnE5REpxTWZSN1RQcjJaLUxZRkUwME1iSERaWTFRT25hdlpHSjM5cDhJT2pQMU5rbVZMckx6YUhGbGVjZGF2Nmk?oc=5"
+  },
+  {
+   "title": "이화영 측 \"이달 중 재심 신청할 것…가석방 등 다른 조치 생각 안 해\"",
+   "source": "조선일보",
+   "time": "2026-10-13T18:21:22+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPR3NscHl4Q0tlTmE2bkNaMFZpMVdleDI0TklpNk5La28zYkhoWFFaV1NSMFRyRlR4eTVYRG50M0c2am9uUjlYUEFOOGZkMWsxel9WWTlWWV8yUjJfR3NGQ0NtQVRPWWZSU0pNR3RTcjk3T1JmZUZNdW5yS3FmVk82NTZqTDRHeWM?oc=5"
+  },
+  {
+   "title": "윤석열 선거법 2심, 오는 27일 선고‥국민의힘 '선거비용 397억 원 반환' 달렸다",
+   "source": "MBC 뉴스",
+   "time": "2026-10-13T11:56:35+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBqVlppeEExSms5RGVjN2ZqY2Y1bXN6ZlV4MTJlcnc3VERVT1BNRDRBZG94Q2xFaGxSZ3JEelJZVk1NNFMzOUt4WW1jOXd2Z0xydXlFajhLM05qZU8xc3RGVlM2NXdteHd1b3FPMjZPdm9UWHFmcjBJ0gF3QVVfeXFMT2FLNS01aG8xbG5qdVpQVl82RmpXVktST0k1VHZ6T2lzdk1lNXJGa1RrV21jZGkxRVUtMzVhdjRFdEF3QUJtRjI0RktXTjhmc2s1YzNLZHpHcDJUZy1Jb2lrYm43ZFpfazFmZUF6OFNtMUJwdEE4M28?oc=5"
+  },
+  {
+   "title": "3조 규모 불법 도박사이트 운영하며 ‘호화 생활’ 누려온 총책 등 3명 UAE서 검거",
    "source": "KBS 뉴스",
-   "time": "2026-10-14T08:06:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE8tQUpmdlJUNXdzRE1aWmctUTlGUm5KRmowSFZiYlVhS040WWxfRFZWMUcxazJvNVVfT1ZKcFFCWWVFVXFBVzVkQXlpZnlvbzdJVEpwUDRQMUxOVGc?oc=5"
-  },
-  {
-   "title": "대사관들 모두 서울 있는데… 법 고쳐 외교안보 부처까지 세종으로",
-   "source": "조선일보",
-   "time": "2026-10-13T22:50:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPNUhJOUtQZ1pudDFjVFZndDUwbHkxSHUtS2hldHllSlpWanBrY0xMckw2YTFDVVNwenpGZ0Z2X25OeDJvZm1YSWNHZnZZSHFMODE3RF8ycVM1b2c2ZW1kOHp6XzRNZko5TmVaQ1VoX29vYnc5LUdUTHhiOUVQSlVjMk1FeUR2UQ?oc=5"
-  },
-  {
-   "title": "뉴욕 국감서 유엔대사 ‘보은 인사’ 공방…우크라이나 대응도 도마",
-   "source": "조선일보",
-   "time": "2026-10-14T02:59:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOZHYwNk9xVGVua3FmQTd2YkFYOHVqaFNBR1pwUXJqekQ3UFJmY0lFSjZ1NURTcXl0TlNQaDV6SldrQ3JiVDNfTXJQbHpTM2stS3lvYUcwSW5MMU5MX1RBOWxXSWo3ZGFhdE5WVXlQZU1OWi05V1Y1VTdNWTJHMDJwMGxlRGFabk5BTXA3Y2dWclpHZmZTUXpwV0tCQXZzQQ?oc=5"
-  },
-  {
-   "title": "이 대통령, 인천 찾아 ‘흉기난동 사건’ 보고받아…“엄정 수사” 지시",
-   "source": "한겨레",
-   "time": "2026-10-13T22:51:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE43eEgyQkpJTnFsbjkxYUxOX1IzT0NaT1BnaVpjM1ZadVFtby1nSXFVOTlmeHFLaWZRM1VGNzB0WGtUVUxOMFBCQ2lMeEZvVU1fbXJLQUFNU3d5QTVuTlNMejdDNWJ3TF8zTkNR?oc=5"
-  },
-  {
-   "title": "주한미군사령관 \"더 넓은 작전환경 이해… 지도서 베이징·서울 선 그어보라\"",
-   "source": "조선일보",
-   "time": "2026-10-14T02:08:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOMG1NTElBZDNGZlJWbmJKZWZxSXFXQ3BWa214UmxTMUcyeFdBNnQwSk41SGpQRHQyX1h6TjFzc09Dd0RvSm5JU3VwaC1qc2M3UGxSUi1QV0lRN241elFHcVI0QUNjMDNUeTZaNDlMakRYU1B3UFI4SktfLXNoRU45YXltYlc?oc=5"
-  },
-  {
-   "title": "김민석 “신천지 민주당 집단가입 확인”…경선 개입 의혹엔 “증언 있다”",
-   "source": "한겨레",
-   "time": "2026-10-14T08:03:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9VZXliNjI0dGNfX3Y5N3UzVVJmTzJSTXY2RXh0cndMVG9MVV9Qa1RBdXQ1dk9rQzJXTFBSUVBaSGlVOXNGbC1QbW1qaE1zckEwS1V1akhlTjcxWGtMcmRFenVPNEFqTVVIdlVJWjJ2bDJVS3V0?oc=5"
-  },
-  {
-   "title": "[속보] 中 신화통신 \"북중 신압록강대교, 15일 공식 개통\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-14T09:12:44+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE4wTjFuY3ZlamlDSmIxcW5kZnVpQkNDc0JQNEk1TW5UbF9JWUJVaXN0OW85bGRvbHBZcjZSVTBfZUc1TFAzekxpZnp5UUFnRms0YjVyQlV3UE5CQjZvQ01YZ1lqMmM3WHBDelZ5ZVB3Qzd6aVh60gF0QVVfeXFMT0V3bU93Z1poZGwtdS01RjFLUTdmLUZEMDJBZUljdWlaS0FOMFJSOUhIa0E1WmFlWGROOWg3WTNQM3NaUk52YW8xSzFZaWYyOEdSZUJEN0UzRDZSQU9nMTUwdVZsQzJIZUFwZ2paMXZ6TTR0NkE?oc=5"
-  },
-  {
-   "title": "특검, 尹 선거법 항소심서 ’1심 당선무효형 유지’ 요청",
-   "source": "연합뉴스TV",
-   "time": "2026-10-13T11:01:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5vVXhWRjZwbXNUSTVNNlVEWWdKWFk2VGZpNGdqVHVma21ZUzBLdFZZcnlBRmt3R0MzRlNNMHRxb05URk5lQ0JvbkdlcHoxMnhZNWhwMDFRQXF3X0VxNktJcE8wQ05EX3c?oc=5"
-  },
-  {
-   "title": "생후 2개월 딸 때려 숨지게 한 친부 구속 갈림길‥\"죄송하다\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-14T09:22:51+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBnRzZabG1wTjhuTjNENmh4OGllVHB3bzJDMmdjWEhualNhYUFJNG9vN2ZyTGx5UjVHTWZBZ0E0bklWZnNBakhmVmVzbVJpaENwSl9sR25IRXpoSXQwLXp2a2RESmxEQ1RJUTRPeWtIaElvY1hadGNF0gF3QVVfeXFMUE5PNHVOWnU4N3NzNEdpR3pLMnlDWTk1NGRQWmdZeFEtU0JvMFdERTZwYnZXQ1Z5dEhQWVdaeTVrcXlXVFo4N2JfaG5sdEdNTGo4NWg5X1pwcUttN3p4OHhFZ1ptNnhHVEk0anJ5WW5JbEhTY0VJcUE?oc=5"
+   "time": "2026-10-14T10:06:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBTaFVJTTFac2ZPa2pnd2s4dU9pSFJoNlV2UFM2WkxwdERrQ0hrZFplV09ERTUtT1U5b0tkYXUwd2NkbXo5LXZLRDhvUnR5STZJd2pmejUxN3B3Q28?oc=5"
   }
  ]
 };
