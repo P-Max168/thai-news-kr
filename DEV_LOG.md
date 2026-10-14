@@ -228,3 +228,7 @@
 - 10-13 14:53 · 💬 [낮음·판 콘텐츠] **10-13 아침판 '💬 오늘의 질문'·운영자 첫 댓글 19건 게시**(민구님 채팅 승인 'ok', 백업 태그 `backup-20261013-1453-discussion-1013am`) — 정본 초안 글 그대로 approved:true 목록으로 `tools/discussion.py apply`(exit 0, krw_check 통과) → data/2026-10-13-am.json|js 19/19 + tools/discussions/2026-10-13-am.json, 정본 초안 approved:true·applied_at 2026-10-13T14:53:15+07:00. 판 generated·기사 글 그대로, workflows·tools·화면 코드 안 건드림
   - **확인한 것**: 초안 글 = 판 데이터 글 19/19 · discussion 빼면 판 데이터 = 게시 전과 같음 · newslib check OK(경고: 기사 19건) · 질문·댓글 태국 문자 0·฿ 0 · 승인함 p1~p13 + dq-2026-10-12-pm(보류 유지)
   - **미확인**: 실제 휴대폰 화면 · 라이브 결과는 배포 뒤 확인(채팅 보고)
+<!-- discussion-1013pm-1014am -->
+- 10-14 09:11 · 💬 [낮음·판 콘텐츠] **10-13 저녁판 20건·10-14 아침판 14건 '💬 오늘의 질문'·운영자 첫 댓글 게시**(민구님 채팅 승인 '모두OK', 백업 태그 `backup-20261014-0911-discussion-1013pm-1014am`) — 정본 초안 글 그대로 approved:true 목록으로 `tools/discussion.py apply` 2번(둘 다 exit 0, krw_check 통과) → data 20/20·14/14 + tools/discussions/, 정본 초안 approved:true·applied_at 2026-10-14T09:11:57+07:00. 판 generated·기사 글 그대로, workflows·tools·화면 코드 안 건드림. 10-12 저녁판은 보류 유지(안 건드림)
+  - **확인한 것**: 초안 글 = 판 데이터 글 20/20·14/14 · discussion 빼면 판 데이터 = 게시 전과 같음 · newslib check OK(경고: 10-14-am 기사 14건) · 질문·댓글 태국 문자 0·฿ 0 · 승인함 p1~p13 + dq-2026-10-12-pm(보류 유지)
+  - **미확인**: 실제 휴대폰 화면 · 라이브 결과는 배포 뒤 확인(채팅 보고)
