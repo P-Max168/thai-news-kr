@@ -152,19 +152,25 @@
   }
   // 화면 = 'M/D HH:MM'(날짜를 넣으면서 칸이 넓어져 화면 글자 '조회'는 뺌 — 읽어 주기·출처 창엔 그대로 '조회')
   function ft(list) { var c = clock(list); return c ? [c + " 조회", clockHTML(list)] : null; }
+  // ▲▼ 변동(2026-10-15, G 그래파이트): 실제 이전 값이 있을 때만(USDT 전일 종가·금 공시 변동·휘발유 어제 값·환율 직전 조회값 prev_*). 화면 장식만(aria-hidden), G 테마에서만 보임(g.css)
+  function chg(d, dig) {
+    if (typeof d !== "number" || !isFinite(d) || Math.abs(d) < Math.pow(10, -dig) / 2) return "";
+    return '<span class="tk-chg tk-chg--' + (d > 0 ? "up" : "dn") + '" aria-hidden="true">' + (d > 0 ? "▲" : "▼") + Math.abs(d).toLocaleString("en-US", { minimumFractionDigits: dig, maximumFractionDigits: dig }) + "</span>";
+  }
+  function dif(a, b) { return typeof a === "number" && typeof b === "number" ? a - b : null; }
   var renderLater = false;
   function render() {
     // 속도(2026-10-03 18:25, 검수 지시): 첫 기사 카드가 그려지기 전에는 칩을 채우지 않음 — 자리는 index.html 의 빈 상자 4개가 잡고 있음
     if (!window.__tnLate && window.TNAfterFirst) { if (!renderLater) { renderLater = true; window.TNAfterFirst(function () { renderLater = false; render(); }); } return; }
     var f = fxOK(), u = usdtOK(), w = wxOK(), g = goldOK(), a = aqOK(), o = fuelOK(), h = [];
     h.push(tile("fx", [
-      f && ["1바트 " + f.THB_KRW.toFixed(1) + "원", "1바트<i class=\"tk-eq\"> =</i> <b>" + f.THB_KRW.toFixed(1) + "원</b>"],
-      f && f.USD_THB > 0 && ["1달러 " + f.USD_THB.toFixed(1) + "바트", "1달러<i class=\"tk-eq\"> =</i> <b>" + f.USD_THB.toFixed(1) + '<small class="tk-u">฿</small></b>']
+      f && ["1바트 " + f.THB_KRW.toFixed(1) + "원", "1바트<i class=\"tk-eq\"> =</i> <b>" + f.THB_KRW.toFixed(1) + "원</b>" + chg(dif(f.THB_KRW, f.prev_THB_KRW), 2)],
+      f && f.USD_THB > 0 && ["1달러 " + f.USD_THB.toFixed(1) + "바트", "1달러<i class=\"tk-eq\"> =</i> <b>" + f.USD_THB.toFixed(1) + '<small class="tk-u">฿</small></b>' + chg(dif(f.USD_THB, f.prev_USD_THB), 2)]
     ], ft([f && ms(f.fetched_at)])));
     // v5(운영자 요청 10-03 10:25): 테더는 환율 바로 옆 자기 상자 — '1USDT' / 큰 글자 '33.5฿' / 조회 시각
     h.push(tile("usdt", [
       u && ["1USDT", '<span class="tk-l">1USDT</span>'],
-      u && ["테더(USDT) 1개 " + u.USDT_THB.toFixed(1) + "바트", '<b class="tk-big">' + u.USDT_THB.toFixed(1) + '<small class="tk-u">฿</small></b>']
+      u && ["테더(USDT) 1개 " + u.USDT_THB.toFixed(1) + "바트", '<b class="tk-big">' + u.USDT_THB.toFixed(1) + '<small class="tk-u">฿</small></b>' + chg(u.change, 2)]
     ].filter(function (x, i, a) { return a[1]; }), ft([u && ms(u.fetched_at)])));
     var ic = w && wmo(w.code, w.day), lv = a && pmLevel(a.pm);
     h.push(tile("env", [
@@ -177,8 +183,8 @@
       return c ? [rn + " " + c + " 조회", '<span class="tk-rg">' + rn + "</span>" + clockHTML([w && w.at, a && a.at])] : null;
     })()));
     h.push(tile("price", [
-      g && ["금시세 금괴 1바트 " + n0(g.bar_sell) + "바트", '<span class="tk-l">금</span><b>' + n0(g.bar_sell) + '<small class="tk-u">฿</small></b>'],
-      o && ["휘발유(95) 리터당 " + n2(o.gasohol95) + "바트", '<span class="tk-l">휘발유<span class="tk-95">(95)</span></span><b>' + n2(o.gasohol95) + '<small class="tk-u">฿</small></b>']
+      g && ["금시세 금괴 1바트 " + n0(g.bar_sell) + "바트", '<span class="tk-l">금</span><b>' + n0(g.bar_sell) + '<small class="tk-u">฿</small></b>' + chg(g.change, 0)],
+      o && ["휘발유(95) 리터당 " + n2(o.gasohol95) + "바트", '<span class="tk-l">휘발유<span class="tk-95">(95)</span></span><b>' + n2(o.gasohol95) + '<small class="tk-u">฿</small></b>' + chg(dif(o.gasohol95, o.yesterday), 2)]
     ], ft([g && ms(g.fetched_at), o && ms(o.fetched_at)])));
     var open = pop && !pop.hidden ? pop.getAttribute("data-k") : null;
     box.innerHTML = h.join("");

@@ -429,6 +429,7 @@ def edition_page(data, meta, chosen, tp, ed_url, img):
 header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
 a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
 li{margin:6px 0;color:#333D4B}</style>
+<link rel="stylesheet" href="/assets/g-pages.css?v=1">
 </head>
 <body>
 <header>태국 뉴스 한눈에</header>

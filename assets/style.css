@@ -950,3 +950,4 @@ body.drawer-open{overflow:hidden}
 .tk-fit4 .tk-pm,.tk-fit4 .tk-tile[data-tk="env"] .tk-rg{display:none}
 .tk-fit5 .ticker{flex-wrap:wrap;overflow-x:visible;row-gap:3px}
 .tk-fit5 .ticker>.tk-tile{flex:1 1 calc(50% - 2px)}
+.tk-chg{display:none}

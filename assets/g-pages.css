@@ -1,0 +1,15 @@
+/* G 그래파이트(2026-10-15) — 따로 떨어진 쪽(404·offline·안내 4쪽·판 미리보기 e/)에 덮는 색·모서리·글꼴. 각 쪽의 <style> 뒤에서 읽힘. 되돌리기 = 그 쪽들의 g-pages.css 링크 한 줄 삭제 */
+@font-face{font-family:"TNK Plex Mono";src:url(fonts/plexmono/plexmono-latin-600.woff2) format("woff2");font-weight:600;font-display:swap;unicode-range:U+0020-007E}
+body{background:#EEF0F2!important;color:#1C1F24!important;font-variant-numeric:tabular-nums}
+header{background:#fff!important;color:#1C1F24!important;box-shadow:0 1px 0 #DADEE3!important;border-top:3px solid #2B2F36}
+header a{color:#1C1F24!important}
+.box,main>section,.card{border-radius:6px!important;border:1px solid #DADEE3;box-shadow:none!important}
+.box{background:#fff}
+.ic{background:#2B2F36!important;color:#E9ECEF!important;border-radius:6px!important}
+.ic svg{stroke-width:1.5!important}
+a.btn,.box a,#home{background:#2B2F36!important;color:#fff!important;border-radius:4px!important}
+a.btn:hover,.box a:hover{background:#1C1F24!important}
+a:not(.btn):not(#home){color:#3D6A8E}
+h1,h2,h3{letter-spacing:-.6px}
+p,li{color:#454B54}
+b,strong{color:#1C1F24}

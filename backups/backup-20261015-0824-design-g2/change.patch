@@ -1,0 +1,551 @@
+diff --git a/404.html b/404.html
+index 9ad085f..e143f73 100644
+--- a/404.html
++++ b/404.html
+@@ -17,6 +17,7 @@ h1{font-size:1.25rem;margin:14px 0 6px;letter-spacing:-.4px}
+ p{margin:0 0 18px;color:#4E5968;font-size:.9375rem}
+ a{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;font-weight:700;text-decoration:none;background:#1B64DA;color:#fff}
+ </style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <main class="box">
+diff --git a/about.html b/about.html
+index 6906308..6804a22 100644
+--- a/about.html
++++ b/about.html
+@@ -26,6 +26,7 @@ nav.more{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+ nav.more a{display:flex;align-items:center;justify-content:center;min-height:48px;background:#fff;border:0;border-radius:12px;color:#191F28;text-decoration:none;font-weight:600;text-align:center;padding:6px}
+ nav.more a[aria-current]{background:#1B64DA;color:#fff}
+ a{color:#1B64DA}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header><a href="./">← 태국 뉴스 한눈에</a></header>
+diff --git a/assets/g.css b/assets/g.css
+index 1b231e7..dabbc78 100644
+--- a/assets/g.css
++++ b/assets/g.css
+@@ -59,3 +59,68 @@ html.th-modern.th-g .tk-lv--good{color:#7FD4A6}
+ html.th-modern.th-g .tk-lv--mod{color:#F2D06B}
+ html.th-modern.th-g .tk-lv--bad{color:#F5A36B}
+ html.th-modern.th-g .tk-lv--vbad{color:#FF8A80}
++html.th-modern.th-g .acct .gbtn,html.th-modern.th-g .also__m,html.th-modern.th-g .badge-op,html.th-modern.th-g .bchip,html.th-modern.th-g .briefing__badge,html.th-modern.th-g .cat-stats .bar,html.th-modern.th-g .chip,html.th-modern.th-g .dm-target,html.th-modern.th-g .gbtn,html.th-modern.th-g .impf__c,html.th-modern.th-g .int__c,html.th-modern.th-g .korea__list .kp,html.th-modern.th-g .mine__chip,html.th-modern.th-g .mini,html.th-modern.th-g .mytopics,html.th-modern.th-g .nb-cat,html.th-modern.th-g .ob__step,html.th-modern.th-g .opt__r,html.th-modern.th-g .persona--sm,html.th-modern.th-g .picked,html.th-modern.th-g .qr__c,html.th-modern.th-g .rep-btn,html.th-modern.th-g .src-list li,html.th-modern.th-g .tab,html.th-modern.th-g .tags span,html.th-modern.th-g .tk-chip,html.th-modern.th-g .tk-lv,html.th-modern.th-g .tk-pop__rg button,html.th-modern.th-g .tl__here,html.th-modern.th-g .tool,html.th-modern.th-g .tpick__c,html.th-modern.th-g .vote,html.th-modern.th-g .more-btn,html.th-modern.th-g .korea__more,html.th-modern.th-g .korea__top,html.th-modern.th-g .rep-btn{border-radius:4px}
++html.th-modern.th-g .masthead__row2{display:block;padding:0;overflow:hidden}
++html.th-modern.th-g .masthead__row2 .mbox{display:flex;flex-direction:row;gap:6px;padding:8px 10px;border-bottom:1px solid var(--g-gline)}
++html.th-modern.th-g .masthead__row2 .mbox .menu-btn,html.th-modern.th-g .masthead__row2 .mbox .heart-btn{height:30px;min-height:0;margin:0;padding:0 10px;flex-direction:row;gap:6px}
++html.th-modern.th-g .ticker,html.th-modern.th-g .ticker[data-fit]{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;overflow:visible;padding:0;margin:0;-webkit-mask:none;mask:none}
++html.th-modern.th-g .ticker::after,html.th-modern.th-g .ticker::before{display:none}
++html.th-modern.th-g .tk-chip.tk-tile{display:grid;grid-template-columns:subgrid;grid-template-rows:auto auto;min-width:0;width:auto;height:auto;margin:0;padding:0;border-radius:0;box-shadow:none;text-align:left;align-items:start;background:transparent}
++html.th-modern.th-g .tk-tile[data-tk="fx"],html.th-modern.th-g .tk-tile[data-tk="env"]{grid-column:span 2}
++html.th-modern.th-g .tk-tile .tk-in{display:contents}
++html.th-modern.th-g .tk-tile .tk-ln{display:block;min-width:0;padding:9px 10px 2px;border-left:1px solid var(--g-gline);border-top:1px solid var(--g-gline);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:0.6875rem;line-height:1.35;color:var(--g-gsub)}
++html.th-modern.th-g .ticker .tk-tile:nth-child(-n+2) .tk-ln{border-top:0}
++html.th-modern.th-g .tk-tile[data-tk="fx"] .tk-ln,html.th-modern.th-g .tk-tile[data-tk="env"] .tk-ln{border-left:0}
++html.th-modern.th-g .tk-tile[data-tk="fx"] .tk-ln+.tk-ln:not(.tk-ft),html.th-modern.th-g .tk-tile[data-tk="env"] .tk-ln+.tk-ln:not(.tk-ft){border-left:1px solid var(--g-gline)}
++html.th-modern.th-g .tk-tile .tk-ln b{display:block;font-size:1.0312rem;line-height:1.25;margin-top:2px}
++html.th-modern.th-g .tk-tile .tk-ln .tk-big{font-size:1.0312rem}
++html.th-modern.th-g .tk-tile .tk-ft{grid-column:1/-1;border-top:0;padding:0 10px 8px;font-size:0.625rem;font-family:var(--g-num);color:#7E8590}
++html.th-modern.th-g .tk-tile[data-tk="fx"] .tk-ft,html.th-modern.th-g .tk-tile[data-tk="env"] .tk-ft{border-left:0}
++html.th-modern.th-g .tk-tile[data-tk="usdt"] .tk-ln,html.th-modern.th-g .tk-tile[data-tk="price"] .tk-ln{border-left:1px solid var(--g-gline)}
++html.th-modern.th-g .tk-tile[data-tk="usdt"] .tk-ft,html.th-modern.th-g .tk-tile[data-tk="price"] .tk-ft{border-left:1px solid var(--g-gline)}
++html.th-modern.th-g .tk-tile[data-tk="usdt"],html.th-modern.th-g .tk-tile[data-tk="price"]{grid-template-columns:minmax(0,1fr);grid-template-rows:auto}
++html.th-modern.th-g .tk-tile[data-tk="usdt"] .tk-ln:first-child{padding-bottom:0}
++html.th-modern.th-g .tk-tile[data-tk="usdt"] .tk-ln:first-child+.tk-ln{padding-top:0;border-top:0}
++html.th-modern.th-g .tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft){padding-top:0;border-top:0}
++html.th-modern.th-g .tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft) b{display:inline;font-size:0.7188rem;margin-left:4px}
++html.th-modern.th-g .tk-tile .tk-eq{display:none}
++html.th-modern.th-g .tk-tile .tk-rain{margin-left:6px}
++html.th-modern.th-g .tk-tile .tk-lv{margin-left:6px;vertical-align:2px}
++html.th-modern.th-g .tk-tile .tk-ln b+.tk-lv{display:inline-block}
++html.th-modern.th-g .tk-chg{display:inline-block!important;margin-left:6px;font:600 0.6562rem/1 var(--g-num);vertical-align:2px}
++html.th-modern.th-g .tk-ln b .tk-chg{display:none!important}
++html.th-modern.th-g .tk-chg--up{color:#6FCF97}
++html.th-modern.th-g .tk-chg--dn{color:#FF8A7A}
++html.th-modern.th-g .tk-ln:has(.tk-chg) b{display:inline-block}
++html.th-modern.th-g .brief-list{counter-reset:gb}
++html.th-modern.th-g .brief-list li+li{border-top:1px solid var(--line)}
++html.th-modern.th-g .brief-line{counter-increment:gb;display:flex;align-items:flex-start;gap:14px;padding:14px 2px}
++html.th-modern.th-g .brief-line::before{content:counter(gb,decimal-leading-zero);font:600 0.9375rem/1.45 var(--g-num);color:var(--m-t5);flex:0 0 auto;min-width:20px}
++html.th-modern.th-g .brief-text{display:flex;flex-direction:column;font-weight:600;color:var(--m-t1);line-height:1.5}
++html.th-modern.th-g .brief-text .bchip{order:2;background:none;padding:0;margin:6px 0 0;font-size:0.7188rem;font-weight:500;color:var(--m-t3);box-shadow:none;align-self:flex-start}
++html.th-modern.th-g .briefing__badge{font-size:0.6875rem;letter-spacing:.16em}
++html.th-modern.th-g .nearby .nb-cats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:1px solid var(--g-line);border-radius:4px;background:#fff;overflow:hidden}
++html.th-modern.th-g .nearby .nb-cat{border:0;border-left:1px solid var(--g-line);border-radius:0;background:#fff;min-width:0;padding:8px 2px;justify-content:center}
++html.th-modern.th-g .nearby .nb-cat:first-child{border-left:0}
++html.th-modern.th-g .nearby .nb-lab__t{font-size:0.6875rem;letter-spacing:.06em;color:var(--m-ac);font-weight:700}
++html.th-modern.th-g .brand__text strong{white-space:nowrap}
++html.th-modern.th-g .masthead__row2 .menu-btn__t{display:inline;font-size:0.75rem}
++html.th-modern.th-g .tk-tile .tk-l{display:block}
++html.th-modern.th-g .tk-tile .tk-ln:has(.tk-chg) b{display:inline-block}
++html.th-modern.th-g .tk-tile .tk-ln:has(.tk-chg) .tk-chg{display:inline-block!important}
++html.th-modern.th-g .tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft){white-space:normal;font-size:0.6562rem}
++html.th-modern.th-g .tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft) .tk-l{display:inline}
++html.th-modern.th-g .tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft) .tk-chg{display:none!important}
++html.th-modern.th-g .tk-tile .tk-rg{margin-right:4px}
++html.th-modern.th-g .tk-tile .tk-rain{display:inline-block}
++html.th-modern.th-g .tk-tile[data-tk="price"] .tk-ln:first-child,html.th-modern.th-g .tk-tile[data-tk="usdt"] .tk-ln{white-space:normal;overflow:visible}
++html.th-modern.th-g .masthead__row2 .mbox .menu-btn{flex-direction:row!important;width:auto!important;display:inline-flex;align-items:center}
++html.th-modern.th-g .masthead__row2 .mbox .menu-btn__ic{width:16px;height:13px}
++html.th-modern.th-g .masthead__row2 .menu-btn__t{white-space:nowrap;writing-mode:horizontal-tb}
++html.th-modern.th-g .masthead__row2 .mbox .menu-btn{min-width:64px}
++@media (min-width:720px){html.th-modern.th-g .ticker,html.th-modern.th-g .ticker[data-fit]{grid-template-columns:repeat(6,minmax(0,1fr))}
++html.th-modern.th-g .ticker .tk-tile .tk-ln{border-top:0}
++html.th-modern.th-g .ticker .tk-tile[data-tk="env"] .tk-ln:first-child{border-left:1px solid var(--g-gline)}
++html.th-modern.th-g .ticker .tk-tile[data-tk="env"] .tk-ft{border-left:1px solid var(--g-gline)}}
++html.th-modern.th-g .brief-text{display:table;width:100%}
++html.th-modern.th-g .brief-text .bchip{display:table-footer-group}
+diff --git a/assets/style.css b/assets/style.css
+index 37c8e9e..7f4cb94 100644
+--- a/assets/style.css
++++ b/assets/style.css
+@@ -950,3 +950,4 @@ body.drawer-open{overflow:hidden}
+ .tk-fit4 .tk-pm,.tk-fit4 .tk-tile[data-tk="env"] .tk-rg{display:none}
+ .tk-fit5 .ticker{flex-wrap:wrap;overflow-x:visible;row-gap:3px}
+ .tk-fit5 .ticker>.tk-tile{flex:1 1 calc(50% - 2px)}
++.tk-chg{display:none}
+diff --git a/assets/ticker.js b/assets/ticker.js
+index bf3e089..56696ad 100644
+--- a/assets/ticker.js
++++ b/assets/ticker.js
+@@ -152,19 +152,25 @@
+   }
+   // 화면 = 'M/D HH:MM'(날짜를 넣으면서 칸이 넓어져 화면 글자 '조회'는 뺌 — 읽어 주기·출처 창엔 그대로 '조회')
+   function ft(list) { var c = clock(list); return c ? [c + " 조회", clockHTML(list)] : null; }
++  // ▲▼ 변동(2026-10-15, G 그래파이트): 실제 이전 값이 있을 때만(USDT 전일 종가·금 공시 변동·휘발유 어제 값·환율 직전 조회값 prev_*). 화면 장식만(aria-hidden), G 테마에서만 보임(g.css)
++  function chg(d, dig) {
++    if (typeof d !== "number" || !isFinite(d) || Math.abs(d) < Math.pow(10, -dig) / 2) return "";
++    return '<span class="tk-chg tk-chg--' + (d > 0 ? "up" : "dn") + '" aria-hidden="true">' + (d > 0 ? "▲" : "▼") + Math.abs(d).toLocaleString("en-US", { minimumFractionDigits: dig, maximumFractionDigits: dig }) + "</span>";
++  }
++  function dif(a, b) { return typeof a === "number" && typeof b === "number" ? a - b : null; }
+   var renderLater = false;
+   function render() {
+     // 속도(2026-10-03 18:25, 검수 지시): 첫 기사 카드가 그려지기 전에는 칩을 채우지 않음 — 자리는 index.html 의 빈 상자 4개가 잡고 있음
+     if (!window.__tnLate && window.TNAfterFirst) { if (!renderLater) { renderLater = true; window.TNAfterFirst(function () { renderLater = false; render(); }); } return; }
+     var f = fxOK(), u = usdtOK(), w = wxOK(), g = goldOK(), a = aqOK(), o = fuelOK(), h = [];
+     h.push(tile("fx", [
+-      f && ["1바트 " + f.THB_KRW.toFixed(1) + "원", "1바트<i class=\"tk-eq\"> =</i> <b>" + f.THB_KRW.toFixed(1) + "원</b>"],
+-      f && f.USD_THB > 0 && ["1달러 " + f.USD_THB.toFixed(1) + "바트", "1달러<i class=\"tk-eq\"> =</i> <b>" + f.USD_THB.toFixed(1) + '<small class="tk-u">฿</small></b>']
++      f && ["1바트 " + f.THB_KRW.toFixed(1) + "원", "1바트<i class=\"tk-eq\"> =</i> <b>" + f.THB_KRW.toFixed(1) + "원</b>" + chg(dif(f.THB_KRW, f.prev_THB_KRW), 2)],
++      f && f.USD_THB > 0 && ["1달러 " + f.USD_THB.toFixed(1) + "바트", "1달러<i class=\"tk-eq\"> =</i> <b>" + f.USD_THB.toFixed(1) + '<small class="tk-u">฿</small></b>' + chg(dif(f.USD_THB, f.prev_USD_THB), 2)]
+     ], ft([f && ms(f.fetched_at)])));
+     // v5(운영자 요청 10-03 10:25): 테더는 환율 바로 옆 자기 상자 — '1USDT' / 큰 글자 '33.5฿' / 조회 시각
+     h.push(tile("usdt", [
+       u && ["1USDT", '<span class="tk-l">1USDT</span>'],
+-      u && ["테더(USDT) 1개 " + u.USDT_THB.toFixed(1) + "바트", '<b class="tk-big">' + u.USDT_THB.toFixed(1) + '<small class="tk-u">฿</small></b>']
++      u && ["테더(USDT) 1개 " + u.USDT_THB.toFixed(1) + "바트", '<b class="tk-big">' + u.USDT_THB.toFixed(1) + '<small class="tk-u">฿</small></b>' + chg(u.change, 2)]
+     ].filter(function (x, i, a) { return a[1]; }), ft([u && ms(u.fetched_at)])));
+     var ic = w && wmo(w.code, w.day), lv = a && pmLevel(a.pm);
+     h.push(tile("env", [
+@@ -177,8 +183,8 @@
+       return c ? [rn + " " + c + " 조회", '<span class="tk-rg">' + rn + "</span>" + clockHTML([w && w.at, a && a.at])] : null;
+     })()));
+     h.push(tile("price", [
+-      g && ["금시세 금괴 1바트 " + n0(g.bar_sell) + "바트", '<span class="tk-l">금</span><b>' + n0(g.bar_sell) + '<small class="tk-u">฿</small></b>'],
+-      o && ["휘발유(95) 리터당 " + n2(o.gasohol95) + "바트", '<span class="tk-l">휘발유<span class="tk-95">(95)</span></span><b>' + n2(o.gasohol95) + '<small class="tk-u">฿</small></b>']
++      g && ["금시세 금괴 1바트 " + n0(g.bar_sell) + "바트", '<span class="tk-l">금</span><b>' + n0(g.bar_sell) + '<small class="tk-u">฿</small></b>' + chg(g.change, 0)],
++      o && ["휘발유(95) 리터당 " + n2(o.gasohol95) + "바트", '<span class="tk-l">휘발유<span class="tk-95">(95)</span></span><b>' + n2(o.gasohol95) + '<small class="tk-u">฿</small></b>' + chg(dif(o.gasohol95, o.yesterday), 2)]
+     ], ft([g && ms(g.fetched_at), o && ms(o.fetched_at)])));
+     var open = pop && !pop.hidden ? pop.getAttribute("data-k") : null;
+     box.innerHTML = h.join("");
+diff --git a/contact.html b/contact.html
+index 599da5d..22e4658 100644
+--- a/contact.html
++++ b/contact.html
+@@ -26,6 +26,7 @@ nav.more{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+ nav.more a{display:flex;align-items:center;justify-content:center;min-height:48px;background:#fff;border:0;border-radius:12px;color:#191F28;text-decoration:none;font-weight:600;text-align:center;padding:6px}
+ nav.more a[aria-current]{background:#1B64DA;color:#fff}
+ a{color:#1B64DA}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header><a href="./">← 태국 뉴스 한눈에</a></header>
+diff --git a/e/2026-10-02-pm/index.html b/e/2026-10-02-pm/index.html
+index 74d7e49..16543ad 100644
+--- a/e/2026-10-02-pm/index.html
++++ b/e/2026-10-02-pm/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/e/2026-10-03-am/index.html b/e/2026-10-03-am/index.html
+index 58318b3..32ce96a 100644
+--- a/e/2026-10-03-am/index.html
++++ b/e/2026-10-03-am/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/e/2026-10-03-pm/index.html b/e/2026-10-03-pm/index.html
+index 8de7146..536166a 100644
+--- a/e/2026-10-03-pm/index.html
++++ b/e/2026-10-03-pm/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/e/2026-10-04-am/index.html b/e/2026-10-04-am/index.html
+index 3549b8b..b217f3a 100644
+--- a/e/2026-10-04-am/index.html
++++ b/e/2026-10-04-am/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/e/2026-10-04-pm/index.html b/e/2026-10-04-pm/index.html
+index fdf930b..57264a1 100644
+--- a/e/2026-10-04-pm/index.html
++++ b/e/2026-10-04-pm/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/e/2026-10-05-am/index.html b/e/2026-10-05-am/index.html
+index 5c069e7..45aafdd 100644
+--- a/e/2026-10-05-am/index.html
++++ b/e/2026-10-05-am/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/e/2026-10-11-am/index.html b/e/2026-10-11-am/index.html
+index e72c8ad..5d9ff16 100644
+--- a/e/2026-10-11-am/index.html
++++ b/e/2026-10-11-am/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/e/2026-10-11-pm/index.html b/e/2026-10-11-pm/index.html
+index eed2b6a..5ba933d 100644
+--- a/e/2026-10-11-pm/index.html
++++ b/e/2026-10-11-pm/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/e/2026-10-12-am/index.html b/e/2026-10-12-am/index.html
+index 5543111..013380e 100644
+--- a/e/2026-10-12-am/index.html
++++ b/e/2026-10-12-am/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/e/2026-10-12-pm/index.html b/e/2026-10-12-pm/index.html
+index 13fee69..de05091 100644
+--- a/e/2026-10-12-pm/index.html
++++ b/e/2026-10-12-pm/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/e/2026-10-13-am/index.html b/e/2026-10-13-am/index.html
+index 3ee0dc8..e6ba74a 100644
+--- a/e/2026-10-13-am/index.html
++++ b/e/2026-10-13-am/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/e/2026-10-13-pm/index.html b/e/2026-10-13-pm/index.html
+index c6a4084..2bf5d20 100644
+--- a/e/2026-10-13-pm/index.html
++++ b/e/2026-10-13-pm/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/e/2026-10-14-am/index.html b/e/2026-10-14-am/index.html
+index 481cb2e..59ae3a6 100644
+--- a/e/2026-10-14-am/index.html
++++ b/e/2026-10-14-am/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/e/2026-10-14-pm/index.html b/e/2026-10-14-pm/index.html
+index 1fbddc7..529193c 100644
+--- a/e/2026-10-14-pm/index.html
++++ b/e/2026-10-14-pm/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/e/2026-10-15-am/index.html b/e/2026-10-15-am/index.html
+index 84fb1a7..b7ba6ed 100644
+--- a/e/2026-10-15-am/index.html
++++ b/e/2026-10-15-am/index.html
+@@ -29,6 +29,7 @@
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>
+diff --git a/index.html b/index.html
+index 1f98d92..5c4d588 100644
+--- a/index.html
++++ b/index.html
+@@ -39,11 +39,11 @@ var u=location.href.replace(/([?&])theme=(g|modern|classic)(&|(?=#)|$)/,function
+ <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+ <script>(function(){var M=window.__tnTheme==="modern",K=M?"tnk.fontm":"tnk.font",u=M?"assets/fonts/pretendard/pretendardvariable-dynamic-subset.min.css":"https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css";function add(){var l=document.createElement("link");l.rel="stylesheet";l.href=u;if(!M)l.crossOrigin="anonymous";l.onload=function(){try{localStorage.setItem(K,"1")}catch(e){}};document.head.appendChild(l)}var seen=false;try{seen=localStorage.getItem(K)==="1"}catch(e){}if(seen)add();else addEventListener("load",function(){setTimeout(add,300)})})();</script>
+ <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"></noscript>
+-<link rel="stylesheet" href="assets/style.css?v=aae32522">
++<link rel="stylesheet" href="assets/style.css?v=8f738250">
+ <link rel="stylesheet" href="assets/nearby.css?v=411a136f">
+ <link rel="stylesheet" href="assets/ads/massage/dragon-ad.css?v=c79f816c">
+ <!-- 모던 테마일 때만: 기존 CSS 뒤에 덮는 층(html.th-modern 으로 시작하는 규칙만) + 이모지 → 선 아이콘(modern.js) -->
+-<script>if(window.__tnTheme==="modern")document.write('<link rel="stylesheet" href="assets/modern.css?v=62ff3b52"><script src="assets/modern.js?v=6c2f923e"><\/script>'+(window.__tnG?'<link rel="stylesheet" href="assets/g.css?v=2795487f">':''));</script>
++<script>if(window.__tnTheme==="modern")document.write('<link rel="stylesheet" href="assets/modern.css?v=62ff3b52"><script src="assets/modern.js?v=6c2f923e"><\/script>'+(window.__tnG?'<link rel="stylesheet" href="assets/g.css?v=1d2d67e7">':''));</script>
+ 
+ <script>/* G: 하트(저장) 누를 때만 짧은 진동 10ms — 지원 기기만, 동작 줄이기 설정이면 안 함 */if(window.__tnG&&navigator.vibrate&&!(matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest(".card-heart"))try{navigator.vibrate(10)}catch(x){}},true);</script>
+ </head>
+@@ -164,7 +164,7 @@ var u=location.href.replace(/([?&])theme=(g|modern|classic)(&|(?=#)|$)/,function
+ <script src="assets/adsafe.js?v=f83c8d3e"></script>
+ <script src="assets/app.js?v=9fbd21a4"></script>
+ <!-- 헤더 빠른 정보 칩(맨 위에 보이는 값이라 보통 우선순위 — 17:45 낮췄더니 첫 기사 카드 때 칩이 비어 있어서 되돌림). 아래 로그인·내 주변은 fetchpriority="low" = 판 데이터·app.js·CSS 를 먼저 받게(실행 순서는 그대로) -->
+-<script src="assets/ticker.js?v=8a30ddcf"></script>
++<script src="assets/ticker.js?v=91ae7a8a"></script>
+ <!-- 선택 기능(Google 로그인·동기화·댓글): 못 불러와도 사이트는 그대로 동작 -->
+ <script src="assets/social.js?v=4c090fe8" fetchpriority="low"></script>
+ <!-- 📍 내 주변(헤더 셋째 줄 + #nearby/<id> 화면). defer = 드래곤 광고 스크립트 다음에 실행 -->
+diff --git a/offline.html b/offline.html
+index fe4f612..36498f5 100644
+--- a/offline.html
++++ b/offline.html
+@@ -20,6 +20,7 @@ button,a{display:flex;align-items:center;justify-content:center;min-height:48px;
+ button{border:0;background:#1B64DA;color:#fff}
+ a{border:0;color:#191F28;background:#F2F4F6}
+ </style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <main class="box">
+diff --git a/privacy.html b/privacy.html
+index 0c38889..6e7dad0 100644
+--- a/privacy.html
++++ b/privacy.html
+@@ -26,6 +26,7 @@ nav.more{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+ nav.more a{display:flex;align-items:center;justify-content:center;min-height:48px;background:#fff;border:0;border-radius:12px;color:#191F28;text-decoration:none;font-weight:600;text-align:center;padding:6px}
+ nav.more a[aria-current]{background:#1B64DA;color:#fff}
+ a{color:#1B64DA}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header><a href="./">← 태국 뉴스 한눈에</a></header>
+diff --git a/sw.js b/sw.js
+index 146111b..d3255e6 100644
+--- a/sw.js
++++ b/sw.js
+@@ -9,14 +9,14 @@
+  * - Google 로그인·Firestore(firebase / googleapis / gstatic SDK / firebaseapp.com / google.com 계정 창)는
+  *   절대 가로채거나 캐시하지 않는다(그냥 브라우저가 직접 요청). 글꼴(fonts.googleapis/gstatic)만 예외로 캐시.
+  */
+-var VERSION = "tnk-47c7b30cb9";
++var VERSION = "tnk-626340a2ad";
+ var SHELL = "shell-" + VERSION, DATA = "data-v1", EXT = "ext-v1";
+ var SHELL_FILES = [
+-  "./", "index.html", "manifest.json", "offline.html",
+-  "assets/style.css?v=aae32522", "assets/topics.js?v=3e951135", "assets/prefs.js?v=280ab29a", "assets/taste.js?v=788775b8", "assets/adsafe.js?v=f83c8d3e", "assets/app.js?v=9fbd21a4", "assets/social.js?v=4c090fe8", "assets/ticker.js?v=8a30ddcf",
++  "./", "index.html", "manifest.json", "offline.html", "assets/g-pages.css?v=1",
++  "assets/style.css?v=8f738250", "assets/topics.js?v=3e951135", "assets/prefs.js?v=280ab29a", "assets/taste.js?v=788775b8", "assets/adsafe.js?v=f83c8d3e", "assets/app.js?v=9fbd21a4", "assets/social.js?v=4c090fe8", "assets/ticker.js?v=91ae7a8a",
+   "assets/nearby.css?v=411a136f", "assets/late.css?v=3dadb69b", "assets/nearby.js?v=caa6bab9", "assets/pages.js?v=3209f4c9", "assets/places.js?v=e321e8d6", "assets/jobs.js?v=88ad85ca",
+   "assets/ads/massage/dragon-ad.css?v=c79f816c", "assets/ads/massage/dragon-ad.js?v=286d1e52", "assets/ads/massage/dragon.svg",
+-  "assets/modern.css?v=62ff3b52", "assets/modern.js?v=6c2f923e", "assets/g.css?v=2795487f",
++  "assets/modern.css?v=62ff3b52", "assets/modern.js?v=6c2f923e", "assets/g.css?v=1d2d67e7",
+   "assets/icons/icon-192.png", "assets/icons/icon-512.png", "assets/icons/maskable-512.png",
+   "assets/icons/apple-touch-icon.png", "assets/icons/favicon-32.png"
+ ];
+diff --git a/terms.html b/terms.html
+index 6f9c119..7e50377 100644
+--- a/terms.html
++++ b/terms.html
+@@ -26,6 +26,7 @@ nav.more{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+ nav.more a{display:flex;align-items:center;justify-content:center;min-height:48px;background:#fff;border:0;border-radius:12px;color:#191F28;text-decoration:none;font-weight:600;text-align:center;padding:6px}
+ nav.more a[aria-current]{background:#1B64DA;color:#fff}
+ a{color:#1B64DA}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header><a href="./">← 태국 뉴스 한눈에</a></header>
+diff --git a/tools/fetch_ticker.py b/tools/fetch_ticker.py
+index 77552e3..24ebf34 100644
+--- a/tools/fetch_ticker.py
++++ b/tools/fetch_ticker.py
+@@ -222,6 +222,14 @@ def main():
+             print(key, json.dumps(val, ensure_ascii=False))
+         elif old.get(key):
+             out[key] = old[key]; print("%s: 이전 값 유지(fetched_at %s)" % (key, old[key].get("fetched_at")), file=sys.stderr)
++    # 환율 직전 값(2026-10-15, 화면 ▲▼용): 기준 시각(rate_time)이 바뀌었으면 이전 파일 값을 prev_* 로, 같으면 이전 prev_* 를 이어 씀 — 실제로 받았던 값만
++    of, nf = old.get("fx") or {}, out.get("fx") or {}
++    if nf and of and nf is not of:
++        for k in ("THB_KRW", "USD_THB"):
++            if of.get("rate_time") and of.get("rate_time") != nf.get("rate_time") and isinstance(of.get(k), (int, float)):
++                nf["prev_" + k] = of[k]; nf["prev_rate_time"] = of["rate_time"]
++            elif "prev_" + k in of:
++                nf["prev_" + k] = of["prev_" + k]; nf["prev_rate_time"] = of.get("prev_rate_time")
+     if not out.get("fx") and not out.get("gold") or not ok:
+         print("fx·gold 모두 실패 — 파일 그대로", file=sys.stderr); sys.exit(1)
+     txt = json.dumps(out, ensure_ascii=False, indent=1)
+diff --git a/tools/legal_pages.py b/tools/legal_pages.py
+index 2092c9f..5be691a 100644
+--- a/tools/legal_pages.py
++++ b/tools/legal_pages.py
+@@ -82,6 +82,7 @@ def render(fn, title, secs):
+ <title>%s · %s</title>
+ <link rel="icon" href="assets/icons/icon-192.png">
+ <style>%s</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header><a href="./">← %s</a></header>
+diff --git a/tools/modern/g.src.css b/tools/modern/g.src.css
+index 82961bd..0511589 100644
+--- a/tools/modern/g.src.css
++++ b/tools/modern/g.src.css
+@@ -65,3 +65,75 @@ body{background:var(--m-bg);color:var(--m-t1);font-variant-numeric:tabular-nums}
+ /* 미세먼지 등급 표시: 어두운 칸 위에서 대비 4.5:1 이상(테두리형) */
+ .tk-lv{background:transparent!important;border-radius:3px;box-shadow:inset 0 0 0 1px currentColor}
+ .tk-lv--good{color:#7FD4A6}.tk-lv--mod{color:#F2D06B}.tk-lv--bad{color:#F5A36B}.tk-lv--vbad{color:#FF8A80}
++
++/* ===== 2단계(10-15 08:30, 시안 G 배치에 가깝게) ===== */
++/* 알약 → 작은 각(자동 수집한 둥근 칩·버튼) */
++.acct .gbtn,.also__m,.badge-op,.bchip,.briefing__badge,.cat-stats .bar,.chip,.dm-target,.gbtn,.impf__c,.int__c,.korea__list .kp,.mine__chip,.mini,.mytopics,.nb-cat,.ob__step,.opt__r,.persona--sm,.picked,.qr__c,.rep-btn,.src-list li,.tab,.tags span,.tk-chip,.tk-lv,.tk-pop__rg button,.tl__here,.tool,.tpick__c,.vote,.more-btn,.korea__more,.korea__top,.rep-btn{border-radius:4px}
++/* 헤더 데이터 칸: 3×2 표(환율·달러·USDT / 날씨·미세먼지·금), 칸 사이 얇은 선 */
++.masthead__row2{display:block;padding:0;overflow:hidden}
++.masthead__row2 .mbox{display:flex;flex-direction:row;gap:6px;padding:8px 10px;border-bottom:1px solid var(--g-gline)}
++.masthead__row2 .mbox .menu-btn,.masthead__row2 .mbox .heart-btn{height:30px;min-height:0;margin:0;padding:0 10px;flex-direction:row;gap:6px}
++.ticker,.ticker[data-fit]{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;overflow:visible;padding:0;margin:0;-webkit-mask:none;mask:none}
++.ticker::after,.ticker::before{display:none}
++.tk-chip.tk-tile{display:grid;grid-template-columns:subgrid;grid-template-rows:auto auto;min-width:0;width:auto;height:auto;margin:0;padding:0;border-radius:0;box-shadow:none;text-align:left;align-items:start;background:transparent}
++.tk-tile[data-tk="fx"],.tk-tile[data-tk="env"]{grid-column:span 2}
++.tk-tile .tk-in{display:contents}
++.tk-tile .tk-ln{display:block;min-width:0;padding:9px 10px 2px;border-left:1px solid var(--g-gline);border-top:1px solid var(--g-gline);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:0.6875rem;line-height:1.35;color:var(--g-gsub)}
++.ticker .tk-tile:nth-child(-n+2) .tk-ln{border-top:0}
++.tk-tile[data-tk="fx"] .tk-ln,.tk-tile[data-tk="env"] .tk-ln{border-left:0}
++.tk-tile[data-tk="fx"] .tk-ln+.tk-ln:not(.tk-ft),.tk-tile[data-tk="env"] .tk-ln+.tk-ln:not(.tk-ft){border-left:1px solid var(--g-gline)}
++.tk-tile .tk-ln b{display:block;font-size:1.0312rem;line-height:1.25;margin-top:2px}
++.tk-tile .tk-ln .tk-big{font-size:1.0312rem}
++.tk-tile .tk-ft{grid-column:1/-1;border-top:0;padding:0 10px 8px;font-size:0.625rem;font-family:var(--g-num);color:#7E8590}
++.tk-tile[data-tk="fx"] .tk-ft,.tk-tile[data-tk="env"] .tk-ft{border-left:0}
++.tk-tile[data-tk="usdt"] .tk-ln,.tk-tile[data-tk="price"] .tk-ln{border-left:1px solid var(--g-gline)}
++.tk-tile[data-tk="usdt"] .tk-ft,.tk-tile[data-tk="price"] .tk-ft{border-left:1px solid var(--g-gline)}
++.tk-tile[data-tk="usdt"],.tk-tile[data-tk="price"]{grid-template-columns:minmax(0,1fr);grid-template-rows:auto}
++.tk-tile[data-tk="usdt"] .tk-ln:first-child{padding-bottom:0}
++.tk-tile[data-tk="usdt"] .tk-ln:first-child+.tk-ln{padding-top:0;border-top:0}
++.tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft){padding-top:0;border-top:0}
++.tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft) b{display:inline;font-size:0.7188rem;margin-left:4px}
++.tk-tile .tk-eq{display:none}
++.tk-tile .tk-rain{margin-left:6px}
++.tk-tile .tk-lv{margin-left:6px;vertical-align:2px}
++.tk-tile .tk-ln b+.tk-lv{display:inline-block}
++.tk-chg{display:inline-block!important;margin-left:6px;font:600 0.6562rem/1 var(--g-num);vertical-align:2px}
++.tk-ln b .tk-chg{display:none!important}
++.tk-chg--up{color:#6FCF97}.tk-chg--dn{color:#FF8A7A}
++.tk-ln:has(.tk-chg) b{display:inline-block}
++/* 브리핑: 01·02… 굵은 숫자 목록, 주제는 제목 아래 작은 글자 */
++.brief-list{counter-reset:gb}
++.brief-list li+li{border-top:1px solid var(--line)}
++.brief-line{counter-increment:gb;display:flex;align-items:flex-start;gap:14px;padding:14px 2px}
++.brief-line::before{content:counter(gb,decimal-leading-zero);font:600 0.9375rem/1.45 var(--g-num);color:var(--m-t5);flex:0 0 auto;min-width:20px}
++.brief-text{display:flex;flex-direction:column;font-weight:600;color:var(--m-t1);line-height:1.5}
++.brief-text .bchip{order:2;background:none;padding:0;margin:6px 0 0;font-size:0.7188rem;font-weight:500;color:var(--m-t3);box-shadow:none;align-self:flex-start}
++.briefing__badge{font-size:0.6875rem;letter-spacing:.16em}
++/* 내 주변: 칸 나눈 표(선으로 이어 붙임) */
++.nearby .nb-cats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:1px solid var(--g-line);border-radius:4px;background:#fff;overflow:hidden}
++.nearby .nb-cat{border:0;border-left:1px solid var(--g-line);border-radius:0;background:#fff;min-width:0;padding:8px 2px;justify-content:center}
++.nearby .nb-cat:first-child{border-left:0}
++.nearby .nb-lab__t{font-size:0.6875rem;letter-spacing:.06em;color:var(--m-ac);font-weight:700}
++.brand__text strong{white-space:nowrap}
++.masthead__row2 .menu-btn__t{display:inline;font-size:0.75rem}
++.tk-tile .tk-l{display:block}
++.tk-tile .tk-ln:has(.tk-chg) b{display:inline-block}
++.tk-tile .tk-ln:has(.tk-chg) .tk-chg{display:inline-block!important}
++.tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft){white-space:normal;font-size:0.6562rem}
++.tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft) .tk-l{display:inline}
++.tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft) .tk-chg{display:none!important}
++.tk-tile .tk-rg{margin-right:4px}
++.tk-tile .tk-rain{display:inline-block}
++.tk-tile[data-tk="price"] .tk-ln:first-child,.tk-tile[data-tk="usdt"] .tk-ln{white-space:normal;overflow:visible}
++.masthead__row2 .mbox .menu-btn{flex-direction:row!important;width:auto!important;display:inline-flex;align-items:center}
++.masthead__row2 .mbox .menu-btn__ic{width:16px;height:13px}
++.masthead__row2 .menu-btn__t{white-space:nowrap;writing-mode:horizontal-tb}
++.masthead__row2 .mbox .menu-btn{min-width:64px}
++@media (min-width:720px){
++  .ticker,.ticker[data-fit]{grid-template-columns:repeat(6,minmax(0,1fr))}
++  .ticker .tk-tile .tk-ln{border-top:0}
++  .ticker .tk-tile[data-tk="env"] .tk-ln:first-child{border-left:1px solid var(--g-gline)}
++  .ticker .tk-tile[data-tk="env"] .tk-ft{border-left:1px solid var(--g-gline)}
++}
++.brief-text{display:table;width:100%}
++.brief-text .bchip{display:table-footer-group}
+diff --git a/tools/share_kit.py b/tools/share_kit.py
+index 10d4020..906dbb1 100644
+--- a/tools/share_kit.py
++++ b/tools/share_kit.py
+@@ -429,6 +429,7 @@ def edition_page(data, meta, chosen, tp, ed_url, img):
+ header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
+ a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
+ li{margin:6px 0;color:#333D4B}</style>
++<link rel="stylesheet" href="/assets/g-pages.css?v=1">
+ </head>
+ <body>
+ <header>태국 뉴스 한눈에</header>

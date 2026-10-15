@@ -82,6 +82,7 @@ def render(fn, title, secs):
 <title>%s · %s</title>
 <link rel="icon" href="assets/icons/icon-192.png">
 <style>%s</style>
+<link rel="stylesheet" href="/assets/g-pages.css?v=1">
 </head>
 <body>
 <header><a href="./">← %s</a></header>

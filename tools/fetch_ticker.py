@@ -222,6 +222,14 @@ def main():
             print(key, json.dumps(val, ensure_ascii=False))
         elif old.get(key):
             out[key] = old[key]; print("%s: 이전 값 유지(fetched_at %s)" % (key, old[key].get("fetched_at")), file=sys.stderr)
+    # 환율 직전 값(2026-10-15, 화면 ▲▼용): 기준 시각(rate_time)이 바뀌었으면 이전 파일 값을 prev_* 로, 같으면 이전 prev_* 를 이어 씀 — 실제로 받았던 값만
+    of, nf = old.get("fx") or {}, out.get("fx") or {}
+    if nf and of and nf is not of:
+        for k in ("THB_KRW", "USD_THB"):
+            if of.get("rate_time") and of.get("rate_time") != nf.get("rate_time") and isinstance(of.get(k), (int, float)):
+                nf["prev_" + k] = of[k]; nf["prev_rate_time"] = of["rate_time"]
+            elif "prev_" + k in of:
+                nf["prev_" + k] = of["prev_" + k]; nf["prev_rate_time"] = of.get("prev_rate_time")
     if not out.get("fx") and not out.get("gold") or not ok:
         print("fx·gold 모두 실패 — 파일 그대로", file=sys.stderr); sys.exit(1)
     txt = json.dumps(out, ensure_ascii=False, indent=1)

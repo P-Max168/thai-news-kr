@@ -65,3 +65,75 @@ body{background:var(--m-bg);color:var(--m-t1);font-variant-numeric:tabular-nums}
 /* 미세먼지 등급 표시: 어두운 칸 위에서 대비 4.5:1 이상(테두리형) */
 .tk-lv{background:transparent!important;border-radius:3px;box-shadow:inset 0 0 0 1px currentColor}
 .tk-lv--good{color:#7FD4A6}.tk-lv--mod{color:#F2D06B}.tk-lv--bad{color:#F5A36B}.tk-lv--vbad{color:#FF8A80}
+
+/* ===== 2단계(10-15 08:30, 시안 G 배치에 가깝게) ===== */
+/* 알약 → 작은 각(자동 수집한 둥근 칩·버튼) */
+.acct .gbtn,.also__m,.badge-op,.bchip,.briefing__badge,.cat-stats .bar,.chip,.dm-target,.gbtn,.impf__c,.int__c,.korea__list .kp,.mine__chip,.mini,.mytopics,.nb-cat,.ob__step,.opt__r,.persona--sm,.picked,.qr__c,.rep-btn,.src-list li,.tab,.tags span,.tk-chip,.tk-lv,.tk-pop__rg button,.tl__here,.tool,.tpick__c,.vote,.more-btn,.korea__more,.korea__top,.rep-btn{border-radius:4px}
+/* 헤더 데이터 칸: 3×2 표(환율·달러·USDT / 날씨·미세먼지·금), 칸 사이 얇은 선 */
+.masthead__row2{display:block;padding:0;overflow:hidden}
+.masthead__row2 .mbox{display:flex;flex-direction:row;gap:6px;padding:8px 10px;border-bottom:1px solid var(--g-gline)}
+.masthead__row2 .mbox .menu-btn,.masthead__row2 .mbox .heart-btn{height:30px;min-height:0;margin:0;padding:0 10px;flex-direction:row;gap:6px}
+.ticker,.ticker[data-fit]{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;overflow:visible;padding:0;margin:0;-webkit-mask:none;mask:none}
+.ticker::after,.ticker::before{display:none}
+.tk-chip.tk-tile{display:grid;grid-template-columns:subgrid;grid-template-rows:auto auto;min-width:0;width:auto;height:auto;margin:0;padding:0;border-radius:0;box-shadow:none;text-align:left;align-items:start;background:transparent}
+.tk-tile[data-tk="fx"],.tk-tile[data-tk="env"]{grid-column:span 2}
+.tk-tile .tk-in{display:contents}
+.tk-tile .tk-ln{display:block;min-width:0;padding:9px 10px 2px;border-left:1px solid var(--g-gline);border-top:1px solid var(--g-gline);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:0.6875rem;line-height:1.35;color:var(--g-gsub)}
+.ticker .tk-tile:nth-child(-n+2) .tk-ln{border-top:0}
+.tk-tile[data-tk="fx"] .tk-ln,.tk-tile[data-tk="env"] .tk-ln{border-left:0}
+.tk-tile[data-tk="fx"] .tk-ln+.tk-ln:not(.tk-ft),.tk-tile[data-tk="env"] .tk-ln+.tk-ln:not(.tk-ft){border-left:1px solid var(--g-gline)}
+.tk-tile .tk-ln b{display:block;font-size:1.0312rem;line-height:1.25;margin-top:2px}
+.tk-tile .tk-ln .tk-big{font-size:1.0312rem}
+.tk-tile .tk-ft{grid-column:1/-1;border-top:0;padding:0 10px 8px;font-size:0.625rem;font-family:var(--g-num);color:#7E8590}
+.tk-tile[data-tk="fx"] .tk-ft,.tk-tile[data-tk="env"] .tk-ft{border-left:0}
+.tk-tile[data-tk="usdt"] .tk-ln,.tk-tile[data-tk="price"] .tk-ln{border-left:1px solid var(--g-gline)}
+.tk-tile[data-tk="usdt"] .tk-ft,.tk-tile[data-tk="price"] .tk-ft{border-left:1px solid var(--g-gline)}
+.tk-tile[data-tk="usdt"],.tk-tile[data-tk="price"]{grid-template-columns:minmax(0,1fr);grid-template-rows:auto}
+.tk-tile[data-tk="usdt"] .tk-ln:first-child{padding-bottom:0}
+.tk-tile[data-tk="usdt"] .tk-ln:first-child+.tk-ln{padding-top:0;border-top:0}
+.tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft){padding-top:0;border-top:0}
+.tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft) b{display:inline;font-size:0.7188rem;margin-left:4px}
+.tk-tile .tk-eq{display:none}
+.tk-tile .tk-rain{margin-left:6px}
+.tk-tile .tk-lv{margin-left:6px;vertical-align:2px}
+.tk-tile .tk-ln b+.tk-lv{display:inline-block}
+.tk-chg{display:inline-block!important;margin-left:6px;font:600 0.6562rem/1 var(--g-num);vertical-align:2px}
+.tk-ln b .tk-chg{display:none!important}
+.tk-chg--up{color:#6FCF97}.tk-chg--dn{color:#FF8A7A}
+.tk-ln:has(.tk-chg) b{display:inline-block}
+/* 브리핑: 01·02… 굵은 숫자 목록, 주제는 제목 아래 작은 글자 */
+.brief-list{counter-reset:gb}
+.brief-list li+li{border-top:1px solid var(--line)}
+.brief-line{counter-increment:gb;display:flex;align-items:flex-start;gap:14px;padding:14px 2px}
+.brief-line::before{content:counter(gb,decimal-leading-zero);font:600 0.9375rem/1.45 var(--g-num);color:var(--m-t5);flex:0 0 auto;min-width:20px}
+.brief-text{display:flex;flex-direction:column;font-weight:600;color:var(--m-t1);line-height:1.5}
+.brief-text .bchip{order:2;background:none;padding:0;margin:6px 0 0;font-size:0.7188rem;font-weight:500;color:var(--m-t3);box-shadow:none;align-self:flex-start}
+.briefing__badge{font-size:0.6875rem;letter-spacing:.16em}
+/* 내 주변: 칸 나눈 표(선으로 이어 붙임) */
+.nearby .nb-cats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:1px solid var(--g-line);border-radius:4px;background:#fff;overflow:hidden}
+.nearby .nb-cat{border:0;border-left:1px solid var(--g-line);border-radius:0;background:#fff;min-width:0;padding:8px 2px;justify-content:center}
+.nearby .nb-cat:first-child{border-left:0}
+.nearby .nb-lab__t{font-size:0.6875rem;letter-spacing:.06em;color:var(--m-ac);font-weight:700}
+.brand__text strong{white-space:nowrap}
+.masthead__row2 .menu-btn__t{display:inline;font-size:0.75rem}
+.tk-tile .tk-l{display:block}
+.tk-tile .tk-ln:has(.tk-chg) b{display:inline-block}
+.tk-tile .tk-ln:has(.tk-chg) .tk-chg{display:inline-block!important}
+.tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft){white-space:normal;font-size:0.6562rem}
+.tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft) .tk-l{display:inline}
+.tk-tile[data-tk="price"] .tk-ln+.tk-ln:not(.tk-ft) .tk-chg{display:none!important}
+.tk-tile .tk-rg{margin-right:4px}
+.tk-tile .tk-rain{display:inline-block}
+.tk-tile[data-tk="price"] .tk-ln:first-child,.tk-tile[data-tk="usdt"] .tk-ln{white-space:normal;overflow:visible}
+.masthead__row2 .mbox .menu-btn{flex-direction:row!important;width:auto!important;display:inline-flex;align-items:center}
+.masthead__row2 .mbox .menu-btn__ic{width:16px;height:13px}
+.masthead__row2 .menu-btn__t{white-space:nowrap;writing-mode:horizontal-tb}
+.masthead__row2 .mbox .menu-btn{min-width:64px}
+@media (min-width:720px){
+  .ticker,.ticker[data-fit]{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .ticker .tk-tile .tk-ln{border-top:0}
+  .ticker .tk-tile[data-tk="env"] .tk-ln:first-child{border-left:1px solid var(--g-gline)}
+  .ticker .tk-tile[data-tk="env"] .tk-ft{border-left:1px solid var(--g-gline)}
+}
+.brief-text{display:table;width:100%}
+.brief-text .bchip{display:table-footer-group}
