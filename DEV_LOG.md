@@ -248,3 +248,8 @@
   - **확인한 것**: 로컬 regress 통과 57·실패 0 · 360/390/1280 홈·판 콘솔 오류 0 · ?theme=modern 화면 예전 그대로(▲▼ 숨김)
   - **미확인**: 환율 ▲▼ 는 다음 korea.yml 실행 뒤부터(아직 prev 없음) · 실제 휴대폰 · 시안의 '내 주변 지역 4칸(기사 수)'은 없는 기능이라 업종 5칸 표로 대신
 - 10-15 11:48 · 💬 [낮음·판 콘텐츠] **10-14 저녁판 17건·10-15 아침판 17건 '💬 오늘의 질문'·운영자 첫 댓글 게시**(민구님 채팅 승인 '전부올려', 백업 태그 `backup-20261015-1146-discussion-1014pm-1015am`) — 10-14-pm ea2 운영자 댓글 원화만 정정('126억5,600만바트(약 22억3,720만 원)' → '(약 5,056억720만 원)', 판 환율 39.95, 헤드라인과 일치). 나머지 글 그대로 approved:true 로 `tools/discussion.py apply` 2번(exit 0) + pending.py rebuild → 승인함 13건. 다른 바트·원화 표기 34건 전수 대조: 모두 환율 39.95와 일치(10-15-am 은 바트 금액 없음). workflows·tools·화면 코드 안 건드림
+
+<!-- discussion-1015pm -->
+- 10-16 04:42 · 💬 [낮음·판 콘텐츠] **10-15 저녁판 '💬 오늘의 질문'·운영자 첫 댓글 22건 게시**(민구님 채팅 승인 '전부 올려', 백업 태그 `backup-20261016-0442-discussion-1015pm`) — 정본 초안 글 그대로 approved:true 목록으로 `tools/discussion.py apply`(exit 0, krw_check 통과, 원화 환산 3건 39.83 기준 맞음) → data/2026-10-15-pm.json|js 22/22 + tools/discussions/2026-10-15-pm.json, pending.py rebuild(13건). 판 generated·기사 글 그대로, workflows·tools·화면 코드 안 건드림
+  - **확인한 것**: apply exit 0 · 초안 22건 질문 채움 22/22 · 정본 초안 approved:true·applied_at 반영
+  - **미확인**: 실제 폰 화면에서 질문 상자 표시
