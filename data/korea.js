@@ -1,48 +1,48 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-15T22:13:37+07:00",
+ "updated_at": "2026-10-16T00:13:42+07:00",
  "items": [
   {
-   "title": "[단독] 미국, 전작권 전환 협의 과정서 ‘천무·정찰 무인항공기’ 강화 요구…정부 ‘골대 옮기기’ 반발",
-   "source": "경향신문",
-   "time": "2026-10-15T16:10:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5VSUhOMFlnLXlwSVdsSmhkNHplanVEQVVZUUZqX1ZNUURNU0w3THNfWGk1bkNab0FfM19NSGhSMVZXbWd2OWNfRmpxNlJ2b3pBVFRfV2Zwak01QdIBX0FVX3lxTFBEMUJiTVpfQ3A0Z216aWVsU1N1dkZZUHJSNmRUVnhhbGx0bUwwV1JmZkF1QVl1eGc3MG8tZWJyRngwRkpmQXotVEFXSVNZMmx0NlN4eUtVVUtTUU1IN3Bv?oc=5"
+   "title": "전작권 전환 “새 기준” 밝힌 미국…국방부 “골대 옮기면 영원히 불가”",
+   "source": "한겨레",
+   "time": "2026-10-15T21:12:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1TMXdBbTI3bkhxQjFmaE45Y1BDWmx3N2phSmZyTzljckU5d0tuT3BPSHZUWEhoS0NuNnBQYXk0Z05faFNNZkJWbWFhWUtEdXdXRzVoS3gtVzdfNW0weGd1YTVmNFoyQTlT?oc=5"
   },
   {
-   "title": "이 대통령, 김지용 중수청장 임명…범여권 ‘부적격 논란’ 여전",
-   "source": "한겨레",
-   "time": "2026-10-15T20:15:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1sdGVmVWRJNGZjNzJFbkNOa0N3aGFkbElWYVdKak1qaXI5cldab3JUeDZjUnFWc19aWHNoUlRCSDFHLVdoYnE1MkVCdlJvRkdoSldSS1VvNzQ5N0NqVl85ZUVIN3RpZlZlbEow?oc=5"
+   "title": "김지용 초대 중수청장…지명 37일 만에 ‘임명’",
+   "source": "경향신문",
+   "time": "2026-10-15T20:06:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9PRzFkXy16UndVekRtNktfMzZZQmhYaEtPSkpfeG8wNmJFdjl1R1BlbjFVR1NFUmN6YjlWV3pFUXhMTTlDc0FsckpZNHBnNjVudUh4ek0yYXRNQdIBX0FVX3lxTFBXOU1nNnkzS0ZULTV4bEhLY1RYdC1CSm5kNjZpay1yQmZoaTh4QzRmVWM0WVAtZUZuMElQSkE3ZXdjcTN3dS1tLXRidU1WVUNlamJaVGpBT1FqdXNGUW5N?oc=5"
   },
   {
    "title": "“강훈식과 갈등 빚은 김현지, 말 잘 듣는 비서실장 원했을 것”[법정모독 업앤다운]",
    "source": "동아일보",
-   "time": "2026-10-15T17:35:00+07:00",
+   "time": "2026-10-15T17:35:19+07:00",
    "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1RRDkyTUZGTmdVaFJmZTFuX2lwMmpnMDcyYVZuNVpSWnd6ZXJHZ0NkY3prTXh4NVhMSENXS0cydGVyWkhTNDlCR1E5LXVzZDZhOG9DaUNONGIzMVc0dVVielZIc0tPdk9Tc19iSG1FOV8tYUwyT0V30gFmQVVfeXFMUEFMWVFtR2tWWXA0TFBVM3FqTEwwOTdsVkFWS1RYRGF5b01UU3RkR2xfLThja2JudGFQOGg4U01oT0FvNlA2MTVDZElxTTd0UHV6MHJxVW90MllNTE0xXzRmVlFBTGVn?oc=5"
   },
   {
-   "title": "‘접근·연락 금지’ 스토킹 남편, 아내 살해…경찰은 연락두절에도 안 찾아가",
-   "source": "한겨레",
-   "time": "2026-10-15T14:50:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBHVUVPXy1zbEhpZHA5dUJSbV9sdE9XQVFnOGRnUzU1Y3FwRUtvcjI5cThLTDVUM2VUNGxDNVcxZ0V4VXR4LVNnbXBKcTMzcnhCNFd0bFphTVY0THlCR3NQcg?oc=5"
-  },
-  {
-   "title": "“위례 사건 등 수사, 위법성 못 찾아”…진상조사단 미래위에 보고",
+   "title": "이 대통령 “관계성·무차별 범죄와의 전쟁”",
    "source": "경향신문",
-   "time": "2026-10-15T19:52:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1sWGFjR0pnbUZLNVFVcFRrLXJid2pYLW1rNFJpWkJYMm9scnFSZUV0S2J4dklUTXpBSFhueVI5V0lqMi0zbThOS3V1ZTFsUGhXZklXc2tMODh6d9IBX0FVX3lxTE81YVhmUFA5RGt4bFNGcVRFWjI0OUIxV3JsdUdBVEJYVzhMcGlJYXJiSkdzMmpuWEZnMXQtekpQUG5DcXRSTjhLRzlIaUpFLXpZQ00wSEhwWVAwWF9fcDM4?oc=5"
+   "time": "2026-10-15T19:57:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE05YUN1NlNKWmUxR3QzWjVkQW1SWFNKTWhHZWFGN3VPZ2x4XzhhR3VpcmtMZWJuVTFKSWJBOWRmV2hYNkJNSDZTX2hGZWh0dUR4cFBST3ZHeWRlZ9IBX0FVX3lxTFBhc0IybE9IWi1UUTQ0bGxFSjgwUUdvd2pqMTZmNFdacHhXUVQ0RFhONHVpTmJaOWlZR2wyVWgwZVA5NmdSQlU0MHZjMmhWR2dYbDRVandRRy1pWXdsRVlJ?oc=5"
   },
   {
-   "title": "이 대통령 지지율 44% 보합‥민주-국힘 지지율 격차 줄어 [NBS]",
+   "title": "인천시, 흉기난동 피해 주민 지원…‘트라우마’ 심리상담",
+   "source": "KBS 뉴스",
+   "time": "2026-10-15T16:13:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5IejF1RFBfOWtmNGVsVGkwUnBYU0M4WllHaTM4akpxcldOcS1CSml0ZURwbVF3SU4xMHd4TlF6R1lEWXNFLVVnTnFNUC1yUnJDaTZQUW0tMnhMLWM?oc=5"
+  },
+  {
+   "title": "[단독] 한강버스 리베이트 의혹 간부, 서울시 감사 중에도 SH 임원 '영전'",
    "source": "MBC 뉴스",
-   "time": "2026-10-15T09:38:28+07:00",
-   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1IN0k3azRBQ2RJN1l6cTRndUNaRERUWW0zaHFkOFdLZl9MT2owQ1RTQkg1T3pmNzZzbVFqcWpTVkljSkpmTTFkaWNSRDhuQWlnZVZfbWhRNlZSZ3B6S3N0ZUxQblluMmZfeHQtMWNZR3EtejEzZHpCNdIBeEFVX3lxTE9pd3J6U2YxTF82RFNNMzJ4NVlTU1Z3OWpsdGNFQl9qY09TTW93RDRJdnRSSzU2NFJCSTZZTzNHZ3JkdlZYMUJMSzBSQkJKdUdPd3VIdjFxT0NjWVFaTkx0bTFVRHBMcVZPTkdJdldHT0hkNVRkVVRoYQ?oc=5"
+   "time": "2026-10-15T15:15:55+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5GSTNJZV9UMTByd0N5WERpQkdUT0ltZ3k2a3lITF80Si15c3VIUEVHR3VRN3BvNk5ETVBBMGJlakFwNktTeEhuZmptVFNMYm1ZYld1cEwyRTY3OUpqQlRDSFpMeFZVTDlwRERhd2hydnJ0RnNQVENN0gF3QVVfeXFMT01EWkRPSy1wZ2VsX0lIQVYxMk5MN2RDZUlkVjJtRDROWkdiWUhISDVJbUxwVVBWblJLQUwycFQwSW00MDlNRFg4bXQwb1dnWDdJSXJyZG9TV3hwaWpvZHFOdE10ZHZOLW9Ed0tsSWNjbHF6MTlKMEE?oc=5"
   },
   {
-   "title": "서울시, 한강버스 수주 ‘비리 의혹’ 알고도 1년 넘게 수사의뢰 안 해",
-   "source": "한겨레",
-   "time": "2026-10-15T17:58:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9LWFE5V3BNdk5OLVFLVWxDSXR3RDdrYklMaXdCNUdKNjZuTllrRnRUeVBVTUxta0Q4WDNhTXJQbldySUhONmwtaFpsNzNOUjBfdWx5bWZic1d5dlZHZWlqSG4zMDI0NW10Mmc?oc=5"
+   "title": "‘1억 공천헌금’ 강선우, 1심 실형에 항소...선고 하루 만",
+   "source": "조선일보",
+   "time": "2026-10-15T17:12:08+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPcTRyMk5ydlJVdmMyUmZZT2xSRlZnbFZGNVlpX25CejQ1Yk1HZ2laSWRNNDJJNklPNl9EUkMta0VnVXM1NF9fdzhWYmpMNHRBcFF4RzRSOElkdnVvWlFLdVU2REd1ZDFlbUhScnV0dVlTMEZzZkNDV09vTVRySldRR1VRZUJfWDg?oc=5"
   },
   {
    "title": "\"소방이 가장 골치 아픈 재정 빨대\" 추미애 발언 '후폭풍' [영상]",
@@ -51,16 +51,16 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1LNlJQcTJsdWd5cTJEb2MxU1FkY2FHUWVPS0pvNE9TcWpwWDRaTG5OTHNEMlJFdEN1dTh4a3RycFQtbFYtbXltSm1CODRMWjNsUnUwTm4tQ1pIZw?oc=5"
   },
   {
+   "title": "‘접근·연락 금지’ 스토킹 남편, 아내 살해…경찰은 연락두절에도 안 찾아가",
+   "source": "한겨레",
+   "time": "2026-10-15T14:50:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBHVUVPXy1zbEhpZHA5dUJSbV9sdE9XQVFnOGRnUzU1Y3FwRUtvcjI5cThLTDVUM2VUNGxDNVcxZ0V4VXR4LVNnbXBKcTMzcnhCNFd0bFphTVY0THlCR3NQcg?oc=5"
+  },
+  {
    "title": "\"선수들 안전, 심각하게 우려\"…아시안컵 앞두고 '초비상'",
    "source": "한국경제",
    "time": "2026-10-15T06:55:06+07:00",
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5sX0NsNDdZdFZhRGwwcFhJM0I1aEJLWE1nMDJEQjQyM1Nxa0d0UUF4eW5QOTdNcGRhT0NCQ2E5TU96UzFZRUlhYlowQ3lzaGwyQVFCLVRZdk5FUQ?oc=5"
-  },
-  {
-   "title": "경찰, 스마트워치 지급 대상자 피해 상황 집계 안 해",
-   "source": "MBC 뉴스",
-   "time": "2026-10-15T18:35:57+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9Hd28wUzdhckplM2F5b3pkUGtQVXlHd2NPaXBIZWFNME9DTjY0OE5HLWp6eVZlVHBJTUJfRjF1QXVfQkNNTHNkblpJM0Mza01YdVVpVWpyR2pURjNVN1g3Y25aekdPVXZ0ckJyZHMyWEpLNDd0cXNR0gF3QVVfeXFMTllMTnlOUmxXd1pobzh4VGRVUTJLbGJwT3cwejdWWlRMdEE1Z3pxY0k5Nllza0xQRmFlRTFMTGVNOWNXdGdoaC1wdUVnN1pnVTVlbzFrVkFxZUQzbDVYYTRJRnlZSVRiZTEyUk1YcWFRR2FicVBvdHc?oc=5"
   }
  ]
 };
