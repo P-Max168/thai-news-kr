@@ -3,10 +3,10 @@
 
 | 항목 | 내용 |
 |---|---|
-| 마지막으로 확인한 사이트 최신 판 | **2026-10-14-pm** (라이브 data/index.json `latest`, 판 generated 2026-10-14T18:24:28+07:00, 17건 · 커밋 7bc97e2·9ce1775(공유 키트) · 확인: 2026-10-14 18:27 BKK, Grok — verify_live OK, e/2026-10-14-pm/ 200) |
-| 정기 실행(07:08/18:08) | **10-14 18:08 정기 저녁판 도착**: edition 커밋 7bc97e2(18:25 push)·공유 키트 9ce1775(18:26 push) · verify_live OK. 직전 10-14 07:08 아침판도 정기(777462d·0b90907) |
+| 마지막으로 확인한 사이트 최신 판 | **2026-10-15-am** (라이브 data/index.json `latest`, 판 generated 2026-10-15T07:25:33+07:00, 17건 · 커밋 004862c·232acf8(공유 키트) · 확인: 2026-10-15 07:30 BKK, Grok — verify_live OK, e/2026-10-15-am/ 200) |
+| 정기 실행(07:08/18:08) | **10-15 07:08 정기 아침판 도착**: edition 커밋 004862c(07:27 push)·공유 키트 232acf8(07:28 push) · verify_live OK. 직전 10-14 18:08 저녁판도 정기(7bc97e2·9ce1775) |
 | 판 지연 | 10-05-pm ~ 10-10-pm **11판 빠짐**(6일 공백, 목록: Grok 서버 /workspace/logs/edition-gaps.txt). **재생성 안 함**(운영자·Max 결정 10-11: 옛 뉴스를 지금 판처럼 올리지 않음) |
-| 진행 중 작업 | 💬 오늘의 질문 2026-10-14-pm 17건 승인 대기(approved false). 아침판·이전 저녁판 게시는 완료 |
+| 진행 중 작업 | 💬 오늘의 질문 2026-10-15-am 17건 · 2026-10-14-pm 17건 승인 대기(approved false). 10-14-pm 초안 ea2 운영자 댓글 원화 오기(약 22억3,720만 원 → 판 환율로는 약 5,056억720만 원) — 승인 전 수정 필요 |
 | 사이트 주소(10-14) | **https://tnews.pmaxone.com** (GitHub Pages 맞춤 도메인, DNS 는 Cloudflare CNAME tnews→p-max168.github.io DNS only). 옛 주소 p-max168.github.io/thai-news-kr/ 는 301 로 넘어감. Grok 도메인 작업 끝나면 Claude 가 이어받음 — 인계 문서 Grok 서버 /workspace/handoff/TNEWS_DOMAIN_HANDOFF.md |
 
 ## Claude 질문 3개에 대한 Grok 답 (2026-10-11 09:34 BKK)
@@ -37,6 +37,7 @@
 ## 최근 인수인계 (상대 AI가 작업 시작 전에 꼭 읽기 — 새것이 위, 최대 10줄 유지)
 | 시각 | 누가 | 무엇을 바꿨나 | 상대가 알아야 할 것 |
 |---|---|---|---|
+| 2026-10-15 07:30 | Grok | 2026-10-15-am 아침판 정기 빌드(17건, 문서·판 데이터만) | 💬 초안 17건 승인 대기(approved false). 환율 39.83 = open.er-api 직접 조회(공시 10-15 00:02 UTC; ticker.json rate_time 10-14 07:02 이라 미사용). screenshot 👎 FAIL 1=알려진 비자 고정 거짓 실패(vi1 단독 고정 카드). Google News 날짜만 새것인 옛 기사 4건 제외(The Standard 등). 출국세·전자 폐기물 새 전개 없음. korea_top 은 data/korea.json(06:04) 6건 GN decode. ent 0건. |
 | 2026-10-14 18:28 | Grok | 2026-10-14-pm 저녁판 정기 빌드(17건, 문서·판 데이터만) | 💬 초안 17건 승인 대기(approved false). 환율 39.95 = ticker.json fx(rate_time 10-14 07:02 BKK, 조회 16:12). 출국세는 핫야이 육로 면제 요청·한국 매체 후속(issue id 없어 issue=None). screenshot 👎 FAIL 1=알려진 비자 고정 거짓 실패(vi2). korea_top 은 data/korea.json(16:12) 6건 GN decode. ent 0건(실제 후보 약함). |
 | 2026-10-14 07:29 | Grok | 2026-10-14-am 아침판 정기 빌드(14건, 문서·판 데이터만) | 💬 초안 14건 승인 대기(approved false). 환율 39.95 = open.er-api 직접 조회(공시 10-14 00:02 UTC; ticker.json rate_time 10-13 06:57 이라 미사용). 라용 전자 폐기물 후속(ea1)·출국세 재탕은 제외. issues.json 이슈 id 없어 ea1은 issue=None+update. screenshot ALL OK. korea_top 은 data/korea.json(06:04) 6건 GN decode |
 | 2026-10-13 18:31 | Grok | 2026-10-13-pm 저녁판 정기 빌드(20건, 문서·판 데이터만) | 💬 초안 20건 승인 대기(approved false). 환율 39.68 = ticker.json fx(공시 06:57, 17:58 조회, 신선). 아침판 후속 2건(출국세 vi3·라용 전자 폐기물 ea4)은 issues.json 에 이슈 id 가 없어 `issue=None`+`update` 로만 연결 → REQUESTS 에 이슈 id 추가 요청. screenshot.py 이번엔 ALL OK(👎 거짓 실패 안 남). fetch_korea 후보 수집은 됐지만 korea_top 은 data/korea.json(17:58) 6건 decode |
