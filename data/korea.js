@@ -1,36 +1,18 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-15T10:07:59+07:00",
+ "updated_at": "2026-10-15T12:07:54+07:00",
  "items": [
   {
-   "title": "특검, 중앙선관위 등 동시다발 압수수색…“투표자 허위 입력 5곳→ 30곳”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-15T09:35:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBodzJGMk12aGttdWx4RHFiWHlHbk9kRXlNMEs1bV9zREFDa1hmTW5jQS1pX2UySXluME5aYmF6bVQ1ZGRFTGhpSmNxUjFyM2NYZ3ZjT2V2RzBtaUU?oc=5"
-  },
-  {
-   "title": "성기홍 \"임광현 '보은인사' 근거 없어‥김지용 결격 사유 안 보여\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-15T08:00:29+07:00",
-   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1rall2QmVfTzloc3AtQ05YNVVZQTFLM1J0Z2xQaXlMVDRueWJFN1Z1b1l2MlNRblpBZVBFeEVLN3dnRWQ2WF9CM01XZEMtdXhHbkdaZlRRRGdabWJyMjFHUFBnNmtWa0JXR0J5QVc2dHJLUm5WTEQzetIBeEFVX3lxTFBoU001NXBib2loVnRKV2hqVUgzSFdQVFdXYmg1VmJtM3VUc2xWaC1VREpjSGlsOWVoc1hEc1Q4V0U1V3lzSjNWTEN4SFFSUHI0Y01uNkw5Tko3SXlLUjBGd3U0eGJwbUdkQVVMdDJjV0I4aFk5SUtIaw?oc=5"
+   "title": "野, 임광현 비서실장 저격... \"尹정부 국세청장 노렸던 분\"",
+   "source": "조선일보",
+   "time": "2026-10-15T08:31:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNMGU4eTA5V3RSTUVnaHVZVnFjbmxRcXNwb3UxcVVOaDFMdTQ5QWY1aC1sb3pfQ2Ftb191cmZ6N25CTHpGbGZrTWhHVmlQYW5QbTJRVzFoSzRPT1k1UURlZmFPWGxsOWZwRDl6bGgxUUN4U3J0WFN3Sml2Vko0NnZMZDhGZWxCQQ?oc=5"
   },
   {
    "title": "성기홍 “김지용 청문회, 흠결 지적하기 힘들 정도로 잘 설명됐다”",
    "source": "한겨레",
-   "time": "2026-10-15T07:28:00+07:00",
+   "time": "2026-10-15T09:53:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5iT0FsZDBqdHc4WXZQYnQ0VjRTTnVIWFlFSW5JWDJxSE9wSHJVZWxrUnNOYXVkNEdYT0lpQWgyMUF1QWszRzFib0xPaEpzclduUVBtejc3ZkF1MHNIVUs0bVVFUVNpV2JNSjkw?oc=5"
-  },
-  {
-   "title": "국민 46.8% \"대통령 SNS 그만\"…李 지지율 34.9% [KSOI]",
-   "source": "한국경제",
-   "time": "2026-10-14T14:06:44+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE56ZFBoVk5CR1JLZWVjTDgwM0oySk4xZnFDS3VualZPY3o4Qy1kWmlKQng0OHNHeWEtcmxNamkwYUJ4NU90VHM0aHMxQVJMUl9BMUoyR1JiWUd1QQ?oc=5"
-  },
-  {
-   "title": "인천 흉기난동범, 과거 살인미수에도 ’집행유예’…재범위험성 ’높음’ 진단",
-   "source": "연합뉴스TV",
-   "time": "2026-10-15T04:15:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE96Rmx2YmIxR0hRbEJHTWNpYWpCWlVqSjRudGcyMnF4UUtJZHBRRXNRREtpekZBVzN5b3l5NHNMZUdyWTdOVUw3VkpXY3ZpR3lmNUl0cjB1YWVlcTRpWmlHOWJrZFcxbzA?oc=5"
   },
   {
    "title": "추미애 “소방이 재정 빨대” 발언에···소방관들 “명예 훼손” 사과 촉구",
@@ -39,28 +21,46 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBiVWRyUWtQaXNPNHdPOWJfTk9uRXFOT1RuV1JhU2hEaHN1UjBwai1XRUhqVjZSeHY1M0hwVy1NRlB4Y3U3d0pmX1pWYnNlTlFORWl1ZGtCdEp2QdIBX0FVX3lxTFBhYVdpMTdNYjA5RlQ4Vk1HRWYyNmJiUmd1NmJreXAwX3ViM0tsajJFY1hMaXV5SzBueFB6b0E2NEQ0MjJkcUxISGVxSDRrVVl4VTVGd1lLM05UY09PWFM0?oc=5"
   },
   {
-   "title": "주한美사령관, 전작권 전환 관련 “계획 변경돼 새 기준 생겨”",
-   "source": "동아일보",
-   "time": "2026-10-15T04:54:45+07:00",
-   "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBmRlF5MkJPeXNkUkNxMkhRWFdoakZodV91OEZERDJ2b1RoT3FFRnNJbUM0cW0tc2E3ZFgxV3M3RW1STDBVcDRPRU5YYS1qNE5jdlN4Wmdud0VkQmlXUTVnMm5vdTFOQ01XTmo2SS15OHUtTG_SAWZBVV95cUxOeTNkbEtjT0FtNG9kd2p4YVRaTzhEQWgwTTRCcEZYRFpyVEl3SnFmaG1lUmxKejBWTXVmUXY2MXpBaHhLMFU2WlFhc2t0WjE2d3IzZUg1XzBGZkJOQnF4SEdXaUo0VUE?oc=5"
+   "title": "인천 흉기난동범, 감방 피한 이유…22년 전 사건 봤더니",
+   "source": "한국경제",
+   "time": "2026-10-15T05:01:03+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5fYnBJdi0zbWlUU08temJSbUlhSnBZdURCeG5samIxdnFJQ3JrU25DNWRXcV9EVXEzYThLTWIyRmlMWkNKM0dRTG9zR2tYUnVJU0FvYzM1d1NrUQ?oc=5"
   },
   {
-   "title": "'송파 장모 살해' 유족 울음바다…\"고인 딸도 결혼생활 중 상습 폭행당해\"",
-   "source": "뉴스1",
-   "time": "2026-10-14T12:09:44+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1hUkhrQkxRQTZKTTRveTM1ZXF2eS1rSm5PSXp1ZU5oV3AzMS1jUW8xNlAxRTNIdDdsSnJuZE1DcmZJVE9ZcmxCOGl0RjgtbEpBMWphMDhPNC03V0tNZWYtejd5VUU?oc=5"
-  },
-  {
-   "title": "김민석, 신천지 논란에 \"당헌당규 지키며 처리 중\"",
+   "title": "이 대통령 지지율 44% 보합‥민주-국힘 지지율 격차 줄어 [NBS]",
    "source": "MBC 뉴스",
-   "time": "2026-10-15T08:34:20+07:00",
-   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE04bDMxN2NiSmF1SENCZWprZDFxNmZmUmU3aWZ3aUNqTVdSMEczMGJtWE1vVDc3T0Q2WGZ4ZlM5YXFLYXNTZU1MU3VZLVRVSmxLdXRCdnZBektGOFJmbXV6T0Zhd2NjWVFUVUpNaGNOaGJLUXk0ODBFSdIBeEFVX3lxTFBIY0RfeGNXWUNUMGdyUFdTZnNtN3JEUGtUTWswR3NMX1JZVy0wZkpUb0d0dl8ybHBsWUkyS2JCLTlwRE5wbzZjc0U3bmF4V0lQSk1EaGFhUlB1MkFzWWlEcXZDOV9RWVNMWTlvcnJmX1B1bHl6cGEtUA?oc=5"
+   "time": "2026-10-15T09:38:28+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1IN0k3azRBQ2RJN1l6cTRndUNaRERUWW0zaHFkOFdLZl9MT2owQ1RTQkg1T3pmNzZzbVFqcWpTVkljSkpmTTFkaWNSRDhuQWlnZVZfbWhRNlZSZ3B6S3N0ZUxQblluMmZfeHQtMWNZR3EtejEzZHpCNdIBeEFVX3lxTE9pd3J6U2YxTF82RFNNMzJ4NVlTU1Z3OWpsdGNFQl9qY09TTW93RDRJdnRSSzU2NFJCSTZZTzNHZ3JkdlZYMUJMSzBSQkJKdUdPd3VIdjFxT0NjWVFaTkx0bTFVRHBMcVZPTkdJdldHT0hkNVRkVVRoYQ?oc=5"
   },
   {
-   "title": "누리호 탄 초소형군집위성, 발사 14시간 만에 첫 사진 전송",
+   "title": "선관위 특검, '투표자수 허위 입력' 중앙선관위 등 7곳 압수수색",
    "source": "MBC 뉴스",
-   "time": "2026-10-15T08:32:57+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9jVVFCVUJIUzVxR0o0NXJfOV84VEgtczR4bmRQSEpmU0xONWtTMUZCTEFCNUJwbEYzd1hXZmdYMUltYjhFcUZobHdjekxCZS0wbnFuU044VnozNkxvMjA3ZDZSQ20yWmRFbU03WEN0UGpHWmtD0gF0QVVfeXFMTjFCVVlTMzVKT1lpYTFLMkMtMm5hSE9IcUI3Y25nOWFZdGdXUTNMLUtjejdkMHlDYWk2RExWZ3c2azRVMzhTRjU0NmNKalFmSi1KS0VqbXg5bmk3ZGpjZ0pvTWhoV2ttQ3hRdkhxYzdtQVJ3SWo?oc=5"
+   "time": "2026-10-15T09:35:05+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE10ZGptcWVZNmQ3UEYyU0w2cjdWdngzQjJIdXQyS2RJTFJKNlVMWEFCOFhCNE1tYzNVOVhHZlpPc2F1NVM2MXpyRXJZRjVCYzc0eU9wNWdhYnFsM2o3UlI5TWRBRHUxeU9aTjBfNjRWLWdKZ25OSC1Z0gF3QVVfeXFMTVRkLWV6WTlBOFZMWHlNc2NVeGhybEhKbDdDdWw2OUZRREFtZzRhNVZ5aGh0SUUxR002VHE1cDlPYmxTN0V5b05wekw0QkpoWjl4NzNVUENCdUJyUkZPWkxSaU1FRnQ3ZjhKdEo2U2pGbXFVZzZtVDA?oc=5"
+  },
+  {
+   "title": "주한미군사령관 “전작권 전환…새로운 기준 부합 군사역량 갖춰야”",
+   "source": "한겨레",
+   "time": "2026-10-15T08:43:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1mTkpWeDdCTFFJenltNFR0ZHVzb2xCWjJpRTV2VXI0VWd5SVRvRzlsbjZXRmpVc1drTV84NmhiS0xNeUxjd3FBckRCb29oR25hQmJKRVF1MzlCY1VDVVd2UmxNQ2ZMR2lfcUxvZkx5Zw?oc=5"
+  },
+  {
+   "title": "장모 살해·아내 납치 20대 남성, 내주 신상공개 경찰 심의",
+   "source": "MBC 뉴스",
+   "time": "2026-10-15T07:54:19+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9CQ0RRbHZIdUxRdnN1c2FSYU03cXRCRkdsbXR4MUxPSFBuS2dLRXdxbFNoNjAxM0ZYTHA0STMweWcyT0tTWTE5WXlJSlc5V3pfUkxQaW40NXBYTW5YeGUwdFBtUHFjT0trc1F4N3ZITVVhUTU2emtn0gF3QVVfeXFMTkdpU3JFZHYySUt1blVCN0RnQVVnSm5hVXM4SnJoVzhQMXJ3WXJVRUdFMkx3cUxIQmRHdDNiUzJVbkZEUVlndkZPSDZpdDIyR2dMd2JvSllvcG5MWDd2YWtRVUQyN3Nzc042a0RxMnkxTkVfR3doTXc?oc=5"
+  },
+  {
+   "title": "일교차 큰 날씨…밤까지 수도권 등에 비",
+   "source": "KBS 뉴스",
+   "time": "2026-10-15T10:03:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBMcGJnQjhHVzBEWWpxVV9JVmRXQThUSHhueHl2dnJDcklsSzR3V19CUElaNTYxSVRqenZ4dml2SFFQWXJ0bTJvcHpFSGMwS1U0cy1IQ0ltRUQ1bXM?oc=5"
+  },
+  {
+   "title": "누리호로 쏘아 올린 초소형위성 5기, 14시간 만에 지구 촬영 성공",
+   "source": "조선일보",
+   "time": "2026-10-15T09:13:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPb002OUREdnU3MkZ4clp0amJNbW1mUzhRYkkwcWJiclhaVGpSMk9VeHBJMWdMaTR6dEE4andGME0xNXVoTXItOG4yY2VKWFVraEdYakJjenNQNHVDTnZMY1M1NmY2WUFET09zbFFmQjlGcXhJakY3eTlpNUNQQWtRUF9ocw?oc=5"
   }
  ]
 };
