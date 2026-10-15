@@ -1,0 +1,61 @@
+/* ===== G 그래파이트 테크(2026-10-15, 민구님 선택 — 시안 /workspace/design-mockups/r2/G-*.png) =====
+   tools/modern/build_g.py 가 이 파일에서 assets/g.css 를 만듦(모든 규칙 앞에 html.th-modern.th-g). 모던 층 위에 덮는 색·글꼴·움직임만, 구조·기능은 그대로.
+   색: 바탕 #EEF0F2(은빛) · 카드 #FFFFFF · 글자 #1C1F24/#454B54/#5F666F · 선 #DADEE3 · 강조 #3D6A8E(스틸 블루) · 헤더 데이터 칸 #1C1F24~#2B2F36(그래파이트)
+   숫자: IBM Plex Mono(자체 호스팅, OFL) + tabular-nums */
+@font-face{font-family:"TNK Plex Mono";src:url(fonts/plexmono/plexmono-latin-500.woff2) format("woff2");font-weight:500;font-display:swap;unicode-range:U+0020-007E,U+0E3F,U+00B7}
+@font-face{font-family:"TNK Plex Mono";src:url(fonts/plexmono/plexmono-latin-600.woff2) format("woff2");font-weight:600 700;font-display:swap;unicode-range:U+0020-007E,U+0E3F,U+00B7}
+html.th-modern.th-g{--m-ac:#3D6A8E; --m-acd:#2F5677; --m-tint:#E6EDF3; --m-ic:#7A828C;
+  --m-t1:#1C1F24; --m-t2:#454B54; --m-t3:#5F666F; --m-t4:#5F666F; --m-t5:#A7AEB6;
+  --m-bg:#EEF0F2; --m-box:#F5F6F8; --m-pill:#EEF0F2; --m-press:#E2E5E9;
+  --m-r:6px; --m-sh:none;
+  --navy:#3D6A8E; --navy-2:#3D6A8E; --ink:#1C1F24; --ink-2:#454B54; --muted:#5F666F;
+  --line:#E3E6EA; --bg:#EEF0F2; --card:#fff; --accent:#3D6A8E; --gold:#3D6A8E;
+  --radius:6px; --shadow:none;
+  --g-gr:#1C1F24; --g-gr2:#2B2F36; --g-gline:#3A3F47; --g-gsub:#A3AAB4; --g-line:#DADEE3;
+  --g-num:"TNK Plex Mono","Pretendard Variable",Pretendard,ui-monospace,monospace;
+  --g-ease:cubic-bezier(.2,.7,.2,1);}
+html.th-modern.th-g body{background:var(--m-bg);color:var(--m-t1);font-variant-numeric:tabular-nums}
+html.th-modern.th-g .masthead{background:rgba(255,255,255,.92);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);box-shadow:0 1px 0 var(--g-line)}
+html.th-modern.th-g .brand__text strong{font-weight:800;letter-spacing:-.6px}
+html.th-modern.th-g .brand__text small{letter-spacing:.02em}
+html.th-modern.th-g .datepick select{border-radius:4px;border:1px solid var(--g-line);background:#fff}
+html.th-modern.th-g .gbtn,html.th-modern.th-g .heart-btn,html.th-modern.th-g .masthead__row2 .menu-btn,html.th-modern.th-g .masthead__row2 .mbox .menu-btn{border-radius:4px}
+html.th-modern.th-g .masthead__row2{background:linear-gradient(160deg,var(--g-gr2),var(--g-gr));border-radius:6px;padding-top:8px;padding-bottom:8px}
+html.th-modern.th-g .masthead__row2 .menu-btn,html.th-modern.th-g .masthead__row2 .mbox .menu-btn,html.th-modern.th-g .heart-btn{background:rgba(255,255,255,.07);color:#E9ECEF;box-shadow:inset 0 0 0 1px var(--g-gline)}
+html.th-modern.th-g .masthead__row2 .menu-btn:hover,html.th-modern.th-g .heart-btn:hover{background:rgba(255,255,255,.13)}
+html.th-modern.th-g .tk-chip{background:transparent;color:#F1F3F5;border-radius:4px;box-shadow:inset 0 0 0 1px var(--g-gline)}
+html.th-modern.th-g .tk-chip:hover,html.th-modern.th-g .tk-chip[aria-expanded="true"]{background:rgba(255,255,255,.08)}
+html.th-modern.th-g .tk-chip b,html.th-modern.th-g .tk-chip .tk-big{font-family:var(--g-num);font-weight:600;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+html.th-modern.th-g .tk-chip small,html.th-modern.th-g .tk-chip .tk-l,html.th-modern.th-g .tk-chip i,html.th-modern.th-g .tk-chip span{color:var(--g-gsub)}
+html.th-modern.th-g .tk-chip .tk-u{color:#C9CED5}
+html.th-modern.th-g .tk-ph{background:rgba(255,255,255,.06)}
+html.th-modern.th-g .card,html.th-modern.th-g .korea,html.th-modern.th-g .briefing,html.th-modern.th-g .top-card,html.th-modern.th-g .widget,html.th-modern.th-g .nb-cat,html.th-modern.th-g .ad-slot{box-shadow:none;border:1px solid var(--g-line)}
+html.th-modern.th-g .card.is-open{box-shadow:0 6px 24px rgba(28,31,36,.06);border-color:#CDD2D8}
+html.th-modern.th-g .nb-cat{background:#fff;border-radius:4px}
+html.th-modern.th-g .nb-cat[aria-current]{background:var(--g-gr);color:#fff;border-color:var(--g-gr)}
+html.th-modern.th-g .nb-cat[aria-current] .mic{color:#fff}
+html.th-modern.th-g .top-card .rank,html.th-modern.th-g .briefing__badge{border-radius:3px;font-family:var(--g-num);letter-spacing:.04em}
+html.th-modern.th-g .top-card .rank{background:var(--g-gr)}
+html.th-modern.th-g .briefing__badge{background:transparent;color:var(--m-ac);box-shadow:inset 0 0 0 1px currentColor;text-transform:uppercase}
+html.th-modern.th-g .section-title{font-weight:800;letter-spacing:-.6px}
+html.th-modern.th-g .section-title .mic{color:var(--m-ac)}
+html.th-modern.th-g .card__title,html.th-modern.th-g .top-card h3{letter-spacing:-.6px}
+html.th-modern.th-g .brief-text b,html.th-modern.th-g .card__title b{color:var(--m-ac)}
+html.th-modern.th-g .meta,html.th-modern.th-g .card .meta,html.th-modern.th-g .dateline,html.th-modern.th-g .top-card .meta{font-variant-numeric:tabular-nums}
+html.th-modern.th-g .mic{stroke-width:1.5}
+html.th-modern.th-g .drawer{box-shadow:4px 0 32px rgba(28,31,36,.18)}
+html.th-modern.th-g .drawer__head{border-bottom:1px solid var(--g-line)}
+html.th-modern.th-g .thm[aria-checked="true"]{box-shadow:inset 0 0 0 1.5px var(--m-ac)}
+html.th-modern.th-g .footer{border-top:1px solid var(--g-line)}
+html.th-modern.th-g .card,html.th-modern.th-g .top-card,html.th-modern.th-g .nb-cat,html.th-modern.th-g .tk-chip,html.th-modern.th-g .brief-line,html.th-modern.th-g .heart-btn,html.th-modern.th-g .menu-btn,html.th-modern.th-g .card-heart,html.th-modern.th-g .thm,html.th-modern.th-g .dr-item,html.th-modern.th-g .gbtn{transition:transform .2s var(--g-ease),background-color .2s var(--g-ease),border-color .2s var(--g-ease),box-shadow .22s var(--g-ease)}
+html.th-modern.th-g .top-card:active,html.th-modern.th-g .nb-cat:active,html.th-modern.th-g .tk-chip:active,html.th-modern.th-g .brief-line:active,html.th-modern.th-g .heart-btn:active,html.th-modern.th-g .menu-btn:active,html.th-modern.th-g .card-heart:active,html.th-modern.th-g .thm:active,html.th-modern.th-g .dr-item:active,html.th-modern.th-g .gbtn:active,html.th-modern.th-g .card__head:active{transform:scale(.98)}
+@media (prefers-reduced-motion:reduce){html.th-modern.th-g .card,html.th-modern.th-g .top-card,html.th-modern.th-g .nb-cat,html.th-modern.th-g .tk-chip,html.th-modern.th-g .brief-line,html.th-modern.th-g .heart-btn,html.th-modern.th-g .menu-btn,html.th-modern.th-g .card-heart,html.th-modern.th-g .thm,html.th-modern.th-g .dr-item,html.th-modern.th-g .gbtn{transition:none}
+html.th-modern.th-g .top-card:active,html.th-modern.th-g .nb-cat:active,html.th-modern.th-g .tk-chip:active,html.th-modern.th-g .brief-line:active,html.th-modern.th-g .heart-btn:active,html.th-modern.th-g .menu-btn:active,html.th-modern.th-g .card-heart:active,html.th-modern.th-g .thm:active,html.th-modern.th-g .dr-item:active,html.th-modern.th-g .gbtn:active,html.th-modern.th-g .card__head:active{transform:none}}
+html.th-modern.th-g .chip,html.th-modern.th-g .tag,html.th-modern.th-g .card .chip,html.th-modern.th-g .pill,html.th-modern.th-g .more-btn,html.th-modern.th-g .korea__more,html.th-modern.th-g .report-btn,html.th-modern.th-g .dq-btn,html.th-modern.th-g .opt,html.th-modern.th-g .tool,html.th-modern.th-g .dr-item,html.th-modern.th-g .drawer__list button,html.th-modern.th-g .drawer__quick a,html.th-modern.th-g .drawer__quick button,html.th-modern.th-g .brief-line,html.th-modern.th-g .datepick select,html.th-modern.th-g .tk-pop{border-radius:4px}
+html.th-modern.th-g .ad-slot{border:0}
+html.th-modern.th-g .card__body .para{color:#2C3138}
+html.th-modern.th-g .tk-lv{background:transparent!important;border-radius:3px;box-shadow:inset 0 0 0 1px currentColor}
+html.th-modern.th-g .tk-lv--good{color:#7FD4A6}
+html.th-modern.th-g .tk-lv--mod{color:#F2D06B}
+html.th-modern.th-g .tk-lv--bad{color:#F5A36B}
+html.th-modern.th-g .tk-lv--vbad{color:#FF8A80}

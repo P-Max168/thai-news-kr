@@ -239,3 +239,7 @@
 - 10-14 09:40 · 🌐 [중간·도메인] **맞춤 도메인 https://tnews.pmaxone.com 연결**(민구님 직접 지시, 백업 태그 `backup-20261014-0937-tnews-domain`) — Cloudflare DNS 에 CNAME tnews → p-max168.github.io (DNS only) 1개만 추가(다른 레코드·네임서버 안 건드림). 루트 `CNAME` 파일 추가, 404.html 홈 링크 '/', index.html og:url·og:image·twitter:image 새 주소, share_kit.py SITE/SHORT, deploy.sh LIVE_URL, ship.sh 라이브 확인 주소(LIVE_BASE·LIVE_CURL_OPTS), edition_watch/edition_stale/verify_live, tools/dev 기본 URL 상수, firestore.rules:149 새 주소 허용(옛 주소 유지). 이미 만든 e/·data/ 는 그대로(옛 주소는 GitHub 가 301 로 넘김). 호스팅은 GitHub Pages 그대로
   - **확인한 것**: DNS 응답 CNAME p-max168.github.io(dns.google) · newslib check OK · 파이썬/셸 문법 OK
   - **미확인**: 인증서 발급·HTTPS 강제, firestore.rules 배포, Firebase Auth 승인 도메인 — 배포 뒤 확인(채팅 보고·handoff)
+<!-- design-g -->
+- 10-15 08:20 · 🎨 [중간·디자인] **G 그래파이트 테크를 기본 디자인으로**(민구님 직접 지시, 백업 태그 `backup-20261015-0811-design-g`) — 모던 층 위에 assets/g.css(원본 tools/modern/g.src.css → build_g.py), 그래파이트 헤더 데이터 칸·은빛 바탕·스틸 블루·IBM Plex Mono 숫자(자체 호스팅)·얇은 선·작은 모서리·200ms 전환·누름 0.98·하트 진동 10ms·prefers-reduced-motion. 서랍에 '그래파이트' 칸 추가(클래식·모던 그대로 고를 수 있음). sw VERSION 바뀜
+  - **확인한 것**: 로컬 regress 통과 57·실패 0 · 360/390/1280 홈·판·404 콘솔 오류 0(외부 날씨 API 503 1회 제외)
+  - **미확인**: 실제 휴대폰 진동·iOS 흐림 · ▲▼ 변동 표시는 이전 값 기록이 없어 넣지 않음 · 404·안내 쪽·판 미리보기(e/)·공유 카드는 따로 떨어진 CSS 라 G 미적용

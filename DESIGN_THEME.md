@@ -1,5 +1,7 @@
 # 디자인 테마 스위치 (2026-10-04 1단계 미리보기 → 2026-10-05 00:26 방콕 2단계: 모던이 기본 → 3단계: 읽는 분이 서랍에서 고르기)
 
+> **2026-10-15 G 그래파이트(기본값):** `TN_THEME="g"` → html 에 `th-modern th-g`, 모던 층 위에 `assets/g.css`(원본 `tools/modern/g.src.css`, `python3 tools/modern/build_g.py`). 되돌리기 한 줄 = `"g"` → `"modern"`(태그 `backup-20261015-0811-design-g`). `?theme=g` 비교 가능.
+
 > **되돌리기 한 줄:** `index.html` 의 `<script>window.TN_THEME="modern";</script>` 를 `<script>window.TN_THEME="classic";</script>` 로 바꾸고 배포하면 예전 디자인으로 돌아갑니다(태그 `backup-20261005-0018-modern-on`).
 
 ## 한 줄로 켜고 끄기

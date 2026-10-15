@@ -1,0 +1,67 @@
+/* ===== G 그래파이트 테크(2026-10-15, 민구님 선택 — 시안 /workspace/design-mockups/r2/G-*.png) =====
+   tools/modern/build_g.py 가 이 파일에서 assets/g.css 를 만듦(모든 규칙 앞에 html.th-modern.th-g). 모던 층 위에 덮는 색·글꼴·움직임만, 구조·기능은 그대로.
+   색: 바탕 #EEF0F2(은빛) · 카드 #FFFFFF · 글자 #1C1F24/#454B54/#5F666F · 선 #DADEE3 · 강조 #3D6A8E(스틸 블루) · 헤더 데이터 칸 #1C1F24~#2B2F36(그래파이트)
+   숫자: IBM Plex Mono(자체 호스팅, OFL) + tabular-nums */
+@font-face{font-family:"TNK Plex Mono";src:url(fonts/plexmono/plexmono-latin-500.woff2) format("woff2");font-weight:500;font-display:swap;unicode-range:U+0020-007E,U+0E3F,U+00B7}
+@font-face{font-family:"TNK Plex Mono";src:url(fonts/plexmono/plexmono-latin-600.woff2) format("woff2");font-weight:600 700;font-display:swap;unicode-range:U+0020-007E,U+0E3F,U+00B7}
+:root{
+  --m-ac:#3D6A8E; --m-acd:#2F5677; --m-tint:#E6EDF3; --m-ic:#7A828C;
+  --m-t1:#1C1F24; --m-t2:#454B54; --m-t3:#5F666F; --m-t4:#5F666F; --m-t5:#A7AEB6;
+  --m-bg:#EEF0F2; --m-box:#F5F6F8; --m-pill:#EEF0F2; --m-press:#E2E5E9;
+  --m-r:6px; --m-sh:none;
+  --navy:#3D6A8E; --navy-2:#3D6A8E; --ink:#1C1F24; --ink-2:#454B54; --muted:#5F666F;
+  --line:#E3E6EA; --bg:#EEF0F2; --card:#fff; --accent:#3D6A8E; --gold:#3D6A8E;
+  --radius:6px; --shadow:none;
+  --g-gr:#1C1F24; --g-gr2:#2B2F36; --g-gline:#3A3F47; --g-gsub:#A3AAB4; --g-line:#DADEE3;
+  --g-num:"TNK Plex Mono","Pretendard Variable",Pretendard,ui-monospace,monospace;
+  --g-ease:cubic-bezier(.2,.7,.2,1);
+}
+body{background:var(--m-bg);color:var(--m-t1);font-variant-numeric:tabular-nums}
+/* 헤더: 위는 흰 줄, 데이터 칸은 그래파이트 패널 · 위에 붙어 있을 때 살짝 흐림 */
+.masthead{background:rgba(255,255,255,.92);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);box-shadow:0 1px 0 var(--g-line)}
+.brand__text strong{font-weight:800;letter-spacing:-.6px}
+.brand__text small{letter-spacing:.02em}
+.datepick select{border-radius:4px;border:1px solid var(--g-line);background:#fff}
+.gbtn,.heart-btn,.masthead__row2 .menu-btn,.masthead__row2 .mbox .menu-btn{border-radius:4px}
+.masthead__row2{background:linear-gradient(160deg,var(--g-gr2),var(--g-gr));border-radius:6px;padding-top:8px;padding-bottom:8px}
+.masthead__row2 .menu-btn,.masthead__row2 .mbox .menu-btn,.heart-btn{background:rgba(255,255,255,.07);color:#E9ECEF;box-shadow:inset 0 0 0 1px var(--g-gline)}
+.masthead__row2 .menu-btn:hover,.heart-btn:hover{background:rgba(255,255,255,.13)}
+.tk-chip{background:transparent;color:#F1F3F5;border-radius:4px;box-shadow:inset 0 0 0 1px var(--g-gline)}
+.tk-chip:hover,.tk-chip[aria-expanded="true"]{background:rgba(255,255,255,.08)}
+.tk-chip b,.tk-chip .tk-big{font-family:var(--g-num);font-weight:600;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.tk-chip small,.tk-chip .tk-l,.tk-chip i,.tk-chip span{color:var(--g-gsub)}
+.tk-chip .tk-u{color:#C9CED5}
+.tk-ph{background:rgba(255,255,255,.06)}
+/* 칸·카드: 그림자 대신 얇은 선, 작은 모서리 */
+.card,.korea,.briefing,.top-card,.widget,.nb-cat,.ad-slot{box-shadow:none;border:1px solid var(--g-line)}
+.card.is-open{box-shadow:0 6px 24px rgba(28,31,36,.06);border-color:#CDD2D8}
+.nb-cat{background:#fff;border-radius:4px}
+.nb-cat[aria-current]{background:var(--g-gr);color:#fff;border-color:var(--g-gr)}
+.nb-cat[aria-current] .mic{color:#fff}
+.top-card .rank,.briefing__badge{border-radius:3px;font-family:var(--g-num);letter-spacing:.04em}
+.top-card .rank{background:var(--g-gr)}
+.briefing__badge{background:transparent;color:var(--m-ac);box-shadow:inset 0 0 0 1px currentColor;text-transform:uppercase}
+.section-title{font-weight:800;letter-spacing:-.6px}
+.section-title .mic{color:var(--m-ac)}
+.card__title,.top-card h3{letter-spacing:-.6px}
+.brief-text b,.card__title b{color:var(--m-ac)}
+.meta,.card .meta,.dateline,.top-card .meta{font-variant-numeric:tabular-nums}
+.mic{stroke-width:1.5}
+.drawer{box-shadow:4px 0 32px rgba(28,31,36,.18)}
+.drawer__head{border-bottom:1px solid var(--g-line)}
+.thm[aria-checked="true"]{box-shadow:inset 0 0 0 1.5px var(--m-ac)}
+.footer{border-top:1px solid var(--g-line)}
+/* 움직임: 200ms ease-out, 누르면 0.98 */
+.card,.top-card,.nb-cat,.tk-chip,.brief-line,.heart-btn,.menu-btn,.card-heart,.thm,.dr-item,.gbtn{transition:transform .2s var(--g-ease),background-color .2s var(--g-ease),border-color .2s var(--g-ease),box-shadow .22s var(--g-ease)}
+.top-card:active,.nb-cat:active,.tk-chip:active,.brief-line:active,.heart-btn:active,.menu-btn:active,.card-heart:active,.thm:active,.dr-item:active,.gbtn:active,.card__head:active{transform:scale(.98)}
+@media (prefers-reduced-motion:reduce){
+  .card,.top-card,.nb-cat,.tk-chip,.brief-line,.heart-btn,.menu-btn,.card-heart,.thm,.dr-item,.gbtn{transition:none}
+  .top-card:active,.nb-cat:active,.tk-chip:active,.brief-line:active,.heart-btn:active,.menu-btn:active,.card-heart:active,.thm:active,.dr-item:active,.gbtn:active,.card__head:active{transform:none}
+}
+/* 모서리: 둥근 알약 → 작은 각(정밀한 느낌) */
+.chip,.tag,.card .chip,.pill,.more-btn,.korea__more,.report-btn,.dq-btn,.opt,.tool,.dr-item,.drawer__list button,.drawer__quick a,.drawer__quick button,.brief-line,.datepick select,.tk-pop{border-radius:4px}
+.ad-slot{border:0}
+.card__body .para{color:#2C3138}
+/* 미세먼지 등급 표시: 어두운 칸 위에서 대비 4.5:1 이상(테두리형) */
+.tk-lv{background:transparent!important;border-radius:3px;box-shadow:inset 0 0 0 1px currentColor}
+.tk-lv--good{color:#7FD4A6}.tk-lv--mod{color:#F2D06B}.tk-lv--bad{color:#F5A36B}.tk-lv--vbad{color:#FF8A80}

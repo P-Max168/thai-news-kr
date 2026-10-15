@@ -469,7 +469,7 @@ async def main():
             base = urllib.parse.urlsplit(URL)._replace(query="", fragment="").geturl()
             c3 = await b.new_context(viewport={"width": 360, "height": 780}, is_mobile=True, has_touch=True, timezone_id="Asia/Bangkok", locale="ko-KR")
             await c3.add_init_script(SEED); p3 = await c3.new_page()
-            TJS = "()=>({m:document.documentElement.classList.contains('th-modern'),d:window.TN_THEME,k:localStorage.getItem('tnk.theme.pick'),n:document.querySelectorAll('#themePick .thm').length,on:(document.querySelector('#themePick .thm[aria-checked=\"true\"]')||{}).dataset})"
+            TJS = "()=>({m:document.documentElement.classList.contains('th-g')?'g':document.documentElement.classList.contains('th-modern')?'modern':'',d:window.TN_THEME,k:localStorage.getItem('tnk.theme.pick'),n:document.querySelectorAll('#themePick .thm').length,on:(document.querySelector('#themePick .thm[aria-checked=\"true\"]')||{}).dataset})"
             await p3.goto(base + "?_=%d" % time.time(), wait_until="load"); await p3.wait_for_timeout(900)
             t1 = await p3.evaluate(TJS)
             await p3.click("#menuBtn"); await p3.wait_for_timeout(400)
@@ -482,8 +482,8 @@ async def main():
             await p3.wait_for_timeout(700)
             t3 = await p3.evaluate(TJS)
             await c3.close()
-            th = {"새 방문": "modern" if t1["m"] else "classic", "기본값": t1["d"], "칸": t1["n"], "클래식 고른 뒤": "modern" if t2["m"] else "classic", "저장": t2["k"], "모던 고른 뒤": "modern" if t3["m"] else "classic"}
-            okth = t1["n"] == 2 and th["새 방문"] == t1["d"] and th["클래식 고른 뒤"] == "classic" and t2["k"] == "classic" and th["모던 고른 뒤"] == "modern" and t3["k"] == "modern"
+            th = {"새 방문": t1["m"] or "classic", "기본값": t1["d"], "칸": t1["n"], "클래식 고른 뒤": t2["m"] or "classic", "저장": t2["k"], "모던 고른 뒤": t3["m"] or "classic"}   # 2026-10-15 G 그래파이트(th-g) 추가 → 칸 3
+            okth = t1["n"] == 3 and th["새 방문"] == t1["d"] and th["클래식 고른 뒤"] == "classic" and t2["k"] == "classic" and th["모던 고른 뒤"] == "modern" and t3["k"] == "modern"
         except Exception as e:
             okth, th = False, {"err": str(e)[:100]}
         rec(okth, "화면 디자인 고르기 — 새 방문자 = 기본값, ☰ 서랍 📰 클래식/✨ 모던 누르면 이 기기에 저장·다시 열어도 유지(창 없음)", th)
