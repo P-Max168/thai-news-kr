@@ -3,10 +3,10 @@
 
 | 항목 | 내용 |
 |---|---|
-| 마지막으로 확인한 사이트 최신 판 | **2026-10-16-am** (라이브 data/index.json `latest`, 판 generated 2026-10-16T07:27:58+07:00, 18건 · 커밋 a9263f2·3863bd7(공유 키트) · 확인: 2026-10-16 07:31 BKK, Grok — verify_live OK, e/2026-10-16-am/ 200) |
-| 정기 실행(07:08/18:08) | **10-16 07:08 정기 아침판 도착**: edition 커밋 a9263f2(07:29 push)·공유 키트 3863bd7(07:30 push) · verify_live OK. 직전 10-15 18:08 저녁판도 정기(37dc8e4·02d2170) |
+| 마지막으로 확인한 사이트 최신 판 | **2026-10-16-pm** (라이브 data/index.json `latest`, 판 generated 2026-10-16T18:26:09+07:00, 19건 · 커밋 d4bd725·25fd288(공유 키트) · 확인: 2026-10-16 18:29 BKK, Grok — verify_live OK, e/2026-10-16-pm/ 200) |
+| 정기 실행(07:08/18:08) | **10-16 18:08 정기 저녁판 도착**: edition 커밋 d4bd725(18:27 push)·공유 키트 25fd288(18:28 push) · verify_live OK. 직전 10-16 07:08 아침판도 정기(a9263f2·3863bd7) |
 | 판 지연 | 10-05-pm ~ 10-10-pm **11판 빠짐**(6일 공백, 목록: Grok 서버 /workspace/logs/edition-gaps.txt). **재생성 안 함**(운영자·Max 결정 10-11: 옛 뉴스를 지금 판처럼 올리지 않음) |
-| 진행 중 작업 | 💬 오늘의 질문 2026-10-16-am 18건 승인 대기(approved false). 10-15-pm 22건은 게시 완료(f06ed1f) |
+| 진행 중 작업 | 💬 오늘의 질문 2026-10-16-pm 19건·2026-10-16-am 18건 승인 대기(approved false). 10-15-pm 22건은 게시 완료(f06ed1f) |
 | 사이트 주소(10-14) | **https://tnews.pmaxone.com** (GitHub Pages 맞춤 도메인, DNS 는 Cloudflare CNAME tnews→p-max168.github.io DNS only). 옛 주소 p-max168.github.io/thai-news-kr/ 는 301 로 넘어감. Grok 도메인 작업 끝나면 Claude 가 이어받음 — 인계 문서 Grok 서버 /workspace/handoff/TNEWS_DOMAIN_HANDOFF.md |
 
 ## Claude 질문 3개에 대한 Grok 답 (2026-10-11 09:34 BKK)
@@ -37,6 +37,7 @@
 ## 최근 인수인계 (상대 AI가 작업 시작 전에 꼭 읽기 — 새것이 위, 최대 10줄 유지)
 | 시각 | 누가 | 무엇을 바꿨나 | 상대가 알아야 할 것 |
 |---|---|---|---|
+| 2026-10-16 18:30 | Grok | 2026-10-16-pm 저녁판 정기 빌드(19건, 문서·판 데이터만) | 💬 초안 19건 승인 대기(approved false). 환율 40.11 = ticker.json fx(40.1114, open.er-api, rate_time 10-16 07:02 BKK, 16:12 조회) + 18:15 직접 조회 같은 값. screenshot 👎 FAIL 1=알려진 비자 고정 거짓 실패(vi2 단독 고정 카드). 후속: IMF 시위 종료·6요구·도로 재개방(bk1, update)·라용 전자폐기물 2,500톤↑(ea1, issue=None+update)·방콕 15구 복구(bk2, issue=2026-floods-bangkok-east). issue 연결: vi1 nominee-crackdown·bk2·lf1·wt1·wt2. 제외: 10-15-pm 한국인 274일 오버스테이 재탕·Muaythai DTV(원문 10-02)·선정성 기사. korea_top 은 data/korea.json(16:12) 6건 GN decode(MBC URL 실패→제외). 실패 소스: Pattaya City·대사관·AOT·Air4Thai·KOTRA SSL/timeout 등 collect 8. |
 | 2026-10-16 07:33 | Grok | 2026-10-16-am 아침판 정기 빌드(18건, 문서·판 데이터만) | 💬 초안 18건 승인 대기(approved false). 환율 39.83 = ticker.json fx(39.8254, open.er-api, rate_time 10-15 07:02 BKK, 06:01 조회) + 07:17 직접 조회 같은 값(10-16 공시 전). screenshot 👎 FAIL 1=알려진 비자 고정 거짓 실패(vi2 단독 고정 카드). 후속: IMF 총회 반대 시위 충돌·밤샘 농성·16일 드론 금지(bk1, update). issue 연결: bk2·lf1·tr1·so1(기존 id). 한국 관련: 한-태 전략대화(vi2)·한화오션 호위함 관측(pe1). Google News 날짜만 새것인 옛 기사 3건 제외. korea_top 은 data/korea.json(06:01) 6건 GN decode(연합뉴스 URL 은 상자에서 접속 안 돼 WebFetch 로 확인). |
 | 2026-10-15 18:25 | Grok | 2026-10-15-pm 저녁판 정기 빌드(22건, 문서·판 데이터만) | 💬 초안 22건 승인 대기(approved false). 환율 39.83 = ticker.json fx(39.8254, open.er-api, rate_time 10-15 07:02 BKK, 16:11 조회) + 18:15 직접 조회 같은 값. screenshot ALL OK(👎 거짓 실패 안 남). 후속: 출국세 업계 반대(vi4, issue=None+update)·라용 전자 폐기물 공장 폐쇄(ea1, issue=None+update)·16일 펀찟/MRT 시리킷 통제(bk1). 파타야 한국인 남성 체포(vi1, 274일 오버스테이). 실패 소스 2: Pattaya City(SSL)·Air4Thai(timeout). korea_top 은 data/korea.json(16:11) 6건 GN decode. |
 | 2026-10-15 07:30 | Grok | 2026-10-15-am 아침판 정기 빌드(17건, 문서·판 데이터만) | 💬 초안 17건 승인 대기(approved false). 환율 39.83 = open.er-api 직접 조회(공시 10-15 00:02 UTC; ticker.json rate_time 10-14 07:02 이라 미사용). screenshot 👎 FAIL 1=알려진 비자 고정 거짓 실패(vi1 단독 고정 카드). Google News 날짜만 새것인 옛 기사 4건 제외(The Standard 등). 출국세·전자 폐기물 새 전개 없음. korea_top 은 data/korea.json(06:04) 6건 GN decode. ent 0건. |
