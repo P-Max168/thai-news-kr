@@ -1,18 +1,30 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-16T18:41:37+07:00",
+ "updated_at": "2026-10-16T20:19:38+07:00",
  "items": [
+  {
+   "title": "“심정지 소방관 안타깝다”…이 대통령, 전국체전서 격려 박수 제안",
+   "source": "한겨레",
+   "time": "2026-10-16T17:46:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBUSkxxOWQ1bDF2Uy1pY1NPZS1PX3pPNlJlcXp3RGRLMzNyejNQa2FENEljMXFqSlAxSnhNeHl4cEMyY0pDeEZKMG16dUNPRVY5RTB0TVNMS21aLWQ5Ml8xenBNQm5TYk5CeEVR?oc=5"
+  },
+  {
+   "title": "충남 공주서 50대 여성, 스토킹 신고됐던 남성 차량서 숨진 채 발견",
+   "source": "연합뉴스TV",
+   "time": "2026-10-16T17:37:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE0tVUVCQS1XbVBETG1fbFpvTWV4TWEwYV9zVFBQd19XeTFPRDh2eC1uT0FwakZONnpnMWlFdk52b29oamoyS01obDFjSmlTZWpybmxPNG9TTE9mZ3lxU2syeEN1SE84bEE?oc=5"
+  },
+  {
+   "title": "[속보] 특검, ‘평양 무인기’ 윤석열에 2심도 징역 30년 구형",
+   "source": "한국경제",
+   "time": "2026-10-16T10:06:10+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1QamQ3Ym9oQ202MFNSdE5PcEthbEt0T0x5YzNJeUNMbWg4RHByY2diTFh2VHk1R1pBTlRwZ3lSVDkxT1V4NDZvdjlXZ0lyR1FORG1wcDQ5Z1U4UQ?oc=5"
+  },
   {
    "title": "[속보] 인천 상가 흉기난동범 신상정보 공개‥'59세 최충락'",
    "source": "MBC 뉴스",
    "time": "2026-10-16T17:43:14+07:00",
    "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE4zVWVJVkloTUxwM21sZUxvRWNfeF9DZGV6US1DcFBHOXV3THdSbzgzZ0VNQ19nTkVXdDM5M2RiMnl3NkoxVFpDVzNKSVhpN2Z2UXhYelNkb2ZDa0ZvX29yWUlObkVQcDhKT18xT05wVjBFckY2a1pj0gF3QVVfeXFMT0c3U0cwMFlPMzJCWTdyVXNQMGRHMnp3NGZ5cG50Z21JQ09BQkhuT1ZScFVES0xLeV9yQzl6akFUSnpSUkNBTlNFRF9tbGEwODZvaDhkcUNuNzF6XzlpNzhUbF9KNHJweFFoWm5FSkd1cDdPRGNaTDQ?oc=5"
-  },
-  {
-   "title": "부천 화재 현장서 ‘위험물 허가 이력’ 없는 석유류 100통 확인",
-   "source": "한겨레",
-   "time": "2026-10-16T15:56:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1VMjJzcUVqTWJzbVppNG4wYWNxTzQ5TDVXTGs1V2l6RE5HUHZ3cVI2Q0x2aTQ3MWdONFkyQVVqTUYzWjIyZXVMYXJPSk8zWVhjbXN3LWdONmdqQkpNdFVVM21YZw?oc=5"
   },
   {
    "title": "李 “부마항쟁-5·18, 헌법전문 담아야…국회 조속 개헌 논의를”",
@@ -21,46 +33,34 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE96a3hWMlU5eU50NzY1VGJBRENGWG5jZTJDYW5MNXU3cTNIWndYdTcybGpNN1lRN1B4ek1nWkFaMmdFenlZN2NYeG5sMTBhNjQ2Qy1TQXFPWFFFak9qWkNCbFgzRG9VVmR6Wmd5dDBRR2FkOUc4dzRj0gFmQVVfeXFMUHp0cWZHOENVbXB5Q2p2c1lIVEotT2NJNExVUVd3cU5OREtUamR0ZkRNZVVHR3VieDJfNzFVMk1IVDdWQTRkZFp4WTRzWnFna1J6ZHVxVU5UWTdBOURXVkVmSlhoZjlR?oc=5"
   },
   {
-   "title": "‘한강버스 비리 의혹’ SH 간부, 서울시 추가 조사 중 임원 발탁돼",
+   "title": "‘정치인 호감도’ 오세훈 1위…비호감도 선두는 이준석 [갤럽]",
    "source": "한겨레",
-   "time": "2026-10-16T15:05:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5UcnJUS0JtLXhJaTBrMFVBdk1ISDJJYjY3YkZ5SUtYZ3N2WE43LThmV2p1RFc1N1BQMmRSaGdEVDN4UWdxMUMyOVNfRUpfcElLUDFYVU91VWtfNy1ZTGJWazBpeUlzX2ltSFE?oc=5"
+   "time": "2026-10-16T18:17:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9fNGg5M3Z4ZVFuQ1k2WGxaOU84cE1QSTcyRG1yZmtXaWp3Zl8zSXVLZF9fRXI0bG5pQ20wX3lMNnBvTUhXdHNwbVAtVEYwcHlaLUstb18wQ3phSUtZRnR4OGZPVlQ4NDNqWUNmSGd0bHA0aEJ5?oc=5"
+  },
+  {
+   "title": "\"李 재판 중단, 직무유기 아닌가\"…서울고법원장 \"헌법 84조가 근거\"",
+   "source": "조선일보",
+   "time": "2026-10-16T12:39:06+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOcGNJMzYxOUxPdE9OSzMyWHNTVlktSi1NeDhvdlM4TVRfLXBwaWVYRUxUR3JrdUpvY3pPSmZRQ21sb2VySDk1ZVczci1EdHgxZTY2Y1RSNWsxZDl3Zm1veHJ4X3d6NmlVeWRYOGduaGh4ZlF4cGVhc0FJQkhVUmd5eGlTS0JELXM?oc=5"
   },
   {
    "title": "민주, ‘조희대 탄핵’ 논의 공식화…‘범여권 결집’ 승부수 띄우나",
    "source": "한겨레",
-   "time": "2026-10-16T18:18:00+07:00",
+   "time": "2026-10-16T19:15:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9UeDVUc0xBaTdjS2Y2QVF6S3hBNmpTZ2ZpTzdmMWhQcHlnWV9INDUwVF93dEdweUpoNUN0U0FTamRndjFRR0tuRS1DdTV0WTMtM3IzTjZrakxDaE0tSHJNQ2loUXNJZEVYamRXeWJ4clFXUURF?oc=5"
   },
   {
-   "title": "李정부 출범 500일‥여 \"민생경제 살려\" 야 \"끔찍한 시간\"",
+   "title": "한동훈 딸 부실수사 의혹 고발사건, 서울청으로 이관‥\"면밀 검토해 배정\"",
    "source": "MBC 뉴스",
-   "time": "2026-10-16T09:28:06+07:00",
-   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1odGJvWEVfUHBNdnhpdEx0UXYzc0JFaHBCb1BvVXB3ejAwQU1KUjJxSGgxYnpIU0M5WUExUnIxZmJ1bEpmSFBYM0pNV1FCQWRBVUFYSXdEWHRtc2hvUW9GTEktTFpmclpubW9LVE1CYngxd1Fpa2l1ZtIBeEFVX3lxTE5TMVA4ZklDa1QzNWZoRTRmUWRYVW9pbzFEb283cHJrYUlJWUJrZC05UWIxS180ejM1RnBxMEVCWjl6RU0yZ19Kd1BQQ0FjYTMxTG5aeUw5a19MbU1PaXppODJXQ3lCeDU3UGV2cjBGNmJIMXV3aHdkdQ?oc=5"
+   "time": "2026-10-16T13:13:33+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5jUlp3djZEaGItZ2RzWjBwZ0Ztb3FlVTRacXVqSTVGQ2VmZ3pDVGpTZHVGRGJvSnYxekE2ai14LXNvMTdxdElNTkpPV2dYTGk1cDZVN09aYWpXRGNUZ2NOZjkxUHk2NGJrYS0yZjIxVldXZURNWGFZ0gF3QVVfeXFMTjRfaGd5WmtYNlRlc2I4bUNfcEFSampsdmdqdWNUdmctdVI4MFRkZFBWV1lKSEpjUTZxS1hIWE1xOXRoYlRCUVZxcUprNFBVN09IcnI1dFNOcXN6ZUs1RjEydEh3S1lOdVQ5a0lCQVZwS0tpSnJKRmM?oc=5"
   },
   {
-   "title": "[단독] 검찰 미래위 '윗어르신' 논란 \"보완 조사\"‥이 대통령 공소취소 될까?",
-   "source": "MBC 뉴스",
-   "time": "2026-10-16T12:31:56+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBSWVAzeFJNbEpZSG41YlZWQWpINlFPaVlKWUpPUjNHTnV4OEtzSG1tUHFGT01UeXlnWFR6ZTU2U1dDUFFCc0RpSl9lVUZpT2Q4LVI3LUJCVWQySzE0T0FZVmhzU09XXzNmd0NGQk9WT2oxanJwUTNj0gF3QVVfeXFMTlZ4QlM0S2dQb192a0VlcjhvN1ZWOU9CVmxCaWdFY0xRZmZQM0NZbDhEcURTaDhsaFFXQkJKSnlVMWZMNnVlTlVUT2xTaHlMZ04xM2RPZXhxeXpUMUVuTWhjaFN1N2dlVHRGZklON3pSQkltSzYtTDg?oc=5"
-  },
-  {
-   "title": "서울고법원장 “李 재판 중단, 헌법 84조에 따른 재판부 결정 존중”",
-   "source": "동아일보",
-   "time": "2026-10-16T13:58:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1seXduWVpNV1NnTGJjS3dLZHh3Z19HYXFEU0gxSzBwbVYwd0pXbFJVdng3OUhMcG00OWpaSWstMHNaNzBMV0xuU2lJeHd0RkNnNjlrdGZGeWs3T2NZSWExMUpPbXJUTjBoNE1TaG5qSVhEU1ZGRXVn0gFmQVVfeXFMTVhYWF9WaENkWWUzenlNUlA0MTdOdWRjcExEakV4Q3JWRnN5REJIVEMySmxVN0RFTjdfLV9wV280WHpkN1FGWUVVTE9yU2JGdFZwWm9Uc2VtcXBaVFhPamFVcTlscHFR?oc=5"
-  },
-  {
-   "title": "이 대통령 “소방관 예우·보상 충분치 못한 게 안타까운 현실…사경 헤매는 소방관 쾌차할 수 있길”",
-   "source": "경향신문",
-   "time": "2026-10-16T17:42:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE90SHZVcTl6YUE4ZlVmQjBKR0lUY1d4bUtGaTBDMzg0WkZuYnFpRmIwc0x5ZVF2OEY4c2VRcGI3YmZqMkNxTm5BXzRBN2FqX3BlRS1ZLXVmMWhVd9IBX0FVX3lxTE9ONXBGOXlsMVZyT1dLZTJ1ZUpjSHktSkpnZU5TT1dOOUFSV1hGTnd0NGlHRE5fd2xrcXVRbG9PZ2RSZk9yUEloMmZsZ3Z1eGdSTWdGTGlUV245VExlcTBN?oc=5"
-  },
-  {
-   "title": "‘한동훈 딸 스펙’ 고발 사건, 서울중수청에 배당됐다",
-   "source": "조선일보",
-   "time": "2026-10-16T15:58:16+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNak9nSXl0OGxrWVY2aEtROUhNdTRFTXQ5RWRJRkNIbF9RT1Naay12LXhENzd6YWtBTjdybmw4QTBMLXJOVVNFZEllOENYbjdjRE5UYnVvd295aW9sZkV2VHd1OWtHU1BjSUZGNGVSZzZoZVFhQjZzLVc4WHJEUzA5cUg2NWVfenc?oc=5"
+   "title": "‘가로 성적표’만 봐도 ‘서울대 졸업생’…“로스쿨, 블라인드 평가 맞나”",
+   "source": "한겨레",
+   "time": "2026-10-16T18:18:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBvV251eGQwSkhsci15TUZHcWFwMVZWTXhZVEFzb3Fwcl9Ob0ZZSWYyUVBLZk5nQVpkc2ZMS1ZFMXFIeUg4SGJvcllieF9pajFIWGhmeGtXMklJT1B3ZEZDS05MMDg1YUp2dFE?oc=5"
   }
  ]
 };
