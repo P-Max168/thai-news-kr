@@ -1,6 +1,6 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-16T08:13:16+07:00",
+ "updated_at": "2026-10-16T08:48:04+07:00",
  "items": [
   {
    "title": "[단독] 미국, 한국에 “북핵정보 공유 원하면 쿠팡문제도 풀라” 요구",
@@ -15,12 +15,6 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNWFBfaEdlRkJGejNmNDRmdE1lY3VRdEVhVUluY3NaUHZxZlo2WVNETVVnQWMycUE0MHZLYmpBNlVRT25FZk5TMC1udFV4cTFyWUY1ajBwcHI5S01vUnBjcjNkMkhfc3c0ODNVTFJkdWVsenVTdmxRbG9HcHZVRkcwZ2E5NjA?oc=5"
   },
   {
-   "title": "평년 웃도는 포근한 날씨…일교차 매우 커",
-   "source": "KBS 뉴스",
-   "time": "2026-10-16T05:57:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFB2VHRZRkdaLXVadnl0alJjNl9VcTdwZzMyVEZ2bUplWFh2ZlZqTXpJT3gxUk5YWEg4Y1F1YThHNEIxaWhrOHpMR1ZLVmwzYnpzQ2xzVHR2dEJ3dDQ?oc=5"
-  },
-  {
    "title": "국민의힘 “4개월 만에 코스피 5,500선…‘리밸런싱 유예’ 특검할 것”",
    "source": "KBS 뉴스",
    "time": "2026-10-16T07:49:00+07:00",
@@ -33,34 +27,40 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE55WUpERUtib2Jmb2hOVDZuUDhDLVJ1NGtKejJjdk9fLUpCVDQyYWFYZkVSWVkwSkpsTEZtTldXeXItSk9qOF80bXdvaU5CRktXd19xQzZBbl8zRldyc3g3bkpyRXAtbVBvaHlJYXZzZDdUQ2dj0gF0QVVfeXFMTTNFTlA3SmtvcmY1OFpUZ2E2d252d3o4X0tQTUJiX2pSWmUydDU0RU1CcmZSZVdRY3hhNDdMMGhBZEtOWXl2RWNEVF9ERzFsc0dzV2MzRks4VXlqdUw0Tml1Y1dpNHBxUEpzSFlFczJCV0d0TXU?oc=5"
   },
   {
-   "title": "’나주 부부 살해’ 53살 박용수…강도살인 혐의 구속 송치",
-   "source": "연합뉴스TV",
-   "time": "2026-10-16T06:46:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE83OENyRXVjLW5qdEYzNFdVb3RnanlNY25TQVdNUkVSM0JfeGw1ODlHOXNSTThqSmt6Mi1yd2stQlg2d3ZZZU95elZTeE1YLTBoVnNJRW9YRERxQW82MnYtUXY3eV81Mlk?oc=5"
+   "title": "평년 웃도는 포근한 날씨…일교차 매우 커",
+   "source": "KBS 뉴스",
+   "time": "2026-10-16T05:57:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFB2VHRZRkdaLXVadnl0alJjNl9VcTdwZzMyVEZ2bUplWFh2ZlZqTXpJT3gxUk5YWEg4Y1F1YThHNEIxaWhrOHpMR1ZLVmwzYnpzQ2xzVHR2dEJ3dDQ?oc=5"
   },
   {
-   "title": "김민석 “조희대 탄핵, 모든 방법과 경로 올려놓고 논의하기 시작”",
-   "source": "한겨레",
+   "title": "[단독]한강버스 적자 탓?…서울시, 뒤늦게 지원금 500억 한도 설정",
+   "source": "노컷뉴스",
+   "time": "2026-10-15T03:00:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5vNzNQZWxhUDRxcC1IUU9mNFA4T3ZVejlHanl6TjZ6Z2dIbC1qR1hfaldMY3VtSkxrWW5COXM3ZnpUVEpUd3NFODA0WjZwV3RGeXc?oc=5"
+  },
+  {
+   "title": "이 대통령 \"국무회의 비공개 동의 못해…할 말 못하는 국무위원 없어\"",
+   "source": "연합뉴스TV",
+   "time": "2026-10-16T08:06:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5NV2I5ZlVwNWtfa1Nfb0k4NTczcVNZVVgtWDgzX0l6bWxBcHF6bzdYb1BaQXZrY01ILUlsdTRxbThqSW9ucm9VYlM4Z242MzA0TU5XRlNyVE1vYXdMWmh2cHB1eFRZX0E?oc=5"
+  },
+  {
+   "title": "도심서 흉기 난동…50대 여성 체포",
+   "source": "KBS 뉴스",
    "time": "2026-10-16T07:39:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5KWEpqNjJ5bkxhTzBvMXdycjdOSTNxMlRGaUtEUXhkMEZIczlPcTVaaklCbUpTMGIxM2tSVEt2cTRqUDNzYmR4ZXFnemVRUk5fRHkzMkV1TmpFYzFtRFhZdUdWVmI1eTRrRjN2a3N2UG85NU9u?oc=5"
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBjaVNWWDZzTWRBU1RJMHpxS3VOd1FGazRtSUtPSVd3amozR3l0WDBsTjVpaFFUZ0Nmb3JIUG1sY2JpdUlhV2xxNHBPVDJQcjNhNll4OFZWWTRTdVE?oc=5"
   },
   {
-   "title": "서울시, 한강버스 수주 ‘비리 의혹’ 알고도 1년 넘게 수사의뢰 안 해",
-   "source": "한겨레",
-   "time": "2026-10-15T22:58:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9LWFE5V3BNdk5OLVFLVWxDSXR3RDdrYklMaXdCNUdKNjZuTllrRnRUeVBVTUxta0Q4WDNhTXJQbldySUhONmwtaFpsNzNOUjBfdWx5bWZic1d5dlZHZWlqSG4zMDI0NW10Mmc?oc=5"
+   "title": "장동혁, 양향자에 \"정도껏 하라\"... 경선 놓고 국힘 지도부 또 충돌",
+   "source": "조선일보",
+   "time": "2026-10-15T14:11:24+07:00",
+   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNVGlLbHpDQkxxcVcydTdBOHYzQ080X1pkazN3RGpQekRtazdpR0tMY0w1VmVIMjlVbWt5UjJYQ1hLazFBOFo3Y3JQM2ltWUcyUzIyZmxWV1JZSVZ2TzFEcmptS1N3SjRTaEc2ZHRPMlp1Tldjamk0cHMwd1pwc0R2b1NnWnFGQQ?oc=5"
   },
   {
-   "title": "\"소방이 가장 골치 아픈 재정 빨대\" 추미애 발언 '후폭풍' [영상]",
-   "source": "한국경제",
-   "time": "2026-10-15T09:11:57+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1LNlJQcTJsdWd5cTJEb2MxU1FkY2FHUWVPS0pvNE9TcWpwWDRaTG5OTHNEMlJFdEN1dTh4a3RycFQtbFYtbXltSm1CODRMWjNsUnUwTm4tQ1pIZw?oc=5"
-  },
-  {
-   "title": "인천 흉기난동범, 범행 때 현금 600만원 소지…\"귀금속 팔아 마련\"",
+   "title": "北, 신압록강대교 개통 대내외 보도…\"북중 경제적 연계 강화\"",
    "source": "연합뉴스TV",
-   "time": "2026-10-15T08:18:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE8xUTUyWlNhbEREVmlaNXFMZ1JXMzVtbUNrSkNvQUVfWkxURzNwUnU0aWl4UTB4ODY5eUxnX2VwMG85REs5elF3VmdvN1FuN3NLRlQ0cWs5b2xCTVJ3WG92czJkQzRGaWc?oc=5"
+   "time": "2026-10-16T06:56:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1Zb2Vvb3hZTVdTM2lCOGZDaVBTbWhoS1htT1M2cC13Zmt0aUlySDhDTmJ3aE9tbXlVaUZyandOM1dTX1g5MlRtb2lxUjdmaE8xdWdoRzljZ0MyblpQS2FfRV9KX3p2VkE?oc=5"
   }
  ]
 };
