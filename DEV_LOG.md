@@ -253,3 +253,8 @@
 - 10-16 04:42 · 💬 [낮음·판 콘텐츠] **10-15 저녁판 '💬 오늘의 질문'·운영자 첫 댓글 22건 게시**(민구님 채팅 승인 '전부 올려', 백업 태그 `backup-20261016-0442-discussion-1015pm`) — 정본 초안 글 그대로 approved:true 목록으로 `tools/discussion.py apply`(exit 0, krw_check 통과, 원화 환산 3건 39.83 기준 맞음) → data/2026-10-15-pm.json|js 22/22 + tools/discussions/2026-10-15-pm.json, pending.py rebuild(13건). 판 generated·기사 글 그대로, workflows·tools·화면 코드 안 건드림
   - **확인한 것**: apply exit 0 · 초안 22건 질문 채움 22/22 · 정본 초안 approved:true·applied_at 반영
   - **미확인**: 실제 폰 화면에서 질문 상자 표시
+
+<!-- discussion-1016am -->
+- 10-16 07:48 · 💬 [낮음·판 콘텐츠] **10-16 아침판 '💬 오늘의 질문'·운영자 첫 댓글 18건 게시**(민구님 채팅 승인 '전부 올려', 백업 태그 `backup-20261016-0748-discussion-1016am`) — 정본 초안 글 그대로 approved:true 로 `tools/discussion.py apply`(exit 0) → data/2026-10-16-am.json|js + tools/discussions/2026-10-16-am.json, pending.py rebuild(13건). 원화 환산 1건(167억3,000만바트, 39.83) 맞음. 판 generated·기사 글·workflows·tools·화면 코드 안 건드림
+  - 확인: apply exit 0, 18/18 적용, 원화 1건 대조 일치
+  - 미확인: 폰 화면에서 질문 상자 실제 표시
