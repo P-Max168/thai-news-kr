@@ -1,11 +1,17 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-16T08:48:04+07:00",
+ "updated_at": "2026-10-16T10:07:45+07:00",
  "items": [
+  {
+   "title": "추미애, ‘소방관 중상’ 부천 도장공장 화재 현장 간다···‘소방 빨대’ 논란 의식했나",
+   "source": "경향신문",
+   "time": "2026-10-16T09:21:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9CMTdHTEk0S1ZvVk1UeHNxRG1TSThQYU9KMmhqcVdrMFZSS3pSUEw4NHE5X0RjWF8wZnZXZWptMFlVTVRxbnZhYWs4aGptUTRVTDlZYUR1b0tFUdIBX0FVX3lxTE5OVW9Wd2tnejZmZUloMDBrUDlnQXo0cHF5bzNlckFheWV3b2RJbnhkczdCcE9NUTRKZTlQOWhXeFhVeFVWT3A4akpzb1MyMW1fTFNRZ1ItZ3Z6djNIVEpZ?oc=5"
+  },
   {
    "title": "[단독] 미국, 한국에 “북핵정보 공유 원하면 쿠팡문제도 풀라” 요구",
    "source": "한겨레",
-   "time": "2026-10-16T04:42:00+07:00",
+   "time": "2026-10-16T08:57:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE9oZEhLWGVodU5rUTUybUduNEtuXzYxSGp1dHBXLUNSbUNDWnYxZE5fUWhJZzcxYjZreElxUFNVZXVZTF9XVU0wOUxoVi11WWZaT1ZZeURrSTdabWVYMUtFTmlvaWxOVENyMUF3?oc=5"
   },
   {
@@ -15,10 +21,34 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNWFBfaEdlRkJGejNmNDRmdE1lY3VRdEVhVUluY3NaUHZxZlo2WVNETVVnQWMycUE0MHZLYmpBNlVRT25FZk5TMC1udFV4cTFyWUY1ajBwcHI5S01vUnBjcjNkMkhfc3c0ODNVTFJkdWVsenVTdmxRbG9HcHZVRkcwZ2E5NjA?oc=5"
   },
   {
-   "title": "국민의힘 “4개월 만에 코스피 5,500선…‘리밸런싱 유예’ 특검할 것”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-16T07:49:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1fanFMcnYyR3ByMzFDYU5TT1NaMWVrRHNlUE44ZkZRWFVMeFo1aXl5NlVfSkNERXhGVGZSeUl4VmVDalk2VUdjc05lc2lESXdiREFPTFBwZGdUWVE?oc=5"
+   "title": "일부러 부딪쳐 휴대전화 파손…38명에 수리비 뜯은 사기범 검거",
+   "source": "연합뉴스",
+   "time": "2026-10-16T06:00:05+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9zOWttVjNHOTVsRkdRVTkzUzBGdFFKNHlyMVYtQk9odVZEOUNnaEc2YmFBVFhLb3daNXV2VG1kSFY0UmpWYmNaYlRrakJiOUlqYVBJX0h0bnpsTlnSAWBBVV95cUxONjQ4bjQwX3gweU9KT2NYckwybEN5NWo1Z2FHYTZxRXZHal9hZzFMbnFiaE1fdXgzZjVNNlhFQmlIWDIwNi1HbUpBYUdJVG9HQmFBOEE0Y1lLUC15S2V4U1E?oc=5"
+  },
+  {
+   "title": "[속보] 경찰, '딸 교수 임용 의혹' 유승민 전 의원 등 4명 송치",
+   "source": "MBC 뉴스",
+   "time": "2026-10-16T08:23:58+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5jSGk3Nlg1QXQ3dmtSeXIwbk81MTdmOEZpVzdmalo3MEo1dFFqUWdaRmFUVGk4b3hxc25PcF9QYUQyZ0U3ZFZmRGFsSFFuOUhyVm50cHJFSDczSURMQk9RT1VXc1R6VE00QzFhUFY1bnRZc09haU1B0gF3QVVfeXFMT21pWlZVNk1EMkFKV2tHbjR1T2pIVGtvc3RZQmp4TkhJMG4yVTdKZUQtTFEtUGhocFJoc2psMzlsYk8tbTM3SE9faTNwN0Npa3hJMy13ZnlNRXRyZWRfMDNhLTNSQU5TYXVIZ3VnMU9wZ3o1TjdTR00?oc=5"
+  },
+  {
+   "title": "이 대통령 지지율 39%…하락세 멈추고 2%p 반등 [갤럽]",
+   "source": "한겨레",
+   "time": "2026-10-16T08:34:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE54NGotdW9IM2MwaGYzdzEzb2F1UlZJVVI3alV5SWE0UlBmYXkwNTM1SjVjSW1FejU4a2tPeWdOdW5sY0UyVUpGWTM4YWFfOVJ0TV9STHhGcWJoMl9weTBnRHpDaVYtQ0hNaXhqQTlNUkZxTmln?oc=5"
+  },
+  {
+   "title": "경찰 출동까지 4분 32초‥'가장 빠른 비상벨'도 못 막았다",
+   "source": "MBC 뉴스",
+   "time": "2026-10-16T09:36:41+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9FN2tSeHpDRjlyaFllVFZYS1FHTkVEN1YwQ3F0LXpBbUZmeXlEY3lGd21WTW83WjYxRl96aUxRVkx4VVNvTE1GR0Y3M0hicGZlemFwVE1DeTJhYXNYYld4amQ2QzdrcjBCN2d1WVdPczVKRlZEMEdF0gF3QVVfeXFMUDMxTW1CZmdnR1dsaG5PdEl5RG9wREFFUUNuWnI0NGNqN0U2cTRRcnhqUnJQVTZHZnI5VW9rejRYSmVOeG1vbTBkWERIZVQ1X19tMm82SjJUdklEbzNvdC1ubl9YWUc0Q2I4WXpnN3JGdWZmbkRFSkk?oc=5"
+  },
+  {
+   "title": "이재명 정부 국무회의 ‘생중계’가 문제?",
+   "source": "미디어오늘",
+   "time": "2026-10-15T20:05:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9NRDhrMkRKYlZXZndrYjNwbGhLUTI0NUNoUlozMm5qZGFtZG5Hb09XS0RaNVhGQldGQ0hIbnpCWkQ4ZlZvMFUyM2tCeHJnd2ZPZUlubjlrSmRLeHVGUUFiQ1E0aF9RTngzY3czdk41S28?oc=5"
   },
   {
    "title": "\"우크라, 북한 포로송환 공개해 한국 대북·대러 접근법 훼손\"",
@@ -27,40 +57,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE55WUpERUtib2Jmb2hOVDZuUDhDLVJ1NGtKejJjdk9fLUpCVDQyYWFYZkVSWVkwSkpsTEZtTldXeXItSk9qOF80bXdvaU5CRktXd19xQzZBbl8zRldyc3g3bkpyRXAtbVBvaHlJYXZzZDdUQ2dj0gF0QVVfeXFMTTNFTlA3SmtvcmY1OFpUZ2E2d252d3o4X0tQTUJiX2pSWmUydDU0RU1CcmZSZVdRY3hhNDdMMGhBZEtOWXl2RWNEVF9ERzFsc0dzV2MzRks4VXlqdUw0Tml1Y1dpNHBxUEpzSFlFczJCV0d0TXU?oc=5"
   },
   {
-   "title": "평년 웃도는 포근한 날씨…일교차 매우 커",
+   "title": "한병도 “한강버스 비위 은폐 의혹 충격적…사실이면 ‘한강버스 게이트’”",
    "source": "KBS 뉴스",
-   "time": "2026-10-16T05:57:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFB2VHRZRkdaLXVadnl0alJjNl9VcTdwZzMyVEZ2bUplWFh2ZlZqTXpJT3gxUk5YWEg4Y1F1YThHNEIxaWhrOHpMR1ZLVmwzYnpzQ2xzVHR2dEJ3dDQ?oc=5"
-  },
-  {
-   "title": "[단독]한강버스 적자 탓?…서울시, 뒤늦게 지원금 500억 한도 설정",
-   "source": "노컷뉴스",
-   "time": "2026-10-15T03:00:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5vNzNQZWxhUDRxcC1IUU9mNFA4T3ZVejlHanl6TjZ6Z2dIbC1qR1hfaldMY3VtSkxrWW5COXM3ZnpUVEpUd3NFODA0WjZwV3RGeXc?oc=5"
-  },
-  {
-   "title": "이 대통령 \"국무회의 비공개 동의 못해…할 말 못하는 국무위원 없어\"",
-   "source": "연합뉴스TV",
-   "time": "2026-10-16T08:06:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5NV2I5ZlVwNWtfa1Nfb0k4NTczcVNZVVgtWDgzX0l6bWxBcHF6bzdYb1BaQXZrY01ILUlsdTRxbThqSW9ucm9VYlM4Z242MzA0TU5XRlNyVE1vYXdMWmh2cHB1eFRZX0E?oc=5"
-  },
-  {
-   "title": "도심서 흉기 난동…50대 여성 체포",
-   "source": "KBS 뉴스",
-   "time": "2026-10-16T07:39:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBjaVNWWDZzTWRBU1RJMHpxS3VOd1FGazRtSUtPSVd3amozR3l0WDBsTjVpaFFUZ0Nmb3JIUG1sY2JpdUlhV2xxNHBPVDJQcjNhNll4OFZWWTRTdVE?oc=5"
-  },
-  {
-   "title": "장동혁, 양향자에 \"정도껏 하라\"... 경선 놓고 국힘 지도부 또 충돌",
-   "source": "조선일보",
-   "time": "2026-10-15T14:11:24+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNVGlLbHpDQkxxcVcydTdBOHYzQ080X1pkazN3RGpQekRtazdpR0tMY0w1VmVIMjlVbWt5UjJYQ1hLazFBOFo3Y3JQM2ltWUcyUzIyZmxWV1JZSVZ2TzFEcmptS1N3SjRTaEc2ZHRPMlp1Tldjamk0cHMwd1pwc0R2b1NnWnFGQQ?oc=5"
-  },
-  {
-   "title": "北, 신압록강대교 개통 대내외 보도…\"북중 경제적 연계 강화\"",
-   "source": "연합뉴스TV",
-   "time": "2026-10-16T06:56:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1Zb2Vvb3hZTVdTM2lCOGZDaVBTbWhoS1htT1M2cC13Zmt0aUlySDhDTmJ3aE9tbXlVaUZyandOM1dTX1g5MlRtb2lxUjdmaE8xdWdoRzljZ0MyblpQS2FfRV9KX3p2VkE?oc=5"
+   "time": "2026-10-16T08:52:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE85N09JT0pKeGYwQ1hRSGJ2MG5Rek1SbmduQjdxNVNjcVNYbkx3ejlDSGJEeWJWaWgzTWNjRXJMZ3pYS0lwbkc5ektNcmVRODV6cmpUYjVheGhBaE0?oc=5"
   }
  ]
 };
