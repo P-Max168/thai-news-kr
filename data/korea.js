@@ -1,18 +1,18 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-16T14:54:36+07:00",
+ "updated_at": "2026-10-16T16:12:05+07:00",
  "items": [
   {
-   "title": "부천 부품도장공장 화재... 소방관 5명이 쓰러졌다",
-   "source": "조선일보",
-   "time": "2026-10-16T08:37:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQeUxZXzhFQ1k2VFplckpOTXY5WFpEeVpuWUV0dGpQaFk3MW0tRm5lcDUycUFocXBZd1Z3NmRIbkgwdkFDT0E3dVhOUkp6cDlrVmZDQTdvbGhFaU9kTzRBVzRYU09QQWtZTVlqazVjVEc4MW9NRGNrU0NXaGwxY1ZJNUhDSHFOaVJhU2ozdUF3WkU?oc=5"
+   "title": "추미애, 부천 화재 현장에서 ‘빨대 발언’ 질문에 “그런 얘기 하지 마시죠”",
+   "source": "주간경향",
+   "time": "2026-10-16T15:11:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1DczJnck40LWhhWG9peWJXM1piaHYya3BDMW0tcTViZWV5QWM3LUJGRkp6RUlveERoNWtoVDNIRUkydTg3ckZ1NlVlMkl6aEg4UHZ5NHgyamZ0XzZaS3c?oc=5"
   },
   {
-   "title": "[단독] 검찰 미래위 '윗어르신' 논란 \"보완 조사\"‥이 대통령 공소취소 될까?",
+   "title": "민주, 추미애 '소방 빨대' 발언 사과 \"노고 헤아리지 못해\"",
    "source": "MBC 뉴스",
-   "time": "2026-10-16T12:31:56+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBSWVAzeFJNbEpZSG41YlZWQWpINlFPaVlKWUpPUjNHTnV4OEtzSG1tUHFGT01UeXlnWFR6ZTU2U1dDUFFCc0RpSl9lVUZpT2Q4LVI3LUJCVWQySzE0T0FZVmhzU09XXzNmd0NGQk9WT2oxanJwUTNj0gF3QVVfeXFMTlZ4QlM0S2dQb192a0VlcjhvN1ZWOU9CVmxCaWdFY0xRZmZQM0NZbDhEcURTaDhsaFFXQkJKSnlVMWZMNnVlTlVUT2xTaHlMZ04xM2RPZXhxeXpUMUVuTWhjaFN1N2dlVHRGZklON3pSQkltSzYtTDg?oc=5"
+   "time": "2026-10-16T12:42:03+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1EWjFyVWZ1Zm4xamhELUpDbmZrRjJYV1hndno3ckVoSUZybEppMHlwWXpnYlViR1ZkakxzejFlQzRMRFlubzhCUnJYQkYwNlhKWTUtSFlidHY3UzZVNkYxQ3BFeG4wVHVtQ1NhWUI0Z0c2UUFlRE1PSNIBeEFVX3lxTFBqNWlyUlFmTGo2NkhkeXp3S1BEcFZzejVjYXJJWkxaZlc3NjZ2cUFHU2psQlZEV1dLeHFxNi1VQ0habXRpOENnaFhOWGNFOW04V2ZITzUxVUFCRXpGMjN1VlpVSWQ0RlZjaDJldzBVbWZNUm1vTmh0cg?oc=5"
   },
   {
    "title": "\"죽을 죄를 지었다\"… 인천 흉기난동범 50대 男, 구속심사 출석",
@@ -21,34 +21,10 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOaEljbGdZX2FaQVotMTAwMlFQdWhfdWdCVFBWNFpVUDhnN3FyRExhcTZhRlQ0eXRaNl9xSHJscUxTVmJhbU5uLWpJdVBFMjBvaElhLWZlS3BjZVBuU1VRcC1iV2UxcllCN0EwXzk5MzNrTEFzM19KVjJFZE9CZXlVU2Jya2I0dw?oc=5"
   },
   {
-   "title": "이 대통령 “부마항쟁·광주민주화운동 헌법 전문 수록…국회 나서 달라”",
-   "source": "한겨레",
-   "time": "2026-10-16T12:55:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1VdFJzS2plVzVadXR3WUQ3eWNBa1dTQk9iRmpCeGRLSTFOYUpRZjQ3MVA0T2s5THNYY0VfVTNTdlBfY3AzZWZnZzFqQ2JaNmRfclJLcmZCYUZ5Umhqb0VEb1RQbVRKeENKNEZz?oc=5"
-  },
-  {
-   "title": "조국 \"한동훈 딸 천재인지 '한동훈 특검'으로 확인하자\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-16T12:22:19+07:00",
-   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFAzUHppcmNtSWxfb1VIUDZBdDZrTS1MOXlNY1NKSmlPMkd2S1dSUVA3UXRTR2ZXWUNZTXVnQXRGYy1teG0xejVIRDJUSWJLT1kwMlF0NWtRR1lVMG9STnhJYlpaNnQ1eWpEcEc5RkdCRFU1UmtNdnc1cdIBeEFVX3lxTE9HN2hsT1ZLZVdZelVuMDA3dHFyVmxKTU9EbXVwSjFsTWxkTExqRVJXcDFtVGxBN09YT2xqaWRCUXRGeDFZU1E2blAxcmRQTXFCQnhVdDVxNGItNHlXcV9Na2ZqWVJjYzRNd2RraWVQR0Z4a3BsYmZtMQ?oc=5"
-  },
-  {
-   "title": "‘한강버스 비리 의혹’ SH 간부, 서울시 추가 조사 중 임원 발탁돼",
-   "source": "한겨레",
-   "time": "2026-10-16T12:29:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5UcnJUS0JtLXhJaTBrMFVBdk1ISDJJYjY3YkZ5SUtYZ3N2WE43LThmV2p1RFc1N1BQMmRSaGdEVDN4UWdxMUMyOVNfRUpfcElLUDFYVU91VWtfNy1ZTGJWazBpeUlzX2ltSFE?oc=5"
-  },
-  {
-   "title": "국회 행안위, 김지용 중수청장 후보자 청문보고서 채택",
-   "source": "한겨레",
-   "time": "2026-10-15T18:51:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFB6TFpTSkJPRU52d3hWWEFBcERxdlppUVZ5NlR1QkFlY203S1lvNDhyU3JRV3RWRWt1MS1USWNPUlpvZ3pWVlV0RnJrbXdLTVN5cHp1VjZ5dGlod21HaXZJclJybGRFMUhva0E?oc=5"
-  },
-  {
-   "title": "경사노위 위원장 \"민주노총 불참 아쉬워‥대표성 보완 과제\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-16T12:47:55+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5qeWFQMTBnUm12TVlHeGpjbjYyb3FYamN4Q1NnaHJVcTlDellHdFZwZlJPbE9WV0lkaDhvaFVQRUpyeTB0RU43a1lVQVlxSnRfQUppWTFLOXB4Qms4Qm94bVc0RWRpRk1pcUt0d1FqVEY4VGl1d0tR0gF3QVVfeXFMUFY4N2FsTE1qUFJyNDVMazdCbWJzWVRCdU9uNjZxb1VnTXFaeEtYUEh0bmtxMHdQY3FjeFhKNzd3ZWlJWkItOHJvQXVRR19NdXpVZkd1a2U4dHliRUhWdzRBdWZKb3V5dFAtZXNxWU9UcGFBUFZIU2s?oc=5"
+   "title": "이 대통령 \"부마항쟁 헌법에 담아야\"...기념사 마치며 울먹이기도",
+   "source": "YTN",
+   "time": "2026-10-16T13:43:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE05SkxBMUkxTDctc19hYUlncW04YV9GRWhBYmxKa1BVZ2dqQkd4UVp1TXJ5V01kN0FkN3pEUUp0czhMSFU4azNhWXowM1FjZmx4YUx0TWZDRXN5TFBfUEE?oc=5"
   },
   {
    "title": "이 대통령 지지율 39%…하락세 멈추고 2%p 반등 [갤럽]",
@@ -57,9 +33,33 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE54NGotdW9IM2MwaGYzdzEzb2F1UlZJVVI3alV5SWE0UlBmYXkwNTM1SjVjSW1FejU4a2tPeWdOdW5sY0UyVUpGWTM4YWFfOVJ0TV9STHhGcWJoMl9weTBnRHpDaVYtQ0hNaXhqQTlNUkZxTmln?oc=5"
   },
   {
+   "title": "조국 “한동훈 딸 천재인지 특검으로 확인하자”",
+   "source": "한겨레",
+   "time": "2026-10-16T11:29:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBGUzlNQ0NVaGZEMkJZVXZLZHZkcXBhNDV4bWkxQjY1bEVkb1pqcTNxYy1oLWRmbHdZWkplempibUh6dVdESTMwMjRiYmxXb2ROUkRCelJFeGEyQzZaRnJ0a0gyUlMyX1NQd3VCd1kzWWtsMWF5?oc=5"
+  },
+  {
+   "title": "유승민 '딸 유담 교수 특혜 임용 의혹' 수사 10개월 만에 송치",
+   "source": "뉴스1",
+   "time": "2026-10-16T08:37:04+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1YQ1JCUndidDZLbzA3UE85TWlGdXlKeUkzM3RqWUJVVkRPQ293SUViRkxTa19YWm9rS0V5c0dZamVxS1p2a29LV3FJX0dLUDVMdFpReA?oc=5"
+  },
+  {
+   "title": "‘한강버스 비리 의혹’ SH 간부, 서울시 추가 조사 중 임원 발탁돼",
+   "source": "한겨레",
+   "time": "2026-10-16T12:29:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5UcnJUS0JtLXhJaTBrMFVBdk1ISDJJYjY3YkZ5SUtYZ3N2WE43LThmV2p1RFc1N1BQMmRSaGdEVDN4UWdxMUMyOVNfRUpfcElLUDFYVU91VWtfNy1ZTGJWazBpeUlzX2ltSFE?oc=5"
+  },
+  {
+   "title": "공수처 \"조희대 업무추진비 수사 예정\", 중수청장 후보자 \"수사 가능\"",
+   "source": "뉴스타파",
+   "time": "2026-10-15T08:55:50+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE52a0pKejBqUm52SEoyVi1SVW1vQ09MY0hsZGJ6NHNlUG1WaUxTc0pMQkNXalJVMGkzaWVBWmJNOWtQNUYyV1hjTzJB?oc=5"
+  },
+  {
    "title": "[속보] 특검, ‘평양 무인기’ 윤석열에 2심도 징역 30년 구형",
    "source": "한국경제",
-   "time": "2026-10-16T11:08:00+07:00",
+   "time": "2026-10-16T10:06:10+07:00",
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1QamQ3Ym9oQ202MFNSdE5PcEthbEt0T0x5YzNJeUNMbWg4RHByY2diTFh2VHk1R1pBTlRwZ3lSVDkxT1V4NDZvdjlXZ0lyR1FORG1wcDQ5Z1U4UQ?oc=5"
   }
  ]
