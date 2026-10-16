@@ -1,12 +1,24 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-17T02:46:10+07:00",
+ "updated_at": "2026-10-17T04:08:05+07:00",
  "items": [
+  {
+   "title": "추미애 ‘재정 빨대’ 논란 속...李대통령 “소방관에 천금을 준들 아깝겠나”",
+   "source": "조선일보",
+   "time": "2026-10-16T20:22:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOeTM2X0xNS09hZTRxOW9VOFhYNGota2ItV1ZTOVNVcDRFWndsTDZzN3JnZkNTaDlPZXE4SmdOWkRzTnVndWt6ZXloYUowekF3SnVZTUoxMm1vRlN6ZWNXM2QwUW5CbEZqRktCQzhrSFgzaUlXUnpWNWNSR3Z4dUtsRTNRQnVuQVNr?oc=5"
+  },
   {
    "title": "공주 실종 50대 여성 숨진 채 발견…스토킹 신고 남성 차량서",
    "source": "한겨레",
    "time": "2026-10-16T20:18:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBLdUpSenNoelNlRDFhR2pHUlhkMVoxa1NmYlhKMUlnS3R1TC1UVmsyYnQyOWwzUlRPNGNrb2JPS1RvbHo5QklGdG5TaGMwWnVXUGljTHliVC1MX29RYUI0SUh4RU9zYXV1?oc=5"
+  },
+  {
+   "title": "오후부터 강한 바람…일요일 전국에 가을비",
+   "source": "KBS 뉴스",
+   "time": "2026-10-17T03:04:06+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBxR1pFdUJjXzJpMFNkZnJtWWpMX1l0WlBTa29uekNJbVJyNTliWXBJLThPTXRzTW1SNUNicE9xR0wtWnlmODhvdmJ5NlhwX1BzVElJZnFhM2VpZWs?oc=5"
   },
   {
    "title": "‘8명 부상’ 인천 흉기 난동 피의자 신상 공개…59세 최충락",
@@ -15,40 +27,16 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE0tVlowaDVjYzczY2F2d2JONjZGV2ZVS1k4MkZodlU3YmZ3MnZuQVJ6T0d1Y3g3TlZqQk1Ldk9rMVNpYXNJNHlSeTlMV090dDdUUnZ0TU5NWHbSAVRBVV95cUxPdElVcnU3OG04UU5qWC1BUEFQbHR6bXBQOHFRb0xNUDNmdkF0c2NDSFMyekJ3TDVuWnNGZ3dvVGw2MGtiRFhoWVhrVFNtRVJ6MlZNTHQ?oc=5"
   },
   {
-   "title": "추미애 ‘재정 빨대’ 논란 속...李대통령 “소방관에 천금을 준들 아깝겠나”",
-   "source": "조선일보",
-   "time": "2026-10-16T20:22:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOeTM2X0xNS09hZTRxOW9VOFhYNGota2ItV1ZTOVNVcDRFWndsTDZzN3JnZkNTaDlPZXE4SmdOWkRzTnVndWt6ZXloYUowekF3SnVZTUoxMm1vRlN6ZWNXM2QwUW5CbEZqRktCQzhrSFgzaUlXUnpWNWNSR3Z4dUtsRTNRQnVuQVNr?oc=5"
-  },
-  {
-   "title": "주말 요란한 가을비…‘낙엽 배수구 막힘 주의’",
-   "source": "KBS 뉴스",
-   "time": "2026-10-16T19:11:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE82RGV4Y2RTckFqc2FxT1dNaTZmakltLWlkZkROUmtlRDlYRFpMVzZuajZ1S0d4NUs5ZDVEdXhSOXlaTjRYSDlDZ2loUTZmUnBOV3Z5ejc4blBpUjg?oc=5"
-  },
-  {
    "title": "브런슨 “대한민국은 남쪽 철책선에서 시작”···DMZ 영토주권 부정 발언 파문",
    "source": "경향신문",
    "time": "2026-10-16T14:37:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5ZWi1EcmFlTUVES0Q1VURxZVk0NXN5ekxmM2JYVjY5d2R2SE5Qemp2bDFxcUMxRll4ZkRoSnRBUWVRQ1ZDN0ZSUmVMSFJUZ2VmM2dtdUhrbjJnQdIBX0FVX3lxTE91ZU0wUlBoVm94U1ZhYTNvRkJrWDY5a2tIN2dSR0N6ZWpUUGtPdGdrNnRwS1pTUHl1czdWa3ZIblpDdzF5TTZ6QWlsbHdPNGhoaUZkeG1oZ3ZNQ1pHZEI4?oc=5"
   },
   {
-   "title": "'한동훈 딸 허위 스펙' 수사 무마 의혹, 서울중수청 반부패국 배당",
-   "source": "MBC 뉴스",
-   "time": "2026-10-16T15:49:27+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9vTXd0NzBSWUJfN2oxNlEwQWNuN1A1TmVNZVU5VG5adFNTSHRLUUIwT3VSTkw4MmZLb0RIWnBsRmg1ZjBiY0lhLTdaQkE1U3p0NkdjRjJEeG5aVno4RUk2dTJVY2lUSkpRSU5BUG16SXItZmlaUDlr0gF3QVVfeXFMT2VNcUdjQ2R1NTV3N0R6NUUxZ0dYZUhRNF9RMDB4bGY1S3BrMEhKd0FsSU0tbndxaE8yNEZRT3JpeGdMTVBwNjFSQnZ4UGE4V1psYWZDRWI3VzdjOWg4b21PVTZOR0xOZE5yMVpiUTJldUJiTVA3V0U?oc=5"
-  },
-  {
-   "title": "‘소방 재정 빨대’라더니…경기도, 순직 추모 사업 예산도 전액 삭감",
-   "source": "경향신문",
-   "time": "2026-10-16T12:53:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1OaUk2cTYyZmN1SXlERDRpT0t6U1RKaEFESXJ2S1NKNWRvOUZnc0h5VDlXMTdQVVMwS0JmVGw1djBSektTcl9rb1BZYUhuVlZfcEtVVnBCNVpGQdIBX0FVX3lxTE5ZNkdaZERMbS12VWNJTXYtTmRHU2dnVlNaZkkyMUdGZEZFc0NPMlR5YWIxeEpZbkpRd1RFZThOd1FOVHA3R2xvNmVxWTF6NkxPc0szblJJWnY2cTFMcnhj?oc=5"
-  },
-  {
-   "title": "이 대통령 “부마항쟁, 5·18과 헌법전문수록 실천할 때…개헌 음모론 벗어나도”",
+   "title": "화산섬 제주를 뜨겁게! 107회 전국체전 개막",
    "source": "KBS 뉴스",
-   "time": "2026-10-16T19:40:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5mR1hjZDBHM3pVWjVURDR3YW9Da2hFbmdubl9HcVBVOXBPVy1lYk5sWFgyZkJMbVNaME5HM210VjNlV051VE1fSmpFNWlsNVFwRUEzTDBEbGtwdmM?oc=5"
+   "time": "2026-10-16T19:50:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE91MjRQYnlPb3lybTZUTlE4NWw2S2R3TkI4WWRMSlNCZ3lGWTFvNjJQR1Rmcm1xRm9BaXV5Ti1tdWZIWTFwN0hWTFA1YnFIak1IS0lDSkZrelRsbnc?oc=5"
   },
   {
    "title": "행안부, 서울시 한강버스 136억원 적자 지원안 제동",
@@ -57,10 +45,22 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE53NUZUT3lfeVgySmpkSnQyUHRNaXNVOVFwMy0zUnF4OGZMdldrZ0V1TzdhR3JvREpfbU5PWHhIMWIzVWZsT0t4dWJ1VnhFVzJOV2pIa0NrVlFwREZ3MUktcVhna3RxcWtmcFE?oc=5"
   },
   {
-   "title": "화산섬 제주를 뜨겁게! 107회 전국체전 개막",
+   "title": "민주, ‘조희대 탄핵’ 논의 공식화…‘범여권 결집’ 승부수 띄우나",
+   "source": "한겨레",
+   "time": "2026-10-16T20:15:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9UeDVUc0xBaTdjS2Y2QVF6S3hBNmpTZ2ZpTzdmMWhQcHlnWV9INDUwVF93dEdweUpoNUN0U0FTamRndjFRR0tuRS1DdTV0WTMtM3IzTjZrakxDaE0tSHJNQ2loUXNJZEVYamRXeWJ4clFXUURF?oc=5"
+  },
+  {
+   "title": "야당 “이 대통령 재판 중단, 직무유기”…서울고법원장 “헌법 84조 근거”",
+   "source": "한겨레",
+   "time": "2026-10-16T20:15:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFAyZ3o4Vi1zSHpHcjJUM0dhaWYzcmpwQUpNaV9RMnM2OWVxNlQ0N2M4NkJQZUtzanJjSXFCZG0tRkRBd1MxMHpERDJLblJnVXFLWmRLYUVyTVNqQ0QtZ3VMY1BaSTJVdnYwSnlYS2Z6SWxZQQ?oc=5"
+  },
+  {
+   "title": "“봐줘요”부터 “배 째라”까지…체납차량 단속 곳곳 실랑이",
    "source": "KBS 뉴스",
-   "time": "2026-10-16T19:50:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE91MjRQYnlPb3lybTZUTlE4NWw2S2R3TkI4WWRMSlNCZ3lGWTFvNjJQR1Rmcm1xRm9BaXV5Ti1tdWZIWTFwN0hWTFA1YnFIak1IS0lDSkZrelRsbnc?oc=5"
+   "time": "2026-10-16T19:24:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5HZEZhZklESmVQWklMZnUzUjFuVzJXSlBZdjBqNUhoZmx3T0pQS3VKZlFYZ0JNU2o5dWJSbVRzQThmSEo5UWZYS0lKV3M1bk5GMnNnQkxRa3JhWmM?oc=5"
   }
  ]
 };
