@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-16T10:07:45+07:00",
+ "updated_at": "2026-10-16T12:09:44+07:00",
  "items": [
   {
-   "title": "추미애, ‘소방관 중상’ 부천 도장공장 화재 현장 간다···‘소방 빨대’ 논란 의식했나",
-   "source": "경향신문",
-   "time": "2026-10-16T09:21:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9CMTdHTEk0S1ZvVk1UeHNxRG1TSThQYU9KMmhqcVdrMFZSS3pSUEw4NHE5X0RjWF8wZnZXZWptMFlVTVRxbnZhYWs4aGptUTRVTDlZYUR1b0tFUdIBX0FVX3lxTE5OVW9Wd2tnejZmZUloMDBrUDlnQXo0cHF5bzNlckFheWV3b2RJbnhkczdCcE9NUTRKZTlQOWhXeFhVeFVWT3A4akpzb1MyMW1fTFNRZ1ItZ3Z6djNIVEpZ?oc=5"
+   "title": "부천 부품도장공장 화재... 소방관 5명이 쓰러졌다",
+   "source": "조선일보",
+   "time": "2026-10-16T08:37:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQeUxZXzhFQ1k2VFplckpOTXY5WFpEeVpuWUV0dGpQaFk3MW0tRm5lcDUycUFocXBZd1Z3NmRIbkgwdkFDT0E3dVhOUkp6cDlrVmZDQTdvbGhFaU9kTzRBVzRYU09QQWtZTVlqazVjVEc4MW9NRGNrU0NXaGwxY1ZJNUhDSHFOaVJhU2ozdUF3WkU?oc=5"
   },
   {
    "title": "[단독] 미국, 한국에 “북핵정보 공유 원하면 쿠팡문제도 풀라” 요구",
    "source": "한겨레",
-   "time": "2026-10-16T08:57:00+07:00",
+   "time": "2026-10-16T11:49:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE9oZEhLWGVodU5rUTUybUduNEtuXzYxSGp1dHBXLUNSbUNDWnYxZE5fUWhJZzcxYjZreElxUFNVZXVZTF9XVU0wOUxoVi11WWZaT1ZZeURrSTdabWVYMUtFTmlvaWxOVENyMUF3?oc=5"
   },
   {
-   "title": "주한미군사령관, 사흘 연속 작심 발언… 여권 \"저 입 막으라\" 반발",
-   "source": "조선일보",
-   "time": "2026-10-16T03:56:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNWFBfaEdlRkJGejNmNDRmdE1lY3VRdEVhVUluY3NaUHZxZlo2WVNETVVnQWMycUE0MHZLYmpBNlVRT25FZk5TMC1udFV4cTFyWUY1ajBwcHI5S01vUnBjcjNkMkhfc3c0ODNVTFJkdWVsenVTdmxRbG9HcHZVRkcwZ2E5NjA?oc=5"
-  },
-  {
-   "title": "일부러 부딪쳐 휴대전화 파손…38명에 수리비 뜯은 사기범 검거",
-   "source": "연합뉴스",
-   "time": "2026-10-16T06:00:05+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9zOWttVjNHOTVsRkdRVTkzUzBGdFFKNHlyMVYtQk9odVZEOUNnaEc2YmFBVFhLb3daNXV2VG1kSFY0UmpWYmNaYlRrakJiOUlqYVBJX0h0bnpsTlnSAWBBVV95cUxONjQ4bjQwX3gweU9KT2NYckwybEN5NWo1Z2FHYTZxRXZHal9hZzFMbnFiaE1fdXgzZjVNNlhFQmlIWDIwNi1HbUpBYUdJVG9HQmFBOEE0Y1lLUC15S2V4U1E?oc=5"
-  },
-  {
-   "title": "[속보] 경찰, '딸 교수 임용 의혹' 유승민 전 의원 등 4명 송치",
+   "title": "이 대통령 지지율, 39%로 2%p 상승‥부정평가는 52% [한국갤럽]",
    "source": "MBC 뉴스",
-   "time": "2026-10-16T08:23:58+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5jSGk3Nlg1QXQ3dmtSeXIwbk81MTdmOEZpVzdmalo3MEo1dFFqUWdaRmFUVGk4b3hxc25PcF9QYUQyZ0U3ZFZmRGFsSFFuOUhyVm50cHJFSDczSURMQk9RT1VXc1R6VE00QzFhUFY1bnRZc09haU1B0gF3QVVfeXFMT21pWlZVNk1EMkFKV2tHbjR1T2pIVGtvc3RZQmp4TkhJMG4yVTdKZUQtTFEtUGhocFJoc2psMzlsYk8tbTM3SE9faTNwN0Npa3hJMy13ZnlNRXRyZWRfMDNhLTNSQU5TYXVIZ3VnMU9wZ3o1TjdTR00?oc=5"
+   "time": "2026-10-16T09:19:48+07:00",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5zdVdqU0duUndVTHp3TEo0RnJDblVMZXZKdFJPRHNJLVptLTZrcUJBVVBoaEtvR0YyRlZHSWNxTjVXVGpmYnZLYjRlQUJ0dXgzdkRiWU9VS0tPUzE4TDNPTHdQWjJjWjR3QWcyVXVTMTZrM2w1aGg3T9IBeEFVX3lxTE8yWGp3LVdsOU5jLTN2ZjNrYlBvNGZEajdyazBHMVF4MTR2dUFQNWp3bGhOVUQwSGIzRTE1NUUySW1UVThWVnVkMnlvZktPaTJIaW1sNXhZeUVGM1hCdm5Mekp3aTBzN2FBX3laelRaTUE3R3ljVTNnTA?oc=5"
   },
   {
-   "title": "이 대통령 지지율 39%…하락세 멈추고 2%p 반등 [갤럽]",
-   "source": "한겨레",
+   "title": "[속보]경찰, ‘딸 교수 임용 의혹 특혜 의혹’ 유승민 전 의원 송치",
+   "source": "경향신문",
    "time": "2026-10-16T08:34:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE54NGotdW9IM2MwaGYzdzEzb2F1UlZJVVI3alV5SWE0UlBmYXkwNTM1SjVjSW1FejU4a2tPeWdOdW5sY0UyVUpGWTM4YWFfOVJ0TV9STHhGcWJoMl9weTBnRHpDaVYtQ0hNaXhqQTlNUkZxTmln?oc=5"
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE53bHdkOEZDcTVQWnpIRUFRZEkzWTFKdGdpMnY5bmpVSzRJTXo0aS13emFub0RJcFRYb1N6ejlHVUhCbnlnaHVWQmVDR3pQQzZCaENYNkY0bUZJd9IBX0FVX3lxTE1BbnJnWTllZ3dPanoycDB5M181WEJtSjFjVTVCaFdXeU5oYWFEbTVObTJkR0VxbVZQWnpyQUtyTDFYTnloMWtncWhYODFEcldNSk10WHNhOWRRT2pLRnBZ?oc=5"
   },
   {
-   "title": "경찰 출동까지 4분 32초‥'가장 빠른 비상벨'도 못 막았다",
+   "title": "‘소방이 재정 빨대’ 발언에 분노···부산서 “경기도지사 관사에 불 지른다”고 협박한 60대 검거",
+   "source": "경향신문",
+   "time": "2026-10-16T09:56:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9IcGxwSGg2cVNaYmxZTmNTQ183Q1FkMlhTaWRvT3YwTjd0OUtKWF9zaTBSbzloWlJsTlFFX3JUaElXY2RpZVhUelptYWxXWU1VME1HUjhSTWFFdw?oc=5"
+  },
+  {
+   "title": "낮 최고 26도 ‘포근한 가을’…일교차 15도 ‘감기 주의’",
+   "source": "한겨레",
+   "time": "2026-10-16T05:59:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFA2SXVxY3ljZUJ1MjJwTndTYWYtdXVWOU5wU2tENkI3NzcyS01GVlJnbF9zczVQSVZtMVg0VENmNS1wUFYyQkhNOE1YUkJMOWlfTmItSnlEMTNCU3RHUHoyN2l3Qk04d0hxVjdjSA?oc=5"
+  },
+  {
+   "title": "지나가는 사람 슬쩍 부딪히고 폰 '툭'‥수리비 2천여만 원 뜯어낸 20대 구속 송치",
    "source": "MBC 뉴스",
-   "time": "2026-10-16T09:36:41+07:00",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9FN2tSeHpDRjlyaFllVFZYS1FHTkVEN1YwQ3F0LXpBbUZmeXlEY3lGd21WTW83WjYxRl96aUxRVkx4VVNvTE1GR0Y3M0hicGZlemFwVE1DeTJhYXNYYld4amQ2QzdrcjBCN2d1WVdPczVKRlZEMEdF0gF3QVVfeXFMUDMxTW1CZmdnR1dsaG5PdEl5RG9wREFFUUNuWnI0NGNqN0U2cTRRcnhqUnJQVTZHZnI5VW9rejRYSmVOeG1vbTBkWERIZVQ1X19tMm82SjJUdklEbzNvdC1ubl9YWUc0Q2I4WXpnN3JGdWZmbkRFSkk?oc=5"
+   "time": "2026-10-16T06:55:30+07:00",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBiUzBBN2YzY2x4ZEJqRTdEbUUzMC1nT29JX256UG14VWpMTWNRQTJUdV9GUy03bDNJUkhOSlJHdERtNjlScW05MndvWnFTVEJqRXZyZFZqT0NkaFBtaWJKZHkySklrdkpsdkRJZmlxWnpXREJ5eFpN0gF3QVVfeXFMTTV5Q1R2cWdORFFZaXhMczV0aWJYbDRMVnZaVlQ4TzE2dXo2Ul9ZaG5ETm1QdmR6NDFHNXJwZnRBM0hNQ3p3VGhubjlLSURvLXM4RkJzVXZHRXVCbmVUSi16cWtBVHNEWXlFZjBrd0w1WFl6S3g2WGc?oc=5"
   },
   {
-   "title": "이재명 정부 국무회의 ‘생중계’가 문제?",
-   "source": "미디어오늘",
-   "time": "2026-10-15T20:05:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9NRDhrMkRKYlZXZndrYjNwbGhLUTI0NUNoUlozMm5qZGFtZG5Hb09XS0RaNVhGQldGQ0hIbnpCWkQ4ZlZvMFUyM2tCeHJnd2ZPZUlubjlrSmRLeHVGUUFiQ1E0aF9RTngzY3czdk41S28?oc=5"
+   "title": "\"우크라, 송환 공개…韓 대북·대러 접근법 훼손\"",
+   "source": "연합뉴스TV",
+   "time": "2026-10-16T06:20:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1uY0J5YUNrS25fTFdzV0N6cEI4Wno0YlVtZUtoTzU5RzlUUEZINm5JNTY1MmhZUHE2b1FYaERsTmNLbUNZN2ZaSWxPMUN2TU51Rkdia2tIQ0M3djFsNkx1d21DcFdtZG8?oc=5"
   },
   {
-   "title": "\"우크라, 북한 포로송환 공개해 한국 대북·대러 접근법 훼손\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-16T05:22:05+07:00",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE55WUpERUtib2Jmb2hOVDZuUDhDLVJ1NGtKejJjdk9fLUpCVDQyYWFYZkVSWVkwSkpsTEZtTldXeXItSk9qOF80bXdvaU5CRktXd19xQzZBbl8zRldyc3g3bkpyRXAtbVBvaHlJYXZzZDdUQ2dj0gF0QVVfeXFMTTNFTlA3SmtvcmY1OFpUZ2E2d252d3o4X0tQTUJiX2pSWmUydDU0RU1CcmZSZVdRY3hhNDdMMGhBZEtOWXl2RWNEVF9ERzFsc0dzV2MzRks4VXlqdUw0Tml1Y1dpNHBxUEpzSFlFczJCV0d0TXU?oc=5"
+   "title": "한동훈, 딸 ‘허위 스펙’ 의혹에 “야비한 정치깡패 민주당 쓸어버리겠다”",
+   "source": "주간경향",
+   "time": "2026-10-15T06:31:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBzc0ZJSHViSVRzb3B2emlTRDczZXljc0xMX1hDb3ZCWGNreVA0TnZ0RkF6ZHVzdHpzTmtveklNbzhPRzNoRk1jTnhxNkxwaWhqUWdVS3BGbkgtaWVGMlE?oc=5"
   },
   {
-   "title": "한병도 “한강버스 비위 은폐 의혹 충격적…사실이면 ‘한강버스 게이트’”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-16T08:52:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE85N09JT0pKeGYwQ1hRSGJ2MG5Rek1SbmduQjdxNVNjcVNYbkx3ejlDSGJEeWJWaWgzTWNjRXJMZ3pYS0lwbkc5ektNcmVRODV6cmpUYjVheGhBaE0?oc=5"
+   "title": "임은정 “김지용 청장에 쓴소리 아끼지 않겠다”",
+   "source": "한겨레",
+   "time": "2026-10-16T09:44:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE42VG1CZjZMN0lMU1EtQXplZEV5R083N2FSVUhXdThYeHlxakY5elJ4ampCRzRBSFFjak9WNGd0ekk2YnVMUXlvRDBDeGVNTkhUZjdEZVdlX2k3NE1sc3JXbQ?oc=5"
   }
  ]
 };
