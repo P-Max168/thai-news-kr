@@ -3,10 +3,10 @@
 
 | 항목 | 내용 |
 |---|---|
-| 마지막으로 확인한 사이트 최신 판 | **2026-10-15-pm** (라이브 data/index.json `latest`, 판 generated 2026-10-15T18:21:05+07:00, 22건 · 커밋 37dc8e4·02d2170(공유 키트) · 확인: 2026-10-15 18:25 BKK, Grok — verify_live OK, e/2026-10-15-pm/ 200) |
-| 정기 실행(07:08/18:08) | **10-15 18:08 정기 저녁판 도착**: edition 커밋 37dc8e4(18:22 push)·공유 키트 02d2170(18:23 push) · verify_live OK. 직전 10-15 07:08 아침판도 정기(004862c·232acf8) |
+| 마지막으로 확인한 사이트 최신 판 | **2026-10-16-am** (라이브 data/index.json `latest`, 판 generated 2026-10-16T07:27:58+07:00, 18건 · 커밋 a9263f2·3863bd7(공유 키트) · 확인: 2026-10-16 07:31 BKK, Grok — verify_live OK, e/2026-10-16-am/ 200) |
+| 정기 실행(07:08/18:08) | **10-16 07:08 정기 아침판 도착**: edition 커밋 a9263f2(07:29 push)·공유 키트 3863bd7(07:30 push) · verify_live OK. 직전 10-15 18:08 저녁판도 정기(37dc8e4·02d2170) |
 | 판 지연 | 10-05-pm ~ 10-10-pm **11판 빠짐**(6일 공백, 목록: Grok 서버 /workspace/logs/edition-gaps.txt). **재생성 안 함**(운영자·Max 결정 10-11: 옛 뉴스를 지금 판처럼 올리지 않음) |
-| 진행 중 작업 | 💬 오늘의 질문 2026-10-15-pm 22건 승인 대기(approved false). 10-14-pm·10-15-am 은 10-15 11:47 게시 완료(79c0d2a, ea2 원화 정정 포함) |
+| 진행 중 작업 | 💬 오늘의 질문 2026-10-16-am 18건 승인 대기(approved false). 10-15-pm 22건은 게시 완료(f06ed1f) |
 | 사이트 주소(10-14) | **https://tnews.pmaxone.com** (GitHub Pages 맞춤 도메인, DNS 는 Cloudflare CNAME tnews→p-max168.github.io DNS only). 옛 주소 p-max168.github.io/thai-news-kr/ 는 301 로 넘어감. Grok 도메인 작업 끝나면 Claude 가 이어받음 — 인계 문서 Grok 서버 /workspace/handoff/TNEWS_DOMAIN_HANDOFF.md |
 
 ## Claude 질문 3개에 대한 Grok 답 (2026-10-11 09:34 BKK)
@@ -37,6 +37,7 @@
 ## 최근 인수인계 (상대 AI가 작업 시작 전에 꼭 읽기 — 새것이 위, 최대 10줄 유지)
 | 시각 | 누가 | 무엇을 바꿨나 | 상대가 알아야 할 것 |
 |---|---|---|---|
+| 2026-10-16 07:33 | Grok | 2026-10-16-am 아침판 정기 빌드(18건, 문서·판 데이터만) | 💬 초안 18건 승인 대기(approved false). 환율 39.83 = ticker.json fx(39.8254, open.er-api, rate_time 10-15 07:02 BKK, 06:01 조회) + 07:17 직접 조회 같은 값(10-16 공시 전). screenshot 👎 FAIL 1=알려진 비자 고정 거짓 실패(vi2 단독 고정 카드). 후속: IMF 총회 반대 시위 충돌·밤샘 농성·16일 드론 금지(bk1, update). issue 연결: bk2·lf1·tr1·so1(기존 id). 한국 관련: 한-태 전략대화(vi2)·한화오션 호위함 관측(pe1). Google News 날짜만 새것인 옛 기사 3건 제외. korea_top 은 data/korea.json(06:01) 6건 GN decode(연합뉴스 URL 은 상자에서 접속 안 돼 WebFetch 로 확인). |
 | 2026-10-15 18:25 | Grok | 2026-10-15-pm 저녁판 정기 빌드(22건, 문서·판 데이터만) | 💬 초안 22건 승인 대기(approved false). 환율 39.83 = ticker.json fx(39.8254, open.er-api, rate_time 10-15 07:02 BKK, 16:11 조회) + 18:15 직접 조회 같은 값. screenshot ALL OK(👎 거짓 실패 안 남). 후속: 출국세 업계 반대(vi4, issue=None+update)·라용 전자 폐기물 공장 폐쇄(ea1, issue=None+update)·16일 펀찟/MRT 시리킷 통제(bk1). 파타야 한국인 남성 체포(vi1, 274일 오버스테이). 실패 소스 2: Pattaya City(SSL)·Air4Thai(timeout). korea_top 은 data/korea.json(16:11) 6건 GN decode. |
 | 2026-10-15 07:30 | Grok | 2026-10-15-am 아침판 정기 빌드(17건, 문서·판 데이터만) | 💬 초안 17건 승인 대기(approved false). 환율 39.83 = open.er-api 직접 조회(공시 10-15 00:02 UTC; ticker.json rate_time 10-14 07:02 이라 미사용). screenshot 👎 FAIL 1=알려진 비자 고정 거짓 실패(vi1 단독 고정 카드). Google News 날짜만 새것인 옛 기사 4건 제외(The Standard 등). 출국세·전자 폐기물 새 전개 없음. korea_top 은 data/korea.json(06:04) 6건 GN decode. ent 0건. |
 | 2026-10-14 18:28 | Grok | 2026-10-14-pm 저녁판 정기 빌드(17건, 문서·판 데이터만) | 💬 초안 17건 승인 대기(approved false). 환율 39.95 = ticker.json fx(rate_time 10-14 07:02 BKK, 조회 16:12). 출국세는 핫야이 육로 면제 요청·한국 매체 후속(issue id 없어 issue=None). screenshot 👎 FAIL 1=알려진 비자 고정 거짓 실패(vi2). korea_top 은 data/korea.json(16:12) 6건 GN decode. ent 0건(실제 후보 약함). |
@@ -46,7 +47,6 @@
 | 2026-10-12 18:25 | Grok | 2026-10-12-pm 저녁판 정기 빌드(18건, 문서·판 데이터만) | 💬 초안 18건 승인 대기(`drafts/discussion/2026-10-12-pm.json`, approved false). fetch_korea TOP RSS 404라 korea_top 은 data/korea.json decode 6건. [Grok→Claude] screenshot 👎 검사 요청은 아침과 동일 대기 |
 | 2026-10-12 07:31 | Grok | 2026-10-12-am 아침판 정기 빌드(18건, 문서·판 데이터만) | `tools/screenshot.py` 👎 재정렬 검사가 이번 판에서 FAIL 1 — 원인: 내 피드 첫 카드가 📌 비자 고정 묶음의 **유일한** 카드(vi2)라 👎 해도 순서가 안 바뀜(화면 정상, 검사 가정 문제). REQUESTS 에 [Grok→Claude] 남김 |
 | 2026-10-11 09:34 | Grok | `collab/` 인수인계 확인, STATUS 질문 3개 답, REQUESTS Claude 요청 완료 처리 (문서만) | 이제 Grok은 workflows·tools(editions 제외)·화면 코드를 직접 고치지 않고 `REQUESTS.md` 에 [Grok→Claude] 로 남김. GROK_PROMPT 5번 '누락 판을 만든다'는 운영자·Max 결정(재생성 안 함)과 충돌 → Grok은 재생성 안 함 |
-| 2026-10-11 08:31 | Grok | **edition-watch 신설**(`.github/workflows/edition-watch.yml` + `tools/edition_watch.py`): 라이브 index.json 의 latest·generated 가 기대 판보다 90분 넘게 늦으면 GitHub 이슈 `edition-gap` 1번(같은 공백은 한 번만). **korea.yml 예비 예약 4번 추가**(Actions 예약 누락 대비). 커밋 30cf391, 백업 `backup-20261011-0827-edition-watch` | **⚠️ 이제 이 둘은 Claude 영역**(workflows·tools). Grok은 직접 안 고침. 미확인: 실제 공백 때 이슈가 열리는지·메일 알림. 같은 날 08:19 regress·ship.sh·edition_stale 수정(cd3b359)도 Claude 영역으로 넘김 |
 
 ## 잠금 (지금 누가 어떤 파일을 고치는 중인지)
 | 파일 | 누가 | 시작 시각 |
