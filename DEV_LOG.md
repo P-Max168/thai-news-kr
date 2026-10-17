@@ -272,3 +272,7 @@
 - 10-17 18:46 · 💬 [낮음·판 콘텐츠] **10-17 저녁판 '💬 오늘의 질문'·운영자 첫 댓글 17건 게시**(민구님 채팅 승인 '전부올려' 18:31, 백업 태그 `backup-20261017-1846-discussion-1017pm`) — 정본 초안 글 그대로 approved:true 로 `tools/discussion.py apply`(exit 0) → data/2026-10-17-pm.json|js + tools/discussions/2026-10-17-pm.json, pending.py rebuild(13건). 원화 환산 3건(39.94 기준) 맞음, 태국 글자·฿ 없음. 18:32 첫 작업분이 커밋 전 작업 폴더에서 사라져(다른 작업/박스 복원 추정) 18:46 에 다시 적용. 판 generated·기사 글·workflows·tools·화면 코드 안 건드림
   - 확인: apply exit 0, 로컬 적용 17/17, 원화 3건 대조 일치
   - 미확인: 폰 화면에서 질문 상자 실제 표시, 18:32 작업분이 사라진 원인
+<!-- seo-robots-1018 -->
+- 10-18 05:32 · 🔎 [보통·사이트 규칙] **검색 노출 1단계: robots.txt 허용 + sitemap.xml 추가**(민구님 채팅 승인 10-18 05:30 '이제 한국어버전은 검색에 나타날수있게해줘' = 승인함 #4, 백업 태그 `backup-20261018-0531-seo-robots`). robots.txt = Allow / (drafts·raw·backups·screenshots·tools·collab 만 막음) + Sitemap 줄. sitemap.xml = 홈·안내 4쪽·판별 페이지 e/* 20개(lastmod = data/index.json generated). 페이지 noindex 메타 해제·사이트맵 자동 갱신·판별 정적 본문은 Claude 담당 파일이라 collab/REQUESTS.md 에 요청(R-seo-1~4)
+  - 확인: sitemap.xml XML 문법 OK(25개 주소), 감사 결과 — 라이브 X-Robots-Tag 헤더 없음, 옛 github.io 주소 301→tnews, 모든 쪽 meta robots noindex,nofollow, canonical·hreflang 없음, 기사 본문은 data/*.js 로 그리는 JS 전용(e/ 쪽은 제목 5개 + JS 이동만)
+  - 미확인: Claude 수락·일정, 검색엔진 실제 수집(noindex 해제 전에는 색인 안 됨), 서치 콘솔·네이버 서치어드바이저 등록(민구님 로그인 필요)

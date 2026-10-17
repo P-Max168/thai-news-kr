@@ -1,6 +1,6 @@
 {
  "_readme": "관리자 승인함(#approve) 목록 — tools/pending.py 가 PENDING_APPROVAL.md 에서 만듦. 승인은 민구님이 고르고 봇이 다음 실행에 반영(자동 승인 없음)",
- "updated_at": "2026-10-17T18:46:55+07:00",
+ "updated_at": "2026-10-18T05:32:30+07:00",
  "items": [
   {
    "id": "p1",
@@ -32,7 +32,7 @@
    "kind": "사이트 규칙(검색 노출)",
    "body": "**검색엔진 막기 풀기** — 지금 모든 쪽이 `noindex, nofollow` + robots.txt `Disallow: /`. 애드센스 심사는 사이트를 읽을 수 있어야 해서 신청 전에 풀어야 함(구글 검색에도 뜨기 시작). 신청 직전에 풀기를 권함. **고를 안 A/B/C + 공식 문서 링크: CHOICE_MEMO_4_5.md**",
    "where": "index.html·안내 4쪽 meta robots, robots.txt",
-   "status": "대기"
+   "status": "**승인됨(10-18 05:30 채팅)** — robots.txt·sitemap.xml 반영(Grok), noindex 메타 해제는 Claude 요청 R-seo-1"
   },
   {
    "id": "p5",
