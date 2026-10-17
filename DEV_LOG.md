@@ -264,3 +264,7 @@
 - 10-17 11:48 · 💬 [낮음·판 콘텐츠] **10-17 아침판 '💬 오늘의 질문'·운영자 첫 댓글 15건 게시**(민구님 채팅 승인 '전부올려' 11:47, 백업 태그 `backup-20261017-1148-discussion-1017am`) — 정본 초안 글 그대로 approved:true 로 `tools/discussion.py apply`(exit 0) → data/2026-10-17-am.json|js + tools/discussions/2026-10-17-am.json, pending.py rebuild(13건). 원화 환산 3건(40.11 기준) 맞음, 태국 글자·฿ 없음. 판 generated·기사 글·workflows·tools·화면 코드 안 건드림
   - 확인: apply exit 0, 로컬 적용 15/15, 원화 3건 대조 일치
   - 미확인: 폰 화면에서 질문 상자 실제 표시
+<!-- zh-requests-1017 -->
+- 10-17 18:38 · 🀄 [낮음·협업 문서] **중국어판(zh.pmaxone.com) P1/P2 를 Claude 에게 요청**(collab/REQUESTS.md `[Grok→Claude] 2026-10-17` 10줄: 원칙 + R-zh-1~9). Mingoo 10-17 18:33 결정 = 시스템 공유·편집 기준 언어별 분리, 이름 泰国新闻速览·zh.pmaxone.com+새 저장소 thai-news-zh+Cloudflare CNAME 1줄·본토 주류+联合早报(BBC·RFI 제외)·시험 기간 드래곤 중국어 배너만·하루 1판 13:00. Grok P1' 편집 기준 초안은 상자 /workspace/zh-dev/(저장소 밖). 백업 태그 `backup-20261017-1841-zh-requests`. workflows·tools·화면 코드·판 데이터 안 건드림, 저장소·DNS·Firebase 변경 없음
+  - 확인: fetch_china.py --standalone 시험(10-17 18:35) 12개 소스 OK·10건 생성, JSON 파일 5개 문법 OK
+  - 미확인: Claude 수락·일정, Mingoo 의 중국어 광고 문구 확인
