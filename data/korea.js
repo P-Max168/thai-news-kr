@@ -1,18 +1,24 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-17T08:14:16+07:00",
+ "updated_at": "2026-10-17T08:46:58+07:00",
  "items": [
   {
-   "title": "소방관 6명이 쓰러졌다, 이래도 ‘재정 빨대’인가요",
-   "source": "조선일보",
-   "time": "2026-10-16T22:56:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOdHByMk5yaDd1QUpfWHhoaWZTY2E3eVFrRGgxU3FIbEVDYlFjak1KZ25JWmRMNGFvQWl4Nk9UY0hkMUF0dW1ZYmVZWTlVVWpTS2xmQ3ZxYjdaNmJlRkRfTENUMko2SUdhLVNkNy14NXdtck5icmZkVjdSUUZQeHhObVQzbWxMQQ?oc=5"
+   "title": "부천 심정지 40대 소방관 끝내 숨져…“가장 먼저 도착해 불 끄다가”",
+   "source": "동아일보",
+   "time": "2026-10-17T06:44:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5Va2tHYUh5WGFkNmRfZDA2LTgwTUZvR1BHNEsxQjdJSkwyZFl0U3pCeHBRcExsT18wbWJJbnZHR0IwazJNdWk1MHZzMTBIaTNkMHcwMk10RTdzSVFUa1UzMWtzWDZtNmRDbDNXWUtwckpKdmp3aVHSAWZBVV95cUxOWkxPZzdVNTh0MVV5bWtxMmp2dDVFZ2hqRUR0Q1BTRXBJdDRmSVRNM3I0b2I1NjhVbk5EdVpvSlk3cDVfZkRzb1hyV1FIRWdCQ1VsSXB0aEVoYXFYcEVKcE5OTUdqTmc?oc=5"
   },
   {
-   "title": "[날씨] 단풍 물드는 맑고 포근한 가을 날씨…내일은 전국에 비바람",
-   "source": "연합뉴스TV",
-   "time": "2026-10-17T07:37:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1JQ0IzUHdFaWE0YVJ5bHFEVEZkRlVkX3czalE2bjZQa3pCc1Brd3AzU0ZWb0FxYlpWdVA4WWZGRkxRS1AwWU1yQTBNLVZRSldHRS15X1JlakVtTFhpSjJlaTFTY0k5alk?oc=5"
+   "title": "[내일날씨] 전국 흐리고 비…수도권·충청·전북 최대 80㎜",
+   "source": "연합뉴스",
+   "time": "2026-10-17T07:00:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE91anBWeDdLbV9VQ1VNZTJCbHZ6UlJoOUpNNmZhdTBsY3hUeEtDZFJfRmxtUXE5dGk3RW5uOVIwSHhkZ1RETW1lajk4WU92Z0pIY3JPRFIxMDRVVTQ?oc=5"
+  },
+  {
+   "title": "경찰, ‘인천 흉기 난동’ 최충락 자택 압수수색",
+   "source": "KBS 뉴스",
+   "time": "2026-10-17T06:34:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBycVVLUkI2dld1ZnNXZ01hdWMzLWZBdXVNOWNmTW9rTm50Rl9pV0J0b3lDVXhCLThuMnBiVFhKemtNNVRTRDYwUUdhMDhJS21FcVR0UUlqZ0M0RmM?oc=5"
   },
   {
    "title": "공주 실종 50대 여성 숨진 채 발견…스토킹 신고 남성 차량서",
@@ -21,16 +27,16 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBLdUpSenNoelNlRDFhR2pHUlhkMVoxa1NmYlhKMUlnS3R1TC1UVmsyYnQyOWwzUlRPNGNrb2JPS1RvbHo5QklGdG5TaGMwWnVXUGljTHliVC1MX29RYUI0SUh4RU9zYXV1?oc=5"
   },
   {
-   "title": "브런슨 “대한민국은 남쪽 철책선에서 시작”···DMZ 영토주권 부정 발언 파문",
-   "source": "경향신문",
-   "time": "2026-10-16T14:37:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5ZWi1EcmFlTUVES0Q1VURxZVk0NXN5ekxmM2JYVjY5d2R2SE5Qemp2bDFxcUMxRll4ZkRoSnRBUWVRQ1ZDN0ZSUmVMSFJUZ2VmM2dtdUhrbjJnQdIBX0FVX3lxTE91ZU0wUlBoVm94U1ZhYTNvRkJrWDY5a2tIN2dSR0N6ZWpUUGtPdGdrNnRwS1pTUHl1czdWa3ZIblpDdzF5TTZ6QWlsbHdPNGhoaUZkeG1oZ3ZNQ1pHZEI4?oc=5"
+   "title": "민주 \"소방공무원 숭고한 희생 애도…추미애 발언 다시 한번 사죄\"",
+   "source": "연합뉴스TV",
+   "time": "2026-10-17T08:20:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBzNlVaeXdiU2RqZFBQTElHaFI1NFlvMHViYU5UNlkwOHBSRnhSOWY3VGhfSkoyMW91dC1MOUdqbnNyVEx3cmVUZmNudDVTVUdzR25vamJDTV9zckhWd1lieFZmY3RaczA?oc=5"
   },
   {
-   "title": "’8명 부상’ 인천 흉기난동범 신상 공개…59세 최충락",
-   "source": "연합뉴스TV",
-   "time": "2026-10-16T16:38:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE41UHZsUmxVakQ2S0g2NzFBazhyc3RMN1prUWxEYWVtN080UUlmM0ljN092N2VhdUs5M2JGMDdPZ0xXd1J2LU1WT3FTZWx0R2MxWWFIandQY1N6QklBVnl2Sm5mYktmWk0?oc=5"
+   "title": "브런슨 직격한 與 \"한국 영토주권 부정\"",
+   "source": "매일경제",
+   "time": "2026-10-16T16:03:22+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFB4ZmNROVM1TGZWQVRoZW52VWdjZGc2UlJZQ3cwNTEtV0pLZFQzOEtDMjA5Vl9hd24tdW9MWnZsT3FNSGVxcU90QmRhOGtIQmN1NXNWQjFR?oc=5"
   },
   {
    "title": "與의 부산 구애… 李 한주 두번 찾고, 김민석은 \"2주마다 갈 것\"",
@@ -39,28 +45,22 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOMFhBaERneEZ3WV9ObnRtZEZNSjJXSkMtYTkybXQwb1lRTl9aX0R2OENKejRBME1DRGpPcVJGaGU4MDFSbVQ4ZlV3bGZLQnpUczN6eWJpelBlWEFZS25rYlh2N2ZTQm1iZ3lUWGRacHV0ZTlLRzB2aGpHX1dPbDc3UTBBSXJsZ3o1MktBeGVDRnQ?oc=5"
   },
   {
-   "title": "‘소방 재정 빨대’라더니…경기도, 순직 추모 사업 예산도 전액 삭감",
-   "source": "경향신문",
-   "time": "2026-10-16T12:53:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1OaUk2cTYyZmN1SXlERDRpT0t6U1RKaEFESXJ2S1NKNWRvOUZnc0h5VDlXMTdQVVMwS0JmVGw1djBSektTcl9rb1BZYUhuVlZfcEtVVnBCNVpGQdIBX0FVX3lxTE5ZNkdaZERMbS12VWNJTXYtTmRHU2dnVlNaZkkyMUdGZEZFc0NPMlR5YWIxeEpZbkpRd1RFZThOd1FOVHA3R2xvNmVxWTF6NkxPc0szblJJWnY2cTFMcnhj?oc=5"
-  },
-  {
    "title": "한동훈 딸 부실수사 의혹 고발사건, 서울청으로 이관‥\"면밀 검토해 배정\"",
    "source": "MBC 뉴스",
    "time": "2026-10-16T13:13:33+07:00",
    "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5jUlp3djZEaGItZ2RzWjBwZ0Ztb3FlVTRacXVqSTVGQ2VmZ3pDVGpTZHVGRGJvSnYxekE2ai14LXNvMTdxdElNTkpPV2dYTGk1cDZVN09aYWpXRGNUZ2NOZjkxUHk2NGJrYS0yZjIxVldXZURNWGFZ0gF3QVVfeXFMTjRfaGd5WmtYNlRlc2I4bUNfcEFSampsdmdqdWNUdmctdVI4MFRkZFBWV1lKSEpjUTZxS1hIWE1xOXRoYlRCUVZxcUprNFBVN09IcnI1dFNOcXN6ZUs1RjEydEh3S1lOdVQ5a0lCQVZwS0tpSnJKRmM?oc=5"
   },
   {
-   "title": "트럼프 “현대, 조지아주에 5억6천만 달러 투자 방금 발표”",
-   "source": "미주한국일보",
-   "time": "2026-10-16T01:02:35+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE91OFo5NElLRjI2ZGRlbk4xaUVNM3ZLdktZalFHcFMtR0xCU3M2RTRmZnRZT1lWX3VydDNHWlZyUUlKSkVQU255WDFjMVMzSWVIX1hnXzl2akR1ekwxWjFF?oc=5"
-  },
-  {
    "title": "[단독] 中대사 “전쟁하면 쉽게 이긴다”…필리핀 대통령 “노골적 무력 위협” 반발",
    "source": "문화일보",
    "time": "2026-10-17T06:23:09+07:00",
    "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBtdXI5MVFnTlVtSUFBaG1lZW1LSHZrVTAyS1RwQlhmazd1c2dHUUhrOFpkLWdkUF9tdE9RTTMwNW1nbUNzUlF2ZDlyWE9rM3dq?oc=5"
+  },
+  {
+   "title": "한동훈 “브라질 계란 수입, 이 대통령이 룰라에 준 선물”…외교부 “사실 아냐”",
+   "source": "한겨레",
+   "time": "2026-10-16T20:08:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBkUTVBQmFWLXRCR0hUYlpDT0VNUVJ3dmdJWmowWjFwelRpUmZ0R3ZYWXBpVkJvdTZRYzc1VVFCQmFJbGZQVmx4Nk5jVTlfU3VlTlBLUjR6cHVjREtkSU1RRVZ5RlI2Wmk3WEF1c2NiUGR5Qmdv?oc=5"
   }
  ]
 };
