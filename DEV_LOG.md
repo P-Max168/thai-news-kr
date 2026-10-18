@@ -290,5 +290,5 @@
   - 미확인: zh 쪽 문구 품질(중국어 독자 검수 전), zh 의 시세 팝업 환율 설명은 아직 THB_KRW 기준(문구만 '韩元' — 위안 설명은 코드 수정 필요), 운영자 화면(반응 통계·승인함·신고함·광고 기준)과 숨긴 코너(places·nearby·jobs)는 zh 문구를 일부러 안 넣음(운영자 = 민구님 한국어, 코너는 zh 에서 숨김)
 <!-- seo-gsc-verify-1018 -->
 - 10-18 08:56 · 🔎 [낮음·검색] **구글 서치 콘솔 인증 메타를 홈(index.html)에만 넣음**(R-seo-3 자리, 민구님 10-18 요청 — Grok, 백업 태그 `backup-20261018-0856-seo-gsc-verify`). `<meta name="google-site-verification" content="DtP2tEd0o62MViKUUJFR5BhgfuvsxQvf3omU1z25nzk" />` 주석 풀어 넣음, 네이버 줄은 주석 그대로(값 오면 같은 방식). 원인/재발 방지: 언어판 빌드(tools/site_build.py)가 주석 줄만 지우던 정규식 → 주석 푼 한국판 인증 줄이 zh 판 index.html 에 남을 뻔 → 정규식이 주석/주석 푼 줄 모두 지우게 고침(zh 값은 site/<lang>.json seo.verification).
-  - 확인: 로컬 정규식 시험(한국판 index.html → 언어판 처리 뒤 site-verification 0개), e/<판>/ 쪽은 share_kit 이 따로 만들어 영향 없음.
-  - 미확인: 라이브 반영(배포 뒤 curl 로 확인 예정), 구글 쪽 '확인' 버튼 결과.
+  - 확인: 로컬 정규식 시험(한국판 index.html → 언어판 처리 뒤 site-verification 0개), e/<판>/ 쪽은 share_kit 이 따로 만들어 영향 없음. 라이브(커밋 4cf4e75, 08:57 curl 캐시 우회): https://tnews.pmaxone.com/ 9행에 인증 메타 있음, 네이버 줄은 주석 그대로, e/2026-10-18-am/ 에는 0개.
+  - 미확인: 구글 쪽 '확인' 버튼 결과.
