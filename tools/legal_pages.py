@@ -77,7 +77,8 @@ def render(fn, title, secs):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tnews.pmaxone.com/%s">
 <meta name="theme-color" content="#ffffff">
 <title>%s · %s</title>
 <link rel="icon" href="assets/icons/icon-192.png">
@@ -94,7 +95,7 @@ def render(fn, title, secs):
 </main>
 </body>
 </html>
-""" % (html.escape(title), SITE, CSS.strip(), SITE, draft, html.escape(title), UPDATED, body, nav)
+""" % (fn, html.escape(title), SITE, CSS.strip(), SITE, draft, html.escape(title), UPDATED, body, nav)
 
 if __name__ == "__main__":
     for fn, title, secs in PAGES:

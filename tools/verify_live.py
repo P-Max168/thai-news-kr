@@ -65,6 +65,7 @@ async def main():
           dateline: (document.getElementById('dateline')||{}).innerText,
           footer: (document.querySelector('.footer__about')||{}).innerText,
           robots: (document.querySelector('meta[name=robots]')||{}).content,
+          canonical: (document.querySelector('link[rel=canonical]')||{}).href || null,
           scroll: [document.documentElement.scrollWidth, window.innerWidth],
           visaStories: st.filter(s=>TNTopics.storyTopics(s).all.includes('visa')).length,
           xtrendGone: !document.querySelector('#trendWidget,#trendBottom,#trendList,#trendMore,#trendNote'),
@@ -112,6 +113,25 @@ async def main():
         gok, gmsg = gen_time_check.check(WANT, generated=lg, root=ROOT, index_generated=li)
     except Exception as e:
         gok, gmsg = False, "점검 실행 실패: %s" % str(e)[:120]
+    # 2026-10-18 검색 노출(R-seo-1): 홈에 noindex 가 없어야 하고 canonical 이 있어야 함 + e/<판>/ 정적 쪽도 noindex 없이 기사 전체(<article>)
+    seo_ok, seo_msg = True, []
+    import urllib.request
+    base = URL.split("?")[0].rstrip("/") + "/"; ts = str(int(time.time()))
+    if "noindex" in (info.get("robots") or ""):
+        seo_ok = False; seo_msg.append("홈 robots=%s" % info.get("robots"))
+    if not info.get("canonical"):
+        seo_ok = False; seo_msg.append("홈 canonical 없음")
+    try:
+        ep = urllib.request.urlopen(base + "e/%s/?_=%s" % (WANT, ts), timeout=30).read().decode("utf-8")
+        na = ep.count("<article")
+        if "noindex" in ep: seo_ok = False; seo_msg.append("e 쪽 noindex")
+        if na < 1: seo_ok = False; seo_msg.append("e 쪽 기사 0")
+        if 'rel="canonical"' not in ep: seo_ok = False; seo_msg.append("e 쪽 canonical 없음")
+        seo_msg.append("e 쪽 기사 %d" % na)
+    except Exception as ex:
+        seo_msg.append("e 쪽 확인 못 함(%s)" % str(ex)[:80])   # share_kit 전 첫 배포면 아직 없을 수 있음 → 실패로 보지 않음
+    print("seo:", "OK" if seo_ok else "FAIL", " · ".join(seo_msg))
+    ok = ok and seo_ok
     print("generated:", "OK" if gok else ("FAIL" if gok is False else "참고"), gmsg)
     ok = ok and gok is not False
     print("OK" if ok else "FAIL (want %s)" % WANT)

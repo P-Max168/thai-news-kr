@@ -1,4 +1,4 @@
-# 검색 노출 허용(2026-10-18 민구님 채팅 승인 05:30). 페이지별 noindex 메타 해제는 Claude 요청(collab/REQUESTS.md)
+# 검색 노출 허용(2026-10-18 민구님 채팅 승인 05:30). 페이지별 noindex 해제 10-18 Grok(R-seo-1, 민구님 08:00 승인). offline·404·시안 쪽만 noindex
 User-agent: *
 Allow: /
 Disallow: /drafts/

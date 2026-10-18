@@ -1024,6 +1024,11 @@
   }
   var cur = resolve(getParam("e") || getParam("ed") || getParam("date"));
   state.edition = cur;
+  // 검색 노출(2026-10-18 R-seo-3): ?ed=<판> 으로 열린 화면은 canonical 을 그 판의 정적 쪽 /e/<판>/ 으로(홈 기본값은 index.html 의 /)
+  if (cur && !cur.missing && (getParam("e") || getParam("ed") || getParam("date"))) {
+    var cl = document.querySelector('link[rel="canonical"]');
+    if (cl) try { cl.setAttribute("href", new URL("e/" + encodeURIComponent(cur.id) + "/", cl.href).href); } catch (e) {}
+  }
   var tabParam = getParam("tab");
   if (tabParam && (tabParam === "all" || tabParam === "feed" || T.get(tabParam))) state.tab = T.canon(tabParam);   // ?tab=pattaya 같은 옛 주소도 동부로
   if (EDS.length > 1) {

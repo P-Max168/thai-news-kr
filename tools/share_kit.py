@@ -15,7 +15,7 @@
   share/<id>.txt        카카오톡 메시지 문구(링크 1~2개)
   share/<id>-card.html, share/<id>-og.html  렌더에 쓴 HTML(확인용)
   og/<id>.png, og/latest.png(최신 판일 때만)  ← 사이트에 올릴 OG 이미지
-  e/<id>/index.html     판별 OG 태그를 가진 작은 정적 페이지 → ../../?ed=<id> 로 이동
+  e/<id>/index.html     판별 OG 태그 + 판 기사 전체 정적 HTML(검색용, tools/seo.py) → 사람은 ../../?ed=<id> 로 이동
 share/ 는 .gitignore(올리지 않음). og/ e/ 는 사이트에 올릴 파일(배포 스크립트에 경로 추가 필요).
 
 기사 고르기(기본): 🏖️동부(촌부리·라용) 2건 → 🛂외국인·비자 1건(주 주제 +2, 제목·지역에 촌부리·라용 지명 +1,
@@ -403,41 +403,17 @@ def og_tags(title, desc, url, img):
 
 
 def edition_page(data, meta, chosen, tp, ed_url, img):
+    """판 정적 페이지 e/<판>/index.html — 2026-10-18 검색 노출(R-seo-1·3·4): 판 기사 전체(제목·요약·출처) 정적 HTML,
+    index/follow, canonical 자기 자신. 본문은 tools/seo.py(공용). 제목·설명·OG 는 여기서(카드 고르기 기준 그대로)."""
+    import seo
     m, d, wd, edn = date_label(data, meta)
-    eid = data["id"]
     title = "태국 뉴스 한눈에 — %d월 %d일(%s) %s" % (m, d, wd, edn)
     desc = " · ".join("%s %s" % (TOPICS[tp[s["id"]]["topic"]][1], split_head(s["headline"])[0]) for s in chosen[:3])
     if len(desc) > 110:
         desc = desc[:108].rstrip() + "…"
-    target = "../../?ed=" + eid
-    items = "".join("<li>%s %s</li>" % (TOPICS[tp[s["id"]]["topic"]][1], e(split_head(s["headline"])[0])) for s in chosen[:5])
-    return """<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>%(title)s</title>
-<meta name="description" content="%(desc)s">
-%(og)s
-<meta name="theme-color" content="#ffffff">
-<link rel="icon" type="image/png" sizes="32x32" href="../../assets/icons/favicon-32.png">
-<!-- 판별 링크 미리보기용 정적 페이지(tools/share_kit.py 가 생성). 사람은 바로 판 화면으로 이동.
-     meta refresh 는 일부 미리보기 수집기가 따라가 메인 페이지 태그를 읽을 수 있어 쓰지 않음(JS 이동 + 링크). -->
-<script>location.replace(%(target_js)s + location.hash);</script>
-<style>body{margin:0;font-family:Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:#F2F4F6;color:#191F28}
-header{background:#fff;color:#191F28;padding:18px 20px;font-weight:800;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05)}main{padding:20px;max-width:640px;margin:auto}
-a.btn{display:inline-block;margin-top:14px;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
-li{margin:6px 0;color:#333D4B}</style>
-<link rel="stylesheet" href="/assets/g-pages.css?v=1">
-</head>
-<body>
-<header>태국 뉴스 한눈에</header>
-<main><p><b>%(label)s</b></p><ul>%(items)s</ul><a class="btn" href="%(target)s">이번 판 열기 →</a></main>
-</body>
-</html>
-""" % {"title": e(title), "desc": e(desc), "og": og_tags(title, desc, ed_url, img), "target_js": json.dumps(target),
-       "target": e(target), "label": e(meta.get("label", eid)), "items": items}, title, desc
+    emo = {k: TOPICS.get(v["topic"], ("", ""))[1] for k, v in tp.items()}
+    page = seo.edition_page(data, meta, title, desc, og_tags(title, desc, ed_url, img), emo)
+    return page, title, desc
 
 
 def ensure_gitignore():
@@ -507,6 +483,8 @@ def main():
         ep.mkdir(parents=True, exist_ok=True)
         (ep / "index.html").write_text(page, encoding="utf-8")
         print("saved e/%s/index.html" % eid)
+        import seo   # 2026-10-18 R-seo-2: 판마다 sitemap.xml 갱신(deploy.sh 도 커밋 전에 한 번 더)
+        print("sitemap.xml: 판 쪽 %d개" % seo.sitemap())
 
     print("\n기사:", ", ".join("%s(%s)" % (s["id"], tp[s["id"]]["topic"]) for s in chosen))
     print("\n----- %s/%s.txt (%d자) -----\n%s" % (_rel(share), eid, len(msg.rstrip("\n")), msg))
