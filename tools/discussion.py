@@ -3,9 +3,12 @@
 
   python3 tools/discussion.py draft <판 id>
       → drafts/discussion/<판 id>.json (올리지 않음, .gitignore) 에 그 판의 모든 기사(빠짐없이 전부):
-        [{id, title(한국어 제목), topic, question:"", operator_comment:"", approved:false}]
+        [{id, title(한국어 제목), topic, reader_fit:""(A|B|C), question:"", operator_comment:"", approved:false}]
         question·operator_comment 는 정기 실행(편집자)이 직접 채운다 — 자연스러운 한국어, 정직한 운영자 목소리,
         tools/TRANSLATION_RULES.md 준수, 기사에 없는 사실 단정 금지, 절대 독자(사용자)인 척하지 않는다.
+        독자 = 태국의 한국인 교민·여행자. 쓰기 전에 기사마다 reader_fit 을 A(누구나 화제)/B(외국인도 해당 행정)/
+        C(태국 국민 전용 행정·혜택)로 정한다. C 는 독자·운영자가 직접 할 일처럼 쓰지 않음('신청하셨나요?'·'여러분 빨리 가세요' 금지)
+        → 간접 영향·주변 태국인 직원/이웃·본 것·중립 의견을 묻는다(TRANSLATION_RULES.md 'A/B/C 3단계', 운영자 답글도 같음).
         이미 채운 초안 파일이 있으면 덮어쓰지 않는다(--force 로 새로).
   python3 tools/discussion.py show <판 id>              # 초안을 사람이 읽기 좋게 출력(채팅으로 보여 줄 때)
   python3 tools/discussion.py apply <판 id> <approved.json>
@@ -54,7 +57,7 @@ def draft(eid, force=False):
         old = json.loads(fn.read_text(encoding="utf-8"))
         if any(x.get("question") for x in old):
             print("이미 채운 초안이 있음(덮어쓰지 않음):", fn); return fn
-    items = [dict(id=s["id"], title=s["headline"], topic=newslib.topics_of(s)[0], question="", operator_comment="", approved=False)
+    items = [dict(id=s["id"], title=s["headline"], topic=newslib.topics_of(s)[0], reader_fit="", question="", operator_comment="", approved=False)
              for s in candidates(d)]
     fn.write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8")
     print("초안 %d건 → %s (question·operator_comment 를 채우고 approved 는 false 로 둘 것)" % (len(items), fn))
@@ -64,7 +67,7 @@ def draft(eid, force=False):
 def show(eid):
     items = json.loads((DRAFTS / (eid + ".json")).read_text(encoding="utf-8"))
     for i, x in enumerate(items, 1):
-        print("%d. [%s] %s\n   💬 질문: %s\n   🗨️ 운영자: %s\n" % (i, x["id"], x["title"], x.get("question") or "(비어 있음)", x.get("operator_comment") or "(비어 있음)"))
+        print("%d. [%s%s] %s\n   💬 질문: %s\n   🗨️ 운영자: %s\n" % (i, x["id"], ("·" + x["reader_fit"]) if x.get("reader_fit") else "", x["title"], x.get("question") or "(비어 있음)", x.get("operator_comment") or "(비어 있음)"))
 
 
 def merge_into(d, items):
