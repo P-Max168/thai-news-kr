@@ -197,10 +197,12 @@ def main():
     ap.add_argument("--timeout", type=float, default=20)
     ap.add_argument("--workers", type=int, default=12)
     ap.add_argument("--verify", action="store_true")
+    # 언어판(2026-10-18 Grok): 소스 파일을 바꿔 쓸 수 있게(zh 13:00 빌드 = 한국판 정본 sources.json + sources.zh.json 보강을 합친 임시 파일). 기본은 그대로 tools/sources.json
+    ap.add_argument("--sources", default=str(SOURCES))
     a = ap.parse_args()
     if feedparser is None:
         sys.exit("feedparser 필요: pip install feedparser")
-    cfg = json.loads(SOURCES.read_text(encoding="utf-8"))
+    cfg = json.loads(pathlib.Path(a.sources).read_text(encoding="utf-8"))
     build_canon(cfg["sources"])
     excl = [re.compile(x, re.I) for x in cfg.get("exclude_outlets", [])]
     disabled = [s for s in cfg["sources"] if s.get("disabled")]

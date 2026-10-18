@@ -81,7 +81,8 @@ while :; do
 done
 
 if python3 -c 'import playwright' 2>/dev/null; then
-  python3 tools/verify_live.py "$LIVE_URL" "$LATEST" "screenshots/live-mobile-390.png"
+  if [ "$SITE_LANG" = "ko" ]; then python3 tools/verify_live.py "$LIVE_URL" "$LATEST" "screenshots/live-mobile-390.png"
+  else python3 tools/dev/lang_check.py "$LIVE_URL" "$LATEST" "screenshots/live-$SITE_LANG"; fi   # 언어판(2026-10-18): verify_live 는 한국판 문구 기준
 else
   echo "playwright 없음 — 브라우저 렌더 검증 생략(데이터 검증은 통과)"
 fi
