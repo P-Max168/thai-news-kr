@@ -295,4 +295,4 @@
 <!-- zh-build-proc-1018 -->
 - 10-18 09:05 · 🇨🇳 [보통·공유 코드] **zh 13:00 점심판 빌드 절차 준비(예약 안 함)**(민구님 10-18 08:00 승인 — Grok 대행, 백업 태그 `backup-20261018-0904-zh-build-proc`). 새 `tools/lang_build.sh`(언어판 전용 prep·build·publish·draft·end — 한국판에선 안 돎)·`tools/dev/lang_check.py`(언어판 화면 점검: 콘솔 오류·보이는 한글/태국 문자·카드 수 — screenshot.py/verify_live 는 한국판 문구 기준). `tools/collect.py --sources <파일>` 추가(기본 그대로 tools/sources.json). `tools/deploy.sh` 는 언어판일 때만 verify_live 대신 lang_check(한국판 경로 그대로). index.html 헤더 ♥ 의 aria-label 에 `data-i18n-aria="a11y.heart"`(글자 그대로). zh 저장소 쪽 루틴 프롬프트 = `ROUTINE_MD.md`, 템플릿 = `tools/editions/_template.py`
   - 확인: /tmp 복사본에서 TNK_TEST=1 — prep(한국판 265 + 중문 보강 7곳 수집, 중문 후보 76건, THB_CNY 0.2005)·build(시험 판 4건, 검증 통과·lang_check ALL OK)·share_kit(카드·e/·og/)·draft 동작. bash -n·i18n_scan(남은 한글 0, ko.json 899키)
-  - 미확인: publish 실제 배포(첫 zh 판 때), zh 주소 DNS 없을 때 deploy.sh 라이브 대기 60초로 줄여 push 만 확인하는 경로(첫 배포 때), 루틴 예약(민구님 확인 전)
+  - 미확인: publish 실제 배포(첫 zh 판 때), zh 주소 DNS 없을 때(판단 = 실제 접속 — 상자 DNS 가 없는 이름에 198.18.x 가짜 IP 를 줘서 getent 안 씀, 09:10 고침) deploy.sh 라이브 대기 60초로 줄여 push 만 확인하는 경로(첫 배포 때), 루틴 예약(민구님 확인 전)

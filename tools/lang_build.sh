@@ -84,7 +84,8 @@ publish)
   done
   # 주소(DNS)가 아직 없으면 deploy.sh 의 라이브 대기(기본 900초)를 짧게 — push 는 되고 라이브 확인만 못 함(exit 2 = 그 경우로 봄)
   HOST="$(echo "$SITE_URL" | sed -E 's#^https?://##; s#/.*##')"; NODNS=""
-  getent hosts "$HOST" >/dev/null 2>&1 || { NODNS=1; export DEPLOY_TIMEOUT=60; echo "주소 $HOST DNS 없음 — 배포는 하고 라이브 확인은 Pages 빌드 상태로"; }
+  # (상자 DNS 는 없는 이름에도 가짜 IP(198.18.x)를 줄 수 있어 getent 대신 실제 접속으로 판단)
+  curl -fsS -m 20 -o /dev/null "$SITE_URL" 2>/dev/null || { NODNS=1; export DEPLOY_TIMEOUT=60; echo "주소 $HOST DNS 없음 — 배포는 하고 라이브 확인은 Pages 빌드 상태로"; }
   dep() { bash tools/deploy.sh; local c=$?; [ $c -eq 0 ] && return 0; [ -n "$NODNS" ] && [ $c -eq 2 ] && { echo "(DNS 없음: push 완료·라이브 확인 생략)"; return 0; }; return $c; }
   dep || { echo "DEPLOY FAIL"; exit 1; }
   python3 tools/share_kit.py "$ID" || echo "경고: share_kit 실패(카드·e/·og/ 없음)"
