@@ -113,3 +113,4 @@ git commit -m "되돌리기: <태그> 시점 화면으로" && git push   # force
 | `backup-20261018-0812-seo-noindex` | 10-18 08:12 | 검색 노출 2단계 직전: 모든 쪽 noindex,nofollow, e 쪽 = 제목 5개 + JS 이동, sitemap 손으로 만든 것 (HEAD 84bb4d9) | — | `git revert <이번 커밋>` → push(force 금지). 또는 태그의 index.html·안내 4쪽·e/·sitemap.xml·tools/share_kit.py·legal_pages.py·deploy.sh·verify_live.py·assets/app.js 로 되돌리고 tools/seo.py 삭제 |
 | `backup-20261018-0834-zh-shared` | 10-18 08:34 | 중국어판 공유 코드 직전(언어 설정·TNI 없음, 판 슬롯 early/am/pm) (HEAD 3ed8867) | — | `git revert <이번 커밋>` → push(force 금지). 한국판 화면은 바뀐 게 없어야 정상 |
 | `backup-20261018-1842-discussion-reader-fit` | 10-18 18:42 | 오늘의 질문 A/B/C 규칙 직전 (HEAD 8e53d60) | — | `git revert <이번 커밋>` → push(force 금지). 문서·안내 문구만 바뀜 |
+| `backup-20261018-1845-forme-reader-fit` | 10-18 18:45 | 10-18 저녁판 for_me 2칸(lf1·bk1) 고치기 직전 (HEAD 827e900) | — | `git revert <이번 커밋>` → push(force 금지) |
