@@ -6,7 +6,7 @@
  */
 (function () {
   "use strict";
-  var FB_URL = "assets/fb.js?v=32f860c3";       // tools/stamp_assets.py 가 ?v= 갱신
+  var FB_URL = "assets/fb.js?v=2b3801f4";       // tools/stamp_assets.py 가 ?v= 갱신
   var AUTH_KEY = "tnk.auth.v1";                  // 이 기기: {uid, linked:[uid…]} (계정 정보는 저장 안 함)
   var S = window.TNStore, L = window.TNTaste;
   var live = /^https?:$/.test(location.protocol);
@@ -23,7 +23,7 @@
     if (!live) return Promise.reject(new Error("file"));
     if (!fbP) {
       fbP = import(new URL(FB_URL, document.baseURI).href).then(function (m) { fb = m; return m; });
-      fbP.catch(function (e) { console.warn("[로그인] Firebase 를 불러오지 못함(로그인 없이 계속):", e); fbP = null; failed = true; refreshUI(); });
+      fbP.catch(function (e) { console.warn(TNI("social.k829f7b1", "[로그인] Firebase 를 불러오지 못함(로그인 없이 계속):"), e); fbP = null; failed = true; refreshUI(); });
     }
     return fbP;
   }
@@ -38,25 +38,25 @@
     var el = $("acct"); if (!el) return;
     if (!live || (failed && !user)) { el.hidden = true; return; }
     el.hidden = false;
-    if (user) el.innerHTML = '<button type="button" class="acct__me" data-acct-menu aria-haspopup="true" aria-label="내 계정">' + avatar("acct__av") + "</button>";
-    else el.innerHTML = '<button type="button" class="gbtn" data-login>' + G + '<span class="gbtn__t">' + (window.TNI ? TNI("login.google", "구글로 로그인") : "구글로 로그인") + '</span><span class="gbtn__s">' + (window.TNI ? TNI("login.short", "로그인") : "로그인") + '</span></button>';
+    if (user) el.innerHTML = TNI("social.kabfc72c", "<button type=\"button\" class=\"acct__me\" data-acct-menu aria-haspopup=\"true\" aria-label=\"내 계정\">") + avatar("acct__av") + "</button>";
+    else el.innerHTML = '<button type="button" class="gbtn" data-login>' + G + '<span class="gbtn__t">' + (window.TNI ? TNI("login.google", "구글로 로그인") : TNI("social.k90ec74c", "구글로 로그인")) + '</span><span class="gbtn__s">' + (window.TNI ? TNI("login.short", "로그인") : TNI("social.ke225a6f", "로그인")) + '</span></button>';
   }
   function statusText() {
-    return syncState === "error" ? "⚠️ 동기화 오류 — 잠시 뒤 다시 시도해요" : syncState === "saving" ? "저장 중…" : "✓ 구글 계정에 저장됨";
+    return syncState === "error" ? TNI("social.kf09bd1c", "⚠️ 동기화 오류 — 잠시 뒤 다시 시도해요") : syncState === "saving" ? TNI("social.k9f67850", "저장 중…") : TNI("social.k9d64095", "✓ 구글 계정에 저장됨");
   }
   function menuHTML() {
     return '<div class="acct-menu__in">' +
-      '<div class="acct-menu__top">' + avatar("acct-menu__av") + '<div><b>' + (profile ? esc(profile.nickname) : "구글 계정으로 로그인됨") + "</b>" + (admin ? ' <span class="badge-op">운영자</span>' : "") +
+      '<div class="acct-menu__top">' + avatar("acct-menu__av") + '<div><b>' + (profile ? esc(profile.nickname) : TNI("social.kf57cfb1", "구글 계정으로 로그인됨")) + "</b>" + (admin ? TNI("social.k16541d6", " <span class=\"badge-op\">운영자</span>") : "") +
       '<small class="acct-sync">' + statusText() + "</small></div></div>" +
-      '<p class="acct-menu__note">내 주제·취향이 다른 기기에서도 이어져요. 댓글에는 닉네임만 보여요.</p>' +
-      (profile ? '<button type="button" class="setbtn setbtn--sm" data-nick-edit>닉네임 바꾸기</button>' : "") +
-      '<button type="button" class="btn btn--sm acct-out" data-logout>로그아웃</button>' +
-      '<p class="acct-uid">내 사용자 ID(UID): <code>' + esc(user.uid) + "</code></p></div>";
+      TNI("social.k1bbad39", "<p class=\"acct-menu__note\">내 주제·취향이 다른 기기에서도 이어져요. 댓글에는 닉네임만 보여요.</p>") +
+      (profile ? TNI("social.k6322b85", "<button type=\"button\" class=\"setbtn setbtn--sm\" data-nick-edit>닉네임 바꾸기</button>") : "") +
+      TNI("social.k535c9e2", "<button type=\"button\" class=\"btn btn--sm acct-out\" data-logout>로그아웃</button>") +
+      TNI("social.k3264cbe", "<p class=\"acct-uid\">내 사용자 ID(UID): <code>") + esc(user.uid) + "</code></p></div>";
   }
   function closeMenu() { var m = $("acctMenu"); if (m) m.remove(); }
   function openMenu() {
     closeMenu();
-    var m = document.createElement("div"); m.id = "acctMenu"; m.className = "acct-menu"; m.setAttribute("role", "dialog"); m.setAttribute("aria-label", "내 계정");
+    var m = document.createElement("div"); m.id = "acctMenu"; m.className = "acct-menu"; m.setAttribute("role", "dialog"); m.setAttribute("aria-label", TNI("social.kfd9b1c0", "내 계정"));
     m.innerHTML = menuHTML(); document.body.appendChild(m);
   }
   /* 🧩 설정 창 안의 계정 칸 */
@@ -65,15 +65,15 @@
     if (!live || (failed && !user)) { el.hidden = true; return; }
     el.hidden = false;
     el.innerHTML = user
-      ? '<div class="acct-box__row">' + avatar("acct__av") + '<span><b>구글 계정으로 로그인됨</b><small>' + statusText() + '</small></span><button type="button" class="btn btn--sm acct-out" data-logout>로그아웃</button></div>' +
-        (admin ? '<div class="adm-links"><button type="button" class="adm-link" data-page="admin">📊 반응 통계</button>' + (window.TNPages && TNPages.has("approve") ? '<button type="button" class="adm-link" data-page="approve">✅ 승인함</button>' : "") + '</div>' : "")
-      : '<div class="acct-box__row"><span><b>다른 기기에서도 이어 보기</b><small>로그인은 선택이에요. 안 해도 모든 기능을 쓸 수 있어요.</small></span><button type="button" class="gbtn gbtn--light" data-login>' + G + '<span>구글로 로그인</span></button></div>';
+      ? '<div class="acct-box__row">' + avatar("acct__av") + TNI("social.kdc7d532", "<span><b>구글 계정으로 로그인됨</b><small>") + statusText() + TNI("social.k315e602", "</small></span><button type=\"button\" class=\"btn btn--sm acct-out\" data-logout>로그아웃</button></div>") +
+        (admin ? TNI("social.kf708e4a", "<div class=\"adm-links\"><button type=\"button\" class=\"adm-link\" data-page=\"admin\">📊 반응 통계</button>") + (window.TNPages && TNPages.has("approve") ? TNI("social.kc4c1c54", "<button type=\"button\" class=\"adm-link\" data-page=\"approve\">✅ 승인함</button>") : "") + '</div>' : "")
+      : TNI("social.kec77ebb", "<div class=\"acct-box__row\"><span><b>다른 기기에서도 이어 보기</b><small>로그인은 선택이에요. 안 해도 모든 기능을 쓸 수 있어요.</small></span><button type=\"button\" class=\"gbtn gbtn--light\" data-login>") + G + TNI("social.k4314815", "<span>구글로 로그인</span></button></div>");
   }
   function refreshUI() {
     renderHeader();
     if ($("acctBox")) renderAccountBox($("acctBox"));
     if ($("drawerAcct")) renderAccountBox($("drawerAcct"));
-    var n = $("storeNote"); if (n) n.textContent = user ? "구글 계정에 저장돼 다른 기기에서도 이어져요." : "설정과 취향은 이 기기(브라우저)에만 저장돼요. 구글로 로그인하면 다른 기기에서도 이어져요(선택).";
+    var n = $("storeNote"); if (n) n.textContent = user ? TNI("social.k28dd65e", "구글 계정에 저장돼 다른 기기에서도 이어져요.") : TNI("social.k4b1291b", "설정과 취향은 이 기기(브라우저)에만 저장돼요. 구글로 로그인하면 다른 기기에서도 이어져요(선택).");
     if ($("acctMenu")) $("acctMenu").innerHTML = menuHTML();
     document.querySelectorAll("[data-cmts].is-mounted").forEach(function (c) { renderComments(c); });
     if (window.TNPages && /^(admin|approve)$/.test(TNPages.current() || "")) TNPages.refresh();
@@ -102,28 +102,28 @@
     setTimeout(rxFlush, 2000);   // 지난번에 못 보낸 반응
     m.onUser(onUser);
     m.redirectResult().then(function (r) {
-      if (r && r.failed && !m.currentUser()) toast("로그인이 끝나지 않았어요. Safari(또는 Chrome) 브라우저에서 열어 다시 시도해 주세요.", 5000);
+      if (r && r.failed && !m.currentUser()) toast(TNI("social.k1158d8a", "로그인이 끝나지 않았어요. Safari(또는 Chrome) 브라우저에서 열어 다시 시도해 주세요."), 5000);
     });
   }
   function login() {
-    toast("구글 로그인 창을 여는 중…", 1500);
+    toast(TNI("social.kddd5ea0", "구글 로그인 창을 여는 중…"), 1500);
     load().then(function (m) { start(m); return m.signIn(); }).then(function (u) {
-      if (u) toast("로그인했어요. 내 주제·취향을 계정에 저장할게요 🙂");
+      if (u) toast(TNI("social.kb20c7e6", "로그인했어요. 내 주제·취향을 계정에 저장할게요 🙂"));
     }).catch(function (e) {
       var c = e && e.code;
       if (c === "auth/popup-closed-by-user" || c === "auth/cancelled-popup-request") return;
-      console.warn("[로그인]", e);
-      toast(c === "auth/network-request-failed" || !fb ? "인터넷 연결을 확인해 주세요. 로그인 없이도 그대로 볼 수 있어요." : "로그인하지 못했어요(" + esc(c || "오류") + "). 잠시 뒤 다시 시도해 주세요.", 4000);
+      console.warn(TNI("social.k760f04e", "[로그인]"), e);
+      toast(c === "auth/network-request-failed" || !fb ? TNI("social.kdb7c6fd", "인터넷 연결을 확인해 주세요. 로그인 없이도 그대로 볼 수 있어요.") : TNI("social.k0ddd995", "로그인하지 못했어요(") + esc(c || TNI("social.k3efa8af", "오류")) + TNI("social.k6b97f82", "). 잠시 뒤 다시 시도해 주세요."), 4000);
     });
   }
   function logout() {
     if (!fb) return;
     closeMenu();
-    fb.signOutNow().then(function () { toast("로그아웃했어요. 이 기기의 설정은 그대로 남아 있어요."); });
+    fb.signOutNow().then(function () { toast(TNI("social.k641b12a", "로그아웃했어요. 이 기기의 설정은 그대로 남아 있어요.")); });
   }
 
   /* ---------- 댓글 ---------- */
-  var BAD = ["씨발", "시발", "ㅅㅂ", "ㅆㅂ", "씹", "병신", "ㅂㅅ", "좆", "존나", "개새", "개색", "지랄", "ㅈㄹ", "미친놈", "미친년", "닥쳐", "꺼져", "느금", "니미", "엠창", "썅", "보지", "자지", "섹스", "야동", "창녀", "걸레년",
+  var BAD = ["씨발", "시발", "ㅅㅂ", "ㅆㅂ", "씹", "병신", "ㅂㅅ", "좆", "존나", "개새", "개색", "지랄", "ㅈㄹ", "미친놈", "미친년", "닥쳐", "꺼져", "느금", "니미", "엠창", "썅", "보지", "자지", "섹스", "야동", "창녀", "걸레년",   // i18n:data — 욕설 거르기 단어(화면 문구 아님, 언어판은 따로)
     "เหี้ย", "สัส", "ควย", "หี", "เย็ด", "แม่ง", "ไอ้สัตว์", "อีดอก", "ส้นตีน", "กะหรี่",
     "fuck", "fck", "shit", "bitch", "cunt", "asshole", "pussy", "dick", "nigg", "fag", "porn", "whore", "slut"];
   var SPAM = [/https?:\/\//i, /www\./i, /\b[a-z0-9-]+\.(com|net|org|io|xyz|top|co|me|ly|gg|th)\b/i, /카지노|바카라|토토|슬롯|대출|도박|텔레그램|텔레|카톡\s*아이디|라인\s*아이디/, /casino|baccarat|slot|viagra|crypto|telegram|whatsapp|line\s*id|bit\.ly/i, /บาคาร่า|สล็อต|คาสิโน|เว็บพนัน/, /(.)\1{7,}/];
@@ -136,13 +136,13 @@
   }
   function nickOk(n) {
     n = String(n || "").trim();
-    if (n.length < 2 || n.length > 12) return "닉네임은 2~12자로 정해 주세요.";
-    if (!/^[0-9A-Za-z가-힣ㄱ-ㅎ\u0E00-\u0E7F _-]+$/.test(n)) return "한글·영문·숫자·태국어·띄어쓰기·_ - 만 쓸 수 있어요.";
-    if (/운영자|관리자|운영진|admin|관리인|official/i.test(n.replace(/\s/g, ""))) return "'운영자' 같은 이름은 쓸 수 없어요.";
-    if (badText(n)) return "다른 닉네임을 골라 주세요.";
+    if (n.length < 2 || n.length > 12) return TNI("social.k6ff0b23", "닉네임은 2~12자로 정해 주세요.");
+    if (!/^[0-9A-Za-z가-힣ㄱ-ㅎ\u0E00-\u0E7F _-]+$/.test(n)) return TNI("social.kde5b766", "한글·영문·숫자·태국어·띄어쓰기·_ - 만 쓸 수 있어요.");
+    if (/운영자|관리자|운영진|admin|관리인|official/i.test(n.replace(/\s/g, ""))) return TNI("social.kfc32a2d", "'운영자' 같은 이름은 쓸 수 없어요.");
+    if (badText(n)) return TNI("social.k1e2675d", "다른 닉네임을 골라 주세요.");
     return null;
   }
-  function defaultNick() { return "파타야 회원 " + String(Math.floor(1000 + Math.random() * 9000)); }
+  function defaultNick() { return TNI("social.kfefff10", "파타야 회원 ") + String(Math.floor(1000 + Math.random() * 9000)); }
   function fmt(ms) {
     var p = new Intl.DateTimeFormat("ko-KR", { timeZone: "Asia/Bangkok", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(new Date(ms));
     var o = {}; p.forEach(function (x) { o[x.type] = x.value; }); return o.month + "/" + o.day + " " + o.hour + ":" + o.minute;
@@ -151,14 +151,14 @@
   var pendingQR = null;   // 로그인 전에 누른 추천 문장 {key, parent, text} → 로그인 후 댓글 칸에 채움(자동 등록 안 함)
   /* 💡 추천 문장(판 데이터 story.quick_replies — 편집 때 작성) / 답글 추천(부모 댓글 내용으로 화면에서 간단한 틀 고르기).
    * 누르면 댓글 칸에 채우기만 하고, 등록은 로그인한 사용자가 직접 '등록'을 눌러 자기 닉네임으로 올린다(자동 등록 없음). */
-  var QR_LABEL = "추천 문장 · 눌러서 내 댓글로";
+  var QR_LABEL = TNI("social.k30e6588", "추천 문장 · 눌러서 내 댓글로");
   function replyChips(t) {
     t = String(t || "").trim();
-    if (/명복|조의|애도|숨지|숨진|사망|별세/.test(t)) return ["삼가 고인의 명복을 빕니다", "마음이 아프네요"];
-    if (/[?？]\s*$|(나요|까요|가요|는지|을까|있나|어때|어떤가|아시는 분|계세요)[\s?？.!~]*$/.test(t)) return ["저도 궁금했어요", "아시는 분 답 부탁드려요", "좋은 질문이에요"];
-    if (/^운영자입니다/.test(t)) return ["좋은 정보 감사해요!", "저도 궁금했어요", "혹시 더 자세한 소식 있나요?"];
-    if (/\d|있어요|했어요|입니다|래요|더라고요|대요|됐어요|돼요/.test(t)) return ["정보 감사해요!", "혹시 언제 일인가요?", "어느 쪽 얘기인가요?"];
-    return ["공감해요", "정보 감사해요!", "저도 궁금했어요"];
+    if (/명복|조의|애도|숨지|숨진|사망|별세/.test(t)) return [TNI("social.k8a03a4b", "삼가 고인의 명복을 빕니다"), TNI("social.k6261c66", "마음이 아프네요")];
+    if (/[?？]\s*$|(나요|까요|가요|는지|을까|있나|어때|어떤가|아시는 분|계세요)[\s?？.!~]*$/.test(t)) return [TNI("social.k736017a", "저도 궁금했어요"), TNI("social.kb3c6643", "아시는 분 답 부탁드려요"), TNI("social.kad060f0", "좋은 질문이에요")];
+    if (/^운영자입니다/.test(t)) return [TNI("social.k69d5c90", "좋은 정보 감사해요!"), TNI("social.k736017a", "저도 궁금했어요"), TNI("social.k2968061", "혹시 더 자세한 소식 있나요?")];
+    if (/\d|있어요|했어요|입니다|래요|더라고요|대요|됐어요|돼요/.test(t)) return [TNI("social.k3df65f8", "정보 감사해요!"), TNI("social.kccf66e6", "혹시 언제 일인가요?"), TNI("social.k553be77", "어느 쪽 얘기인가요?")];
+    return [TNI("social.k79953b2", "공감해요"), TNI("social.k3df65f8", "정보 감사해요!"), TNI("social.k736017a", "저도 궁금했어요")];
   }
   function chipsHTML(list, parent) {
     list = (list || []).filter(function (x) { return typeof x === "string" && x.trim(); }).slice(0, 4);
@@ -183,7 +183,7 @@
     load().then(function (m) { start(m); return m.listComments(ed, aid).then(function (list) {
         // 답글(articleId "<기사>~<부모>") — 실패해도 댓글은 그대로 보여 줌
         var parents = ["op"].concat(list.map(function (c) { return c.id; }));
-        return (m.listReplies ? m.listReplies(ed, aid, parents) : Promise.resolve([])).catch(function (e) { console.warn("[답글]", e); return []; })
+        return (m.listReplies ? m.listReplies(ed, aid, parents) : Promise.resolve([])).catch(function (e) { console.warn(TNI("social.k8893c72", "[답글]"), e); return []; })
           .then(function (rs) { return { list: list, rs: rs }; });
       }); })
       .then(function (r) {
@@ -191,23 +191,23 @@
         r.rs.forEach(function (c) { var p = String(c.articleId || "").split("~")[1]; if (p) (by[p] = by[p] || []).push(c); });
         cache[k] = { list: r.list, replies: by };
       })
-      .catch(function (e) { console.warn("[댓글]", e); cache[k] = { err: true, denied: e && e.code === "permission-denied", list: [] }; })
+      .catch(function (e) { console.warn(TNI("social.k2ee26dd", "[댓글]"), e); cache[k] = { err: true, denied: e && e.code === "permission-denied", list: [] }; })
       .then(function () { document.querySelectorAll('[data-cmts="' + el.getAttribute("data-cmts") + '"]').forEach(renderComments); });
   }
   function cHTML(c, reply) {
     var mine = user && c.uid === user.uid;
-    var acts = reply ? "" : '<button type="button" class="cbtn" data-c-reply="' + esc(c.id) + '">↳ 답글</button>';
-    if (user && (mine || admin)) acts += '<button type="button" class="cbtn" data-c-del="' + esc(c.id) + '">삭제</button>';
-    if (user && admin && !mine) acts += '<button type="button" class="cbtn" data-c-hide="' + esc(c.id) + '">숨기기</button>';
-    if (user && !mine) acts += '<button type="button" class="cbtn" data-c-report="' + esc(c.id) + '">신고</button>';
-    return '<div class="cmt' + (c.isAdmin ? " cmt--op" : "") + (reply ? " cmt--reply" : "") + '" data-cid="' + esc(c.id) + '"><div class="cmt__h"><b class="cmt__n">' + esc(c.nickname) + "</b>" + (c.isAdmin ? '<span class="badge-op">운영자</span>' : "") +
-      '<span class="cmt__d">' + esc(fmt(c.createdAt)) + "</span>" + (mine ? '<span class="cmt__me">내 댓글</span>' : "") + "</div>" +
+    var acts = reply ? "" : '<button type="button" class="cbtn" data-c-reply="' + esc(c.id) + TNI("social.k1fa938f", "\">↳ 답글</button>");
+    if (user && (mine || admin)) acts += '<button type="button" class="cbtn" data-c-del="' + esc(c.id) + TNI("social.k42d1163", "\">삭제</button>");
+    if (user && admin && !mine) acts += '<button type="button" class="cbtn" data-c-hide="' + esc(c.id) + TNI("social.kffa6336", "\">숨기기</button>");
+    if (user && !mine) acts += '<button type="button" class="cbtn" data-c-report="' + esc(c.id) + TNI("social.kef7de27", "\">신고</button>");
+    return '<div class="cmt' + (c.isAdmin ? " cmt--op" : "") + (reply ? " cmt--reply" : "") + '" data-cid="' + esc(c.id) + '"><div class="cmt__h"><b class="cmt__n">' + esc(c.nickname) + "</b>" + (c.isAdmin ? TNI("social.ked4421c", "<span class=\"badge-op\">운영자</span>") : "") +
+      '<span class="cmt__d">' + esc(fmt(c.createdAt)) + "</span>" + (mine ? TNI("social.k135cf3f", "<span class=\"cmt__me\">내 댓글</span>") : "") + "</div>" +
       '<p class="cmt__t">' + esc(c.text) + "</p>" + (acts ? '<div class="cmt__a">' + acts + "</div>" : "") + "</div>";
   }
   function replyFormHTML(el, parent, ptext) {
     return '<div class="rform" data-rform="' + esc(parent) + '">' + chipsHTML(replyChips(ptext), parent) +
-      '<textarea maxlength="500" rows="2" placeholder="답글을 남겨 주세요 (500자까지)" data-r-text></textarea>' +
-      '<div class="cform__foot"><span class="cform__msg" data-r-msg></span><button type="button" class="linkbtn" data-r-cancel>취소</button><button type="button" class="btn btn--primary btn--sm" data-r-send>등록</button></div></div>';
+      TNI("social.k60f32d3", "<textarea maxlength=\"500\" rows=\"2\" placeholder=\"답글을 남겨 주세요 (500자까지)\" data-r-text></textarea>") +
+      TNI("social.kf70c566", "<div class=\"cform__foot\"><span class=\"cform__msg\" data-r-msg></span><button type=\"button\" class=\"linkbtn\" data-r-cancel>취소</button><button type=\"button\" class=\"btn btn--primary btn--sm\" data-r-send>등록</button></div></div>");
   }
   function repliesHTML(el, c, parent, ptext) {
     var rs = (c.replies && c.replies[parent]) || [];
@@ -218,24 +218,24 @@
   function formHTML(el) {
     if (!fb && !fbP) return "";
     var qr = chipsHTML(el && el._qr);
-    if (!user) return qr + '<div class="cform cform--out"><span>댓글을 쓰려면 로그인해 주세요. <small>(댓글엔 닉네임만 보여요)</small></span><button type="button" class="gbtn gbtn--light" data-login>' + G + "<span>구글로 로그인</span></button></div>";
-    if (!profile) return '<div class="cform cform--nick"><label><b>댓글에 쓸 닉네임을 정해 주세요</b><small>2~12자 · 구글 이름·이메일은 보이지 않아요</small>' +
-      '<input type="text" maxlength="12" data-nick-input value="' + esc(defaultNick()) + '"></label><p class="cform__msg" data-c-msg></p><button type="button" class="btn btn--primary btn--sm" data-nick-save>이 닉네임으로 시작</button></div>';
-    return qr + '<div class="cform"><div class="cform__who">' + esc(profile.nickname) + (admin ? ' <span class="badge-op">운영자</span>' : "") + '</div><textarea maxlength="500" rows="2" placeholder="생각을 남겨 주세요 (500자까지)" data-c-text></textarea>' +
-      '<div class="cform__foot"><span class="cform__msg" data-c-msg></span><span class="cform__n" data-c-n>0/500</span><button type="button" class="btn btn--primary btn--sm" data-c-send>등록</button></div></div>';
+    if (!user) return qr + TNI("social.kb5aa1c5", "<div class=\"cform cform--out\"><span>댓글을 쓰려면 로그인해 주세요. <small>(댓글엔 닉네임만 보여요)</small></span><button type=\"button\" class=\"gbtn gbtn--light\" data-login>") + G + TNI("social.k4314815", "<span>구글로 로그인</span></button></div>");
+    if (!profile) return TNI("social.k2117828", "<div class=\"cform cform--nick\"><label><b>댓글에 쓸 닉네임을 정해 주세요</b><small>2~12자 · 구글 이름·이메일은 보이지 않아요</small>") +
+      '<input type="text" maxlength="12" data-nick-input value="' + esc(defaultNick()) + TNI("social.kfa0ddd3", "\"></label><p class=\"cform__msg\" data-c-msg></p><button type=\"button\" class=\"btn btn--primary btn--sm\" data-nick-save>이 닉네임으로 시작</button></div>");
+    return qr + '<div class="cform"><div class="cform__who">' + esc(profile.nickname) + (admin ? TNI("social.k16541d6", " <span class=\"badge-op\">운영자</span>") : "") + TNI("social.ka1c1946", "</div><textarea maxlength=\"500\" rows=\"2\" placeholder=\"생각을 남겨 주세요 (500자까지)\" data-c-text></textarea>") +
+      TNI("social.k402c404", "<div class=\"cform__foot\"><span class=\"cform__msg\" data-c-msg></span><span class=\"cform__n\" data-c-n>0/500</span><button type=\"button\" class=\"btn btn--primary btn--sm\" data-c-send>등록</button></div></div>");
   }
   function renderComments(el) {
     var c = cache[cKey(el)] || { list: [] };
-    var body = c.loading ? '<p class="cmts__empty">댓글 불러오는 중…</p>'
-      : c.err && c.denied ? '<p class="cmts__empty">댓글 기능을 준비 중이에요.</p>'
-      : c.err ? '<p class="cmts__empty">댓글을 불러오지 못했어요. <button type="button" class="linkbtn" data-c-retry>다시 시도</button></p>'
-      : c.list.length ? c.list.map(function (x) { return cHTML(x) + repliesHTML(el, c, x.id, x.text); }).join("") : '<p class="cmts__empty">첫 댓글을 남겨보세요</p>';
+    var body = c.loading ? TNI("social.k257dbda", "<p class=\"cmts__empty\">댓글 불러오는 중…</p>")
+      : c.err && c.denied ? TNI("social.kfa1e909", "<p class=\"cmts__empty\">댓글 기능을 준비 중이에요.</p>")
+      : c.err ? TNI("social.k5b67c76", "<p class=\"cmts__empty\">댓글을 불러오지 못했어요. <button type=\"button\" class=\"linkbtn\" data-c-retry>다시 시도</button></p>")
+      : c.list.length ? c.list.map(function (x) { return cHTML(x) + repliesHTML(el, c, x.id, x.text); }).join("") : TNI("social.k06f2933", "<p class=\"cmts__empty\">첫 댓글을 남겨보세요</p>");
     var keep = el.querySelector("[data-c-text]"), draft = keep ? keep.value : "";
     var rk = el.querySelector("[data-r-text]"), rdraft = rk ? rk.value : "";
     var nrep = 0; Object.keys(c.replies || {}).forEach(function (p) { nrep += c.replies[p].length; });
     var opRep = el._op && !c.loading && !c.err ? repliesHTML(el, c, "op", el._op) : "";
-    var tk = el.closest(".talk"), dn = tk && tk.querySelector("[data-dq-n]"); if (dn) dn.textContent = (c.list.length + nrep) ? "댓글 " + (c.list.length + nrep) : "";   // 접힌 '오늘의 질문' 줄에 댓글 수
-    el.innerHTML = (opRep ? '<div class="replies--op">' + opRep + "</div>" : "") + '<h4 class="cmts__h">댓글 <em>' + ((c.list.length + nrep) || "") + "</em></h4>" + body + (c.err ? "" : formHTML(el));
+    var tk = el.closest(".talk"), dn = tk && tk.querySelector("[data-dq-n]"); if (dn) dn.textContent = (c.list.length + nrep) ? TNI("social.k36b4c3c", "댓글 ") + (c.list.length + nrep) : "";   // 접힌 '오늘의 질문' 줄에 댓글 수
+    el.innerHTML = (opRep ? '<div class="replies--op">' + opRep + "</div>" : "") + TNI("social.kd4e1838", "<h4 class=\"cmts__h\">댓글 <em>") + ((c.list.length + nrep) || "") + "</em></h4>" + body + (c.err ? "" : formHTML(el));
     var ta = el.querySelector("[data-c-text]"); if (ta && draft) { ta.value = draft; }
     var ra = el.querySelector("[data-r-text]"); if (ra && rdraft) { ra.value = rdraft; }
     // 로그인 전에 눌렀던 추천 문장 → 로그인·닉네임 뒤 그 칸에 채움(직접 '등록'을 눌러야 올라감)
@@ -254,16 +254,16 @@
     if (!user) {   // 로그인 안 함 → 구글 로그인 안내. 로그인 뒤 이 문장을 칸에 채워 둠(자동 등록 안 함)
       pendingQR = { key: cKey(el), parent: parent || null, text: text };
       if (parent) el._replyTo = parent;
-      toast("로그인하면 이 문장이 댓글 칸에 들어가요. 고쳐 쓴 뒤 '등록'을 눌러 주세요.", 3500);
+      toast(TNI("social.kd148464", "로그인하면 이 문장이 댓글 칸에 들어가요. 고쳐 쓴 뒤 '등록'을 눌러 주세요."), 3500);
       login(); return;
     }
-    if (!profile) { pendingQR = { key: cKey(el), parent: parent || null, text: text }; var ni = el.querySelector("[data-nick-input]"); if (ni) ni.focus(); toast("먼저 댓글에 쓸 닉네임을 정해 주세요."); return; }
+    if (!profile) { pendingQR = { key: cKey(el), parent: parent || null, text: text }; var ni = el.querySelector("[data-nick-input]"); if (ni) ni.focus(); toast(TNI("social.kcd70039", "먼저 댓글에 쓸 닉네임을 정해 주세요.")); return; }
     var box = parent ? el.querySelector('[data-rform="' + parent + '"] [data-r-text]') : el.querySelector("[data-c-text]");
     if (box) fillBox(box, text);
   }
   function openReply(el, parent) {
-    if (!user) { toast("답글을 쓰려면 구글로 로그인해 주세요. (댓글엔 닉네임만 보여요)", 3000); el._replyTo = parent; login(); return; }
-    if (!profile) { toast("먼저 아래에서 댓글에 쓸 닉네임을 정해 주세요."); var ni = el.querySelector("[data-nick-input]"); if (ni) ni.focus(); return; }
+    if (!user) { toast(TNI("social.k6846ce8", "답글을 쓰려면 구글로 로그인해 주세요. (댓글엔 닉네임만 보여요)"), 3000); el._replyTo = parent; login(); return; }
+    if (!profile) { toast(TNI("social.k258225d", "먼저 아래에서 댓글에 쓸 닉네임을 정해 주세요.")); var ni = el.querySelector("[data-nick-input]"); if (ni) ni.focus(); return; }
     el._replyTo = el._replyTo === parent ? null : parent;
     renderComments(el);
     var ra = el.querySelector("[data-r-text]"); if (ra) ra.focus({ preventScroll: false });
@@ -272,42 +272,42 @@
     var f = el.querySelector("[data-rform]"); if (!f) return;
     var parent = f.getAttribute("data-rform"), ta = f.querySelector("[data-r-text]"), t = (ta.value || "").trim();
     var say = function (x) { var m = f.querySelector("[data-r-msg]"); if (m) m.textContent = x; };
-    if (!t) return say("내용을 적어 주세요.");
+    if (!t) return say(TNI("social.kbacdae8", "내용을 적어 주세요."));
     var b = badText(t);
-    if (b) return say(b === "spam" ? "링크·광고성 문구는 쓸 수 없어요." : "욕설·비속어가 들어 있어요. 고쳐서 다시 올려 주세요.");
-    var a = rd(); if (a.lastC && Date.now() - a.lastC < 30000) return say("댓글은 30초에 한 번만 쓸 수 있어요. 잠시만 기다려 주세요.");
-    var btn = f.querySelector("[data-r-send]"); btn.disabled = true; say("올리는 중…");
+    if (b) return say(b === "spam" ? TNI("social.k505836c", "링크·광고성 문구는 쓸 수 없어요.") : TNI("social.k334daed", "욕설·비속어가 들어 있어요. 고쳐서 다시 올려 주세요."));
+    var a = rd(); if (a.lastC && Date.now() - a.lastC < 30000) return say(TNI("social.kc66bdc6", "댓글은 30초에 한 번만 쓸 수 있어요. 잠시만 기다려 주세요."));
+    var btn = f.querySelector("[data-r-send]"); btn.disabled = true; say(TNI("social.k3af83b6", "올리는 중…"));
     fb.addComment(el.getAttribute("data-ed"), el.getAttribute("data-cmts") + "~" + parent, t, { nickname: profile.nickname, isAdmin: admin }).then(function () {
       var x = rd(); x.lastC = Date.now(); wr(x); ta.value = ""; el._replyTo = null;
-      toast("답글을 올렸어요"); fetchComments(el);
+      toast(TNI("social.k97edf38", "답글을 올렸어요")); fetchComments(el);
     }).catch(function (e) {
-      console.warn("[답글 등록]", e); btn.disabled = false;
-      say(e && e.code === "permission-denied" ? "지금은 올릴 수 없어요(30초에 한 번 · 닉네임 확인). 잠시 뒤 다시 시도해 주세요." : "올리지 못했어요. 인터넷 연결을 확인해 주세요.");
+      console.warn(TNI("social.k6bfa56b", "[답글 등록]"), e); btn.disabled = false;
+      say(e && e.code === "permission-denied" ? TNI("social.kc0a1c17", "지금은 올릴 수 없어요(30초에 한 번 · 닉네임 확인). 잠시 뒤 다시 시도해 주세요.") : TNI("social.k79e8247", "올리지 못했어요. 인터넷 연결을 확인해 주세요."));
     });
   }
   function msg(el, t) { var m = el.querySelector("[data-c-msg]"); if (m) m.textContent = t; }
   function send(el) {
     var ta = el.querySelector("[data-c-text]"), t = (ta.value || "").trim();
-    if (!t) return msg(el, "내용을 적어 주세요.");
-    if (t.length > 500) return msg(el, "500자까지 쓸 수 있어요.");
+    if (!t) return msg(el, TNI("social.kbacdae8", "내용을 적어 주세요."));
+    if (t.length > 500) return msg(el, TNI("social.k4f9a318", "500자까지 쓸 수 있어요."));
     var b = badText(t);
-    if (b) return msg(el, b === "spam" ? "링크·광고성 문구는 쓸 수 없어요." : "욕설·비속어가 들어 있어요. 고쳐서 다시 올려 주세요.");
-    var a = rd(); if (a.lastC && Date.now() - a.lastC < 30000) return msg(el, "댓글은 30초에 한 번만 쓸 수 있어요. 잠시만 기다려 주세요.");
-    var btn = el.querySelector("[data-c-send]"); btn.disabled = true; msg(el, "올리는 중…");
+    if (b) return msg(el, b === "spam" ? TNI("social.k505836c", "링크·광고성 문구는 쓸 수 없어요.") : TNI("social.k334daed", "욕설·비속어가 들어 있어요. 고쳐서 다시 올려 주세요."));
+    var a = rd(); if (a.lastC && Date.now() - a.lastC < 30000) return msg(el, TNI("social.kc66bdc6", "댓글은 30초에 한 번만 쓸 수 있어요. 잠시만 기다려 주세요."));
+    var btn = el.querySelector("[data-c-send]"); btn.disabled = true; msg(el, TNI("social.k3af83b6", "올리는 중…"));
     fb.addComment(el.getAttribute("data-ed"), el.getAttribute("data-cmts"), t, { nickname: profile.nickname, isAdmin: admin }).then(function () {
       var x = rd(); x.lastC = Date.now(); wr(x); ta.value = "";
-      toast("댓글을 올렸어요"); fetchComments(el);
+      toast(TNI("social.k7358b52", "댓글을 올렸어요")); fetchComments(el);
     }).catch(function (e) {
-      console.warn("[댓글 등록]", e); btn.disabled = false;
-      msg(el, e && e.code === "permission-denied" ? "지금은 올릴 수 없어요(30초에 한 번 · 닉네임 확인). 잠시 뒤 다시 시도해 주세요." : "올리지 못했어요. 인터넷 연결을 확인해 주세요.");
+      console.warn(TNI("social.kc7e3286", "[댓글 등록]"), e); btn.disabled = false;
+      msg(el, e && e.code === "permission-denied" ? TNI("social.kc0a1c17", "지금은 올릴 수 없어요(30초에 한 번 · 닉네임 확인). 잠시 뒤 다시 시도해 주세요.") : TNI("social.k79e8247", "올리지 못했어요. 인터넷 연결을 확인해 주세요."));
     });
   }
   function saveNick(el) {
     var inp = el.querySelector("[data-nick-input]"), n = (inp.value || "").trim().replace(/\s+/g, " "), bad = nickOk(n);
     if (bad) return msg(el, bad);
-    msg(el, "저장 중…");
+    msg(el, TNI("social.k9f67850", "저장 중…"));
     fb.saveProfile(user.uid, n).then(function (p) { profile = p; refreshUI(); setTimeout(function () { var t = el.querySelector("[data-c-text]"); if (t) t.focus(); }, 50); })
-      .catch(function (e) { console.warn(e); msg(el, "저장하지 못했어요. 잠시 뒤 다시 시도해 주세요."); });
+      .catch(function (e) { console.warn(e); msg(el, TNI("social.k688200d", "저장하지 못했어요. 잠시 뒤 다시 시도해 주세요.")); });
   }
   function reload(id) {
     document.querySelectorAll("[data-cmts].is-mounted").forEach(function (el) {
@@ -322,7 +322,7 @@
     if (t.closest("[data-login]")) { login(); return; }
     if (t.closest("[data-acct-menu]")) { if ($("acctMenu")) closeMenu(); else openMenu(); return; }
     if (t.closest("[data-logout]")) { logout(); return; }
-    if (t.closest("[data-nick-edit]")) { closeMenu(); var nn = window.prompt("새 닉네임(2~12자)", profile ? profile.nickname : ""); if (nn == null) return; var bad = nickOk(nn.trim()); if (bad) { toast(bad); return; } fb.saveProfile(user.uid, nn.trim()).then(function (p) { profile = p; refreshUI(); toast("닉네임을 바꿨어요(새 댓글부터 적용)"); }); return; }
+    if (t.closest("[data-nick-edit]")) { closeMenu(); var nn = window.prompt(TNI("social.k14cec3d", "새 닉네임(2~12자)"), profile ? profile.nickname : ""); if (nn == null) return; var bad = nickOk(nn.trim()); if (bad) { toast(bad); return; } fb.saveProfile(user.uid, nn.trim()).then(function (p) { profile = p; refreshUI(); toast(TNI("social.kb88017d", "닉네임을 바꿨어요(새 댓글부터 적용)")); }); return; }
     if ($("acctMenu") && !t.closest("#acctMenu")) closeMenu();
     if (t.closest("[data-op-reply]")) { var tk = t.closest(".talk"), ce = tk && tk.querySelector("[data-cmts].is-mounted"); if (ce) openReply(ce, "op"); return; }
     if ((el = t.closest("[data-cmts]"))) {
@@ -336,9 +336,9 @@
       else if (t.closest("[data-nick-save]")) saveNick(el);
       else if ((t = t.closest("[data-c-del],[data-c-hide],[data-c-report]"))) {
         var id = t.getAttribute("data-c-del") || t.getAttribute("data-c-hide") || t.getAttribute("data-c-report");
-        if (t.hasAttribute("data-c-del")) { if (!window.confirm("이 댓글을 삭제할까요?")) return; fb.deleteComment(id).then(function () { toast("삭제했어요"); reload(id); }).catch(function () { toast("삭제하지 못했어요"); }); }
-        else if (t.hasAttribute("data-c-hide")) { fb.hideComment(id).then(function () { toast("숨겼어요"); reload(id); }).catch(function () { toast("숨기지 못했어요"); }); }
-        else { if (!window.confirm("이 댓글을 신고할까요? 신고가 3번 쌓이면 자동으로 숨겨져요.")) return; fb.reportComment(id).then(function (r) { toast(r === "already" ? "이미 신고했어요" : r === "hidden" ? "신고했어요. 댓글이 숨겨졌어요" : "신고했어요. 고마워요"); if (r === "hidden") reload(id); }).catch(function () { toast("신고하지 못했어요"); }); }
+        if (t.hasAttribute("data-c-del")) { if (!window.confirm(TNI("social.k4306d5c", "이 댓글을 삭제할까요?"))) return; fb.deleteComment(id).then(function () { toast(TNI("social.k4618fb2", "삭제했어요")); reload(id); }).catch(function () { toast(TNI("social.k134d3b3", "삭제하지 못했어요")); }); }
+        else if (t.hasAttribute("data-c-hide")) { fb.hideComment(id).then(function () { toast(TNI("social.k73a5a66", "숨겼어요")); reload(id); }).catch(function () { toast(TNI("social.k992eb30", "숨기지 못했어요")); }); }
+        else { if (!window.confirm(TNI("social.k8d39873", "이 댓글을 신고할까요? 신고가 3번 쌓이면 자동으로 숨겨져요."))) return; fb.reportComment(id).then(function (r) { toast(r === "already" ? TNI("social.ked85afc", "이미 신고했어요") : r === "hidden" ? TNI("social.kda23068", "신고했어요. 댓글이 숨겨졌어요") : TNI("social.ka809001", "신고했어요. 고마워요")); if (r === "hidden") reload(id); }).catch(function () { toast(TNI("social.ka30d44a", "신고하지 못했어요")); }); }
       }
     }
   });

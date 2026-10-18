@@ -86,7 +86,7 @@ export async function startSync(user, store, merge, opts, onStatus) {
     const d = last; last = null;
     status("saving");
     try { await F.setDoc(ref, payload(d), { mergeFields: FIELDS }); status("ok"); }   // lastCommentAt 등 다른 필드는 건드리지 않음
-    catch (e) { console.warn("[sync] 저장 실패", e); status("error", e); }
+    catch (e) { console.warn(TNI("fb.k119ff69", "[sync] 저장 실패"), e); status("error", e); }
   }
   s.flush = flush;
   const adapter = {
@@ -103,7 +103,7 @@ export async function startSync(user, store, merge, opts, onStatus) {
   // 다른 기기에서 바뀐 내용: 이 화면으로 돌아오거나(visibility) 5분마다 다시 읽어 더 최근이면 반영
   async function pull() {
     if (s.stopped || timer || document.visibilityState === "hidden") return;
-    try { const r = await adapter.read(); if (r && !s.stopped && !timer) store.applyRemote(r); } catch (e) { console.warn("[sync] 읽기 실패", e); }
+    try { const r = await adapter.read(); if (r && !s.stopped && !timer) store.applyRemote(r); } catch (e) { console.warn(TNI("fb.kfdf07d4", "[sync] 읽기 실패"), e); }
   }
   s.onVis = function () { if (document.visibilityState === "visible") pull(); };
   document.addEventListener("visibilitychange", s.onVis);

@@ -113,7 +113,7 @@
 
   function notify(src) { subs.forEach(function (fn) { try { fn(doc, src); } catch (e) { console.warn(e); } }); }
   function writeRemotes() {
-    return remotes.map(function (a) { return Promise.resolve().then(function () { return a.write(doc); }).catch(function (e) { console.warn("[TNStore] 원격 저장 실패:", a.name, e); }); });
+    return remotes.map(function (a) { return Promise.resolve().then(function () { return a.write(doc); }).catch(function (e) { console.warn(TNI("prefs.k7ca15c0", "[TNStore] 원격 저장 실패:"), a.name, e); }); });
   }
   function save(sigBefore) {
     doc.updatedAt = Date.now();

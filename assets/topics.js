@@ -20,17 +20,17 @@
   // 숨길 코너(R-zh-9): 언어판 hidden_sections → <html class="tn-hide-places …"> (CSS 는 언어판 index.html 에 tools/site_build.py 가 넣음). 한국판은 빈 목록
   try { ((SITE && SITE.hidden_sections) || []).forEach(function (s) { document.documentElement.classList.add("tn-hide-" + s); }); } catch (e) {}
   var TOPICS = ST.TOPICS || [
-    { id: "east",     label: "동부(촌부리·라용)", emoji: "🏖️", color: "#0b7285", hint: "파타야·좀티엔·싸따힙·시라차·램차방·방센·라용" },
-    { id: "bangkok",  label: "방콕",             emoji: "🏙️", color: "#495057", hint: "방콕 도심·수완나품" },
-    { id: "north",    label: "북부",             emoji: "⛰️", color: "#5c940d", hint: "치앙마이·치앙라이·람빵·난·핏사눌록" },
-    { id: "south",    label: "남부",             emoji: "🏝️", color: "#1971c2", hint: "푸껫·끄라비·사무이·핫야이·남부 국경" },
-    { id: "poleco",   label: "정치·경제",        emoji: "🏛️", color: "#3b5bdb", hint: "정부·국회·기업·환율" },
-    { id: "society",  label: "사회·사건사고",    emoji: "🚨", color: "#d9480f", hint: "사건·사고·재난·복지" },
-    { id: "visa",     label: "외국인·비자",      emoji: "🛂", color: "#6741d9", hint: "비자·이민국·워크퍼밋·교민" },
-    { id: "life",     label: "생활·물가·부동산", emoji: "🛒", color: "#0c8f6a", hint: "물가·유가·콘도·생활 정보" },
-    { id: "travel",   label: "여행·맛집",        emoji: "🍜", color: "#e67700", hint: "관광·호텔·항공·맛집" },
-    { id: "ent",      label: "연예·스포츠·SNS",  emoji: "💬", color: "#c2255c", hint: "드라마·스포츠·바이럴" },
-    { id: "weather",  label: "날씨·교통",        emoji: "🌦️", color: "#0ca678", hint: "비·홍수·도로·공항" }
+    { id: "east",     label: TNI("topics.kb803985", "동부(촌부리·라용)"), emoji: "🏖️", color: "#0b7285", hint: TNI("topics.k2ed056f", "파타야·좀티엔·싸따힙·시라차·램차방·방센·라용") },
+    { id: "bangkok",  label: TNI("topics.k4dc2c29", "방콕"),             emoji: "🏙️", color: "#495057", hint: TNI("topics.ka34f272", "방콕 도심·수완나품") },
+    { id: "north",    label: TNI("topics.k92be4f4", "북부"),             emoji: "⛰️", color: "#5c940d", hint: TNI("topics.k80460cf", "치앙마이·치앙라이·람빵·난·핏사눌록") },
+    { id: "south",    label: TNI("topics.ke217310", "남부"),             emoji: "🏝️", color: "#1971c2", hint: TNI("topics.kba3a70f", "푸껫·끄라비·사무이·핫야이·남부 국경") },
+    { id: "poleco",   label: TNI("topics.kf7b563d", "정치·경제"),        emoji: "🏛️", color: "#3b5bdb", hint: TNI("topics.k39cafa8", "정부·국회·기업·환율") },
+    { id: "society",  label: TNI("topics.k428dbc2", "사회·사건사고"),    emoji: "🚨", color: "#d9480f", hint: TNI("topics.k3596a8b", "사건·사고·재난·복지") },
+    { id: "visa",     label: TNI("topics.k5aa18b6", "외국인·비자"),      emoji: "🛂", color: "#6741d9", hint: TNI("topics.kc222e30", "비자·이민국·워크퍼밋·교민") },
+    { id: "life",     label: TNI("topics.k5195c2c", "생활·물가·부동산"), emoji: "🛒", color: "#0c8f6a", hint: TNI("topics.k15cc665", "물가·유가·콘도·생활 정보") },
+    { id: "travel",   label: TNI("topics.kc024f70", "여행·맛집"),        emoji: "🍜", color: "#e67700", hint: TNI("topics.k77a5b12", "관광·호텔·항공·맛집") },
+    { id: "ent",      label: TNI("topics.kbe5fbf5", "연예·스포츠·SNS"),  emoji: "💬", color: "#c2255c", hint: TNI("topics.k0e3515c", "드라마·스포츠·바이럴") },
+    { id: "weather",  label: TNI("topics.kf72c310", "날씨·교통"),        emoji: "🌦️", color: "#0ca678", hint: TNI("topics.kb7faf1c", "비·홍수·도로·공항") }
   ];
   var BY_ID = {};
   TOPICS.forEach(function (t) { BY_ID[t.id] = t; });
@@ -40,11 +40,11 @@
 
   /* 페르소나별 기본 주제(5개). 사용자가 끄거나 3개까지 더 고를 수 있음(최대 8개) */
   var PERSONAS = ST.PERSONAS || [
-    { id: "pattaya",  emoji: "🏖️", label: "파타야 거주자", desc: "좀티엔·방라뭉·싸따힙 포함", topics: ["east", "visa", "life", "weather", "society"] },
-    { id: "sriracha", emoji: "⚓",  label: "시라차 거주자", desc: "램차방·촌부리 시내 포함",   topics: ["east", "visa", "life", "weather", "society"] },
-    { id: "bangkok",  emoji: "🏙️", label: "방콕 거주자",   desc: "방콕·근교",                 topics: ["bangkok", "visa", "life", "weather", "society"] },
-    { id: "traveler", emoji: "🧳", label: "여행객",        desc: "단기 방문·여행 계획 중",     topics: ["travel", "weather", "visa", "east", "bangkok"] },
-    { id: "business", emoji: "💼", label: "사업·투자",     desc: "주재원·자영업·투자",         topics: ["poleco", "life", "visa", "bangkok", "east"] }
+    { id: "pattaya",  emoji: "🏖️", label: TNI("topics.k86e6bd6", "파타야 거주자"), desc: TNI("topics.kf3b20ea", "좀티엔·방라뭉·싸따힙 포함"), topics: ["east", "visa", "life", "weather", "society"] },
+    { id: "sriracha", emoji: "⚓",  label: TNI("topics.kaaa082d", "시라차 거주자"), desc: TNI("topics.k0c7e424", "램차방·촌부리 시내 포함"),   topics: ["east", "visa", "life", "weather", "society"] },
+    { id: "bangkok",  emoji: "🏙️", label: TNI("topics.kd4c37fd", "방콕 거주자"),   desc: TNI("topics.k159a00e", "방콕·근교"),                 topics: ["bangkok", "visa", "life", "weather", "society"] },
+    { id: "traveler", emoji: "🧳", label: TNI("topics.k5871c61", "여행객"),        desc: TNI("topics.kb3f6f6f", "단기 방문·여행 계획 중"),     topics: ["travel", "weather", "visa", "east", "bangkok"] },
+    { id: "business", emoji: "💼", label: TNI("topics.ke15cc40", "사업·투자"),     desc: TNI("topics.kcf402f1", "주재원·자영업·투자"),         topics: ["poleco", "life", "visa", "bangkok", "east"] }
   ];
   var MAX_TOPICS = ST.MAX_TOPICS || 8;
 
@@ -52,17 +52,17 @@
    * 저장: profile.region · profile.interests (이 기기) + 동기화용으로 persona 에 "r:<지역>;i:<관심,…>" (32자 이하 — Firestore 규칙 그대로)
    * topic = 그 지역의 주제 id(그 외·여행 중은 없음). 관심 → 주제(내 주제 목록·전국 뉴스 정렬에 씀) */
   var REGIONS = ST.REGIONS || [
-    { id: "east",    topic: "east",    emoji: "🏖️", label: "동부", sub: "(촌부리·라용)", full: "동부(촌부리·라용)", hint: "파타야·시라차·좀티엔·라용", wx: "pattaya" },
-    { id: "bangkok", topic: "bangkok", emoji: "🏙️", label: "방콕", sub: "", full: "방콕", hint: "방콕 시내·근교", wx: "bangkok" },
-    { id: "north",   topic: "north",   emoji: "⛰️", label: "북부", sub: "", full: "북부", hint: "치앙마이·치앙라이", wx: null },
-    { id: "south",   topic: "south",   emoji: "🏝️", label: "남부", sub: "", full: "남부", hint: "푸껫·사무이·핫야이", wx: null },
-    { id: "other",   topic: null,      emoji: "🧳", label: "그 외·여행 중", sub: "", full: "그 외·여행 중", hint: "전국 소식 위주로 보여 드려요", wx: null }
+    { id: "east",    topic: "east",    emoji: "🏖️", label: TNI("topics.k87255b1", "동부"), sub: TNI("topics.k77d6ebb", "(촌부리·라용)"), full: TNI("topics.kb803985", "동부(촌부리·라용)"), hint: TNI("topics.kb151ba3", "파타야·시라차·좀티엔·라용"), wx: "pattaya" },
+    { id: "bangkok", topic: "bangkok", emoji: "🏙️", label: TNI("topics.k4dc2c29", "방콕"), sub: "", full: TNI("topics.k4dc2c29", "방콕"), hint: TNI("topics.k72e9d17", "방콕 시내·근교"), wx: "bangkok" },
+    { id: "north",   topic: "north",   emoji: "⛰️", label: TNI("topics.k92be4f4", "북부"), sub: "", full: TNI("topics.k92be4f4", "북부"), hint: TNI("topics.k10f4d59", "치앙마이·치앙라이"), wx: null },
+    { id: "south",   topic: "south",   emoji: "🏝️", label: TNI("topics.ke217310", "남부"), sub: "", full: TNI("topics.ke217310", "남부"), hint: TNI("topics.ke71dfff", "푸껫·사무이·핫야이"), wx: null },
+    { id: "other",   topic: null,      emoji: "🧳", label: TNI("topics.k3421c82", "그 외·여행 중"), sub: "", full: TNI("topics.k3421c82", "그 외·여행 중"), hint: TNI("topics.k6509ac4", "전국 소식 위주로 보여 드려요"), wx: null }
   ];
   var INTERESTS = ST.INTERESTS || [
-    { id: "life",   emoji: "🏠", label: "생활·정착", hint: "물가·병원·집 구하기·생활 정보", color: "#0b7285", topics: ["life", "weather", "society"] },
-    { id: "travel", emoji: "✈️", label: "여행·맛집", hint: "여행지·축제·맛집·교통",       color: "#d9480f", topics: ["travel", "weather", "ent"] },
-    { id: "biz",    emoji: "💼", label: "사업·투자", hint: "경제·부동산·환율·세금",       color: "#0c8f6a", topics: ["poleco", "life"] },
-    { id: "visa",   emoji: "🛂", label: "비자·체류", hint: "비자·90일 신고·이민국 규정",  color: "#6741d9", topics: ["visa"] }
+    { id: "life",   emoji: "🏠", label: TNI("topics.kfc07b57", "생활·정착"), hint: TNI("topics.k4532a56", "물가·병원·집 구하기·생활 정보"), color: "#0b7285", topics: ["life", "weather", "society"] },
+    { id: "travel", emoji: "✈️", label: TNI("topics.kc024f70", "여행·맛집"), hint: TNI("topics.k950cff7", "여행지·축제·맛집·교통"),       color: "#d9480f", topics: ["travel", "weather", "ent"] },
+    { id: "biz",    emoji: "💼", label: TNI("topics.ke15cc40", "사업·투자"), hint: TNI("topics.ka99ae31", "경제·부동산·환율·세금"),       color: "#0c8f6a", topics: ["poleco", "life"] },
+    { id: "visa",   emoji: "🛂", label: TNI("topics.k38118df", "비자·체류"), hint: TNI("topics.kc1f4abd", "비자·90일 신고·이민국 규정"),  color: "#6741d9", topics: ["visa"] }
   ];
   var R_BY = {}, I_BY = {};
   REGIONS.forEach(function (r) { R_BY[r.id] = r; });
@@ -147,7 +147,7 @@
     } else {
       primary = LEGACY_PRIMARY[cat] || "society";
       // 방콕 한정 사회 기사(방콕 태그 + 방콕 지명)는 방콕을 주 주제로
-      if (cat === "society" && RX_BANGKOK.test(txt) && (s.tags || []).indexOf("방콕") >= 0) { primary = "bangkok"; add("society"); }
+      if (cat === "society" && RX_BANGKOK.test(txt) && (s.tags || []).indexOf("방콕") >= 0) { primary = "bangkok"; add("society"); }   // i18n:data — 데이터 값 비교(화면 문구 아님)
       // 날씨 예보 기사는 날씨·교통이 주 주제
       else if (cat === "society" && /기상청|날씨|우박/.test((s.tags || []).join(" ") + s.headline) && !/사망|사고/.test(s.headline)) { primary = "weather"; add("society"); }
       if (RX_PATTAYA.test(txt) || /시라차|스리라차|램차방|아마타/.test(txt) || RX_RAYONG.test(txt)) add("east");

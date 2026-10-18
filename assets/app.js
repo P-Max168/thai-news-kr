@@ -15,8 +15,8 @@
   var OB2 = !!T.ONBOARDING_2STEP;   // 2단계 시작 화면·내 피드 묶음 스위치(topics.js — 2026-10-03 운영자 보류로 꺼 둠)   // 내 피드 '전국·다른 지역' 칸: 5건 → 10건 → 전부
   /* 한인 영향도 태그(판 데이터 story.impact — README '판마다 채울 필드(2026-10-03 추가)'). 순서 = 필터 칩 순서 */
   var IMPACT = (window.TN_SITE && TN_SITE.impacts_ui) || [   // 언어판: data/site.js impacts_ui(같은 순서·아이콘, 이름만 언어별)
-    { k: "비자·체류", e: "🛂", c: "#6741d9" }, { k: "환율·물가", e: "💱", c: "#0c8f6a" }, { k: "교통·사고", e: "🚗", c: "#d9480f" },
-    { k: "치안", e: "🚨", c: "#c92a2a" }, { k: "날씨·재해", e: "🌧️", c: "#1971c2" }];
+    { k: TNI("app.k38118df", "비자·체류"), e: "🛂", c: "#6741d9" }, { k: TNI("app.kd102271", "환율·물가"), e: "💱", c: "#0c8f6a" }, { k: TNI("app.k7f679d0", "교통·사고"), e: "🚗", c: "#d9480f" },
+    { k: TNI("app.k98f81cb", "치안"), e: "🚨", c: "#c92a2a" }, { k: TNI("app.kc8e0b53", "날씨·재해"), e: "🌧️", c: "#1971c2" }];
   function impOf(k) { for (var i = 0; i < IMPACT.length; i++) if (IMPACT[i].k === k) return IMPACT[i]; return null; }
   function impacts(s) { return (Array.isArray(s.impact) ? s.impact : []).filter(impOf); }
   var $ = function (id) { return document.getElementById(id); };
@@ -46,11 +46,11 @@
     var p = new Intl.DateTimeFormat(TNI("_locale", "ko-KR"), { timeZone: TZ, month: "numeric", day: "numeric", weekday: "short" }).formatToParts(new Date(iso));
     var o = {}; p.forEach(function (x) { o[x.type] = x.value; });
     if (window.TN_SITE) return TNI("fmt.day", "{m}월 {d}일({w})").replace("{m}", o.month).replace("{d}", o.day).replace("{w}", o.weekday);
-    return o.month + "월 " + o.day + "일(" + o.weekday + ")";
+    return o.month + TNI("app.k6878518", "월 ") + o.day + TNI("app.ka0454e1", "일(") + o.weekday + ")";
   }
   // 실제 날짜만(2026-10-04 Max 디자인 지시: 'N시간 전' 같은 상대 시간 안 씀 — 오래된 글이 새 글처럼 보이지 않게). 형식 '10/3 14:20'(방콕)
   function timeHTML(iso) {
-    return '<time datetime="' + esc(iso) + '" title="방콕 시간 기준">' + esc(fmtTime(iso)) + '<span class="tz"> (BKK)</span>' + "</time>";   // 휴대폰은 (BKK) 숨김 — 사이트 전체가 방콕 시간(헤더에 표시)
+    return '<time datetime="' + esc(iso) + TNI("app.kc464e80", "\" title=\"방콕 시간 기준\">") + esc(fmtTime(iso)) + '<span class="tz"> (BKK)</span>' + "</time>";   // 휴대폰은 (BKK) 숨김 — 사이트 전체가 방콕 시간(헤더에 표시)
   }
   function metaHTML(s) {
     return '<div class="meta"><span class="src">' + esc(s.source) + '</span><span class="dot">' + timeHTML(s.published) + "</span></div>";
@@ -68,7 +68,7 @@
     return tps(s).all.some(function (t) { return sel.indexOf(t) >= 0; });
   }
   /* 순위 없는 목록 '더 보기' 글: 다음에 몇 개까지 보이는지(2026-10-05 — 예전 'N건 더'). 끝까지면 '전체 N개 보기' */
-  function moreLabel(upto, total) { return (upto >= total ? "전체 " + total + "개 보기" : upto + "개까지 보기") + " ▾"; }
+  function moreLabel(upto, total) { return (upto >= total ? TNI("app.k57ff445", "전체 ") + total + TNI("app.ke73bbdf", "개 보기") : upto + TNI("app.k535d1ec", "개까지 보기")) + " ▾"; }
   window.TNMoreLabel = moreLabel;
   function edId() { return (state.edition && state.edition.id) || state.data.id || state.data.date; }
   /* ⚠️ 오류 신고 버튼(기사·가게·임대·광고) — 누르면 assets/report.js 를 처음 한 번 불러와 버튼 바로 아래를 펼침(팝업 없음) */
@@ -81,9 +81,9 @@
     e.preventDefault(); e.stopPropagation();
     if (window.TNReport) return TNReport.toggle(b);
     if (repLoading) return; repLoading = true;
-    var sc = document.createElement("script"); sc.src = "assets/report.js?v=1bd40ef6";
+    var sc = document.createElement("script"); sc.src = "assets/report.js?v=947a0af2";
     sc.onload = function () { if (window.TNReport) TNReport.toggle(b); };
-    sc.onerror = function () { repLoading = false; toast("오류 신고 칸을 불러오지 못했어요. 인터넷 연결을 확인해 주세요", 2600); };
+    sc.onerror = function () { repLoading = false; toast(TNI("app.kadb6dfe", "오류 신고 칸을 불러오지 못했어요. 인터넷 연결을 확인해 주세요"), 2600); };
     document.body.appendChild(sc);
   }, true);
   function refTime() { return new Date(state.data.generated || (state.data.date + "T12:00:00+07:00")).getTime(); }
@@ -109,15 +109,15 @@
     var off = navigator.onLine === false;
     $("topGrid") && ($("topGrid").innerHTML = "");
     return '<div class="empty empty--err" role="alert"><b>' + (off ? "📡 " : "⚠️ ") + msg + "</b><br>" +
-      (off ? "인터넷에 연결되어 있지 않아요. 한 번 열어 본 판은 연결 없이도 읽을 수 있어요." : "잠시 뒤 다시 시도해 주세요. 계속 안 되면 다른 판(위 날짜 선택)을 골라 보세요.") +
-      '<br><button type="button" class="btn btn--primary btn--sm empty__retry" onclick="location.reload()">다시 시도</button></div>';
+      (off ? TNI("app.ke250b3a", "인터넷에 연결되어 있지 않아요. 한 번 열어 본 판은 연결 없이도 읽을 수 있어요.") : TNI("app.kcaa929a", "잠시 뒤 다시 시도해 주세요. 계속 안 되면 다른 판(위 날짜 선택)을 골라 보세요.")) +
+      TNI("app.k04b360d", "<br><button type=\"button\" class=\"btn btn--primary btn--sm empty__retry\" onclick=\"location.reload()\">다시 시도</button></div>");
   }
   function loadDate2(date) {
     var sc = document.createElement("script");
     sc.src = "data/" + date + ".js";
     sc.onload = function () { if (window.NEWS_DATA[date]) render(window.NEWS_DATA[date]); else sc.onerror(); };
     sc.onerror = function () {
-      var m = /^(\d{4})-(\d\d)-(\d\d)-(am|pm)$/.exec(date), lbl = m ? (+m[2]) + "월 " + (+m[3]) + "일 " + (m[4] === "am" ? "아침판" : "저녁판") : date;
+      var m = /^(\d{4})-(\d\d)-(\d\d)-(am|pm)$/.exec(date), lbl = m ? (+m[2]) + TNI("app.k6878518", "월 ") + (+m[3]) + TNI("app.k2652830", "일 ") + (m[4] === "am" ? TNI("app.k49ca986", "아침판") : TNI("app.k75af836", "저녁판")) : date;
       if (window.TN_SITE) lbl = (EDS.filter(function (x) { return x.id === date; })[0] || {}).label || date;   // 언어판: 판 이름은 data/index.json label
       $("feed").innerHTML = loadFail(esc(lbl) + TNI("load.edition_fail", " 뉴스를 불러오지 못했어요."));
     };
@@ -243,7 +243,7 @@
     var b = state.data.briefing, items;
     if (Array.isArray(b)) items = b.map(function (x) { return { topic: x.topic, html: rich(x.text), story_id: x.story_id }; });
     else items = legacyBriefing(b || "");
-    var badge = { "아침판": "아침 브리핑", "저녁판": "저녁 브리핑", "새벽판": "새벽 브리핑" }[edName] || "오늘의 브리핑";
+    var badge = { "아침판": TNI("app.k22b44de", "아침 브리핑"), "저녁판": TNI("app.k595c90a", "저녁 브리핑"), "새벽판": TNI("app.kcdf5abc", "새벽 브리핑") }[edName] || TNI("app.k3d0ea90", "오늘의 브리핑");   // i18n:data — 데이터 값 비교(화면 문구 아님)
     if (window.TN_SITE) badge = TNI("brief.badge_" + ((state.edition || {}).edition || ""), TNI("brief.badge", badge));
     $("briefing").innerHTML = '<div class="briefing__head"><span class="briefing__badge">' + esc(badge) + '</span><span class="briefing__title">' + items.length + TNI("brief.title", "줄로 보는 이번 판") + "</span></div>" +
       '<ul class="brief-list">' + items.map(function (it) {
@@ -278,16 +278,16 @@
     var q = $("drawerQuick"); if (!q) return;
     var last = null;
     try { last = localStorage.getItem("tnk.nbLast"); } catch (e) {}
-    q.innerHTML = '<button type="button" class="dq-btn" data-page="hearts"><span class="dq-e" aria-hidden="true">❤️</span><b>하트한 기사</b><small id="drHeartN">' + L.hearts().length + "개</small></button>" +
-      '<button type="button" class="dq-btn" data-quick-nearby="' + esc(last || "") + '"><span class="dq-e" aria-hidden="true">📍</span><b>내 주변</b><small>맛집·마사지·병원</small></button>';
+    q.innerHTML = TNI("app.kf299fb3", "<button type=\"button\" class=\"dq-btn\" data-page=\"hearts\"><span class=\"dq-e\" aria-hidden=\"true\">❤️</span><b>하트한 기사</b><small id=\"drHeartN\">") + L.hearts().length + TNI("app.k2584ca2", "개</small></button>") +
+      '<button type="button" class="dq-btn" data-quick-nearby="' + esc(last || "") + TNI("app.kdb6c836", "\"><span class=\"dq-e\" aria-hidden=\"true\">📍</span><b>내 주변</b><small>맛집·마사지·병원</small></button>");
   }
   function renderTabs() {
     renderQuick();
     var c = topicCounts(), sel = selected(), list = tabList();
     $("tabs").innerHTML = list.map(function (k, i) {
-      return tabBtn(k, c, sel) + (i === 0 ? (OB2 ? '<button type="button" class="dr-item dr-item--mine" data-ob-edit aria-haspopup="dialog">✏️ 내 피드 바꾸기 <small>사는 곳·관심</small></button>' : "") +
-        (OB2 ? '<button type="button" class="dr-item" id="myTopicsBtn" data-open-settings aria-haspopup="dialog">🧩 세부 주제·설정 <small>주제 직접 고르기·취향 초기화</small></button>'
-          : '<button type="button" class="dr-item" id="myTopicsBtn" data-open-settings aria-haspopup="dialog">🧩 내 주제 설정</button>') : "");
+      return tabBtn(k, c, sel) + (i === 0 ? (OB2 ? TNI("app.k17dd793", "<button type=\"button\" class=\"dr-item dr-item--mine\" data-ob-edit aria-haspopup=\"dialog\">✏️ 내 피드 바꾸기 <small>사는 곳·관심</small></button>") : "") +
+        (OB2 ? TNI("app.k1f5cca5", "<button type=\"button\" class=\"dr-item\" id=\"myTopicsBtn\" data-open-settings aria-haspopup=\"dialog\">🧩 세부 주제·설정 <small>주제 직접 고르기·취향 초기화</small></button>")
+          : TNI("app.kcbf9776", "<button type=\"button\" class=\"dr-item\" id=\"myTopicsBtn\" data-open-settings aria-haspopup=\"dialog\">🧩 내 주제 설정</button>")) : "");
     }).join("");
     var other = sel ? T.TOPICS.map(function (t) { return t.id; }).filter(function (k) { return list.indexOf(k) < 0; }) : [];
     $("tabsOther").innerHTML = other.map(function (k) { return tabBtn(k, c, null).replace('class="tab', 'class="tab tab--other'); }).join("");
@@ -364,7 +364,7 @@
       var bg = "radial-gradient(120% 90% at 100% 0%," + shade(t.color, 0.25) + " 0," + shade(t.color, -0.25) + " 55%," + shade(t.color, -0.6) + " 100%)";
       return '<article class="top-card' + (i === 0 ? " top-card--main" : "") + '" style="--bg:' + bg + '" tabindex="0" data-open="' + esc(s.id) + '">' +
         '<span class="deco" aria-hidden="true">' + (DECO[t.id] || "") + "</span>" +
-        '<div class="badges"><span class="rank">TOP ' + (i + 1) + '</span><span class="chip">' + t.emoji + " " + esc(t.label) + "</span>" + (s.region ? '<span class="chip">📍 ' + esc(s.region) + "</span>" : "") + (s.update ? '<span class="chip">후속</span>' : "") + "</div>" +
+        '<div class="badges"><span class="rank">TOP ' + (i + 1) + '</span><span class="chip">' + t.emoji + " " + esc(t.label) + "</span>" + (s.region ? '<span class="chip">📍 ' + esc(s.region) + "</span>" : "") + (s.update ? TNI("app.k4f5e3e5", "<span class=\"chip\">후속</span>") : "") + "</div>" +
         "<h3>" + esc(s.headline) + "</h3>" +
         "<p>" + esc(s.summary[0]) + "</p>" + metaHTML(s) + "</article>";
     }).join("");
@@ -419,7 +419,7 @@
   function originTitle(t) {
     if (!t) return "";
     if (TH_RX.test(t)) return "";   // 태국어 원문 제목은 화면에 내지 않음(2026-10-03 — 펼쳐도 태국 문자가 보이지 않게). 원문은 '원문 보기' 버튼으로
-    return '<p class="origin__th"><small>원문 제목</small>' + esc(t) + "</p>";
+    return TNI("app.k69dcde3", "<p class=\"origin__th\"><small>원문 제목</small>") + esc(t) + "</p>";
   }
 
   /* ---------- 카드 도구 줄(접힌 카드에서도 보임): 📰 N개 매체 보도 · 🗓️ 이슈 타임라인 ---------- */
@@ -428,10 +428,10 @@
   }
   function toolsHTML(s) {
     var al = alsoList(s), sid = esc(s.id);
-    var a = al.length ? '<button type="button" class="tool" data-also="' + sid + '" aria-expanded="false" aria-controls="also-' + sid + '">📰 <b>' + (al.length + 1) + '개 매체</b> 보도 <i aria-hidden="true">▾</i></button>' : "";
-    var panel = al.length ? '<div class="tool-panel also" id="also-' + sid + '" hidden><p class="tool-panel__h">같은 소식을 다룬 매체 · 누르면 새 탭</p><ul class="also__list">' +
+    var a = al.length ? '<button type="button" class="tool" data-also="' + sid + '" aria-expanded="false" aria-controls="also-' + sid + '">📰 <b>' + (al.length + 1) + TNI("app.k3878f93", "개 매체</b> 보도 <i aria-hidden=\"true\">▾</i></button>") : "";
+    var panel = al.length ? '<div class="tool-panel also" id="also-' + sid + TNI("app.kda98923", "\" hidden><p class=\"tool-panel__h\">같은 소식을 다룬 매체 · 누르면 새 탭</p><ul class=\"also__list\">") +
       [{ source: s.source, url: s.url, main: true }].concat(al).map(function (x) {
-        return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener"><span class="also__s">' + esc(String(x.source).replace(/\s*\(.*\)$/, "")) + "</span>" + (x.main ? '<span class="also__m">이 기사 원문</span>' : "") + '<span class="also__go" aria-hidden="true">↗</span></a></li>';
+        return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener"><span class="also__s">' + esc(String(x.source).replace(/\s*\(.*\)$/, "")) + "</span>" + (x.main ? TNI("app.k6169d14", "<span class=\"also__m\">이 기사 원문</span>") : "") + '<span class="also__go" aria-hidden="true">↗</span></a></li>';
       }).join("") + "</ul></div>" : "";
     var ib = issueBtnHTML(s);
     return '<div class="card__tools" data-tools="' + sid + '"' + (al.length || ib ? "" : " hidden") + ">" + a + '<span data-issue-slot="' + sid + '">' + ib + "</span></div>" + panel +
@@ -464,7 +464,7 @@
   function issueBtnHTML(s) {
     var is = issueOf(s);
     if (!is || (is.items && is.items.length < 2)) return "";   // 같은 이슈 기사가 1건뿐이면 숨김
-    return '<button type="button" class="tool tool--tl" data-issue="' + esc(is.id) + '" data-sid="' + esc(s.id) + '" aria-expanded="false" aria-controls="tl-' + esc(s.id) + '">🗓️ 이슈 타임라인' +
+    return '<button type="button" class="tool tool--tl" data-issue="' + esc(is.id) + '" data-sid="' + esc(s.id) + '" aria-expanded="false" aria-controls="tl-' + esc(s.id) + TNI("app.ka0c908d", "\">🗓️ 이슈 타임라인") +
       (is.items ? ' <b class="tool__n">' + is.items.length + "</b>" : "") + ' <i aria-hidden="true">▾</i></button>';
   }
   function refreshIssueButtons() {
@@ -477,14 +477,14 @@
   }
   function timelineHTML(s) {
     var is = issueOf(s);
-    if (!is || !is.items) return '<p class="tool-panel__h">타임라인을 불러오는 중…</p>';
+    if (!is || !is.items) return TNI("app.kf8752ac", "<p class=\"tool-panel__h\">타임라인을 불러오는 중…</p>");
     var cur = edId();
-    return '<p class="tool-panel__h">🗓️ <b>' + esc(is.title) + "</b> · 판별 " + is.items.length + '건 (오래된 순)</p><ol class="tl__list">' + is.items.map(function (it) {
+    return '<p class="tool-panel__h">🗓️ <b>' + esc(is.title) + TNI("app.k9b2942e", "</b> · 판별 ") + is.items.length + TNI("app.kc70297b", "건 (오래된 순)</p><ol class=\"tl__list\">") + is.items.map(function (it) {
       var here = it.edition === cur && it.story === s.id, same = it.edition === cur;
       var when = esc(it.label) + (it.published ? " · " + esc(fmtTime(it.published)) : "");
-      var go = here ? '<span class="tl__here">지금 보는 기사</span>'
-        : same ? '<button type="button" class="tl__go" data-open="' + esc(it.story) + '">이 판에서 보기 ›</button>'
-        : '<a class="tl__go" href="?date=' + encodeURIComponent(it.edition) + "#" + encodeURIComponent(it.story) + '">그 판에서 보기 ›</a>';
+      var go = here ? TNI("app.k40ed6e6", "<span class=\"tl__here\">지금 보는 기사</span>")
+        : same ? '<button type="button" class="tl__go" data-open="' + esc(it.story) + TNI("app.kce43a53", "\">이 판에서 보기 ›</button>")
+        : '<a class="tl__go" href="?date=' + encodeURIComponent(it.edition) + "#" + encodeURIComponent(it.story) + TNI("app.k08ec77c", "\">그 판에서 보기 ›</a>");
       return '<li class="tl__i' + (here ? " is-here" : "") + '"><span class="tl__d">' + when + '</span><span class="tl__t">' + esc(it.headline) + "</span>" + go + "</li>";
     }).join("") + "</ol>";
   }
@@ -499,12 +499,12 @@
    * 누르면 질문 전문 + 📌 운영자 댓글(배지 유지) + 💡 추천 문장 + 댓글 칸·댓글 목록이 펼쳐진다. 질문이 없는 기사는 예전처럼 댓글 칸 그대로. */
   function talkHTML(s) {
     var d = s.discussion, live = /^https?:$/.test(location.protocol), sid = esc(s.id);
-    var cm = live ? '<div class="cmts" data-cmts="' + sid + '"><p class="cmts__empty">댓글은 기사를 펼치면 불러와요.</p></div>' : "";
-    if (!(d && d.approved === true && d.question)) return '<section class="talk" aria-label="댓글">' + cm + "</section>";
-    var op = d.operator_comment ? '<div class="cmt cmt--op cmt--pin"><div class="cmt__h"><b class="cmt__n">' + TNI("discussion.operator", "운영자") + '</b><span class="badge-op">' + TNI("discussion.operator", "운영자") + '</span><span class="cmt__pin">📌 고정</span></div><p class="cmt__t">' + esc(d.operator_comment) + "</p>" +
-      (live ? '<div class="cmt__a"><button type="button" class="cbtn" data-op-reply>↳ 답글</button></div>' : "") + "</div>" : "";
+    var cm = live ? '<div class="cmts" data-cmts="' + sid + TNI("app.k7e3f804", "\"><p class=\"cmts__empty\">댓글은 기사를 펼치면 불러와요.</p></div>") : "";
+    if (!(d && d.approved === true && d.question)) return TNI("app.k5238992", "<section class=\"talk\" aria-label=\"댓글\">") + cm + "</section>";
+    var op = d.operator_comment ? '<div class="cmt cmt--op cmt--pin"><div class="cmt__h"><b class="cmt__n">' + TNI("discussion.operator", "운영자") + '</b><span class="badge-op">' + TNI("discussion.operator", "운영자") + TNI("app.kb9104c2", "</span><span class=\"cmt__pin\">📌 고정</span></div><p class=\"cmt__t\">") + esc(d.operator_comment) + "</p>" +
+      (live ? TNI("app.k00dcff8", "<div class=\"cmt__a\"><button type=\"button\" class=\"cbtn\" data-op-reply>↳ 답글</button></div>") : "") + "</div>" : "";
     var open = !!state.dqOpen[s.id];
-    return '<section class="talk talk--dq' + (open ? " is-open" : "") + '" aria-label="댓글">' +
+    return '<section class="talk talk--dq' + (open ? " is-open" : "") + TNI("app.k94b74bc", "\" aria-label=\"댓글\">") +
       '<button type="button" class="dq-line" data-dq="' + sid + '" aria-expanded="' + open + '" aria-controls="dqm-' + sid + '">' +
         '<span class="dq-line__h">' + TNI("discussion.q_h", "💬 오늘의 질문:") + '</span><span class="dq-line__q">' + esc(d.question) + '</span><span class="dq-line__n" data-dq-n></span><i aria-hidden="true">▾</i></button>' +
       '<div class="talk__more" id="dqm-' + sid + '"' + (open ? "" : " hidden") + '><p class="dq__q dq__q--full">' + esc(d.question) + "</p>" + op + cm + "</div></section>";
@@ -523,7 +523,7 @@
     return sl || null;
   }
   function adHTML(sl, n) {
-    var it = sl.items[(n || 0) % sl.items.length], lab = (window.TN_ADS.label || "광고");
+    var it = sl.items[(n || 0) % sl.items.length], lab = (window.TN_ADS.label || TNI("app.keb18928", "광고"));
     // render:"dragon" = 드래곤 스웨디시 배너(assets/ads/massage/dragon-ad.js, variant·'이 자리 추천 업종' 꼬리표). 못 그리면 아래 일반 카드
     var rb = adRep(sl.id, it);
     var dg = it.render === "dragon" && window.DragonAd && window.DragonAd.slotHTML(it, sl.id + ":" + ((n || 0) % sl.items.length));
@@ -532,10 +532,10 @@
     var link = safe(it.link), img = safe(it.image);
     var inner = '<span class="ad__tag">' + esc(lab) + "</span>" + (img ? '<img class="ad__img" src="' + esc(img) + '" alt="" loading="lazy">' : "") +
       '<span class="ad__txt">' + (it.category ? '<span class="ad__cat">' + esc(it.category) + "</span>" : "") +
-      '<b class="ad__t">' + esc(it.title || "여기에 광고하세요") + '</b><small class="ad__s">' + esc(it.subtitle || "광고 문의") + "</small></span>";
+      '<b class="ad__t">' + esc(it.title || TNI("app.k413ad63", "여기에 광고하세요")) + '</b><small class="ad__s">' + esc(it.subtitle || TNI("app.kf89f72f", "광고 문의")) + "</small></span>";
     var cls = "ad ad--" + esc(sl.size || "medium") + " ad--t" + (it.theme || 1);
     return (link ? '<a class="' + cls + '" href="' + esc(link) + '" target="_blank" rel="noopener sponsored" aria-label="' + esc(lab) + '">' + inner + "</a>"
-      : '<div class="' + cls + '" role="note" aria-label="' + esc(lab) + ' 자리">' + inner + "</div>") + rb;
+      : '<div class="' + cls + '" role="note" aria-label="' + esc(lab) + TNI("app.kd18e540", " 자리\">") + inner + "</div>") + rb;
   }
   function renderAds() {
     [].forEach.call(document.querySelectorAll("[data-ad-slot]"), function (el) {
@@ -601,20 +601,20 @@
   }
   function mineChipHTML() {
     var m = mine(), ints = m.ints.map(function (i) { var x = T.interest(i); return x.emoji + esc(x.label); });
-    var txt = m.region ? (m.region.id === "other" ? "🧳 " + esc(m.region.label) : "📍" + esc(m.region.label)) : "📍 사는 곳 고르기";
+    var txt = m.region ? (m.region.id === "other" ? "🧳 " + esc(m.region.label) : "📍" + esc(m.region.label)) : TNI("app.kbeef9ff", "📍 사는 곳 고르기");
     if (ints.length) txt += ' <span class="sep">·</span> ' + ints.slice(0, 2).join(" ") + (ints.length > 2 ? " +" + (ints.length - 2) : "");
-    return '<p class="mine"><span class="mine__l">내 피드</span><button type="button" class="mine__chip" data-ob-edit aria-label="내 피드 바꾸기(사는 곳·관심)">' + txt + ' <span class="ed" aria-hidden="true">✏️</span></button></p>';
+    return TNI("app.k9f56d86", "<p class=\"mine\"><span class=\"mine__l\">내 피드</span><button type=\"button\" class=\"mine__chip\" data-ob-edit aria-label=\"내 피드 바꾸기(사는 곳·관심)\">") + txt + ' <span class="ed" aria-hidden="true">✏️</span></button></p>';
   }
   function renderMyFeed(imp) {
     var g = feedGroups(), m = g.m, n = g.must.length + g.reg.length + g.nat.length;
-    $("feedTitleText").textContent = "⭐ 내 피드";
-    $("feedCount").textContent = n + "건" + (state.impact ? " · '" + state.impact + "' 영향만" : " (주요 뉴스 제외)") + (L.hasTaste() ? " · 내 취향 반영 순서" : "");
+    $("feedTitleText").textContent = TNI("app.kf29bd3b", "⭐ 내 피드");
+    $("feedCount").textContent = n + TNI("app.kd202b4d", "건") + (state.impact ? " · '" + state.impact + TNI("app.k3eace36", "' 영향만") : TNI("app.k76de025", " (주요 뉴스 제외)")) + (L.hasTaste() ? TNI("app.kfd5b268", " · 내 취향 반영 순서") : "");
     var html = mineChipHTML() + imp;
-    if (!n) { $("feed").innerHTML = html + '<div class="empty">이 판에는 보여 드릴 기사가 없어요. ☰ 메뉴의 \'전체 보기\'를 눌러 보세요.</div>'; return; }
-    if (g.must.length) html += '<div class="pin pin--must" aria-label="꼭 봐야 할 뉴스"><p class="pin__h">📌 꼭 봐야 할 뉴스 <small>모든 지역 공통 · 외국인·비자</small></p>' + g.must.map(cardHTML).join("") + "</div>";
+    if (!n) { $("feed").innerHTML = html + TNI("app.ke39cf3e", "<div class=\"empty\">이 판에는 보여 드릴 기사가 없어요. ☰ 메뉴의 '전체 보기'를 눌러 보세요.</div>"); return; }
+    if (g.must.length) html += TNI("app.k95cff03", "<div class=\"pin pin--must\" aria-label=\"꼭 봐야 할 뉴스\"><p class=\"pin__h\">📌 꼭 봐야 할 뉴스 <small>모든 지역 공통 · 외국인·비자</small></p>") + g.must.map(cardHTML).join("") + "</div>";
     if (m.region && m.region.topic) {
-      html += '<section class="fsec fsec--region" aria-label="' + esc(m.region.full) + ' 뉴스"><h3 class="fsec__h">' + m.region.emoji + " " + esc(m.region.full) + ' 뉴스 <em>' + g.reg.length + "건</em></h3>" +
-        (g.reg.length ? g.reg.map(cardHTML).join("") : '<div class="empty empty--sm">이 판에는 ' + esc(m.region.full) + " 기사가 없어요. 아래 전국 소식을 보세요.</div>") + "</section>";
+      html += '<section class="fsec fsec--region" aria-label="' + esc(m.region.full) + TNI("app.kd771190", " 뉴스\"><h3 class=\"fsec__h\">") + m.region.emoji + " " + esc(m.region.full) + TNI("app.k63f570b", " 뉴스 <em>") + g.reg.length + TNI("app.k37dc80a", "건</em></h3>") +
+        (g.reg.length ? g.reg.map(cardHTML).join("") : TNI("app.k344930f", "<div class=\"empty empty--sm\">이 판에는 ") + esc(m.region.full) + TNI("app.k28d757d", " 기사가 없어요. 아래 전국 소식을 보세요.</div>")) + "</section>";
     }
     var ra = m.region && adSlot("region-" + m.region.id);
     if (ra && (adRisk(g.reg[g.reg.length - 1]) || adRisk(g.nat[0]))) ra = null;   // 바로 앞뒤 기사가 민감 기준에 걸리면 지역 광고 안 보임
@@ -622,9 +622,9 @@
     if (g.nat.length) {
       var show = Math.min(g.nat.length, NAT_STEPS[state.natStep] || g.nat.length), more = g.nat.length - show;
       var nxt = Math.min(g.nat.length, NAT_STEPS[state.natStep + 1] || g.nat.length) - show;
-      html += '<section class="fsec fsec--nat" aria-label="전국·다른 지역 뉴스"><h3 class="fsec__h">🇹🇭 ' + (m.region && m.region.topic ? "전국·다른 지역" : "전국") + ' 뉴스 <em>' + g.nat.length + "건</em></h3>" +
+      html += TNI("app.kdea1dfa", "<section class=\"fsec fsec--nat\" aria-label=\"전국·다른 지역 뉴스\"><h3 class=\"fsec__h\">🇹🇭 ") + (m.region && m.region.topic ? TNI("app.kad2e7b8", "전국·다른 지역") : TNI("app.k21b80d7", "전국")) + TNI("app.k63f570b", " 뉴스 <em>") + g.nat.length + TNI("app.k37dc80a", "건</em></h3>") +
         withInfeed(g.nat.slice(0, show).map(cardHTML)) +
-        (g.nat.length > NAT_STEPS[0] ? '<button type="button" class="more-btn" data-nat-more aria-expanded="' + !more + '">' + (more ? moreLabel(show + nxt, g.nat.length) : "접기 ▴") + "</button>" : "") + "</section>";
+        (g.nat.length > NAT_STEPS[0] ? '<button type="button" class="more-btn" data-nat-more aria-expanded="' + !more + '">' + (more ? moreLabel(show + nxt, g.nat.length) : TNI("app.kbb250c1", "접기 ▴")) + "</button>" : "") + "</section>";
     }
     $("feed").innerHTML = html;
   }
@@ -645,15 +645,15 @@
     var cnt = {}, any = false;
     list.forEach(function (s) { impacts(s).forEach(function (k) { cnt[k] = (cnt[k] || 0) + 1; any = true; }); });
     if (state.impact && !cnt[state.impact]) state.impact = null;
-    var imp = any ? '<div class="impf" role="group" aria-label="한인 영향도로 골라 보기"><span class="impf__l">한인 영향</span>' +
-      '<button type="button" class="impf__c" data-imp="" aria-pressed="' + !state.impact + '">전체</button>' +
+    var imp = any ? TNI("app.k2c71e39", "<div class=\"impf\" role=\"group\" aria-label=\"한인 영향도로 골라 보기\"><span class=\"impf__l\">한인 영향</span>") +
+      '<button type="button" class="impf__c" data-imp="" aria-pressed="' + !state.impact + TNI("app.kdfeaceb", "\">전체</button>") +
       IMPACT.filter(function (m) { return cnt[m.k]; }).map(function (m) {
         return '<button type="button" class="impf__c" data-imp="' + esc(m.k) + '" style="--ic:' + m.c + '" aria-pressed="' + (state.impact === m.k) + '"><span aria-hidden="true">' + m.e + "</span>" + esc(m.k) + " <small>" + cnt[m.k] + "</small></button>";
       }).join("") + "</div>" : "";
     if (tab === "feed" && OB2) { renderMyFeed(imp); return; }
     if (state.impact) {
       list = list.filter(function (s) { return impacts(s).indexOf(state.impact) >= 0; });
-      $("feedCount").textContent = list.length + "건 · '" + state.impact + "' 영향만";
+      $("feedCount").textContent = list.length + TNI("app.k0ef0399", "건 · '") + state.impact + TNI("app.k3eace36", "' 영향만");
     }
     // 📌 비자 소식: 외국인·비자(주 주제) 기사는 피드 맨 위에 고정(이 판에 있을 때만, 외국인·비자 탭 자체에선 안 함)
     var pin = [];
@@ -719,8 +719,8 @@
     } catch (e) {}
     var t = topicOf(tps(s).topic);
     void t;
-    toast(now > 0 ? "알겠어요! 비슷한 소식을 위쪽에 더 올려드릴게요"
-      : now < 0 ? "알겠어요! 비슷한 소식은 아래로 내릴게요" : "선택을 취소했어요", 2000);
+    toast(now > 0 ? TNI("app.k81c9c07", "알겠어요! 비슷한 소식을 위쪽에 더 올려드릴게요")
+      : now < 0 ? TNI("app.ka9a3f42", "알겠어요! 비슷한 소식은 아래로 내릴게요") : TNI("app.ke7a0bab", "선택을 취소했어요"), 2000);
     // 화면 위치는 그대로 둔 채 목록만 다시 정렬
     var y = window.pageYOffset;
     renderTabs(); renderFeed();
@@ -733,7 +733,7 @@
   function doHeart(btn) {
     var s = byId(btn.getAttribute("data-id")); if (!s) return;
     var on = L.heart(edId(), s);
-    toast(on ? "❤️ 다음 판부터 이런 뉴스 더 보여드릴게요" : "하트를 취소했어요", 2200);
+    toast(on ? TNI("app.k5971434", "❤️ 다음 판부터 이런 뉴스 더 보여드릴게요") : TNI("app.k97bacd6", "하트를 취소했어요"), 2200);
     var y = window.pageYOffset;
     renderTabs(); renderFeed(); heartCount();
     window.scrollTo(0, y);
@@ -742,8 +742,8 @@
   }
   function heartCount() {
     var n = L.hearts().length, b = $("heartBtn");
-    if (b) { b.innerHTML = '<span aria-hidden="true">' + (n ? "❤️" : "🤍") + '</span><b>' + n + "</b>"; b.setAttribute("aria-label", "내가 하트한 기사 " + n + "개 보기"); }
-    var d = $("drHeartN"); if (d) d.textContent = n + "개";
+    if (b) { b.innerHTML = '<span aria-hidden="true">' + (n ? "❤️" : "🤍") + '</span><b>' + n + "</b>"; b.setAttribute("aria-label", TNI("app.k895b404", "내가 하트한 기사 ") + n + TNI("app.ke73bbdf", "개 보기")); }
+    var d = $("drHeartN"); if (d) d.textContent = n + TNI("app.k11600c9", "개");
   }
   S.subscribe(function () { heartCount(); });
 
@@ -800,30 +800,30 @@
     /* 2단계 시작 화면(2026-10-03 운영자 승인 시안 /workspace/mockups/residence): ① 어디 사세요?(하나) ② 무엇에 관심 있으세요?(여러 개) */
     function obTop(n) {
       var fl = document.querySelector(".brand__flags");
-      return '<div class="ob__top"><span class="ob__brand"><span class="ob__flags" aria-hidden="true">' + (fl ? fl.innerHTML : "") + "</span> 태국 뉴스 한눈에</span>" +
-        (settingsMode ? '<button type="button" class="ob__x" data-close aria-label="닫기">✕</button>' : "") + '<span class="ob__step">' + n + ' / 2</span></div>' +
-        '<div class="ob__bar" role="progressbar" aria-valuemin="1" aria-valuemax="2" aria-valuenow="' + n + '" aria-label="2단계 중 ' + n + '단계"><i class="on"></i><i' + (n === 2 ? ' class="on"' : "") + "></i></div>";
+      return '<div class="ob__top"><span class="ob__brand"><span class="ob__flags" aria-hidden="true">' + (fl ? fl.innerHTML : "") + TNI("app.kdb61414", "</span> 태국 뉴스 한눈에</span>") +
+        (settingsMode ? TNI("app.k82a5e26", "<button type=\"button\" class=\"ob__x\" data-close aria-label=\"닫기\">✕</button>") : "") + '<span class="ob__step">' + n + ' / 2</span></div>' +
+        '<div class="ob__bar" role="progressbar" aria-valuemin="1" aria-valuemax="2" aria-valuenow="' + n + TNI("app.kea81876", "\" aria-label=\"2단계 중 ") + n + TNI("app.kb693b48", "단계\"><i class=\"on\"></i><i") + (n === 2 ? ' class="on"' : "") + "></i></div>";
     }
     function stepRegion() {
-      return '<div class="ob">' + obTop(1) + '<div class="ob__body"><h2 class="ob__q" id="sheetTitle">📍 어디 사세요?</h2>' +
-        '<p class="ob__sub">사는 곳 소식을 <b>맨 위에</b> 보여 드려요. <b>하나만</b> 골라 주세요.</p>' +
-        '<div class="opts" role="radiogroup" aria-label="사는 곳">' + T.REGIONS.map(function (r) {
+      return '<div class="ob">' + obTop(1) + TNI("app.k1b316d8", "<div class=\"ob__body\"><h2 class=\"ob__q\" id=\"sheetTitle\">📍 어디 사세요?</h2>") +
+        TNI("app.k798e516", "<p class=\"ob__sub\">사는 곳 소식을 <b>맨 위에</b> 보여 드려요. <b>하나만</b> 골라 주세요.</p>") +
+        TNI("app.k633a24a", "<div class=\"opts\" role=\"radiogroup\" aria-label=\"사는 곳\">") + T.REGIONS.map(function (r) {
           return '<button type="button" class="opt" role="radio" data-region="' + r.id + '" aria-checked="' + (reg === r.id) + '"><span class="opt__e" aria-hidden="true">' + r.emoji + '</span>' +
             '<span class="opt__t"><b>' + esc(r.label) + (r.sub ? " <span>" + esc(r.sub) + "</span>" : "") + "</b><small>" + esc(r.hint) + '</small></span><span class="opt__r" aria-hidden="true"></span></button>';
         }).join("") + '</div><p class="pick-msg" id="pickMsg" role="status" aria-live="polite"></p></div>' +
-        '<div class="ob__foot"><button type="button" class="cta" data-ob-next>다음 <small aria-hidden="true">→</small></button>' +
-        (settingsMode ? '<button type="button" class="skip" data-close>닫기</button>' : '<button type="button" class="skip" data-skip>나중에 고를게요</button>') + "</div></div>";
+        TNI("app.k15b5303", "<div class=\"ob__foot\"><button type=\"button\" class=\"cta\" data-ob-next>다음 <small aria-hidden=\"true\">→</small></button>") +
+        (settingsMode ? TNI("app.k8e57618", "<button type=\"button\" class=\"skip\" data-close>닫기</button>") : TNI("app.kecff539", "<button type=\"button\" class=\"skip\" data-skip>나중에 고를게요</button>")) + "</div></div>";
     }
     function stepInterests() {
       var r = T.region(reg);
-      return '<div class="ob">' + obTop(2) + '<div class="ob__body">' + (r ? '<span class="picked">📍 사는 곳 <b>' + esc(r.full) + "</b></span>" : "") +
-        '<h2 class="ob__q" id="sheetTitle">🙋 무엇에 관심 있으세요?<small>(여러 개 선택)</small></h2><p class="ob__sub">고른 주제의 기사를 <b>먼저</b> 보여 드려요.</p>' +
-        '<div class="grid2" role="group" aria-label="관심">' + T.INTERESTS.map(function (x) {
+      return '<div class="ob">' + obTop(2) + '<div class="ob__body">' + (r ? TNI("app.k30dde55", "<span class=\"picked\">📍 사는 곳 <b>") + esc(r.full) + "</b></span>" : "") +
+        TNI("app.k79f589d", "<h2 class=\"ob__q\" id=\"sheetTitle\">🙋 무엇에 관심 있으세요?<small>(여러 개 선택)</small></h2><p class=\"ob__sub\">고른 주제의 기사를 <b>먼저</b> 보여 드려요.</p>") +
+        TNI("app.kb38e482", "<div class=\"grid2\" role=\"group\" aria-label=\"관심\">") + T.INTERESTS.map(function (x) {
           return '<button type="button" class="int" data-int="' + x.id + '" aria-pressed="' + (ints.indexOf(x.id) >= 0) + '" style="--tc:' + x.color + '"><span class="int__c" aria-hidden="true">✓</span><span class="int__e" aria-hidden="true">' + x.emoji + '</span>' +
             '<span class="int__t">' + esc(x.label) + '</span><span class="int__s">' + esc(x.hint) + "</span></button>";
-        }).join("") + '</div><p class="note">💡 <span>언제든 <span class="mi">☰ 메뉴</span>에서 <b>바꿀 수 있어요</b></span></p><p class="pick-msg" id="pickMsg" role="status" aria-live="polite"></p></div>' +
-        '<div class="ob__foot"><p class="ob__cnt" id="intCnt"><b>' + ints.length + "개</b> 선택함</p>" +
-        '<button type="button" class="cta" data-ob-done>완료 <small aria-hidden="true">✓</small></button><button type="button" class="skip" data-ob-prev>← 이전</button></div></div>';
+        }).join("") + TNI("app.kd890019", "</div><p class=\"note\">💡 <span>언제든 <span class=\"mi\">☰ 메뉴</span>에서 <b>바꿀 수 있어요</b></span></p><p class=\"pick-msg\" id=\"pickMsg\" role=\"status\" aria-live=\"polite\"></p></div>") +
+        '<div class="ob__foot"><p class="ob__cnt" id="intCnt"><b>' + ints.length + TNI("app.kc06eac7", "개</b> 선택함</p>") +
+        TNI("app.k1d1b47e", "<button type=\"button\" class=\"cta\" data-ob-done>완료 <small aria-hidden=\"true\">✓</small></button><button type=\"button\" class=\"skip\" data-ob-prev>← 이전</button></div></div>");
     }
     function personaHTML(compact) {
       return T.PERSONAS.map(function (p) {
@@ -833,29 +833,29 @@
     }
     function stepPersona() {
       return '<div class="sheet__step">' +
-        '<p class="sheet__kicker">태국 뉴스 한눈에 👋 태국 현지 뉴스를 한국어로</p>' +
-        '<h2 id="sheetTitle">어떤 분이세요?</h2>' +
-        '<p class="sheet__sub">고르시면 관심 주제 5개를 먼저 골라 드려요. 언제든 <b>🧩 내 주제</b>에서 바꿀 수 있어요.</p>' +
+        TNI("app.k14903a9", "<p class=\"sheet__kicker\">태국 뉴스 한눈에 👋 태국 현지 뉴스를 한국어로</p>") +
+        TNI("app.kd8ba7dd", "<h2 id=\"sheetTitle\">어떤 분이세요?</h2>") +
+        TNI("app.kc9a49cd", "<p class=\"sheet__sub\">고르시면 관심 주제 5개를 먼저 골라 드려요. 언제든 <b>🧩 내 주제</b>에서 바꿀 수 있어요.</p>") +
         '<div class="persona-grid">' + personaHTML(false) + "</div>" +
-        '<button type="button" class="linkbtn sheet__skip" data-skip>건너뛰고 모든 뉴스 보기 ›</button></div>';
+        TNI("app.kd0d6b8c", "<button type=\"button\" class=\"linkbtn sheet__skip\" data-skip>건너뛰고 모든 뉴스 보기 ›</button></div>");
     }
     function stepTopics() {
       var p = persona && T.PERSONAS.filter(function (x) { return x.id === persona; })[0];
       return '<div class="sheet__step">' +
-        (settingsMode ? '<button type="button" class="sheet__x" data-close aria-label="닫기">✕</button>' : '<button type="button" class="linkbtn sheet__back" data-back>‹ 다시 고르기</button>') +
-        '<h2 id="sheetTitle">🧩 내 주제</h2>' +
-        '<p class="sheet__sub">' + (p ? "<b>" + esc(p.emoji + " " + p.label) + "</b> 기본 주제 5개를 골라 뒀어요. " : "") + "끄거나 더 고를 수 있어요(<b>최대 " + MAX + "개</b>).</p>" +
-        (settingsMode ? '<div class="persona-row"><span>빠르게 고르기</span>' + personaHTML(true) + "</div>" : "") +
+        (settingsMode ? TNI("app.k4facf03", "<button type=\"button\" class=\"sheet__x\" data-close aria-label=\"닫기\">✕</button>") : TNI("app.k84933a6", "<button type=\"button\" class=\"linkbtn sheet__back\" data-back>‹ 다시 고르기</button>")) +
+        TNI("app.ke2b4ee0", "<h2 id=\"sheetTitle\">🧩 내 주제</h2>") +
+        '<p class="sheet__sub">' + (p ? "<b>" + esc(p.emoji + " " + p.label) + TNI("app.k656a846", "</b> 기본 주제 5개를 골라 뒀어요. ") : "") + TNI("app.k888d37c", "끄거나 더 고를 수 있어요(<b>최대 ") + MAX + TNI("app.k6e399d9", "개</b>).</p>") +
+        (settingsMode ? TNI("app.kbd11620", "<div class=\"persona-row\"><span>빠르게 고르기</span>") + personaHTML(true) + "</div>" : "") +
         '<div class="topic-grid" id="topicGrid">' + topicGridHTML() + "</div>" +
         '<p class="pick-msg" id="pickMsg" role="status" aria-live="polite"></p>' +
-        '<div class="sheet__actions"><span class="pick-count" id="pickCount"></span><button type="button" class="btn btn--primary" data-save>이대로 보기</button></div>' +
+        TNI("app.ka55a5db", "<div class=\"sheet__actions\"><span class=\"pick-count\" id=\"pickCount\"></span><button type=\"button\" class=\"btn btn--primary\" data-save>이대로 보기</button></div>") +
         (settingsMode ? '<div class="sheet__settings">' +
-          '<button type="button" class="setbtn" data-reset-taste>↺ 내 취향 초기화 <small>👍👎로 배운 순서를 지워요</small></button>' +
-          '<button type="button" class="setbtn" data-show-all>모든 주제 보기 <small>주제 선택 없이 전체를 내 피드로</small></button>' +
-          (OB2 ? '<button type="button" class="setbtn" data-restart>📍 사는 곳·관심 다시 고르기</button>' : '<button type="button" class="setbtn" data-restart>처음 질문(어떤 분이세요?) 다시 보기</button>') +
-          (Install.available() ? '<button type="button" class="setbtn" data-install>📲 홈 화면에 추가</button>' : "") +
+          TNI("app.k119c8a4", "<button type=\"button\" class=\"setbtn\" data-reset-taste>↺ 내 취향 초기화 <small>👍👎로 배운 순서를 지워요</small></button>") +
+          TNI("app.k2b456c5", "<button type=\"button\" class=\"setbtn\" data-show-all>모든 주제 보기 <small>주제 선택 없이 전체를 내 피드로</small></button>") +
+          (OB2 ? TNI("app.kecb7aab", "<button type=\"button\" class=\"setbtn\" data-restart>📍 사는 곳·관심 다시 고르기</button>") : TNI("app.kfb5b851", "<button type=\"button\" class=\"setbtn\" data-restart>처음 질문(어떤 분이세요?) 다시 보기</button>")) +
+          (Install.available() ? TNI("app.k1f82827", "<button type=\"button\" class=\"setbtn\" data-install>📲 홈 화면에 추가</button>") : "") +
           '<div class="acct-box" id="acctBox"></div>' +
-          '<p class="sheet__note" id="storeNote">' + (window.TNSocial && window.TNSocial.signedIn() ? "구글 계정에 저장돼 다른 기기에서도 이어져요." : "설정과 취향은 이 기기(브라우저)에만 저장돼요. 구글로 로그인하면 다른 기기에서도 이어져요(선택).") + "</p></div>" : "") +
+          '<p class="sheet__note" id="storeNote">' + (window.TNSocial && window.TNSocial.signedIn() ? TNI("app.k28dd65e", "구글 계정에 저장돼 다른 기기에서도 이어져요.") : TNI("app.k4b1291b", "설정과 취향은 이 기기(브라우저)에만 저장돼요. 구글로 로그인하면 다른 기기에서도 이어져요(선택).")) + "</p></div>" : "") +
         "</div>";
     }
     function topicGridHTML() {
@@ -866,7 +866,7 @@
       }).join("");
     }
     function updCount() {
-      var c = $("pickCount"); if (c) c.innerHTML = "<b>" + pick.length + "</b> / " + MAX + " 선택";
+      var c = $("pickCount"); if (c) c.innerHTML = "<b>" + pick.length + "</b> / " + MAX + TNI("app.ka54d95e", " 선택");
       var g = $("topicGrid"); if (g) g.innerHTML = topicGridHTML();
     }
     function msg(t, warn) { var m = $("pickMsg"); if (!m) return; m.textContent = t; m.classList.toggle("warn", !!warn); if (warn) { m.classList.remove("shake"); void m.offsetWidth; m.classList.add("shake"); } }
@@ -910,7 +910,7 @@
       if (state.data) renderAll();
       window.scrollTo(0, 0);
       var rr = T.region(r);
-      toast("⭐ 내 피드를 " + (rr && rr.topic ? esc(rr.full) + " 소식 먼저로" : "전국 소식 위주로") + " 맞췄어요");
+      toast(TNI("app.kf7bb606", "⭐ 내 피드를 ") + (rr && rr.topic ? esc(rr.full) + TNI("app.kf635823", " 소식 먼저로") : TNI("app.kc9f0f5e", "전국 소식 위주로")) + TNI("app.k5eb9e89", " 맞췄어요"));
     }
     sheet.addEventListener("click", function (e) {
       var el = e.target;
@@ -920,45 +920,45 @@
         sheet.querySelectorAll("[data-region]").forEach(function (b) { b.setAttribute("aria-checked", String(b === el)); });
         msg(""); return;
       }
-      if (e.target.closest("[data-ob-next]")) { if (!reg) { msg("사는 곳을 하나 골라 주세요 🙂", true); return; } show("interests"); return; }
+      if (e.target.closest("[data-ob-next]")) { if (!reg) { msg(TNI("app.k091e9dc", "사는 곳을 하나 골라 주세요 🙂"), true); return; } show("interests"); return; }
       if (e.target.closest("[data-ob-prev]")) { show("region"); return; }
       if ((el = e.target.closest("[data-int]"))) {
         var iid = el.getAttribute("data-int"), ii = ints.indexOf(iid);
         if (ii >= 0) ints.splice(ii, 1); else ints.push(iid);
         el.setAttribute("aria-pressed", String(ii < 0));
-        var c = $("intCnt"); if (c) c.innerHTML = "<b>" + ints.length + "개</b> 선택함"; msg(""); return;
+        var c = $("intCnt"); if (c) c.innerHTML = "<b>" + ints.length + TNI("app.k77c116d", "개</b> 선택함"); msg(""); return;
       }
-      if (e.target.closest("[data-ob-done]")) { if (!ints.length) { msg("관심을 1개 이상 골라 주세요 🙂", true); return; } finishMine(); return; }
+      if (e.target.closest("[data-ob-done]")) { if (!ints.length) { msg(TNI("app.k7e65653", "관심을 1개 이상 골라 주세요 🙂"), true); return; } finishMine(); return; }
       if ((el = e.target.closest("[data-persona]"))) {
         persona = el.getAttribute("data-persona");
         pick = T.PERSONAS.filter(function (p) { return p.id === persona; })[0].topics.slice();
-        if (settingsMode) { sheet.querySelectorAll("[data-persona]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-persona") === persona)); }); updCount(); msg("기본 주제 5개로 바꿨어요. 3개까지 더 고를 수 있어요."); }
+        if (settingsMode) { sheet.querySelectorAll("[data-persona]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-persona") === persona)); }); updCount(); msg(TNI("app.k55d2f7d", "기본 주제 5개로 바꿨어요. 3개까지 더 고를 수 있어요.")); }
         else show("topics");
         return;
       }
       if ((el = e.target.closest("[data-pick]"))) {
         var id = el.getAttribute("data-pick"), i = pick.indexOf(id);
         if (i >= 0) { pick.splice(i, 1); updCount(); msg(""); }
-        else if (pick.length >= MAX) { msg("주제는 최대 " + MAX + "개까지 고를 수 있어요 🙂 다른 주제를 하나 끈 다음 골라 주세요.", true); }
-        else { pick.push(id); updCount(); msg(pick.length === MAX ? "최대 " + MAX + "개를 모두 골랐어요." : ""); }
+        else if (pick.length >= MAX) { msg(TNI("app.k098aa7b", "주제는 최대 ") + MAX + TNI("app.k35456c5", "개까지 고를 수 있어요 🙂 다른 주제를 하나 끈 다음 골라 주세요."), true); }
+        else { pick.push(id); updCount(); msg(pick.length === MAX ? TNI("app.kf7850c0", "최대 ") + MAX + TNI("app.kf41aa7c", "개를 모두 골랐어요.") : ""); }
         var nb = sheet.querySelector('[data-pick="' + id + '"]'); if (nb) nb.focus({ preventScroll: true });
         return;
       }
       if (e.target.closest("[data-save]")) {
-        if (!pick.length) { msg("주제를 1개 이상 골라 주세요. 모두 보려면 '모든 주제 보기'를 누르세요.", true); return; }
+        if (!pick.length) { msg(TNI("app.k6d87aa1", "주제를 1개 이상 골라 주세요. 모두 보려면 '모든 주제 보기'를 누르세요."), true); return; }
         // 주제 순서는 화면(주제 목록) 순서로 정리
         var ordered = T.TOPICS.map(function (t) { return t.id; }).filter(function (x) { return pick.indexOf(x) >= 0; });
-        finish(ordered, persona); toast("🧩 내 주제 " + ordered.length + "개로 피드를 맞췄어요"); return;
+        finish(ordered, persona); toast(TNI("app.kcb1b049", "🧩 내 주제 ") + ordered.length + TNI("app.k20a1fa0", "개로 피드를 맞췄어요")); return;
       }
       if (e.target.closest("[data-skip]")) { finish(null, null); return; }
-      if (e.target.closest("[data-show-all]")) { finish(null, persona); toast("모든 주제를 내 피드에 보여 드려요"); return; }
+      if (e.target.closest("[data-show-all]")) { finish(null, persona); toast(TNI("app.k3f56530", "모든 주제를 내 피드에 보여 드려요")); return; }
       if (e.target.closest("[data-back]")) { show("persona"); return; }
       if (e.target.closest("[data-restart]")) { if (OB2) show("region"); else { settingsMode = false; show("persona"); } return; }
       if (e.target.closest("[data-close]")) { close(); return; }
       if (e.target.closest("[data-install]")) { close(); Install.prompt(); return; }
       if (e.target.closest("[data-reset-taste]")) {
-        if (window.confirm("👍👎로 배운 내 취향을 모두 지울까요? (주제 선택은 그대로 둡니다)")) {
-          L.reset(); msg("내 취향을 초기화했어요. 기사는 다시 최신순으로 보여요."); if (state.data) renderAll();
+        if (window.confirm(TNI("app.ka4bb331", "👍👎로 배운 내 취향을 모두 지울까요? (주제 선택은 그대로 둡니다)"))) {
+          L.reset(); msg(TNI("app.kb747cf7", "내 취향을 초기화했어요. 기사는 다시 최신순으로 보여요.")); if (state.data) renderAll();
         }
       }
     });
@@ -976,7 +976,7 @@
     var isSafari = isIOS && /safari/i.test(ua) && !/crios|fxios|edgios|kakaotalk|naver|line\/|instagram|fban|fbav/i.test(ua);
     function standalone() { return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true; }
     window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); deferred = e; maybeShow(); });
-    window.addEventListener("appinstalled", function () { deferred = null; hide(); S.update(function (d) { d.ui.installed = true; }); toast("📲 홈 화면에 추가했어요"); });
+    window.addEventListener("appinstalled", function () { deferred = null; hide(); S.update(function (d) { d.ui.installed = true; }); toast(TNI("app.k857a174", "📲 홈 화면에 추가했어요")); });
     function hide() { var el = $("installHint"); el.hidden = true; el.className = "install-hint install-hint--inline"; }
     function dismissed() {
       var ui = prof().ui || {};
@@ -992,16 +992,16 @@
       if (deferred) {
         el.className = "install-hint install-hint--inline";
         el.innerHTML = '<span class="ih__icon" aria-hidden="true"><img src="assets/icons/icon-192.png" alt="" width="36" height="36"></span>' +
-          '<span class="ih__t"><b>홈 화면에 추가할까요?</b><small>앱처럼 편하게 볼 수 있어요</small></span>' +
-          '<span class="ih__btns"><button type="button" class="btn btn--primary btn--sm" data-ih-install>추가하기</button><button type="button" class="ih__later" data-ih-close>나중에</button></span>';
+          TNI("app.kdfcd3ec", "<span class=\"ih__t\"><b>홈 화면에 추가할까요?</b><small>앱처럼 편하게 볼 수 있어요</small></span>") +
+          TNI("app.ka4672b7", "<span class=\"ih__btns\"><button type=\"button\" class=\"btn btn--primary btn--sm\" data-ih-install>추가하기</button><button type=\"button\" class=\"ih__later\" data-ih-close>나중에</button></span>");
         el.hidden = false;
       } else if (isIOS) {
         el.className = "install-hint install-hint--inline install-hint--ios";
-        el.innerHTML = '<div class="ihi__head"><b>📲 홈 화면에 추가하면 앱처럼 열려요</b><button type="button" class="ih__x" data-ih-close aria-label="닫기">닫기</button></div>' +
-          (isSafari ? "" : '<p class="ihi__warn">먼저 이 페이지를 <b>Safari</b>에서 열어 주세요.</p>') +
+        el.innerHTML = TNI("app.k38a2d14", "<div class=\"ihi__head\"><b>📲 홈 화면에 추가하면 앱처럼 열려요</b><button type=\"button\" class=\"ih__x\" data-ih-close aria-label=\"닫기\">닫기</button></div>") +
+          (isSafari ? "" : TNI("app.k4600aee", "<p class=\"ihi__warn\">먼저 이 페이지를 <b>Safari</b>에서 열어 주세요.</p>")) +
           '<ol class="ihi__steps">' +
-          '<li><span class="ihi__n">1</span><span class="ihi__ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5" fill="none" stroke="#0a84ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 10H6a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1h-2" fill="none" stroke="#0a84ff" stroke-width="2" stroke-linecap="round"/></svg></span><span>화면 아래 도구 막대의 <b>공유</b> 버튼을 누르세요</span></li>' +
-          '<li><span class="ihi__n">2</span><span class="ihi__ic ihi__ic--add" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="none" stroke="#1c1c1e" stroke-width="1.8"/><path d="M12 8v8M8 12h8" stroke="#1c1c1e" stroke-width="1.8" stroke-linecap="round"/></svg></span><span>목록을 올려 <b>홈 화면에 추가</b>를 누르세요</span></li>' +
+          TNI("app.k9fdf485", "<li><span class=\"ihi__n\">1</span><span class=\"ihi__ic\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\"><path d=\"M12 3v12M7.5 7.5 12 3l4.5 4.5\" fill=\"none\" stroke=\"#0a84ff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M8 10H6a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1h-2\" fill=\"none\" stroke=\"#0a84ff\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg></span><span>화면 아래 도구 막대의 <b>공유</b> 버튼을 누르세요</span></li>") +
+          TNI("app.kd0b8ad2", "<li><span class=\"ihi__n\">2</span><span class=\"ihi__ic ihi__ic--add\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\"><rect x=\"3.5\" y=\"3.5\" width=\"17\" height=\"17\" rx=\"4\" fill=\"none\" stroke=\"#1c1c1e\" stroke-width=\"1.8\"/><path d=\"M12 8v8M8 12h8\" stroke=\"#1c1c1e\" stroke-width=\"1.8\" stroke-linecap=\"round\"/></svg></span><span>목록을 올려 <b>홈 화면에 추가</b>를 누르세요</span></li>") +
           "</ol>" + '<div class="ihi__arrow" aria-hidden="true">⬇︎</div>';
         el.hidden = false;
       }
@@ -1041,28 +1041,28 @@
     $("datepickWrap").hidden = false;
     document.body.classList.add("has-editions");
     $("datepick").innerHTML = EDS.map(function (e, i) {
-      return '<option value="' + esc(e.id) + '"' + (cur && e.id === cur.id ? " selected" : "") + ">" + esc(e.label) + (i === 0 && innerWidth > 640 ? " (최신)" : "") + "</option>";   // 휴대폰은 칸이 좁아 '(최신)' 생략(잘림 방지)
+      return '<option value="' + esc(e.id) + '"' + (cur && e.id === cur.id ? " selected" : "") + ">" + esc(e.label) + (i === 0 && innerWidth > 640 ? TNI("app.k3edd86f", " (최신)") : "") + "</option>";   // 휴대폰은 칸이 좁아 '(최신)' 생략(잘림 방지)
     }).join("");
     $("datepick").addEventListener("change", function () { location.href = location.pathname + "?date=" + encodeURIComponent(this.value); });
   }
   if (cur && EDS.length && cur.id !== EDS[0].id && !cur.missing) {
     var n = $("editionNote");
     n.hidden = false;
-    n.innerHTML = "지금 <b>" + esc(cur.label) + "</b>을(를) 보고 있습니다. " +
-      '<a href="' + location.pathname + '?date=' + encodeURIComponent(EDS[0].id) + '">최신 ' + esc(EDS[0].label) + " 보기 →</a>";
+    n.innerHTML = TNI("app.ke905ad7", "지금 <b>") + esc(cur.label) + TNI("app.k8242241", "</b>을(를) 보고 있습니다. ") +
+      '<a href="' + location.pathname + '?date=' + encodeURIComponent(EDS[0].id) + TNI("app.ka46be89", "\">최신 ") + esc(EDS[0].label) + TNI("app.ka1ace16", " 보기 →</a>");
   }
   loadKorea();
   loadIssues();
   // 화면으로 돌아왔을 때 10분 넘었으면 한국 뉴스 다시 받기(2시간마다 갱신됨)
   document.addEventListener("visibilitychange", function () { if (!document.hidden && Date.now() - KOREA.at > 10 * 60 * 1000) loadKorea(); });
-  if (cur) loadDate(cur.id); else $("feed").innerHTML = loadFail("뉴스 목록을 불러오지 못했어요.");
+  if (cur) loadDate(cur.id); else $("feed").innerHTML = loadFail(TNI("app.k0f61283", "뉴스 목록을 불러오지 못했어요."));
   // 처음 방문: '어떤 분이세요?' (기사 링크(#id)로 들어온 경우에도 먼저 보여 주되 건너뛰기 가능)
   if (!prof().onboarded) { if (FIRST_SHEET_AUTO) Onb.open(OB2 ? "region" : "persona", false); } else Install.maybeShow();   // 첫 방문만 2단계 시작 화면(옛 사용자는 prefs.js 가 조용히 옮김)
 
   // 서비스 워커(오프라인 읽기·홈 화면 앱). file:// 에서는 쓰지 않음
   if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
     window.addEventListener("load", function () {
-      navigator.serviceWorker.register("sw.js").catch(function (e) { console.warn("SW 등록 실패", e); });
+      navigator.serviceWorker.register("sw.js").catch(function (e) { console.warn(TNI("app.kb076cec", "SW 등록 실패"), e); });
     });
   }
   // 로그인 병합·다른 기기 변경(src="remote") → 다시 그리기. 첫 질문 창이 떠 있는데 계정에 설정이 있으면 닫기

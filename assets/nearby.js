@@ -14,38 +14,38 @@
   var NEARBY = window.TN_NEARBY = {
     zoom: 15,
     regions: {   // 위치 권한이 없을 때 쓰는 지역(assets/ticker.js REGIONS 와 같은 id)
-      pattaya:  { name: "파타야", en: "Pattaya",  lat: 12.9236, lng: 100.8825 },
-      sriracha: { name: "시라차", en: "Si Racha", lat: 13.1682, lng: 100.9310 },
-      bangkok:  { name: "방콕",   en: "Bangkok",  lat: 13.7563, lng: 100.5018 }
+      pattaya:  { name: TNI("nearby.k6a1a0cc", "파타야"), en: "Pattaya",  lat: 12.9236, lng: 100.8825 },
+      sriracha: { name: TNI("nearby.ka7ba72f", "시라차"), en: "Si Racha", lat: 13.1682, lng: 100.9310 },
+      bangkok:  { name: TNI("nearby.k4dc2c29", "방콕"),   en: "Bangkok",  lat: 13.7563, lng: 100.5018 }
     },
     // id = 주소 #nearby/<id> · label = 화면 제목('내 주변 <label>') · short = 헤더 줄 버튼 글자(없으면 label) · tag = 광고 '이 자리 추천 업종'(data/ads.json target)
     // query/subs[].query = 구글 지도 검색어(영어) · places = 나중에 Places API(New) 로 바꿀 때 쓸 값(includedTypes 는 Table A 만, 없으면 textQuery)
     // 2026-10-03 v2(운영자): 💇 미용실·🛒 마트 빼고 🐶 동물병원·펫샵 · 💅 피부과·성형·에스테틱 · 🏍️ 오토바이 렌탈·판매 추가. 옛 #nearby/hair|mart → 피드로(RETIRED)
     categories: [
-      { id: "food", emoji: "🍜", label: "맛집", slot: "nearby-food", query: "restaurants",
+      { id: "food", emoji: "🍜", label: TNI("nearby.k65428f4", "맛집"), slot: "nearby-food", query: "restaurants",
         places: { includedTypes: ["restaurant"] },
-        subs: [ { label: "한식", query: "korean restaurant", places: { includedTypes: ["korean_restaurant"] } },
-                { label: "태국음식", query: "thai restaurant", places: { includedTypes: ["thai_restaurant"] } },
-                { label: "카페", query: "cafe", places: { includedTypes: ["cafe"] } } ] },
-      { id: "massage", emoji: "💆", label: "마사지", slot: "nearby-massage", query: "massage",
+        subs: [ { label: TNI("nearby.ke493ea6", "한식"), query: "korean restaurant", places: { includedTypes: ["korean_restaurant"] } },
+                { label: TNI("nearby.k57054cf", "태국음식"), query: "thai restaurant", places: { includedTypes: ["thai_restaurant"] } },
+                { label: TNI("nearby.k6daadb8", "카페"), query: "cafe", places: { includedTypes: ["cafe"] } } ] },
+      { id: "massage", emoji: "💆", label: TNI("nearby.kb8cee4f", "마사지"), slot: "nearby-massage", query: "massage",
         places: { includedTypes: ["massage", "spa"] },
-        subs: [ { label: "타이 마사지", query: "thai massage", places: { includedTypes: ["massage"] } },
-                { label: "스파", query: "spa", places: { includedTypes: ["spa"] } } ] },
-      { id: "pet", emoji: "🐶", label: "동물병원·펫샵", short: "동물병원", tag: "동물병원·펫샵", slot: "nearby-pet", query: "veterinary clinic",
+        subs: [ { label: TNI("nearby.kf704341", "타이 마사지"), query: "thai massage", places: { includedTypes: ["massage"] } },
+                { label: TNI("nearby.kc95e600", "스파"), query: "spa", places: { includedTypes: ["spa"] } } ] },
+      { id: "pet", emoji: "🐶", label: TNI("nearby.k112a086", "동물병원·펫샵"), short: TNI("nearby.k252f77c", "동물병원"), tag: TNI("nearby.k112a086", "동물병원·펫샵"), slot: "nearby-pet", query: "veterinary clinic",
         places: { includedTypes: ["veterinary_care", "pet_store", "pet_care"] },
-        subs: [ { label: "동물병원", query: "veterinary clinic", places: { includedTypes: ["veterinary_care"] } },
-                { label: "펫샵", query: "pet shop", places: { includedTypes: ["pet_store"] } },
-                { label: "애견미용", query: "pet grooming", places: { includedTypes: ["pet_care"], textQuery: "pet grooming" } } ] },
-      { id: "beauty", emoji: "💅", label: "피부과·성형·에스테틱", short: "뷰티", tag: "피부과·성형·에스테틱", slot: "nearby-beauty", query: "skin clinic",
+        subs: [ { label: TNI("nearby.k252f77c", "동물병원"), query: "veterinary clinic", places: { includedTypes: ["veterinary_care"] } },
+                { label: TNI("nearby.kf7ba209", "펫샵"), query: "pet shop", places: { includedTypes: ["pet_store"] } },
+                { label: TNI("nearby.ke1f1578", "애견미용"), query: "pet grooming", places: { includedTypes: ["pet_care"], textQuery: "pet grooming" } } ] },
+      { id: "beauty", emoji: "💅", label: TNI("nearby.k6bbefd7", "피부과·성형·에스테틱"), short: TNI("nearby.k5b22ad1", "뷰티"), tag: TNI("nearby.k6bbefd7", "피부과·성형·에스테틱"), slot: "nearby-beauty", query: "skin clinic",
         places: { includedTypes: ["skin_care_clinic", "beauty_salon", "medical_clinic"] },
-        subs: [ { label: "피부과", query: "dermatology clinic", places: { includedTypes: ["skin_care_clinic"], textQuery: "dermatology clinic" } },
-                { label: "성형외과", query: "plastic surgery clinic", places: { includedTypes: ["medical_clinic"], textQuery: "plastic surgery clinic" } },
-                { label: "에스테틱", query: "aesthetic clinic", places: { includedTypes: ["beauty_salon", "beautician"], textQuery: "aesthetic clinic beauty salon" } } ] },
-      { id: "moto", emoji: "🏍️", label: "오토바이 렌탈·판매", short: "오토바이", tag: "오토바이 렌탈·판매", slot: "nearby-moto", query: "motorbike rental",
+        subs: [ { label: TNI("nearby.k464414a", "피부과"), query: "dermatology clinic", places: { includedTypes: ["skin_care_clinic"], textQuery: "dermatology clinic" } },
+                { label: TNI("nearby.k8ad05f2", "성형외과"), query: "plastic surgery clinic", places: { includedTypes: ["medical_clinic"], textQuery: "plastic surgery clinic" } },
+                { label: TNI("nearby.ked6706a", "에스테틱"), query: "aesthetic clinic", places: { includedTypes: ["beauty_salon", "beautician"], textQuery: "aesthetic clinic beauty salon" } } ] },
+      { id: "moto", emoji: "🏍️", label: TNI("nearby.kc05dfc9", "오토바이 렌탈·판매"), short: TNI("nearby.k8bf0166", "오토바이"), tag: TNI("nearby.kc05dfc9", "오토바이 렌탈·판매"), slot: "nearby-moto", query: "motorbike rental",
         places: { textQuery: "motorbike rental" },   // Table A 에 오토바이 종류 없음 → Text Search 검색어로
-        subs: [ { label: "렌탈", query: "motorbike rental", places: { textQuery: "motorbike rental" } },
-                { label: "판매", query: "motorcycle dealer", places: { textQuery: "motorcycle dealer" } },
-                { label: "수리", query: "motorcycle repair", places: { textQuery: "motorcycle repair shop" } } ] }
+        subs: [ { label: TNI("nearby.k50e6c53", "렌탈"), query: "motorbike rental", places: { textQuery: "motorbike rental" } },
+                { label: TNI("nearby.k509b5ca", "판매"), query: "motorcycle dealer", places: { textQuery: "motorcycle dealer" } },
+                { label: TNI("nearby.kb007e3d", "수리"), query: "motorcycle repair", places: { textQuery: "motorcycle repair shop" } } ] }
     ],
     retired: ["hair", "mart"]   // 예전 카테고리(10-03 v1). 옛 링크 #nearby/hair|mart 는 화면 없이 피드로(주소에서 #nearby 지움)
   };
@@ -75,7 +75,7 @@
   /* ---------- 헤더 줄 ---------- */
   function renderRow() {
     var row = document.getElementById("nearbyRow"); if (!row) return;
-    row.innerHTML = '<span class="nb-lab"><span class="nb-lab__e" aria-hidden="true">📍</span> <span class="nb-lab__t">내 주변</span></span>' +
+    row.innerHTML = TNI("nearby.k0baec7c", "<span class=\"nb-lab\"><span class=\"nb-lab__e\" aria-hidden=\"true\">📍</span> <span class=\"nb-lab__t\">내 주변</span></span>") +
       '<div class="nb-cats">' + NEARBY.categories.map(function (c) {
         var sh = c.short || c.label;
         return '<a class="nb-cat" href="#nearby/' + c.id + '" data-nb-cat="' + c.id + '"' + (sh !== c.label ? ' aria-label="' + esc(c.label) + '"' : "") +
@@ -105,15 +105,15 @@
     return A.slots.filter(function (x) { return x.id === id && x.enabled !== false && x.items && x.items.length; })[0] || null;
   }
   function adHTML(sl) {
-    var it = sl.items[0], lab = window.TN_ADS.label || "광고";
+    var it = sl.items[0], lab = window.TN_ADS.label || TNI("nearby.keb18928", "광고");
     var safe = function (u) { return u && /^https:\/\//.test(u) ? u : null; };
     var link = safe(it.link), img = safe(it.image);
     var inner = '<span class="ad__tag">' + esc(lab) + "</span>" + (img ? '<img class="ad__img" src="' + esc(img) + '" alt="" loading="lazy">' : "") +
       '<span class="ad__txt">' + (it.category ? '<span class="ad__cat">' + esc(it.category) + "</span>" : "") +
-      '<b class="ad__t">' + esc(it.title || "여기에 광고하세요") + '</b><small class="ad__s">' + esc(it.subtitle || "광고 문의") + "</small></span>";
+      '<b class="ad__t">' + esc(it.title || TNI("nearby.k413ad63", "여기에 광고하세요")) + '</b><small class="ad__s">' + esc(it.subtitle || TNI("nearby.kf89f72f", "광고 문의")) + "</small></span>";
     var cls = "ad ad--" + esc(sl.size || "medium") + " ad--t" + (it.theme || 1);
     return link ? '<a class="' + cls + '" href="' + esc(link) + '" target="_blank" rel="sponsored noopener" aria-label="' + esc(lab) + '">' + inner + "</a>"
-      : '<div class="' + cls + '" role="note" aria-label="' + esc(lab) + ' 자리">' + inner + "</div>";
+      : '<div class="' + cls + '" role="note" aria-label="' + esc(lab) + TNI("nearby.kd18e540", " 자리\">") + inner + "</div>";
   }
   function mountAd(el, c) {
     var sl = adSlot(c.slot);
@@ -133,37 +133,37 @@
   /* ---------- 카테고리 화면 ---------- */
   function statusHTML() {
     var R = NEARBY.regions, rg = region();
-    var line = havePos() ? '<b>📍 내 위치 기준</b>으로 지도를 열어요.'
-      : geo.state === "denied" ? "위치 권한이 꺼져 있어 <b>" + R[rg].name + "</b> 기준으로 열어요."
-      : geo.state === "error" || geo.state === "unsupported" ? "위치를 확인하지 못해 <b>" + R[rg].name + "</b> 기준으로 열어요."
-      : "누르면 위치 권한을 물어요. 허용하면 <b>내 위치</b>, 아니면 <b>" + R[rg].name + "</b> 기준.";
-    var pick = havePos() ? "" : '<span class="nb-rg" role="group" aria-label="위치를 못 쓸 때 기준 지역">' + Object.keys(R).map(function (k) {
+    var line = havePos() ? TNI("nearby.k5267909", "<b>📍 내 위치 기준</b>으로 지도를 열어요.")
+      : geo.state === "denied" ? TNI("nearby.k82be22b", "위치 권한이 꺼져 있어 <b>") + R[rg].name + TNI("nearby.k17a8ca6", "</b> 기준으로 열어요.")
+      : geo.state === "error" || geo.state === "unsupported" ? TNI("nearby.kcad0155", "위치를 확인하지 못해 <b>") + R[rg].name + TNI("nearby.k17a8ca6", "</b> 기준으로 열어요.")
+      : TNI("nearby.ka910df9", "누르면 위치 권한을 물어요. 허용하면 <b>내 위치</b>, 아니면 <b>") + R[rg].name + TNI("nearby.k69e9b1e", "</b> 기준.");
+    var pick = havePos() ? "" : TNI("nearby.k4f9106e", "<span class=\"nb-rg\" role=\"group\" aria-label=\"위치를 못 쓸 때 기준 지역\">") + Object.keys(R).map(function (k) {
       return '<button type="button" data-nb-rg="' + k + '" aria-pressed="' + (k === rg) + '">' + R[k].name + "</button>"; }).join("") + "</span>";
     return '<p class="nb-st__t">' + line + "</p>" + pick;
   }
   function renderPage(c) {
     return '<div class="nb-page__panel" role="document">' +
-      '<div class="nb-page__bar"><button type="button" class="nb-back" data-nb-back aria-label="뒤로 — 뉴스로 돌아가기">← 뒤로</button>' +
-      '<h2 class="nb-page__t" id="nbTitle"><span aria-hidden="true">' + c.emoji + "</span> 내 주변 " + esc(c.label) + "</h2></div>" +
+      TNI("nearby.kaf57351", "<div class=\"nb-page__bar\"><button type=\"button\" class=\"nb-back\" data-nb-back aria-label=\"뒤로 — 뉴스로 돌아가기\">← 뒤로</button>") +
+      '<h2 class="nb-page__t" id="nbTitle"><span aria-hidden="true">' + c.emoji + TNI("nearby.k2d70f8c", "</span> 내 주변 ") + esc(c.label) + "</h2></div>" +
       '<div class="nb-page__body">' +
       // 종류 바꾸기(뒤로 가지 않고 바로, 같은 크기 5칸) — 2026-10-03 ③d
-      '<nav class="nb-switch" aria-label="가게 종류 바꾸기">' + NEARBY.categories.map(function (k) {
+      TNI("nearby.k1d42bae", "<nav class=\"nb-switch\" aria-label=\"가게 종류 바꾸기\">") + NEARBY.categories.map(function (k) {
         return '<button type="button" class="nb-sw" data-nb-sw="' + k.id + '"' + (k.id === c.id ? ' aria-current="page"' : "") + ' aria-label="' + esc(k.label) + '"><span class="nb-sw__e" aria-hidden="true">' + k.emoji + '</span><span class="nb-sw__t">' + esc(k.short || k.label) + "</span></button>"; }).join("") + "</nav>" +
       '<div class="ad-slot nb-ad" data-nb-ad></div>' +
-      '<a class="nb-go" data-nb-q="' + esc(c.query) + '" href="' + esc(mapsUrl(c.query)) + '" target="_blank" rel="noopener">📍 내 주변 평점 좋은 곳<br>구글 지도로 보기</a>' +
+      '<a class="nb-go" data-nb-q="' + esc(c.query) + '" href="' + esc(mapsUrl(c.query)) + TNI("nearby.k8fea946", "\" target=\"_blank\" rel=\"noopener\">📍 내 주변 평점 좋은 곳<br>구글 지도로 보기</a>") +
       '<div class="nb-st" data-nb-st aria-live="polite">' + statusHTML() + "</div>" +
-      '<p class="nb-sec">빠른 찾기</p><div class="nb-subs">' + c.subs.map(function (s) {
+      TNI("nearby.kf154112", "<p class=\"nb-sec\">빠른 찾기</p><div class=\"nb-subs\">") + c.subs.map(function (s) {
         return '<a class="nb-sub" data-nb-q="' + esc(s.query) + '" href="' + esc(mapsUrl(s.query)) + '" target="_blank" rel="noopener">' + esc(s.label) + "</a>"; }).join("") + "</div>" +
       // 📇 가게 카드 시험(파타야 30곳, OSM 실제 데이터) — 2026-10-03 ⑦
-      '<a class="nb-places" href="#places" data-page="places" data-pl-cat="' + esc({ food: "food", pet: "pet", beauty: "beauty", moto: "moto" }[c.id] || "all") + '"><span aria-hidden="true">📇</span><span><b>파타야 가게 카드 보기</b><small>지도에 등록된 가게 · 영업 여부는 확인 안 됨(가기 전에 전화로) — 시험 중</small></span><span aria-hidden="true">›</span></a>' +
-      '<p class="nb-note">💡 평점 좋은 곳만 보려면 구글 지도 위쪽 필터에서 <b>평점</b>을 눌러 4.0 이상 등을 고르세요.</p>' +
+      '<a class="nb-places" href="#places" data-page="places" data-pl-cat="' + esc({ food: "food", pet: "pet", beauty: "beauty", moto: "moto" }[c.id] || "all") + TNI("nearby.kb2c66e4", "\"><span aria-hidden=\"true\">📇</span><span><b>파타야 가게 카드 보기</b><small>지도에 등록된 가게 · 영업 여부는 확인 안 됨(가기 전에 전화로) — 시험 중</small></span><span aria-hidden=\"true\">›</span></a>") +
+      TNI("nearby.k014503d", "<p class=\"nb-note\">💡 평점 좋은 곳만 보려면 구글 지도 위쪽 필터에서 <b>평점</b>을 눌러 4.0 이상 등을 고르세요.</p>") +
       // 이 화면의 기준(운영자·이용자 모두 '무엇으로 찾는지' 알 수 있게) — 2026-10-03 ③d
-      '<details class="nb-how"><summary>🔎 이 화면은 이렇게 찾아요</summary><ul>' +
-        "<li>큰 버튼은 구글 지도에서 영어 검색어 <code>" + esc(c.query) + "</code> 로 찾아요. 빠른 찾기는 버튼마다 검색어가 달라요" + (c.subs[0] ? "(예: " + esc(c.subs[0].label) + " = <code>" + esc(c.subs[0].query) + "</code>)" : "") + ".</li>" +
-        "<li>위치: 허용하면 <b>지금 내 위치</b> 둘레, 아니면 위에서 고른 지역(파타야·시라차·방콕) 이름으로 찾아요.</li>" +
-        "<li>순서·평점·영업 여부는 <b>구글 지도</b>가 정해요. 이 사이트가 돈을 받고 순서를 바꾸지 않아요.</li>" +
-        "<li>맨 위 <b>광고</b> 칸만 이 사이트가 직접 소개하는 가게예요('광고' 표시).</li></ul></details>" +
-      '<p class="nb-note nb-note--sm">구글 지도가 새 창(앱에서는 앱 안 브라우저)으로 열려요. 위치는 지도 주소를 만드는 데만 쓰고 이 사이트에 저장하지 않아요. 순위·평점은 구글 지도 기준이며 이 사이트의 추천이 아니에요.</p>' +
+      TNI("nearby.k4190370", "<details class=\"nb-how\"><summary>🔎 이 화면은 이렇게 찾아요</summary><ul>") +
+        TNI("nearby.k4626a54", "<li>큰 버튼은 구글 지도에서 영어 검색어 <code>") + esc(c.query) + TNI("nearby.k1bd4c91", "</code> 로 찾아요. 빠른 찾기는 버튼마다 검색어가 달라요") + (c.subs[0] ? TNI("nearby.ka2f3a73", "(예: ") + esc(c.subs[0].label) + " = <code>" + esc(c.subs[0].query) + "</code>)" : "") + ".</li>" +
+        TNI("nearby.ka459306", "<li>위치: 허용하면 <b>지금 내 위치</b> 둘레, 아니면 위에서 고른 지역(파타야·시라차·방콕) 이름으로 찾아요.</li>") +
+        TNI("nearby.ke3c4017", "<li>순서·평점·영업 여부는 <b>구글 지도</b>가 정해요. 이 사이트가 돈을 받고 순서를 바꾸지 않아요.</li>") +
+        TNI("nearby.k079e695", "<li>맨 위 <b>광고</b> 칸만 이 사이트가 직접 소개하는 가게예요('광고' 표시).</li></ul></details>") +
+      TNI("nearby.k5fac8bc", "<p class=\"nb-note nb-note--sm\">구글 지도가 새 창(앱에서는 앱 안 브라우저)으로 열려요. 위치는 지도 주소를 만드는 데만 쓰고 이 사이트에 저장하지 않아요. 순위·평점은 구글 지도 기준이며 이 사이트의 추천이 아니에요.</p>") +
       "</div></div>";
   }
   function refreshLinks() {
@@ -193,12 +193,12 @@
     if (w) { try { w.opener = null; } catch (e) {} return; }
     // 팝업이 막힘(위치 확인이 오래 걸려 '사용자 동작'이 끝난 경우) → 링크는 이미 바뀌었으니 한 번 더 누르면 열림
     var st = root && root.querySelector("[data-nb-st]");
-    if (st) st.insertAdjacentHTML("afterbegin", '<p class="nb-st__t nb-st__t--hl">✅ 준비됐어요. 버튼을 한 번 더 눌러 주세요.</p>');
+    if (st) st.insertAdjacentHTML("afterbegin", TNI("nearby.k6b54022", "<p class=\"nb-st__t nb-st__t--hl\">✅ 준비됐어요. 버튼을 한 번 더 눌러 주세요.</p>"));
   }
   function onGo(e, a) {
     if (havePos() || geo.state === "denied" || geo.state === "unsupported") return;   // 그냥 링크대로(새 탭)
     e.preventDefault();
-    var st = root.querySelector("[data-nb-st]"); if (st) st.innerHTML = '<p class="nb-st__t">📍 위치 확인 중…</p>';
+    var st = root.querySelector("[data-nb-st]"); if (st) st.innerHTML = TNI("nearby.ke657a78", "<p class=\"nb-st__t\">📍 위치 확인 중…</p>");
     a.setAttribute("aria-busy", "true");
     locate(function () { a.removeAttribute("aria-busy"); openUrl(mapsUrl(a.getAttribute("data-nb-q"))); });
   }

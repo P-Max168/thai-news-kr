@@ -9,12 +9,12 @@
  * - Google 로그인·Firestore(firebase / googleapis / gstatic SDK / firebaseapp.com / google.com 계정 창)는
  *   절대 가로채거나 캐시하지 않는다(그냥 브라우저가 직접 요청). 글꼴(fonts.googleapis/gstatic)만 예외로 캐시.
  */
-var VERSION = "tnk-981c4882db";
+var VERSION = "tnk-d81a958ee8";
 var SHELL = "shell-" + VERSION, DATA = "data-v1", EXT = "ext-v1";
 var SHELL_FILES = [
   "./", "index.html", "manifest.json", "offline.html", "assets/g-pages.css?v=1",
-  "assets/style.css?v=8f738250", "assets/topics.js?v=645a5640", "assets/prefs.js?v=280ab29a", "assets/taste.js?v=788775b8", "assets/adsafe.js?v=f83c8d3e", "assets/app.js?v=33cf1c5f", "assets/social.js?v=88b9fab9", "assets/ticker.js?v=5ba253a6",
-  "assets/nearby.css?v=411a136f", "assets/late.css?v=3dadb69b", "assets/nearby.js?v=0011bd94", "assets/pages.js?v=17adf6c4", "assets/places.js?v=e321e8d6", "assets/jobs.js?v=88ad85ca",
+  "assets/style.css?v=8f738250", "assets/topics.js?v=7079e749", "assets/prefs.js?v=589d5ced", "assets/taste.js?v=788775b8", "assets/adsafe.js?v=f83c8d3e", "assets/app.js?v=67d28d53", "assets/social.js?v=412033d9", "assets/ticker.js?v=dbf6b24c",
+  "assets/nearby.css?v=411a136f", "assets/late.css?v=3dadb69b", "assets/nearby.js?v=46caca5b", "assets/pages.js?v=404ed4a6", "assets/places.js?v=31ead31a", "assets/jobs.js?v=a913a57f",
   "assets/ads/massage/dragon-ad.css?v=c79f816c", "assets/ads/massage/dragon-ad.js?v=3f37924f", "assets/ads/massage/dragon.svg",
   "assets/modern.css?v=62ff3b52", "assets/modern.js?v=6c2f923e", "assets/g.css?v=1d2d67e7",
   "assets/icons/icon-192.png", "assets/icons/icon-512.png", "assets/icons/maskable-512.png",

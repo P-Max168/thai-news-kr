@@ -29,7 +29,7 @@
     if (root.hidden) lastFocus = document.activeElement;
     cur = name;
     if (window.TNApp && TNApp.closeDrawer) TNApp.closeDrawer();
-    root.innerHTML = '<div class="nb-page__panel" role="document"><div class="nb-page__bar"><button type="button" class="nb-back" data-pg-back aria-label="뒤로 — 뉴스로 돌아가기">← 뒤로</button>' +
+    root.innerHTML = TNI("pages.kb80d41c", "<div class=\"nb-page__panel\" role=\"document\"><div class=\"nb-page__bar\"><button type=\"button\" class=\"nb-back\" data-pg-back aria-label=\"뒤로 — 뉴스로 돌아가기\">← 뒤로</button>") +
       '<h2 class="nb-page__t" id="tnPageT">' + esc(d.title) + '</h2></div><div class="nb-page__body tn-page__body" id="tnPageBody"></div></div>';
     paint();
     root.hidden = false; root.scrollTop = 0;
@@ -84,7 +84,7 @@
     var e = ((window.NEWS_INDEX || {}).editions || []).filter(function (x) { return x.id === id; })[0];
     if (e && e.label) return e.label;
     var m = /^(\d{4})-(\d{2})-(\d{2})-(am|md|pm|early)$/.exec(id || "");
-    return m ? (+m[2]) + "월 " + (+m[3]) + "일 " + { am: "아침판", pm: "저녁판", early: "새벽판" }[m[4]] : (id || "");
+    return m ? (+m[2]) + TNI("pages.k6878518", "월 ") + (+m[3]) + TNI("pages.k2652830", "일 ") + { am: TNI("pages.k49ca986", "아침판"), pm: TNI("pages.k75af836", "저녁판"), early: TNI("pages.k515533f", "새벽판") }[m[4]] : (id || "");
   }
   /* 다른 기기에서 누른 하트는 제목을 모름 → 그 판 파일(data/<판>.js)을 읽어 채움 */
   /* 판 파일 자동 재시도(2026-10-05): 일시적 네트워크 실패면 1초·3초·9초 뒤 3번까지 다시(주소에 ?r=N — 캐시된 실패를 피함), 그래도 안 되면 예전처럼 'err' 표시. 무한 반복 없음 */
@@ -111,25 +111,25 @@
     return null;
   }
   register("hearts", {
-    title: "❤️ 내가 하트한 기사",
+    title: TNI("pages.kfaa6842", "❤️ 내가 하트한 기사"),
     render: function () {
-      var L = window.TNTaste; if (!L) return '<p class="empty">잠시 후 다시 열어 주세요.</p>';
+      var L = window.TNTaste; if (!L) return TNI("pages.kfb1e6dc", "<p class=\"empty\">잠시 후 다시 열어 주세요.</p>");
       var list = L.hearts(), n = list.length;
-      var head = '<div class="hp-sum"><b class="hp-n">❤️ ' + n + '개</b><span>하트한 기사와 비슷한 뉴스를 다음 판부터 더 위에 보여 드려요</span></div>';
-      if (!n) return head + '<div class="empty hp-empty"><p class="hp-empty__e" aria-hidden="true">🤍</p><p><b>아직 하트한 기사가 없어요</b></p><p>기사 카드 오른쪽 위 <b>♡</b> 를 누르면 여기에 모여요.</p><button type="button" class="cta hp-go" data-pg-back>뉴스 보러 가기</button></div>';
+      var head = '<div class="hp-sum"><b class="hp-n">❤️ ' + n + TNI("pages.kd14b8b0", "개</b><span>하트한 기사와 비슷한 뉴스를 다음 판부터 더 위에 보여 드려요</span></div>");
+      if (!n) return head + TNI("pages.k4a38fc6", "<div class=\"empty hp-empty\"><p class=\"hp-empty__e\" aria-hidden=\"true\">🤍</p><p><b>아직 하트한 기사가 없어요</b></p><p>기사 카드 오른쪽 위 <b>♡</b> 를 누르면 여기에 모여요.</p><button type=\"button\" class=\"cta hp-go\" data-pg-back>뉴스 보러 가기</button></div>");
       var show = list.slice(0, STEPS[step]);
       var rows = show.map(function (h) {
         var m = metaOf(h), tp = m && m.tp && window.TNApp ? TNApp.topicOf(m.tp) : null;
-        var title = m ? esc(m.t) : (loading[h.ed] === "err" ? "기사 정보를 불러오지 못했어요" : "불러오는 중…");
+        var title = m ? esc(m.t) : (loading[h.ed] === "err" ? TNI("pages.kdf3dfc1", "기사 정보를 불러오지 못했어요") : TNI("pages.kc78656b", "불러오는 중…"));
         return '<li class="hp-row"><button type="button" class="hp-open" data-hp-open="' + esc(h.ed) + "|" + esc(h.id) + '">' +
           '<span class="hp-ic" aria-hidden="true">' + (tp ? tp.emoji : "📰") + "</span>" +
           '<span class="hp-tx"><b class="hp-t">' + title + '</b><small>' + (m && m.src ? esc(m.src) + " · " : "") + esc(edLabel(h.ed)) + "</small></span></button>" +
-          '<button type="button" class="hp-x" data-hp-del="' + esc(h.ed) + "|" + esc(h.id) + '" aria-label="하트 취소">❤️</button></li>';
+          '<button type="button" class="hp-x" data-hp-del="' + esc(h.ed) + "|" + esc(h.id) + TNI("pages.k82b8e29", "\" aria-label=\"하트 취소\">❤️</button></li>");
       }).join("");
       var upto = Math.min(n, STEPS[step + 1]);   // 다음에 몇 개까지(2026-10-05 — 예전 'N건 더')
-      var more = n > show.length ? '<button type="button" class="more-btn" data-hp-more>' + (upto >= n ? "전체 " + n + "개 보기" : upto + "개까지 보기") + " ▾</button>" : "";
+      var more = n > show.length ? '<button type="button" class="more-btn" data-hp-more>' + (upto >= n ? TNI("pages.k57ff445", "전체 ") + n + TNI("pages.ke73bbdf", "개 보기") : upto + TNI("pages.k535d1ec", "개까지 보기")) + " ▾</button>" : "";
       return head + '<ul class="hp-list">' + rows + "</ul>" + more +
-        '<p class="hp-note">이 기기에 저장돼요. Google 로그인하면 다른 기기와 같이 보여요.</p>';
+        TNI("pages.k6cb845a", "<p class=\"hp-note\">이 기기에 저장돼요. Google 로그인하면 다른 기기와 같이 보여요.</p>");
     },
     click: function (e, t) {
       var el;
@@ -139,7 +139,7 @@
         var s = d && (d.stories || []).filter(function (x) { return x.id === p[1]; })[0];
         if (s) { TNTaste.heart(p[0], s); }
         else TNStore.update(function (doc) { doc.taste.votes["h:" + p[0] + "/" + p[1]] = -1; if (doc.ui && doc.ui.hm) delete doc.ui.hm["h:" + p[0] + "/" + p[1]]; });
-        if (window.TNApp) { TNApp.rerender(); TNApp.toast("하트를 취소했어요", 1800); }
+        if (window.TNApp) { TNApp.rerender(); TNApp.toast(TNI("pages.k97bacd6", "하트를 취소했어요"), 1800); }
         paint(); return true;
       }
       if ((el = t.closest("[data-hp-open]"))) {
@@ -155,7 +155,7 @@
   /* ---------- 📊 관리자: 반응 통계(운영자 UID 로 로그인했을 때만 숫자가 보임) ----------
    * 데이터 = Firestore rx(익명: 기사·반응 종류·사는 곳·관심·주제). 취소(-1)는 빼고 셈. 읽기는 규칙상 운영자만 */
   var AD = { days: 7, data: {}, err: null, busy: false, topN: 5 };
-  var PERIODS = [[1, "오늘"], [7, "7일"], [30, "30일"]];
+  var PERIODS = [[1, TNI("pages.k2bdce5e", "오늘")], [7, TNI("pages.kf5c1868", "7일")], [30, TNI("pages.k504b4b6", "30일")]];
   function sinceOf(days) {
     if (days === 1) { var d = new Date(Date.now() + 7 * 3600e3); d.setUTCHours(0, 0, 0, 0); return d.getTime() - 7 * 3600e3; }   // 방콕 자정
     return Date.now() - days * 864e5;
@@ -195,7 +195,7 @@
     var keys = Object.keys(map);
     keys.sort(function (a, b) { var ia = order ? order.indexOf(a) : -1, ib = order ? order.indexOf(b) : -1; if (ia >= 0 || ib >= 0) return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); var A = map[a], B = map[b]; return (B.h + B.u + B.d) - (A.h + A.u + A.d); });
     if (!keys.length) return "";
-    return '<section class="ad-sec"><h3 class="ad-h">' + title + '</h3><div class="ad-tb" role="table"><div class="ad-tr ad-tr--h" role="row"><span role="columnheader">구분</span><span role="columnheader">❤️</span><span role="columnheader">🙌</span><span role="columnheader">🙅</span></div>' +
+    return '<section class="ad-sec"><h3 class="ad-h">' + title + TNI("pages.k7ec1fb9", "</h3><div class=\"ad-tb\" role=\"table\"><div class=\"ad-tr ad-tr--h\" role=\"row\"><span role=\"columnheader\">구분</span><span role=\"columnheader\">❤️</span><span role=\"columnheader\">🙌</span><span role=\"columnheader\">🙅</span></div>") +
       keys.map(function (k) { var m = map[k]; return '<div class="ad-tr" role="row"><span role="cell">' + esc(labelOf(k)) + '</span><b role="cell">' + n0(m.h) + '</b><b role="cell">' + n0(m.u) + '</b><b role="cell">' + n0(m.d) + "</b></div>"; }).join("") + "</div></section>";
   }
   function storyTitle(a) {
@@ -206,37 +206,37 @@
     return (m[1] ? edLabel(m[1]) + " · " : "") + (m[2] || a);
   }
   register("admin", {
-    title: "📊 반응 통계 (운영자)",
+    title: TNI("pages.k0f609cc", "📊 반응 통계 (운영자)"),
     render: function () {
       var S2 = window.TNSocial, T = window.TNTopics;
       if (!S2 || !S2.isAdmin || !S2.isAdmin()) {
-        return '<div class="empty hp-empty"><p class="hp-empty__e" aria-hidden="true">🔒</p><p><b>운영자만 볼 수 있어요</b></p><p>운영자 구글 계정으로 로그인하면 하트·🙌·🙅 반응을 사는 곳·관심·주제별로 볼 수 있어요.</p>' +
-          (S2 && S2.signedIn && S2.signedIn() ? "" : '<button type="button" class="cta hp-go" data-login>구글로 로그인</button>') + "</div>";
+        return TNI("pages.ked07783", "<div class=\"empty hp-empty\"><p class=\"hp-empty__e\" aria-hidden=\"true\">🔒</p><p><b>운영자만 볼 수 있어요</b></p><p>운영자 구글 계정으로 로그인하면 하트·🙌·🙅 반응을 사는 곳·관심·주제별로 볼 수 있어요.</p>") +
+          (S2 && S2.signedIn && S2.signedIn() ? "" : TNI("pages.k1f11899", "<button type=\"button\" class=\"cta hp-go\" data-login>구글로 로그인</button>")) + "</div>";
       }
       adLoad(false);
-      var chips = '<div class="ad-per" role="group" aria-label="기간">' + PERIODS.map(function (p) { return '<button type="button" class="ad-pbtn" data-ad-days="' + p[0] + '" aria-pressed="' + (AD.days === p[0]) + '">' + p[1] + "</button>"; }).join("") + "</div>";
+      var chips = TNI("pages.k982f20c", "<div class=\"ad-per\" role=\"group\" aria-label=\"기간\">") + PERIODS.map(function (p) { return '<button type="button" class="ad-pbtn" data-ad-days="' + p[0] + '" aria-pressed="' + (AD.days === p[0]) + '">' + p[1] + "</button>"; }).join("") + "</div>";
       var c = AD.data[AD.days];
-      if (AD.err === "perm") return chips + '<div class="empty">통계를 읽을 권한이 아직 없어요. Firestore 보안 규칙(저장소 firestore.rules 의 rx 부분)을 Firebase 콘솔에 게시해야 해요 — LOGIN_TODO.md 참고. <button type="button" class="linkbtn" data-ad-reload>다시 시도</button></div>';
-      if (AD.err) return chips + '<div class="empty">통계를 불러오지 못했어요. 인터넷 연결을 확인하고 <button type="button" class="linkbtn" data-ad-reload>다시 시도</button></div>';
-      if (!c) return chips + '<div class="skel-list" aria-busy="true"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div><p class="hp-note">불러오는 중…</p>';
+      if (AD.err === "perm") return chips + TNI("pages.k1ec1b4f", "<div class=\"empty\">통계를 읽을 권한이 아직 없어요. Firestore 보안 규칙(저장소 firestore.rules 의 rx 부분)을 Firebase 콘솔에 게시해야 해요 — LOGIN_TODO.md 참고. <button type=\"button\" class=\"linkbtn\" data-ad-reload>다시 시도</button></div>");
+      if (AD.err) return chips + TNI("pages.kecef5d6", "<div class=\"empty\">통계를 불러오지 못했어요. 인터넷 연결을 확인하고 <button type=\"button\" class=\"linkbtn\" data-ad-reload>다시 시도</button></div>");
+      if (!c) return chips + TNI("pages.k1a27b94", "<div class=\"skel-list\" aria-busy=\"true\"><div class=\"skel\"></div><div class=\"skel\"></div><div class=\"skel\"></div></div><p class=\"hp-note\">불러오는 중…</p>");
       var g = agg(c.rows);
-      var sum = '<div class="ad-sum"><div class="ad-cell"><span>❤️ 하트</span><b>' + n0(g.tot.h) + '</b></div><div class="ad-cell"><span>🙌 더 보여줘</span><b>' + n0(g.tot.u) + '</b></div><div class="ad-cell"><span>🙅 덜 보여줘</span><b>' + n0(g.tot.d) + "</b></div></div>";
-      if (!c.rows.length) return chips + sum + '<div class="empty">이 기간에 모인 반응이 아직 없어요.</div>';
+      var sum = TNI("pages.k5166f1f", "<div class=\"ad-sum\"><div class=\"ad-cell\"><span>❤️ 하트</span><b>") + n0(g.tot.h) + TNI("pages.k288f441", "</b></div><div class=\"ad-cell\"><span>🙌 더 보여줘</span><b>") + n0(g.tot.u) + TNI("pages.k3bdf0d3", "</b></div><div class=\"ad-cell\"><span>🙅 덜 보여줘</span><b>") + n0(g.tot.d) + "</b></div></div>";
+      if (!c.rows.length) return chips + sum + TNI("pages.k8fd0636", "<div class=\"empty\">이 기간에 모인 반응이 아직 없어요.</div>");
       var arts = Object.keys(g.byA).map(function (a) { var m = g.byA[a]; return { a: a, m: m, sc: m.h * 2 + m.u - m.d }; }).filter(function (x) { return x.sc > 0 || x.m.h > 0 || x.m.u > 0; }).sort(function (x, y) { return y.sc - x.sc; });
       var top = arts.slice(0, AD.topN).map(function (x, i) {
         return '<li class="ad-art"><span class="ad-rank">' + (i + 1) + '</span><span class="ad-at">' + esc(storyTitle(x.a)) + '</span><span class="ad-an">❤️ <b>' + n0(x.m.h) + "</b> 🙌 <b>" + n0(x.m.u) + "</b> 🙅 <b>" + n0(x.m.d) + "</b></span></li>";
       }).join("");
-      var more = arts.length > AD.topN && AD.topN < 10 ? '<button type="button" class="more-btn" data-ad-more>펼치기 (' + Math.min(10, arts.length) + '위까지) ▾</button>' : "";
-      var rl = function (k) { var r = T && T.region(k); return r ? r.emoji + " " + r.label : k === "none" ? "미선택" : k; };
-      var il = function (k) { var r = T && T.interest(k); return r ? r.emoji + " " + r.label : k === "none" ? "미선택" : k; };
+      var more = arts.length > AD.topN && AD.topN < 10 ? TNI("pages.k729ccce", "<button type=\"button\" class=\"more-btn\" data-ad-more>펼치기 (") + Math.min(10, arts.length) + TNI("pages.k42b3fac", "위까지) ▾</button>") : "";
+      var rl = function (k) { var r = T && T.region(k); return r ? r.emoji + " " + r.label : k === "none" ? TNI("pages.kf9e611a", "미선택") : k; };
+      var il = function (k) { var r = T && T.interest(k); return r ? r.emoji + " " + r.label : k === "none" ? TNI("pages.kf9e611a", "미선택") : k; };
       var tl = function (k) { var t = window.TNApp && TNApp.topicOf(k); return t && t.label ? t.emoji + " " + t.label : k; };
       return chips + sum +
-        '<section class="ad-sec"><h3 class="ad-h">🏆 반응 많은 기사</h3><ol class="ad-arts">' + top + "</ol>" + more + "</section>" +
-        table("📍 사는 곳별 <small>페르소나·내 주제로 추정</small>", g.byR, rl, ["east", "bangkok", "north", "south", "other", "none"]) +
-        table("🎯 관심별 <small>페르소나·내 주제로 추정</small>", g.byI, il, ["life", "travel", "biz", "visa", "none"]) +
-        table("🗂️ 주제별", g.byT, tl) +
-        '<p class="hp-note">개인 정보 없이 모은 숫자예요(사는 곳·관심·주제만, 성별·이름·기기 정보 없음). 취소한 반응은 빼고 셉니다. 조회 ' +
-        hm(c.t) + ' · 반응 ' + c.rows.length.toLocaleString("ko-KR") + '건 <button type="button" class="linkbtn" data-ad-reload>새로고침</button></p>';
+        TNI("pages.kc639206", "<section class=\"ad-sec\"><h3 class=\"ad-h\">🏆 반응 많은 기사</h3><ol class=\"ad-arts\">") + top + "</ol>" + more + "</section>" +
+        table(TNI("pages.kb71bad2", "📍 사는 곳별 <small>페르소나·내 주제로 추정</small>"), g.byR, rl, ["east", "bangkok", "north", "south", "other", "none"]) +
+        table(TNI("pages.k5ddc046", "🎯 관심별 <small>페르소나·내 주제로 추정</small>"), g.byI, il, ["life", "travel", "biz", "visa", "none"]) +
+        table(TNI("pages.k5ad2e86", "🗂️ 주제별"), g.byT, tl) +
+        TNI("pages.k5b2fc17", "<p class=\"hp-note\">개인 정보 없이 모은 숫자예요(사는 곳·관심·주제만, 성별·이름·기기 정보 없음). 취소한 반응은 빼고 셉니다. 조회 ") +
+        hm(c.t) + TNI("pages.k5c08078", " · 반응 ") + c.rows.length.toLocaleString("ko-KR") + TNI("pages.kcf72402", "건 <button type=\"button\" class=\"linkbtn\" data-ad-reload>새로고침</button></p>");
     },
     click: function (e, t) {
       var el;
@@ -273,7 +273,7 @@
     var ok = [], hold = [];
     items.forEach(function (x) { var d = dec[x.id]; if (d && d.d === "ok") ok.push("#" + x.no); else if (d && d.d === "hold") hold.push("#" + x.no); });
     if (!ok.length && !hold.length) return "";
-    return "승인함 결정(" + new Date().toLocaleDateString("ko-KR", { month: "numeric", day: "numeric", timeZone: "Asia/Bangkok" }) + "): " + (ok.length ? "OK " + ok.join(" ") : "") + (ok.length && hold.length ? " / " : "") + (hold.length ? "보류 " + hold.join(" ") : "");
+    return TNI("pages.kc5a79f7", "승인함 결정(") + new Date().toLocaleDateString("ko-KR", { month: "numeric", day: "numeric", timeZone: "Asia/Bangkok" }) + "): " + (ok.length ? "OK " + ok.join(" ") : "") + (ok.length && hold.length ? " / " : "") + (hold.length ? TNI("pages.k7364510", "보류 ") + hold.join(" ") : "");
   }
   /* 🛡️ 광고 옆 민감 기사(승인함 아래) — 기준표(assets/adsafe.js RULES) + 이 판에서 광고를 안 둔 기사 목록과 이유. 기사는 지우지 않음 */
   function adsafeHTML() {
@@ -283,29 +283,29 @@
     var hl = (d && d.highlights) || [];
     ((d && d.stories) || []).forEach(function (s) {
       var r = A.score(s); if (!r.why.length) return;
-      var where = hl[0] === s.id ? "메인 큰 배너 + 기사 사이 광고" : hl.indexOf(s.id) >= 0 ? "주요 뉴스(이 칸엔 광고 없음)" : "기사 사이 광고(앞뒤)";
+      var where = hl[0] === s.id ? TNI("pages.k5f3c605", "메인 큰 배너 + 기사 사이 광고") : hl.indexOf(s.id) >= 0 ? TNI("pages.kd16ab6b", "주요 뉴스(이 칸엔 광고 없음)") : TNI("pages.kdaafc07", "기사 사이 광고(앞뒤)");
       (r.hide ? rows : near).push({ s: s, r: r, where: where });
     });
     var by = function (a, b) { return b.r.pts - a.r.pts; };
     rows.sort(by); near.sort(by);
     var li = function (x) { return '<li class="as-item"><b class="as-t">' + esc(x.s.headline) + '</b><span class="as-why">' + esc(A.explain(x.r)) + "</span>" +
-      (x.r.hide ? '<span class="as-where">🙈 안 보이는 광고: ' + esc(x.where) + "</span>" : "") + "</li>"; };
-    var mid = (document.querySelector('[data-ad-slot="mid"][data-ad-hidden]') ? "🙈 지금 숨김(주요 뉴스 TOP 1 기사가 기준에 걸림)" : "보임(TOP 1 기사가 기준 아래)");
-    var rules = '<table class="as-rules"><thead><tr><th>기준</th><th>점수</th><th>예시 낱말</th></tr></thead><tbody>' +
-      R.groups.map(function (g) { return "<tr><td>" + esc(g.label) + "</td><td>+" + g.pts + "</td><td>" + esc(g.words.slice(0, 5).join(", ")) + (g.words.length > 5 ? " 등" : "") + (g.except ? "<br><small>빼는 말: " + esc(g.except.join(", ")) + "</small>" : "") + "</td></tr>"; }).join("") +
+      (x.r.hide ? TNI("pages.k888bf21", "<span class=\"as-where\">🙈 안 보이는 광고: ") + esc(x.where) + "</span>" : "") + "</li>"; };
+    var mid = (document.querySelector('[data-ad-slot="mid"][data-ad-hidden]') ? TNI("pages.kbbfdc1c", "🙈 지금 숨김(주요 뉴스 TOP 1 기사가 기준에 걸림)") : TNI("pages.k5b09913", "보임(TOP 1 기사가 기준 아래)"));
+    var rules = TNI("pages.k3b4f75c", "<table class=\"as-rules\"><thead><tr><th>기준</th><th>점수</th><th>예시 낱말</th></tr></thead><tbody>") +
+      R.groups.map(function (g) { return "<tr><td>" + esc(g.label) + "</td><td>+" + g.pts + "</td><td>" + esc(g.words.slice(0, 5).join(", ")) + (g.words.length > 5 ? TNI("pages.ke69b7ff", " 등") : "") + (g.except ? TNI("pages.k4b5e37d", "<br><small>빼는 말: ") + esc(g.except.join(", ")) + "</small>" : "") + "</td></tr>"; }).join("") +
       R.context.map(function (c) { return "<tr><td>" + esc(c.label) + "</td><td>" + (c.pts > 0 ? "+" : "−") + Math.abs(c.pts) + "</td><td>" + esc(c.how) + "</td></tr>"; }).join("") + "</tbody></table>";
-    return '<section class="ad-sec as-sec" id="adsafe" aria-labelledby="asH"><h3 class="ad-h" id="asH">🛡️ 광고 옆 민감 기사 기준 <small>(' + esc(R.version) + ")</small></h3>" +
-      '<p class="as-sum">점수가 <b>' + R.hide_at + "점 이상</b>이면 그 기사 <b>바로 옆 광고만</b> 안 보여요. <b>기사는 지우지 않아요.</b> 메인 큰 배너는 바로 아래 주요 뉴스 TOP 1 기사로 판단해요.</p>" +
-      '<div class="ad-sum"><div class="ad-cell"><span>이 판 기사</span><b>' + (((d && d.stories) || []).length) + '</b></div><div class="ad-cell"><span>🙈 광고 숨김</span><b>' + rows.length + '</b></div><div class="ad-cell"><span>참고(기준 아래)</span><b>' + near.length + "</b></div></div>" +
-      '<p class="as-mid">📢 메인 큰 배너: ' + esc(mid) + "</p>" +
-      (rows.length ? '<ol class="as-list">' + rows.map(li).join("") + "</ol>" : '<p class="as-none">이 판에는 광고를 숨긴 기사가 없어요 🙂</p>') +
-      (near.length ? '<details class="as-near"><summary>참고: 점수는 있지만 기준 아래라 광고가 보이는 기사 ' + near.length + "건</summary><ol class=\"as-list\">" + near.map(li).join("") + "</ol></details>" : "") +
-      '<details class="as-how" open><summary>점수 매기는 법(전부)</summary>' + rules + '<p class="as-man">✍️ ' + esc(R.manual) + "</p></details>" +
-      '<p class="hp-note">기준을 바꾸려면 봇에게 \'민감 기사 기준에서 ○○ 빼 줘/넣어 줘\'라고 말해 주세요(파일: assets/adsafe.js). 편집자 점검: <code>python3 tools/adsafe.py</code></p></section>';
+    return TNI("pages.kd61b11b", "<section class=\"ad-sec as-sec\" id=\"adsafe\" aria-labelledby=\"asH\"><h3 class=\"ad-h\" id=\"asH\">🛡️ 광고 옆 민감 기사 기준 <small>(") + esc(R.version) + ")</small></h3>" +
+      TNI("pages.keabfd45", "<p class=\"as-sum\">점수가 <b>") + R.hide_at + TNI("pages.k4843b00", "점 이상</b>이면 그 기사 <b>바로 옆 광고만</b> 안 보여요. <b>기사는 지우지 않아요.</b> 메인 큰 배너는 바로 아래 주요 뉴스 TOP 1 기사로 판단해요.</p>") +
+      TNI("pages.kfa02693", "<div class=\"ad-sum\"><div class=\"ad-cell\"><span>이 판 기사</span><b>") + (((d && d.stories) || []).length) + TNI("pages.k555779f", "</b></div><div class=\"ad-cell\"><span>🙈 광고 숨김</span><b>") + rows.length + TNI("pages.k7ef365f", "</b></div><div class=\"ad-cell\"><span>참고(기준 아래)</span><b>") + near.length + "</b></div></div>" +
+      TNI("pages.k856cc31", "<p class=\"as-mid\">📢 메인 큰 배너: ") + esc(mid) + "</p>" +
+      (rows.length ? '<ol class="as-list">' + rows.map(li).join("") + "</ol>" : TNI("pages.k0d053e0", "<p class=\"as-none\">이 판에는 광고를 숨긴 기사가 없어요 🙂</p>")) +
+      (near.length ? TNI("pages.k196b661", "<details class=\"as-near\"><summary>참고: 점수는 있지만 기준 아래라 광고가 보이는 기사 ") + near.length + TNI("pages.kd5b79f8", "건</summary><ol class=\"as-list\">") + near.map(li).join("") + "</ol></details>" : "") +
+      TNI("pages.kc9c4b15", "<details class=\"as-how\" open><summary>점수 매기는 법(전부)</summary>") + rules + '<p class="as-man">✍️ ' + esc(R.manual) + "</p></details>" +
+      TNI("pages.k9ff22bb", "<p class=\"hp-note\">기준을 바꾸려면 봇에게 '민감 기사 기준에서 ○○ 빼 줘/넣어 줘'라고 말해 주세요(파일: assets/adsafe.js). 편집자 점검: <code>python3 tools/adsafe.py</code></p></section>");
   }
   /* ⚠️ 오류 신고함(승인함 안) — 서버(Firestore reports, 운영자만 읽기) + 이 기기에 저장된 신고. 보기만, 자동 처리 없음 */
   var RP = { rows: null, err: null, busy: false, t: 0 };
-  var RP_T = { wrong: "정보 틀림", link: "링크 깨짐", screen: "화면 이상", etc: "기타", closed: "🚫 폐업·없어짐" }, RP_K = { article: "기사", place: "가게 카드", rent: "임대 카드", ad: "광고" };
+  var RP_T = { wrong: TNI("pages.k7e97b2e", "정보 틀림"), link: TNI("pages.k16b6f71", "링크 깨짐"), screen: TNI("pages.kac686d5", "화면 이상"), etc: TNI("pages.k44650a9", "기타"), closed: TNI("pages.k46cd557", "🚫 폐업·없어짐") }, RP_K = { article: TNI("pages.k9df0280", "기사"), place: TNI("pages.k3c9acd2", "가게 카드"), rent: TNI("pages.kda3a290", "임대 카드"), ad: TNI("pages.keb18928", "광고") };
   function rpLoad(force) {
     if (RP.busy || (!force && (RP.rows || RP.err) && Date.now() - RP.t < 120e3)) return;
     if (!window.TNSocial || !TNSocial.adminReports) { RP.err = "load"; return; }
@@ -317,8 +317,8 @@
   function rpRow(x, at) {
     var u = String(x.url || "");
     return '<li class="rp-item"><div class="ap-top"><span class="ap-kind">' + esc(RP_K[x.kind] || x.kind) + '</span><span class="rp-type">' + esc(RP_T[x.type] || x.type) + '</span><span class="ap-st">' + (at ? esc(hm(at)) : "") + "</span></div>" +
-      '<p class="rp-memo">' + (x.memo ? esc(x.memo) : '<span class="rp-none">메모 없음</span>') + "</p>" +
-      '<p class="ap-where">항목 <code>' + esc(x.id) + "</code>" + (x.ed ? " · 판 " + esc(x.ed) : "") + "</p>" +
+      '<p class="rp-memo">' + (x.memo ? esc(x.memo) : TNI("pages.kcb8311c", "<span class=\"rp-none\">메모 없음</span>")) + "</p>" +
+      TNI("pages.k9e5ccda", "<p class=\"ap-where\">항목 <code>") + esc(x.id) + "</code>" + (x.ed ? TNI("pages.k0da4b3c", " · 판 ") + esc(x.ed) : "") + "</p>" +
       (/^https:\/\//.test(u) ? '<p class="ap-where"><a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(u.replace(/^https:\/\/[^/]+/, "")) + " ↗</a></p>" : (u ? '<p class="ap-where">' + esc(u) + "</p>" : "")) + "</li>";
   }
   // '[테스트]' 로 시작하는 메모 = 시험 신고(서버에서 지울 수 없음 — 규칙상 삭제 금지) → 진짜 신고와 섞지 않고 맨 아래 접힌 칸에 따로
@@ -328,7 +328,7 @@
    *   ③ 규칙 게시 전이라 서버 쓰기가 막히면 '기록 복사' 글을 봇에게 → 봇이 data/places-flags.json 에 올림(같은 효과)
    *   폐업 신고 = type 'closed', 또는 (규칙 게시 전 모양) 가게 카드 신고의 메모가 '[폐업·없어짐]' 으로 시작 */
   var PF = { st: {}, dec: null };
-  var PF_TAG = "[폐업·없어짐]";
+  var PF_TAG = TNI("pages.kdb228f3", "[폐업·없어짐]");
   function pfIsClosed(x) { return !!x && x.kind === "place" && (x.type === "closed" || String(x.memo || "").indexOf(PF_TAG) === 0); }
   function pfDec() { if (PF.dec) return PF.dec; try { PF.dec = JSON.parse(localStorage.getItem("tnk.pf.dec") || "{}") || {}; } catch (e) { PF.dec = {}; } return PF.dec; }
   function pfSave() { try { localStorage.setItem("tnk.pf.dec", JSON.stringify(PF.dec || {})); } catch (e) {} }
@@ -345,20 +345,20 @@
   }
   function pfHTML(rows) {
     var gs = pfGroups(rows), dec = pfDec();
-    if (!gs.length && !Object.keys(dec).length) return '<p class="as-sum">🚫 가게 폐업 신고: 최근 30일 0건</p>';
+    if (!gs.length && !Object.keys(dec).length) return TNI("pages.kf2f6fde", "<p class=\"as-sum\">🚫 가게 폐업 신고: 최근 30일 0건</p>");
     gs.forEach(function (o) { pfWrite(o.id, o.n, dec[o.id] === "closed" ? "closed" : ""); });   // 공개 숫자 맞추기(바뀐 것만)
     var li = gs.map(function (o) {
-      var c = dec[o.id] === "closed", w = PF.st[o.id], ws = w === "perm" ? "공개 숫자 쓰기 막힘(규칙 게시 전) — 아래 '기록 복사'로" : w === "net" ? "공개 숫자 쓰기 실패(연결)" : w === "busy" ? "공개 숫자 쓰는 중…" : w ? "공개 숫자 반영됨" : "";
-      return '<li class="rp-item"><div class="ap-top"><span class="ap-kind">가게 카드</span><span class="rp-type">🚫 폐업 신고 ' + o.n + "건" + (o.n >= 2 ? " · 화면에 '폐업 신고됨'" : "") + '</span><span class="ap-st">' + (c ? "🗄️ 보관함" : "") + "</span></div>" +
-        '<p class="ap-where">가게 <code>' + esc(o.id) + "</code>" + (ws ? " · " + esc(ws) : "") + "</p>" +
-        '<div class="ap-acts">' + (c ? '<button type="button" class="ap-btn" data-pf-undo="' + esc(o.id) + '" data-pf-n="' + o.n + '">보관함에서 되돌리기</button>'
-          : '<button type="button" class="ap-btn ap-btn--ok" data-pf-close="' + esc(o.id) + '" data-pf-n="' + o.n + '">폐업 확인 → 보관함</button>') + "</div></li>";
+      var c = dec[o.id] === "closed", w = PF.st[o.id], ws = w === "perm" ? TNI("pages.k83489e1", "공개 숫자 쓰기 막힘(규칙 게시 전) — 아래 '기록 복사'로") : w === "net" ? TNI("pages.k861003e", "공개 숫자 쓰기 실패(연결)") : w === "busy" ? TNI("pages.ka05a73f", "공개 숫자 쓰는 중…") : w ? TNI("pages.ke316029", "공개 숫자 반영됨") : "";
+      return TNI("pages.k2ec6c73", "<li class=\"rp-item\"><div class=\"ap-top\"><span class=\"ap-kind\">가게 카드</span><span class=\"rp-type\">🚫 폐업 신고 ") + o.n + TNI("pages.kd202b4d", "건") + (o.n >= 2 ? TNI("pages.k506831c", " · 화면에 '폐업 신고됨'") : "") + '</span><span class="ap-st">' + (c ? TNI("pages.kf901cec", "🗄️ 보관함") : "") + "</span></div>" +
+        TNI("pages.kdb9b528", "<p class=\"ap-where\">가게 <code>") + esc(o.id) + "</code>" + (ws ? " · " + esc(ws) : "") + "</p>" +
+        '<div class="ap-acts">' + (c ? '<button type="button" class="ap-btn" data-pf-undo="' + esc(o.id) + '" data-pf-n="' + o.n + TNI("pages.ka9a669b", "\">보관함에서 되돌리기</button>")
+          : '<button type="button" class="ap-btn ap-btn--ok" data-pf-close="' + esc(o.id) + '" data-pf-n="' + o.n + TNI("pages.k9653843", "\">폐업 확인 → 보관함</button>")) + "</div></li>";
     }).join("");
     var txt = gs.map(function (o) { return o.id + " n=" + o.n + (dec[o.id] === "closed" ? " st=closed" : ""); }).join("\n");
-    return '<details class="as-near pf-sec" open><summary>🚫 가게 폐업 신고 ' + gs.length + "곳(가게별로 셈 — 2건 이상이면 카드에 '폐업 신고됨')</summary>" +
-      '<p class="as-sum">신고 원문은 여기서만 보여요. 공개되는 건 가게별 숫자뿐이에요. <b>폐업 확인</b>을 누르면 그 가게는 화면의 \'폐업 보관함\'(기본 숨김)으로 가요 — 지우지 않아요.</p>' +
+    return TNI("pages.k690fad8", "<details class=\"as-near pf-sec\" open><summary>🚫 가게 폐업 신고 ") + gs.length + TNI("pages.kcca7c5b", "곳(가게별로 셈 — 2건 이상이면 카드에 '폐업 신고됨')</summary>") +
+      TNI("pages.kd1e858c", "<p class=\"as-sum\">신고 원문은 여기서만 보여요. 공개되는 건 가게별 숫자뿐이에요. <b>폐업 확인</b>을 누르면 그 가게는 화면의 '폐업 보관함'(기본 숨김)으로 가요 — 지우지 않아요.</p>") +
       '<ol class="ap-list rp-list">' + li + "</ol>" +
-      (txt ? '<p class="ap-txt" id="pfTxt">가게 폐업 기록(data/places-flags.json 에 올려 줘):\n' + esc(txt) + '</p><button type="button" class="cta" data-pf-copy>📋 기록 복사</button>' : "") + "</details>";
+      (txt ? TNI("pages.kf0a4a86", "<p class=\"ap-txt\" id=\"pfTxt\">가게 폐업 기록(data/places-flags.json 에 올려 줘):\n") + esc(txt) + TNI("pages.kb10da56", "</p><button type=\"button\" class=\"cta\" data-pf-copy>📋 기록 복사</button>") : "") + "</details>";
   }
   /* 🔁 가게 재확인 줄(2026-10-05 Max 06:55 지시 7번): '영업 확인'이 90일(places.js OPEN_DAYS) 지난 가게 = 화면 초록불 꺼짐 + '재확인 필요' → 여기 목록으로.
    *   매일 자동(가게 데이터 3개를 운영자 화면에서만 읽어 계산). ⚠️ 폐업 의심 가게도 같이(전화·현장 확인 대상) */
@@ -372,8 +372,8 @@
         ds.forEach(function (d) { (d && d.places || []).forEach(function (p) {
           if ((fl[p.id] || {}).st === "closed") return; /* 이미 보관함 */
           var rec = p.verified_status && p.verified_by && p.verified_at && p.verified_source_url;
-          if (rec && p.verified_status === "영업 확인" && String(p.verified_at).slice(0, 10) < cut) out.push({ k: "🔁 재확인 필요", r: d.region_ko, p: p });
-          else if (rec && p.verified_status === "폐업 의심") out.push({ k: "⚠️ 폐업 의심", r: d.region_ko, p: p });
+          if (rec && p.verified_status === "영업 확인" && String(p.verified_at).slice(0, 10) < cut) out.push({ k: TNI("pages.k3dc84c7", "🔁 재확인 필요"), r: d.region_ko, p: p });   // i18n:data — 데이터 값 비교(화면 문구 아님)
+          else if (rec && p.verified_status === "폐업 의심") out.push({ k: TNI("pages.kdc0aa63", "⚠️ 폐업 의심"), r: d.region_ko, p: p });   // i18n:data — 데이터 값 비교(화면 문구 아님)
         }); });
         RC.rows = out; RC.days = days;
       }).then(function () { RC.busy = false; if (cur === "approve") paint(); });
@@ -381,52 +381,52 @@
   function rcHTML() {
     rcLoad();
     if (!RC.rows) return "";
-    return '<details class="as-near rc-sec"><summary>🔁 가게 재확인 ' + RC.rows.length + "곳(영업 확인 " + RC.days + "일 지남 " + RC.rows.filter(function (x) { return /재확인/.test(x.k); }).length + " · 폐업 의심 " + RC.rows.filter(function (x) { return /의심/.test(x.k); }).length + ")</summary>" +
+    return TNI("pages.k4dd3b36", "<details class=\"as-near rc-sec\"><summary>🔁 가게 재확인 ") + RC.rows.length + TNI("pages.kc2f9086", "곳(영업 확인 ") + RC.days + TNI("pages.k24c7cbc", "일 지남 ") + RC.rows.filter(function (x) { return /재확인/.test(x.k); }).length + TNI("pages.kb9f6ed5", " · 폐업 의심 ") + RC.rows.filter(function (x) { return /의심/.test(x.k); }).length + ")</summary>" +
       (RC.rows.length ? '<ol class="ap-list rp-list">' + RC.rows.map(function (x) { return '<li class="rp-item"><div class="ap-top"><span class="ap-kind">' + esc(x.r) + '</span><span class="rp-type">' + esc(x.k) + '</span><span class="ap-st">' + esc(String(x.p.verified_at || "")) + "</span></div>" +
-        '<p class="rp-memo">' + esc(x.p.name) + '</p><p class="ap-where"><a href="' + esc(x.p.verified_source_url) + '" target="_blank" rel="noopener nofollow">근거 ↗</a> · <code>' + esc(x.p.id) + "</code></p></li>"; }).join("") + "</ol>" : '<p class="as-sum">재확인할 가게가 없어요 🙂</p>') +
-      '<p class="as-sum">전화·방문으로 확인한 뒤 봇에게 \'가게 ○○ 영업 확인(언제·어떻게)\' 또는 \'폐업 확인\'이라고 알려 주세요.</p></details>';
+        '<p class="rp-memo">' + esc(x.p.name) + '</p><p class="ap-where"><a href="' + esc(x.p.verified_source_url) + TNI("pages.k24d6d18", "\" target=\"_blank\" rel=\"noopener nofollow\">근거 ↗</a> · <code>") + esc(x.p.id) + "</code></p></li>"; }).join("") + "</ol>" : TNI("pages.kf8cf23d", "<p class=\"as-sum\">재확인할 가게가 없어요 🙂</p>")) +
+      TNI("pages.k9b8ce52", "<p class=\"as-sum\">전화·방문으로 확인한 뒤 봇에게 '가게 ○○ 영업 확인(언제·어떻게)' 또는 '폐업 확인'이라고 알려 주세요.</p></details>");
   }
   function repHTML() {
     rpLoad(false);
     var loc = []; try { loc = JSON.parse(localStorage.getItem("tnk.rep.q") || "[]") || []; } catch (e) {}
     loc = loc.filter(function (x) { return x && !x.sent && !isTestRep(x); });
     var real = (RP.rows || []).filter(function (x) { return !isTestRep(x); }), test = (RP.rows || []).filter(isTestRep);
-    var srv = RP.err === "perm" ? '<p class="as-sum">서버 신고함을 읽을 권한이 없어요(운영자 계정이 아니거나 Firestore 규칙 문제). 독자 신고는 서버에 저장되고, 서버 저장이 실패한 경우에만 <b>메일로 보내기</b>로 운영자 메일에 와요.</p>'
-      : RP.err ? '<p class="as-sum">서버 신고함을 불러오지 못했어요. <button type="button" class="linkbtn" data-rp-reload>다시 시도</button></p>'
-      : !RP.rows ? '<p class="as-sum">불러오는 중…</p>'
-      : real.length ? '<ol class="ap-list rp-list">' + real.map(function (x) { return rpRow(x, x.at); }).join("") + "</ol>" : '<p class="as-sum">최근 30일 동안 들어온 신고가 없어요 🙂</p>';
-    var tst = test.length ? '<details class="as-near rp-test"><summary>🧪 시험 신고 ' + test.length + "건(메모가 '[테스트]'로 시작 — 진짜 신고 아님, 규칙상 지울 수 없어 따로 모음)</summary><ol class=\"ap-list rp-list\">" + test.map(function (x) { return rpRow(x, x.at); }).join("") + "</ol></details>" : "";
-    var mine = loc.length ? '<details class="as-near"><summary>이 기기에 저장된 신고 ' + loc.length + "건(서버 저장 실패 — 메일로 보냈을 수 있음)</summary><ol class=\"ap-list rp-list\">" + loc.slice().reverse().map(function (x) { return rpRow(x, x.t); }).join("") + "</ol></details>" : "";
-    return '<section class="ad-sec rp-sec" id="reports" aria-labelledby="rpH"><h3 class="ad-h" id="rpH">⚠️ 오류 신고함 <small>(최근 30일)</small></h3>' +
-      '<p class="as-sum">기사·가게 카드·광고의 <b>오류 신고</b>가 여기 모여요. <b>자동으로 고치거나 지우지 않아요</b> — 보고 고칠 것을 봇에게 알려 주세요.</p>' + (RP.rows ? pfHTML(real) : "") + rcHTML() + srv + tst + mine + "</section>";
+    var srv = RP.err === "perm" ? TNI("pages.kdb5b7e8", "<p class=\"as-sum\">서버 신고함을 읽을 권한이 없어요(운영자 계정이 아니거나 Firestore 규칙 문제). 독자 신고는 서버에 저장되고, 서버 저장이 실패한 경우에만 <b>메일로 보내기</b>로 운영자 메일에 와요.</p>")
+      : RP.err ? TNI("pages.kf79ecc6", "<p class=\"as-sum\">서버 신고함을 불러오지 못했어요. <button type=\"button\" class=\"linkbtn\" data-rp-reload>다시 시도</button></p>")
+      : !RP.rows ? TNI("pages.k3cef87a", "<p class=\"as-sum\">불러오는 중…</p>")
+      : real.length ? '<ol class="ap-list rp-list">' + real.map(function (x) { return rpRow(x, x.at); }).join("") + "</ol>" : TNI("pages.k8361033", "<p class=\"as-sum\">최근 30일 동안 들어온 신고가 없어요 🙂</p>");
+    var tst = test.length ? TNI("pages.k4aab3f7", "<details class=\"as-near rp-test\"><summary>🧪 시험 신고 ") + test.length + TNI("pages.k27a7a9c", "건(메모가 '[테스트]'로 시작 — 진짜 신고 아님, 규칙상 지울 수 없어 따로 모음)</summary><ol class=\"ap-list rp-list\">") + test.map(function (x) { return rpRow(x, x.at); }).join("") + "</ol></details>" : "";
+    var mine = loc.length ? TNI("pages.kd40dd5d", "<details class=\"as-near\"><summary>이 기기에 저장된 신고 ") + loc.length + TNI("pages.k52497be", "건(서버 저장 실패 — 메일로 보냈을 수 있음)</summary><ol class=\"ap-list rp-list\">") + loc.slice().reverse().map(function (x) { return rpRow(x, x.t); }).join("") + "</ol></details>" : "";
+    return TNI("pages.k21ab6e8", "<section class=\"ad-sec rp-sec\" id=\"reports\" aria-labelledby=\"rpH\"><h3 class=\"ad-h\" id=\"rpH\">⚠️ 오류 신고함 <small>(최근 30일)</small></h3>") +
+      TNI("pages.k99bedfb", "<p class=\"as-sum\">기사·가게 카드·광고의 <b>오류 신고</b>가 여기 모여요. <b>자동으로 고치거나 지우지 않아요</b> — 보고 고칠 것을 봇에게 알려 주세요.</p>") + (RP.rows ? pfHTML(real) : "") + rcHTML() + srv + tst + mine + "</section>";
   }
   register("approve", {
-    title: "✅ 관리자 승인함",
+    title: TNI("pages.kf67a8cd", "✅ 관리자 승인함"),
     render: function () {
       var S2 = window.TNSocial;
       if (!S2 || !S2.isAdmin || !S2.isAdmin()) {
-        return '<div class="empty hp-empty"><p class="hp-empty__e" aria-hidden="true">🔒</p><p><b>운영자만 볼 수 있어요</b></p><p>운영자 구글 계정으로 로그인하면 승인 기다리는 글·설정을 한곳에서 볼 수 있어요.</p>' +
-          (S2 && S2.signedIn && S2.signedIn() ? "" : '<button type="button" class="cta hp-go" data-login>구글로 로그인</button>') + "</div>";
+        return TNI("pages.k0ab027c", "<div class=\"empty hp-empty\"><p class=\"hp-empty__e\" aria-hidden=\"true\">🔒</p><p><b>운영자만 볼 수 있어요</b></p><p>운영자 구글 계정으로 로그인하면 승인 기다리는 글·설정을 한곳에서 볼 수 있어요.</p>") +
+          (S2 && S2.signedIn && S2.signedIn() ? "" : TNI("pages.k1f11899", "<button type=\"button\" class=\"cta hp-go\" data-login>구글로 로그인</button>")) + "</div>";
       }
       apLoad(false);
-      if (AP.err) return '<div class="empty">목록을 불러오지 못했어요. <button type="button" class="linkbtn" data-ap-reload>다시 시도</button></div>';
+      if (AP.err) return TNI("pages.k966ea1b", "<div class=\"empty\">목록을 불러오지 못했어요. <button type=\"button\" class=\"linkbtn\" data-ap-reload>다시 시도</button></div>");
       if (!AP.doc) return '<div class="skel-list" aria-busy="true"><div class="skel"></div><div class="skel"></div></div>';
       var items = AP.doc.items || [], dec = apDec();
       var open = items.filter(function (x) { return !dec[x.id]; }).length;
-      var head = '<div class="ad-sum ap-sum"><div class="ad-cell"><span>전체</span><b>' + items.length + '</b></div><div class="ad-cell"><span>안 고름</span><b>' + open + '</b></div><div class="ad-cell"><span>고름</span><b>' + (items.length - open) + "</b></div></div>" +
-        '<p class="ap-note">여기서 누른 OK 는 <b>바로 올라가지 않아요</b>. 아래 \'결정 복사\'를 봇에게 보내 주시면 봇이 반영해요.</p>';
-      if (!items.length) return head + '<div class="empty">승인 기다리는 항목이 없어요 🙂</div>' + repHTML() + adsafeHTML();
-      var all = open ? '<button type="button" class="cta ap-all" data-ap-all>✅ 남은 ' + open + "건 전부 OK</button>" : "";
+      var head = TNI("pages.k3b82f37", "<div class=\"ad-sum ap-sum\"><div class=\"ad-cell\"><span>전체</span><b>") + items.length + TNI("pages.kb4252e5", "</b></div><div class=\"ad-cell\"><span>안 고름</span><b>") + open + TNI("pages.kba6f735", "</b></div><div class=\"ad-cell\"><span>고름</span><b>") + (items.length - open) + "</b></div></div>" +
+        TNI("pages.k68de435", "<p class=\"ap-note\">여기서 누른 OK 는 <b>바로 올라가지 않아요</b>. 아래 '결정 복사'를 봇에게 보내 주시면 봇이 반영해요.</p>");
+      if (!items.length) return head + TNI("pages.kf4255e2", "<div class=\"empty\">승인 기다리는 항목이 없어요 🙂</div>") + repHTML() + adsafeHTML();
+      var all = open ? TNI("pages.k217c058", "<button type=\"button\" class=\"cta ap-all\" data-ap-all>✅ 남은 ") + open + TNI("pages.k8175419", "건 전부 OK</button>") : "";
       var list = items.map(function (x) {
         var d = dec[x.id];
-        var acts = d ? '<div class="ap-done ap-done--' + d.d + '"><span>' + (d.d === "ok" ? "✅ OK 고름" : "⏸️ 보류 고름") + " · " + hm(d.at) + '</span><button type="button" class="linkbtn" data-ap-undo="' + esc(x.id) + '">취소</button></div>'
-          : '<div class="ap-acts"><button type="button" class="ap-btn ap-btn--ok" data-ap-ok="' + esc(x.id) + '">OK</button><button type="button" class="ap-btn" data-ap-hold="' + esc(x.id) + '">보류</button></div>';
+        var acts = d ? '<div class="ap-done ap-done--' + d.d + '"><span>' + (d.d === "ok" ? TNI("pages.k7197f5b", "✅ OK 고름") : TNI("pages.k67e54b5", "⏸️ 보류 고름")) + " · " + hm(d.at) + '</span><button type="button" class="linkbtn" data-ap-undo="' + esc(x.id) + TNI("pages.k567b3b2", "\">취소</button></div>")
+          : '<div class="ap-acts"><button type="button" class="ap-btn ap-btn--ok" data-ap-ok="' + esc(x.id) + '">OK</button><button type="button" class="ap-btn" data-ap-hold="' + esc(x.id) + TNI("pages.k4df686a", "\">보류</button></div>");
         return '<li class="ap-item"><div class="ap-top"><span class="ad-rank">' + x.no + '</span><span class="ap-kind">' + esc(x.kind) + '</span><span class="ap-st">' + esc(x.status) + "</span></div>" +
           '<p class="ap-body">' + md(x.body) + '</p><p class="ap-where">📍 ' + md(x.where) + "</p>" + acts + "</li>";
       }).join("");
       var txt = apText(items, dec);
-      var copy = txt ? '<section class="ad-sec ap-copy"><h3 class="ad-h">봇에게 보낼 결정</h3><p class="ap-txt" id="apTxt">' + esc(txt) + '</p><button type="button" class="cta" data-ap-copy>📋 결정 복사</button></section>' : "";
-      return head + all + '<ol class="ap-list">' + list + "</ol>" + copy + '<p class="hp-note">목록 기준 ' + esc(String(AP.doc.updated_at || "").replace("T", " ").slice(5, 16)) + ' (방콕) · 원본 PENDING_APPROVAL.md <button type="button" class="linkbtn" data-ap-reload>새로고침</button></p>' + repHTML() + adsafeHTML();
+      var copy = txt ? TNI("pages.ka8f3538", "<section class=\"ad-sec ap-copy\"><h3 class=\"ad-h\">봇에게 보낼 결정</h3><p class=\"ap-txt\" id=\"apTxt\">") + esc(txt) + TNI("pages.k89e7b4c", "</p><button type=\"button\" class=\"cta\" data-ap-copy>📋 결정 복사</button></section>") : "";
+      return head + all + '<ol class="ap-list">' + list + "</ol>" + copy + TNI("pages.k4a0bf29", "<p class=\"hp-note\">목록 기준 ") + esc(String(AP.doc.updated_at || "").replace("T", " ").slice(5, 16)) + TNI("pages.k8bc2dd8", " (방콕) · 원본 PENDING_APPROVAL.md <button type=\"button\" class=\"linkbtn\" data-ap-reload>새로고침</button></p>") + repHTML() + adsafeHTML();
     },
     click: function (e, t) {
       var el, dec = apDec();
@@ -435,13 +435,13 @@
       if ((el = t.closest("[data-ap-undo]"))) { delete dec[el.getAttribute("data-ap-undo")]; apSave(dec); paint(); return true; }
       if (t.closest("[data-ap-all]")) {
         (AP.doc && AP.doc.items || []).forEach(function (x) { if (!dec[x.id]) dec[x.id] = { d: "ok", at: Date.now() }; });
-        apSave(dec); paint(); if (window.TNApp) TNApp.toast("이 기기에 OK 로 표시했어요. '결정 복사'를 봇에게 보내 주세요", 3200); return true;
+        apSave(dec); paint(); if (window.TNApp) TNApp.toast(TNI("pages.k6d4c803", "이 기기에 OK 로 표시했어요. '결정 복사'를 봇에게 보내 주세요"), 3200); return true;
       }
       if (t.closest("[data-ap-copy]")) {
         var tx = ($("apTxt") || {}).textContent || "";
-        var done = function () { if (window.TNApp) TNApp.toast("복사했어요. 봇과의 대화창에 붙여 넣어 주세요", 2600); };
-        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(tx).then(done, function () { window.prompt("아래 글을 복사해 주세요", tx); });
-        else window.prompt("아래 글을 복사해 주세요", tx);
+        var done = function () { if (window.TNApp) TNApp.toast(TNI("pages.k0e0fd7a", "복사했어요. 봇과의 대화창에 붙여 넣어 주세요"), 2600); };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(tx).then(done, function () { window.prompt(TNI("pages.k0fd65da", "아래 글을 복사해 주세요"), tx); });
+        else window.prompt(TNI("pages.k0fd65da", "아래 글을 복사해 주세요"), tx);
         return true;
       }
       if (t.closest("[data-rp-reload]")) { rpLoad(true); paint(); return true; }

@@ -9,7 +9,7 @@ import html, argparse, json, pathlib, re, sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 JS = ["app.js", "topics.js", "ticker.js", "social.js", "pages.js", "places.js", "prefs.js", "taste.js", "report.js", "nearby.js", "jobs.js", "modern.js", "fb.js"]
-TNI_RE = re.compile(r'\b(?:TNI|I)\(\s*"([\w.]+)"\s*,\s*"((?:[^"\\]|\\.)*)"\s*\)')
+TNI_RE = re.compile(r'\b(?:TNI|I|T)\(\s*"([\w.]+)"\s*,\s*"((?:[^"\\]|\\.)*)"\s*\)')
 ATTR_RE = re.compile(r'<(\w+)\b[^>]*\sdata-i18n(?:-html)?="([\w.]+)"[^>]*>(.*?)</\1>', re.S)
 ARIA_RE = re.compile(r'<\w+\b(?=[^>]*\sdata-i18n-aria="([\w.]+)")(?=[^>]*\saria-label="([^"]*)")[^>]*>')
 STR_RE = re.compile(r'"((?:[^"\\\n]|\\.)*)"|\'((?:[^\'\\\n]|\\.)*)\'')
@@ -40,7 +40,13 @@ def scan():
         p = ROOT / "assets" / n
         if not p.exists():
             continue
-        src = strip_comments(p.read_text(encoding="utf-8"))
+        # 'i18n:data' 표시 줄 = 데이터 값 비교·욕설 거르기 단어 등(화면 문구 아님) → 남은 문구 수에서 뺌(2026-10-18)
+        raw = p.read_text(encoding="utf-8")
+        data_lines = sum(1 for l in raw.splitlines() if "i18n:data" in l)
+        src = strip_comments("\n".join(l for l in raw.splitlines() if "i18n:data" not in l))
+        keys_src = strip_comments(raw)
+        for k, v in TNI_RE.findall(keys_src):
+            keys.setdefault(k, json.loads('"%s"' % v))
         for k, v in TNI_RE.findall(src):
             keys.setdefault(k, json.loads('"%s"' % v))
         rest = TNI_RE.sub("", src)
@@ -67,7 +73,7 @@ def main():
     out.update(nest(keys))
     (ROOT / "i18n" / "ko.json").write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print("i18n/ko.json: 키 %d개" % len(keys))
-    print("아직 TNI 로 안 뺀 한글 문구(파일별): " + ", ".join("%s %d" % (k, v) for k, v in left.items() if v))
+    print("아직 TNI 로 안 뺀 한글 문구(파일별): " + (", ".join("%s %d" % (k, v) for k, v in left.items() if v) or "0"))
     if a.lang:
         r = pathlib.Path(a.zh_root or ROOT)
         lp = r / "i18n" / ("%s.json" % a.lang)
