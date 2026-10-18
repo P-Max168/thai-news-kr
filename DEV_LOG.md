@@ -305,3 +305,4 @@
 - 10-18 09:26 · 🔎 [낮음·검색] **네이버 서치어드바이저 인증 메타 넣기**(민구님 10-18 네이버 등록 진행 — Grok, 백업 태그 `backup-20261018-0926-seo-naver-verify`). index.html 홈에만: 주석이던 네이버 자리를 풀어 `<meta name="naver-site-verification" content="e51d7bc94318de53352045da2f6239f1bdc1e78d" />`, 구글 인증 줄 그대로. 다른 쪽(e/·안내 쪽) 안 건드림.
   - 확인: 로컬 diff 2줄(index.html 네이버 줄 + 안내 주석 '대기'→'10-18 넣음'), zh 시험(/tmp 복사본 + site/zh.json) site_build → 인증 메타 0개, 바꾸기 전 HEAD 와 zh index.html 결과 똑같음(언어판에 한국판 값 안 넘어감).
   - 미확인: 라이브 반영(배포 뒤 아래 줄), 네이버 쪽 '소유확인' 통과(사이트 반영 뒤 네이버 화면에서 누름).
+  - 라이브 확인(09:26, 커밋 3910f02, curl 캐시 우회): 홈에 google-site-verification(DtP2tE…) + naver-site-verification(e51d7bc9…) 둘 다, HTTP 200.
