@@ -71,7 +71,7 @@ def patch_index(t, c, i18n):
         t = re.sub(r'<meta property="%s" content="[^"]*">' % re.escape(k), '<meta property="%s" content="%s">' % (k, _attr(v)), t)
     t = re.sub(r'<meta name="twitter:image" content="[^"]*">', '<meta name="twitter:image" content="%s">' % _attr(url + "og/latest.png"), t)
     # 검색 인증 메타 자리(한국판 값 주석)는 언어판에서 지움 — 언어판 값은 site/<lang>.json seo.verification 으로
-    t = re.sub(r"<!-- 검색 등록 인증.*?-->\n(?:<!-- <meta name=\"(?:google|naver)-site-verification\"[^\n]*-->\n)*", "", t, flags=re.S)
+    t = re.sub(r"<!-- 검색 등록 인증.*?-->\n(?:(?:<!-- )?<meta name=\"(?:google|naver)-site-verification\"[^\n]*\n)*", "", t, flags=re.S)  # (10-18) 주석 푼 한국판 값 줄도 지움
     for name, val in (seo.get("verification") or {}).items():
         if val and ('name="%s"' % name) not in t:
             t = t.replace("</title>", '</title>\n<meta name="%s" content="%s">' % (_attr(name), _attr(val)), 1)
