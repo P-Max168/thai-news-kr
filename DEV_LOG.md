@@ -306,3 +306,7 @@
   - 확인: 로컬 diff 2줄(index.html 네이버 줄 + 안내 주석 '대기'→'10-18 넣음'), zh 시험(/tmp 복사본 + site/zh.json) site_build → 인증 메타 0개, 바꾸기 전 HEAD 와 zh index.html 결과 똑같음(언어판에 한국판 값 안 넘어감).
   - 미확인: 라이브 반영(배포 뒤 아래 줄), 네이버 쪽 '소유확인' 통과(사이트 반영 뒤 네이버 화면에서 누름).
   - 라이브 확인(09:26, 커밋 3910f02, curl 캐시 우회): 홈에 google-site-verification(DtP2tE…) + naver-site-verification(e51d7bc9…) 둘 다, HTTP 200.
+<!-- gnews-radar-1018 -->
+- 10-18 18:42 · 📡 [보통·수집 도구] **Google News RSS 레이더 `tools/gnews_scan.py`**(민구님 10-18 요청 '놓친 기사 잡기·화제성 점수' — Grok, 백업 태그 `backup-20261018-1842-gnews-radar`). 검색어 = `tools/gnews_keywords.json`(ko: 태국 비자·파타야·방콕·스리라차·태국 / en: Thailand visa·Pattaya·Bangkok·Thailand, when:1d + 최근 18h, ko 결과는 제목에 태국 관련 낱말 필수, 도박 스팸·성인(trend_blocklist)·SNS·exclude_outlets 버림). 비슷한 제목끼리 사건으로 묶고 매체 수 = hotness. drafts/candidates/latest.json(+also)·data/<최신 판>.json 과 링크·제목으로 비교 → missed 표시, missed 는 googlenewsdecoder 로 원문 URL. 결과 drafts/gnews/latest.{json,md}(.gitignore). 실패 = 검색어마다 1번 재시도 → 로그(drafts/gnews/scan.log) + 빈 결과 exit 0. `--record <판> '<json>'` → 봇 저장소 gnews_reports.json(없으면 [] 생성). README 정기 실행 1단계에 레이더 단계(missed 최대 ~2건, 원 매체 페이지로 직접 작성, 피드 내용 게시 금지, hotness 참고, 판마다 기록) 추가. 사이트 화면·판 빌드 코드는 안 건드림.
+  - 확인: 라이브 검색 9/9 성공(17:43 아침 후보 기준 missed 119, 18:52 저녁 후보 기준 항목 138·사건 117·missed 23·covered 94), 원문 URL 풀기 동작, 프록시 차단으로 실패 강제 → 9개 모두 실패 로그·빈 결과·exit 0, --record 시험(임시 파일), py_compile.
+  - 미확인: 실제 정기 판 루틴에서의 사용(다음 판부터), 한국어 제목 ↔ 태국어 후보는 제목 비교가 안 돼 이미 가진 사건이 missed 로 나올 수 있음(README 에 주의 적음), 묶기 기준 0.5 는 하루치로만 맞춰 봄.

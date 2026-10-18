@@ -73,6 +73,7 @@
 - `tools/newslib.py`  : 판 저장(`write_edition`) + 검증 + index 재생성(`build_index`). 이름 규칙·라벨이 여기 정의돼 있음
 - `tools/build_data.py` : 진입점. `python3 tools/build_data.py tools/editions/<id>.py` → json/js 저장 + index 갱신. 인자 없이 실행하면 index만 재생성
 - `tools/editions/<id>.py` : 판별 편집 파일(기사 목록·브리핑·주요뉴스)
+- `tools/gnews_scan.py` : **Google News RSS 레이더**(2026-10-18) — `tools/gnews_keywords.json` 의 한국어(hl=ko·gl=TH)·영어(hl=en-US·gl=TH) 검색어로 최근 18시간을 훑어 비슷한 제목끼리 사건으로 묶고, 사건마다 보도 매체 수 = 화제성(hotness). `drafts/candidates/latest.json`·판 데이터와 비교해 우리가 못 모은 사건을 'missed' 로 표시(원문 URL 풀기 시도). 결과 `drafts/gnews/latest.{json,md}`. **발견용 — 피드 내용은 사이트에 게시하지 않음.** 가져오기 실패는 1번 다시 시도 후 빈 결과로 exit 0(판을 막지 않음)
 - `tools/gnews.py` : Google News RSS 검색(태국어/`en:`영어, 기본 최근 8일)·실제 기사 URL 풀기(`--decode`). 결과는 `raw/<id>/` 에 저장
 - `tools/fetch_trends.py` : **사용 중지**된 옛 X 트렌드 수집기(기존 원본 보존용; 새 판에서 실행하지 않음)
 - `tools/trend_blocklist.txt` : 기사 제목·요약의 성인·선정적 키워드 차단 목록(한 줄 하나, `re:`=정규식, `#`=주석). X 트렌드 수집은 중단됐고 기사 검증에만 씀. **직접 고쳐서 늘리면 됨**
@@ -220,6 +221,11 @@
 0. **맨 먼저 점검(2026-10-05~)**: `bash tools/preflight.sh am-build`(저녁은 `pm-build`, 07:38·18:38 대체 루틴은 `backup-check`). 오래된 git 잠금·멈춘 rebase·다른 브랜치·올리지 않은 변경(stash, 버리지 않음)을 스스로 정리하고 원격과 맞춘 뒤 디스크·메모리·인터넷·도구를 확인한다. **`PREFLIGHT FAIL` 이면 판을 만들지 말고 그 줄을 Max 에게 알린다**(실패 이유가 그대로 적힘). 끝나면 `bash tools/preflight.sh end am-build ok`(실패면 `fail "이유"`). 시작·끝·배포(deploy.sh 가 자동)는 `/workspace/logs/automation.log` 에 남는다 — 다음에 판이 빠지면 이 파일에 START 가 있는지부터 본다(없으면 예약 실행 자체가 안 온 것).
    - preflight 는 끝에 `python3 tools/edition_stale.py` 도 부름: 라이브 최신 판이 예정(07:08·18:08)보다 **30분 넘게 늦으면** `/workspace/logs/edition-stale.txt` 에 한 줄(같은 판은 한 번만, 빌드는 안 막음, 휴대폰 알림 없음 — Max 가 검수 때 봄). 매시 점검 루틴에서 따로 불러도 됨.
 1. 수집: **먼저 `python3 tools/collect.py`** 를 실행한다(`tools/sources.json` 의 RSS·뉴스 사이트맵·Google News 검색 약 240개를 동시에 훑음(24시간 창이면 2~3분), 실패한 소스는 건너뛰고 끝에 표시, 1분 안쪽). 결과 = `drafts/candidates/latest.md`(사람용)·`latest.json`(최근 14시간, 중복 합침, 주제별(동부·방콕·북부·남부 …)·매체별 건수, `also` = 같은 사건을 보도한 다른 매체). 기간은 `--hours 20` 처럼 바꾼다(저녁판은 아침판 이후 ~11시간이면 충분). `drafts/` 는 .gitignore 대상이라 커밋되지 않는다.
+   - **Google News 레이더(2026-10-18~, 매번 — collect.py 바로 뒤, 기사 고르기 전)**: `python3 tools/gnews_scan.py`(저녁판은 `--hours 12`도 됨, 30초 안쪽). 실패해도 exit 0·빈 결과이니 그냥 다음 단계로. 결과 `drafts/gnews/latest.md`:
+     - **놓친 사건(missed)** 중 중요한 것(뉴스 가치·한국인 관련성)을 **최대 ~2건** 골라 판에 넣는다. 쓸 때는 **반드시 원 매체 페이지(`source_url`, 못 풀었으면 매체 이름 + 제목으로 검색)를 열어** 그 내용으로 직접 쓴다 — Google News 제목·목록을 그대로 옮기지 않는다(발견용일 뿐, 다시 게시 금지). 게재 시각·숫자는 원문에서 확인(Google 날짜는 참고용). 약하면 넣지 않는다.
+     - **화제성(hotness = 같은 사건을 보도한 매체 수)**은 순서·브리핑 고르기에 참고한다(이미 가진 사건 목록에도 점수가 붙음). 숫자만 보고 약한 기사를 올리지 않는다.
+     - 한국어 제목 ↔ 태국어 후보는 제목 비교가 안 돼서, 이미 가진 사건이 missed 로 나올 수 있다 → 넣기 전에 후보·직전 판과 같은 사건인지 한 번 본다.
+     - **판마다 기록(필수, 쓴 게 없으면 빈 목록)**: 레이더로 찾아 실제로 쓴 기사를 `python3 tools/gnews_scan.py --record <id> '[{"google_title":"…","outlet":"…","source_url":"원문 URL","our_title":"우리 기사 제목"}]'` → `/cursor/stores/store-7f8a67fb-8a1e-4410-b2ae-b38500b36be0/gnews_reports.json` 에 `{edition, items:[{google_title, outlet, source_url, our_title}]}` 한 줄 추가(파일이 없으면 `[]` 로 만듦, 같은 판은 덮어씀). 이 기록으로 운영자에게 '무엇을 놓쳤고 어떻게 잡아 어떤 기사로 썼는지' 보고한다(10-18 요청: 첫 10판 동안 판마다 보고).
    - **후보에서 고른다**: 주제마다 후보를 훑어 뉴스 가치·한국인 관련성 순으로 고르고, 같은 사건은 `also` 를 보고 가장 자세한 원 보도를 원문 `url` 로. Google News 항목(`type: gnews`)은 링크가 news.google.com 이므로 `python3 tools/gnews.py --decode` 또는 원문 검색으로 실제 기사 URL·게재 시각을 확인한다. 주제 분류는 제목 키워드 기반이라 틀릴 수 있다 — `other`(미분류)도 한 번 훑는다.
    - **피드가 없는 곳은 손으로**: `sources.json` 의 `type: html`(Pattaya Mail 홈·PRD Chonburi·주태국 한국대사관 공지·Air4Thai·BOT·KOTRA 등)과 `disabled`(TMD·이민국·Pattaya People — 적힌 대체 경로로) 를 필요할 때 연다. 기존 방식(`python3 tools/gnews.py raw/<id>/<폴더> "검색어"`)으로 더 찾아도 된다. 원문은 `raw/<id>/`에 저장.
    - 고르는 규칙·편집 원칙(**최소 건수 없음**, 원 보도 우선, 가장 자세한 기사, 매체 고루, 정치는 성향 다른 2~3곳 비교)은 위 '수집 소스 목록' 절을 따른다. Pantip·Wongnai·태사랑 은 반응 참고 전용.
