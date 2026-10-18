@@ -61,6 +61,13 @@ TX = {"brand": "태국 뉴스 한눈에", "brand_sub": "파타야에서 읽는 �
       "msg_head": "📰 태국 뉴스 한눈에 {m}월 {d}일({wd}) {edn}이에요. 현지 보도를 한국어로 정리했어요.",
       "msg_edition": "👉 이번 판 보기: ", "msg_home": "🏠 최신 뉴스({upd}): ", "title": "태국 뉴스 한눈에 — {m}월 {d}일({wd}) {edn}",
       "font": '"Pretendard","Pretendard Variable","Noto Sans CJK KR","Noto Sans KR"'}
+# 검색용 판 제목·설명(2026-10-18 키워드 정리, 민구님 09:00 승인) — 한국판만. 언어판은 share.text 에 seo_* 를 넣을 때만 씀
+# (한국어 검색어 '태국 뉴스'·'태국 현지 뉴스'·지역 이름을 언어판이 물려받지 않게)
+SEO_TX = {"seo_title": "{m}월 {d}일({wd}) 태국 뉴스 {edn} — {heads} | {brand}",
+          "seo_desc": "{m}월 {d}일({wd}) {edn}, 태국 현지 뉴스 {n}건을 한국어로 정리했어요{regions}. {heads}",
+          "seo_regions": " ({r} 소식)", "seo_h1": "{label} 태국 뉴스", "seo_sep_title": "·", "seo_sep_desc": " · "}
+if LANG == "ko":
+    TX.update(SEO_TX)
 if LANG != "ko":
     SITE = _S["site_url"]
     SHORT = _S.get("domain") or SITE.split("//")[-1].strip("/")
@@ -98,7 +105,7 @@ def load(ed_id):
 def story_topics(data):
     """화면과 같은 주제(assets/topics.js storyTopics). {id: {topic, secondary[]}}"""
     # 언어판: data/site.js(window.TN_SITE — 그 판 주제 목록)를 먼저 읽음. 한국판엔 이 파일이 없어 그대로(2026-10-18)
-    js = ("const fs=require('fs');global.window={};if(process.argv[3]&&fs.existsSync(process.argv[3]))eval(fs.readFileSync(process.argv[3],'utf8'));"
+    js = ("const fs=require('fs');global.window=global;if(process.argv[3]&&fs.existsSync(process.argv[3]))eval(fs.readFileSync(process.argv[3],'utf8'));"
           "eval(fs.readFileSync(process.argv[1],'utf8'));"
           "const d=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));const o={};"
           "d.stories.forEach(s=>{const r=window.TNTopics.storyTopics(s);o[s.id]={topic:r.topic,secondary:r.secondary}});"
@@ -444,14 +451,55 @@ def edition_page(data, meta, chosen, tp, ed_url, img):
     """판 정적 페이지 e/<판>/index.html — 2026-10-18 검색 노출(R-seo-1·3·4): 판 기사 전체(제목·요약·출처) 정적 HTML,
     index/follow, canonical 자기 자신. 본문은 tools/seo.py(공용). 제목·설명·OG 는 여기서(카드 고르기 기준 그대로)."""
     import seo
-    m, d, wd, edn = date_label(data, meta)
-    title = TX["title"].format(m=m, d=d, wd=wd, edn=edn)
-    desc = " · ".join("%s %s" % (TOPICS[tp[s["id"]]["topic"]][1], split_head(s["headline"])[0]) for s in chosen[:3])
-    if len(desc) > 110:
-        desc = desc[:108].rstrip() + "…"
+    title, desc, h1 = seo_meta(data, meta, chosen, tp)
     emo = {k: TOPICS.get(v["topic"], ("", ""))[1] for k, v in tp.items()}
-    page = seo.edition_page(data, meta, title, desc, og_tags(title, desc, ed_url, img), emo)
+    page = seo.edition_page(data, meta, title, desc, og_tags(title, desc, ed_url, img), emo, label=h1)
     return page, title, desc
+
+
+def _regions(data, chosen, k=4):
+    """판 지역 이름(괄호 앞 큰 이름) — 카드에 고른 기사 먼저, 다음은 판 순서. 같은 이름은 한 번만."""
+    out = []
+    for s in list(chosen) + [x for x in data.get("stories", []) if x not in chosen]:
+        r = re.split(r"[(（]", s.get("region") or "")[0].strip()
+        if r and r not in out:
+            out.append(r)
+    return out[:k]
+
+
+def seo_meta(data, meta, chosen, tp):
+    """(검색 제목, 검색 설명, h1). 한국판 = 날짜 + '태국 뉴스' + 주요 제목·지역. 언어판에 seo_* 문구가 없으면 예전 그대로."""
+    m, d, wd, edn = date_label(data, meta)
+    if "seo_title" not in TX:
+        title = TX["title"].format(m=m, d=d, wd=wd, edn=edn)
+        desc = " · ".join("%s %s" % (TOPICS[tp[s["id"]]["topic"]][1], split_head(s["headline"])[0]) for s in chosen[:3])
+        if len(desc) > 110:
+            desc = desc[:108].rstrip() + "…"
+        return title, desc, None
+    heads = [split_head(s["headline"])[0] for s in chosen[:3]]
+    # 제목: 주요 제목 1~2개, 너무 길면(64자 넘으면) 1개
+    title = ""
+    for k in (2, 1):
+        title = TX["seo_title"].format(m=m, d=d, wd=wd, edn=edn, heads=TX["seo_sep_title"].join(heads[:k]), brand=TX["brand"])
+        if len(title) <= 64:
+            break
+    else:   # 제목 하나로도 길면 그 제목을 줄임
+        over = len(title) - 64
+        h0 = heads[0][:max(8, len(heads[0]) - over - 1)]
+        if h0.count("(") > h0.count(")"):          # 괄호(바트 원화 환산 등) 안에서 자르지 않음
+            h0 = h0[:h0.rfind("(")]
+        if " " in h0.strip():
+            h0 = h0.strip().rsplit(" ", 1)[0]       # 낱말 중간에서 자르지 않음
+        h0 = h0.rstrip(" ,·") + "…"
+        title = TX["seo_title"].format(m=m, d=d, wd=wd, edn=edn, heads=h0, brand=TX["brand"])
+    rg = _regions(data, chosen)
+    for k in (3, 2, 1):   # 설명: 150자 안에 들어가는 만큼 주요 제목을 통째로(제목 중간·괄호 안에서 자르지 않음)
+        desc = TX["seo_desc"].format(m=m, d=d, wd=wd, edn=edn, n=len(data.get("stories", [])),
+                                     regions=TX["seo_regions"].format(r="·".join(rg)) if rg else "", heads=TX["seo_sep_desc"].join(heads[:k]))
+        if len(desc) <= 150:
+            break
+    h1 = TX["seo_h1"].format(label=meta.get("label") or "%d월 %d일 %s" % (m, d, edn))
+    return title, desc, h1
 
 
 def ensure_gitignore():

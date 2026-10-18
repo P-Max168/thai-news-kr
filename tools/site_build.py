@@ -75,6 +75,17 @@ def patch_index(t, c, i18n):
     for name, val in (seo.get("verification") or {}).items():
         if val and ('name="%s"' % name) not in t:
             t = t.replace("</title>", '</title>\n<meta name="%s" content="%s">' % (_attr(name), _attr(val)), 1)
+    # 검색 구조화 데이터(JSON-LD)·숨은 h1(2026-10-18 한국판 키워드 정리) — 언어판은 한국어 키워드를 물려받지 않게 자기 값으로 바꿈
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "WebSite", "@id": url + "#website", "url": url, "name": c["brand"], "description": desc,
+         "inLanguage": c.get("htmlLang", c["lang"]), "publisher": {"@id": url + "#org"}},
+        {"@type": "NewsMediaOrganization", "@id": url + "#org", "name": c["brand"], "url": url,
+         "logo": {"@type": "ImageObject", "url": url + "assets/icons/icon-512.png", "width": 512, "height": 512},
+         "areaServed": "TH", "knowsLanguage": c.get("htmlLang", c["lang"])}]}
+    ldj = json.dumps(ld, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    t = re.sub(r'<script type="application/ld\+json" id="tn-ld">.*?</script>(<!--.*?-->)?',
+               lambda _: '<script type="application/ld+json" id="tn-ld">%s</script>' % ldj, t, count=1, flags=re.S)
+    t = re.sub(r'(<h1 class="sr-only" id="tn-h1">).*?(</h1>)', lambda m: m.group(1) + html.escape(seo.get("h1") or title, quote=False) + m.group(2), t, count=1, flags=re.S)
     # data/site.js — 앱 코드보다 먼저(topics.js 가 TN_SITE 를 읽음). 한 번만
     if 'src="data/site.js"' not in t:
         t = t.replace('<script src="data/index.js"></script>', '<script src="data/site.js"></script>\n<script src="data/index.js"></script>', 1)

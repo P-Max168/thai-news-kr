@@ -71,6 +71,16 @@ def edition_page(data, meta, title, desc, og_block, emoji=None, label=None):
     if isinstance(brief, list) and brief:
         brief_html = '<section class="brief"><h2>브리핑</h2><ul>%s</ul></section>' % "".join(
             "<li>%s</li>" % e((b if isinstance(b, str) else (b.get("text") or b.get("line") or "")).replace("**", "")) for b in brief)
+    # 검색 구조화 데이터(2026-10-18 키워드 정리): 판 = CollectionPage + 기사 목록(ItemList). 언어판도 자기 brand·site_url 로
+    ld = {"@context": "https://schema.org", "@type": "CollectionPage", "@id": url, "url": url, "name": title, "description": desc,
+          "inLanguage": lang, "isPartOf": {"@type": "WebSite", "@id": site + "#website", "name": brand, "url": site},
+          "publisher": {"@type": "NewsMediaOrganization", "@id": site + "#org", "name": brand, "url": site},
+          "mainEntity": {"@type": "ItemList", "numberOfItems": len(data.get("stories", [])), "itemListElement": [
+              {"@type": "ListItem", "position": i + 1, "url": url + "#" + s["id"], "name": s["headline"]}
+              for i, s in enumerate(data.get("stories", []))]}}
+    if data.get("generated"):
+        ld["datePublished"] = data["generated"]
+    ld_html = '<script type="application/ld+json">%s</script>' % json.dumps(ld, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     page = """<!doctype html>
 <html lang="%(lang)s">
 <head>
@@ -81,6 +91,7 @@ def edition_page(data, meta, title, desc, og_block, emoji=None, label=None):
 <meta name="description" content="%(desc)s">
 %(canon)s
 %(og)s
+%(ld)s
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/icons/favicon-32.png">
 <!-- 판 전체 정적 페이지(tools/seo.py 가 생성, tools/share_kit.py 가 판마다 부름). 검색 수집기는 이 글을 읽고,
@@ -105,7 +116,7 @@ li{margin:6px 0;color:#333D4B}footer{color:#5F6B7A;font-size:14px;padding:10px 2
 </html>
 """ % {"lang": lang, "title": e(title), "desc": e(desc), "canon": canonical_tag(url), "og": og_block, "botrx": BOT_RX,
        "target_js": json.dumps(target), "target": e(target), "brand": e(brand), "label": e(label or meta.get("label", eid)),
-       "brief": brief_html, "arts": "\n".join(arts)}
+       "brief": brief_html, "arts": "\n".join(arts), "ld": ld_html}
     if "฿" in page or _THAI.search(page):
         raise SystemExit("e/%s: '฿' 또는 태국 글자가 들어감 — 데이터 문구 확인(TRANSLATION_RULES)" % eid)
     return page
@@ -143,6 +154,7 @@ def _old_head(path):
 def regen_e(root=ROOT):
     sys.path.insert(0, str(root / "tools"))
     import share_kit
+    site, _, _ = _site()
     idx = json.loads((root / "data/index.json").read_text(encoding="utf-8"))
     n = 0
     for meta in idx.get("editions", []):
@@ -154,7 +166,16 @@ def regen_e(root=ROOT):
         title, desc, og = _old_head(p)
         tp = share_kit.story_topics(data)
         emo = {k: share_kit.TOPICS.get(v["topic"], ("", ""))[1] for k, v in tp.items()}
-        p.write_text(edition_page(data, meta, title, desc, og, emo), encoding="utf-8")
+        # (2026-10-18) 검색 제목·설명 다시 만들기 — 카드에 골랐던 기사는 기존 설명에 든 제목으로 되찾음(og 이미지는 그대로)
+        heads = [(s, share_kit.split_head(s["headline"])[0]) for s in data.get("stories", [])]
+        chosen = sorted([s for s, h in heads if h and h in desc], key=lambda s: desc.find(share_kit.split_head(s["headline"])[0]))
+        h1 = None
+        if chosen:
+            title, desc, h1 = share_kit.seo_meta(data, meta, chosen, tp)
+            img = re.search(r'<meta property="og:image" content="([^"]*)"', og)
+            if img:
+                og = share_kit.og_tags(title, desc, site + "e/%s/" % meta["id"], html.unescape(img.group(1)))
+        p.write_text(edition_page(data, meta, title, desc, og, emo, label=h1), encoding="utf-8")
         n += 1
     return n
 

@@ -66,6 +66,12 @@ PAGES = [
  ]),
 ]
 
+# 검색 설명(2026-10-18 키워드 정리) — 화면에는 안 보임
+DESC = {"about.html": "태국 뉴스 한눈에 소개 — 태국 현지 언론 보도를 매일 아침 7시·저녁 6시 한국어로 정리하는 태국 교민·여행자용 뉴스예요. 만드는 방식과 운영 원칙을 안내해요.",
+        "contact.html": "태국 뉴스 한눈에 연락하기 — 잘못된 요약 신고, 제보, 저작권·광고·개인정보 문의 방법을 안내해요.",
+        "privacy.html": "태국 뉴스 한눈에 개인정보 처리방침 — 기기에만 저장되는 정보, 로그인할 때 저장되는 정보, 위치·외부 서비스와 삭제 요청 방법을 안내해요.",
+        "terms.html": "태국 뉴스 한눈에 이용약관 — 서비스 범위, 기사 요약과 저작권, 댓글 규칙, 광고·업체 소개 기준을 안내해요."}
+
 NAV = [("privacy.html", "개인정보 처리방침"), ("terms.html", "이용약관"), ("about.html", "소개"), ("contact.html", "연락하기")]
 
 def render(fn, title, secs):
@@ -81,6 +87,7 @@ def render(fn, title, secs):
 <link rel="canonical" href="https://tnews.pmaxone.com/%s">
 <meta name="theme-color" content="#ffffff">
 <title>%s · %s</title>
+<meta name="description" content="%s">
 <link rel="icon" href="assets/icons/icon-192.png">
 <style>%s</style>
 <link rel="stylesheet" href="/assets/g-pages.css?v=1">
@@ -95,7 +102,7 @@ def render(fn, title, secs):
 </main>
 </body>
 </html>
-""" % (fn, html.escape(title), SITE, CSS.strip(), SITE, draft, html.escape(title), UPDATED, body, nav)
+""" % (fn, html.escape(title), SITE, html.escape(DESC.get(fn, SITE)), CSS.strip(), SITE, draft, html.escape(title), UPDATED, body, nav)
 
 if __name__ == "__main__":
     for fn, title, secs in PAGES:
