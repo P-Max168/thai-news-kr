@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-19T01:56:28+07:00",
+ "updated_at": "2026-10-19T04:34:19+07:00",
  "items": [
   {
    "title": "국가직 소방, 재정은 지방…추미애 “빨대” 충격파에 드러난 ‘이중 구조’ [뉴스분석]",
    "source": "한겨레",
    "time": "2026-10-18T22:28:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5DeXYtY1lDYnI5VkZZX1YwR1M5WVBHempuV21IallubXlYMW1oZFBsWVpPZlFzeVVUdlpHUDlyVmU1clRPYWUyTEFoVWNoNUszZkt4djdDa05sTlZIbEc2VThHdw?oc=5"
-  },
-  {
-   "title": "전국에 강한 비바람…비 그치면 기온 ‘뚝’",
-   "source": "KBS 뉴스",
-   "time": "2026-10-18T22:01:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBfc3FTazA1VVVfaHE5NXlKU0g2RXQwY0xfZHNqckJWWTA3YnRIYUhyS2dNb2htOVhyWDZPYjAwWGRaNDNBMDRxLVhrTk8wbzU1LWNFd082b04zQTA?oc=5"
-  },
-  {
-   "title": "아빠 빈소에, 아빠랑 잡은 메뚜기 상자 안고…7살 딸 “꼭 다시 만나”",
-   "source": "한겨레",
-   "time": "2026-10-18T20:17:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE02cEdiOGRCeTBoSWJvUV94SmVMbGtvRUdqUzVocDNiUENwSFBwMEozdHFISEdMRm5FNGRyUmw0YTJVU3NKX0lGNk5JUFBrUXp5aXpUN0xaVHo1a0d4aEkxeUhaUU5OQXV3RUV6VWJFX0FJUQ?oc=5"
-  },
-  {
-   "title": "신세계백화점 강남점 출차 대란…\"5시간째 제자리, 지옥 같아\"",
-   "source": "연합뉴스TV",
-   "time": "2026-10-18T20:49:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBGOEZMem13QnR3ZmxacjNqc0ZLTENPOEZkdHg1SGRvakdmSld1Y1ZkMlhGbi1RMUxCVExUWDFnUDQ1NnJHNHNRX2gyV1pTbUVvU1FHeU5SbkpjQlB5UkhBOVRlcHdqbDQ?oc=5"
-  },
-  {
-   "title": "시위 때 흉기 압수했다 돌려줬다…최충락 범행 전 경찰 대응 논란",
-   "source": "한국경제",
-   "time": "2026-10-18T19:58:33+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9xTWdOazFySVVlQXk5Y29qVVlxOTR6RUxkNFhQMS0xczM0dzB5NWhvZ1pnX1VRVjBZeDFEWXMtSEh2U3NPMUo0b1VIUFctQVN6TWJQX25OUm9vUQ?oc=5"
+   "url": "https://www.hani.co.kr/arti/area/capital/1282954.html"
   },
   {
    "title": "‘전작권 조건 변화’에 이어 ‘한국 영토 주권 부정’…선 넘는 주한미군사령관",
    "source": "경향신문",
    "time": "2026-10-18T20:07:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5pQkw2b21yeVRwZmJvdUtpZ0VmeTdnZ2kyaWZEYmhTZVcxYXV0VzQ5OGJ4MjdYXzI4OXlKTnB5SUpkbnhDdFZrbVA5NmVSTW1jaWdnU3VJRGpIUdIBX0FVX3lxTE1BQXZhLU92NWNBckplSjl0dkpVeFZHZFNxU19zRWkzSUJ1RFFLQ0xMaXZzTmtUWWF4OGQ0X1BRYzA5VHJwN1JXT1VVMG9PUi1sTzJYaVFGYXZMbzhLMzd3?oc=5"
+   "url": "https://www.khan.co.kr/article/202610182207015"
   },
   {
-   "title": "민주당, \"인내에도 한계\" 조희대 사퇴 재촉구",
+   "title": "아빠 빈소에, 아빠랑 잡은 메뚜기 상자 안고…7살 딸 “꼭 다시 만나”",
+   "source": "한겨레",
+   "time": "2026-10-18T22:36:00+07:00",
+   "url": "https://www.hani.co.kr/arti/society/society_general/1282899.html"
+  },
+  {
+   "title": "민주, ‘조희대 탄핵’ 만지작…지지층 결집 기대 속 중도 이탈 불안",
+   "source": "한겨레",
+   "time": "2026-10-18T22:28:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/politics_general/1282952.html"
+  },
+  {
+   "title": "[날씨] 남부·제주도 중심 빗방울 이어져‥\"저지대 침수피해 주의\"",
    "source": "MBC 뉴스",
-   "time": "2026-10-18T15:31:14+07:00",
-   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE55VnJsMzlXOFZDQ1I2NlVJb0VaVDFDX19iajBxQW1KaHBYN28xM3F3YWNBcS00Y0dzM0M0Qmg3REF0RzVmTDI1TEFRM2NCMFEyY2g2Z2N5Y0ZkR3JZb2FFMTI2ckdGWVdmWFU0dXlhUUVEYlpmMURfQdIBeEFVX3lxTFB1cms4TkNvcXFTNkU3UTgwSVNRMjljT1ZCY1FpdUtxNjNUN3VrQTNOMXJjQXVlYktzUzVkRTJKYk9ENXk4dHVSMHNkdkV5RlhiR01mRHRFYzVRSHI0bkRNdjVMU0RfMzc4V2RneXNGNm1KaGc2ODFvZA?oc=5"
+   "time": "2026-10-18T22:00:31+07:00",
+   "url": "https://imnews.imbc.com/news/2026/society/article/6858839_36918.html"
   },
   {
-   "title": "\"전쟁터 같다\" 아수라장 된 파리…시위 격화 속 약탈도",
+   "title": "시위 때 흉기 압수했다 돌려줬다…최충락 범행 전 경찰 대응 논란",
+   "source": "한국경제",
+   "time": "2026-10-18T19:58:33+07:00",
+   "url": "https://www.hankyung.com/article/2026101891107"
+  },
+  {
+   "title": "김민석, 축제 공연 중 무대 올라 인사…\"가수·관객께 죄송\"",
+   "source": "노컷뉴스",
+   "time": "2026-10-18T14:24:22+07:00",
+   "url": "https://www.nocutnews.co.kr/news/6593060"
+  },
+  {
+   "title": "지각 출범 ‘김지용의 중수청’…조직 안착·임은정 감찰·1호 송치 사건 ‘과제’",
+   "source": "경향신문",
+   "time": "2026-10-18T19:26:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610182126015"
+  },
+  {
+   "title": "美재무장관, '우크라는 동맹인가' 질문에 \"난 국무장관 아냐\"",
    "source": "연합뉴스",
-   "time": "2026-10-18T20:56:44+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9XUmFwTHdOZV9KU1o4T044X1N2YVFWWXN3WDlfa0VVQl9qeTF1RldSOXdzNUNPVWZqNEZLWm9PNzE3OWhuM0prNzVtaVUwUUM2ZFk5aE43QWJFVHfSAWBBVV95cUxOMmVHVmV6YVlpZmx1elg3LTRCN3ZRVHZVbEh6TlFhMlhqY2stQjFkbEU1UXU5czJ3X1NOR0hTWkpYOEVYOUxacG8wa0V6SDlSYXpBaTdreEZRak55T2ZvOXE?oc=5"
+   "time": "2026-10-19T01:12:30+07:00",
+   "url": "https://www.yna.co.kr/view/AKR20261019002200071"
   },
   {
-   "title": "이 대통령, 내일 김지용 초대 중수청장 등에 임명장 수여",
-   "source": "연합뉴스TV",
-   "time": "2026-10-18T16:51:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBGMlhsa0RBSFlVdlprR0ZKd2F2bUFVWDExQjdsWTB2UVdjeVg3dWE4TlpVdWsyUGJ0VlBHQXo0aWlhTlJDRHUzcVk4MXA1YWZjdXBDTHBtdXBsOFY3Mkw0azRRYlMteU0?oc=5"
-  },
-  {
-   "title": "주요 정치·계엄 사건 항소심 선고 잇따라…오세훈·박성재 운명은",
-   "source": "아시아투데이",
-   "time": "2026-10-18T22:00:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9GYlU4Y0tkYlh6TTNOZGR2ZVVaeXRWeldCX1FhRnFUNmFKbGplRGc5NWZNcUlSa0hxbllRSzI2N1VCWWxQNXpPR3lmZHdPT3RSeDdZZXk1bXk3T2RyaW53WVBQNFY5Um1KYklFQjZ3?oc=5"
+   "title": "서울 아침 기온 11도…이 시각 여의도 환승센터",
+   "source": "KBS 뉴스",
+   "time": "2026-10-19T04:01:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8688571"
   }
  ]
 };
