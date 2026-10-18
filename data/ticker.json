@@ -1,6 +1,6 @@
 {
  "v": 1,
- "updated_at": "2026-10-18T23:08:25+07:00",
+ "updated_at": "2026-10-18T23:35:40+07:00",
  "fx": {
   "THB_KRW": 39.9321,
   "USD_THB": 33.4303,
@@ -9,21 +9,21 @@
   "source": "ExchangeRate-API (open.er-api.com)",
   "url": "https://www.exchangerate-api.com/",
   "THB_CNY": 0.20049,
-  "fetched_at": "2026-10-18T23:08:25+07:00",
+  "fetched_at": "2026-10-18T23:35:40+07:00",
   "prev_THB_KRW": 39.9431,
   "prev_rate_time": "2026-10-17T07:02:32+07:00",
   "prev_USD_THB": 33.4303
  },
  "usdt": {
-  "USDT_THB": 33.407,
-  "change": 0.049,
-  "change_pct": 0.147,
+  "USDT_THB": 33.4034,
+  "change": 0.0453,
+  "change_pct": 0.136,
   "prev_close": 33.3581,
-  "price_time": "2026-10-18T23:07:00+07:00",
+  "price_time": "2026-10-18T23:32:51+07:00",
   "google": true,
   "source": "구글 파이낸스 (Google Finance)",
   "url": "https://www.google.com/finance/quote/USDT-THB",
-  "fetched_at": "2026-10-18T23:08:25+07:00"
+  "fetched_at": "2026-10-18T23:35:41+07:00"
  },
  "gold": {
   "bar_sell": 66100.0,
@@ -34,7 +34,7 @@
   "unit": "금괴 96.5% · 1바트(15.244 g)",
   "source": "태국 금거래상협회(Gold Traders Association)",
   "url": "https://www.goldtraders.or.th/",
-  "fetched_at": "2026-10-18T23:08:26+07:00"
+  "fetched_at": "2026-10-18T23:35:41+07:00"
  },
  "fuel": {
   "gasohol95": 41.44,
@@ -49,35 +49,35 @@
   "note": "방콕 소매가(방콕 지방세 미포함)",
   "source": "방짝(Bangchak) 유가 공지",
   "url": "https://www.bangchak.co.th/th/oilprice",
-  "fetched_at": "2026-10-18T23:08:27+07:00"
+  "fetched_at": "2026-10-18T23:35:42+07:00"
  },
  "wx": {
   "regions": {
    "pattaya": {
-    "t": 27.0,
+    "t": 26.9,
     "code": 2,
     "day": 0,
-    "time": "2026-10-18T23:00:00+07:00",
+    "time": "2026-10-18T23:30:00+07:00",
     "rain": 2
    },
    "sriracha": {
-    "t": 27.2,
+    "t": 27.1,
     "code": 0,
     "day": 0,
-    "time": "2026-10-18T23:00:00+07:00",
+    "time": "2026-10-18T23:30:00+07:00",
     "rain": 2
    },
    "bangkok": {
-    "t": 27.9,
+    "t": 27.7,
     "code": 0,
     "day": 0,
-    "time": "2026-10-18T23:00:00+07:00",
+    "time": "2026-10-18T23:30:00+07:00",
     "rain": 18
    }
   },
   "source": "Open-Meteo",
   "url": "https://open-meteo.com/",
-  "fetched_at": "2026-10-18T23:08:28+07:00"
+  "fetched_at": "2026-10-18T23:35:43+07:00"
  },
  "aq": {
   "regions": {
@@ -96,6 +96,6 @@
   },
   "source": "Open-Meteo 대기질 (CAMS)",
   "url": "https://open-meteo.com/en/docs/air-quality-api",
-  "fetched_at": "2026-10-18T23:08:28+07:00"
+  "fetched_at": "2026-10-18T23:35:44+07:00"
  }
 }

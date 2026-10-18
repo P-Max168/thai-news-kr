@@ -1,12 +1,12 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-18T23:08:21+07:00",
+ "updated_at": "2026-10-18T23:35:39+07:00",
  "items": [
   {
-   "title": "“그리운 아빠, 꼭 다시 만나요”…일곱살 딸 편지에 빈소 눈물바다",
-   "source": "경향신문",
-   "time": "2026-10-18T19:56:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE8wVjJRVnFJb3g5UWpOMGxheERSaFVuOTVJOTVkZFRKcmxDQVgzd2lVcHJtSng1YlRmZGVsRV9CcHhXLU9CNnFPSnVnNnFGQXBrM2VUZ1lxcm51UdIBX0FVX3lxTE5kVUpJQ2lxSkktRTZjU294MUVxTVdTZHdPYjEtTzZEMDNENk5Gc0d5Vzhza0JzbHZhNENHNWI4VV83MTA4U1B5VUZsTk9hS0FqU2xaOHN0X2lDc3l4aXVZ?oc=5"
+   "title": "국가직 소방, 재정은 지방…추미애 “빨대” 충격파에 드러난 ‘이중 구조’ [뉴스분석]",
+   "source": "한겨레",
+   "time": "2026-10-18T20:17:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5DeXYtY1lDYnI5VkZZX1YwR1M5WVBHempuV21IallubXlYMW1oZFBsWVpPZlFzeVVUdlpHUDlyVmU1clRPYWUyTEFoVWNoNUszZkt4djdDa05sTlZIbEc2VThHdw?oc=5"
   },
   {
    "title": "전국에 강한 비바람…비 그치면 기온 ‘뚝’",
@@ -15,31 +15,13 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBfc3FTazA1VVVfaHE5NXlKU0g2RXQwY0xfZHNqckJWWTA3YnRIYUhyS2dNb2htOVhyWDZPYjAwWGRaNDNBMDRxLVhrTk8wbzU1LWNFd082b04zQTA?oc=5"
   },
   {
-   "title": "국가직 소방, 재정은 지방…추미애 “빨대” 충격파에 드러난 ‘이중 구조’ [뉴스분석]",
-   "source": "한겨레",
-   "time": "2026-10-18T20:17:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5DeXYtY1lDYnI5VkZZX1YwR1M5WVBHempuV21IallubXlYMW1oZFBsWVpPZlFzeVVUdlpHUDlyVmU1clRPYWUyTEFoVWNoNUszZkt4djdDa05sTlZIbEc2VThHdw?oc=5"
-  },
-  {
-   "title": "신세계백화점 강남점 출차 대란…\"5시간째 제자리, 지옥 같아\"",
-   "source": "연합뉴스TV",
-   "time": "2026-10-18T20:49:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBGOEZMem13QnR3ZmxacjNqc0ZLTENPOEZkdHg1SGRvakdmSld1Y1ZkMlhGbi1RMUxCVExUWDFnUDQ1NnJHNHNRX2gyV1pTbUVvU1FHeU5SbkpjQlB5UkhBOVRlcHdqbDQ?oc=5"
-  },
-  {
-   "title": "‘선 넘는’ 브런슨, 영토 주권 침해 논란에 전작권 ‘문턱 높이기’ 자처하는 이유는?",
+   "title": "구조 대상 없었는데…또 되풀이된 참극",
    "source": "경향신문",
-   "time": "2026-10-18T16:03:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5OUlFLY1B2Z2FVX3FBb1BPemZKYzdhNFVPaklHak8zNzVaOWk1RzVzQUQxaTZ5b3VPQmVoSEY3Nm5LVUdTSUV0UFJQd1VjLXVqMERxRHo2QWlVUdIBX0FVX3lxTE1YeTdPYWtSZDFwTHFOQW1peV9qN19hNkZseFBURnFkOWNjYWhxN3FGbGlEdEVOdW5qdjAzcllzalBQTjJsd3Mtc05paE1mYmlDWnZTVHhQdWNFUEFCejEw?oc=5"
+   "time": "2026-10-18T20:08:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBudHhFdFA5WS1CbnRIajduNzUxSjZKU096MXRhSTNPYVNGQlpzOUFrMTY3OElkZkxLTTNmdElRTlpwanAxRWFpRWFhaWhOYl9qcnpTbG9qTjlLUdIBX0FVX3lxTE9vZV9JT0VHSldOcGNoRjZHTXBiODFHMzZHc0NKTFVoQmJlRXBTWnlzN0E2aXBIdTA0REJ3YkFhcm1SR3ZsQ2xvQTRXQm9YQ19rZkJfTGhucHlsN0pIUWxF?oc=5"
   },
   {
-   "title": "“5시간째 주차장에 갇혔다, 지옥 같아”…신세계 강남점서 무슨 일?",
-   "source": "매일경제",
-   "time": "2026-10-18T20:00:46+07:00",
-   "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBoRUNZLWExNGlkaGczNmtodnE4MHN2Rlc1Z2tiS2F5b04wZktHeF9mWTdhVGhQaG04VjJXdXYtQ2J0U0RXTEVoVDVBbGEwX1VMZ0pZaA?oc=5"
-  },
-  {
-   "title": "[단독]“김건희 방조범 성립 가능” 대검 반부패부 보고에도 무혐의 처분",
+   "title": "[단독] 검찰, “김건희 방조범 성립 가능” 반부패부 보고 받고도 ‘무혐의’",
    "source": "한겨레",
    "time": "2026-10-18T20:09:00+07:00",
    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBaM1ZFY0lMZ1RaLTZMU0MwQjk5SjFZdHhhZGZocHFuVHhCNFNtQlNxRTZmM0w3WmtzNC1tRUxnQ18zaG5yM0tJVml2bEY3dzFZZXBHUUkzT1loV2pJUEllekRDNFB4U1ZKenFqQmZXbDVZZw?oc=5"
@@ -51,16 +33,34 @@ window.KOREA_NEWS = {
    "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9RaUxWanZlZko2M0szbUxhSG4tSTM1NE1PYXZEcUlqY256djdiYktPZ01WZHMwNW1aOHdVMktUbWlIRmY2YzBGS3BhRGtsbXlJa2hGcFpsd1VFRl9lY0txY21CcXB3Y08zbGhEVHZMMTBYQXNMRE9kWdIBeEFVX3lxTFByMURQYWVFbDk3ZUNxNXF0Z0JXVFRqb1hNNEc0dzRRb3pRMjBUenJ3WHhyNDcwMERCVTZsWU14RkV3X2EzemYyVTc5bTM4eU1pNUdsTmE2cjJJVkRkSHpQS2Q3bS1TMHRJMVp2SHlETTl1WjNSbkVfMQ?oc=5"
   },
   {
-   "title": "이 대통령, 국무회의 생중계 유지 뜻…“말 못 한다는 건 거짓말”",
-   "source": "한겨레",
-   "time": "2026-10-18T22:33:00+07:00",
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5aWUtOXzlYS2NzQlRITmdJa3RaWFBsZWY4UzVxNnpuS2gxVnNPc2RiSXk4Q3MwR2o4ejU0VERFSXZTd2prZnRRMnpnZm44a2NnbF9JVDM4YTFrQ1lTeFJfU0ZqckJQUVNyekJz?oc=5"
-  },
-  {
    "title": "경찰, 최충락 1인시위 때 뺏은 흉기 시위 후엔 돌려줘",
    "source": "연합뉴스",
    "time": "2026-10-18T19:28:27+07:00",
    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1jTWt5d1JleVNMOTlhckQ4NUFJMmxzTFJYSDJacGlBVjdiX0RpZDF5WXF3Q0FGeFBQeUFka0EyVHo3XzJvT3FJcVA1WnF4aVJyOTNsT3RFSVF6QknSAWBBVV95cUxPdVZ4UnEyTE82YUV5OVd5akNvS0ZGWHZSUldVTV9nTjRiNGxLeHR4cW5nZm1aYUdIN2ZOYVBNcWNBcEFGUXJlZnhvbTZQS0xsYjZJaXRnNnlhTzlwZVBaY2U?oc=5"
+  },
+  {
+   "title": "김민석 “조희대 탄핵”…당내선 ‘갸웃’",
+   "source": "경향신문",
+   "time": "2026-10-18T19:54:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBXYlB3ZTNxSEVCbi0tTVkzLWZhQThvTVA1SjJzUlcyMG9SaWM3a1VPaVlIRkVrY09SVWhmTGpieWRFV2V0ajFOT0ZpYlJCSXJUSW5YNFgyeG4yZ9IBX0FVX3lxTFA1clhhUlg0dnQyVW9QWVhJbEF1VXA3NmxZc3QzTk1JOExzWDY2YXc5OVZiZDc5a3V4QjA2N0t1MF8wSHpoUVJ4YWNxdktiRmcyeTRzSWJncEp5dE9yZm5n?oc=5"
+  },
+  {
+   "title": "“5시간째 주차장에 갇혔다, 지옥 같아”…신세계 강남점서 무슨 일?",
+   "source": "매일경제",
+   "time": "2026-10-18T20:00:46+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBoRUNZLWExNGlkaGczNmtodnE4MHN2Rlc1Z2tiS2F5b04wZktHeF9mWTdhVGhQaG04VjJXdXYtQ2J0U0RXTEVoVDVBbGEwX1VMZ0pZaA?oc=5"
+  },
+  {
+   "title": "7만원 거리서 택시비 69만원 결제…'바가지' 신고해도 97%는 그대로",
+   "source": "주간조선",
+   "time": "2026-10-18T21:40:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1Dd25lUTBndDhvR1pybmMzcFNwd2JfbFZNS0puaEdQT1VxZlZKd2F5TnEwLU5QbGNlR2FZalVjbTJvNmlRZ3d3ZGtFNHBVSW56UDN6N2dDU3BsdlJGMFZaeWlTRng4Z1ZiOHfSAW5BVV95cUxPbWZYSVoySU42cW5SU1ZrVUROeUtONzZyRmdTZUxmWlpyUmlxUXI0MFRaTUFRQU9iOGUtcGp0NjJVaFFyQmpHS0JKMk1rd1hvcF9Hb3FRUERfclAxWUIzN2xRUHBnc2FwUGdwRk43UQ?oc=5"
+  },
+  {
+   "title": "서울 곳곳 침수·교통통제…낙엽에 배수구 막혀",
+   "source": "연합뉴스TV",
+   "time": "2026-10-18T14:50:00+07:00",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE91elBWN3ZEeFVDMTJ4S2NsSlVQNWFBS29CTUpYblhpYkhqZW5LZkpBUHJtYmtfSE1iSEptNXhpLUZDUDFMZ1N3bjdaME9ObzhnU2RoVjNudjhFTTFKSEY0VHRSdXZ5eWs?oc=5"
   }
  ]
 };
