@@ -11,6 +11,12 @@ _deploy_end() { local c=$?; bash tools/preflight.sh end deploy "$([ $c -eq 0 ] &
 trap _deploy_end EXIT
 
 LIVE_URL="${LIVE_URL:-https://tnews.pmaxone.com/}"
+# 언어판(R-zh-4, 2026-10-18): site/LANG 이 ko 가 아니면 라이브 주소 = site/<lang>.json site_url, 판 빌드 전에 data/site.js·index.html 언어 적용(tools/site_build.py)
+SITE_LANG="$(cat site/LANG 2>/dev/null | tr -d '[:space:]')"; SITE_LANG="${SITE_LANG:-ko}"
+if [ "$SITE_LANG" != "ko" ]; then
+  LIVE_URL="$(python3 tools/siteconf.py | python3 -c 'import json,sys;print(json.load(sys.stdin)["site_url"])')"
+  python3 tools/site_build.py
+fi
 TIMEOUT="${DEPLOY_TIMEOUT:-900}"   # 라이브 반영 대기(초)
 
 LATEST=$(python3 -c 'import json;print(json.load(open("data/index.json",encoding="utf-8"))["latest"])')

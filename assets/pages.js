@@ -83,7 +83,7 @@
   function edLabel(id) {
     var e = ((window.NEWS_INDEX || {}).editions || []).filter(function (x) { return x.id === id; })[0];
     if (e && e.label) return e.label;
-    var m = /^(\d{4})-(\d{2})-(\d{2})-(am|pm|early)$/.exec(id || "");
+    var m = /^(\d{4})-(\d{2})-(\d{2})-(am|md|pm|early)$/.exec(id || "");
     return m ? (+m[2]) + "월 " + (+m[3]) + "일 " + { am: "아침판", pm: "저녁판", early: "새벽판" }[m[4]] : (id || "");
   }
   /* 다른 기기에서 누른 하트는 제목을 모름 → 그 판 파일(data/<판>.js)을 읽어 채움 */
@@ -91,7 +91,7 @@
   var RETRY = [1000, 3000, 9000];
   function fill(ed, n) {
     n = n || 0;
-    if ((!n && loading[ed]) || !/^\d{4}-\d{2}-\d{2}-(am|pm|early)$/.test(ed)) return;
+    if ((!n && loading[ed]) || !/^\d{4}-\d{2}-\d{2}-(am|md|pm|early)$/.test(ed)) return;
     loading[ed] = 1;
     var sc = document.createElement("script"); sc.src = "data/" + ed + ".js" + (n ? "?r=" + n : ""); sc.async = true;
     sc.onload = function () { if (cur === "hearts" || cur === "admin") paint(); };

@@ -65,13 +65,14 @@
       return '<a class="dm-btn dm-btn--' + kind + '" href="' + esc(href) + '"' + (external ? ext : ' rel="sponsored"') +
         ' aria-label="' + esc(aria) + '">' + ic + "<span>" + esc(label) + "</span></a>";
     };
-    var b = [btn("map", ad.link, "지도", "Google 지도에서 위치 보기", true),
-             btn("tel", ad.tel, "전화", "전화 걸기 " + (d.phone_display || ""), false)];
+    // 버튼 글자(R-zh-8, 2026-10-18): 광고 데이터 display.btn_* 가 있으면 그 글자(언어판 문구), 없으면 한국판 그대로
+    var b = [btn("map", ad.link, d.btn_map || "지도", d.btn_map_aria || "Google 지도에서 위치 보기", true),
+             btn("tel", ad.tel, d.btn_tel || "전화", (d.btn_tel_aria || "전화 걸기 ") + (d.phone_display || ""), false)];
     var kakao = ad.kakao_url || (opt.preview ? "#" : "");
     var line = ad.line_url || (opt.preview ? "#" : "");
     if (v !== "bar") {   /* 얇은 띠(bar)는 지도·전화 두 개만 */
       if (kakao) b.push(btn("kakao", kakao, "카톡 문의", "카카오톡으로 문의", true));
-      if (line) b.push(btn("line", line, "라인 문의", "LINE으로 문의", true));
+      if (line) b.push(btn("line", line, d.btn_line || "라인 문의", d.btn_line_aria || "LINE으로 문의", true));
     }
     var chips = [["clock", d.hours_short], ["star", d.rating_short], ["pin", d.area_short]]
       .filter(function (c) { return c[1]; })
@@ -91,7 +92,7 @@
     return targetHTML(opt.target) +
       '<aside class="dm-ad dm-ad--' + v + fixed + '"' + sAttr + ' aria-label="' + esc(ad.label || "광고") + ": " + esc(ad.title) + '">' +
       '<div class="dm-ad__in">' +
-      '<a class="dm-ad__cover" href="' + esc(ad.link) + '"' + ext + ' aria-label="' + esc(ad.title) + ' – Google 지도 보기"></a>' +
+      '<a class="dm-ad__cover" href="' + esc(ad.link) + '"' + ext + ' aria-label="' + esc(ad.title) + (d.cover_aria || ' – Google 지도 보기') + '"></a>' +
       '<img class="dm-ad__art" src="' + esc(base + "dragon.svg") + '" alt="" width="760" height="600" loading="lazy" decoding="async" aria-hidden="true">' +
       body +
       '<div class="dm-ad__cta">' + b.join("") + "</div>" +

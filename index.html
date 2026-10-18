@@ -24,7 +24,7 @@
 <script src="data/index.js"></script>
 <!-- 속도(2026-10-03 17:40): 넘침 표시(오른쪽 흐림)처럼 모양 재기만 하는 일은 첫 기사 카드 뒤로(재기 = 강제 레이아웃, CPU×4 에서 약 0.1초). window.TNLate 가 비움 -->
 <script>window.TNAfterFirst=function(f){if(window.__tnLate)return requestAnimationFrame(f);(window.__tnQ=window.__tnQ||[]).push(f)};</script>
-<script>(function(){try{var m=/[?&](?:e|ed|date)=([^&#]*)/.exec(location.search),id=m?decodeURIComponent(m[1]):(window.NEWS_INDEX||{}).latest;if(!id||!/^\d{4}-\d{2}-\d{2}-(am|pm|early)$/.test(id))return;var s=document.createElement("script");s.id="tnkData";s.async=true;s.fetchPriority="high";s.src="data/"+id+".js";s.setAttribute("data-ed",id);s.onload=function(){s.setAttribute("data-done","1")};s.onerror=function(){s.setAttribute("data-done","err")};document.head.appendChild(s)}catch(e){}})();</script>
+<script>(function(){try{var m=/[?&](?:e|ed|date)=([^&#]*)/.exec(location.search),id=m?decodeURIComponent(m[1]):(window.NEWS_INDEX||{}).latest;if(!id||!/^\d{4}-\d{2}-\d{2}-(am|md|pm|early)$/.test(id))return;var s=document.createElement("script");s.id="tnkData";s.async=true;s.fetchPriority="high";s.src="data/"+id+".js";s.setAttribute("data-ed",id);s.onload=function(){s.setAttribute("data-done","1")};s.onerror=function(){s.setAttribute("data-done","err")};document.head.appendChild(s)}catch(e){}})();</script>
 <!-- ===== 디자인 테마 스위치 — 바꿀 곳은 바로 아래 한 줄(TN_THEME)뿐 =====
      "modern" = 모던 디자인(2026-10-05 00시부터 기본, 토스·당근 느낌: assets/modern.css · assets/modern.js · assets/modern-icons.svg · 자체 글꼴 assets/fonts/pretendard)
      "classic" = 예전 디자인. 비교: 주소 뒤 ?theme=classic (같은 탭에서 계속 유지) · ?theme=modern 이면 다시 모던.
@@ -56,16 +56,16 @@ var u=location.href.replace(/([?&])theme=(g|modern|classic)(&|(?=#)|$)/,function
   <div class="wrap masthead__inner">
     <!-- 첫 줄: 🇹🇭❤️🇰🇷 + 제목. 국기는 윈도우 PC 에서도 보이도록 이모지 대신 인라인 SVG(태극기: 건·곤·감·리 위치, 태극 위 빨강·아래 파랑) -->
     <a class="brand" href="./" aria-label="태국 뉴스 한눈에 홈">
-      <span class="brand__flags" aria-hidden="true"><svg class="flag" viewBox="0 0 30 20" width="30" height="20" role="img" aria-label="태국 국기"><rect width="30" height="20" fill="#A51931"/><rect y="3.333" width="30" height="13.333" fill="#F4F5F8"/><rect y="6.667" width="30" height="6.667" fill="#2D2A4A"/></svg><svg class="heart" viewBox="0 0 24 22" width="15" height="14" role="img" aria-label="하트"><path fill="#ff3b5c" d="M12 21.2l-1.5-1.36C5.1 14.94 1.5 11.68 1.5 7.65 1.5 4.4 4.05 1.85 7.3 1.85c1.84 0 3.6.86 4.7 2.2 1.1-1.34 2.86-2.2 4.7-2.2 3.25 0 5.8 2.55 5.8 5.8 0 4.03-3.6 7.29-9 12.2L12 21.2z"/></svg><svg class="flag flag--kr" viewBox="-36 -24 72 48" width="30" height="20" role="img" aria-label="대한민국 국기(태극기)"><rect x="-36" y="-24" width="72" height="48" fill="#fff"/><g transform="rotate(-56.3099325)"><path d="M-6-25H6M-6-22H6M-6-19H6M-6 19H6M-6 22H6M-6 25H6" stroke="#000" stroke-width="2"/><path d="M0 17V27" stroke="#fff" stroke-width="1"/><circle r="12" fill="#CD2E3A"/><path d="M0-12A6 6 0 0 0 0 0A6 6 0 0 1 0 12A12 12 0 0 1 0-12z" fill="#0047A0"/></g><g transform="rotate(-123.6900675)"><path d="M-6-25H6M-6-22H6M-6-19H6M-6 19H6M-6 22H6M-6 25H6" stroke="#000" stroke-width="2"/><path d="M0-23.5V-20.5M0 17V20.5M0 23.5V26.5" stroke="#fff" stroke-width="1"/></g></svg></span>
+      <span class="brand__flags" aria-hidden="true"><svg class="flag" viewBox="0 0 30 20" width="30" height="20" role="img" aria-label="태국 국기" data-i18n-aria="a11y.flag_th"><rect width="30" height="20" fill="#A51931"/><rect y="3.333" width="30" height="13.333" fill="#F4F5F8"/><rect y="6.667" width="30" height="6.667" fill="#2D2A4A"/></svg><svg class="heart" viewBox="0 0 24 22" width="15" height="14" role="img" aria-label="하트"><path fill="#ff3b5c" d="M12 21.2l-1.5-1.36C5.1 14.94 1.5 11.68 1.5 7.65 1.5 4.4 4.05 1.85 7.3 1.85c1.84 0 3.6.86 4.7 2.2 1.1-1.34 2.86-2.2 4.7-2.2 3.25 0 5.8 2.55 5.8 5.8 0 4.03-3.6 7.29-9 12.2L12 21.2z"/></svg><svg class="flag flag--kr" data-site-flag viewBox="-36 -24 72 48" width="30" height="20" role="img" aria-label="대한민국 국기(태극기)"><rect x="-36" y="-24" width="72" height="48" fill="#fff"/><g transform="rotate(-56.3099325)"><path d="M-6-25H6M-6-22H6M-6-19H6M-6 19H6M-6 22H6M-6 25H6" stroke="#000" stroke-width="2"/><path d="M0 17V27" stroke="#fff" stroke-width="1"/><circle r="12" fill="#CD2E3A"/><path d="M0-12A6 6 0 0 0 0 0A6 6 0 0 1 0 12A12 12 0 0 1 0-12z" fill="#0047A0"/></g><g transform="rotate(-123.6900675)"><path d="M-6-25H6M-6-22H6M-6-19H6M-6 19H6M-6 22H6M-6 25H6" stroke="#000" stroke-width="2"/><path d="M0-23.5V-20.5M0 17V20.5M0 23.5V26.5" stroke="#fff" stroke-width="1"/></g></svg></span>
       <span class="brand__text">
-        <strong>태국 뉴스 한눈에</strong>
-        <small>파타야에서 읽는 오늘의 태국</small>
+        <strong data-i18n="brand">태국 뉴스 한눈에</strong>
+        <small data-i18n="brand_sub">파타야에서 읽는 오늘의 태국</small>
       </span>
     </a>
     <div class="masthead__meta">
       <div class="dateline" id="dateline">—</div>
       <label class="datepick" id="datepickWrap" hidden>
-        <span class="sr">날짜·판 선택</span>
+        <span class="sr" data-i18n="a11y.date_pick">날짜·판 선택</span>
         <select id="datepick"></select>
       </label>
       <div class="acct" id="acct" hidden></div>
@@ -74,36 +74,36 @@ var u=location.href.replace(/([?&])theme=(g|modern|classic)(&|(?=#)|$)/,function
   <!-- 둘째 줄: ☰ 메뉴(왼쪽 서랍) + 빠른 정보 칩(바트↔원·날씨·금시세·PM2.5 — assets/ticker.js, 좁은 화면은 옆으로 밀기) -->
   <div class="wrap masthead__row2">
     <div class="mbox"><!-- ☰ 메뉴 + ❤️ 하트 개수(누르면 '내가 하트한 기사' 페이지, assets/pages.js) -->
-    <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-controls="drawer" aria-expanded="false"><svg class="menu-btn__ic" viewBox="0 0 26 20" width="26" height="20" aria-hidden="true"><path d="M2 3h22M2 10h22M2 17h22" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg><span class="menu-btn__t" aria-hidden="true">메뉴</span></button>
-    <button type="button" class="heart-btn" id="heartBtn" data-page="hearts" aria-label="내가 하트한 기사 보기"><span aria-hidden="true">🤍</span><b>0</b></button></div>
-    <div class="ticker is-empty" id="ticker" aria-label="빠른 정보: 환율·날씨·금시세·미세먼지"><span class="tk-chip tk-tile tk-ph" aria-hidden="true"></span><span class="tk-chip tk-tile tk-ph" aria-hidden="true"></span><span class="tk-chip tk-tile tk-ph" aria-hidden="true"></span><span class="tk-chip tk-tile tk-ph" aria-hidden="true"></span></div>
+    <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기" data-i18n-aria="a11y.menu_open" aria-controls="drawer" aria-expanded="false"><svg class="menu-btn__ic" viewBox="0 0 26 20" width="26" height="20" aria-hidden="true"><path d="M2 3h22M2 10h22M2 17h22" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg><span class="menu-btn__t" aria-hidden="true" data-i18n="drawer.menu">메뉴</span></button>
+    <button type="button" class="heart-btn" id="heartBtn" data-page="hearts" aria-label="내가 하트한 기사 보기" data-i18n-aria="a11y.hearts"><span aria-hidden="true">🤍</span><b>0</b></button></div>
+    <div class="ticker is-empty" id="ticker" aria-label="빠른 정보: 환율·날씨·금시세·미세먼지" data-i18n-aria="a11y.ticker"><span class="tk-chip tk-tile tk-ph" aria-hidden="true"></span><span class="tk-chip tk-tile tk-ph" aria-hidden="true"></span><span class="tk-chip tk-tile tk-ph" aria-hidden="true"></span><span class="tk-chip tk-tile tk-ph" aria-hidden="true"></span></div>
   </div>
   <!-- 셋째 줄(예전 주제 탭 줄 자리): 📍 내 주변 — 이름표 + 카테고리 버튼 5개(맛집·마사지·동물병원·피부·뷰티·오토바이, assets/nearby.js 가 채움, 설정은 그 파일의 NEARBY 객체) -->
-  <div class="subbar subbar--nearby"><nav class="wrap nearby" id="nearbyRow" aria-label="내 주변 가게 찾기"><span class="nb-lab nb-ph-lab" aria-hidden="true"></span><div class="nb-cats" aria-hidden="true"><span class="nb-cat nb-ph"></span><span class="nb-cat nb-ph"></span><span class="nb-cat nb-ph"></span><span class="nb-cat nb-ph"></span><span class="nb-cat nb-ph"></span></div></nav></div>
+  <div class="subbar subbar--nearby"><nav class="wrap nearby" id="nearbyRow" aria-label="내 주변 가게 찾기" data-i18n-aria="a11y.nearby"><span class="nb-lab nb-ph-lab" aria-hidden="true"></span><div class="nb-cats" aria-hidden="true"><span class="nb-cat nb-ph"></span><span class="nb-cat nb-ph"></span><span class="nb-cat nb-ph"></span><span class="nb-cat nb-ph"></span><span class="nb-cat nb-ph"></span></div></nav></div>
 </header>
 
 <!-- ☰ 메뉴(왼쪽 서랍): 내 피드 · 내 주제 설정 · 주제별 · 전체 보기 · 계정 -->
 <div class="drawer-ov" id="drawerOv" hidden></div>
-<nav class="drawer" id="drawer" aria-label="메뉴" role="dialog" aria-modal="true" aria-hidden="true">
-  <div class="drawer__head"><b>메뉴</b><button type="button" class="drawer__x" data-drawer-close aria-label="메뉴 닫기">✕</button></div>
+<nav class="drawer" id="drawer" aria-label="메뉴" data-i18n-aria="a11y.menu" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="drawer__head"><b data-i18n="drawer.menu">메뉴</b><button type="button" class="drawer__x" data-drawer-close aria-label="메뉴 닫기" data-i18n-aria="a11y.menu_close">✕</button></div>
   <!-- 바로가기(자주 쓰는 것 맨 위): ❤️ 하트한 기사 · 📍 내 주변 — app.js renderQuick -->
   <div class="drawer__quick" id="drawerQuick"></div>
   <div class="drawer__list" id="tabs" role="tablist" aria-orientation="vertical"></div>
-  <p class="drawer__sec" id="tabsOtherTitle">다른 주제</p>
+  <p class="drawer__sec" id="tabsOtherTitle" data-i18n="drawer.other_topics">다른 주제</p>
   <div class="drawer__list" id="tabsOther"></div>
   <!-- 화면 디자인 고르기(2026-10-05 민구님 요청): 누르면 이 기기에 저장(localStorage tnk.theme.pick) 하고 화면을 한 번 새로 그림. 창·팝업 없음 -->
-  <p class="drawer__sec" id="themePickTitle">화면 디자인</p>
+  <p class="drawer__sec" id="themePickTitle" data-i18n="drawer.theme">화면 디자인</p>
   <div class="drawer__theme" id="themePick" role="radiogroup" aria-labelledby="themePickTitle">
-    <button type="button" class="thm" data-theme="g" role="radio" aria-checked="false"><span class="thm__n"><span class="thm__e" aria-hidden="true">📊</span> 그래파이트</span><small>기본 모양</small></button>
-    <button type="button" class="thm" data-theme="classic" role="radio" aria-checked="false"><span class="thm__n"><span class="thm__e" aria-hidden="true">📰</span> 클래식</span><small>예전 모양</small></button>
-    <button type="button" class="thm" data-theme="modern" role="radio" aria-checked="false"><span class="thm__n"><span class="thm__e" aria-hidden="true">✨</span> 모던</span><small>새 모양</small></button>
+    <button type="button" class="thm" data-theme="g" role="radio" aria-checked="false"><span class="thm__n"><span class="thm__e" aria-hidden="true">📊</span> <span data-i18n="theme.g">그래파이트</span></span><small data-i18n="theme.g_sub">기본 모양</small></button>
+    <button type="button" class="thm" data-theme="classic" role="radio" aria-checked="false"><span class="thm__n"><span class="thm__e" aria-hidden="true">📰</span> <span data-i18n="theme.classic">클래식</span></span><small data-i18n="theme.classic_sub">예전 모양</small></button>
+    <button type="button" class="thm" data-theme="modern" role="radio" aria-checked="false"><span class="thm__n"><span class="thm__e" aria-hidden="true">✨</span> <span data-i18n="theme.modern">모던</span></span><small data-i18n="theme.modern_sub">새 모양</small></button>
   </div>
-  <p class="drawer__sec">계정</p>
+  <p class="drawer__sec" data-i18n="drawer.account">계정</p>
   <div class="drawer__acct acct-box" id="drawerAcct"></div>
   <div class="ad-slot" data-ad-slot="drawer" hidden></div>
   <!-- 안내 문서(2026-10-03 애드센스 준비, tools/legal_pages.py 가 생성 — 지금은 초안) -->
-  <p class="drawer__sec">안내</p>
-  <div class="drawer__legal"><a href="about.html">소개</a><a href="contact.html">연락하기</a><a href="privacy.html">개인정보 처리방침</a><a href="terms.html">이용약관</a></div>
+  <p class="drawer__sec" data-i18n="drawer.info">안내</p>
+  <div class="drawer__legal"><a href="about.html" data-i18n="drawer.about">소개</a><a href="contact.html" data-i18n="drawer.contact">연락하기</a><a href="privacy.html" data-i18n="drawer.privacy">개인정보 처리방침</a><a href="terms.html" data-i18n="drawer.terms">이용약관</a></div>
 </nav>
 
 <main class="wrap layout">
@@ -111,46 +111,46 @@ var u=location.href.replace(/([?&])theme=(g|modern|classic)(&|(?=#)|$)/,function
     <div class="ad-slot" data-ad-slot="top" hidden></div>
     <p class="edition-note" id="editionNote" hidden></p>
     <section class="korea" id="korea" aria-labelledby="koreaTitle" hidden></section>
-    <section class="briefing" id="briefing" aria-label="브리핑"></section>
+    <section class="briefing" id="briefing" aria-label="브리핑" data-i18n-aria="a11y.briefing"></section>
 
     <!-- 메인 큰 배너(data/ads.json 'mid' → 드래곤 스웨디시 large, assets/ads/massage/) -->
     <div class="ad-slot ad-slot--mid" data-ad-slot="mid" hidden></div>
     <section class="top" id="topSection" aria-labelledby="topTitle">
-      <h2 class="section-title" id="topTitle"><span>오늘의 주요 뉴스</span></h2>
+      <h2 class="section-title" id="topTitle"><span data-i18n="feed.top_title">오늘의 주요 뉴스</span></h2>
       <div class="top__grid" id="topGrid"><div class="skel skel--top" aria-hidden="true"></div></div>
     </section>
 
 
     <section class="feed" aria-labelledby="feedTitle">
-      <h2 class="section-title" id="feedTitle"><span id="feedTitleText">전체 뉴스</span> <em id="feedCount"></em></h2>
-      <div class="feed__list" id="feed"><!-- 불러오는 동안 뼈대(첫 화면에서 빈칸 대신) — render 가 바꿈 --><div class="skel" aria-hidden="true"></div><div class="skel" aria-hidden="true"></div><div class="skel" aria-hidden="true"></div><p class="sr-only" role="status">뉴스를 불러오는 중이에요…</p></div>
+      <h2 class="section-title" id="feedTitle"><span id="feedTitleText" data-i18n="feed.all_title">전체 뉴스</span> <em id="feedCount"></em></h2>
+      <div class="feed__list" id="feed"><!-- 불러오는 동안 뼈대(첫 화면에서 빈칸 대신) — render 가 바꿈 --><div class="skel" aria-hidden="true"></div><div class="skel" aria-hidden="true"></div><div class="skel" aria-hidden="true"></div><p class="sr-only" role="status" data-i18n="feed.loading">뉴스를 불러오는 중이에요…</p></div>
     </section>
   </div>
 
   <aside class="side-col">
     <section class="widget" aria-labelledby="catTitle">
-      <h3 id="catTitle">주제별 기사</h3>
+      <h3 id="catTitle" data-i18n="side.cat_title">주제별 기사</h3>
       <ul class="cat-stats" id="catStats"></ul>
     </section>
     <section class="widget" aria-labelledby="srcTitle">
-      <h3 id="srcTitle">오늘 참고한 원문 매체</h3>
+      <h3 id="srcTitle" data-i18n="side.src_title">오늘 참고한 원문 매체</h3>
       <ul class="src-list" id="srcList"></ul>
     </section>
     <section class="widget widget--muted">
-      <h3>이용 안내</h3>
-      <p>모든 기사는 태국 현지 언론 원문을 바탕으로 한국어로 옮기고 요약한 것입니다. 시각은 모두 <b>방콕 시간(UTC+7)</b> 기준이며, 정확한 내용은 각 기사의 원문 링크에서 확인하세요.</p>
+      <h3 data-i18n="side.guide_title">이용 안내</h3>
+      <p data-i18n-html="side.guide">모든 기사는 태국 현지 언론 원문을 바탕으로 한국어로 옮기고 요약한 것입니다. 시각은 모두 <b>방콕 시간(UTC+7)</b> 기준이며, 정확한 내용은 각 기사의 원문 링크에서 확인하세요.</p>
     </section>
   </aside>
 </main>
 
 <!-- 홈 화면에 추가 안내: 떠 있는 바 대신 페이지 맨 아래(푸터 위) 글 흐름 속 칸(2026-10-04 — 덮는·떠 있는 요소 금지) -->
-<div class="install-hint install-hint--inline" id="installHint" hidden role="region" aria-label="홈 화면에 추가 안내"></div>
+<div class="install-hint install-hint--inline" id="installHint" hidden role="region" aria-label="홈 화면에 추가 안내" data-i18n-aria="a11y.install"></div>
 <footer class="footer">
   <div class="wrap">
     <div class="ad-slot" data-ad-slot="footer" hidden></div>
-    <p class="footer__about">태국 언론 보도를 한국어로 요약·번역한 개인 프로젝트입니다. 원문 링크를 확인하세요.</p>
-    <p><strong>태국 뉴스 한눈에</strong> · 원문 저작권은 각 언론사에 있습니다. · <button type="button" class="linkbtn linkbtn--light" data-open-settings>🧩 내 주제·취향 설정</button></p>
-    <p class="footer__links"><a href="about.html">소개</a><a href="contact.html">연락하기</a><a href="privacy.html">개인정보 처리방침</a><a href="terms.html">이용약관</a></p>
+    <p class="footer__about" data-i18n="footer.about">태국 언론 보도를 한국어로 요약·번역한 개인 프로젝트입니다. 원문 링크를 확인하세요.</p>
+    <p><strong data-i18n="brand">태국 뉴스 한눈에</strong> <span data-i18n="footer.copyright">· 원문 저작권은 각 언론사에 있습니다. ·</span> <button type="button" class="linkbtn linkbtn--light" data-open-settings data-i18n="footer.settings">🧩 내 주제·취향 설정</button></p>
+    <p class="footer__links"><a href="about.html" data-i18n="drawer.about">소개</a><a href="contact.html" data-i18n="drawer.contact">연락하기</a><a href="privacy.html" data-i18n="drawer.privacy">개인정보 처리방침</a><a href="terms.html" data-i18n="drawer.terms">이용약관</a></p>
     <p class="footer__small" id="generated"></p>
   </div>
 </footer>
@@ -162,19 +162,19 @@ var u=location.href.replace(/([?&])theme=(g|modern|classic)(&|(?=#)|$)/,function
 <script src="data/ads.js" onerror="window.TN_ADS=null"></script>
 <!-- 드래곤 스웨디시 광고 그리기(app.js·nearby.js 보다 먼저) -->
 <script src="assets/ads/massage/dragon-ad.js?v=286d1e52"></script>
-<script src="assets/topics.js?v=3e951135"></script>
+<script src="assets/topics.js?v=645a5640"></script>
 <script src="assets/prefs.js?v=280ab29a"></script>
 <script src="assets/taste.js?v=788775b8"></script>
 <script src="assets/adsafe.js?v=f83c8d3e"></script>
-<script src="assets/app.js?v=04279d0c"></script>
+<script src="assets/app.js?v=50c00f68"></script>
 <!-- 헤더 빠른 정보 칩(맨 위에 보이는 값이라 보통 우선순위 — 17:45 낮췄더니 첫 기사 카드 때 칩이 비어 있어서 되돌림). 아래 로그인·내 주변은 fetchpriority="low" = 판 데이터·app.js·CSS 를 먼저 받게(실행 순서는 그대로) -->
-<script src="assets/ticker.js?v=91ae7a8a"></script>
+<script src="assets/ticker.js?v=f06018d0"></script>
 <!-- 선택 기능(Google 로그인·동기화·댓글): 못 불러와도 사이트는 그대로 동작 -->
-<script src="assets/social.js?v=4c090fe8" fetchpriority="low"></script>
+<script src="assets/social.js?v=c1da8c7a" fetchpriority="low"></script>
 <!-- 📍 내 주변(헤더 셋째 줄 + #nearby/<id> 화면). defer = 드래곤 광고 스크립트 다음에 실행 -->
-<script src="assets/nearby.js?v=caa6bab9" fetchpriority="low" defer></script>
+<script src="assets/nearby.js?v=0011bd94" fetchpriority="low" defer></script>
 <!-- 속도(2026-10-03 17:05): 쪽 화면(하트·승인함·가게 카드 등) 스크립트는 첫 기사 카드가 그려진 뒤 받음 — 느린 망에서 판 데이터와 대역을 나눠 쓰지 않게.
      app.js 첫 그리기 끝 → TNLate() / 늦어도 load 뒤. 쪽 화면 CSS(assets/late.css)도 여기서 받음. 🧑‍💼 구인판 시안(assets/jobs.js)은 주소가 #jobs 일 때만 받음(메뉴 링크 없음). pages.js → places.js 순서(places 는 TNPages 필요). 주소 #places 등은 pages.js 가 받은 뒤 바로 열림 -->
-<script>window.TNLate=function(){if(window.__tnLate)return;window.__tnLate=1;(window.__tnQ||[]).forEach(function(f){requestAnimationFrame(f)});window.__tnQ=null;var c=document.createElement("link");c.rel="stylesheet";c.href="assets/late.css?v=3dadb69b";document.head.appendChild(c);var a=document.createElement("script");a.src="assets/pages.js?v=3209f4c9";a.onload=function(){var b=document.createElement("script");b.src="assets/places.js?v=e321e8d6";document.body.appendChild(b);if(/^#jobs/.test(location.hash))window.TNJobs()};document.body.appendChild(a)};window.TNJobs=function(){if(window.__tnJobs)return;window.__tnJobs=1;var j=document.createElement("script");j.src="assets/jobs.js?v=88ad85ca";document.body.appendChild(j)};addEventListener("hashchange",function(){if(/^#jobs/.test(location.hash)&&window.TNPages)window.TNJobs()});addEventListener("load",function(){setTimeout(window.TNLate,0)});</script>
+<script>window.TNLate=function(){if(window.__tnLate)return;window.__tnLate=1;(window.__tnQ||[]).forEach(function(f){requestAnimationFrame(f)});window.__tnQ=null;var c=document.createElement("link");c.rel="stylesheet";c.href="assets/late.css?v=3dadb69b";document.head.appendChild(c);var a=document.createElement("script");a.src="assets/pages.js?v=17adf6c4";a.onload=function(){var b=document.createElement("script");b.src="assets/places.js?v=e321e8d6";document.body.appendChild(b);if(/^#jobs/.test(location.hash))window.TNJobs()};document.body.appendChild(a)};window.TNJobs=function(){if(window.__tnJobs)return;window.__tnJobs=1;var j=document.createElement("script");j.src="assets/jobs.js?v=88ad85ca";document.body.appendChild(j)};addEventListener("hashchange",function(){if(/^#jobs/.test(location.hash)&&window.TNPages)window.TNJobs()});addEventListener("load",function(){setTimeout(window.TNLate,0)});</script>
 </body>
 </html>

@@ -49,6 +49,39 @@ BRIEF_BADGE = {"am": "아침 브리핑", "pm": "저녁 브리핑", "early": "새
 
 e = html.escape
 
+# ── 언어판(R-zh-8, 2026-10-18 Grok): 시스템 공유·편집 기준 분리. 한국판은 TX 기본값 = 지금 글자 그대로 ──
+sys.path.insert(0, str(ROOT / "tools"))
+import siteconf  # noqa: E402
+_S = siteconf.load()
+LANG = _S["lang"]
+TX = {"brand": "태국 뉴스 한눈에", "brand_sub": "파타야에서 읽는 오늘의 태국", "html_lang": "ko", "og_locale": "ko_KR",
+      "date_long": "{m}월 {d}일 {wd}요일", "date_short": "{m}월 {d}일({wd})", "time": "{m}월 {d}일 {hh}:{mm}", "wd": "월화수목금토일",
+      "tz_line": "방콕 시간 기준", "spot": "이번 판 주목", "brief_title": '이번 판 주요 소식 <span class="bcount">{n}</span>건',
+      "og_brief_title": "한국어로 정리한 현지 소식", "brief_badge": "오늘의 브리핑",
+      "msg_head": "📰 태국 뉴스 한눈에 {m}월 {d}일({wd}) {edn}이에요. 현지 보도를 한국어로 정리했어요.",
+      "msg_edition": "👉 이번 판 보기: ", "msg_home": "🏠 최신 뉴스({upd}): ", "title": "태국 뉴스 한눈에 — {m}월 {d}일({wd}) {edn}",
+      "font": '"Pretendard","Pretendard Variable","Noto Sans CJK KR","Noto Sans KR"'}
+if LANG != "ko":
+    SITE = _S["site_url"]
+    SHORT = _S.get("domain") or SITE.split("//")[-1].strip("/")
+    TX.update((_S.get("share") or {}).get("text") or {})
+    UPDATE_LINE = TX.get("update_line", UPDATE_LINE)
+    ED_NAME = dict(_S.get("edition_label") or ED_NAME)
+    BRIEF_BADGE = dict((_S.get("share") or {}).get("brief_badge") or {})
+    PRIORITY = list((_S.get("share") or {}).get("priority") or PRIORITY)
+    if _S.get("topics"):
+        TOPICS = {x["id"]: (x["label"], x["emoji"], x["color"]) for x in _S["topics"]["TOPICS"]}
+
+
+def _tpl(h):
+    """카드·OG 틀의 @@자리@@ 를 TX 로 채움(2026-10-18). 날짜 자리는 %d·%s 로 바뀌어 뒤의 % 채우기에 그대로 들어감"""
+    fmt = lambda s: e(s).replace("{m}", "%d").replace("{d}", "%d").replace("{wd}", "%s")
+    for k, v in (("@@LANG@@", e(TX["html_lang"])), ("@@BRAND@@", e(TX["brand"])), ("@@SUB@@", e(TX["brand_sub"])),
+                 ("@@DLONG@@", fmt(TX["date_long"])), ("@@DSHORT@@", fmt(TX["date_short"])), ("@@TZ@@", e(TX["tz_line"])),
+                 ("@@BTITLE@@", TX["brief_title"].replace("%", "%%").replace("{n}", "%d")), ("@@OGBT@@", e(TX["og_brief_title"]))):
+        h = h.replace(k, v)
+    return h
+
 
 # ---------------------------------------------------------------- 데이터
 def load(ed_id):
@@ -64,14 +97,16 @@ def load(ed_id):
 
 def story_topics(data):
     """화면과 같은 주제(assets/topics.js storyTopics). {id: {topic, secondary[]}}"""
-    js = ("const fs=require('fs');global.window={};eval(fs.readFileSync(process.argv[1],'utf8'));"
+    # 언어판: data/site.js(window.TN_SITE — 그 판 주제 목록)를 먼저 읽음. 한국판엔 이 파일이 없어 그대로(2026-10-18)
+    js = ("const fs=require('fs');global.window={};if(process.argv[3]&&fs.existsSync(process.argv[3]))eval(fs.readFileSync(process.argv[3],'utf8'));"
+          "eval(fs.readFileSync(process.argv[1],'utf8'));"
           "const d=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));const o={};"
           "d.stories.forEach(s=>{const r=window.TNTopics.storyTopics(s);o[s.id]={topic:r.topic,secondary:r.secondary}});"
           "process.stdout.write(JSON.stringify(o));")
     node = shutil.which("node")
     if node:
         try:
-            out = subprocess.run([node, "-e", js, str(ROOT / "assets/topics.js"), str(ROOT / "data" / (data["id"] + ".json"))],
+            out = subprocess.run([node, "-e", js, str(ROOT / "assets/topics.js"), str(ROOT / "data" / (data["id"] + ".json")), str(ROOT / "data/site.js") if LANG != "ko" else ""],
                                  capture_output=True, text=True, timeout=30, check=True).stdout
             return json.loads(out)
         except Exception as ex:  # noqa
@@ -125,6 +160,9 @@ def split_head(h):
 def date_label(data, meta):
     m, d = int(data["date"][5:7]), int(data["date"][8:10])
     wd = (data.get("weekday") or "")[:1]
+    if LANG != "ko":
+        import datetime as _dt
+        wd = TX["wd"][_dt.date(int(data["date"][:4]), m, d).weekday()]
     edn = ED_NAME.get(data.get("edition"), meta.get("label", "").split(" ")[-1])
     return m, d, wd, edn
 
@@ -150,7 +188,7 @@ def icon(name):
 BASE_CSS = """
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:%(W)dpx;height:%(H)dpx;overflow:hidden}
-body{font-family:"Pretendard","Pretendard Variable","Noto Sans CJK KR","Noto Sans KR",sans-serif;
+body{font-family:%(FONT)s,sans-serif;
   background:#F2F4F6;color:#191F28;word-break:keep-all;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased}
 .page{width:%(W)dpx;height:%(H)dpx;display:flex;flex-direction:column}
 .ic{width:1em;height:1em;flex:0 0 auto;vertical-align:-.12em}
@@ -196,12 +234,12 @@ li{display:flex;align-items:flex-start;gap:.5em}
 
 def fmt_time(iso):
     m = re.match(r"\d{4}-(\d\d)-(\d\d)T(\d\d):(\d\d)", iso or "")
-    return "%d월 %d일 %s:%s" % (int(m[1]), int(m[2]), m[3], m[4]) if m else ""
+    return TX["time"].format(m=int(m[1]), d=int(m[2]), hh=m[3], mm=m[4]) if m else ""
 
 
 def badge_html(s, i, hl, tp):
     t = TOPICS[tp[s["id"]]["topic"]]
-    rank = ("TOP %d" % (hl.index(s["id"]) + 1)) if s["id"] in hl else "이번 판 주목"
+    rank = ("TOP %d" % (hl.index(s["id"]) + 1)) if s["id"] in hl else TX["spot"]
     out = '<span class="rank">%s</span><span class="chip">%s</span>' % (e(rank), e(t[0]))
     if s.get("region") and s["region"].strip() != t[0]:
         out += '<span class="chip">%s%s</span>' % (icon("map-pin"), e(s["region"]))
@@ -262,7 +300,7 @@ def card_html(data, meta, chosen, tp):
     hl = data.get("highlights") or []
     main, rest = chosen[0], chosen[1:]
     a, b = split_head(main["headline"])
-    css = BASE_CSS % {"W": 1080, "H": 1350} + """
+    css = BASE_CSS % {"W": 1080, "H": 1350, "FONT": TX["font"]} + """
 :root{--u:2.4;--k:1}
 .mast{padding:44px 56px 40px}
 .mark{width:92px;height:92px}
@@ -285,21 +323,21 @@ li{padding:calc(var(--k)*18px) 0}
 .go{font-size:calc(var(--k)*40px)}
 .foot{padding:30px 56px 34px;gap:24px}.foot .url{font-size:31px}.foot .upd{font-size:26px;white-space:nowrap}
 """
-    return """<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>%s</style></head><body><div class="page">
-<header class="mast"><span class="mark"></span><span class="btext"><strong>태국 뉴스 한눈에</strong><small>파타야에서 읽는 오늘의 태국</small></span>
-<span class="dl"><span class="d">%d월 %d일 %s요일</span><span class="t"><b class="edtag">%s</b> · 방콕 시간 기준</span></span></header>
+    return _tpl("""<!doctype html><html lang="@@LANG@@"><head><meta charset="utf-8"><style>%s</style></head><body><div class="page">
+<header class="mast"><span class="mark"></span><span class="btext"><strong>@@BRAND@@</strong><small>@@SUB@@</small></span>
+<span class="dl"><span class="d">@@DLONG@@</span><span class="t"><b class="edtag">%s</b> · @@TZ@@</span></span></header>
 <main class="body">
 <article class="card top-card" data-fit>
 <div class="badges">%s</div><h3>%s</h3>%s<div class="meta"><b>%s</b> · %s</div></article>
-<section class="card briefing"><div class="bhead"><span class="bbadge">%s</span><span class="btitle">이번 판 주요 소식 <span class="bcount">%d</span>건</span></div>
+<section class="card briefing"><div class="bhead"><span class="bbadge">%s</span><span class="btitle">@@BTITLE@@</span></div>
 <ul data-fit>%s</ul></section>
 </main>
 <footer class="foot"><span class="url">%s%s</span><span class="upd">%s</span></footer>
-</div></body></html>""" % (
+</div></body></html>""") % (
         css, m, d, e(wd), e(edn), badge_html(main, 0, hl, tp),
         e(a), ("<p>%s</p>" % e(b)) if b else ("<p>%s</p>" % e((main.get("summary") or [""])[0])),
         e(main.get("source", "")), e(fmt_time(main.get("published"))),
-        BRIEF_BADGE.get(data.get("edition"), "오늘의 브리핑"), len(rest), "".join(brief_li(s, tp) for s in rest),
+        BRIEF_BADGE.get(data.get("edition"), TX["brief_badge"]), len(rest), "".join(brief_li(s, tp) for s in rest),
         icon("link"), SHORT, UPDATE_LINE)
 
 
@@ -308,7 +346,7 @@ def og_html(data, meta, chosen, tp):
     hl = data.get("highlights") or []
     main, rest = chosen[0], chosen[1:3]
     a, _ = split_head(main["headline"])
-    css = BASE_CSS % {"W": 1200, "H": 630} + """
+    css = BASE_CSS % {"W": 1200, "H": 630, "FONT": TX["font"]} + """
 :root{--u:1.9;--k:1}
 .mast{padding:24px 44px 22px}
 .mark{width:68px;height:68px}
@@ -327,18 +365,18 @@ li{padding:10px 0}
 .foot{padding:14px 44px 16px}
 .foot .url{font-size:25px}.foot .upd{font-size:22px}
 """
-    return """<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>%s</style></head><body><div class="page">
-<header class="mast"><span class="mark"></span><span class="btext"><strong>태국 뉴스 한눈에</strong><small>파타야에서 읽는 오늘의 태국</small></span>
-<span class="edbig">%d월 %d일(%s) %s</span></header>
+    return _tpl("""<!doctype html><html lang="@@LANG@@"><head><meta charset="utf-8"><style>%s</style></head><body><div class="page">
+<header class="mast"><span class="mark"></span><span class="btext"><strong>@@BRAND@@</strong><small>@@SUB@@</small></span>
+<span class="edbig">@@DSHORT@@ %s</span></header>
 <main class="body">
 <article class="card top-card" data-fit><div class="badges">%s</div><h3>%s</h3></article>
-<section class="card briefing"><div class="bhead"><span class="bbadge">%s</span><span class="btitle">한국어로 정리한 현지 소식</span></div>
+<section class="card briefing"><div class="bhead"><span class="bbadge">%s</span><span class="btitle">@@OGBT@@</span></div>
 <ul data-fit>%s</ul></section></main>
 <footer class="foot"><span class="url">%s%s</span><span class="upd">%s</span></footer>
-</div></body></html>""" % (
+</div></body></html>""") % (
         css, m, d, e(wd), e(edn),
         badge_html(dict(main, region=None), 0, hl, tp), e(a),
-        BRIEF_BADGE.get(data.get("edition"), "오늘의 브리핑"),
+        BRIEF_BADGE.get(data.get("edition"), TX["brief_badge"]),
         "".join(brief_li(dict(s, headline=split_head(s["headline"])[0]), tp, False) for s in rest),
         icon("link"), SHORT, UPDATE_LINE)
 
@@ -373,21 +411,21 @@ async def render(jobs):
 # ---------------------------------------------------------------- 메시지·정적 페이지
 def message(data, meta, chosen, tp, ed_url, main_link=True):
     m, d, wd, edn = date_label(data, meta)
-    lines = ["📰 태국 뉴스 한눈에 %d월 %d일(%s) %s이에요. 현지 보도를 한국어로 정리했어요." % (m, d, wd, edn)]
+    lines = [TX["msg_head"].format(m=m, d=d, wd=wd, edn=edn)]
     for s in chosen[:3]:
         lines.append("%s %s" % (TOPICS[tp[s["id"]]["topic"]][1], split_head(s["headline"])[0]))
     lines.append("")
-    lines.append("👉 이번 판 보기: " + ed_url)
+    lines.append(TX["msg_edition"] + ed_url)
     if main_link:
-        lines.append("🏠 최신 뉴스(%s): %s" % (UPDATE_LINE.replace(" 업데이트", ""), SITE))
+        lines.append(TX["msg_home"].format(upd=UPDATE_LINE.replace(" 업데이트", "")) + SITE)
     return "\n".join(lines) + "\n"
 
 
 def og_tags(title, desc, url, img):
     return "\n".join([
         '<meta property="og:type" content="website">',
-        '<meta property="og:site_name" content="태국 뉴스 한눈에">',
-        '<meta property="og:locale" content="ko_KR">',
+        '<meta property="og:site_name" content="%s">' % e(TX["brand"]),
+        '<meta property="og:locale" content="%s">' % e(TX["og_locale"]),
         '<meta property="og:title" content="%s">' % e(title),
         '<meta property="og:description" content="%s">' % e(desc),
         '<meta property="og:url" content="%s">' % e(url),
@@ -407,7 +445,7 @@ def edition_page(data, meta, chosen, tp, ed_url, img):
     index/follow, canonical 자기 자신. 본문은 tools/seo.py(공용). 제목·설명·OG 는 여기서(카드 고르기 기준 그대로)."""
     import seo
     m, d, wd, edn = date_label(data, meta)
-    title = "태국 뉴스 한눈에 — %d월 %d일(%s) %s" % (m, d, wd, edn)
+    title = TX["title"].format(m=m, d=d, wd=wd, edn=edn)
     desc = " · ".join("%s %s" % (TOPICS[tp[s["id"]]["topic"]][1], split_head(s["headline"])[0]) for s in chosen[:3])
     if len(desc) > 110:
         desc = desc[:108].rstrip() + "…"

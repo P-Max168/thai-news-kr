@@ -198,6 +198,85 @@ service cloud.firestore {
     }
 
     // ---------- 그 밖에는 모두 거부 ----------
+    // ================= 🇨🇳 중국어판(zh.pmaxone.com) 컬렉션 — 2026-10-18 Grok(R-zh-6, 민구님 08:00 승인으로 Claude 대신) · ⏳ 게시 전 =================
+    // 같은 Firebase 프로젝트, 판 데이터만 zh_ 접두사(assets/fb.js 가 site 설정 firestore_prefix 로 붙임). users·profiles(계정·닉네임)는 한국판과 공유.
+    // 한국판 규칙(위)은 한 글자도 안 바꿈. 게시는 민구님이 Firebase 콘솔에서 직접(LOGIN_TODO). 운영자 목록 = config/admins_zh(콘솔에서만 수정)
+    function adminsZhPath() { return /databases/$(database)/documents/config/admins_zh; }
+    function isAdminZh() {
+      return signedIn() && exists(adminsZhPath()) && request.auth.uid in get(adminsZhPath()).data.uids;
+    }
+    match /config/admins_zh {
+      allow read: if true;
+      allow write: if false;
+    }
+    function validNewCommentZh(d) {
+      return d.keys().hasOnly(['articleId', 'edition', 'uid', 'nickname', 'text', 'createdAt', 'isAdmin', 'hidden', 'reports', 'reporters'])
+        && d.keys().hasAll(['articleId', 'edition', 'uid', 'nickname', 'text', 'createdAt', 'isAdmin', 'hidden', 'reports', 'reporters'])
+        && d.uid == request.auth.uid
+        && d.articleId is string && d.articleId.size() >= 1 && d.articleId.size() <= 40
+        && d.edition is string && d.edition.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}-(am|md|pm)$')
+        && d.text is string && d.text.size() >= 1 && d.text.size() <= 500
+        && d.nickname is string && exists(profilePath(request.auth.uid))
+        && d.nickname == getAfter(profilePath(request.auth.uid)).data.nickname
+        && d.createdAt == request.time
+        && d.isAdmin == isAdminZh()
+        && d.hidden == false && d.reports == 0 && d.reporters == [];
+    }
+    match /zh_comments/{id} {
+      allow read: if resource.data.hidden == false || isAdminZh();
+      allow create: if signedIn() && validNewCommentZh(request.resource.data) && rateOk(request.auth.uid);
+      allow update: if signedIn() && (
+        validReport()
+        || (isAdminZh() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['hidden']))
+      );
+      allow delete: if signedIn() && (resource.data.uid == request.auth.uid || isAdminZh());
+    }
+    function validRxZh(d) {
+      return d.keys().hasOnly(['a', 'k', 'v', 'r', 'i', 'tp', 'at']) && d.keys().hasAll(['a', 'k', 'v', 'at'])
+        && d.a is string && d.a.size() >= 3 && d.a.size() <= 48
+        && d.k in ['h', 'u', 'd'] && d.v in [1, -1]
+        && (!('r' in d) || d.r in ['east', 'bangkok', 'north', 'south', 'other', 'none'])
+        && (!('i' in d) || (d.i is list && d.i.size() <= 5 && d.i.hasOnly(['cn', 'visa', 'biz', 'life', 'travel'])))
+        && (!('tp' in d) || (d.tp is string && d.tp.size() <= 16))
+        && d.at == request.time;
+    }
+    match /zh_rx/{id} {
+      allow read: if isAdminZh();
+      allow create: if validRxZh(request.resource.data);
+      allow update, delete: if false;
+    }
+    function validRepZh(d) {
+      return d.keys().hasOnly(['id', 'kind', 'type', 'memo', 'url', 'ed', 'at']) && d.keys().hasAll(['id', 'kind', 'type', 'url', 'at'])
+        && d.id is string && d.id.size() >= 1 && d.id.size() <= 80
+        && d.kind in ['article', 'ad']
+        && d.type in ['wrong', 'link', 'screen', 'etc']
+        && (!('memo' in d) || (d.memo is string && d.memo.size() <= 80))
+        && d.url is string && d.url.size() <= 300 && d.url.matches('^https://zh[.]pmaxone[.]com/.*')
+        && (!('ed' in d) || (d.ed is string && d.ed.size() <= 20))
+        && d.at == request.time;
+    }
+    match /zh_reports/{id} {
+      allow read: if isAdminZh();
+      allow create: if validRepZh(request.resource.data);
+      allow update, delete: if false;
+    }
+    function validAdClickZh(d, id) {
+      return d.keys().hasOnly(['s', 'd', 'n']) && d.keys().hasAll(['s', 'd', 'n'])
+        && d.s is string && d.s.matches('^(top|mid|china-mid|infeed|drawer|footer)$')
+        && d.d is int && (d.d == bkDay(request.time) || d.d == bkDay(request.time - duration.value(1, 'd')))
+        && id == d.s + '_' + string(d.d)
+        && d.n is int;
+    }
+    match /zh_adclicks/{id} {
+      allow read: if isAdminZh();
+      allow create: if validAdClickZh(request.resource.data, id)
+        && request.resource.data.n >= 1 && request.resource.data.n <= 20;
+      allow update: if validAdClickZh(request.resource.data, id)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['n'])
+        && request.resource.data.n > resource.data.n && request.resource.data.n <= resource.data.n + 20;
+      allow delete: if false;
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

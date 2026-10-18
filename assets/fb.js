@@ -19,7 +19,13 @@ const CONFIG = {
 };
 const app = initializeApp(CONFIG);
 const auth = A.getAuth(app);
-auth.languageCode = "ko";
+// 언어판(R-zh-3, 2026-10-18): 같은 Firebase 프로젝트, 판 데이터 컬렉션만 접두사(zh = zh_comments·zh_rx·zh_reports·zh_adclicks, 운영자 config/admins_zh).
+//   users·profiles(계정·닉네임)는 언어판끼리 공유. 한국판 = 접두사 없음(지금 이름 그대로)
+const SITE = (typeof window !== "undefined" && window.TN_SITE) || {};
+const PX = SITE.firestore_prefix || "";
+const C = (n) => PX + n;
+const ADMINS = (SITE.admins_doc || "config/admins").split("/");
+auth.languageCode = SITE.lang || "ko";
 
 let F = null, db = null;
 async function fs() {
@@ -119,7 +125,7 @@ export function stopSync() {
 let adminCache = null;
 export async function isAdmin(uid) {
   await fs();
-  if (!adminCache) adminCache = F.getDoc(F.doc(db, "config", "admins")).then(function (s) { return s.exists() ? (s.data().uids || []) : []; }).catch(function () { return []; });
+  if (!adminCache) adminCache = F.getDoc(F.doc(db, ADMINS[0], ADMINS[1])).then(function (s) { return s.exists() ? (s.data().uids || []) : []; }).catch(function () { return []; });
   return (await adminCache).includes(uid);
 }
 export async function getProfile(uid) {
@@ -139,7 +145,7 @@ function cmt(d) { const x = d.data(); return Object.assign({ id: d.id }, x, { cr
 export async function listComments(edition, articleId) {
   await fs();
   // 같음(==) 조건만 → 복합 색인 불필요. 정렬은 화면에서
-  const q = F.query(F.collection(db, "comments"), F.where("edition", "==", edition), F.where("articleId", "==", articleId), F.where("hidden", "==", false), F.limit(200));
+  const q = F.query(F.collection(db, C("comments")), F.where("edition", "==", edition), F.where("articleId", "==", articleId), F.where("hidden", "==", false), F.limit(200));
   const snap = await F.getDocs(q);
   return snap.docs.map(cmt).sort(function (a, b) { return a.createdAt - b.createdAt; });
 }
@@ -150,7 +156,7 @@ export async function listReplies(edition, articleId, parentIds) {
   const ids = parentIds.map(function (p) { return articleId + "~" + p; }).filter(function (x) { return x.length <= 40; });
   const out = [];
   for (let i = 0; i < ids.length; i += 30) {
-    const q = F.query(F.collection(db, "comments"), F.where("edition", "==", edition), F.where("articleId", "in", ids.slice(i, i + 30)), F.where("hidden", "==", false), F.limit(300));
+    const q = F.query(F.collection(db, C("comments")), F.where("edition", "==", edition), F.where("articleId", "in", ids.slice(i, i + 30)), F.where("hidden", "==", false), F.limit(300));
     const snap = await F.getDocs(q);
     snap.docs.forEach(function (d) { out.push(cmt(d)); });
   }
@@ -160,18 +166,18 @@ export async function addComment(edition, articleId, text, profile) {
   await fs();
   const u = auth.currentUser; if (!u) throw new Error("not-signed-in");
   const b = F.writeBatch(db);
-  const ref = F.doc(F.collection(db, "comments"));
+  const ref = F.doc(F.collection(db, C("comments")));
   b.set(ref, { articleId, edition, uid: u.uid, nickname: profile.nickname, text, createdAt: F.serverTimestamp(), isAdmin: !!profile.isAdmin, hidden: false, reports: 0, reporters: [] });
   b.set(F.doc(db, "users", u.uid), { lastCommentAt: F.serverTimestamp() }, { merge: true });   // 30초 제한(규칙에서 확인)
   await b.commit();
   return ref.id;
 }
-export async function deleteComment(id) { await fs(); await F.deleteDoc(F.doc(db, "comments", id)); }
-export async function hideComment(id) { await fs(); await F.updateDoc(F.doc(db, "comments", id), { hidden: true }); }
+export async function deleteComment(id) { await fs(); await F.deleteDoc(F.doc(db, C("comments"), id)); }
+export async function hideComment(id) { await fs(); await F.updateDoc(F.doc(db, C("comments"), id), { hidden: true }); }
 export async function reportComment(id) {
   await fs();
   const u = auth.currentUser; if (!u) throw new Error("not-signed-in");
-  const ref = F.doc(db, "comments", id);
+  const ref = F.doc(db, C("comments"), id);
   return F.runTransaction(db, async function (tx) {
     const s = await tx.get(ref); if (!s.exists()) return "gone";
     const d = s.data(), rs = d.reporters || [];
@@ -189,13 +195,13 @@ export async function reportComment(id) {
 export async function addReactions(list) {
   await fs();
   const b = F.writeBatch(db), ids = [];
-  list.slice(0, 20).forEach(function (x) { const ref = F.doc(F.collection(db, "rx")); ids.push(ref.id); b.set(ref, Object.assign({}, x, { at: F.serverTimestamp() })); });
+  list.slice(0, 20).forEach(function (x) { const ref = F.doc(F.collection(db, C("rx"))); ids.push(ref.id); b.set(ref, Object.assign({}, x, { at: F.serverTimestamp() })); });
   await b.commit();
   return ids;   // 저장된 문서 id(확인·기록용)
 }
 export async function listReactions(sinceMs, max) {
   await fs();
-  const q = F.query(F.collection(db, "rx"), F.where("at", ">=", F.Timestamp.fromMillis(sinceMs)), F.limit(max || 5000));
+  const q = F.query(F.collection(db, C("rx")), F.where("at", ">=", F.Timestamp.fromMillis(sinceMs)), F.limit(max || 5000));
   const snap = await F.getDocs(q);
   return snap.docs.map(function (d) { const x = d.data(); return Object.assign({}, x, { at: x.at && x.at.toMillis ? x.at.toMillis() : 0 }); });
 }
@@ -207,12 +213,12 @@ export async function listReactions(sinceMs, max) {
 export async function addReport(r) {
   await fs();
   const d = { id: String(r.id).slice(0, 80), kind: r.kind, type: r.type, memo: String(r.memo || "").slice(0, 80), url: String(r.url).slice(0, 300), ed: String(r.ed || "").slice(0, 20), at: F.serverTimestamp() };
-  const ref = await F.addDoc(F.collection(db, "reports"), d);
+  const ref = await F.addDoc(F.collection(db, C("reports")), d);
   return ref.id;   // 저장된 문서 id(확인·기록용)
 }
 export async function listReports(sinceMs, max) {
   await fs();
-  const q = F.query(F.collection(db, "reports"), F.where("at", ">=", F.Timestamp.fromMillis(sinceMs)), F.limit(max || 300));
+  const q = F.query(F.collection(db, C("reports")), F.where("at", ">=", F.Timestamp.fromMillis(sinceMs)), F.limit(max || 300));
   const snap = await F.getDocs(q);
   return snap.docs.map(function (d) { const x = d.data(); return Object.assign({}, x, { at: x.at && x.at.toMillis ? x.at.toMillis() : 0 }); });
 }
@@ -223,13 +229,13 @@ export async function listReports(sinceMs, max) {
 export async function addAdClicks(list) {
   await fs();
   const b = F.writeBatch(db);
-  list.slice(0, 20).forEach(function (x) { b.set(F.doc(db, "adclicks", x.s + "_" + x.d), { s: x.s, d: x.d, n: F.increment(x.n) }, { merge: true }); });
+  list.slice(0, 20).forEach(function (x) { b.set(F.doc(db, C("adclicks"), x.s + "_" + x.d), { s: x.s, d: x.d, n: F.increment(x.n) }, { merge: true }); });
   await b.commit();
   return list.length;
 }
 export async function listAdClicks(sinceDay) {
   await fs();
-  const q = F.query(F.collection(db, "adclicks"), F.where("d", ">=", sinceDay), F.limit(2000));
+  const q = F.query(F.collection(db, C("adclicks")), F.where("d", ">=", sinceDay), F.limit(2000));
   const snap = await F.getDocs(q);
   return snap.docs.map(function (d) { return d.data(); });
 }

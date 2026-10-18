@@ -30,7 +30,8 @@ def _site():
         sys.path.insert(0, str(ROOT / "tools"))
         import siteconf
         c = siteconf.load()
-        return c.get("site_url", SITE), c.get("brand", {}).get("name", BRAND), c.get("htmlLang", "ko")
+        b = c.get("brand", BRAND)
+        return c.get("site_url", SITE), (b.get("name", BRAND) if isinstance(b, dict) else b), c.get("htmlLang", "ko")
     except Exception:
         return SITE, BRAND, "ko"
 

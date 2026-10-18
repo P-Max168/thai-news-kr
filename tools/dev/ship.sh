@@ -12,9 +12,17 @@ if [ -n "$OVR" ] && [ "${TNK_TEST:-}" != "1" ]; then
   echo "배포 거부: 시험용 환경 변수가 남아 있음 — ${OVR}(TNK_TEST=1 없음). 'env -u CANON_DIR -u TNK_LOGDIR -u CANON_NO_FETCH' 로 다시" >&2; exit 9
 fi
 CANON=/workspace/thai-news-portal; [ "${TNK_TEST:-}" = "1" ] && CANON="${CANON_DIR:-$CANON}"
+# 언어판(R-zh-4, 2026-10-18): 저장소 언어 = site/LANG(없으면 ko). ko 가 아니면 정본 = /workspace/thai-news-<lang>-portal, 라이브 = site/<lang>.json site_url
+SITE_LANG="$(cat site/LANG 2>/dev/null | tr -d '[:space:]')"; SITE_LANG="${SITE_LANG:-ko}"
+if [ "$SITE_LANG" != "ko" ]; then
+  [ "${TNK_TEST:-}" = "1" ] || CANON="/workspace/thai-news-$SITE_LANG-portal"
+  LIVE_BASE="${LIVE_BASE:-$(python3 tools/siteconf.py | python3 -c 'import json,sys;print(json.load(sys.stdin)["site_url"])')}"
+fi
 [ "${TNK_TEST:-}" = "1" ] && echo "TNK_TEST=1 — 시험 모드: 정본 $CANON" >&2
 # 07:05–08:10(방콕) push 금지(정기 아침판 시간) — 사람이 잊어도 여기서 막음(2026-10-05)
-hm=$(TZ=Asia/Bangkok date +%H%M); if [ "$hm" -ge 0705 ] && [ "$hm" -le 0810 ]; then echo "지금 $(TZ=Asia/Bangkok date +%H:%M) — 07:05~08:10 은 push 금지(아침판). 08:10 뒤에 다시" >&2; exit 4; fi
+# (2026-10-18) GROK_PROMPT 4-6 금지 구간 전체로: 07:00~08:10(아침판) + 18:00~18:40(저녁판) — 10-11 요청(18:00~18:40 누락) 반영
+hm=$(TZ=Asia/Bangkok date +%H%M); hm=$((10#$hm))
+if { [ "$hm" -ge 700 ] && [ "$hm" -le 810 ]; } || { [ "$hm" -ge 1800 ] && [ "$hm" -le 1840 ]; }; then echo "지금 $(TZ=Asia/Bangkok date +%H:%M) — 07:00~08:10·18:00~18:40 은 push 금지(정기 판 시간). 끝난 뒤에 다시" >&2; exit 4; fi
 # 정본 체크아웃 검사(2026-10-05): 정본이 rebase/merge 중·앞섬·바뀐/추적 안 된 파일이면 push 전에 멈춤(아무것도 안 고침, canon-alert.txt + automation.log)
 #   10-05 08:30: 정본에 직접 커밋된 DEV_LOG 줄 때문에 push 뒤 정본 pull 이 rebase 중간에 멈췄음(ship exit 1) → 이제 push 전에 막음
 bash tools/canon_guard.sh ship || { echo "정본 상태가 깨끗하지 않아 배포 안 함(push 전). 정본을 먼저 정리" >&2; exit 7; }

@@ -10,6 +10,7 @@
  *   places.includedTypes 를 그대로 쓰고, 화면의 '지도 버튼' 자리(renderPage 의 .nb-go)에 목록을 넣으면 됨. */
 (function () {
   "use strict";
+  if (window.TNSite && TNSite.hidden("places")) return;   // 언어판에서 숨긴 코너(R-zh-9, site/<lang>.json hidden_sections) — 한국판은 그대로
   var NEARBY = window.TN_NEARBY = {
     zoom: 15,
     regions: {   // 위치 권한이 없을 때 쓰는 지역(assets/ticker.js REGIONS 와 같은 id)

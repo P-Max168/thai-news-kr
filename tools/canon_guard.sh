@@ -14,6 +14,8 @@
 set -uo pipefail
 WHO="${1:-manual}"
 REAL_C=/workspace/thai-news-portal; REAL_LOG=/workspace/logs
+# 언어판(R-zh-4, 2026-10-18): 부른 저장소의 site/LANG 이 ko 가 아니면 그 언어판 정본(/workspace/thai-news-<lang>-portal)을 검사. 없으면 한국판 그대로
+_L="$(cat "$(dirname "$0")/../site/LANG" 2>/dev/null | tr -d '[:space:]')"; [ -n "$_L" ] && [ "$_L" != "ko" ] && REAL_C="/workspace/thai-news-$_L-portal"
 C="$REAL_C"; LOGDIR="$REAL_LOG"; NOFETCH=0
 if [ "${TNK_TEST:-}" = "1" ]; then
   C="${CANON_DIR:-$REAL_C}"; LOGDIR="${TNK_LOGDIR:-$REAL_LOG}"; NOFETCH="${CANON_NO_FETCH:-0}"

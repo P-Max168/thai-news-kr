@@ -100,12 +100,15 @@
   }
   // PM2.5 4단계 — 태국 오염관리국(PCD) 2023년 AQI 기준(15/25/37.5/75 µg/m³)을 4단계로 묶음: 좋음(0–25) 보통(25.1–37.5) 나쁨(37.6–75) 매우 나쁨(75.1~)
   function pmLevel(v) {
-    if (v <= 25) return { k: "good", t: "좋음" };
-    if (v <= 37.5) return { k: "mod", t: "보통" };
-    if (v <= 75) return { k: "bad", t: "나쁨" };
-    return { k: "vbad", t: "매우 나쁨" };
+    var T = window.TNI || function (k, d) { return d; };   // 언어판 문구(R-zh-1, 2026-10-18) — 한국판은 기본값 그대로
+    if (v <= 25) return { k: "good", t: T("ticker.pm_good", "좋음") };
+    if (v <= 37.5) return { k: "mod", t: T("ticker.pm_mod", "보통") };
+    if (v <= 75) return { k: "bad", t: T("ticker.pm_bad", "나쁨") };
+    return { k: "vbad", t: T("ticker.pm_vbad", "매우 나쁨") };
   }
-  function fxOK() { var f = st.tk && st.tk.fx; return f && f.THB_KRW > 0 && fresh(f.fetched_at, DAY) && fresh(f.rate_time, 2 * DAY) ? f : null; }
+  // 언어판 통화(R-zh-3, 2026-10-18): 한국판 THB_KRW·'원'(기본값), zh = THB_CNY·'元' (data/site.js currency.pair·unit). 헤더 ฿ 는 그대로
+  var CUR = (window.TN_SITE && window.TN_SITE.currency) || {}, PAIR = CUR.pair || "THB_KRW", UNIT = CUR.unit || "원", I = window.TNI || function (k, d) { return d; };
+  function fxOK() { var f = st.tk && st.tk.fx; return f && f[PAIR] > 0 && fresh(f.fetched_at, DAY) && fresh(f.rate_time, 2 * DAY) ? f : null; }
   function goldOK() { var g = st.tk && st.tk.gold; return g && g.bar_sell > 0 && fresh(g.fetched_at, DAY) && fresh(g.announced_at, 4 * DAY) ? g : null; }
   // 날씨·미세먼지: 브라우저에서 직접 받은 Open-Meteo 값 우선, 실패하면 data/ticker.json 의 서버 값(Actions 가 2시간마다) — 둘 다 3시간 안의 것만
   function srv(key, rg) {
@@ -164,8 +167,8 @@
     if (!window.__tnLate && window.TNAfterFirst) { if (!renderLater) { renderLater = true; window.TNAfterFirst(function () { renderLater = false; render(); }); } return; }
     var f = fxOK(), u = usdtOK(), w = wxOK(), g = goldOK(), a = aqOK(), o = fuelOK(), h = [];
     h.push(tile("fx", [
-      f && ["1바트 " + f.THB_KRW.toFixed(1) + "원", "1바트<i class=\"tk-eq\"> =</i> <b>" + f.THB_KRW.toFixed(1) + "원</b>" + chg(dif(f.THB_KRW, f.prev_THB_KRW), 2)],
-      f && f.USD_THB > 0 && ["1달러 " + f.USD_THB.toFixed(1) + "바트", "1달러<i class=\"tk-eq\"> =</i> <b>" + f.USD_THB.toFixed(1) + '<small class="tk-u">฿</small></b>' + chg(dif(f.USD_THB, f.prev_USD_THB), 2)]
+      f && [I("ticker.one_baht", "1바트 ") + f[PAIR].toFixed(PAIR === "THB_KRW" ? 1 : 3) + UNIT, I("ticker.one_baht_s", "1바트") + "<i class=\"tk-eq\"> =</i> <b>" + f[PAIR].toFixed(PAIR === "THB_KRW" ? 1 : 3) + UNIT + "</b>" + chg(dif(f[PAIR], f["prev_" + PAIR]), PAIR === "THB_KRW" ? 2 : 4)],
+      f && f.USD_THB > 0 && [I("ticker.one_usd", "1달러 ") + f.USD_THB.toFixed(1) + I("ticker.baht", "바트"), I("ticker.one_usd_s", "1달러") + "<i class=\"tk-eq\"> =</i> <b>" + f.USD_THB.toFixed(1) + '<small class="tk-u">฿</small></b>' + chg(dif(f.USD_THB, f.prev_USD_THB), 2)]
     ], ft([f && ms(f.fetched_at)])));
     // v5(운영자 요청 10-03 10:25): 테더는 환율 바로 옆 자기 상자 — '1USDT' / 큰 글자 '33.5฿' / 조회 시각
     h.push(tile("usdt", [
@@ -179,12 +182,12 @@
         (w.rain != null ? '<span class="tk-rain">☔' + w.rain + "%</span>" : "")],
       a && ["미세먼지 PM2.5 " + Math.round(a.pm) + " " + lv.t, '<span class="tk-l tk-pm">PM2.5</span><b>' + Math.round(a.pm) + '</b><span class="tk-lv tk-lv--' + lv.k + '">' + lv.t + "</span>"]
     ], (function () {   // 지역 이름은 맨 아래 조회 줄 앞에(첫 줄 폭 줄이기 — 운영자 요청 10-03: 날씨 상자 잘림)
-      var c = clock([w && w.at, a && a.at]), rn = REGIONS[(w || a || {}).rg || region()].name;
+      var c = clock([w && w.at, a && a.at]), rk = (w || a || {}).rg || region(), rn = I("ticker.rg_" + rk, REGIONS[rk].name);
       return c ? [rn + " " + c + " 조회", '<span class="tk-rg">' + rn + "</span>" + clockHTML([w && w.at, a && a.at])] : null;
     })()));
     h.push(tile("price", [
-      g && ["금시세 금괴 1바트 " + n0(g.bar_sell) + "바트", '<span class="tk-l">금</span><b>' + n0(g.bar_sell) + '<small class="tk-u">฿</small></b>' + chg(g.change, 0)],
-      o && ["휘발유(95) 리터당 " + n2(o.gasohol95) + "바트", '<span class="tk-l">휘발유<span class="tk-95">(95)</span></span><b>' + n2(o.gasohol95) + '<small class="tk-u">฿</small></b>' + chg(dif(o.gasohol95, o.yesterday), 2)]
+      g && ["금시세 금괴 1바트 " + n0(g.bar_sell) + "바트", '<span class="tk-l">' + I("ticker.gold_s", "금") + '</span><b>' + n0(g.bar_sell) + '<small class="tk-u">฿</small></b>' + chg(g.change, 0)],
+      o && ["휘발유(95) 리터당 " + n2(o.gasohol95) + "바트", '<span class="tk-l">' + I("ticker.fuel_s", "휘발유") + '<span class="tk-95">(95)</span></span><b>' + n2(o.gasohol95) + '<small class="tk-u">฿</small></b>' + chg(dif(o.gasohol95, o.yesterday), 2)]
     ], ft([g && ms(g.fetched_at), o && ms(o.fetched_at)])));
     var open = pop && !pop.hidden ? pop.getAttribute("data-k") : null;
     box.innerHTML = h.join("");

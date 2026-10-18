@@ -43,17 +43,25 @@ def fx_er_api():
     if not (5 < krw < 200 and 0 < usd < 1):
         raise ValueError("환율 값 이상: KRW=%r USD=%r" % (krw, usd))
     t = datetime.fromtimestamp(int(d["time_last_update_unix"]), BKK).isoformat(timespec="seconds")
-    return dict(THB_KRW=round(krw, 4), USD_THB=round(1 / usd, 4), USD_KRW=round(krw / usd, 2), rate_time=t,
-                source="ExchangeRate-API (open.er-api.com)", url="https://www.exchangerate-api.com/")
+    out = dict(THB_KRW=round(krw, 4), USD_THB=round(1 / usd, 4), USD_KRW=round(krw / usd, 2), rate_time=t,
+               source="ExchangeRate-API (open.er-api.com)", url="https://www.exchangerate-api.com/")
+    cny = r.get("CNY")   # 중국어판 헤더 칩용(2026-10-18 R-zh-3) — 값이 이상하면 넣지 않음(한국판 값에는 영향 없음)
+    if isinstance(cny, (int, float)) and 0.05 < cny < 1:
+        out["THB_CNY"] = round(float(cny), 5)
+    return out
 
 
 def fx_frankfurter():
-    d = get_json("https://api.frankfurter.app/latest?from=USD&to=THB,KRW")
+    d = get_json("https://api.frankfurter.app/latest?from=USD&to=THB,KRW,CNY")
     thb, krw = float(d["rates"]["THB"]), float(d["rates"]["KRW"])
     if not (5 < krw / thb < 200):
         raise ValueError("환율 값 이상")
-    return dict(THB_KRW=round(krw / thb, 4), USD_THB=round(thb, 4), USD_KRW=round(krw, 2), rate_time=datetime.fromisoformat(d["date"] + "T16:00:00+01:00").astimezone(BKK).isoformat(timespec="seconds"),
-                source="Frankfurter (유럽중앙은행 ECB 기준환율)", url="https://www.frankfurter.app/")
+    out = dict(THB_KRW=round(krw / thb, 4), USD_THB=round(thb, 4), USD_KRW=round(krw, 2), rate_time=datetime.fromisoformat(d["date"] + "T16:00:00+01:00").astimezone(BKK).isoformat(timespec="seconds"),
+               source="Frankfurter (유럽중앙은행 ECB 기준환율)", url="https://www.frankfurter.app/")
+    cny = d["rates"].get("CNY")
+    if isinstance(cny, (int, float)) and 0.05 < cny / thb < 1:
+        out["THB_CNY"] = round(float(cny) / thb, 5)
+    return out
 
 
 def gold_gta():
@@ -225,7 +233,7 @@ def main():
     # 환율 직전 값(2026-10-15, 화면 ▲▼용): 기준 시각(rate_time)이 바뀌었으면 이전 파일 값을 prev_* 로, 같으면 이전 prev_* 를 이어 씀 — 실제로 받았던 값만
     of, nf = old.get("fx") or {}, out.get("fx") or {}
     if nf and of and nf is not of:
-        for k in ("THB_KRW", "USD_THB"):
+        for k in ("THB_KRW", "USD_THB", "THB_CNY"):
             if of.get("rate_time") and of.get("rate_time") != nf.get("rate_time") and isinstance(of.get(k), (int, float)):
                 nf["prev_" + k] = of[k]; nf["prev_rate_time"] = of["rate_time"]
             elif "prev_" + k in of:

@@ -6,7 +6,20 @@
  */
 (function (root) {
   "use strict";
-  var TOPICS = [
+  /* ── 언어판(2026-10-18 R-zh-1·2, 시스템 공유·편집 기준 분리) ──
+   * window.TN_SITE = 언어판 저장소의 data/site.js(tools/site_build.py 가 site/<lang>.json·topics.<lang>.json·i18n/<lang>.json 로 만듦).
+   * 한국판에는 없음(undefined) → 아래 한국판 기본값 그대로(화면·동작 변화 0).
+   * TNI(key, 기본 문구) = 화면 문구: 언어판 i18n 에 key 가 있으면 그 값, 없으면 기본(한국어) 문구. i18n/ko.json 은 이 기본 문구 목록. */
+  var SITE = root.TN_SITE || null, ST = (SITE && SITE.topics) || {}, I18N = (SITE && SITE.i18n) || {};
+  root.TNI = function (key, def) {
+    var v = I18N, ks = String(key).split(".");
+    for (var i = 0; i < ks.length && v != null; i++) v = v[ks[i]];
+    return typeof v === "string" ? v : def;
+  };
+  root.TNSite = { lang: (SITE && SITE.lang) || "ko", conf: SITE || {}, hidden: function (sec) { return !!(SITE && (SITE.hidden_sections || []).indexOf(sec) >= 0); } };
+  // 숨길 코너(R-zh-9): 언어판 hidden_sections → <html class="tn-hide-places …"> (CSS 는 언어판 index.html 에 tools/site_build.py 가 넣음). 한국판은 빈 목록
+  try { ((SITE && SITE.hidden_sections) || []).forEach(function (s) { document.documentElement.classList.add("tn-hide-" + s); }); } catch (e) {}
+  var TOPICS = ST.TOPICS || [
     { id: "east",     label: "동부(촌부리·라용)", emoji: "🏖️", color: "#0b7285", hint: "파타야·좀티엔·싸따힙·시라차·램차방·방센·라용" },
     { id: "bangkok",  label: "방콕",             emoji: "🏙️", color: "#495057", hint: "방콕 도심·수완나품" },
     { id: "north",    label: "북부",             emoji: "⛰️", color: "#5c940d", hint: "치앙마이·치앙라이·람빵·난·핏사눌록" },
@@ -26,26 +39,26 @@
   function canon(id) { return ALIAS[id] || id; }
 
   /* 페르소나별 기본 주제(5개). 사용자가 끄거나 3개까지 더 고를 수 있음(최대 8개) */
-  var PERSONAS = [
+  var PERSONAS = ST.PERSONAS || [
     { id: "pattaya",  emoji: "🏖️", label: "파타야 거주자", desc: "좀티엔·방라뭉·싸따힙 포함", topics: ["east", "visa", "life", "weather", "society"] },
     { id: "sriracha", emoji: "⚓",  label: "시라차 거주자", desc: "램차방·촌부리 시내 포함",   topics: ["east", "visa", "life", "weather", "society"] },
     { id: "bangkok",  emoji: "🏙️", label: "방콕 거주자",   desc: "방콕·근교",                 topics: ["bangkok", "visa", "life", "weather", "society"] },
     { id: "traveler", emoji: "🧳", label: "여행객",        desc: "단기 방문·여행 계획 중",     topics: ["travel", "weather", "visa", "east", "bangkok"] },
     { id: "business", emoji: "💼", label: "사업·투자",     desc: "주재원·자영업·투자",         topics: ["poleco", "life", "visa", "bangkok", "east"] }
   ];
-  var MAX_TOPICS = 8;
+  var MAX_TOPICS = ST.MAX_TOPICS || 8;
 
   /* ---------- 2단계 시작 화면(2026-10-03 운영자 승인): 사는 곳 1개 + 관심 여러 개 ----------
    * 저장: profile.region · profile.interests (이 기기) + 동기화용으로 persona 에 "r:<지역>;i:<관심,…>" (32자 이하 — Firestore 규칙 그대로)
    * topic = 그 지역의 주제 id(그 외·여행 중은 없음). 관심 → 주제(내 주제 목록·전국 뉴스 정렬에 씀) */
-  var REGIONS = [
+  var REGIONS = ST.REGIONS || [
     { id: "east",    topic: "east",    emoji: "🏖️", label: "동부", sub: "(촌부리·라용)", full: "동부(촌부리·라용)", hint: "파타야·시라차·좀티엔·라용", wx: "pattaya" },
     { id: "bangkok", topic: "bangkok", emoji: "🏙️", label: "방콕", sub: "", full: "방콕", hint: "방콕 시내·근교", wx: "bangkok" },
     { id: "north",   topic: "north",   emoji: "⛰️", label: "북부", sub: "", full: "북부", hint: "치앙마이·치앙라이", wx: null },
     { id: "south",   topic: "south",   emoji: "🏝️", label: "남부", sub: "", full: "남부", hint: "푸껫·사무이·핫야이", wx: null },
     { id: "other",   topic: null,      emoji: "🧳", label: "그 외·여행 중", sub: "", full: "그 외·여행 중", hint: "전국 소식 위주로 보여 드려요", wx: null }
   ];
-  var INTERESTS = [
+  var INTERESTS = ST.INTERESTS || [
     { id: "life",   emoji: "🏠", label: "생활·정착", hint: "물가·병원·집 구하기·생활 정보", color: "#0b7285", topics: ["life", "weather", "society"] },
     { id: "travel", emoji: "✈️", label: "여행·맛집", hint: "여행지·축제·맛집·교통",       color: "#d9480f", topics: ["travel", "weather", "ent"] },
     { id: "biz",    emoji: "💼", label: "사업·투자", hint: "경제·부동산·환율·세금",       color: "#0c8f6a", topics: ["poleco", "life"] },

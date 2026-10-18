@@ -14,7 +14,7 @@
   var FIRST_SHEET_AUTO = false;
   var OB2 = !!T.ONBOARDING_2STEP;   // 2단계 시작 화면·내 피드 묶음 스위치(topics.js — 2026-10-03 운영자 보류로 꺼 둠)   // 내 피드 '전국·다른 지역' 칸: 5건 → 10건 → 전부
   /* 한인 영향도 태그(판 데이터 story.impact — README '판마다 채울 필드(2026-10-03 추가)'). 순서 = 필터 칩 순서 */
-  var IMPACT = [
+  var IMPACT = (window.TN_SITE && TN_SITE.impacts_ui) || [   // 언어판: data/site.js impacts_ui(같은 순서·아이콘, 이름만 언어별)
     { k: "비자·체류", e: "🛂", c: "#6741d9" }, { k: "환율·물가", e: "💱", c: "#0c8f6a" }, { k: "교통·사고", e: "🚗", c: "#d9480f" },
     { k: "치안", e: "🚨", c: "#c92a2a" }, { k: "날씨·재해", e: "🌧️", c: "#1971c2" }];
   function impOf(k) { for (var i = 0; i < IMPACT.length; i++) if (IMPACT[i].k === k) return IMPACT[i]; return null; }
@@ -43,8 +43,9 @@
     return o.month + "/" + o.day + " " + o.hour + ":" + o.minute;
   }
   function fmtDay(iso) {
-    var p = new Intl.DateTimeFormat("ko-KR", { timeZone: TZ, month: "numeric", day: "numeric", weekday: "short" }).formatToParts(new Date(iso));
+    var p = new Intl.DateTimeFormat(TNI("_locale", "ko-KR"), { timeZone: TZ, month: "numeric", day: "numeric", weekday: "short" }).formatToParts(new Date(iso));
     var o = {}; p.forEach(function (x) { o[x.type] = x.value; });
+    if (window.TN_SITE) return TNI("fmt.day", "{m}월 {d}일({w})").replace("{m}", o.month).replace("{d}", o.day).replace("{w}", o.weekday);
     return o.month + "월 " + o.day + "일(" + o.weekday + ")";
   }
   // 실제 날짜만(2026-10-04 Max 디자인 지시: 'N시간 전' 같은 상대 시간 안 씀 — 오래된 글이 새 글처럼 보이지 않게). 형식 '10/3 14:20'(방콕)
@@ -71,7 +72,7 @@
   window.TNMoreLabel = moreLabel;
   function edId() { return (state.edition && state.edition.id) || state.data.id || state.data.date; }
   /* ⚠️ 오류 신고 버튼(기사·가게·임대·광고) — 누르면 assets/report.js 를 처음 한 번 불러와 버튼 바로 아래를 펼침(팝업 없음) */
-  function repBtn(kind, id) { return '<button type="button" class="rep-btn" data-rep="' + kind + '" data-rep-id="' + esc(id) + '" aria-expanded="false"><span class="rep-btn__e" aria-hidden="true">⚠️</span> 오류 신고</button>'; }
+  function repBtn(kind, id) { return '<button type="button" class="rep-btn" data-rep="' + kind + '" data-rep-id="' + esc(id) + '" aria-expanded="false"><span class="rep-btn__e" aria-hidden="true">⚠️</span> ' + TNI("report.btn", "오류 신고") + '</button>'; }
   function adRep(slotId, it) { return '<div class="rep-row rep-row--ad">' + repBtn("ad", "ad:" + (slotId || "slot") + ":" + ((it && (it.id || it.render)) || "item")) + "</div>"; }
   window.TNRepBtn = repBtn; window.TNAdRep = adRep;
   var repLoading = false;
@@ -117,7 +118,8 @@
     sc.onload = function () { if (window.NEWS_DATA[date]) render(window.NEWS_DATA[date]); else sc.onerror(); };
     sc.onerror = function () {
       var m = /^(\d{4})-(\d\d)-(\d\d)-(am|pm)$/.exec(date), lbl = m ? (+m[2]) + "월 " + (+m[3]) + "일 " + (m[4] === "am" ? "아침판" : "저녁판") : date;
-      $("feed").innerHTML = loadFail(esc(lbl) + " 뉴스를 불러오지 못했어요.");
+      if (window.TN_SITE) lbl = (EDS.filter(function (x) { return x.id === date; })[0] || {}).label || date;   // 언어판: 판 이름은 data/index.json label
+      $("feed").innerHTML = loadFail(esc(lbl) + TNI("load.edition_fail", " 뉴스를 불러오지 못했어요."));
     };
     document.body.appendChild(sc);
   }
@@ -126,12 +128,12 @@
   function render(data) {
     state.data = data;
     var d = new Date(data.date + "T12:00:00+07:00");
-    var longDate = new Intl.DateTimeFormat("ko-KR", { timeZone: TZ, year: "numeric", month: "long", day: "numeric", weekday: "long" }).format(d);
+    var longDate = new Intl.DateTimeFormat(TNI("_locale", "ko-KR"), { timeZone: TZ, year: "numeric", month: "long", day: "numeric", weekday: "long" }).format(d);
     var ed = state.edition || {};
-    var edName = ed.label ? ed.label.replace(/^\d+월 \d+일 /, "") : "";
-    $("dateline").innerHTML = esc(longDate) + "<span>" + (edName ? '<b class="edtag">' + esc(edName) + "</b> · " : "") + "방콕 시간 (UTC+7) 기준</span>";
-    document.title = "태국 뉴스 한눈에 — " + (ed.label || longDate);
-    $("generated").textContent = (ed.label ? ed.label + " · " : "") + "업데이트: " + fmtTime(data.updated || data.generated) + " (방콕) · 기사 " + data.stories.length + "건";
+    var edName = (window.TN_SITE && ed.edition && TNI("edition." + ed.edition, "")) || (ed.label ? ed.label.replace(/^\d+월 \d+일 /, "") : "");
+    $("dateline").innerHTML = esc(longDate) + "<span>" + (edName ? '<b class="edtag">' + esc(edName) + "</b> · " : "") + TNI("dateline.tz", "방콕 시간 (UTC+7) 기준") + "</span>";
+    document.title = TNI("brand", "태국 뉴스 한눈에") + " — " + (ed.label || longDate);
+    $("generated").textContent = (ed.label ? ed.label + " · " : "") + TNI("footer.updated", "업데이트: ") + fmtTime(data.updated || data.generated) + TNI("footer.bkk", " (방콕) · 기사 ") + data.stories.length + TNI("footer.count_unit", "건");
     renderBriefing(edName);
     if (L.backfill(edId(), data.stories)) S.update(function () {});
     renderAll();
@@ -148,6 +150,9 @@
    * ② 없거나 6시간 넘게 지났으면 판의 korea_top 으로 대체(없으면 섹션 숨김) */
   // TOP 10(순위 1~10): 처음 3건 → '펼치기' 5건 → 10건 → '접기'
   var KOREA = { live: null, at: 0, step: 0, open: -1, STEPS: [3, 5, 10], MAX_AGE: 6 * 3600 * 1000, MAX: 10 };
+  // 홈 나라 칸(R-zh-3, 2026-10-18): 한국판 = 🇰🇷 data/korea.json·KOREA_NEWS·korea_top(기본값), 언어판 = site/<lang>.json home_section(zh = 🇨🇳 data/china.json·CHINA_NEWS·china_top)
+  var HOME = (window.TNSite && TNSite.conf.home_section) || {};
+  var HOME_JSON = HOME.data || "data/korea.json", HOME_JS = HOME.script || "data/korea.js", HOME_GLOBAL = HOME.global || "KOREA_NEWS", HOME_KEY = HOME.key || "korea_top";
   function loadKorea() {
     KOREA.at = Date.now();
     function done(d) {
@@ -156,13 +161,13 @@
     }
     if (!/^https?:$/.test(location.protocol)) {
       var sc = document.createElement("script");
-      sc.src = "data/korea.js?_=" + Date.now();
-      sc.onload = function () { done(window.KOREA_NEWS); };
+      sc.src = HOME_JS + "?_=" + Date.now();
+      sc.onload = function () { done(window[HOME_GLOBAL]); };
       sc.onerror = function () { done(null); };
       document.body.appendChild(sc);
       return;
     }
-    fetch("data/korea.json?_=" + Date.now(), { cache: "no-store" })
+    fetch(HOME_JSON + "?_=" + Date.now(), { cache: "no-store" })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(done, function () { done(null); });
   }
@@ -170,9 +175,9 @@
   function koreaSource() {
     var k = KOREA.live, t = k && new Date(k.updated_at).getTime();
     if (k && k.items.length && isLatest() && t > 0 && Date.now() - t <= KOREA.MAX_AGE) {
-      return { at: k.updated_at, live: true, items: k.items.map(function (x) { return { headline: x.title, source: x.source, url: x.url, published: x.time, desc: x.desc || x.summary || x.description }; }) };
+      return { at: k.updated_at, live: true, items: k.items.map(function (x) { return { headline: x.title || x.headline, source: x.source, url: x.url, published: x.time || x.published, desc: x.desc || x.summary || x.description }; }) };
     }
-    var e = state.data && state.data.korea_top;
+    var e = state.data && state.data[HOME_KEY];
     if (Array.isArray(e) && e.length) return { at: state.data.updated || state.data.generated, live: false, items: e };
     return null;
   }
@@ -191,24 +196,24 @@
     el.hidden = false;
     el.classList.toggle("is-closed", closed);
     el.setAttribute("data-korea-src", src.live ? "live" : "edition");
-    el.innerHTML = '<button type="button" class="korea__head" data-korea-toggle aria-expanded="' + !closed + '" aria-controls="koreaList"><span><span class="korea__title" id="koreaTitle">🇰🇷 오늘의 한국 주요 뉴스 <b class="korea__top">TOP ' + k.length + '</b></span><span class="korea__sub">' +
-      (src.at ? '<time class="korea__upd" datetime="' + esc(src.at) + '" title="방콕 시간 기준 업데이트">' + esc(fmtTime(src.at)) + "</time>" : "한국 언론") + "</span></span><span class=\"korea__chev\" aria-hidden=\"true\">▾</span></button>" +
+    el.innerHTML = '<button type="button" class="korea__head" data-korea-toggle aria-expanded="' + !closed + '" aria-controls="koreaList"><span><span class="korea__title" id="koreaTitle">' + TNI("home.title", "🇰🇷 오늘의 한국 주요 뉴스") + ' <b class="korea__top">TOP ' + k.length + '</b></span><span class="korea__sub">' +
+      (src.at ? '<time class="korea__upd" datetime="' + esc(src.at) + '" title="' + TNI("home.upd_title", "방콕 시간 기준 업데이트") + '">' + esc(fmtTime(src.at)) + "</time>" : TNI("home.src", "한국 언론")) + "</span></span><span class=\"korea__chev\" aria-hidden=\"true\">▾</span></button>" +
       '<ol class="korea__list" id="koreaList">' + k.map(function (x, i) {
         // 항목을 누르면 바로 아래 작은 카드(제목·매체·시각·짧은 설명이 데이터에 있을 때만 — 기사 본문은 절대 옮기지 않음) + '기사 보러 가기 ↗'(새 탭)
         var op = KOREA.open === i, d = (x.desc || x.summary || "").toString().trim();
         if (d.length > 160) d = d.slice(0, 157) + "…";
         return '<li' + (i >= show ? ' class="k-extra"' : "") + (i < 3 ? ' data-rank-top' : "") + (op ? ' data-open' : "") + '>' +
-          '<button type="button" class="k-row" data-korea-item="' + i + '" aria-expanded="' + op + '" aria-controls="kcard' + i + '"><span class="kn" aria-label="' + (i + 1) + '위">' + (i + 1) + '</span><span class="kt">' +
+          '<button type="button" class="k-row" data-korea-item="' + i + '" aria-expanded="' + op + '" aria-controls="kcard' + i + '"><span class="kn" aria-label="' + (i + 1) + TNI("home.rank_unit", "위") + '">' + (i + 1) + '</span><span class="kt">' +
           (x.badge ? '<span class="kp">' + esc(x.badge) + "</span>" : "") + esc(x.headline) +
           '<span class="km">' + esc(x.source) + (x.published ? " · " + esc(fmtTime(x.published)) + " (BKK)" : "") + '</span></span><span class="k-chev" aria-hidden="true">▾</span></button>' +
           '<div class="k-card" id="kcard' + i + '"' + (op ? "" : " hidden") + '><b class="k-card__t">' + esc(x.headline) + '</b>' +
-          '<span class="k-card__m">' + esc(x.source) + (x.published ? " · " + esc(fmtDay(x.published)) + " " + esc(hhmm(x.published)) + " (방콕)" : "") + "</span>" +
+          '<span class="k-card__m">' + esc(x.source) + (x.published ? " · " + esc(fmtDay(x.published)) + " " + esc(hhmm(x.published)) + TNI("home.bkk", " (방콕)") : "") + "</span>" +
           (d ? '<p class="k-card__d">' + esc(d) + "</p>" : "") +
-          (/^https?:\/\//.test(x.url || "") ? '<a class="k-card__go" href="' + esc(x.url) + '" target="_blank" rel="noopener">기사 보러 가기 ↗</a>' : "") + "</div></li>" +
+          (/^https?:\/\//.test(x.url || "") ? '<a class="k-card__go" href="' + esc(x.url) + '" target="_blank" rel="noopener">' + TNI("home.go", "기사 보러 가기 ↗") + '</a>' : "") + "</div></li>" +
           (i === 4 && show > 5 && kAd && !adRisk(x) && !adRisk(k[5]) ? '<li class="k-ad">' + adHTML(kAd, 0) + "</li>" : "");   // 5위·6위 사이 작은 광고(6~10위가 보일 때만, data/ads.json 'korea-mid')
       }).join("") + "</ol>" +
       (k.length > ST[0] ? '<button type="button" class="korea__more" data-korea-more aria-controls="koreaList" aria-expanded="' + (show >= k.length) + '">' +
-        (show >= k.length ? "접기 ▴" : "펼치기 (" + next + "위까지) ▾") + "</button>" : "");   // 몇 위까지 보이는지(2026-10-05 — 예전 'N건 더')
+        (show >= k.length ? TNI("home.fold", "접기 ▴") : TNI("home.more", "펼치기 ({n}위까지) ▾").replace("{n}", next)) + "</button>" : "");   // 몇 위까지 보이는지(2026-10-05 — 예전 'N건 더')
   }
 
   /* 브리핑: 새 형식 [{topic, text(**굵게**), story_id}] / 옛 형식(문단) → 문장별 글머리표 */
@@ -239,7 +244,8 @@
     if (Array.isArray(b)) items = b.map(function (x) { return { topic: x.topic, html: rich(x.text), story_id: x.story_id }; });
     else items = legacyBriefing(b || "");
     var badge = { "아침판": "아침 브리핑", "저녁판": "저녁 브리핑", "새벽판": "새벽 브리핑" }[edName] || "오늘의 브리핑";
-    $("briefing").innerHTML = '<div class="briefing__head"><span class="briefing__badge">' + esc(badge) + '</span><span class="briefing__title">' + items.length + "줄로 보는 이번 판</span></div>" +
+    if (window.TN_SITE) badge = TNI("brief.badge_" + ((state.edition || {}).edition || ""), TNI("brief.badge", badge));
+    $("briefing").innerHTML = '<div class="briefing__head"><span class="briefing__badge">' + esc(badge) + '</span><span class="briefing__title">' + items.length + TNI("brief.title", "줄로 보는 이번 판") + "</span></div>" +
       '<ul class="brief-list">' + items.map(function (it) {
         var t = it.topic ? topicOf(it.topic) : null;
         var chip = t ? '<span class="bchip" style="--tc:' + t.color + '"><span aria-hidden="true">' + t.emoji + "</span>" + esc(t.label) + "</span>" : '<span class="bchip bchip--none">📰</span>';
@@ -262,8 +268,8 @@
   /* ☰ 서랍 메뉴 안의 세로 목록(#tabs = 내 피드 + 내 주제 + 전체 보기, #tabsOther = 고르지 않은 주제) */
   function tabBtn(k, c, sel) {
     var label, n, cls = "tab";
-    if (k === "feed") { label = "⭐ 내 피드"; n = feedList().length + (state.data.highlights || []).length; }
-    else if (k === "all") { label = "📰 전체 보기"; n = state.data.stories.length; }
+    if (k === "feed") { label = TNI("nav.myfeed_tab", "⭐ 내 피드"); n = feedList().length + (state.data.highlights || []).length; }
+    else if (k === "all") { label = TNI("nav.all_tab", "📰 전체 보기"); n = state.data.stories.length; }
     else { var t = topicOf(k); label = t.emoji + " " + t.label; n = c[k] || 0; if (sel && sel.indexOf(k) < 0) cls += " tab--temp"; }
     return '<button type="button" class="' + cls + '" role="tab" data-tab="' + k + '" aria-selected="' + (state.tab === k) + '"><span class="tab__l">' + esc(label) + '</span><span class="n">' + (n || "–") + "</span></button>";
   }
@@ -366,10 +372,10 @@
 
   function voteHTML(s) {
     var v = L.voteOf(edId(), s);
-    return '<div class="card__acts" role="group" aria-label="이런 소식 더 볼래요?">' +
-      '<span class="vote-q">이런 소식 더 볼래요?</span><span class="vote-btns">' +
-      '<button type="button" class="vote vote--up" data-vote="1" data-id="' + esc(s.id) + '" aria-pressed="' + (v > 0) + '">🙌 더 보여줘</button>' +
-      '<button type="button" class="vote vote--down" data-vote="-1" data-id="' + esc(s.id) + '" aria-pressed="' + (v < 0) + '">🙅 덜 보여줘</button></span></div>';
+    return '<div class="card__acts" role="group" aria-label="' + TNI("card.vote_q", "이런 소식 더 볼래요?") + '">' +
+      '<span class="vote-q">' + TNI("card.vote_q", "이런 소식 더 볼래요?") + '</span><span class="vote-btns">' +
+      '<button type="button" class="vote vote--up" data-vote="1" data-id="' + esc(s.id) + '" aria-pressed="' + (v > 0) + '">' + TNI("card.vote_up", "🙌 더 보여줘") + '</button>' +
+      '<button type="button" class="vote vote--down" data-vote="-1" data-id="' + esc(s.id) + '" aria-pressed="' + (v < 0) + '">' + TNI("card.vote_down", "🙅 덜 보여줘") + '</button></span></div>';
   }
 
   function cardHTML(s) {
@@ -379,31 +385,31 @@
     if (s.region) chips += '<span class="chip chip--region">📍 ' + esc(s.region) + "</span>";
     var age = refTime() - new Date(s.published).getTime();
     if (tp.all.indexOf("visa") >= 0 || age > 36 * 3600000) chips += '<span class="chip chip--date">📅 ' + esc(fmtDay(s.published)) + "</span>";
-    if (s.update) chips += '<span class="chip chip--new">후속</span>';
-    impacts(s).forEach(function (k) { var m = impOf(k); chips += '<span class="chip chip--imp" style="--ic:' + m.c + '" title="한인 영향: ' + esc(k) + '"><span aria-hidden="true">' + m.e + "</span>" + esc(k) + "</span>"; });
-    var forMe = (typeof s.for_me === "string" && s.for_me.trim()) ? '<p class="forme"><b class="forme__h">🙋 그래서 나는?</b><span class="forme__t">' + esc(s.for_me.trim()) + "</span></p>" : "";
+    if (s.update) chips += '<span class="chip chip--new">' + TNI("card.followup", "후속") + '</span>';
+    impacts(s).forEach(function (k) { var m = impOf(k); chips += '<span class="chip chip--imp" style="--ic:' + m.c + '" title="' + TNI("card.impact_title", "한인 영향: ") + esc(k) + '"><span aria-hidden="true">' + m.e + "</span>" + esc(k) + "</span>"; });
+    var forMe = (typeof s.for_me === "string" && s.for_me.trim()) ? '<p class="forme"><b class="forme__h">' + TNI("card.for_me_h", "🙋 그래서 나는?") + '</b><span class="forme__t">' + esc(s.for_me.trim()) + "</span></p>" : "";
     var paras = s.summary.map(function (p) { return '<p class="para">' + esc(p) + "</p>"; }).join("");
-    var ctx = s.context ? '<div class="context"><b>💡 배경 설명</b>' + esc(s.context) + "</div>" : "";
-    var upd = s.update ? '<div class="update"><b>🆕 이전 판 이후 새로 나온 내용</b>' + esc(s.update) + "</div>" : "";
-    var rel = (s.related && s.related.length) ? '<p class="related-label">관련 기사 · 함께 참고한 원문</p><ul class="related">' + s.related.map(function (r) {
+    var ctx = s.context ? '<div class="context"><b>' + TNI("card.background_h", "💡 배경 설명") + '</b>' + esc(s.context) + "</div>" : "";
+    var upd = s.update ? '<div class="update"><b>' + TNI("card.update_h", "🆕 이전 판 이후 새로 나온 내용") + '</b>' + esc(s.update) + "</div>" : "";
+    var rel = (s.related && s.related.length) ? '<p class="related-label">' + TNI("card.related_h", "관련 기사 · 함께 참고한 원문") + '</p><ul class="related">' + s.related.map(function (r) {
       // 태국 문자 제목은 화면에 내지 않음(운영자 기준: 태국 문자 금지, ฿ 만 허용) → '관련 보도 원문(태국어)'
-      var rt = TH_RX.test(r.title || "") ? "관련 보도 원문 (태국어 기사)" : (r.title || "관련 보도 원문");
+      var rt = TH_RX.test(r.title || "") ? TNI("card.related_th", "관련 보도 원문 (태국어 기사)") : (r.title || TNI("card.related_one", "관련 보도 원문"));
       return '<li><a href="' + esc(r.url) + '" target="_blank" rel="noopener"><span class="rs">' + esc(String(r.source || "").replace(/\s*\([^)]*[\u0E00-\u0E7F][^)]*\)/g, "")) + '</span><span class="rt">' + esc(rt) + "</span> ↗</a></li>";
     }).join("") + "</ul>" : "";
     var tags = (s.tags || []).length ? '<div class="tags">' + s.tags.map(function (x) { return "<span>#" + esc(x) + "</span>"; }).join("") + "</div>" : "";
     var v = L.voteOf(edId(), s);
     var hon = L.heartOf(edId(), s);
     return '<article class="card' + (v < 0 ? " is-down" : "") + '" style="--tc:' + t.color + '" data-topic="' + tp.topic + '"' + (adRisk(s) ? ' data-adsafe="0"' : "") + ' id="' + esc(s.id) + '">' +
-      '<button type="button" class="card-heart" data-heart data-id="' + esc(s.id) + '" aria-pressed="' + hon + '" aria-label="' + (hon ? "하트 취소" : "하트 — 이런 뉴스 더 보기") + '"><span aria-hidden="true">' + (hon ? "❤️" : "♡") + "</span></button>" +
+      '<button type="button" class="card-heart" data-heart data-id="' + esc(s.id) + '" aria-pressed="' + hon + '" aria-label="' + (hon ? TNI("card.heart_off", "하트 취소") : TNI("card.heart_on", "하트 — 이런 뉴스 더 보기")) + '"><span aria-hidden="true">' + (hon ? "❤️" : "♡") + "</span></button>" +
       '<button class="card__head" aria-expanded="false" aria-controls="body-' + esc(s.id) + '">' +
         '<div class="card__top">' + chips + "</div>" +
         '<h3 class="card__title">' + esc(s.headline) + "</h3>" + forMe +
         '<p class="card__lead">' + esc(s.summary[0]) + "</p>" +
-        '<div class="card__foot">' + metaHTML(s) + '<span class="more"><span class="more__t">자세히</span> <i>▾</i></span></div>' +
+        '<div class="card__foot">' + metaHTML(s) + '<span class="more"><span class="more__t">' + TNI("card.more", "자세히") + '</span> <i>▾</i></span></div>' +
       "</button>" + toolsHTML(s) +
       '<div class="card__body" id="body-' + esc(s.id) + '">' + upd + paras + ctx +
         '<div class="origin">' + originTitle(s.title_th) +
-        '<a class="btn" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.source.replace(/\s*\(.*\)$/, "")) + " 원문 보기 ↗</a>" + rel + tags + "</div>" +
+        '<a class="btn" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.source.replace(/\s*\(.*\)$/, "")) + TNI("card.source_btn", " 원문 보기 ↗") + "</a>" + rel + tags + "</div>" +
         '<div class="rep-row">' + repBtn("article", edId() + "/" + s.id) + "</div>" +
         talkHTML(s) +
       "</div>" + voteHTML(s) + "</article>";
@@ -495,12 +501,12 @@
     var d = s.discussion, live = /^https?:$/.test(location.protocol), sid = esc(s.id);
     var cm = live ? '<div class="cmts" data-cmts="' + sid + '"><p class="cmts__empty">댓글은 기사를 펼치면 불러와요.</p></div>' : "";
     if (!(d && d.approved === true && d.question)) return '<section class="talk" aria-label="댓글">' + cm + "</section>";
-    var op = d.operator_comment ? '<div class="cmt cmt--op cmt--pin"><div class="cmt__h"><b class="cmt__n">운영자</b><span class="badge-op">운영자</span><span class="cmt__pin">📌 고정</span></div><p class="cmt__t">' + esc(d.operator_comment) + "</p>" +
+    var op = d.operator_comment ? '<div class="cmt cmt--op cmt--pin"><div class="cmt__h"><b class="cmt__n">' + TNI("discussion.operator", "운영자") + '</b><span class="badge-op">' + TNI("discussion.operator", "운영자") + '</span><span class="cmt__pin">📌 고정</span></div><p class="cmt__t">' + esc(d.operator_comment) + "</p>" +
       (live ? '<div class="cmt__a"><button type="button" class="cbtn" data-op-reply>↳ 답글</button></div>' : "") + "</div>" : "";
     var open = !!state.dqOpen[s.id];
     return '<section class="talk talk--dq' + (open ? " is-open" : "") + '" aria-label="댓글">' +
       '<button type="button" class="dq-line" data-dq="' + sid + '" aria-expanded="' + open + '" aria-controls="dqm-' + sid + '">' +
-        '<span class="dq-line__h">💬 오늘의 질문:</span><span class="dq-line__q">' + esc(d.question) + '</span><span class="dq-line__n" data-dq-n></span><i aria-hidden="true">▾</i></button>' +
+        '<span class="dq-line__h">' + TNI("discussion.q_h", "💬 오늘의 질문:") + '</span><span class="dq-line__q">' + esc(d.question) + '</span><span class="dq-line__n" data-dq-n></span><i aria-hidden="true">▾</i></button>' +
       '<div class="talk__more" id="dqm-' + sid + '"' + (open ? "" : " hidden") + '><p class="dq__q dq__q--full">' + esc(d.question) + "</p>" + op + cm + "</div></section>";
   }
   function toggleTalk(btn) {
@@ -584,7 +590,7 @@
     var hl = state.data.highlights || [], ed = edId(), ref = refTime(), m = mine();
     var list = state.data.stories.filter(function (s) { return hl.indexOf(s.id) < 0; });
     if (state.impact) list = list.filter(function (s) { return impacts(s).indexOf(state.impact) >= 0; });
-    var must = list.filter(function (s) { return tps(s).topic === "visa" || impacts(s).indexOf("비자·체류") >= 0; });
+    var must = list.filter(function (s) { return tps(s).topic === "visa" || impacts(s).indexOf(IMPACT[0].k) >= 0; });
     var rest = list.filter(function (s) { return must.indexOf(s) < 0; });
     var rt = m.region && m.region.topic, reg = rt ? rest.filter(function (s) { return tps(s).all.indexOf(rt) >= 0; }) : [];
     var nat = rest.filter(function (s) { return reg.indexOf(s) < 0; });
@@ -624,17 +630,17 @@
   }
   function renderFeed() {
     var list = feedList(), tab = state.tab;
-    var title = tab === "feed" ? "⭐ 내 피드" : tab === "all" ? "전체 뉴스" : topicOf(tab).emoji + " " + topicOf(tab).label;
+    var title = tab === "feed" ? TNI("nav.myfeed_tab", "⭐ 내 피드") : tab === "all" ? TNI("feed.all_title", "전체 뉴스") : topicOf(tab).emoji + " " + topicOf(tab).label;
     $("feedTitleText").textContent = title;
-    $("feedCount").textContent = list.length + "건" + (topShown() ? " (주요 뉴스 제외)" : "") + (L.hasTaste() ? " · 내 취향 반영 순서" : "");
+    $("feedCount").textContent = list.length + TNI("footer.count_unit", "건") + (topShown() ? TNI("feed.ex_top", " (주요 뉴스 제외)") : "") + (L.hasTaste() ? TNI("feed.taste", " · 내 취향 반영 순서") : "");
     var sel = selected(), intro = "";
     if (tab === "feed") {
-      intro = sel ? '<p class="feed-intro">내 주제: ' + sel.map(function (k) { var t = topicOf(k); return '<span class="mini" style="--tc:' + t.color + '">' + t.emoji + " " + esc(t.label) + "</span>"; }).join("") +
-        ' <button type="button" class="linkbtn" data-open-settings>바꾸기</button></p>'
-        : '<p class="feed-intro feed-intro--cta">지금은 모든 주제를 보여 드려요. <button type="button" class="linkbtn" data-open-settings>🧩 관심 주제 고르기</button></p>';
+      intro = sel ? '<p class="feed-intro">' + TNI("feed.mine", "내 주제: ") + sel.map(function (k) { var t = topicOf(k); return '<span class="mini" style="--tc:' + t.color + '">' + t.emoji + " " + esc(t.label) + "</span>"; }).join("") +
+        ' <button type="button" class="linkbtn" data-open-settings>' + TNI("feed.change", "바꾸기") + '</button></p>'
+        : '<p class="feed-intro feed-intro--cta">' + TNI("feed.all_now", "지금은 모든 주제를 보여 드려요.") + ' <button type="button" class="linkbtn" data-open-settings>' + TNI("feed.pick_topics", "🧩 관심 주제 고르기") + '</button></p>';
     }
-    var empty = tab === "feed" ? "이 판에는 내 주제 기사가 없어요. ☰ 메뉴의 '전체 보기'를 눌러 보세요."
-      : tab === "all" ? "이 판에는 아직 기사가 없어요." : "이 판에는 " + topicOf(tab).label + " 기사가 없어요. ☰ 메뉴에서 다른 주제를 골라 보세요.";
+    var empty = tab === "feed" ? TNI("feed.empty_mine", "이 판에는 내 주제 기사가 없어요. ☰ 메뉴의 '전체 보기'를 눌러 보세요.")
+      : tab === "all" ? TNI("feed.empty_all", "이 판에는 아직 기사가 없어요.") : TNI("feed.empty_topic", "이 판에는 {t} 기사가 없어요. ☰ 메뉴에서 다른 주제를 골라 보세요.").replace("{t}", topicOf(tab).label);
     // 한인 영향도 필터 칩(이 판에 impact 데이터가 있을 때만) — 누르면 그 영향 태그가 있는 기사만
     var cnt = {}, any = false;
     list.forEach(function (s) { impacts(s).forEach(function (k) { cnt[k] = (cnt[k] || 0) + 1; any = true; }); });
@@ -652,8 +658,8 @@
     // 📌 비자 소식: 외국인·비자(주 주제) 기사는 피드 맨 위에 고정(이 판에 있을 때만, 외국인·비자 탭 자체에선 안 함)
     var pin = [];
     if (tab !== "visa") { pin = list.filter(function (s) { return tps(s).topic === "visa"; }); list = list.filter(function (s) { return pin.indexOf(s) < 0; }); }
-    var pinHTML = pin.length ? '<div class="pin" aria-label="비자 소식 고정"><p class="pin__h">📌 비자 소식 <small>외국인·비자 기사를 맨 위에 모았어요</small></p>' + pin.map(cardHTML).join("") + "</div>" : "";
-    if (!FIRST_SHEET_AUTO && !prof().onboarded) intro = '<p class="feed-intro feed-intro--cta feed-intro--hello">👋 처음 오셨나요? 어떤 분인지 고르면 관심 주제를 먼저 골라 드려요. <button type="button" class="linkbtn" data-ob-start>고르기</button></p>' + intro;
+    var pinHTML = pin.length ? '<div class="pin" aria-label="' + TNI("pin.aria", "비자 소식 고정") + '"><p class="pin__h">' + TNI("pin.h", "📌 비자 소식") + ' <small>' + TNI("pin.sub", "외국인·비자 기사를 맨 위에 모았어요") + '</small></p>' + pin.map(cardHTML).join("") + "</div>" : "";
+    if (!FIRST_SHEET_AUTO && !prof().onboarded) intro = '<p class="feed-intro feed-intro--cta feed-intro--hello">' + TNI("feed.hello", "👋 처음 오셨나요? 어떤 분인지 고르면 관심 주제를 먼저 골라 드려요.") + ' <button type="button" class="linkbtn" data-ob-start>' + TNI("feed.hello_btn", "고르기") + '</button></p>' + intro;
     $("feed").innerHTML = intro + imp + ((pin.length || list.length) ? pinHTML + withInfeed(list.map(cardHTML)) : '<div class="empty">' + esc(empty) + "</div>");
   }
 
@@ -680,7 +686,7 @@
     var open = force != null ? force : !card.classList.contains("is-open");
     card.classList.toggle("is-open", open);
     card.querySelector(".card__head").setAttribute("aria-expanded", String(open));
-    card.querySelector(".more__t").textContent = open ? "접기" : "자세히";
+    card.querySelector(".more__t").textContent = open ? TNI("card.fold", "접기") : TNI("card.more", "자세히");
     if (open && window.TNSocial && window.TNSocial.mountComments) { var c = card.querySelector("[data-cmts]"); if (c) window.TNSocial.mountComments(c, edId(), byId(card.id)); }
   }
   function openStory(id, fromHash) {

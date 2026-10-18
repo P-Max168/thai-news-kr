@@ -22,6 +22,17 @@ BKK = dt.timezone(dt.timedelta(hours=7))
 SITE = "https://tnews.pmaxone.com/"
 REPO = os.environ.get("GITHUB_REPOSITORY", "P-Max168/thai-news-kr")
 SLOTS = [("am", 7, 8), ("pm", 18, 8)]
+# 언어판(R-zh-5, 2026-10-18): site/<lang>.json 의 site_url·watch_slots(예 zh 시험 = [["md", 13, 0]]). 한국판은 위 값 그대로
+try:
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import siteconf
+    _C = siteconf.load()
+    if _C.get("lang", "ko") != "ko":
+        SITE = _C.get("site_url", SITE)
+        REPO = os.environ.get("GITHUB_REPOSITORY", _C.get("repo", REPO))
+        SLOTS = [tuple(x) for x in _C.get("watch_slots", SLOTS)]
+except Exception as _e:   # 설정을 못 읽으면 한국판 기본값(감시는 계속)
+    print("siteconf 못 읽음 — 기본값:", _e, file=sys.stderr)
 LIMIT_MIN = 90
 LABEL = "edition-gap"
 MENTION = "@P-Max168"
@@ -104,15 +115,17 @@ def open_gap_issues():
 
 
 def gap_list(latest, upto):
-    m = re.match(r"(\d{4}-\d{2}-\d{2})-(am|pm)$", latest or "")
-    if not m:
+    m = re.match(r"(\d{4}-\d{2}-\d{2})-(am|md|pm)$", latest or "")
+    order = [s[0] for s in SLOTS]   # 한국판 am→pm, zh 시험 md 하나(하루 1판)
+    if not m or m.group(2) not in order:
         return []
     d, slot, out = dt.date.fromisoformat(m.group(1)), m.group(2), []
     for _ in range(120):
-        if slot == "am":
-            slot = "pm"
+        i = order.index(slot)
+        if i + 1 < len(order):
+            slot = order[i + 1]
         else:
-            slot, d = "am", d + dt.timedelta(days=1)
+            slot, d = order[0], d + dt.timedelta(days=1)
         ed = "%s-%s" % (d.isoformat(), slot)
         if ed > upto:
             break

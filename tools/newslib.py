@@ -21,8 +21,16 @@ from datetime import datetime
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 EDITION_LABEL = {"am": "아침판", "pm": "저녁판", "early": "새벽판"}
-EDITION_ORDER = {"early": 0, "am": 1, "pm": 2}
-ID_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-(am|pm|early)$")
+# md = 점심판(중국어판 시험 13:00, 2026-10-18 R-zh-2). 순서 값만 늘림(early<am<md<pm) — 한국판 판 정렬·비교 결과는 그대로
+EDITION_ORDER = {"early": 0, "am": 1, "md": 2, "pm": 3}
+ID_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-(am|md|pm|early)$")
+# ── 언어판 설정(R-zh-2, 2026-10-18): 시스템 공유·편집 기준 분리. 한국판(site/LANG=ko 또는 없음)은 아래 값이 지금과 똑같음 ──
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import siteconf  # noqa: E402
+SITE = siteconf.load()
+LANG = SITE["lang"]
+if LANG != "ko":
+    EDITION_LABEL = dict(SITE["edition_label"])
 CATS = {"politics", "economy", "society", "local", "visa", "sns"}          # 옛 형식(10월 2일 저녁판까지)
 CAT_ORDER = ["politics", "economy", "society", "local", "visa", "sns"]
 # 새 형식 주제 11개 (assets/topics.js 와 같은 id·순서) — 2026-10-03 운영자 결정: 파타야·시라차 → 동부(촌부리·라용), 북부·남부 추가
@@ -31,6 +39,8 @@ TOPICS = {
     "poleco": "정치·경제", "society": "사회·사건사고", "visa": "외국인·비자",
     "life": "생활·물가·부동산", "travel": "여행·맛집", "ent": "연예·스포츠·SNS", "weather": "날씨·교통",
 }
+if LANG != "ko" and siteconf.topic_ids(SITE):   # 언어판 주제(예: zh 에는 cn 涉华 추가) — site/topics.<lang>.json
+    TOPICS = {x["id"]: x["label"] for x in SITE["topics"]["TOPICS"]}
 TOPIC_ORDER = list(TOPICS)
 # 옛 주제 id(2026-10-03 아침판까지 쓰임) → 새 id. 그 판까지는 별칭으로 받아 주고, 저녁판부터는 막는다.
 TOPIC_ALIAS = {"pattaya": "east", "sriracha": "east"}
@@ -45,6 +55,8 @@ _BL = None
 #   also[]        : 같은 사건을 보도한 다른 매체 [{source, url}] (확인한 실제 기사 주소만)
 #   issue         : {id, title} — 이어지는 이슈(tools/issues.json 등록부의 id 만)   quick_replies[] : 추천 댓글 3~4개
 IMPACTS = ["비자·체류", "환율·물가", "교통·사고", "치안", "날씨·재해"]
+if LANG != "ko":
+    IMPACTS = list(SITE.get("impacts") or IMPACTS)
 ISSUES_FILE = ROOT / "tools" / "issues.json"
 ISSUE_ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{2,60}$")
 THAI_RE = re.compile(r"[\u0E00-\u0E7F]")
@@ -92,7 +104,7 @@ def thai_check(data):
         if isinstance(d, dict): chk((s.get("id"), "discussion"), [d.get("question") or "", d.get("operator_comment") or ""])
     br = data.get("briefing")
     chk("briefing", [b.get("text") or "" for b in br] if isinstance(br, list) else (br or ""))
-    for i, k in enumerate(data.get("korea_top") or []):
+    for i, k in enumerate(data.get((SITE.get("home_section") or {}).get("key") or "korea_top") or []):
         if isinstance(k, dict): chk(("korea_top", i), k.get("headline") or "")
 
 
@@ -200,6 +212,60 @@ def krw_check(data):
                       ["%s: '%s' 뒤에 '%s' ← …%s…" % (w, a, g, c) for w, a, g, c in miss])
 
 
+# ---- 泰铢 → 元 환산(중국어판, 2026-10-18 R-zh-2) — 한국판 krw_check 와 같은 자리, 표기만 언어별(site/zh.json currency.format) ----
+#   규칙(TRANSLATION_RULES.zh.md): 금액마다 '350泰铢（约70元）' · 판 하나 = 환율 하나(data fx.THB_CNY). 반각 괄호 '(约…元)' 도 받아 줌
+_ZNUM = r"\d[\d,]*(?:\.\d+)?"
+CNY_BAHT_RE = re.compile(r"(?<![\d,.])(%s)\s*(?:[万亿]\s*)?(?:[~\-–至]\s*%s\s*(?:[万亿]\s*)?)?泰铢" % (_ZNUM, _ZNUM))
+CNY_AFTER_RE = re.compile(r"\**\s*[（(]\s*约\s*[\d,.万亿~\-–至\s]*元")
+CNY_BEFORE_RE = re.compile(r"元\s*[（(]\s*约\s*$")
+
+
+def cny_missing(data):
+    out = []
+    for where, t in _shown_texts(data):
+        for m in CNY_BAHT_RE.finditer(t):
+            if CNY_AFTER_RE.match(t, m.end()) or CNY_BEFORE_RE.search(t[:m.start()]):
+                continue
+            out.append((where, m.group(0), t[max(0, m.start() - 10):m.end() + 10]))
+    return out
+
+
+def cny_check(data):
+    rate = (data.get("fx") or {}).get("THB_CNY")
+    miss = cny_missing(data)
+    assert not miss, ("泰铢 금액 %d건에 인민币 환산 없음 — 판 환율 %s 로 '泰铢' 바로 뒤에 （约N元）(TRANSLATION_RULES.zh)" % (len(miss), rate),
+                      ["%s: '%s' ← …%s…" % (w, a, c) for w, a, c in miss])
+
+
+def money_check(data):
+    """판 글 금액 환산 검사 — 언어판 설정 currency.check(ko=krw_check, zh=cny_check)."""
+    return cny_check(data) if SITE.get("currency", {}).get("check") == "cny_check" else krw_check(data)
+
+
+def money_ok(text):
+    """한 문장 검사(for_me·quick_replies): ko=바트(약 N원), zh=泰铢（约N元）."""
+    if SITE.get("currency", {}).get("check") == "cny_check":
+        return not cny_missing({"briefing": [{"text": text}]})
+    return baht_ok(text)
+
+
+HANGUL_RE = re.compile(r"[\u1100-\u11FF\u3130-\u318F\uAC00-\uD7AF]")
+
+
+def script_check(data):
+    """언어판 금지 문자(site/<lang>.json validate.forbid_scripts): ko = cjk(한자·가나, 번역 잔재), zh = hangul(한글). thai 는 thai_check 가 따로."""
+    fs = SITE.get("validate", {}).get("forbid_scripts", ["thai", "cjk"])
+    if "cjk" in fs:
+        cjk_check(data)
+    if "hangul" in fs:
+        def chk(where, v):
+            for t in (v if isinstance(v, list) else [v]):
+                m = HANGUL_RE.search(t) if isinstance(t, str) else None
+                assert not m, (where, "중국어판 글에 한글 금지 — 中文으로 고칠 것", t[max(0, m.start() - 12):m.end() + 8])
+        for where, t in _shown_texts(data):
+            chk(where, t)
+
+
 # 추천 댓글은 독자 본인이 올리는 문장 — 겪지 않은 경험을 지어내게 만드는 표현 금지
 FAKE_EXP_RE = re.compile(r"저도\s*(거기|그\s*동네|근처|여기)\s*(살|사는|살아)|제가\s*(직접|가\s*봤|가봤|겪|봤)|저도\s*(겪|당했|가\s*봤|가봤|다녀왔|봤어)|우리\s*(집|동네)도|저희\s*(집|동네|가게)")
 LINK_RE = re.compile(r"https?://|www\.|\.(com|net|org|co|th|me|ly)\b", re.I)
@@ -239,7 +305,7 @@ def validate_extras(s):
         fm = s["for_me"]
         assert isinstance(fm, str) and len(fm) <= 160, (sid, "for_me 는 한 문장(160자 이하) 문자열, 의미 없으면 \"\"")
         assert not THAI_RE.search(fm), (sid, "for_me 에 태국 글자 금지")
-        assert not blocked(fm) and baht_ok(fm), (sid, "for_me 차단 키워드 또는 바트 금액에 (약 N원) 없음")
+        assert not blocked(fm) and money_ok(fm), (sid, "for_me 차단 키워드 또는 바트 금액에 (약 N원) 없음")
     if "also" in s:
         al = s["also"]
         assert isinstance(al, list) and len(al) <= 8, (sid, "also 는 최대 8개 목록")
@@ -262,7 +328,7 @@ def validate_extras(s):
             assert isinstance(q, str) and 2 <= len(q.strip()) <= 40, (sid, "quick_replies 한 줄 2~40자", q)
             assert not THAI_RE.search(q) and not LINK_RE.search(q) and not blocked(q), (sid, "quick_replies 태국 글자·링크·차단 키워드 금지", q)
             assert not FAKE_EXP_RE.search(q), (sid, "quick_replies 에 겪지 않은 경험을 꾸미는 표현 금지('저도 거기 살아요' 등)", q)
-            assert baht_ok(q), (sid, "quick_replies 바트 금액엔 (약 N원)", q)
+            assert money_ok(q), (sid, "quick_replies 바트 금액엔 (약 N원)", q)
 
 
 def _blocklist():
@@ -297,6 +363,8 @@ def KR(headline, source, url, published=None, badge=None):
 
 def label_for(date, edition):
     m, d = int(date[5:7]), int(date[8:10])
+    if LANG != "ko":
+        return SITE.get("label_format", "{m}/{d} {slot}").format(m=m, d=d, slot=EDITION_LABEL[edition])
     return "%d월 %d일 %s" % (m, d, EDITION_LABEL[edition])
 
 
@@ -304,7 +372,8 @@ def validate(data):
     """사람이 실수하기 쉬운 부분만 점검. 문제 있으면 예외."""
     eid = data["id"]
     m = ID_RE.match(eid)
-    assert m, "id 형식 오류: %s (YYYY-MM-DD-am|pm|early)" % eid
+    assert m, "id 형식 오류: %s (YYYY-MM-DD-am|pm|early|md)" % eid
+    assert m.group(2) in SITE.get("slots", ["early", "am", "pm"]), "이 언어판(%s)에 없는 판 슬롯: %s" % (LANG, m.group(2))
     assert data["date"] == m.group(1) and data["edition"] == m.group(2), "id/date/edition 불일치"
     ids = [s["id"] for s in data["stories"]]
     assert len(ids) == len(set(ids)), "기사 id 중복"
@@ -361,7 +430,7 @@ def validate(data):
     # trends is a legacy field. It is intentionally optional and ignored: old editions
     # may retain it for history, while new editions do not collect or render it.
     # discussion(오늘의 질문) 건수 제한 없음 — 2026-10-03 운영자 결정: 판의 모든 기사에(승인된 것만 화면에)
-    kt = data.get("korea_top")
+    kt = data.get((SITE.get("home_section") or {}).get("key") or "korea_top")   # 홈 나라 칸: ko=korea_top, zh=china_top (R-zh-3)
     if kt is not None:   # 🇰🇷 오늘의 한국 주요 뉴스(tools/fetch_korea.py) — 최대 10건, 링크 필수
         assert isinstance(kt, list) and len(kt) <= 10, "korea_top 은 최대 10건 목록"
         for i, k in enumerate(kt):
@@ -376,9 +445,9 @@ def validate(data):
     for h in data["highlights"]:
         assert h in ids, "highlights 에 없는 id: " + h
     assert len(data["highlights"]) == 3, "highlights 는 3개"
-    cjk_check(data)
+    script_check(data)   # ko = cjk_check(한자·가나), zh = 한글 금지 — site/<lang>.json validate (R-zh-2)
     thai_check(data)
-    krw_check(data)   # 2026-10-05: 바트 금액마다 원화 환산(없으면 판 저장 실패)
+    money_check(data)   # 2026-10-05: 바트 금액마다 원화 환산(없으면 판 저장 실패). zh = 泰铢（约N元）
     br = data.get("briefing")
     if new:
         assert isinstance(br, list), "새 형식 briefing 은 [{topic, text, story_id}] 목록 (newslib.B 사용)"
@@ -587,7 +656,7 @@ def build_ads():
         return
     ads = json.loads(src.read_text(encoding="utf-8"))
     for sl in ads.get("slots", []):
-        assert sl.get("id") in ("top", "mid", "korea-mid", "infeed", "drawer", "footer", "nearby-food", "nearby-massage", "nearby-pet", "nearby-beauty", "nearby-moto",
+        assert sl.get("id") in ("top", "mid", "korea-mid", "home-mid", "china-mid", "infeed", "drawer", "footer", "nearby-food", "nearby-massage", "nearby-pet", "nearby-beauty", "nearby-moto",
                              "nearby-hair", "nearby-mart",
                              "region-east", "region-bangkok", "region-north", "region-south", "region-other"), ("ads", sl.get("id"))  # region-* = 내 피드 지역 광고(2026-10-03 야간)  # hair·mart = 10-03 v1 옛 자리(지금 화면 없음, 남아 있어도 무해)
         for it in sl.get("items", []):
@@ -601,6 +670,13 @@ def build_ads():
         for k in ("link", "kakao_url", "line_url"):
             assert not ads["dragon"].get(k) or str(ads["dragon"][k]).startswith("https://"), ("ads dragon", k, "https:// 만")
         assert str(ads["dragon"].get("tel") or "tel:").startswith("tel:"), ("ads dragon", "tel")
+    # 언어판(R-zh-8, 2026-10-18): data/ads.json 에 dragon_<lang>(그 언어 문구)이 있으면 그것을 배너 데이터로(링크·전화 검사 같음). 한국판은 위 그대로
+    ov = ads.pop("dragon_" + LANG, None) if LANG != "ko" else None
+    if isinstance(ov, dict):
+        ads["dragon"] = {k: ov.get(k) for k in ("id", "label", "title", "link", "tel", "kakao_url", "line_url", "display")}
+        ads["dragon"]["label"] = ads["dragon"].get("label") or ads.get("label")
+        for k in ("link", "kakao_url", "line_url"):
+            assert not ads["dragon"].get(k) or str(ads["dragon"][k]).startswith("https://"), ("ads dragon_" + LANG, k, "https:// 만")
     (DATA / "ads.js").write_text("window.TN_ADS = %s;\n" % json.dumps(ads, ensure_ascii=False), encoding="utf-8")
 
 
