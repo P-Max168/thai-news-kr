@@ -301,3 +301,7 @@
   - 확인: 로컬 127.0.0.1:8751 regress 56/1(헤더 빠른 정보 최악 경우 — 기존 실패)·screenshot FAIL 1(알려진 👎 vi2 거짓 실패)·변경 전 HEAD 와 screenshot 12장 픽셀 비교 같음(시각 숫자만 다름), zh 시험(site/zh.json 넣은 복사본) site_build → 홈 한글 0개·인증 메타 0개·JSON-LD 泰国新闻速览, google-site-verification 줄 그대로, e 쪽 태국 글자·'฿' 검사 통과.
   - 미확인: 라이브 반영(배포 뒤 아래 줄), 검색엔진 실제 반영(며칠), 검색량 수치(키워드 도구 없음 — 자동완성은 '많이 찾는 말'의 신호일 뿐), 홈 탭 제목은 app.js 가 '태국 뉴스 한눈에 — 10월 N일 아침판'으로 바꿈(구글은 렌더된 제목을 쓸 수 있음 — 화면 동작 변경이라 안 건드림).
   - 라이브 확인(09:12, 커밋 38faada, curl 캐시 우회): 홈 새 title·tn-ld(NewsMediaOrganization)·tn-h1·google-site-verification 그대로, e/2026-10-18-am/ 새 제목·설명·h1·CollectionPage, about.html description. verify_live OK(seo: e 쪽 기사 15), 라이브 regress 56/1(같은 기존 실패).
+<!-- seo-naver-verify-1018 -->
+- 10-18 09:26 · 🔎 [낮음·검색] **네이버 서치어드바이저 인증 메타 넣기**(민구님 10-18 네이버 등록 진행 — Grok, 백업 태그 `backup-20261018-0926-seo-naver-verify`). index.html 홈에만: 주석이던 네이버 자리를 풀어 `<meta name="naver-site-verification" content="e51d7bc94318de53352045da2f6239f1bdc1e78d" />`, 구글 인증 줄 그대로. 다른 쪽(e/·안내 쪽) 안 건드림.
+  - 확인: 로컬 diff 2줄(index.html 네이버 줄 + 안내 주석 '대기'→'10-18 넣음'), zh 시험(/tmp 복사본 + site/zh.json) site_build → 인증 메타 0개, 바꾸기 전 HEAD 와 zh index.html 결과 똑같음(언어판에 한국판 값 안 넘어감).
+  - 미확인: 라이브 반영(배포 뒤 아래 줄), 네이버 쪽 '소유확인' 통과(사이트 반영 뒤 네이버 화면에서 누름).
