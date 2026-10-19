@@ -1,7 +1,7 @@
 /* tools/fetch_ticker.py 가 만듦(GitHub Actions) — 직접 고치지 말 것 */
 window.TN_TICKER = {
  "v": 1,
- "updated_at": "2026-10-19T05:35:54+07:00",
+ "updated_at": "2026-10-19T07:41:47+07:00",
  "fx": {
   "THB_KRW": 39.9321,
   "USD_THB": 33.4303,
@@ -10,21 +10,21 @@ window.TN_TICKER = {
   "source": "ExchangeRate-API (open.er-api.com)",
   "url": "https://www.exchangerate-api.com/",
   "THB_CNY": 0.20049,
-  "fetched_at": "2026-10-19T05:35:54+07:00",
+  "fetched_at": "2026-10-19T07:41:47+07:00",
   "prev_THB_KRW": 39.9431,
   "prev_rate_time": "2026-10-17T07:02:32+07:00",
   "prev_USD_THB": 33.4303
  },
  "usdt": {
-  "USDT_THB": 33.406,
-  "change": 0.048,
-  "change_pct": 0.144,
-  "prev_close": 33.3581,
-  "price_time": "2026-10-19T05:33:59+07:00",
+  "USDT_THB": 33.3801,
+  "change": -0.0237,
+  "change_pct": -0.071,
+  "prev_close": 33.4037,
+  "price_time": "2026-10-19T07:40:58+07:00",
   "google": true,
   "source": "구글 파이낸스 (Google Finance)",
   "url": "https://www.google.com/finance/quote/USDT-THB",
-  "fetched_at": "2026-10-19T05:35:55+07:00"
+  "fetched_at": "2026-10-19T07:41:47+07:00"
  },
  "gold": {
   "bar_sell": 66100.0,
@@ -35,7 +35,7 @@ window.TN_TICKER = {
   "unit": "금괴 96.5% · 1바트(15.244 g)",
   "source": "태국 금거래상협회(Gold Traders Association)",
   "url": "https://www.goldtraders.or.th/",
-  "fetched_at": "2026-10-19T05:35:56+07:00"
+  "fetched_at": "2026-10-19T07:41:49+07:00"
  },
  "fuel": {
   "gasohol95": 41.44,
@@ -50,53 +50,53 @@ window.TN_TICKER = {
   "note": "방콕 소매가(방콕 지방세 미포함)",
   "source": "방짝(Bangchak) 유가 공지",
   "url": "https://www.bangchak.co.th/th/oilprice",
-  "fetched_at": "2026-10-19T05:35:57+07:00"
+  "fetched_at": "2026-10-19T07:41:49+07:00"
  },
  "wx": {
   "regions": {
    "pattaya": {
-    "t": 25.3,
+    "t": 26.2,
     "code": 3,
-    "day": 0,
-    "time": "2026-10-19T05:30:00+07:00",
-    "rain": 12
+    "day": 1,
+    "time": "2026-10-19T07:30:00+07:00",
+    "rain": 37
    },
    "sriracha": {
-    "t": 25.9,
+    "t": 26.2,
     "code": 3,
-    "day": 0,
-    "time": "2026-10-19T05:30:00+07:00",
-    "rain": 8
+    "day": 1,
+    "time": "2026-10-19T07:30:00+07:00",
+    "rain": 21
    },
    "bangkok": {
-    "t": 24.2,
-    "code": 53,
-    "day": 0,
-    "time": "2026-10-19T05:30:00+07:00",
-    "rain": 19
+    "t": 25.8,
+    "code": 3,
+    "day": 1,
+    "time": "2026-10-19T07:30:00+07:00",
+    "rain": 33
    }
   },
   "source": "Open-Meteo",
   "url": "https://open-meteo.com/",
-  "fetched_at": "2026-10-19T05:35:58+07:00"
+  "fetched_at": "2026-10-19T07:41:51+07:00"
  },
  "aq": {
   "regions": {
    "pattaya": {
-    "pm": 6.6,
-    "time": "2026-10-19T05:00:00+07:00"
+    "pm": 7.8,
+    "time": "2026-10-19T07:00:00+07:00"
    },
    "sriracha": {
-    "pm": 8.6,
-    "time": "2026-10-19T05:00:00+07:00"
+    "pm": 8.4,
+    "time": "2026-10-19T07:00:00+07:00"
    },
    "bangkok": {
-    "pm": 18.9,
-    "time": "2026-10-19T05:00:00+07:00"
+    "pm": 15.7,
+    "time": "2026-10-19T07:00:00+07:00"
    }
   },
   "source": "Open-Meteo 대기질 (CAMS)",
   "url": "https://open-meteo.com/en/docs/air-quality-api",
-  "fetched_at": "2026-10-19T05:35:58+07:00"
+  "fetched_at": "2026-10-19T07:41:51+07:00"
  }
 };
