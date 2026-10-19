@@ -1,48 +1,54 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-20T03:12:20+07:00",
+ "updated_at": "2026-10-20T05:55:37+07:00",
  "items": [
   {
-   "title": "“제도 마련” 수습 나선 여당 무색…김민석 “부승찬, 윤리위 회부”",
+   "title": "다시 불거진 조희대 탄핵론…헌재 파면 가능성은 낮은데, 역풍만 일 수도",
    "source": "경향신문",
-   "time": "2026-10-19T19:41:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610192141015"
+   "time": "2026-10-20T04:00:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610200600081"
   },
   {
-   "title": "이 대통령 “전작권 반드시 조기 환수…한-미 협의 잘 되고 있다”",
-   "source": "한겨레",
-   "time": "2026-10-19T19:12:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/bluehouse/1283094.html"
+   "title": "[속보] 경찰, ‘송파 장모 살해·아내 납치범’ 신상공개…“잔인성 인정”",
+   "source": "매일경제",
+   "time": "2026-10-19T15:29:42+07:00",
+   "url": "https://www.mk.co.kr/news/society/12179822"
   },
   {
-   "title": "‘오세훈 비선실세’ 지목된 이종현 “민주당, 정상적 절차 왜곡했다”",
-   "source": "경향신문",
-   "time": "2026-10-19T18:35:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610192035001"
-  },
-  {
-   "title": "李대통령 \"주식시장 조만간 필요한 조치…부동산 진폭 줄여야\"",
-   "source": "연합뉴스",
-   "time": "2026-10-19T16:09:09+07:00",
-   "url": "https://www.yna.co.kr/view/AKR20261019157400001"
-  },
-  {
-   "title": "김여정 “남부 국경 상황 불안정…대남 확성기 방송 재개 검토”",
-   "source": "한겨레",
-   "time": "2026-10-19T20:11:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1283119.html"
-  },
-  {
-   "title": "[단독] 이상동기범죄 집중 관리한다더니…‘조건’ 좁혀 최충락 누락",
+   "title": "“부디 편안히 쉬길”…부천 공장 화재 순직 소방관 영결식",
    "source": "KBS 뉴스",
-   "time": "2026-10-19T19:22:00+07:00",
-   "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8689453"
+   "time": "2026-10-20T04:15:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8689677"
   },
   {
-   "title": "'송파 장모살인·아내납치' 피의자 신상정보 공개…26세 김성우",
-   "source": "연합뉴스",
-   "time": "2026-10-19T15:59:34+07:00",
-   "url": "https://www.yna.co.kr/view/AKR20261019157651004"
+   "title": "이 대통령 “한국 주식시장, 매우 저평가···조만간 필요한 조치”",
+   "source": "경향신문",
+   "time": "2026-10-19T20:15:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610192215001"
+  },
+  {
+   "title": "北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\"",
+   "source": "연합뉴스TV",
+   "time": "2026-10-19T17:16:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261019191654SHO"
+  },
+  {
+   "title": "트럼프, ‘11월 김정은 회담’ 질문에 “모르겠다, 요청 확실치 않아”",
+   "source": "한겨레",
+   "time": "2026-10-20T05:02:00+07:00",
+   "url": "https://www.hani.co.kr/arti/international/america/1283167.html"
+  },
+  {
+   "title": "서울공소청장, 한동훈-조국 수사 비교에 \"국민 법 감정, 눈높이 안 맞는 부분 있다\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-19T15:28:02+07:00",
+   "url": "https://imnews.imbc.com/news/2026/society/article/6859068_36918.html"
+  },
+  {
+   "title": "김민석 조문 차량, ‘응급 전용 구역’ 주차 논란…비서실장 “제 잘못”",
+   "source": "한겨레",
+   "time": "2026-10-19T13:37:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/politics_general/1283040.html"
   },
   {
    "title": "李 \"소셜미디어는 소통 목숨줄… 마지막 순간에 날 살려줄 숨구멍\"",
@@ -51,16 +57,10 @@ window.KOREA_NEWS = {
    "url": "https://www.chosun.com/politics/politics_general/2026/10/20/W57OKMEM2FDEJK2ZX4KBHX5OCY/"
   },
   {
-   "title": "이 대통령 “저쪽 의원 몇명 빼오는 쌍팔년도식 정계개편 무의미”",
-   "source": "한겨레",
-   "time": "2026-10-19T20:11:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/bluehouse/1283150.html"
-  },
-  {
-   "title": "트럼프 지지율 33% ‘최저’… 중간선거 2주앞 상하원 모두 빨간불",
-   "source": "동아일보",
-   "time": "2026-10-20T02:30:00+07:00",
-   "url": "https://www.donga.com/news/Inter/article/all/20261020/134871086/2"
+   "title": "트럼프·공화당, 중간선거 패색 먹구름에 ’네탓’ 내홍",
+   "source": "연합뉴스TV",
+   "time": "2026-10-20T02:56:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261020045624ic2"
   }
  ]
 };
