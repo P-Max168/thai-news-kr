@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-19T13:18:17+07:00",
+ "updated_at": "2026-10-19T20:57:03+07:00",
  "items": [
   {
-   "title": "[현장] “무거운 장비도 긴장 속 출동도 내려놓길”…순직 소방관 눈물의 영결식",
-   "source": "한겨레",
-   "time": "2026-10-19T10:33:00+07:00",
-   "url": "https://www.hani.co.kr/arti/area/capital/1283005.html"
-  },
-  {
-   "title": "\"사과 바라시니 사과\"…추미애, 소방 예산 34.5억원 깎았다",
-   "source": "한국경제",
-   "time": "2026-10-19T07:44:37+07:00",
-   "url": "https://www.hankyung.com/article/202610199797H"
-  },
-  {
-   "title": "연일 브런슨 때리는 범여권 \"오버한다\" \"이 땅을 떠나라\"",
-   "source": "조선일보",
-   "time": "2026-10-19T07:53:00+07:00",
-   "url": "https://www.chosun.com/politics/politics_general/2026/10/19/BZ5FUZGECBGYFNLSORPXQ2DG34/"
-  },
-  {
-   "title": "혁신당 두 번째 ‘조희대 탄핵안’ 공개…“국민 명령·정치 의무·혁신당 존재 이유”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-19T09:43:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8688983"
-  },
-  {
-   "title": "李 지지율 '3주 만에 반등' 37.3%‥민주·국힘 오차범위 내",
-   "source": "MBC 뉴스",
-   "time": "2026-10-19T07:38:00+07:00",
-   "url": "https://imnews.imbc.com/news/2026/politics/article/6858913_36911.html"
-  },
-  {
-   "title": "[속보] JMS 정명석, ‘여신도 성폭행’ 추가 혐의 징역 33년",
-   "source": "한겨레",
-   "time": "2026-10-19T11:18:00+07:00",
-   "url": "https://www.hani.co.kr/arti/area/chungcheong/1283010.html"
-  },
-  {
-   "title": "오세훈 “서울 주택공급난, 박원순이 제초제까지 뿌리고 간 탓”",
+   "title": "이 대통령 “전작권 반드시 조기 환수해야”",
    "source": "경향신문",
-   "time": "2026-10-19T10:10:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610191210001"
+   "time": "2026-10-19T19:58:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610192158025"
   },
   {
-   "title": "한병도 \"오세훈, 한강버스 의혹 답해야…수사의뢰 왜 미뤘나\"",
+   "title": "국힘, 김민석 ’응급 구역 주차’ 논란에 “민주당식 민생 행보냐“",
    "source": "연합뉴스TV",
-   "time": "2026-10-19T08:02:00+07:00",
-   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261019100243riJ"
+   "time": "2026-10-19T15:45:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR202610191745305Ad"
   },
   {
-   "title": "스마트워치 받은 60대 여성, 전 남편 흉기에 피습···도주 2시간 만에 검거",
+   "title": "李대통령 \"주식시장 매우 저평가돼 있다\"",
+   "source": "한국경제",
+   "time": "2026-10-19T15:50:35+07:00",
+   "url": "https://www.hankyung.com/article/2026101915581"
+  },
+  {
+   "title": "[속보] 北 김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\"",
+   "source": "조선일보",
+   "time": "2026-10-19T16:19:00+07:00",
+   "url": "https://www.chosun.com/politics/politics_general/2026/10/19/6LMMJ5GMLVHG3FC3UNAS4JRXWI/"
+  },
+  {
+   "title": "혁신당 ‘조희대 탄핵소추안’ 공개…민주당은 “국감 이후 논의” 신중론 유지",
    "source": "경향신문",
-   "time": "2026-10-19T09:51:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610191151001"
+   "time": "2026-10-19T15:59:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610191759001"
   },
   {
-   "title": "수능 전 마지막 학력평가 내일 실시‥고3 37만 2천 명 응시",
+   "title": "김민석, “소방이 재정 쭉쭉” 부승찬 엄중 경고·당 직권조사 명령",
+   "source": "한겨레",
+   "time": "2026-10-19T20:11:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/politics_general/1283113.html"
+  },
+  {
+   "title": "제주, 헤어진 연인 살해 후 자해시도 60대 퇴원...경찰 다시 체포",
+   "source": "헤드라인제주",
+   "time": "2026-10-19T12:32:48+07:00",
+   "url": "https://www.headlinejeju.co.kr/news/articleView.html?idxno=600697"
+  },
+  {
+   "title": "李대통령 지지율 37.3%…민주 36.2%·국힘 40.9% '오차內'[리얼미터]",
+   "source": "연합뉴스",
+   "time": "2026-10-19T06:18:17+07:00",
+   "url": "https://www.yna.co.kr/view/AKR20261019019100001"
+  },
+  {
+   "title": "이 대통령 “저쪽 의원 몇명 빼오는 쌍팔년도식 정계개편 무의미”",
+   "source": "한겨레",
+   "time": "2026-10-19T20:11:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/bluehouse/1283150.html"
+  },
+  {
+   "title": "송파 장모 살해·아내 납치 혐의 피의자는 26살 김성우",
    "source": "MBC 뉴스",
-   "time": "2026-10-19T06:57:47+07:00",
-   "url": "https://imnews.imbc.com/news/2026/society/article/6858904_36918.html"
+   "time": "2026-10-19T16:01:40+07:00",
+   "url": "https://imnews.imbc.com/news/2026/society/article/6859076_36918.html"
   }
  ]
 };
