@@ -1,30 +1,12 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-19T12:19:00+07:00",
+ "updated_at": "2026-10-19T13:18:17+07:00",
  "items": [
   {
-   "title": "고 김진석 소방위 오늘 영결식…차분한 분위기 속 진행",
-   "source": "KBS 뉴스",
-   "time": "2026-10-19T10:01:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8688986"
-  },
-  {
-   "title": "[속보]‘한강버스 리베이트 의혹’ SH 간부, 서울시 수사의뢰 후 직위해제",
-   "source": "경향신문",
-   "time": "2026-10-19T11:09:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610191309001"
-  },
-  {
-   "title": "DMZ 한국 땅 아니라는 브런슨 일파만파…유엔사 진화 나섰지만",
-   "source": "한겨레",
-   "time": "2026-10-19T10:28:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/defense/1282970.html"
-  },
-  {
-   "title": "혁신당, ‘새 조희대 탄핵안’ 공개…“역풍 걱정 말고 동참” 민주 압박",
+   "title": "[현장] “무거운 장비도 긴장 속 출동도 내려놓길”…순직 소방관 눈물의 영결식",
    "source": "한겨레",
    "time": "2026-10-19T10:33:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1283006.html"
+   "url": "https://www.hani.co.kr/arti/area/capital/1283005.html"
   },
   {
    "title": "\"사과 바라시니 사과\"…추미애, 소방 예산 34.5억원 깎았다",
@@ -33,34 +15,52 @@ window.KOREA_NEWS = {
    "url": "https://www.hankyung.com/article/202610199797H"
   },
   {
+   "title": "연일 브런슨 때리는 범여권 \"오버한다\" \"이 땅을 떠나라\"",
+   "source": "조선일보",
+   "time": "2026-10-19T07:53:00+07:00",
+   "url": "https://www.chosun.com/politics/politics_general/2026/10/19/BZ5FUZGECBGYFNLSORPXQ2DG34/"
+  },
+  {
+   "title": "혁신당 두 번째 ‘조희대 탄핵안’ 공개…“국민 명령·정치 의무·혁신당 존재 이유”",
+   "source": "KBS 뉴스",
+   "time": "2026-10-19T09:43:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8688983"
+  },
+  {
    "title": "李 지지율 '3주 만에 반등' 37.3%‥민주·국힘 오차범위 내",
    "source": "MBC 뉴스",
    "time": "2026-10-19T07:38:00+07:00",
    "url": "https://imnews.imbc.com/news/2026/politics/article/6858913_36911.html"
   },
   {
-   "title": "오세훈, 비강남 주택공급 저조 지적에 '전임 시장' 소환",
-   "source": "연합인포맥스",
-   "time": "2026-10-19T09:17:14+07:00",
-   "url": "https://news.einfomax.co.kr/news/articleView.html?idxno=4439895"
+   "title": "[속보] JMS 정명석, ‘여신도 성폭행’ 추가 혐의 징역 33년",
+   "source": "한겨레",
+   "time": "2026-10-19T11:18:00+07:00",
+   "url": "https://www.hani.co.kr/arti/area/chungcheong/1283010.html"
+  },
+  {
+   "title": "오세훈 “서울 주택공급난, 박원순이 제초제까지 뿌리고 간 탓”",
+   "source": "경향신문",
+   "time": "2026-10-19T10:10:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610191210001"
+  },
+  {
+   "title": "한병도 \"오세훈, 한강버스 의혹 답해야…수사의뢰 왜 미뤘나\"",
+   "source": "연합뉴스TV",
+   "time": "2026-10-19T08:02:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261019100243riJ"
+  },
+  {
+   "title": "스마트워치 받은 60대 여성, 전 남편 흉기에 피습···도주 2시간 만에 검거",
+   "source": "경향신문",
+   "time": "2026-10-19T09:51:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610191151001"
   },
   {
    "title": "수능 전 마지막 학력평가 내일 실시‥고3 37만 2천 명 응시",
    "source": "MBC 뉴스",
    "time": "2026-10-19T06:57:47+07:00",
    "url": "https://imnews.imbc.com/news/2026/society/article/6858904_36918.html"
-  },
-  {
-   "title": "김지용 중수청장, 국무회의 참석 질문에 “관계기관과 협의하겠다”",
-   "source": "한겨레",
-   "time": "2026-10-19T08:37:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/society_general/1282997.html"
-  },
-  {
-   "title": "'인천 흉기난동' 최충락 사이코패스 검사 검토…사전답사 정황은 없어",
-   "source": "뉴스1",
-   "time": "2026-10-19T09:26:27+07:00",
-   "url": "https://www.news1.kr/local/incheon/6324342"
   }
  ]
 };
