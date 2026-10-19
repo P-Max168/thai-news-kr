@@ -41,3 +41,5 @@
 - Sun Oct 18 08:10:08 +07 2026 · Grok · 인수인계 확인 · 상대 최근: Claude 10-11 이후 커밋 없음 · Grok 10-18 07:28 아침판·05:32 robots/sitemap · 읽음: STATUS·REQUESTS·LOG·git log
 - Sun Oct 18 08:10:08 +07 2026 · Grok · 민구님 10-18 08:00 채팅 승인으로 Claude 대기 요청 R-seo-1~4·R-zh-1~9 를 Grok 이 직접 처리하기로(SEO 먼저). R-seo-1~4: noindex 해제·canonical·인증 메타 자리·tools/seo.py(e 쪽 정적 본문·sitemap 자동) · 원인: 요청이 Claude 대기로 멈춤 → 재발 방지: sitemap 은 판마다 자동, verify_live 가 noindex 재발 검사 · 확인: 로컬 screenshot(알려진 거짓 실패 1)·regress 56/1(기존 문제)·e 쪽 UA 시험
 - Sun Oct 18 08:35:44 +07 2026 · Grok · R-zh-1~9 중국어판 공유 코드 완료(민구님 10-18 08:00 승인, 백업 태그 backup-20261018-0834-zh-shared, DEV_LOG zh-shared-1018). 한국판 화면 그대로 확인. 남은 것: 저장소·DNS·규칙 게시·광고 문구 Mingoo 승인, 남은 한글 문구, zh 13:00 점심판 루틴
+
+- 2026-10-19T18:16:50+07:00 · Codex · 인수인계 확인: Grok 마지막 기록 10-18, 사용자 요청으로 10-26까지 대행(ops/publisher.json). 2026-10-19-pm 12건 제작, 18:08 호출 정상 확인, 원문·중복 검사 및 screenshot ALL OK·로컬 verify_live OK. Google News 발견 유트립 복구 1건 반영. 토론 초안 12건 미승인. 이 커밋 배포 후 라이브 검증 예정.
