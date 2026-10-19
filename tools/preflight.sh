@@ -52,6 +52,10 @@ done
 [ -n "$ok" ] || FAIL+=("git pull --rebase 3번 실패(인터넷·충돌)")
 behind=$(git rev-list --count HEAD..origin/main 2>/dev/null || echo "?")
 [ "$behind" = "0" ] || FAIL+=("원격보다 ${behind}개 뒤처짐")
+# Check after pulling so a resumed Grok routine sees the temporary handoff.
+if ! python3 tools/publisher_guard.py; then
+  jlog "HOLD  $JOB publisher handoff"; exit 4
+fi
 # 7) 자원·인터넷
 free_gb=$(df -Pk . | awk 'NR==2{printf "%d", $4/1048576}')
 [ "${free_gb:-0}" -ge 2 ] || FAIL+=("디스크 여유 ${free_gb}GB(<2GB)")

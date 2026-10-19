@@ -1,0 +1,7 @@
+{
+  "owner": "codex",
+  "starts": "2026-10-19T12:45:00+07:00",
+  "expires": "2026-10-26T12:45:00+07:00",
+  "reason": "Operator requested one week of Codex publishing while Grok is stopped.",
+  "late_editions": ["2026-10-19-am"]
+}

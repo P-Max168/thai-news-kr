@@ -596,7 +596,10 @@ def build_index():
             continue
         d = json.loads(p.read_text(encoding="utf-8"))
         date, ed = m.group(1), m.group(2)
-        eds.append(dict(id=p.stem, date=date, edition=ed, label=label_for(date, ed),
+        label = label_for(date, ed)
+        if d.get("delayed_publication") is True:
+            label += " · 지연 발행"
+        eds.append(dict(id=p.stem, date=date, edition=ed, label=label,
                         generated=d.get("generated", ""), stories=len(d.get("stories", []))))
     eds.sort(key=lambda e: (e["date"], EDITION_ORDER[e["edition"]], e["generated"]), reverse=True)
     idx = {"latest": eds[0]["id"] if eds else None, "editions": eds, "dates": [e["id"] for e in eds]}
