@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-20T19:47:20+07:00",
+ "updated_at": "2026-10-21T00:31:15+07:00",
  "items": [
   {
-   "title": "역삼동 빌딩 방화 용의자, 과거에도 “특허증 사기”라며 휘발유 뿌리고 협박",
+   "title": "역삼 특허법인 2곳 방화 70대, 4년전에도 ‘휘발유 난동’ 부렸다",
+   "source": "동아일보",
+   "time": "2026-10-20T17:50:00+07:00",
+   "url": "https://www.donga.com/news/Society/article/all/20261020/134875313/1"
+  },
+  {
+   "title": "[단독] 3년 넘은 방화복 교체 필요한데…소방예산 증가분 98% 인건비",
+   "source": "한겨레",
+   "time": "2026-10-20T20:13:00+07:00",
+   "url": "https://www.hani.co.kr/arti/area/area_general/1283324.html"
+  },
+  {
+   "title": "‘조희대 탄핵소추 후폭풍’ 부담되는 민주당…국정조사 카드 만지작",
    "source": "경향신문",
-   "time": "2026-10-20T18:02:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610202002001"
+   "time": "2026-10-20T14:42:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610201642001"
   },
   {
-   "title": "추미애, 소방노조 만나 ‘재정 빨대’ 발언 재차 사과",
-   "source": "조선일보",
-   "time": "2026-10-20T15:49:00+07:00",
-   "url": "https://www.chosun.com/national/regional/2026/10/20/4WS4C5G74VAMDMESDORPV37RUY/"
-  },
-  {
-   "title": "법원, 오세훈 시장직 걸린 ‘여론조사 대납’ 혐의 항소심 23일 생중계",
-   "source": "한겨레",
-   "time": "2026-10-20T18:08:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/society_general/1283283.html"
-  },
-  {
-   "title": "정부, 우크라 공관원 절반 철수 결정…\"전향적조치 없다고 판단\"",
+   "title": "\"수사의 정치화 청산\" 강조한 김지용 중수청장, 국무회의 참석",
    "source": "연합뉴스",
-   "time": "2026-10-20T17:50:01+07:00",
-   "url": "https://www.yna.co.kr/view/AKR20261020112153504"
+   "time": "2026-10-20T08:04:12+07:00",
+   "url": "https://www.yna.co.kr/view/AKR20261019181300004"
   },
   {
-   "title": "\"이번엔 떠날까‥\" 해수부, 상어 '부캉이' 3차 외해 유도 추진",
+   "title": "한강버스 공익신고자 측, 서울시 감사 관계자 및 오세훈 시장 최측근 고발",
    "source": "MBC 뉴스",
-   "time": "2026-10-20T14:24:00+07:00",
-   "url": "https://imnews.imbc.com/news/2026/society/article/6859345_36918.html"
+   "time": "2026-10-20T14:04:41+07:00",
+   "url": "https://imnews.imbc.com/news/2026/society/article/6859340_36918.html"
   },
   {
-   "title": "청와대 “‘전작권 환수’ 운전대 우리가 잡자는 것…미국 내리라는 것 아냐”",
+   "title": "23명 숨진 아리셀 ’화재 참사’ 박순관 대표 징역 4년 확정",
+   "source": "연합뉴스TV",
+   "time": "2026-10-20T08:17:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR202610201009469SC"
+  },
+  {
+   "title": "[뉴스 분석]청년 분노 눈감고 폭력만 보는 정치…격화되는 프랑스 시위",
+   "source": "경향신문",
+   "time": "2026-10-20T20:14:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610202214015"
+  },
+  {
+   "title": "경찰, ’5·18 북한군 개입설’ 보수논객 지만원 구속영장 신청",
+   "source": "연합뉴스TV",
+   "time": "2026-10-20T19:58:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261020215824FJf"
+  },
+  {
+   "title": "이 대통령 “한국 주식시장, 매우 저평가···조만간 필요한 조치”",
+   "source": "경향신문",
+   "time": "2026-10-19T20:15:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610192215001"
+  },
+  {
+   "title": "제주서 전 연인 살해 60대 남성 구속영장 신청",
    "source": "KBS 뉴스",
-   "time": "2026-10-20T15:47:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8690329"
-  },
-  {
-   "title": "이 대통령, 순직 소방관에 “영원히 기억할 것”…군중 밀집시설 안전점검 주문 [지금뉴스]",
-   "source": "KBS 뉴스",
-   "time": "2026-10-20T15:25:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8690325"
-  },
-  {
-   "title": "국무회의 첫 참석 김지용 \"중수청 정착시켜 검찰개혁 완수할 것\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-20T11:49:10+07:00",
-   "url": "https://imnews.imbc.com/news/2026/society/article/6859292_36918.html"
-  },
-  {
-   "title": "[속보] 경찰, 역삼 연쇄방화 70대 용의자 검거…동묘앞역까지 도주",
-   "source": "매일경제",
-   "time": "2026-10-20T14:38:51+07:00",
-   "url": "https://www.mk.co.kr/news/society/12180704"
-  },
-  {
-   "title": "‘아리셀 참사’로 23명 숨졌는데 징역 4년…“악마의 판결” 비판",
-   "source": "한겨레",
-   "time": "2026-10-20T15:39:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/labor/1283293.html"
+   "time": "2026-10-20T21:36:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8690802"
   }
  ]
 };
