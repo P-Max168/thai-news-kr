@@ -665,6 +665,16 @@ def build_ads():
         for it in sl.get("items", []):
             for k in ("image", "link"):
                 assert not it.get(k) or str(it[k]).startswith("https://"), ("ads", sl["id"], k, "https:// 만")
+    campaign = ads.get("campaign")
+    if campaign and campaign.get("enabled"):
+        items = campaign.get("items", [])
+        assert len(items) == 6 and len({x["id"] for x in items}) == 6, "campaign: six unique advertisers required"
+        assert {x["id"]: x["weight"] for x in items} == {"dragon": 40, "seven": 12, "suwon": 12, "lounge": 12, "dongwon": 12, "kt": 12}, "campaign: 40/12 weights required"
+        assert all(x.get("approved") is True for x in items), "campaign: unapproved creative"
+        for key in ("creatives_url", "css_url"):
+            path = campaign[key].split("?", 1)[0]
+            assert path.startswith("assets/ads/partners/") and ".." not in path, "campaign: invalid asset path"
+            assert (ROOT / path).is_file(), "campaign: missing " + path
     # 드래곤 스웨디시 배너 데이터(assets/ads/massage/ad.json)를 같이 실어 화면이 바로(동기) 그리게 함 — item.render == "dragon"
     dj = ROOT / "assets/ads/massage/ad.json"
     if dj.exists():

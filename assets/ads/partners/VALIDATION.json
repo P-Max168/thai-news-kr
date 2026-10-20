@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-10-20T09:02:07+07:00",
+  "status": "PASS",
+  "widths": [
+    320,
+    390,
+    1280
+  ],
+  "advertiser_variant_cases": 72,
+  "qr_decodes": 12,
+  "page_errors": [],
+  "local_viewability_observed": true,
+  "redraw_deduplication": true,
+  "resilience": {
+    "status": "PASS",
+    "offlineNewsTitlesPreserved": 1,
+    "offlinePartners": true,
+    "fallbackToDragon": 4,
+    "legacyCampaignOff": true,
+    "globalDisabled": true
+  },
+  "limitations": [
+    "Not global impression distribution",
+    "Live verification happens after publication"
+  ]
+}

@@ -522,7 +522,9 @@
     var sl = A.slots.filter(function (x) { return x.id === id && x.enabled !== false && x.items && x.items.length; })[0];
     return sl || null;
   }
-  function adHTML(sl, n) {
+  function adHTML(sl, n, stableKey) {
+    var campaignKey = stableKey || sl.id + ":" + (n || 0), mixed = window.TNAds && TNAds.renderSlot(sl, campaignKey);
+    if (mixed) return mixed.html + adRep(sl.id, mixed.item);
     var it = sl.items[(n || 0) % sl.items.length], lab = (window.TN_ADS.label || TNI("app.keb18928", "광고"));
     // render:"dragon" = 드래곤 스웨디시 배너(assets/ads/massage/dragon-ad.js, variant·'이 자리 추천 업종' 꼬리표). 못 그리면 아래 일반 카드
     var rb = adRep(sl.id, it);
@@ -555,7 +557,7 @@
     cards.forEach(function (c, i) {
       out.push(c);
       if ((i + 1) % every === 0) due = true;
-      if (due && i < cards.length - 1 && !risky(c) && !risky(cards[i + 1])) { out.push('<div class="ad-slot ad-slot--feed" data-unit="' + esc(sl.unit || "300x250") + '">' + adHTML(sl, k++) + "</div>"); due = false; }
+      if (due && i < cards.length - 1 && !risky(c) && !risky(cards[i + 1])) { out.push('<div class="ad-slot ad-slot--feed" data-unit="' + esc(sl.unit || "300x250") + '">' + adHTML(sl, k++, "infeed:" + edId() + ":after:" + ((/\bid="([^"]+)"/.exec(c) || [])[1] || i)) + "</div>"); due = false; }
     });
     return out.join("");
   }

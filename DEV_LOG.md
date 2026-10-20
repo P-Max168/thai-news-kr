@@ -318,3 +318,6 @@
 - 10-18 18:45 · 🙋 [보통·편집] **10-18 저녁판 '그래서 나는?'(for_me) A/B/C 규칙 맞춤**(민구님 지적 후속). 원인 → lf1 for_me 가 태국 국민 대상 홍수 지원금을 독자가 직접 신청하는 일처럼 씀('새벽 줄을 서기보다 … 가세요'). 재발 방지 → README for_me 설명·tools/editions/_template.py 에 'A/B/C 단계 먼저, C 는 신청·방문 권유 금지' 연결(규칙 본문 = TRANSLATION_RULES.md A/B/C, 10-18 827e900). 고침: lf1 → '태국 홍수 피해 가구를 위한 지원금이에요. 주변 태국인 직원이나 이웃이 …', bk1 → '자녀가 있다면, …'(자녀 단정 없앰). 나머지 18건 그대로(A/B 에 맞고 조건부 표현). generated 그대로(keep_generated), 다른 값 변화 0. 백업 태그 `backup-20261018-1845-forme-reader-fit`.
   - 확인: 바꾸기 전 판 JSON 과 비교 → stories[4]·[7] for_me 두 칸만 다름, write_edition 검증 통과(원화·태국 문자·한자 검사).
   - 미확인: 라이브 반영(배포 뒤 확인), 원문에 '태국 국적만 대상'이라는 문장은 없어 '한국인은 해당 없어요'는 쓰지 않음.
+
+## 2026-10-20T09:02:07+07:00 · Six-ad campaign / KT LINE QR
+User approves final existing five creatives and immediate deployment. Added common weighted selector preserving legacy slots/renderers, isolated partner templates, optimized six images (730352 bytes), verified LINE QR, local viewability diagnostics and offline/failure fallbacks. Full browser matrix and resilience pass; live verification follows publication. See assets/ads/partners/README.md.

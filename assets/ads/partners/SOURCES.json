@@ -1,0 +1,55 @@
+{
+  "source_html_sha256": "020c8bf3b6d6146b1a1e9a9b1d6fcba1b24808b57ab4c12ab6c2d55821ce195f",
+  "source_version": "lounge v4 / other four v3",
+  "rights": "User confirms permission for all three businesses’ photographs, 2026-10-20 08:03 Asia/Bangkok",
+  "approval": "User finalizes existing five creatives with KT LINE QR addition and directs deployment, 08:53 Asia/Bangkok",
+  "line_url": "https://line.me/ti/p/x_k8FjS5cQ",
+  "generated_backgrounds": [
+    "dongwon",
+    "kt"
+  ],
+  "images": [
+    {
+      "brand": "seven",
+      "file": "seven-0.webp",
+      "source_sha256": "f9d6d5a0c314fb5b711c38813d68b336bcab83965eb7571aba0ab72bebdf8630",
+      "sha256": "dbcc0d1384869b9a196cace60f05d685fd5bbd8e7470f761e31a8e821b273f68",
+      "bytes": 71082
+    },
+    {
+      "brand": "suwon",
+      "file": "suwon-0.webp",
+      "source_sha256": "5f2d8d67b959978026a7d99f5a088ce6ec08710f30c0f5b8155ad233938978a5",
+      "sha256": "a8ec3e8cd9f55146989c5b04231b20ff6933260610c6dcffcb7f01b4508f4f20",
+      "bytes": 129492
+    },
+    {
+      "brand": "lounge",
+      "file": "lounge-0.webp",
+      "source_sha256": "643c8d074214fdde43e1d0936d65c5873d3125357fa79a8275d48bef0fd0bd95",
+      "sha256": "e82717dec0645d78da09aaf33cab13f447eb65cb00fb835a6adb5b31845f7a2a",
+      "bytes": 120140
+    },
+    {
+      "brand": "lounge",
+      "file": "lounge-1.webp",
+      "source_sha256": "6f79c3c5f885627c279774883ecc0ac43f3da10f886c364628d37c5bcbb521fb",
+      "sha256": "e4744e894b74efed3686d6ccc6c529b0f8154b1d4282350eb508e42447cbc29c",
+      "bytes": 127412
+    },
+    {
+      "brand": "dongwon",
+      "file": "dongwon-0.webp",
+      "source_sha256": "eb27321e299144b1b2bee5698f4ed238407a4b810fd6cdc6092c02ddf0a1d834",
+      "sha256": "d38be1779594c4bf6a5ea4941e0755732ed1ba9c9d62dca163506c41b1f0ebe9",
+      "bytes": 137326
+    },
+    {
+      "brand": "kt",
+      "file": "kt-0.webp",
+      "source_sha256": "35f2a4270698f6a5af44c035586c673d5a8a8e336b1cca15d235550d7914ec1d",
+      "sha256": "e64ff588463e33b50f4d0ba609ee0cf56bcc6c2a94a04049c684f67d1e5ecc25",
+      "bytes": 144900
+    }
+  ]
+}

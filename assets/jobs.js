@@ -19,6 +19,8 @@
   function adBox() {
     // 기사 사이 광고(infeed) 자리 설정을 그대로 씀(같은 드래곤 배너·같은 크기) — 추천 업종 꼬리표만 이 쪽에 맞게
     var A = window.TN_ADS, sl = A && A.enabled !== false && A.slots && A.slots.filter(function (x) { return x.id === "infeed" && x.enabled !== false && x.items && x.items.length; })[0];
+    var mixed = sl && window.TNAds && TNAds.renderSlot(sl, "jobs:0");
+    if (mixed) return '<div class="ad-slot jb-ad" data-unit="' + esc(sl.unit || "300x250") + '">' + mixed.html + (window.TNAdRep ? TNAdRep("jobs", mixed.item) : "") + "</div>";
     var it = sl && Object.assign({}, sl.items[0], { target: TNI("jobs.kd8fd559", "인력·비자 대행·통역") });
     var h = it && window.DragonAd && window.DragonAd.slotHTML && window.DragonAd.slotHTML(it);
     return h ? '<div class="ad-slot jb-ad" data-unit="' + esc(sl.unit || "300x250") + '">' + h + (window.TNAdRep ? TNAdRep("jobs", it) : "") + "</div>" : "";

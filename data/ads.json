@@ -1,5 +1,5 @@
 {
- "_readme": "광고 자리 설정. slots[].items 를 고치고 python3 tools/newslib.py (또는 build_data.py) 를 실행하면 data/ads.js 가 다시 만들어진다(assets/ads/massage/ad.json 도 TN_ADS.dragon 으로 같이 실림). enabled=false 면 모든 광고 숨김. item = {category, title, subtitle, image(선택, https), link(선택, https), theme(1~5), target(이 자리 추천 업종 꼬리표), render:'dragon'(드래곤 스웨디시 배너), variant:large|strip|small|bar, preview(카톡·라인 '#' 자리표시)}. 2026-10-03: 모든 자리 = 운영자 가게 드래곤 스웨디시(파타야) 배너 + '📢 이 자리 추천 업종' 꼬리표 / 2026-10-03 야간: 내 피드 지역 광고 자리 region-east|bangkok|north|south|other(사는 곳별 타게팅, 내 지역 뉴스 바로 아래) 추가 / 2026-10-03 애드센스 준비: slot.unit = 표준 광고 단위(320x100 모바일 큰 배너 · 300x250 중간 직사각형 · 336x280 큰 직사각형 · responsive 반응형) — 화면은 이 크기 칸을 미리 잡아 둠(밀림 방지). slot.adsense_slot = 애드센스 승인 뒤 받는 광고 단위 id(비어 있으면 지금처럼 드래곤 하우스 광고). 자동 광고·팝업 광고는 쓰지 않음",
+ "_readme": "광고 자리 설정. slots[].items 를 고치고 python3 tools/newslib.py (또는 build_data.py) 를 실행하면 data/ads.js 가 다시 만들어진다(assets/ads/massage/ad.json 도 TN_ADS.dragon 으로 같이 실림). enabled=false 면 모든 광고 숨김. item = {category, title, subtitle, image(선택, https), link(선택, https), theme(1~5), target(이 자리 추천 업종 꼬리표), render:'dragon'(드래곤 스웨디시 배너), variant:large|strip|small|bar, preview(카톡·라인 '#' 자리표시)}. 2026-10-03: 모든 자리 = 운영자 가게 드래곤 스웨디시(파타야) 배너 + '📢 이 자리 추천 업종' 꼬리표 / 2026-10-03 야간: 내 피드 지역 광고 자리 region-east|bangkok|north|south|other(사는 곳별 타게팅, 내 지역 뉴스 바로 아래) 추가 / 2026-10-03 애드센스 준비: slot.unit = 표준 광고 단위(320x100 모바일 큰 배너 · 300x250 중간 직사각형 · 336x280 큰 직사각형 · responsive 반응형) — 화면은 이 크기 칸을 미리 잡아 둠(밀림 방지). slot.adsense_slot = 애드센스 승인 뒤 받는 광고 단위 id(비어 있으면 지금처럼 드래곤 하우스 광고). 자동 광고·팝업 광고는 쓰지 않음 / 2026-10-20: campaign.enabled=true이면 공통 가중치 선택기(드래곤40/새5업소각12)가 slots.items 위에 적용. false면 보존된 기존 드래곤 슬롯으로 즉시 복구. 사진 권리는 사용자 08:03 확인, 디자인+KT LINE QR 공개는 08:53 지시. 실제 노출 수는 기기 내 진단이며 전 방문자 통계가 아님.",
  "enabled": true,
  "label": "광고",
  "slots": [
@@ -329,5 +329,62 @@
    "unit": "300x250",
    "adsense_slot": ""
   }
- ]
+ ],
+ "campaign": {
+  "enabled": true,
+  "version": "20261020-final-qr",
+  "selection": "weighted-random-per-page-placement",
+  "measurement": "local-only; 50% visible for 1 continuous foreground second; not global totals",
+  "creatives_url": "assets/ads/partners/creatives.json?v=20261020-final-qr",
+  "css_url": "assets/ads/partners/partners.css?v=18aaa7a1",
+  "items": [
+   {
+    "id": "dragon",
+    "title": "드래곤 스웨디시 (파타야)",
+    "weight": 40,
+    "render": "dragon",
+    "approved": true
+   },
+   {
+    "id": "seven",
+    "title": "세븐포차",
+    "weight": 12,
+    "render": "partner",
+    "approved": true,
+    "creative_version": "v3"
+   },
+   {
+    "id": "suwon",
+    "title": "수원왕갈비",
+    "weight": 12,
+    "render": "partner",
+    "approved": true,
+    "creative_version": "v3"
+   },
+   {
+    "id": "lounge",
+    "title": "더라운지 사우나",
+    "weight": 12,
+    "render": "partner",
+    "approved": true,
+    "creative_version": "v4"
+   },
+   {
+    "id": "dongwon",
+    "title": "동원각",
+    "weight": 12,
+    "render": "partner",
+    "approved": true,
+    "creative_version": "v3"
+   },
+   {
+    "id": "kt",
+    "title": "KT USDT 환전소",
+    "weight": 12,
+    "render": "partner",
+    "approved": true,
+    "creative_version": "v3"
+   }
+  ]
+ }
 }

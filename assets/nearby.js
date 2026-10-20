@@ -118,6 +118,8 @@
   function mountAd(el, c) {
     var sl = adSlot(c.slot);
     if (!sl) { el.hidden = true; return; }
+    var mixed = window.TNAds && TNAds.renderSlot(sl, c.slot + ":0");
+    if (mixed) { el.hidden = false; el.innerHTML = mixed.html + (window.TNAdRep ? TNAdRep(c.slot, mixed.item) : ""); return; }
     var it = sl.items[0];
     // render:"dragon" = 드래곤 스웨디시 배너 + '이 자리 추천 업종' 꼬리표(data/ads.js 의 TN_ADS.dragon 으로 바로 그림). 못 그리면 일반 카드
     if (it.render === "dragon" && !it.target && c.tag) { it = Object.assign({}, it, { target: c.tag }); }   // 꼬리표 비었으면 NEARBY 의 tag
