@@ -3,8 +3,8 @@
 
 | 항목 | 내용 |
 |---|---|
-| 마지막으로 확인한 사이트 최신 판 | **2026-10-18-am** (라이브 data/index.json `latest`, 15건 · 커밋 e758f40(판)·671f5e4(제목 정리+공유 키트), e/2026-10-18-am/ 200 · 확인: 2026-10-18 07:27 BKK, Grok — verify_live OK, tnews·옛 주소(301) 둘 다 latest 2026-10-18-am) |
-| 정기 실행(07:08/18:08) | **10-18 07:08 정기 아침판 도착**: edition 커밋 e758f40(07:26 push)·671f5e4(07:29 push) · verify_live OK. 직전 10-17 18:08 저녁판도 정기(39beab5·596aaac·8b128f5) |
+| 마지막으로 확인한 사이트 최신 판 | **2026-10-19-pm** · Codex 10-20 07:08 라이브 확인. 2026-10-20-am 6건 원문 검증·로컬 화면/공유 키트 준비, 게시 후 라이브 별도 검증 예정. |
+| 정기 실행(07:08/18:08) | Codex 임시 대행(ops/publisher.json). 10-20 호출 07:07:43 도착, 07:08 이후 수집 시작. 실제 생성시각 기록, 지연 표시. Grok 내부 실행 로그 접근 불가. |
 | 판 지연 | 10-05-pm ~ 10-10-pm **11판 빠짐**(6일 공백, 목록: Grok 서버 /workspace/logs/edition-gaps.txt). **재생성 안 함**(운영자·Max 결정 10-11: 옛 뉴스를 지금 판처럼 올리지 않음) |
 | 진행 중 작업 | 💬 오늘의 질문 2026-10-18-am 15건 승인 대기(approved false). 10-17-pm 17건은 게시 완료(95235d9). **민구님 10-18 08:00 승인: Claude 대기 요청 R-seo-1~4·R-zh-1~9 를 Grok 이 직접 처리**(Claude 10-11 이후 커밋 없음). R-seo-1~4 완료(10-18 08:12). R-zh-1~9 공유 코드 완료(10-18 08:40, DEV_LOG zh-shared-1018) — 공개 전 Mingoo 승인 대기: zh 저장소 생성·Cloudflare zh CNAME·Firebase 규칙 게시·zh 광고 문구 |
 | 사이트 주소(10-14) | **https://tnews.pmaxone.com** (GitHub Pages 맞춤 도메인, DNS 는 Cloudflare CNAME tnews→p-max168.github.io DNS only). 옛 주소 p-max168.github.io/thai-news-kr/ 는 301 로 넘어감. Grok 도메인 작업 끝나면 Claude 가 이어받음 — 인계 문서 Grok 서버 /workspace/handoff/TNEWS_DOMAIN_HANDOFF.md |
