@@ -1,6 +1,6 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-22T01:07:05+07:00",
+ "updated_at": "2026-10-22T01:55:09+07:00",
  "items": [
   {
    "title": "북, 요새화 완성·DMZ 포병대 배치 엄포…남북 ‘강 대 강’ 우려",
@@ -21,10 +21,16 @@ window.KOREA_NEWS = {
    "url": "https://www.khan.co.kr/article/202610212133005"
   },
   {
-   "title": "“소방이 재정 쭉쭉” 부승찬, 국회 운영위 나오기로",
-   "source": "한겨레",
-   "time": "2026-10-21T20:10:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1283557.html"
+   "title": "여, ‘소방 빨대’ 추미애·부승찬에 경고…경징계로 ‘뒷북 진화’",
+   "source": "경향신문",
+   "time": "2026-10-21T19:33:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610212133025"
+  },
+  {
+   "title": "[속보] “부캉이, 결국 가는구나 안녕”···한달여 만에 수로 밖으로 이동",
+   "source": "경향신문",
+   "time": "2026-10-21T16:17:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610211817001"
   },
   {
    "title": "피의자조사 받은 선관위 직원 사망…\"심리적 부담\"vs\"강압 없어\"",
@@ -33,15 +39,9 @@ window.KOREA_NEWS = {
    "url": "https://www.yna.co.kr/view/AKR20261021091352061"
   },
   {
-   "title": "‘부캉이 안녕, 고마웠어’…33일 만에 바다로 귀환 [현장]",
+   "title": "밤사이 덮친 가을 한파…오늘 아침 최저 0도, 낮부터 태풍 북상 변수",
    "source": "한겨레",
-   "time": "2026-10-22T00:28:00+07:00",
-   "url": "https://www.hani.co.kr/arti/area/yeongnam/1283508.html"
-  },
-  {
-   "title": "‘패딩 꺼내요’ 오늘 밤 한파주의보…내일 0~10도까지 떨어져",
-   "source": "한겨레",
-   "time": "2026-10-21T18:17:00+07:00",
+   "time": "2026-10-21T22:39:00+07:00",
    "url": "https://www.hani.co.kr/arti/society/environment/1283500.html"
   },
   {
@@ -57,10 +57,10 @@ window.KOREA_NEWS = {
    "url": "https://www.yonhapnewstv.co.kr/news/AKR20261021224135Bnh"
   },
   {
-   "title": "트럼프 슈퍼팩, 중간선거에 3천240억원 투입…공화 지원 총력전",
-   "source": "연합뉴스",
-   "time": "2026-10-21T22:08:48+07:00",
-   "url": "https://www.yna.co.kr/view/AKR20261022000200071"
+   "title": "지도부 없이 기습 작전…‘블랙 블록’, 프랑스 시위 과격화에 한몫했나",
+   "source": "한겨레",
+   "time": "2026-10-21T16:33:00+07:00",
+   "url": "https://www.hani.co.kr/arti/international/international_general/1283516.html"
   }
  ]
 };
