@@ -1,12 +1,18 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-21T21:07:03+07:00",
+ "updated_at": "2026-10-22T01:07:05+07:00",
  "items": [
   {
-   "title": "[속보] 김여정 “10월 중 대남확성기 전 국경 가동”",
+   "title": "북, 요새화 완성·DMZ 포병대 배치 엄포…남북 ‘강 대 강’ 우려",
    "source": "한겨레",
-   "time": "2026-10-21T19:17:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/defense/1283545.html"
+   "time": "2026-10-21T20:21:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/defense/1283559.html"
+  },
+  {
+   "title": "경찰, 역삼동 연쇄방화 70대 구속영장 신청",
+   "source": "KBS 뉴스",
+   "time": "2026-10-21T19:53:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8691803"
   },
   {
    "title": "이 대통령 “유시민 처벌 불원”…명예훼손 수사 종결 수순",
@@ -15,28 +21,22 @@ window.KOREA_NEWS = {
    "url": "https://www.khan.co.kr/article/202610212133005"
   },
   {
-   "title": "박성재 징역 9년…내란 항소심 ‘16년 감형’",
-   "source": "경향신문",
-   "time": "2026-10-21T19:07:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610212107015"
+   "title": "“소방이 재정 쭉쭉” 부승찬, 국회 운영위 나오기로",
+   "source": "한겨레",
+   "time": "2026-10-21T20:10:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/politics_general/1283557.html"
+  },
+  {
+   "title": "피의자조사 받은 선관위 직원 사망…\"심리적 부담\"vs\"강압 없어\"",
+   "source": "연합뉴스",
+   "time": "2026-10-21T16:04:39+07:00",
+   "url": "https://www.yna.co.kr/view/AKR20261021091352061"
   },
   {
    "title": "‘부캉이 안녕, 고마웠어’…33일 만에 바다로 귀환 [현장]",
    "source": "한겨레",
-   "time": "2026-10-21T19:17:00+07:00",
+   "time": "2026-10-22T00:28:00+07:00",
    "url": "https://www.hani.co.kr/arti/area/yeongnam/1283508.html"
-  },
-  {
-   "title": "역삼동 방화범, 출소 1년 만에 드러난 ‘거짓 반성’",
-   "source": "경향신문",
-   "time": "2026-10-21T19:14:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610212114025"
-  },
-  {
-   "title": "선관위 직원, 조사 다음날 숨진채 발견…특검 \"강압수사 없었어\"",
-   "source": "연합뉴스",
-   "time": "2026-10-21T11:45:57+07:00",
-   "url": "https://www.yna.co.kr/view/AKR20261021091351061"
   },
   {
    "title": "‘패딩 꺼내요’ 오늘 밤 한파주의보…내일 0~10도까지 떨어져",
@@ -45,22 +45,22 @@ window.KOREA_NEWS = {
    "url": "https://www.hani.co.kr/arti/society/environment/1283500.html"
   },
   {
-   "title": "이진숙, 22일 과방위 종합감사 참여 가능…헌재, 가처분 일부 인용",
-   "source": "조선일보",
-   "time": "2026-10-21T17:23:20+07:00",
-   "url": "https://www.chosun.com/national/court_law/2026/10/21/AWDA2WIBZRF6TGRYTFDF6MV2FA/"
+   "title": "초강력 태풍 ‘참피’, ‘일본 상륙’ 시나리오 우세",
+   "source": "KBS 뉴스",
+   "time": "2026-10-21T17:22:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8691549"
   },
   {
-   "title": "국힘, '우크라 공관원 추가 철수' 결정에 \"대통령, 감정적 대응\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-21T09:04:19+07:00",
-   "url": "https://imnews.imbc.com/news/2026/politics/article/6859557_36911.html"
+   "title": "’이진숙 제척’ 제동걸리자…與 “전면해제 아냐“·野 “엄중히 수용하라“",
+   "source": "연합뉴스TV",
+   "time": "2026-10-21T20:41:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261021224135Bnh"
   },
   {
-   "title": "특검, ‘외유성 출장 의혹’ 노태악 전 대법관 자택 압수수색",
-   "source": "한겨레",
-   "time": "2026-10-21T14:57:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/society_general/1283398.html"
+   "title": "트럼프 슈퍼팩, 중간선거에 3천240억원 투입…공화 지원 총력전",
+   "source": "연합뉴스",
+   "time": "2026-10-21T22:08:48+07:00",
+   "url": "https://www.yna.co.kr/view/AKR20261022000200071"
   }
  ]
 };
