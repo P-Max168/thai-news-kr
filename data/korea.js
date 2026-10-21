@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-21T07:56:43+07:00",
+ "updated_at": "2026-10-21T13:06:33+07:00",
  "items": [
   {
-   "title": "집안싸움, 막말, 과잉의전...‘나사 빠진’ 민주당, 민심 떠난다",
+   "title": "슬픔을 묻은 채 “괜찮다”는 소방관…그들도 지켜 달라 [왜냐면]",
    "source": "한겨레",
-   "time": "2026-10-21T06:18:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1283361.html"
+   "time": "2026-10-21T09:44:00+07:00",
+   "url": "https://www.hani.co.kr/arti/opinion/because/1283387.html"
   },
   {
-   "title": "北, 사흘새 60회 경고 사격 받고도 MDL 계속 넘어왔다",
-   "source": "조선일보",
-   "time": "2026-10-20T22:50:00+07:00",
-   "url": "https://www.chosun.com/politics/diplomacy-defense/2026/10/21/VS2YB4TVI5GLZK5BRZBK4BRMZ4/"
-  },
-  {
-   "title": "4년 전 ‘휘발유 난동’ 구속에도 같은 건물 또 불내…‘특허 앙심’ 70대 체포",
+   "title": "[속보] 특검, ‘외유성 출장 의혹’ 노태악 전 대법관 자택 압수수색",
    "source": "한겨레",
-   "time": "2026-10-20T23:21:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/society_general/1283348.html"
+   "time": "2026-10-21T10:10:00+07:00",
+   "url": "https://www.hani.co.kr/arti/society/society_general/1283398.html"
   },
   {
-   "title": "21일 낮부터 찬 바람에 기온 뚝···전국 곳곳 비",
-   "source": "경향신문",
-   "time": "2026-10-21T05:46:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610210746001"
-  },
-  {
-   "title": "‘아리셀 참사’로 23명 숨졌는데 징역 4년…“악마의 판결” 비판",
-   "source": "한겨레",
-   "time": "2026-10-20T19:06:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/labor/1283293.html"
-  },
-  {
-   "title": "민주, ‘조희대 탄핵’ 앞서 국정조사 검토…역풍 맞을라 여론부터 키운다",
-   "source": "한겨레",
-   "time": "2026-10-20T23:18:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/assembly/1283305.html"
-  },
-  {
-   "title": "한강버스 공익신고자 측, 서울시 감사 관계자 및 오세훈 시장 최측근 고발",
-   "source": "MBC 뉴스",
-   "time": "2026-10-20T14:04:41+07:00",
-   "url": "https://imnews.imbc.com/news/2026/society/article/6859340_36918.html"
-  },
-  {
-   "title": "李, ‘3기 신도시’ 계양 찾아 “신속공급이 부동산정책 성패 갈라”",
-   "source": "동아일보",
-   "time": "2026-10-20T15:30:00+07:00",
-   "url": "https://www.donga.com/news/Politics/article/all/20261020/134876030/2"
-  },
-  {
-   "title": "제주서 전 연인 살해 60대 남성 구속영장 신청",
+   "title": "선관위 특검 조사받던 선관위 직원, 숨진 채 발견",
    "source": "KBS 뉴스",
-   "time": "2026-10-20T21:36:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8690802"
+   "time": "2026-10-21T12:14:00+07:00",
+   "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8691328"
   },
   {
-   "title": "사회적 대화 한창인데…민주 ‘주52시간 예외’ 초광역특구법 발의",
+   "title": "김종인의 섬뜩 경고 “지금 李대통령 서울지지율 30% 미만인데…”",
+   "source": "문화일보",
+   "time": "2026-10-21T09:29:33+07:00",
+   "url": "https://www.munhwa.com/article/11625076"
+  },
+  {
+   "title": "[속보]“지금 총선하면 경기 60석 중 국힘 45석” 양향자 분석",
+   "source": "문화일보",
+   "time": "2026-10-21T09:05:33+07:00",
+   "url": "https://www.munhwa.com/article/11625062"
+  },
+  {
+   "title": "“경량 패딩 챙기세요”…비 온 뒤 쌀쌀, 전날보다 10도 ‘뚝’",
    "source": "한겨레",
-   "time": "2026-10-20T19:16:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1283346.html"
+   "time": "2026-10-21T06:04:00+07:00",
+   "url": "https://www.hani.co.kr/arti/society/environment/1283369.html"
+  },
+  {
+   "title": "김민석 \"초광역특구법 최우선 입법‥52시간제 예외 합리적 대안 도출\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-21T08:09:00+07:00",
+   "url": "https://imnews.imbc.com/news/2026/politics/article/6859543_36911.html"
+  },
+  {
+   "title": "이 대통령 “중수청장 국무회의 배제론 위헌적 억지…AI에도 물어봐”",
+   "source": "한겨레",
+   "time": "2026-10-21T08:28:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/politics_general/1283378.html"
+  },
+  {
+   "title": "美중간선거 참패 우려에…트럼프 백악관 내부 분열 격화",
+   "source": "연합뉴스",
+   "time": "2026-10-21T09:53:48+07:00",
+   "url": "https://www.yna.co.kr/amp/view/AKR20261021085900009"
+  },
+  {
+   "title": "[속보] ‘소장품 셀프 출품 논란’ 유홍준 국립중앙박물관장 사의 표명",
+   "source": "매일경제",
+   "time": "2026-10-21T08:38:34+07:00",
+   "url": "https://www.mk.co.kr/news/politics/12181501"
   }
  ]
 };
