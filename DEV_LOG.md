@@ -321,3 +321,6 @@
 
 ## 2026-10-20T09:02:07+07:00 · Six-ad campaign / KT LINE QR
 User approves final existing five creatives and immediate deployment. Added common weighted selector preserving legacy slots/renderers, isolated partner templates, optimized six images (730352 bytes), verified LINE QR, local viewability diagnostics and offline/failure fallbacks. Full browser matrix and resilience pass; live verification follows publication. See assets/ads/partners/README.md.
+
+## 2026-10-23T03:55:00+07:00 · Claude · 전체 시스템 설계 문서
+- `ops/SYSTEM_PLAN.md` 추가: 엔진+판 설정 템플릿 구조, 역할(코드/그록/Claude 비상 발행), 6개 판, 단계별 할 일, 결정 대기 항목, 실패 기록. 문서만 추가, 코드·판·예약·설정 변경 없음.
