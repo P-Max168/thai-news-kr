@@ -38,10 +38,10 @@ KOREA_FILES="data/korea.json data/korea.js data/ticker.json data/ticker.js"
 for f in $KOREA_FILES; do
   if git ls-files --error-unmatch "$f" >/dev/null 2>&1; then git checkout -q -- "$f"; else rm -f "$f"; fi
 done
-# 앱 셸 버전 갱신(assets 가 바뀌었으면 index.html ?v= 와 sw.js VERSION 변경 → 서비스 워커가 새 파일을 받음)
-python3 tools/stamp_assets.py
 # 검색 노출(2026-10-18 R-seo-2): sitemap.xml 을 data/index.json·e/ 에 맞춰 다시 만듦(share_kit 도 만들지만 한 번 더 — 실패해도 배포는 계속)
 python3 tools/seo.py sitemap || echo "경고: sitemap.xml 갱신 실패(배포는 계속)" >&2
+# 홈 뉴스판 링크를 갱신한 뒤 앱 셸 버전을 계산해야 캐시에도 새 링크가 반영됨.
+python3 tools/stamp_assets.py
 # 사이트 파일만 스테이징 (.gitignore 가 제외 대상 차단)
 # og/(링크 미리보기 이미지)·e/(판별 미리보기 페이지)는 tools/share_kit.py 가 만듦 — 있는 경로만 추가
 PATHS=""

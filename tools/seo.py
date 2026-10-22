@@ -139,7 +139,42 @@ def sitemap(root=ROOT):
     out.append("</urlset>")
     txt = "\n".join(out) + "\n"
     (root / "sitemap.xml").write_text(txt, encoding="utf-8")
+    home_edition_links(root, eds)
     return len(out) - 3
+
+
+def home_edition_links(root, editions, limit=14):
+    """Keep real edition links in the home HTML, without requiring JS or a select change."""
+    path = root / "index.html"
+    if not path.exists():
+        return
+    text = path.read_text(encoding="utf-8")
+    start, end = "<!-- edition-links:start -->", "<!-- edition-links:end -->"
+    pattern = re.escape(start) + r".*?" + re.escape(end)
+    _, _, lang = _site()
+    block = ""
+    # Other language builds must not inherit Korean navigation from the shared shell.
+    if lang == "ko":
+        links = []
+        for item in sorted(editions, key=lambda x: x["id"], reverse=True):
+            eid = item["id"]
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}-(am|md|pm|early)", eid):
+                continue
+            if not (root / "e" / eid / "index.html").is_file():
+                continue
+            links.append('<a href="e/%s/">%s</a>' % (e(eid), e(item.get("label") or eid)))
+            if len(links) >= limit:
+                break
+        if links:
+            block = start + '\n    <details><summary>지난 뉴스판</summary><nav aria-label="지난 뉴스판"><p class="footer__links">' + "".join(links) + '</p></nav></details>\n    ' + end
+    if start in text and end in text:
+        text = re.sub(pattern, lambda _: block, text, count=1, flags=re.S)
+    elif block:
+        anchor = '    <p class="footer__small" id="generated"></p>'
+        if anchor not in text:
+            raise ValueError("Home edition links: footer anchor missing")
+        text = text.replace(anchor, "    " + block + "\n" + anchor, 1)
+    path.write_text(text, encoding="utf-8")
 
 
 def _old_head(path):
