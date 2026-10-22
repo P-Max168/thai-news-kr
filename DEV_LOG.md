@@ -342,3 +342,6 @@ User approves final existing five creatives and immediate deployment. Added comm
 
 ## 2026-10-23T05:40:00+07:00 · Claude · 비상 발행 장치
 - ops/EMERGENCY_PUBLISH.md·ops/emergency.json. 클라우드 연습: candidates 브랜치 → WebFetch 로 원문 4건 확인 → 편집 파일 → build_data 검증 통과(배포 안 함). 실패: 첫 시도 highlights 3개·briefing 4줄 미만으로 검증 멈춤 → 절차 문서에 필수 조건 적음. 실패: 이 클라우드는 Pages API(pages/builds) 403 → Actions runs 로 확인하게 함.
+
+## 2026-10-23T06:00:00+07:00 · Claude · 장소 엔진 시범 완료
+- ops/places-pilot/(5분류 JSON + preview.html). 2곳 이상 출처로 영업 확인, 한·중 후기 요약. 실패: 러시아어 후기는 일반 검색으로 거의 안 잡힘(얀덱스·2GIS·텔레그램) → 러시아어판 보류와 같은 이유. 네이버·티스토리·태사랑·씨트립·마펑워는 자동 읽기가 막혀 한국어 후기는 WAUG·Trip.com 위주.
