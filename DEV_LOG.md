@@ -327,3 +327,6 @@ User approves final existing five creatives and immediate deployment. Added comm
 
 ## 2026-10-23T04:00:00+07:00 · Claude · 판 시작 시각 06:40/17:40
 - 맥스님 승인. 감시·늦음 판정·한국 뉴스 대기·push 금지 구간·설정·README를 새 시각으로. 대행 기간(07:08) 판도 덮도록 금지 구간을 넓힘. edition_watch dry-run 확인(08:05 정상, 08:15 경보). 판·데이터 변경 없음.
+
+## 2026-10-23T04:20:00+07:00 · Claude · 방문 통계(Cloudflare Web Analytics)
+- 맥스님 승인. Cloudflare 에 tnews.pmaxone.com·zh.pmaxone.com 웹 분석 사이트 등록(DNS only 라 JS 코드 방식). 주소로 토큰을 고르는 작은 코드를 HTML 6쪽·e 30쪽·seo.py 템플릿에 넣고, 개인정보 처리방침 5번에 방문 통계 한 줄. 실패: seo.py regen-e 는 설명문 지역 순서를 바꿔 되돌림 / stamp_assets 는 모든 ?v= 를 바꿔 되돌림(이번 변경엔 불필요).

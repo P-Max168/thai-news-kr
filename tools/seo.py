@@ -104,6 +104,8 @@ article h2,.brief h2{font-size:18px;margin:0 0 8px;line-height:1.4}.meta,.src{co
 a{color:#1B64DA}a.btn{display:inline-block;margin:10px 0;background:#1B64DA;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none}
 li{margin:6px 0;color:#333D4B}footer{color:#5F6B7A;font-size:14px;padding:10px 20px 30px;max-width:720px;margin:auto}</style>
 <link rel="stylesheet" href="/assets/g-pages.css?v=1">
+<!-- 방문 통계: Cloudflare Web Analytics(쿠키 없음, 2026-10-23 맥스님 승인). 주소별 토큰 -->
+<script>(function(){var t={"tnews.pmaxone.com":"bea5ff7413d34c85b4f9f0df04a87e4e","zh.pmaxone.com":"bb059d024cbc42a99df391388dcae578"}[location.hostname];if(!t)return;var s=document.createElement("script");s.defer=true;s.src="https://static.cloudflareinsights.com/beacon.min.js";s.setAttribute("data-cf-beacon",JSON.stringify({token:t}));document.head.appendChild(s);})();</script>
 </head>
 <body>
 <header><a href="../../">%(brand)s</a></header>

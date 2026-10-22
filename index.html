@@ -51,7 +51,8 @@ var u=location.href.replace(/([?&])theme=(g|modern|classic)(&|(?=#)|$)/,function
 <script>if(window.__tnTheme==="modern")document.write('<link rel="stylesheet" href="assets/modern.css?v=f5a5e488"><script src="assets/modern.js?v=2b99d07f"><\/script>'+(window.__tnG?'<link rel="stylesheet" href="assets/g.css?v=81aaa6eb">':''));</script>
 
 <script>/* G: 하트(저장) 누를 때만 짧은 진동 10ms — 지원 기기만, 동작 줄이기 설정이면 안 함 */if(window.__tnG&&navigator.vibrate&&!(matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest(".card-heart"))try{navigator.vibrate(10)}catch(x){}},true);</script>
-</head>
+<!-- 방문 통계: Cloudflare Web Analytics(쿠키 없음, 2026-10-23 맥스님 승인). 주소별 토큰 -->
+<script>(function(){var t={"tnews.pmaxone.com":"bea5ff7413d34c85b4f9f0df04a87e4e","zh.pmaxone.com":"bb059d024cbc42a99df391388dcae578"}[location.hostname];if(!t)return;var s=document.createElement("script");s.defer=true;s.src="https://static.cloudflareinsights.com/beacon.min.js";s.setAttribute("data-cf-beacon",JSON.stringify({token:t}));document.head.appendChild(s);})();</script></head>
 <body>
 <header class="masthead">
   <div class="wrap masthead__inner">
