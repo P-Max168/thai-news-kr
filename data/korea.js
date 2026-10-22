@@ -1,6 +1,6 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-22T20:01:32+07:00",
+ "updated_at": "2026-10-23T00:38:01+07:00",
  "items": [
   {
    "title": "수로 넘어온 ‘부캉이’ 다시 외해로 이동···“기력 회복하고, 스스로 나가는 것이 최선”",
@@ -9,58 +9,58 @@ window.KOREA_NEWS = {
    "url": "https://www.khan.co.kr/article/202610221751001"
   },
   {
-   "title": "검찰총장 대행 \"尹 '기소해 고통줘야' 말해‥먼지털이 수사 원인\"",
+   "title": "'역삼 연쇄 방화' 77세 이 모 씨 구속‥\"도망 염려\"",
    "source": "MBC 뉴스",
-   "time": "2026-10-22T15:29:36+07:00",
-   "url": "https://imnews.imbc.com/news/2026/society/article/6859994_36918.html"
+   "time": "2026-10-22T18:43:47+07:00",
+   "url": "https://imnews.imbc.com/news/2026/society/article/6860045_36918.html"
   },
   {
-   "title": "'역삼동 연쇄 방화' 70대 남성 구속영장 심사 출석",
-   "source": "YTN",
-   "time": "2026-10-22T13:56:00+07:00",
-   "url": "https://www.ytn.co.kr/_ln/0103_202610221556041642"
-  },
-  {
-   "title": "김여정 “국경선 새 대응수단 임무 대기…확성기도 준비 태세”",
-   "source": "한겨레",
-   "time": "2026-10-22T07:14:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1283571.html"
-  },
-  {
-   "title": "이 대통령 ‘중수청장 배석 논란’에 연일 반박…“지휘·감독 포기는 탄핵 사유”",
-   "source": "한겨레",
-   "time": "2026-10-22T19:26:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/bluehouse/1283698.html"
-  },
-  {
-   "title": "태풍 참피, 제주 영향↓…25일 아름다운마라톤 ‘순항’ 전망",
-   "source": "제주의소리",
-   "time": "2026-10-22T09:25:03+07:00",
-   "url": "https://www.jejusori.net/news/articleView.html?idxno=507590"
-  },
-  {
-   "title": "청주 중학교서 여학생들 딥페이크 영상 만든 남학생 집단폭행 당해···경찰 수사",
+   "title": "[단독] ‘소방 빨대’ 발언 수습 나선 여당, 소방관 인건비 전액 국비 지원 검토",
    "source": "경향신문",
-   "time": "2026-10-22T16:55:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610221855001"
+   "time": "2026-10-22T16:09:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610221809001"
   },
   {
-   "title": "[여의도앨리스] 정치권 블랙홀 된 서울시장 보궐선거 여부…양당 지도 체제, 보수 진영 내 역학 구도까지 흔든다",
+   "title": "검찰총장 대행 “윤석열, 총장 시절 ‘자백 안하면 기소해 고통받게 하라’고 해”",
+   "source": "한겨레",
+   "time": "2026-10-22T20:13:00+07:00",
+   "url": "https://www.hani.co.kr/arti/society/society_general/1283715.html"
+  },
+  {
+   "title": "장동혁 ‘욕설 녹취’ 공개…민주 “‘극우 베스트’ 자처, 심각하다”",
+   "source": "한겨레",
+   "time": "2026-10-22T14:16:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/politics_general/1283642.html"
+  },
+  {
+   "title": "조국, 민주당 향해 ‘조희대 탄핵’ 압박…“가만두면 대통령 호구로 봐”",
+   "source": "한겨레",
+   "time": "2026-10-22T16:43:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/politics_general/1283709.html"
+  },
+  {
+   "title": "북한 IT 인력 국내 위장취업…경찰 수사",
+   "source": "연합뉴스TV",
+   "time": "2026-10-22T20:27:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261022222757NOn"
+  },
+  {
+   "title": "\"제미나이에 나도 물어봤다\"... 대통령이 불러온 AI 챌린지",
+   "source": "조선일보",
+   "time": "2026-10-22T13:44:10+07:00",
+   "url": "https://www.chosun.com/politics/assembly/2026/10/22/RIXWIDAFLZFTROMMUOEGJK53QA/"
+  },
+  {
+   "title": "부산교통공사 노사, 단체교섭 최종 타결···23일 열차 정상 운행",
    "source": "경향신문",
-   "time": "2026-10-21T15:54:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610211754001"
+   "time": "2026-10-22T22:00:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610230000001"
   },
   {
-   "title": "김정은 사망설, 김한솔 후계설, 미군 투입설까지···도대체 무슨 일이",
-   "source": "주간경향",
-   "time": "2026-10-22T16:24:00+07:00",
-   "url": "https://weekly.khan.co.kr/article/202610221824001"
-  },
-  {
-   "title": "\"순직하면 10억 로또\" 망언에…현직 소방관이 남긴 글",
-   "source": "한국경제",
-   "time": "2026-10-22T13:55:10+07:00",
-   "url": "https://www.hankyung.com/article/2026102288147"
+   "title": "프랑스 시위 약탈품 온라인 중고시장에…거래 차단 조치",
+   "source": "연합뉴스TV",
+   "time": "2026-10-22T18:31:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR202610222031365L0"
   }
  ]
 };
