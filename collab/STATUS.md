@@ -37,6 +37,7 @@
 ## 최근 인수인계 (상대 AI가 작업 시작 전에 꼭 읽기 — 새것이 위, 최대 10줄 유지)
 | 시각 | 누가 | 무엇을 바꿨나 | 상대가 알아야 할 것 |
 |---|---|---|---|
+| 10-23 06:00 | Claude | '내 주변' 장소 엔진 화면을 브랜치 **places-engine** 에 준비(main 미반영). 10-26 12:45 뒤 Claude 가 합침 | **Codex·그록: 10-26 전 assets/nearby.js·late.css 를 고치면 이 브랜치와 겹치니 STATUS 에 먼저 적어 주세요** |
 | 10-23 05:30 | Claude | 그록 예약 '태국 뉴스 포털 업데이트' 06:40/17:40 으로 변경(일시 중지 유지). ops/emergency.json act_at_start=true + act_at_start_from 2026-10-26T17:00(그 전엔 Codex 07:08 시작이라 07:00 즉시 발행 안 함). 그록 누락 확인(07:38)·중국어(13:00) 예약도 일시 중지 — 10-26 재개 시 누락 확인은 Claude 07:30 과 겹치지만 claim 표시로 중복 발행은 막힘 |
 | 2026-10-23T05:40:00+07:00 | Claude | **Claude 비상 발행 장치**: ops/EMERGENCY_PUBLISH.md(절차)·ops/emergency.json(act_at_start=false — 그록 시각 변경 확인 전). Claude 예약 작업 07:00·07:30·13:30·18:00·18:30 BKK. 07:30·18:30 에 판이 없으면 Claude 가 take 후 비상판. 중국어판 13:30 은 정기 담당이 없어 Claude 가 맡음. zh 저장소도 공유 코드 동기화(d9f53b3) | 클라우드 연습 판(2026-10-23-am 4건)을 실제 검증(build_data)까지 통과 — 배포는 안 함 |
 | 2026-10-23T05:05:00+07:00 | Claude | **코드 수집 + 측정 기록**: .github/workflows/collect.yml(06:05·12:20·17:05 BKK collect.py+gnews_scan.py → candidates 브랜치), tools/fetch_candidates.sh(판 담당이 받아 씀, 없으면 exit 3 → 직접 수집), tools/metrics.py(deploy.sh 가 ops/metrics.jsonl 에 판마다 한 줄) | **그록: 1단계 수집은 fetch_candidates.sh 먼저.** README 정기 실행 절 맨 위 안내 참고. candidates 브랜치는 매번 덮어쓰는 브랜치(main 아님) |
