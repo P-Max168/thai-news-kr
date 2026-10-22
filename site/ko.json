@@ -10,7 +10,7 @@
  "slots": ["early", "am", "pm"],
  "edition_label": {"early": "새벽판", "am": "아침판", "pm": "저녁판"},
  "label_format": "{m}월 {d}일 {slot}",
- "schedule": {"full": [{"slot": "am", "build": "07:08"}, {"slot": "pm", "build": "18:08"}], "no_push_windows": ["07:00-08:10", "18:00-18:40"], "tz": "Asia/Bangkok"},
+ "schedule": {"full": [{"slot": "am", "build": "06:40"}, {"slot": "pm", "build": "17:40"}], "no_push_windows": ["06:40-08:10", "17:40-18:40"], "tz": "Asia/Bangkok"},
  "home_section": {"id": "korea", "key": "korea_top", "fetcher": "tools/fetch_korea.py --standalone", "data": "data/korea.json", "script": "data/korea.js", "global": "KOREA_NEWS", "cron": "17 */2 * * *"},
  "editorial": {"sources": "tools/sources.json", "translation_rules": "tools/TRANSLATION_RULES.md", "topics": "assets/topics.js(기본값)", "discussion_persona": "tools/TRANSLATION_RULES.md", "i18n": "i18n/ko.json(화면 기본값 목록 — 코드 안 기본 문구에서 뽑음)"},
  "currency": {"pair": "THB_KRW", "format": "{thb}바트(약 {krw}원)", "check": "krw_check", "header_symbol": "฿"},

@@ -324,3 +324,6 @@ User approves final existing five creatives and immediate deployment. Added comm
 
 ## 2026-10-23T03:55:00+07:00 · Claude · 전체 시스템 설계 문서
 - `ops/SYSTEM_PLAN.md` 추가: 엔진+판 설정 템플릿 구조, 역할(코드/그록/Claude 비상 발행), 6개 판, 단계별 할 일, 결정 대기 항목, 실패 기록. 문서만 추가, 코드·판·예약·설정 변경 없음.
+
+## 2026-10-23T04:00:00+07:00 · Claude · 판 시작 시각 06:40/17:40
+- 맥스님 승인. 감시·늦음 판정·한국 뉴스 대기·push 금지 구간·설정·README를 새 시각으로. 대행 기간(07:08) 판도 덮도록 금지 구간을 넓힘. edition_watch dry-run 확인(08:05 정상, 08:15 경보). 판·데이터 변경 없음.

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 판 빌드 전 점검(2026-10-05) — 정기 실행(07:08·18:08)과 대체 루틴(07:38·18:38)의 **맨 처음**에 실행.
+# 판 빌드 전 점검(2026-10-05) — 정기 실행(2026-10-23부터 06:40·17:40, 전 07:08·18:08)과 대체 루틴의 **맨 처음**에 실행.
 #   bash tools/preflight.sh <작업이름>              예: bash tools/preflight.sh am-build
 #   bash tools/preflight.sh end <작업이름> ok|fail [메모]   (작업 끝에 한 줄 — 실행 기록 닫기)
 # 왜: 10-04 07:08 아침판이 안 만들어졌을 때 상자(box)에 '실행이 시작은 됐는지' 증거가 하나도 없었음(DEV_LOG 10-05 원인 조사).
@@ -72,7 +72,7 @@ command -v node >/dev/null || FIX+=("node 없음(주제 계산은 간단 매핑�
 # 9) 오늘 판 상태
 d=$(TZ=Asia/Bangkok date +%F); h=$(TZ=Asia/Bangkok date +%H)
 st="오늘 아침판 ${d}-am: $([ -f data/${d}-am.json ] && echo 있음 || echo 없음)"
-# 10) 라이브 최신 판이 예정(07:08·18:08)보다 30분 넘게 늦었는지 — 늦으면 /workspace/logs/edition-stale.txt 에 한 줄(빌드를 막지는 않음, 2026-10-05)
+# 10) 라이브 최신 판이 게시 목표(07:00·18:00, 2026-10-23 변경)보다 30분 넘게 늦었는지 — 늦으면 /workspace/logs/edition-stale.txt 에 한 줄(빌드를 막지는 않음, 2026-10-05)
 stale="$(timeout 60 python3 tools/edition_stale.py 2>&1 | tail -n1)"; say "라이브 판: $stale"; st="$st · 라이브: ${stale:0:80}"
 [ "$h" -ge 18 ] && st="$st · 저녁판 ${d}-pm: $([ -f data/${d}-pm.json ] && echo 있음 || echo 없음)"
 

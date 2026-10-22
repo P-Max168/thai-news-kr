@@ -22,7 +22,8 @@ fi
 # 07:05–08:10(방콕) push 금지(정기 아침판 시간) — 사람이 잊어도 여기서 막음(2026-10-05)
 # (2026-10-18) GROK_PROMPT 4-6 금지 구간 전체로: 07:00~08:10(아침판) + 18:00~18:40(저녁판) — 10-11 요청(18:00~18:40 누락) 반영
 hm=$(TZ=Asia/Bangkok date +%H%M); hm=$((10#$hm))
-if { [ "$hm" -ge 700 ] && [ "$hm" -le 810 ]; } || { [ "$hm" -ge 1800 ] && [ "$hm" -le 1840 ]; }; then echo "지금 $(TZ=Asia/Bangkok date +%H:%M) — 07:00~08:10·18:00~18:40 은 push 금지(정기 판 시간). 끝난 뒤에 다시" >&2; exit 4; fi
+# (2026-10-23) 판 시작 06:40·17:40 으로 앞당김 → 금지 06:40~08:10 + 17:40~18:40
+if { [ "$hm" -ge 640 ] && [ "$hm" -le 810 ]; } || { [ "$hm" -ge 1740 ] && [ "$hm" -le 1840 ]; }; then echo "지금 $(TZ=Asia/Bangkok date +%H:%M) — 06:40~08:10·17:40~18:40 은 push 금지(정기 판 시간). 끝난 뒤에 다시" >&2; exit 4; fi
 # 정본 체크아웃 검사(2026-10-05): 정본이 rebase/merge 중·앞섬·바뀐/추적 안 된 파일이면 push 전에 멈춤(아무것도 안 고침, canon-alert.txt + automation.log)
 #   10-05 08:30: 정본에 직접 커밋된 DEV_LOG 줄 때문에 push 뒤 정본 pull 이 rebase 중간에 멈췄음(ship exit 1) → 이제 push 전에 막음
 bash tools/canon_guard.sh ship || { echo "정본 상태가 깨끗하지 않아 배포 안 함(push 전). 정본을 먼저 정리" >&2; exit 7; }

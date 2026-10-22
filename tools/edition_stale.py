@@ -2,7 +2,7 @@
 """최신 판 늦음 검사(2026-10-05) — 라이브 사이트의 최신 판이 예정보다 30분 넘게 늦으면 /workspace/logs/edition-stale.txt 에 한 줄.
   python3 tools/edition_stale.py            # 상태 출력 + 늦으면 한 줄 기록(같은 판은 한 번만)
   python3 tools/edition_stale.py --now "2026-10-05 07:45"   # 시험(방콕 시각 흉내)
-예정: 아침판 07:08, 저녁판 18:08 (방콕). 30분 지나도(= 07:38 / 18:38) 라이브 data/index.js 의 latest 가 그 판이 아니면 '늦음'.
+예정(2026-10-23 변경): 게시 목표 아침판 07:00, 저녁판 18:00 (방콕, 시작 06:40·17:40). 30분 지나도(= 07:30 / 18:30) 라이브 data/index.js 의 latest 가 그 판이 아니면 '늦음'.
 읽기만 함(사이트·저장소를 바꾸지 않음), 휴대폰 알림 없음 — Max 가 다음 검수에서 이 파일을 봄. tools/preflight.sh 가 매번 부름.
 종료 코드: 0 = 정상, 1 = 늦음(기록함), 2 = 라이브를 못 읽음(기록함).
 (2026-10-11) 여러 판 공백 경보: 라이브 최신과 기대 판 사이에 빠진 판이 2개 이상이면(= '1판 늦음'이 아니라 공백)
@@ -15,7 +15,7 @@ import datetime as dt, json, os, random, re, sys, urllib.request
 BKK = dt.timezone(dt.timedelta(hours=7))
 SITE = os.environ.get("TNK_SITE", "https://tnews.pmaxone.com/")
 LOG = os.path.join(os.environ.get("TNK_LOGDIR", "/workspace/logs") if os.environ.get("TNK_TEST") == "1" else "/workspace/logs", "edition-stale.txt")   # 덮어쓰기는 TNK_TEST=1 일 때만(2026-10-05)
-SLOTS = [("am", 7, 8), ("pm", 18, 8)]
+SLOTS = [("am", 7, 0), ("pm", 18, 0)]   # 2026-10-23: 게시 목표 07:00·18:00(시작 06:40·17:40)
 GRACE = 30
 GAPS = os.path.join(os.path.dirname(LOG), "edition-gaps.txt")
 

@@ -37,8 +37,8 @@
 ## 판(edition) 파일 이름 규칙 ★정기 실행은 반드시 이 규칙을 따를 것
 | 실행 | 파일 id | 화면 라벨 | 수집 범위(대략) |
 |---|---|---|---|
-| 매일 07:08 (방콕) | `<YYYY-MM-DD>-am` | `M월 D일 아침판` | 전날 저녁판 이후 ~ 아침 |
-| 매일 18:08 (방콕) | `<YYYY-MM-DD>-pm` | `M월 D일 저녁판` | 그날 아침판 이후 ~ 저녁 |
+| 매일 06:40 시작 · 07:00 게시 (방콕) | `<YYYY-MM-DD>-am` | `M월 D일 아침판` | 전날 저녁판 이후 ~ 아침 |
+| 매일 17:40 시작 · 18:00 게시 (방콕) | `<YYYY-MM-DD>-pm` | `M월 D일 저녁판` | 그날 아침판 이후 ~ 저녁 |
 | (예외) 정기 외 임시판 | `<YYYY-MM-DD>-early` | `M월 D일 새벽판` | 현재 `2026-09-29-early`(01:10 작성) 한 건뿐 |
 
 - 날짜 = 방콕 시간 기준 **실행한 날**. 예: 9월 30일 07:08 실행 → `2026-09-30-am`.
@@ -217,9 +217,9 @@
   - 한 매체가 판을 독차지하지 않게 **여러 소스에 고루** 나눠 고른다(부드러운 지침).
   - 주제를 채우려고 고르지 않는다 — 좋은 후보가 없으면 그 주제는 비우고 `coverage` 에 적는다(절대 지어내지 않음).
 
-## 정기 실행(07:08 / 18:08) 절차
+## 정기 실행(06:40 / 17:40 시작, 2026-10-23 변경 — 전 07:08 / 18:08) 절차
 0. **맨 먼저 점검(2026-10-05~)**: `bash tools/preflight.sh am-build`(저녁은 `pm-build`, 07:38·18:38 대체 루틴은 `backup-check`). 오래된 git 잠금·멈춘 rebase·다른 브랜치·올리지 않은 변경(stash, 버리지 않음)을 스스로 정리하고 원격과 맞춘 뒤 디스크·메모리·인터넷·도구를 확인한다. **`PREFLIGHT FAIL` 이면 판을 만들지 말고 그 줄을 Max 에게 알린다**(실패 이유가 그대로 적힘). 끝나면 `bash tools/preflight.sh end am-build ok`(실패면 `fail "이유"`). 시작·끝·배포(deploy.sh 가 자동)는 `/workspace/logs/automation.log` 에 남는다 — 다음에 판이 빠지면 이 파일에 START 가 있는지부터 본다(없으면 예약 실행 자체가 안 온 것).
-   - preflight 는 끝에 `python3 tools/edition_stale.py` 도 부름: 라이브 최신 판이 예정(07:08·18:08)보다 **30분 넘게 늦으면** `/workspace/logs/edition-stale.txt` 에 한 줄(같은 판은 한 번만, 빌드는 안 막음, 휴대폰 알림 없음 — Max 가 검수 때 봄). 매시 점검 루틴에서 따로 불러도 됨.
+   - preflight 는 끝에 `python3 tools/edition_stale.py` 도 부름: 라이브 최신 판이 게시 목표(07:00·18:00)보다 **30분 넘게 늦으면** `/workspace/logs/edition-stale.txt` 에 한 줄(같은 판은 한 번만, 빌드는 안 막음, 휴대폰 알림 없음 — Max 가 검수 때 봄). 매시 점검 루틴에서 따로 불러도 됨.
 1. 수집: **먼저 `python3 tools/collect.py`** 를 실행한다(`tools/sources.json` 의 RSS·뉴스 사이트맵·Google News 검색 약 240개를 동시에 훑음(24시간 창이면 2~3분), 실패한 소스는 건너뛰고 끝에 표시, 1분 안쪽). 결과 = `drafts/candidates/latest.md`(사람용)·`latest.json`(최근 14시간, 중복 합침, 주제별(동부·방콕·북부·남부 …)·매체별 건수, `also` = 같은 사건을 보도한 다른 매체). 기간은 `--hours 20` 처럼 바꾼다(저녁판은 아침판 이후 ~11시간이면 충분). `drafts/` 는 .gitignore 대상이라 커밋되지 않는다.
    - **Google News 레이더(2026-10-18~, 매번 — collect.py 바로 뒤, 기사 고르기 전)**: `python3 tools/gnews_scan.py`(저녁판은 `--hours 12`도 됨, 30초 안쪽). 실패해도 exit 0·빈 결과이니 그냥 다음 단계로. 결과 `drafts/gnews/latest.md`:
      - **놓친 사건(missed)** 중 중요한 것(뉴스 가치·한국인 관련성)을 **최대 ~2건** 골라 판에 넣는다. 쓸 때는 **반드시 원 매체 페이지(`source_url`, 못 풀었으면 매체 이름 + 제목으로 검색)를 열어** 그 내용으로 직접 쓴다 — Google News 제목·목록을 그대로 옮기지 않는다(발견용일 뿐, 다시 게시 금지). 게재 시각·숫자는 원문에서 확인(Google 날짜는 참고용). 약하면 넣지 않는다.
@@ -246,7 +246,7 @@
 4. `python3 tools/build_data.py tools/editions/<id>.py` (검증 실패 시 예외로 멈춤. `점검(경고):` 줄은 구성 안내 — 실제 뉴스가 있는데 빠진 주제면 보강)
 5. `python3 -m http.server 8765 &` → `python3 tools/screenshot.py` (`ALL OK` 확인) → `screenshots/`의 이미지를 직접 보고 문제 수정. 특히 `mobile-390-feed.png`(브리핑 5~6줄·굵게·주제 칩), `mobile-390-tab-visa.png`(외국인·비자 탭), `desktop-1280-top.png`; 390px·1280px에서 X 트렌드 섹션·메뉴 항목이 없는지도 확인한다. 앱 코드(assets·sw.js)를 고쳤으면 `python3 tools/test_pwa.py` 도.
 6. **💬 오늘의 질문 초안(매번, 승인 전까지 화면에 안 나옴)**: `python3 tools/discussion.py draft <id>` → `drafts/discussion/<id>.json` 의 **모든 기사(판의 기사 전부 — 건수 제한 없음, 2026-10-03 운영자 결정)**마다 `question`(독자에게 묻는 한 줄)·`operator_comment`(운영자 첫 댓글)를 채운다 — 자연스러운 한국어, 정직한 '운영자' 목소리(“운영자입니다.”), `TRANSLATION_RULES.md` 준수, 기사에 없는 사실·숫자 단정 금지, **절대 독자(사용자)인 척 쓰지 않는다**. **독자는 태국의 한국인 교민·여행자 — 기사마다 먼저 A(누구나 화제)/B(외국인도 해당 행정)/C(태국 국민 전용 행정·혜택)를 정해 `reader_fit` 에 적고, C 는 '신청하셨나요?·여러분 빨리 가세요' 금지(간접 영향·주변 태국인·본 것·의견만). 운영자 첫 댓글·운영자 답글(`drafts/replies`)도 같은 기준(`TRANSLATION_RULES.md` 'A/B/C 3단계', 2026-10-18).** `approved` 는 false 그대로. 보고에 `python3 tools/discussion.py show <id>` 결과를 붙여 운영자에게 보여 주고, **채팅에서 OK 받은 항목만** `approved: true` 로 바꾼 파일로 `python3 tools/discussion.py apply <id> <파일>` → 배포. **apply 는 그 판의 질문 전체를 파일 내용으로 바꾸므로, 일부만 새로 승인했으면 이미 적용된 `tools/discussions/<id>.json` 항목도 같은 파일에 넣는다.** (적용분은 `tools/discussions/<id>.json` 에 남아 판을 다시 만들어도 유지)
-7. **배포(필수)**: `bash tools/deploy.sh` — 아래 'Deploy' 참고. 07:08·18:08 정기 실행은 판을 만든 뒤 **매번** 실행할 것.
+7. **배포(필수)**: `bash tools/deploy.sh` — 아래 'Deploy' 참고. 06:40·17:40 정기 실행은 판을 만든 뒤 **매번** 실행할 것.
 8. **공유 키트(매번, 배포 뒤)**: `python3 tools/share_kit.py <id>` → `share/<id>.png`(카톡 사진 카드)·`share/<id>.txt`(메시지 문구, 올리지 않음) + 사이트용 `og/<id>.png`·`og/latest.png`(링크 미리보기 이미지)·`e/<id>/index.html`(판별 미리보기 페이지 → `?ed=<id>` 로 이동). og/·e/ 가 바뀌었으니 **`bash tools/deploy.sh` 한 번 더**. 그다음 `python3 tools/discussion.py draft <id>`(6번) 초안을 채워 보고에 붙인다.
    - 링크: 메인 `https://p-max168.github.io/thai-news-kr/`(og/latest.png), 판별 `https://p-max168.github.io/thai-news-kr/e/<id>/`. `?e=<id>`·`?ed=<id>`·`?date=<id>` 모두 그 판을 연다. 서비스 워커는 루트·index.html 만 앱 셸로 다루고 e/ 페이지는 가로채지 않는다.
 
@@ -354,7 +354,7 @@
 - 저장소: https://github.com/P-Max168/thai-news-kr (공개 — 무료 Pages 조건)
 - 라이브: https://p-max168.github.io/thai-news-kr/ (휴대폰에서 이 주소로 열기)
 - Pages 설정: `main` 브랜치 루트(`/`). `.nojekyll` 로 Jekyll 처리 끔.
-- **매 정기 실행(07:08 / 18:08 방콕)은 판을 만든 뒤(위 4~5단계) 반드시 `bash tools/deploy.sh` 를 실행한다.**
+- **매 정기 실행(06:40 / 17:40 방콕, 2026-10-23 변경)은 판을 만든 뒤(위 4~5단계) 반드시 `bash tools/deploy.sh` 를 실행한다.**
   - 먼저 `tools/stamp_assets.py` 로 앱 셸 버전 갱신(assets 가 바뀐 경우만 index.html·sw.js 수정)
   - 사이트 파일(index.html, manifest.json, sw.js, assets/, data/, tools/, README.md 등)의 새 파일·변경분을 `edition <id>` 메시지로 커밋 → `main` 에 push
   - force-push 금지(스크립트도 하지 않음). push 전에 **항상 `git pull --rebase --autostash`**(Actions 의 korea.json 커밋을 받아 옴) → 일반 push, 거부되면 최대 4번 재시도

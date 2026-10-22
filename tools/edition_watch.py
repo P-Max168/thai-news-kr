@@ -4,7 +4,7 @@
   이유: 10-05~10-11 정기 07:08·18:08 빌드와 07:38·18:38 대체 루틴이 같은 실행기를 써서 같이 멈췄고(6일), 그 사이 경보도 상자 안 파일에만 남았음.
 
 '기대 판' 정의(방콕 시각, UTC+7):
-  예정 시각 = 아침판 07:08 (-am), 저녁판 18:08 (-pm). 허용 = 예정 + 90분 → 아침판 08:38, 저녁판 19:38 까지.
+  예정 시각 = 아침판 06:40 (-am), 저녁판 17:40 (-pm) 시작(2026-10-23 변경, 전 07:08·18:08). 허용 = 예정 + 90분 → 아침판 08:10, 저녁판 19:10 까지.
   기대 판 = 허용 시각이 이미 지난 판 중 가장 최근 것.  예) 08:37 → 전날 -pm, 08:38 → 오늘 -am, 19:38 → 오늘 -pm
   라이브 https://tnews.pmaxone.com/data/index.json 의 latest 가 기대 판보다 앞(옛 판)이면 = 공백(예정보다 90분 넘게 늦음).
   generated 는 그 latest 판 data/<id>.json 의 generated(없으면 index.json editions[] 의 generated) — 보고용.
@@ -21,7 +21,7 @@ import datetime as dt, json, os, random, re, sys, time, urllib.error, urllib.req
 BKK = dt.timezone(dt.timedelta(hours=7))
 SITE = "https://tnews.pmaxone.com/"
 REPO = os.environ.get("GITHUB_REPOSITORY", "P-Max168/thai-news-kr")
-SLOTS = [("am", 7, 8), ("pm", 18, 8)]
+SLOTS = [("am", 6, 40), ("pm", 17, 40)]   # 2026-10-23 맥스님: 시작 06:40·17:40(게시 목표 07:00·18:00)
 # 언어판(R-zh-5, 2026-10-18): site/<lang>.json 의 site_url·watch_slots(예 zh 시험 = [["md", 13, 0]]). 한국판은 위 값 그대로
 try:
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
