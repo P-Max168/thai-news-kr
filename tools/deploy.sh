@@ -73,6 +73,21 @@ echo "push 완료: $(git rev-parse --short HEAD)"
 
 # 라이브 검증: index.js 에 최신 id 가 반영될 때까지 대기 후 헤드리스 브라우저로 렌더 확인
 deadline=$(( $(date +%s) + TIMEOUT ))
+# (2026-10-23) TNK_LIVE_CHECK=pages: 사이트에 직접 못 붙는 곳(Claude 클라우드 비상 발행)에서는 GitHub Pages 빌드 결과로 확인
+if [ "${TNK_LIVE_CHECK:-curl}" = "pages" ]; then
+  REPO="$(git config --get remote.origin.url | sed -E 's#.*github.com[/:]##; s#\.git$##')"; HEAD_SHA="$(git rev-parse HEAD)"
+  while :; do
+    # pages build and deployment 실행 중 이 커밋(또는 그 뒤 커밋)이 success 면 통과. 뒤 커밋이 덮으면 앞 실행은 cancelled 가 정상.
+    st="$(gh api "repos/$REPO/actions/runs?event=dynamic&per_page=10" --jq '.workflow_runs[]|select(.name=="pages build and deployment")|.head_sha+" "+.status+" "+(.conclusion//"")' 2>/dev/null || true)"
+    mine="$(echo "$st" | grep "^$HEAD_SHA " | head -1)"
+    if echo "$mine" | grep -q " completed success"; then echo "Pages 빌드 완료: ${HEAD_SHA:0:7} (사이트 직접 확인은 생략)"; echo "배포 완료: $LIVE_URL (판 $LATEST)"; exit 0; fi
+    if echo "$mine" | grep -q " completed cancelled" && git merge-base --is-ancestor "$HEAD_SHA" "$(echo "$st" | grep ' completed success' | head -1 | cut -c1-40)" 2>/dev/null; then
+      echo "Pages: 뒤 커밋 빌드가 성공(이 커밋 포함)"; echo "배포 완료: $LIVE_URL (판 $LATEST)"; exit 0; fi
+    echo "$mine" | grep -q " completed failure" && { echo "실패: Pages 빌드 실패 ($mine)" >&2; exit 2; }
+    [ "$(date +%s)" -ge "$deadline" ] && { echo "실패: ${TIMEOUT}s 안에 Pages 빌드 확인 안 됨 ($st)" >&2; exit 2; }
+    sleep 20
+  done
+fi
 while :; do
   ts=$(date +%s)
   # 최신 판 id 뿐 아니라 내용(같은 판을 고쳐 다시 올린 경우)과 앱 코드까지 로컬과 같아야 통과

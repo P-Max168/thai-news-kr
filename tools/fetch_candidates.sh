@@ -6,7 +6,7 @@
 set -uo pipefail
 cd "$(dirname "$0")/.." || exit 1
 ED="${1:-}"
-git fetch -q origin candidates 2>/dev/null || { echo "candidates 브랜치 없음 → 직접 수집"; exit 3; }
+git fetch -q origin +candidates:refs/remotes/origin/candidates 2>/dev/null || { echo "candidates 브랜치 없음 → 직접 수집"; exit 3; }
 meta="$(git show origin/candidates:meta.json 2>/dev/null)" || { echo "meta.json 없음 → 직접 수집"; exit 3; }
 ok=$(ED="$ED" python3 -c '
 import json,os,sys,datetime
