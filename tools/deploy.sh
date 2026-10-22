@@ -25,6 +25,8 @@ LATEST=$(python3 -c 'import json;print(json.load(open("data/index.json",encoding
 [ -n "$LATEST" ] || { echo "data/index.json 에 latest 없음" >&2; exit 1; }
 [ -f "data/$LATEST.json" ] && [ -f "data/$LATEST.js" ] || { echo "data/$LATEST.json|js 없음" >&2; exit 1; }
 echo "최신 판: $LATEST"
+# 판 담당 확인(2026-10-23): 이 판을 다른 담당(예: Claude 비상 인수)이 가져갔으면 배포하지 않음
+python3 tools/edition_claim.py check "${TNK_PUBLISHER:-grok}" "$LATEST" || { echo "다른 담당이 $LATEST 를 맡아 배포 중단" >&2; exit 4; }
 
 # 안전장치: 제외 대상이 실수로 추적되고 있으면 중단
 if git ls-files | grep -qE '^(raw|archive|screenshots)/'; then

@@ -333,3 +333,6 @@ User approves final existing five creatives and immediate deployment. Added comm
 
 ## 2026-10-23T05:00:00+07:00 · Claude · 지연 발행 라벨 자동 판정
 - newslib.is_delayed 추가, build_index 가 판 파일의 delayed_publication 대신 generated 와 예정 게시 시각(+30분)으로 판정. 10-20~10-22 여섯 판의 잘못된 라벨을 index·issues·e 쪽·홈 링크에서 제거. 시험: 10-19-am 12:57 지연, 10-22-pm 18:17 정상, 10-27-am 07:31 지연·07:29 정상. 실패 기록 없음.
+
+## 2026-10-23T05:20:00+07:00 · Claude · 판 담당 표시(claim)
+- tools/edition_claim.py(claim/check/take/status), preflight·deploy.sh 연결, publisher_guard 에 claude 상시 허용, claim-prune 워크플로. 실제 원격 시험: take claude → check grok HOLD(4) → claim grok HOLD(4) 확인. 실패: 이 클라우드 세션은 브랜치 삭제가 프록시에서 403(git push :ref, gh api DELETE 모두) → 정리는 GitHub Actions 로 옮김.

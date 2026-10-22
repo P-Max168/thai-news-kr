@@ -1,0 +1,35 @@
+# 🧹 판 담당 표시 정리(2026-10-23) — tools/edition_claim.py 가 남기는 원격 브랜치 claim/<판 id>/<누구> 중 3일 지난 것을 지움.
+# Claude 비상 발행은 클라우드 세션에서 돌아 브랜치를 만들 수는 있어도 지울 수는 없어서, 정리는 여기서 함.
+# 시각: 매일 방콕 03:17 (UTC 20:17) — 판 시간대와 겹치지 않음. 손으로: Actions → claim-prune → Run workflow
+name: claim-prune
+
+on:
+  schedule:
+    - cron: "17 20 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: claim-prune
+  cancel-in-progress: false
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      TZ: Asia/Bangkok
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: 3일 지난 claim 브랜치 지우기
+        run: |
+          cut=$(date -d '3 days ago' +%F)
+          gh api "repos/${GITHUB_REPOSITORY}/git/matching-refs/heads/claim/" --jq '.[].ref' | while read -r ref; do
+            ed=$(echo "$ref" | sed -E 's#^refs/heads/claim/([0-9]{4}-[0-9]{2}-[0-9]{2})-.*#\1#')
+            if [[ "$ed" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] && [[ "$ed" < "$cut" ]]; then
+              gh api -X DELETE "repos/${GITHUB_REPOSITORY}/git/${ref#refs/}" && echo "지움: $ref"
+            fi
+          done
+          echo "정리 끝(기준 $cut 이전)"

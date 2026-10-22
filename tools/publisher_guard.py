@@ -13,6 +13,9 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 
 def permitted(config, actor, now):
+    # 2026-10-23 맥스님: Claude 는 상시 비상 발행자. 판마다 tools/edition_claim.py 로 중복을 막는다.
+    if actor == "claude":
+        return True
     start = datetime.fromisoformat(config["starts"])
     end = datetime.fromisoformat(config["expires"])
     if start.tzinfo is None or end.tzinfo is None or start >= end:
