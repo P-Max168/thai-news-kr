@@ -345,3 +345,5 @@ User approves final existing five creatives and immediate deployment. Added comm
 
 ## 2026-10-23T06:00:00+07:00 · Claude · 장소 엔진 시범 완료
 - ops/places-pilot/(5분류 JSON + preview.html). 2곳 이상 출처로 영업 확인, 한·중 후기 요약. 실패: 러시아어 후기는 일반 검색으로 거의 안 잡힘(얀덱스·2GIS·텔레그램) → 러시아어판 보류와 같은 이유. 네이버·티스토리·태사랑·씨트립·마펑워는 자동 읽기가 막혀 한국어 후기는 WAUG·Trip.com 위주.
+
+- 2026-10-23 05:30 BKK (Claude): 그록 정기 예약 06:40/17:40 변경 확인(일시 중지 유지). ops/emergency.json act_at_start=true, act_at_start_from=2026-10-26T17:00 추가, EMERGENCY_PUBLISH.md·07:00 Claude 예약 작업 지시문에 반영.

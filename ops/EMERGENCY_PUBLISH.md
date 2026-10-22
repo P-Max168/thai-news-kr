@@ -17,7 +17,7 @@ Claude 예약 작업이 이 문서를 그대로 따른다. 사람도 읽을 수 
 - 저장소를 받는다: `git clone --depth 30 https://github.com/P-Max168/thai-news-kr` (중국어판은 `thai-news-zh`).
 - `python3 -c "import json;print(json.load(open('data/index.json'))['latest'])"` 가 오늘 판이면 끝.
 - `python3 tools/edition_claim.py status <판 id>` 로 담당 표시 확인.
-- 07:00·18:00 실행에서는 `ops/emergency.json` 을 먼저 본다. `act_at_start=false` 면 끝(그록 예약 시각이 아직 옛 시각이라 07:08 시작).
+- 07:00·18:00 실행에서는 `ops/emergency.json` 을 먼저 본다. `act_at_start=false` 이거나, 지금(방콕)이 `act_at_start_from` 보다 이르면 끝(그 전엔 Codex 가 07:08·18:08 시작). 그록 예약은 10-23 에 06:40·17:40 으로 바뀜(일시 중지 상태, 10-26 재개).
 
 ## 2. 비상 발행 (한국어판)
 1. 담당 표시: 07:00·18:00 이면 `python3 tools/edition_claim.py claim claude <판 id>`, 07:30·18:30 이면 `take`. HOLD 면 끝.

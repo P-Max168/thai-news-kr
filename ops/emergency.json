@@ -1,5 +1,6 @@
 {
-  "_doc": "Claude 비상 발행 설정(ops/EMERGENCY_PUBLISH.md). act_at_start: 07:00·18:00 에 담당 표시가 없으면 바로 비상 발행할지. 그록 예약 시각이 06:40·17:40 으로 바뀐 게 확인되면 true 로.",
-  "act_at_start": false,
-  "zh_md_owner": "claude"
+  "_doc": "Claude 비상 발행 설정(ops/EMERGENCY_PUBLISH.md). act_at_start: 07:00·18:00 에 담당 표시가 없으면 바로 비상 발행할지. act_at_start_from(방콕 시각) 이후 판부터 적용 — 그 전엔 Codex 가 07:08·18:08 에 시작하므로 07:00 즉시 발행 금지.",
+  "act_at_start": true,
+  "zh_md_owner": "claude",
+  "act_at_start_from": "2026-10-26T17:00"
 }
