@@ -1,0 +1,75 @@
+# 📥 코드 수집(2026-10-23, ops/SYSTEM_PLAN.md 2절) — 판 시작 전에 GitHub 서버에서 기사 후보를 모아 'candidates' 브랜치에 둔다.
+# 왜: ① 그록 토큰 절감(수집은 AI가 아니라 코드) ② Claude 비상 발행은 클라우드에서 뉴스 사이트에 직접 못 붙어서, 미리 모은 후보가 필요.
+# 결과: 브랜치 candidates 의 candidates/latest.{json,md}, gnews/latest.{json,md}, meta.json(수집 시각·판 id·성공 소스 수)
+#   main 은 건드리지 않음(Pages 재배포·push 금지 구간과 무관). 브랜치는 매번 커밋 1개로 덮어씀(저장소가 커지지 않게) — main 의 force push 금지 규칙과 별개.
+# 시각(방콕): 06:05 아침판 · 12:20 중국어 점심판 · 17:05 저녁판 (그록 시작 06:40·17:40 보다 앞). GitHub 예약은 늦을 수 있어 20~35분 여유.
+# 판이 쓰는 법: git fetch origin candidates && git show origin/candidates:candidates/latest.md
+name: collect
+
+on:
+  schedule:
+    - cron: "5 23 * * *"     # 06:05 BKK
+    - cron: "20 5 * * *"     # 12:20 BKK
+    - cron: "5 10 * * *"     # 17:05 BKK
+  workflow_dispatch:
+    inputs:
+      hours:
+        description: "최근 몇 시간 후보(기본 14)"
+        default: "14"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      TZ: Asia/Bangkok
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: 의존성
+        run: pip install --quiet requests feedparser googlenewsdecoder
+      - name: 판 id 정하기
+        id: ed
+        run: |
+          h=$(date +%H); d=$(date +%F)
+          if [ "$h" -lt 11 ]; then s=am; elif [ "$h" -lt 16 ]; then s=md; else s=pm; fi
+          echo "id=$d-$s" >> "$GITHUB_OUTPUT"
+      - name: 후보 수집(tools/collect.py)
+        continue-on-error: true
+        run: python3 tools/collect.py --hours "${{ inputs.hours || '14' }}" --out out/candidates 2>&1 | tail -n 40 | tee out_collect.log
+      - name: 놓친 사건 레이더(tools/gnews_scan.py)
+        continue-on-error: true
+        run: |
+          mkdir -p drafts/candidates && cp out/candidates/latest.json drafts/candidates/latest.json 2>/dev/null || true
+          python3 tools/gnews_scan.py --hours 18 2>&1 | tail -n 20 | tee out_gnews.log
+          mkdir -p out/gnews && cp drafts/gnews/latest.* out/gnews/ 2>/dev/null || true
+      - name: candidates 브랜치에 올리기
+        run: |
+          set -e
+          [ -f out/candidates/latest.json ] || { echo "수집 결과 없음 — 올리지 않음"; exit 1; }
+          python3 - <<'PY'
+          import json, os, datetime
+          c = json.load(open("out/candidates/latest.json", encoding="utf-8"))
+          meta = {"edition": os.environ["ED"], "collected_at": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
+                  "run": os.environ.get("GITHUB_RUN_ID"), "items": c.get("candidates"), "sources_ok": c.get("sources_ok"),
+                  "log_tail": open("out_collect.log", encoding="utf-8").read()[-1500:]}
+          json.dump(meta, open("out/meta.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+          print(meta["edition"], meta["items"])
+          PY
+          cd out
+          rm -f candidates/[0-9]*.json candidates/[0-9]*.md gnews/[0-9]*.json gnews/[0-9]*.md 2>/dev/null || true   # 시각별 사본은 빼고 latest 만
+          git init -q -b candidates
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm "candidates ${ED} $(date '+%m-%d %H:%M') BKK"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${GITHUB_REPOSITORY}.git" candidates
+        env:
+          ED: ${{ steps.ed.outputs.id }}

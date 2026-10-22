@@ -336,3 +336,6 @@ User approves final existing five creatives and immediate deployment. Added comm
 
 ## 2026-10-23T05:20:00+07:00 · Claude · 판 담당 표시(claim)
 - tools/edition_claim.py(claim/check/take/status), preflight·deploy.sh 연결, publisher_guard 에 claude 상시 허용, claim-prune 워크플로. 실제 원격 시험: take claude → check grok HOLD(4) → claim grok HOLD(4) 확인. 실패: 이 클라우드 세션은 브랜치 삭제가 프록시에서 403(git push :ref, gh api DELETE 모두) → 정리는 GitHub Actions 로 옮김.
+
+## 2026-10-23T05:05:00+07:00 · Claude · 코드 수집·측정 기록
+- collect.yml(GitHub 서버에서 수집 → candidates 브랜치 덮어쓰기), fetch_candidates.sh(3시간·판 id 확인 후 drafts/ 로), metrics.py(+deploy.sh 연결, ops 경로 추가), README 안내. metrics 로컬 시험 OK. fetch 는 브랜치가 아직 없어 exit 3(정상).

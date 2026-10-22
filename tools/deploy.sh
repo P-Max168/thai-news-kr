@@ -44,10 +44,12 @@ done
 python3 tools/seo.py sitemap || echo "경고: sitemap.xml 갱신 실패(배포는 계속)" >&2
 # 홈 뉴스판 링크를 갱신한 뒤 앱 셸 버전을 계산해야 캐시에도 새 링크가 반영됨.
 python3 tools/stamp_assets.py
+# 측정 한 줄(2026-10-23): ops/metrics.jsonl — 실패해도 배포 계속
+python3 tools/metrics.py "$LATEST" || true
 # 사이트 파일만 스테이징 (.gitignore 가 제외 대상 차단)
 # og/(링크 미리보기 이미지)·e/(판별 미리보기 페이지)는 tools/share_kit.py 가 만듦 — 있는 경로만 추가
 PATHS=""
-for p in index.html robots.txt sitemap.xml .nojekyll .gitignore README.md manifest.json sw.js firestore.rules assets data tools og e .github; do
+for p in index.html robots.txt sitemap.xml .nojekyll .gitignore README.md manifest.json sw.js firestore.rules assets data tools og e .github ops/metrics.jsonl; do
   [ -e "$p" ] && PATHS="$PATHS $p"
 done
 git add -A -- $PATHS
