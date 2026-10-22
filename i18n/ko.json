@@ -302,7 +302,6 @@
   "myfeed_tab": "⭐ 내 피드"
  },
  "nearby": {
-  "k014503d": "<p class=\"nb-note\">💡 평점 좋은 곳만 보려면 구글 지도 위쪽 필터에서 <b>평점</b>을 눌러 4.0 이상 등을 고르세요.</p>",
   "k079e695": "<li>맨 위 <b>광고</b> 칸만 이 사이트가 직접 소개하는 가게예요('광고' 표시).</li></ul></details>",
   "k0baec7c": "<span class=\"nb-lab\"><span class=\"nb-lab__e\" aria-hidden=\"true\">📍</span> <span class=\"nb-lab__t\">내 주변</span></span>",
   "k112a086": "동물병원·펫샵",
@@ -310,7 +309,9 @@
   "k1bd4c91": "</code> 로 찾아요. 빠른 찾기는 버튼마다 검색어가 달라요",
   "k1d42bae": "<nav class=\"nb-switch\" aria-label=\"가게 종류 바꾸기\">",
   "k252f77c": "동물병원",
+  "k27eaea9": "<li>맨 위 <b>확인한 곳</b>은 출처 2곳 이상(공식 사이트·리뷰 사이트 등)에서 영업을 확인한 가게예요. 돈을 받고 넣거나 순서를 바꾸지 않아요.</li>",
   "k2d70f8c": "</span> 내 주변 ",
+  "k3b864ba": "<p class=\"nb-sec nb-sec--more\">구글 지도에서 더 찾기</p>",
   "k413ad63": "여기에 광고하세요",
   "k4190370": "<details class=\"nb-how\"><summary>🔎 이 화면은 이렇게 찾아요</summary><ul>",
   "k4626a54": "<li>큰 버튼은 구글 지도에서 영어 검색어 <code>",
@@ -339,7 +340,6 @@
   "ka910df9": "누르면 위치 권한을 물어요. 허용하면 <b>내 위치</b>, 아니면 <b>",
   "kaf57351": "<div class=\"nb-page__bar\"><button type=\"button\" class=\"nb-back\" data-nb-back aria-label=\"뒤로 — 뉴스로 돌아가기\">← 뒤로</button>",
   "kb007e3d": "수리",
-  "kb2c66e4": "\"><span aria-hidden=\"true\">📇</span><span><b>파타야 가게 카드 보기</b><small>지도에 등록된 가게 · 영업 여부는 확인 안 됨(가기 전에 전화로) — 시험 중</small></span><span aria-hidden=\"true\">›</span></a>",
   "kb8cee4f": "마사지",
   "kc05dfc9": "오토바이 렌탈·판매",
   "kc95e600": "스파",
