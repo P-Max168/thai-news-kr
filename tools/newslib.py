@@ -586,6 +586,26 @@ def write_edition(data, merge_discussions=True, keep_generated=False):
         print("점검(경고):", w)
 
 
+# "지연 발행" 라벨은 코드가 자동 판정(2026-10-23 맥스님 결정 — 판 파일의 delayed_publication 손 표시는 쓰지 않음).
+# 예정 게시 시각 + 30분 이 지나서 만들어진(generated) 판만 지연. 10-26 전 판은 옛 예정(07:08·18:08) 기준.
+DELAY_GRACE_MIN = 30
+def _due_hm(date, edition):
+    new = date >= "2026-10-26"
+    return {"am": (7, 0) if new else (7, 8), "pm": (18, 0) if new else (18, 8), "md": (13, 0), "early": None}.get(edition)
+
+
+def is_delayed(date, edition, generated):
+    hm = _due_hm(date, edition)
+    if not hm or not generated:
+        return False
+    try:
+        g = datetime.fromisoformat(generated)
+        due = datetime.fromisoformat("%sT%02d:%02d:00+07:00" % (date, hm[0], hm[1]))
+    except ValueError:
+        return False
+    return (g - due).total_seconds() > DELAY_GRACE_MIN * 60
+
+
 def build_index():
     """data/*.json 을 훑어 index.json / index.js 재생성 (최신 판이 맨 앞 = 기본 화면)."""
     eds = []
@@ -597,7 +617,7 @@ def build_index():
         d = json.loads(p.read_text(encoding="utf-8"))
         date, ed = m.group(1), m.group(2)
         label = label_for(date, ed)
-        if d.get("delayed_publication") is True:
+        if is_delayed(date, ed, d.get("generated", "")):
             label += " · 지연 발행"
         eds.append(dict(id=p.stem, date=date, edition=ed, label=label,
                         generated=d.get("generated", ""), stories=len(d.get("stories", []))))

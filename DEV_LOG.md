@@ -330,3 +330,6 @@ User approves final existing five creatives and immediate deployment. Added comm
 
 ## 2026-10-23T04:20:00+07:00 · Claude · 방문 통계(Cloudflare Web Analytics)
 - 맥스님 승인. Cloudflare 에 tnews.pmaxone.com·zh.pmaxone.com 웹 분석 사이트 등록(DNS only 라 JS 코드 방식). 주소로 토큰을 고르는 작은 코드를 HTML 6쪽·e 30쪽·seo.py 템플릿에 넣고, 개인정보 처리방침 5번에 방문 통계 한 줄. 실패: seo.py regen-e 는 설명문 지역 순서를 바꿔 되돌림 / stamp_assets 는 모든 ?v= 를 바꿔 되돌림(이번 변경엔 불필요).
+
+## 2026-10-23T05:00:00+07:00 · Claude · 지연 발행 라벨 자동 판정
+- newslib.is_delayed 추가, build_index 가 판 파일의 delayed_publication 대신 generated 와 예정 게시 시각(+30분)으로 판정. 10-20~10-22 여섯 판의 잘못된 라벨을 index·issues·e 쪽·홈 링크에서 제거. 시험: 10-19-am 12:57 지연, 10-22-pm 18:17 정상, 10-27-am 07:31 지연·07:29 정상. 실패 기록 없음.
