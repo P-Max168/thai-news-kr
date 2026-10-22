@@ -1,0 +1,5 @@
+{
+  "_doc": "Claude 비상 발행 설정(ops/EMERGENCY_PUBLISH.md). act_at_start: 07:00·18:00 에 담당 표시가 없으면 바로 비상 발행할지. 그록 예약 시각이 06:40·17:40 으로 바뀐 게 확인되면 true 로.",
+  "act_at_start": false,
+  "zh_md_owner": "claude"
+}

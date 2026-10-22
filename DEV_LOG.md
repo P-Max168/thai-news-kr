@@ -339,3 +339,6 @@ User approves final existing five creatives and immediate deployment. Added comm
 
 ## 2026-10-23T05:05:00+07:00 · Claude · 코드 수집·측정 기록
 - collect.yml(GitHub 서버에서 수집 → candidates 브랜치 덮어쓰기), fetch_candidates.sh(3시간·판 id 확인 후 drafts/ 로), metrics.py(+deploy.sh 연결, ops 경로 추가), README 안내. metrics 로컬 시험 OK. fetch 는 브랜치가 아직 없어 exit 3(정상).
+
+## 2026-10-23T05:40:00+07:00 · Claude · 비상 발행 장치
+- ops/EMERGENCY_PUBLISH.md·ops/emergency.json. 클라우드 연습: candidates 브랜치 → WebFetch 로 원문 4건 확인 → 편집 파일 → build_data 검증 통과(배포 안 함). 실패: 첫 시도 highlights 3개·briefing 4줄 미만으로 검증 멈춤 → 절차 문서에 필수 조건 적음. 실패: 이 클라우드는 Pages API(pages/builds) 403 → Actions runs 로 확인하게 함.
