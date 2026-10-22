@@ -81,7 +81,7 @@
     e.preventDefault(); e.stopPropagation();
     if (window.TNReport) return TNReport.toggle(b);
     if (repLoading) return; repLoading = true;
-    var sc = document.createElement("script"); sc.src = "assets/report.js?v=947a0af2";
+    var sc = document.createElement("script"); sc.src = "assets/report.js?v=d94b1fa1";
     sc.onload = function () { if (window.TNReport) TNReport.toggle(b); };
     sc.onerror = function () { repLoading = false; toast(TNI("app.kadb6dfe", "오류 신고 칸을 불러오지 못했어요. 인터넷 연결을 확인해 주세요"), 2600); };
     document.body.appendChild(sc);
