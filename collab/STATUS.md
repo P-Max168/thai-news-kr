@@ -3,8 +3,8 @@
 
 | 항목 | 내용 |
 |---|---|
-| 마지막으로 확인한 사이트 최신 판 | **2026-10-22-pm** · 18:23 게시 및 18:39 라이브 재검증 완료(24b4204). 2026-10-23-am 8건 준비·검증 중, 게시 후 라이브 확인 예정. |
-| 정기 실행(07:08/18:08) | Codex 대행(ops/publisher.json). 10-23 07:06:46 조기 호출, 07:08 이후 claim/codex 및 수집 시작. 새 자동 지연 판정·비상 인수 규칙 확인. Grok 예약 중지는 인수인계 보고, 내부 로그 직접 확인 불가. |
+| 마지막으로 확인한 사이트 최신 판 | **2026-10-23-am** · 07:15 게시 및 07:38 라이브 재검증 완료(f8192eb). 2026-10-23-pm 8건 준비·검증 중, 게시 후 라이브 확인 예정. |
+| 정기 실행(07:08/18:08) | Codex 대행(ops/publisher.json). 10-23 18:09 호출·claim/codex 표시 후 수집. Claude 비상 인수 및 자동 지연 판정 규칙 확인. Grok 내부 로그 직접 확인 불가. |
 | 판 지연 | 10-05-pm ~ 10-10-pm **11판 빠짐**(6일 공백, 목록: Grok 서버 /workspace/logs/edition-gaps.txt). **재생성 안 함**(운영자·Max 결정 10-11: 옛 뉴스를 지금 판처럼 올리지 않음) |
 | 진행 중 작업 | 💬 오늘의 질문 2026-10-18-am 15건 승인 대기(approved false). 10-17-pm 17건은 게시 완료(95235d9). **민구님 10-18 08:00 승인: Claude 대기 요청 R-seo-1~4·R-zh-1~9 를 Grok 이 직접 처리**(Claude 10-11 이후 커밋 없음). R-seo-1~4 완료(10-18 08:12). R-zh-1~9 공유 코드 완료(10-18 08:40, DEV_LOG zh-shared-1018) — 공개 전 Mingoo 승인 대기: zh 저장소 생성·Cloudflare zh CNAME·Firebase 규칙 게시·zh 광고 문구 |
 | 사이트 주소(10-14) | **https://tnews.pmaxone.com** (GitHub Pages 맞춤 도메인, DNS 는 Cloudflare CNAME tnews→p-max168.github.io DNS only). 옛 주소 p-max168.github.io/thai-news-kr/ 는 301 로 넘어감. Grok 도메인 작업 끝나면 Claude 가 이어받음 — 인계 문서 Grok 서버 /workspace/handoff/TNEWS_DOMAIN_HANDOFF.md |
@@ -38,6 +38,7 @@
 | 시각 | 누가 | 무엇을 바꿨나 | 상대가 알아야 할 것 |
 |---|---|---|---|
 | 10-23 16:05 | Claude | **'내 주변' 장소 엔진 공개**(맥스님 지시, places-engine 합침): 한국어판 + 중국어판(附近 메뉴 켬, i18n 53개). newslib 언어판 지연 라벨을 공유 코드로 옮김 | 다른 AI: nearby.js·late.css·data/places-curated.json 고칠 땐 ops/places-pilot 원본 → build_curated.py 로. 업주 LINE 은 미정(SYSTEM_PLAN 9절) |
+| 2026-10-23T18:19:59+07:00 | Codex | 2026-10-23-pm 8건 준비. 4e46c51 인수인계·장소 엔진 공개 반영 확인 | 기존 장소 엔진·중국어 공유 코드 보존. 게시 전 claim 재검사·게시 후 live 검증 |
 | 2026-10-23T13:46+07:00 | Claude | 비상 발행 zh 2026-10-23-md 6건(d3014b9, Pages 빌드 성공) | 이유: 중국어판 정기 담당 없음. 후보는 kr candidates 08:20분(12:20분 없음). zh tools/newslib.py 의 "지연 발행" 라벨이 zh 화면에 한글로 떠 lang_check FAIL → 언어판은 "延迟发布"(site delayed_label) 로 바꿈 — **한국판 공유 코드에도 같은 수정 필요(sync_core 시 덮어씀)** |
 | 2026-10-23T07:13:44+07:00 | Codex | 2026-10-23-am 8건 준비. b45c021 인수인계·claim/codex 표시 확인 | 기존 통계 코드·장소 엔진·지연 자동 판정 보존, nearby.js·late.css 미변경. 게시 전 claim 재검사·게시 후 live 검증 |
 | 10-23 06:00 | Claude | '내 주변' 장소 엔진 화면을 브랜치 **places-engine** 에 준비(main 미반영). 10-26 12:45 뒤 Claude 가 합침 | **Codex·그록: 10-26 전 assets/nearby.js·late.css 를 고치면 이 브랜치와 겹치니 STATUS 에 먼저 적어 주세요** |
