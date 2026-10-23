@@ -1,0 +1,51 @@
+// 태국 뉴스 한눈에 — Android 앱(TWA: 크롬으로 tnews.pmaxone.com 을 주소창 없이 연다)
+// 콘텐츠는 사이트에서 오므로 판마다 앱을 다시 올릴 필요 없음. 앱 쪽 변경 때만 versionCode +1.
+plugins { id "com.android.application" }
+
+def host = "tnews.pmaxone.com"
+def ks = System.getenv("TNK_KEYSTORE")   // GitHub Actions 가 비밀값에서 풀어 놓은 서명 키 경로(없으면 서명 없이 빌드)
+
+android {
+    namespace "com.pmaxone.tnews"
+    compileSdk 36
+    defaultConfig {
+        applicationId "com.pmaxone.tnews"
+        minSdk 23
+        targetSdk 36
+        versionCode 1
+        versionName "1.0.0"
+        manifestPlaceholders = [
+            hostName: host,
+            defaultUrl: "https://" + host + "/?source=twa",
+            launcherName: "태국 뉴스 한눈에",
+            themeColor: "#FFFFFF",
+            backgroundColor: "#F2F4F6",
+        ]
+        resValue "string", "assetStatements",
+            '[{ \\"relation\\": [\\"delegate_permission/common.handle_all_urls\\"], \\"target\\": {\\"namespace\\": \\"web\\", \\"site\\": \\"https://' + host + '\\"}}]'
+    }
+    if (ks) {
+        signingConfigs {
+            upload {
+                storeFile file(ks)
+                storePassword System.getenv("TNK_KEYSTORE_PASSWORD")
+                keyAlias "upload"
+                keyPassword System.getenv("TNK_KEYSTORE_PASSWORD")
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            if (ks) signingConfig signingConfigs.upload
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation "com.google.androidbrowserhelper:androidbrowserhelper:2.5.0"
+}

@@ -1,0 +1,47 @@
+# Android 앱(TWA) 빌드 — android/ 가 바뀌거나 손으로 실행할 때.
+# 서명 키 비밀값(ANDROID_KEYSTORE_B64, ANDROID_KEYSTORE_PASSWORD)이 있으면 서명된 AAB, 없으면 서명 없이 빌드만 확인.
+name: android
+on:
+  push:
+    paths: ["android/**", ".github/workflows/android.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.14.3"
+      - name: 서명 키 풀기(있을 때만)
+        env:
+          KS_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+        run: |
+          if [ -n "$KS_B64" ]; then
+            echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/upload.jks"
+            echo "TNK_KEYSTORE=$RUNNER_TEMP/upload.jks" >> "$GITHUB_ENV"
+            echo "서명 키 있음 → 서명된 AAB"
+          else
+            echo "서명 키 없음 → 서명 없이 빌드만"
+          fi
+      - name: 빌드(AAB + APK)
+        env:
+          TNK_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: gradle --no-daemon bundleRelease assembleRelease
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tnews-android
+          path: |
+            android/app/build/outputs/bundle/release/*.aab
+            android/app/build/outputs/apk/release/*.apk
+          if-no-files-found: error

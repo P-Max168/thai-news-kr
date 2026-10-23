@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.pmaxone.tnews",
+    "sha256_cert_fingerprints": [
+      "64:7E:C0:1B:C4:D2:BB:F2:32:D7:73:50:F0:51:AA:D0:74:12:24:CD:2C:6F:56:B6:15:E5:DB:AA:69:B8:9C:21"
+    ]
+  }
+}]
