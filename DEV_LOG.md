@@ -349,3 +349,5 @@ User approves final existing five creatives and immediate deployment. Added comm
 - 2026-10-23 05:30 BKK (Claude): 그록 정기 예약 06:40/17:40 변경 확인(일시 중지 유지). ops/emergency.json act_at_start=true, act_at_start_from=2026-10-26T17:00 추가, EMERGENCY_PUBLISH.md·07:00 Claude 예약 작업 지시문에 반영.
 
 - 2026-10-23 06:00 BKK (Claude): 장소 엔진 화면을 브랜치 places-engine 에 준비(main 미반영). nearby.js 확인한 곳 카드 + late.css 카드 모양 + data/places-curated.json + tools/places/build_curated.py. 10-26 12:45 뒤 합침.
+
+- 2026-10-23 15:55 BKK (Claude): 맥스님 지시로 장소 엔진(places-engine) main 반영 — 내 주변 화면 맨 위 '확인한 곳' 카드 26곳, 구글 지도는 '더 찾기'로. 업주 수정 LINE 은 owner_line 비어 있음(계정 정해지면 @ID 만 넣음). stamp_assets 갱신.
