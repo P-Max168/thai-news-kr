@@ -94,8 +94,8 @@
 - 주의: 구글 장소 API 유료·저장 약관 제한, 리뷰 사이트 자동 수집은 사이트별 약관 확인, 사진은 업주 제공·직접 촬영만.
 - 시범: [완료 10-23] 파타야 5분류 26곳(맛집 6·마사지 5·동물병원 5·뷰티 5·오토바이 5), 한국어·중국어. 데이터·미리보기 = ops/places-pilot/. 맥스님: 표시 단순화·검색 결과 인정 승인.
 - 확인된 한계: 한국어·중국어 후기는 맛집·마사지(여행 상품 사이트에 후기 많음)는 모이지만, 동물병원·뷰티·오토바이는 거의 0건 → 이 분류들은 후기 대신 실용 정보(가격·보증금·24시간 등)가 핵심.
-- [준비 완료 10-23] 실제 '내 주변' 메뉴 교체: 브랜치 `places-engine`(main 에 아직 안 합침). 화면 맨 위 = 확인한 곳 카드(data/places-curated.json ← tools/places/build_curated.py ← ops/places-pilot/*.json), 표시 안내 한 번, 구글 지도는 아래 '더 찾기'. 업주 수정 = 오류 신고 버튼(사이트 전용 LINE 공식 계정이 생기면 build_curated.py 의 OWNER_LINE 에 주소만 넣음). 금액은 '200바트'(฿ 기호 안 씀). 옛 '파타야 가게 카드 보기 — 시험 중' 링크 뺌(#places 페이지 자체는 그대로).
-- 10-26 12:45 뒤 합치기: git merge places-engine → python3 tools/stamp_assets.py → python3 tools/dev/regress.py → ship.sh(push 금지 시간 피해서) → 라이브 #nearby/food 확인. 중국어판은 그다음 sync_core.sh 로 nearby.js·late.css·데이터 복사.
+- [완료 10-23 16:00 공개] '내 주변' 메뉴 교체(맥스님 지시로 10-26 전에 반영). 한국어판·중국어판(附近 메뉴 켬, 문구 53개 번역) 둘 다. 화면 맨 위 = 확인한 곳 카드(data/places-curated.json ← tools/places/build_curated.py ← ops/places-pilot/*.json), 표시 안내 한 번, 구글 지도는 아래 '더 찾기'. 금액 '200바트'·'200泰铢'.
+- 업주 수정 LINE(맥스님: 나중에 연결, 계정은 더 생각해 봄 — 드래곤 계정은 Claude 반대: 경쟁 가게·광고 중립성): build_curated.py OWNER_LINE 에 "@기본ID" 만 넣고 다시 만들면 버튼이 생김. 대화창에 미리 채워지는 글 = 첫 줄 "[tnews 정보 수정] <가게 id>"(예: massage-1), 둘째 줄 가게 이름 / 태국어 이름, 셋째 줄 "고칠 내용:". 번역봇 계정을 쓰게 되면 봇은 첫 줄 표시를 보고 번역 대신 수정 요청함으로 보내도록 고칠 것. 그 전까지는 오류 신고 버튼(kind=place, id curated:<가게 id>).
 - 남은 것: 월 1회 재확인 자동화, 사이트 전용 LINE 공식 계정(맥스님이 만들어야 함 — 본인 로그인 필요).
 
 ## 7-1. 결정 기록
