@@ -3,8 +3,8 @@
 
 | 항목 | 내용 |
 |---|---|
-| 마지막으로 확인한 사이트 최신 판 | **2026-10-22-am** · 07:18 게시 확인·07:38 재검증. 2026-10-22-pm 10건 원문·중복 검증 및 화면·공유 키트 준비, 게시 후 라이브 검증 예정. |
-| 정기 실행(07:08/18:08) | Codex 대행(ops/publisher.json). 10-22 18:09:06 호출, 18:09:26 수집. 실제 생성시각·지연 표시. Grok 내부 로그 접근 불가, 새 발행 작업 흔적 없음. |
+| 마지막으로 확인한 사이트 최신 판 | **2026-10-22-pm** · 18:23 게시 및 18:39 라이브 재검증 완료(24b4204). 2026-10-23-am 8건 준비·검증 중, 게시 후 라이브 확인 예정. |
+| 정기 실행(07:08/18:08) | Codex 대행(ops/publisher.json). 10-23 07:06:46 조기 호출, 07:08 이후 claim/codex 및 수집 시작. 새 자동 지연 판정·비상 인수 규칙 확인. Grok 예약 중지는 인수인계 보고, 내부 로그 직접 확인 불가. |
 | 판 지연 | 10-05-pm ~ 10-10-pm **11판 빠짐**(6일 공백, 목록: Grok 서버 /workspace/logs/edition-gaps.txt). **재생성 안 함**(운영자·Max 결정 10-11: 옛 뉴스를 지금 판처럼 올리지 않음) |
 | 진행 중 작업 | 💬 오늘의 질문 2026-10-18-am 15건 승인 대기(approved false). 10-17-pm 17건은 게시 완료(95235d9). **민구님 10-18 08:00 승인: Claude 대기 요청 R-seo-1~4·R-zh-1~9 를 Grok 이 직접 처리**(Claude 10-11 이후 커밋 없음). R-seo-1~4 완료(10-18 08:12). R-zh-1~9 공유 코드 완료(10-18 08:40, DEV_LOG zh-shared-1018) — 공개 전 Mingoo 승인 대기: zh 저장소 생성·Cloudflare zh CNAME·Firebase 규칙 게시·zh 광고 문구 |
 | 사이트 주소(10-14) | **https://tnews.pmaxone.com** (GitHub Pages 맞춤 도메인, DNS 는 Cloudflare CNAME tnews→p-max168.github.io DNS only). 옛 주소 p-max168.github.io/thai-news-kr/ 는 301 로 넘어감. Grok 도메인 작업 끝나면 Claude 가 이어받음 — 인계 문서 Grok 서버 /workspace/handoff/TNEWS_DOMAIN_HANDOFF.md |
@@ -37,6 +37,7 @@
 ## 최근 인수인계 (상대 AI가 작업 시작 전에 꼭 읽기 — 새것이 위, 최대 10줄 유지)
 | 시각 | 누가 | 무엇을 바꿨나 | 상대가 알아야 할 것 |
 |---|---|---|---|
+| 2026-10-23T07:13:44+07:00 | Codex | 2026-10-23-am 8건 준비. b45c021 인수인계·claim/codex 표시 확인 | 기존 통계 코드·장소 엔진·지연 자동 판정 보존, nearby.js·late.css 미변경. 게시 전 claim 재검사·게시 후 live 검증 |
 | 10-23 06:00 | Claude | '내 주변' 장소 엔진 화면을 브랜치 **places-engine** 에 준비(main 미반영). 10-26 12:45 뒤 Claude 가 합침 | **Codex·그록: 10-26 전 assets/nearby.js·late.css 를 고치면 이 브랜치와 겹치니 STATUS 에 먼저 적어 주세요** |
 | 10-23 05:30 | Claude | 그록 예약 '태국 뉴스 포털 업데이트' 06:40/17:40 으로 변경(일시 중지 유지). ops/emergency.json act_at_start=true + act_at_start_from 2026-10-26T17:00(그 전엔 Codex 07:08 시작이라 07:00 즉시 발행 안 함). 그록 누락 확인(07:38)·중국어(13:00) 예약도 일시 중지 — 10-26 재개 시 누락 확인은 Claude 07:30 과 겹치지만 claim 표시로 중복 발행은 막힘 |
 | 2026-10-23T05:40:00+07:00 | Claude | **Claude 비상 발행 장치**: ops/EMERGENCY_PUBLISH.md(절차)·ops/emergency.json(act_at_start=false — 그록 시각 변경 확인 전). Claude 예약 작업 07:00·07:30·13:30·18:00·18:30 BKK. 07:30·18:30 에 판이 없으면 Claude 가 take 후 비상판. 중국어판 13:30 은 정기 담당이 없어 Claude 가 맡음. zh 저장소도 공유 코드 동기화(d9f53b3) | 클라우드 연습 판(2026-10-23-am 4건)을 실제 검증(build_data)까지 통과 — 배포는 안 함 |
