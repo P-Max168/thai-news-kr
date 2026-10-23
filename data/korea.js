@@ -1,48 +1,30 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-23T13:05:12+07:00",
+ "updated_at": "2026-10-23T14:56:01+07:00",
  "items": [
   {
-   "title": "[속보]“끝났다” 외친 서울시 직원들···‘무죄’ 오세훈, 본격 대선모드 들어가나",
+   "title": "[판결분석]오세훈 무죄 왜…‘명태균 진술’ 인정한 1심, 2심은 “신빙성 없다” 판단",
    "source": "경향신문",
-   "time": "2026-10-23T12:17:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610231417011"
+   "time": "2026-10-23T14:19:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610231619001"
   },
   {
-   "title": "부캉이 머문 북항 바다 기름 유출…방제 착수",
-   "source": "연합뉴스TV",
-   "time": "2026-10-23T12:37:00+07:00",
-   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261023143702sEV"
+   "title": "정부 “‘가석방 없는 무기형’ 적극 추진…‘가해자 격리 시설’도 도입”",
+   "source": "KBS 뉴스",
+   "time": "2026-10-23T12:53:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8693641"
   },
   {
-   "title": "‘최고 23도’ 낮부터 추위 풀린다…태풍 ‘참피’에 제주·남부 비",
-   "source": "한겨레",
-   "time": "2026-10-23T08:58:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/environment/1283781.html"
+   "title": "부산 북항서 기름 유출… 흑상어 ‘부캉이’ 5시간째 자취 감춰",
+   "source": "조선일보",
+   "time": "2026-10-23T11:51:00+07:00",
+   "url": "https://www.chosun.com/national/regional/2026/10/23/7KSP3W7VHRDHPIKWJZBA5Z3DOM/"
   },
   {
-   "title": "선관위 특검 “숨진 직원 유서에 강압수사 언급 없어…특검 원망하지 않는다는 내용”",
+   "title": "추미애 “국가직 소방관 인건비, 전액 국가가 책임져야”",
    "source": "경향신문",
-   "time": "2026-10-23T11:24:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610231324001"
-  },
-  {
-   "title": "[단독] 오세훈표 한강버스만 공익감사 초고속 ‘당일 각하’…910건 중 유일",
-   "source": "한겨레",
-   "time": "2026-10-23T09:40:00+07:00",
-   "url": "https://www.hani.co.kr/arti/area/capital/1283770.html"
-  },
-  {
-   "title": "인천공항서 불 지른 60대 남성 검거‥시민이 바로 불 꺼",
-   "source": "MBC 뉴스",
-   "time": "2026-10-23T08:49:51+07:00",
-   "url": "https://imnews.imbc.com/news/2026/society/article/6860179_36918.html"
-  },
-  {
-   "title": "‘조희대 대법원장 탄핵’ 반대 39%-찬성 34% [갤럽]",
-   "source": "한겨레",
-   "time": "2026-10-23T11:18:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/assembly/1283800.html"
+   "time": "2026-10-23T12:00:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610231400021"
   },
   {
    "title": "태풍 참피 제주 접근, 24일까지 최대 강수량 100mm",
@@ -51,16 +33,34 @@ window.KOREA_NEWS = {
    "url": "https://www.jejusori.net/news/articleView.html?idxno=507634"
   },
   {
-   "title": "이 대통령 ‘중수청장 배석 논란’에 연일 반박…“지휘·감독 포기는 탄핵 사유”",
+   "title": "‘조희대 대법원장 탄핵’ 반대 39%-찬성 34% [갤럽]",
    "source": "한겨레",
-   "time": "2026-10-23T11:26:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/bluehouse/1283698.html"
+   "time": "2026-10-23T11:18:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/assembly/1283800.html"
   },
   {
-   "title": "“파리 비행기 취소할게요”…대한항공·아시아나 ‘수수료 면제’",
+   "title": "[단독] 오세훈표 한강버스만 공익감사 초고속 ‘당일 각하’…910건 중 유일",
    "source": "한겨레",
-   "time": "2026-10-23T09:41:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/society_general/1283792.html"
+   "time": "2026-10-23T11:45:00+07:00",
+   "url": "https://www.hani.co.kr/arti/area/capital/1283770.html"
+  },
+  {
+   "title": "'인천 흉기 난동' 최충락 공소청 송치‥\"선의의 피해자에게 미안\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-23T07:41:07+07:00",
+   "url": "https://imnews.imbc.com/news/2026/society/article/6860160_36918.html"
+  },
+  {
+   "title": "軍 “北 ‘국경화’하며 DMZ에 지뢰 96만발 매설”",
+   "source": "조선일보",
+   "time": "2026-10-23T08:46:00+07:00",
+   "url": "https://www.chosun.com/politics/diplomacy-defense/2026/10/23/7J4ATCE7EJGSPHY7BULRJ556ZM/"
+  },
+  {
+   "title": "[속보] 이 대통령, 최길수 특별감찰관 임명안 재가",
+   "source": "MBC 뉴스",
+   "time": "2026-10-23T11:50:26+07:00",
+   "url": "https://imnews.imbc.com/news/2026/politics/article/6860215_36911.html"
   }
  ]
 };
