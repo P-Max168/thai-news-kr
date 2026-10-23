@@ -232,3 +232,52 @@
 .pc__price-l{font-size:.875rem;font-weight:700;color:var(--ink-2,#3a3f4a)}
 .pc__krw{font-size:.9375rem;font-weight:700;color:var(--ink-2,#3a3f4a);white-space:nowrap}
 .pc__price--na{font-size:.9375rem;font-weight:700;color:var(--muted,#5f6672)}
+/* ✅ 확인한 곳 카드(장소 엔진, 2026-10-23 준비 — assets/nearby.js mountCurated, data/places-curated.json). 구글 지도 버튼은 아래 '더 찾기'로 작게 */
+.nbc{margin:0 0 6px}
+.nbc-load{margin:8px 2px;font-size:.875rem;color:var(--muted,#6b7280)}
+.nbc-head{margin:2px 2px 12px}
+.nbc-h{margin:0;font-size:1.0625rem;font-weight:800;letter-spacing:-.3px;color:var(--ink,#16181d)}
+.nbc-h small{font-size:.8125rem;font-weight:700;color:var(--muted,#6b7280);margin-left:2px}
+.nbc-sub{margin:4px 0 0;font-size:.8125rem;line-height:1.5;color:var(--ink-2,#3a3f4a)}
+.nbc-legend{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;margin:8px 0 0;font-size:.75rem;color:var(--muted,#6b7280)}
+.nbc-legend b{color:var(--ink,#16181d)}
+.nbc-legend>span{display:inline-flex;align-items:center;gap:4px}
+.nbc-mk{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;font-size:.6875rem;font-weight:800;flex:0 0 auto}
+.nbc-mk--ok{background:#dcebe8;color:#0e5a57}.nbc-mk--star{background:#f3ead2;color:#8a6616}.nbc-mk--diff{background:#f7e6da;color:#9a4a16}
+.nbc-list{display:grid;gap:14px}
+.nbc-card{background:#fff;border:1px solid #dfe3ea;border-radius:16px;overflow:hidden}
+.nbc-tile{background:#123b39;color:#f2f6f3;padding:14px 16px 12px;display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:start}
+.nbc-thai{grid-column:1/-1;font-size:.8125rem;font-weight:700;opacity:.7}
+.nbc-name{margin:0;font-size:1.1875rem;font-weight:800;line-height:1.3;letter-spacing:-.3px;min-width:0;word-break:keep-all;overflow-wrap:anywhere}
+.nbc-lvl{font-size:.6875rem;letter-spacing:1px;padding-top:6px;white-space:nowrap}
+.nbc-lvl i{font-style:normal;opacity:.3}
+.nbc-where{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:2px 10px;font-size:.8125rem;opacity:.85;margin-top:2px}
+.nbc-body{padding:12px 16px 14px;display:flex;flex-direction:column;gap:10px}
+.nbc-badges{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.nbc-when{font-size:.75rem;color:var(--muted,#6b7280);margin-right:2px}
+.nbc-badge{font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:999px;background:#dcebe8;color:#0e5a57;white-space:nowrap}
+.nbc-badge--gold{background:#f3ead2;color:#7a5a12}.nbc-badge--warn{background:#f7e6da;color:#8a3f10}
+.nbc-facts{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0;font-size:.875rem;line-height:1.5}
+.nbc-facts dt{color:var(--muted,#6b7280);white-space:nowrap}
+.nbc-facts dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.nbc-facts a{color:#1559b8;font-weight:700}
+.nbc-tip{margin:0;font-size:.875rem;line-height:1.5;background:#eef5f4;border-radius:10px;padding:8px 10px;color:var(--ink,#16181d)}
+.nbc-voice{border-top:1px solid #eceff3;padding-top:10px}
+.nbc-voice h4{display:flex;justify-content:space-between;gap:8px;margin:0 0 4px;font-size:.75rem;font-weight:800;color:var(--muted,#6b7280)}
+.nbc-voice h4 small{font-weight:700}
+.nbc-one{margin:0;font-size:.9375rem;font-weight:700;line-height:1.45;color:var(--ink,#16181d)}
+.nbc-empty{margin:0;font-size:.8125rem;color:var(--muted,#6b7280)}
+.nbc-more,.nbc-src{font-size:.8125rem;color:var(--muted,#6b7280)}
+.nbc-more summary,.nbc-src summary{cursor:pointer;min-height:32px;display:flex;align-items:center}
+.nbc-more .nbc-tip{margin-top:6px}
+.nbc-pc{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:3px;font-size:.875rem;color:var(--ink,#16181d)}
+.nbc-pc li{display:grid;grid-template-columns:16px 1fr}
+.nbc-pc li::before{font-weight:800}
+.nbc-pc .g::before{content:"+";color:#0e5a57}.nbc-pc .w::before{content:"!";color:#9a4a16}
+.nbc-src ul{margin:4px 0 0;padding-left:18px}
+.nbc-src a{color:#1559b8}
+.nbc-own{border-top:1px solid #eceff3;padding-top:10px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.nbc-ownhint{margin:0;font-size:.75rem;color:var(--muted,#6b7280);flex:1 1 200px}
+.nbc-owner{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border:1px solid #0e5a57;border-radius:10px;color:#0e5a57;font-size:.8125rem;font-weight:700;text-decoration:none}
+.nb-sec--more{margin-top:22px}
+.nb-go.nb-go--sm{min-height:48px;font-size:.9375rem;border-radius:12px}

@@ -6,6 +6,9 @@
  * - 위치: 버튼을 누를 때 브라우저 위치 권한을 물음. 허용 → https://www.google.com/maps/search/<검색어>/@위도,경도,15z
  *   거절·실패 → 지역(이 화면에서 고른 지역 > 날씨 칩 지역 > 페르소나 > 파타야) 'restaurants in Pattaya' 같은 검색.
  *   좌표는 지도 주소를 만드는 데만 쓰고 저장하지 않음(이 페이지 메모리에 10분).
+ * - ★ 2026-10-26 장소 엔진(ops/SYSTEM_PLAN.md 9절): 화면 맨 위가 '확인한 곳' 카드(data/places-curated.json, tools/places/build_curated.py).
+ *   출처 2곳 이상으로 영업 확인한 파타야 가게만. 표시 안내는 카드 목록 위에 한 번, 카드에는 작은 표시만. 구글 지도 버튼은 아래 '더 찾기'로 내림.
+ *   업주 수정: data 의 owner_line(LINE 공식 계정)이 있으면 그 링크, 없으면 ⚠️ 오류 신고 버튼(kind=place).
  * - ★ 카테고리 설정은 아래 NEARBY 객체 하나. 나중에 Google Places API(New) Nearby Search 로 앱 안 순위 목록을 만들 때
  *   places.includedTypes 를 그대로 쓰고, 화면의 '지도 버튼' 자리(renderPage 의 .nb-go)에 목록을 넣으면 됨. */
 (function () {
@@ -132,6 +135,94 @@
     }
   }
 
+
+  /* ---------- ✅ 확인한 곳 카드(장소 엔진, 2026-10-23 준비 · 10-26 공개) ---------- */
+  var CUR_DATA = null, curLoading = null;
+  var LANG = (window.TNSite && TNSite.lang === "zh") ? "zh" : "ko";
+  var U = {   // 화면 문구 — 데이터가 ko·zh 를 같이 갖고 있어 TNI 대신 언어별 표를 씀
+    ko: { title: "확인한 곳", sub: "출처 2곳 이상에서 영업을 확인하고 고른 곳이에요.", only: "지금은 파타야만 있어요.",   // i18n:data
+      legend: "표시 안내", lg: ["출처 2곳 이상 영업 확인", "업주가 직접 확인", "출처끼리 정보가 다름"],   // i18n:data
+      hours: "영업시간", price: "가격", dish: { food: "대표 메뉴", massage: "대표 코스", pet: "주요 진료", beauty: "대표 시술", moto: "주요 서비스" },   // i18n:data
+      priceBy: { food: "1인 예산" }, pay: "결제", tel: "전화", unknown: "확인 안 됨",   // i18n:data
+      voice: "한국 사람들의 평", n: "후기 ", none: "아직 한국어 후기가 없어요.", more: "좋은 점·아쉬운 점",   // i18n:data
+      src: "확인한 출처", owner: "사장님이세요? 정보 수정", ownerHint: "사장님이세요? 틀린 정보는 오류 신고로 알려 주시면 확인 후 고쳐요.",   // i18n:data
+      loading: "불러오는 중…", fail: "카드를 불러오지 못했어요. 아래 구글 지도로 찾아 주세요.", baht: "바트", checked: "확인" },   // i18n:data
+    zh: { title: "核实过的店", sub: "每家都用两个以上来源确认仍在营业。", only: "目前只有芭提雅。",
+      legend: "标记说明", lg: ["两个以上来源确认营业", "店主亲自确认", "来源之间信息不一致"],
+      hours: "营业时间", price: "价格", dish: { food: "招牌菜", massage: "招牌项目", pet: "主要诊疗", beauty: "招牌项目", moto: "主要服务" },
+      priceBy: { food: "人均" }, pay: "付款", tel: "电话", unknown: "未确认",
+      voice: "中文游客怎么说", n: "来源 ", none: "暂无中文评价。", more: "优点与不足",
+      src: "核对的来源", owner: "您是店主？修改信息", ownerHint: "您是店主？信息有误请点“报错”，核实后修改。",
+      loading: "加载中…", fail: "无法加载，请用下方谷歌地图查找。", baht: "泰铢", checked: "核实" }
+  }[LANG];
+  function loadCurated() {
+    if (CUR_DATA) return Promise.resolve(CUR_DATA);
+    if (curLoading) return curLoading;
+    curLoading = fetch("data/places-curated.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (d) { CUR_DATA = d; return d; }, function () { curLoading = null; return null; });
+    return curLoading;
+  }
+  function baht(t) { return String(t).replace(/฿\s?([\d,]+)(\s?[–-]\s?(?:฿\s?)?[\d,]+)?/g, function (m, a, b) { return a + (b ? b.replace(/฿\s?/, "") : "") + U.baht; }); }   // '฿' 기호는 헤더 시세 칸에만(TRANSLATION_RULES) → '200바트'
+  /* 업주 정보 수정 LINE(나중에 연결 — data/places-curated.json owner_line).
+   *  "@아이디" = LINE 공식 계정 기본 ID → 대화창이 열리며 아래 글이 미리 채워짐(업주가 보내기만 누르면 됨). "https://…" = 그 주소 그대로. 비면 오류 신고만.
+   *  미리 채우는 글 첫 줄 "[tnews 정보 수정] <가게 id>" — 받는 봇(번역봇 등)은 이 표시로 번역 대신 '수정 요청함'으로 보냄(ops/SYSTEM_PLAN.md 9절). */
+  function ownerLink(p) {
+    var o = CUR_DATA && CUR_DATA.owner_line; if (!o) return null;
+    if (/^https:\/\//.test(o)) return o;
+    if (!/^@[\w.-]+$/.test(o)) return null;
+    var nm = (p.name && (p.name[LANG] || p.name.ko)) || p.thai || "";
+    var msg = "[tnews 정보 수정] " + p.id + "\n" + nm + " / " + (p.thai || "") + "\n" + (LANG === "zh" ? "需要修改的内容：" : "고칠 내용(태국어·영어 가능): ") + "\n";   // i18n:data
+    return "https://line.me/R/oaMessage/" + encodeURIComponent(o) + "/?" + encodeURIComponent(msg);
+  }
+  function lvlHTML(l) { if (!l) return ""; var s = ""; for (var i = 1; i <= 4; i++) s += i <= l ? "●" : "<i>●</i>"; return '<span class="nbc-lvl" title="' + esc(U.price) + '">' + s + "</span>"; }
+  function cardHTML(p, cid, checked) {
+    var L = LANG, v = (p.voice || {})[L] || {}, t = function (o) { return o ? (o[L] || o.ko || "") : ""; };
+    var hours = (L === "zh" && p.hours.text_zh) || p.hours.text;
+    var price = (L === "zh" && p.price_zh) || p.price;
+    var badges = '<span class="nbc-mk nbc-mk--ok" title="' + esc(U.lg[0]) + '">✓</span><span class="nbc-when">' + esc(U.checked) + " " + esc(checked.slice(5).replace("-", ".")) + "</span>" +
+      (p.owner_ok ? '<span class="nbc-mk nbc-mk--star" title="' + esc(U.lg[1]) + '">★</span>' : "") +
+      (p.badges || []).map(function (b) { return '<span class="nbc-badge' + (b.k === "gold" ? " nbc-badge--gold" : b.k === "warn" ? " nbc-badge--warn" : "") + '">' + esc(b[L] || b.ko) + "</span>"; }).join("");
+    var facts = "<dt>" + esc(U.hours) + "</dt><dd>" + esc(hours) + "</dd>" +
+      "<dt>" + esc(U.priceBy[cid] || U.price) + "</dt><dd>" + esc(price ? baht(price) : U.unknown) + "</dd>" +
+      "<dt>" + esc(U.dish[cid] || U.dish.food) + "</dt><dd>" + esc((p.dishes[L] || p.dishes.ko).join(" · ")) + "</dd>" +
+      (p.pay ? "<dt>" + esc(U.pay) + "</dt><dd>" + esc(t(p.pay)) + "</dd>" : "") +
+      (p.tel ? "<dt>" + esc(U.tel) + '</dt><dd><a href="tel:' + esc(String(p.tel).replace(/[^\d+]/g, "")) + '">' + esc(p.tel) + "</a></dd>" : "");
+    var voice = !v.n ? '<p class="nbc-empty">' + esc(U.none) + "</p>"
+      : '<p class="nbc-one">' + esc(v.one) + "</p>" + ((v.g && v.g.length) || (v.w && v.w.length) ?
+        '<details class="nbc-more"><summary>' + esc(U.more) + '</summary><ul class="nbc-pc">' + (v.g || []).map(function (x) { return '<li class="g">' + esc(x) + "</li>"; }).join("") +
+        (v.w || []).map(function (x) { return '<li class="w">' + esc(x) + "</li>"; }).join("") + "</ul>" + (v.tip ? '<p class="nbc-tip">' + esc(baht(v.tip)) + "</p>" : "") + "</details>" : "");
+    var srcs = (p.src || []).concat(v.src || []);
+    var line = ownerLink(p);
+    var owner = line ? '<a class="nbc-owner" href="' + esc(line) + '" target="_blank" rel="noopener">💬 ' + esc(U.owner) + "</a>" + (window.TNRepBtn ? TNRepBtn("place", "curated:" + p.id) : "")
+      : '<p class="nbc-ownhint">' + esc(U.ownerHint) + "</p>" + (window.TNRepBtn ? TNRepBtn("place", "curated:" + p.id) : "");
+    return '<article class="nbc-card" aria-labelledby="nbc-' + esc(p.id) + '">' +
+      '<div class="nbc-tile"><div class="nbc-thai" lang="th">' + esc(p.thai) + "</div>" +
+        '<h3 class="nbc-name" id="nbc-' + esc(p.id) + '">' + esc(t(p.name)) + "</h3>" + lvlHTML(p.lvl) +
+        '<div class="nbc-where"><span>' + esc(t(p.area)) + "</span><span>" + esc(t(p.cat)) + "</span></div></div>" +
+      '<div class="nbc-body"><div class="nbc-badges">' + badges + "</div>" +
+        '<dl class="nbc-facts">' + facts + "</dl>" +
+        '<p class="nbc-tip">' + esc(baht(t(p.tip))) + "</p>" +
+        '<section class="nbc-voice"><h4>' + esc(U.voice) + (v.n ? "<small>" + esc(U.n + v.n) + "</small>" : "") + "</h4>" + voice + "</section>" +
+        '<details class="nbc-src"><summary>' + esc(U.src) + " (" + srcs.length + ")</summary><ul>" + srcs.map(function (x) {
+          return /^https?:\/\//.test(x[1]) ? '<li><a href="' + esc(x[1]) + '" target="_blank" rel="noopener">' + esc(x[0]) + "</a></li>" : ""; }).join("") + "</ul></details>" +
+        '<div class="nbc-own">' + owner + "</div>" +
+      "</div></article>";
+  }
+  function mountCurated(el, c) {
+    if (!el) return;
+    el.innerHTML = '<p class="nbc-load">' + esc(U.loading) + "</p>";
+    loadCurated().then(function (d) {
+      if (cur !== c.id || !root || !root.contains(el)) return;
+      var list = d && d.cats && d.cats[c.id];
+      if (!list || !list.length) { el.innerHTML = '<p class="nbc-load">' + esc(U.fail) + "</p>"; return; }
+      var far = d.region && region() !== d.region && !havePos();
+      el.innerHTML = '<div class="nbc-head"><h3 class="nbc-h">✅ ' + esc(NEARBY.regions[d.region] ? NEARBY.regions[d.region].name : "") + " · " + esc(U.title) + " <small>" + list.length + "</small></h3>" +
+        '<p class="nbc-sub">' + esc(U.sub) + (far ? " " + esc(U.only) : "") + "</p>" +
+        '<p class="nbc-legend"><b>' + esc(U.legend) + '</b><span><span class="nbc-mk nbc-mk--ok">✓</span>' + esc(U.lg[0]) + '</span><span><span class="nbc-mk nbc-mk--star">★</span>' + esc(U.lg[1]) + '</span><span><span class="nbc-mk nbc-mk--diff">!</span>' + esc(U.lg[2]) + "</span></p></div>" +
+        '<div class="nbc-list">' + list.map(function (p) { return cardHTML(p, c.id, d.checked || ""); }).join("") + "</div>";
+    });
+  }
+
   /* ---------- 카테고리 화면 ---------- */
   function statusHTML() {
     var R = NEARBY.regions, rg = region();
@@ -152,17 +243,17 @@
       TNI("nearby.k1d42bae", "<nav class=\"nb-switch\" aria-label=\"가게 종류 바꾸기\">") + NEARBY.categories.map(function (k) {
         return '<button type="button" class="nb-sw" data-nb-sw="' + k.id + '"' + (k.id === c.id ? ' aria-current="page"' : "") + ' aria-label="' + esc(k.label) + '"><span class="nb-sw__e" aria-hidden="true">' + k.emoji + '</span><span class="nb-sw__t">' + esc(k.short || k.label) + "</span></button>"; }).join("") + "</nav>" +
       '<div class="ad-slot nb-ad" data-nb-ad></div>' +
-      '<a class="nb-go" data-nb-q="' + esc(c.query) + '" href="' + esc(mapsUrl(c.query)) + TNI("nearby.k8fea946", "\" target=\"_blank\" rel=\"noopener\">📍 내 주변 평점 좋은 곳<br>구글 지도로 보기</a>") +
+      '<div class="nbc" data-nbc aria-live="polite"></div>' +
+      TNI("nearby.k3b864ba", "<p class=\"nb-sec nb-sec--more\">구글 지도에서 더 찾기</p>") +
+      '<a class="nb-go nb-go--sm" data-nb-q="' + esc(c.query) + '" href="' + esc(mapsUrl(c.query)) + TNI("nearby.k8fea946", "\" target=\"_blank\" rel=\"noopener\">📍 내 주변 평점 좋은 곳<br>구글 지도로 보기</a>") +
       '<div class="nb-st" data-nb-st aria-live="polite">' + statusHTML() + "</div>" +
       TNI("nearby.kf154112", "<p class=\"nb-sec\">빠른 찾기</p><div class=\"nb-subs\">") + c.subs.map(function (s) {
         return '<a class="nb-sub" data-nb-q="' + esc(s.query) + '" href="' + esc(mapsUrl(s.query)) + '" target="_blank" rel="noopener">' + esc(s.label) + "</a>"; }).join("") + "</div>" +
-      // 📇 가게 카드 시험(파타야 30곳, OSM 실제 데이터) — 2026-10-03 ⑦
-      '<a class="nb-places" href="#places" data-page="places" data-pl-cat="' + esc({ food: "food", pet: "pet", beauty: "beauty", moto: "moto" }[c.id] || "all") + TNI("nearby.kb2c66e4", "\"><span aria-hidden=\"true\">📇</span><span><b>파타야 가게 카드 보기</b><small>지도에 등록된 가게 · 영업 여부는 확인 안 됨(가기 전에 전화로) — 시험 중</small></span><span aria-hidden=\"true\">›</span></a>") +
-      TNI("nearby.k014503d", "<p class=\"nb-note\">💡 평점 좋은 곳만 보려면 구글 지도 위쪽 필터에서 <b>평점</b>을 눌러 4.0 이상 등을 고르세요.</p>") +
       // 이 화면의 기준(운영자·이용자 모두 '무엇으로 찾는지' 알 수 있게) — 2026-10-03 ③d
       TNI("nearby.k4190370", "<details class=\"nb-how\"><summary>🔎 이 화면은 이렇게 찾아요</summary><ul>") +
         TNI("nearby.k4626a54", "<li>큰 버튼은 구글 지도에서 영어 검색어 <code>") + esc(c.query) + TNI("nearby.k1bd4c91", "</code> 로 찾아요. 빠른 찾기는 버튼마다 검색어가 달라요") + (c.subs[0] ? TNI("nearby.ka2f3a73", "(예: ") + esc(c.subs[0].label) + " = <code>" + esc(c.subs[0].query) + "</code>)" : "") + ".</li>" +
         TNI("nearby.ka459306", "<li>위치: 허용하면 <b>지금 내 위치</b> 둘레, 아니면 위에서 고른 지역(파타야·시라차·방콕) 이름으로 찾아요.</li>") +
+        TNI("nearby.k27eaea9", "<li>맨 위 <b>확인한 곳</b>은 출처 2곳 이상(공식 사이트·리뷰 사이트 등)에서 영업을 확인한 가게예요. 돈을 받고 넣거나 순서를 바꾸지 않아요.</li>") +
         TNI("nearby.ke3c4017", "<li>순서·평점·영업 여부는 <b>구글 지도</b>가 정해요. 이 사이트가 돈을 받고 순서를 바꾸지 않아요.</li>") +
         TNI("nearby.k079e695", "<li>맨 위 <b>광고</b> 칸만 이 사이트가 직접 소개하는 가게예요('광고' 표시).</li></ul></details>") +
       TNI("nearby.k5fac8bc", "<p class=\"nb-note nb-note--sm\">구글 지도가 새 창(앱에서는 앱 안 브라우저)으로 열려요. 위치는 지도 주소를 만드는 데만 쓰고 이 사이트에 저장하지 않아요. 순위·평점은 구글 지도 기준이며 이 사이트의 추천이 아니에요.</p>") +
@@ -240,6 +331,7 @@
     try { localStorage.setItem("tnk.nbLast", id); } catch (e) {}   // ☰ 바로가기 '📍 내 주변'이 마지막 종류로 열림
     root.innerHTML = renderPage(c);
     mountAd(root.querySelector("[data-nb-ad]"), c);
+    mountCurated(root.querySelector("[data-nbc]"), c);
     root.hidden = false; root.scrollTop = 0;
     document.body.classList.add("nb-open");
     [].forEach.call(document.querySelectorAll("[data-nb-cat]"), function (a) { if (a.getAttribute("data-nb-cat") === id) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
