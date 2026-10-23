@@ -163,6 +163,17 @@
     return curLoading;
   }
   function baht(t) { return String(t).replace(/฿\s?([\d,]+)(\s?[–-]\s?(?:฿\s?)?[\d,]+)?/g, function (m, a, b) { return a + (b ? b.replace(/฿\s?/, "") : "") + U.baht; }); }   // '฿' 기호는 헤더 시세 칸에만(TRANSLATION_RULES) → '200바트'
+  /* 업주 정보 수정 LINE(나중에 연결 — data/places-curated.json owner_line).
+   *  "@아이디" = LINE 공식 계정 기본 ID → 대화창이 열리며 아래 글이 미리 채워짐(업주가 보내기만 누르면 됨). "https://…" = 그 주소 그대로. 비면 오류 신고만.
+   *  미리 채우는 글 첫 줄 "[tnews 정보 수정] <가게 id>" — 받는 봇(번역봇 등)은 이 표시로 번역 대신 '수정 요청함'으로 보냄(ops/SYSTEM_PLAN.md 9절). */
+  function ownerLink(p) {
+    var o = CUR_DATA && CUR_DATA.owner_line; if (!o) return null;
+    if (/^https:\/\//.test(o)) return o;
+    if (!/^@[\w.-]+$/.test(o)) return null;
+    var nm = (p.name && (p.name[LANG] || p.name.ko)) || p.thai || "";
+    var msg = "[tnews 정보 수정] " + p.id + "\n" + nm + " / " + (p.thai || "") + "\n" + (LANG === "zh" ? "需要修改的内容：" : "고칠 내용(태국어·영어 가능): ") + "\n";   // i18n:data
+    return "https://line.me/R/oaMessage/" + encodeURIComponent(o) + "/?" + encodeURIComponent(msg);
+  }
   function lvlHTML(l) { if (!l) return ""; var s = ""; for (var i = 1; i <= 4; i++) s += i <= l ? "●" : "<i>●</i>"; return '<span class="nbc-lvl" title="' + esc(U.price) + '">' + s + "</span>"; }
   function cardHTML(p, cid, checked) {
     var L = LANG, v = (p.voice || {})[L] || {}, t = function (o) { return o ? (o[L] || o.ko || "") : ""; };
@@ -181,8 +192,8 @@
         '<details class="nbc-more"><summary>' + esc(U.more) + '</summary><ul class="nbc-pc">' + (v.g || []).map(function (x) { return '<li class="g">' + esc(x) + "</li>"; }).join("") +
         (v.w || []).map(function (x) { return '<li class="w">' + esc(x) + "</li>"; }).join("") + "</ul>" + (v.tip ? '<p class="nbc-tip">' + esc(baht(v.tip)) + "</p>" : "") + "</details>" : "");
     var srcs = (p.src || []).concat(v.src || []);
-    var line = CUR_DATA && CUR_DATA.owner_line && /^https:\/\//.test(CUR_DATA.owner_line) ? CUR_DATA.owner_line : null;
-    var owner = line ? '<a class="nbc-owner" href="' + esc(line) + '" target="_blank" rel="noopener">' + esc(U.owner) + "</a>"
+    var line = ownerLink(p);
+    var owner = line ? '<a class="nbc-owner" href="' + esc(line) + '" target="_blank" rel="noopener">💬 ' + esc(U.owner) + "</a>" + (window.TNRepBtn ? TNRepBtn("place", "curated:" + p.id) : "")
       : '<p class="nbc-ownhint">' + esc(U.ownerHint) + "</p>" + (window.TNRepBtn ? TNRepBtn("place", "curated:" + p.id) : "");
     return '<article class="nbc-card" aria-labelledby="nbc-' + esc(p.id) + '">' +
       '<div class="nbc-tile"><div class="nbc-thai" lang="th">' + esc(p.thai) + "</div>" +

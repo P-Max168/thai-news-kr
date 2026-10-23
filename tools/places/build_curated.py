@@ -19,7 +19,8 @@ CHECKED = "2026-10-23"
 REGION = "pattaya"
 CATS = [("food", "food"), ("massage", "massage"), ("vet", "pet"), ("beauty", "beauty"), ("moto", "moto")]
 LANGS = ("ko", "zh")
-# 업주 정보 수정 창구. 사이트 전용 LINE 공식 계정이 생기면 주소를 넣는다(예: "https://lin.ee/xxxx"). 비어 있으면 화면은 '오류 신고' 버튼을 씀
+# 업주 정보 수정 LINE. 계정이 정해지면 기본 ID("@abc1234" — 대화창에 '[tnews 정보 수정] <가게 id>' 글이 미리 채워짐) 또는
+# https 주소를 넣고 다시 만든다. 비어 있으면 화면은 '오류 신고' 버튼만. (번역봇 계정을 쓸 경우 봇이 이 표시를 보고 번역 대신 수정 요청함으로)
 OWNER_LINE = None
 
 
@@ -42,6 +43,8 @@ def check(cat, i, p):
 
 def main():
     only_check = "--check" in sys.argv
+    if OWNER_LINE and not (str(OWNER_LINE).startswith("https://") or __import__("re").match(r"^@[\w.-]+$", OWNER_LINE)):
+        print("OWNER_LINE 형식 이상: @아이디 또는 https:// 주소"); return 1
     out = {"_doc": "자동 생성(tools/places/build_curated.py) — 손으로 고치지 말고 ops/places-pilot/*.json 을 고친 뒤 다시 만들 것",
            "checked": CHECKED, "region": REGION, "owner_line": OWNER_LINE, "cats": {}}
     errs, n = [], 0
