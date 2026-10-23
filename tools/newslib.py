@@ -618,7 +618,7 @@ def build_index():
         date, ed = m.group(1), m.group(2)
         label = label_for(date, ed)
         if is_delayed(date, ed, d.get("generated", "")):
-            label += " · 지연 발행"
+            label += " · " + (SITE.get("delayed_label", "延迟发布") if LANG != "ko" else "지연 발행")
         eds.append(dict(id=p.stem, date=date, edition=ed, label=label,
                         generated=d.get("generated", ""), stories=len(d.get("stories", []))))
     eds.sort(key=lambda e: (e["date"], EDITION_ORDER[e["edition"]], e["generated"]), reverse=True)
