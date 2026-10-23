@@ -35,7 +35,7 @@ a{color:#1B64DA}
 def ph(s):  # 운영자가 정할 칸
     return '<span class="ph">[' + html.escape(s) + ']</span>'
 
-CONTACT = ph("연락 이메일 — 운영자가 정할 주소(개인 메일 대신 사이트 전용 주소 권장)")
+CONTACT = '<a href="mailto:pmax@pmaxone.com">pmax@pmaxone.com</a>'  # 2026-10-23 맥스님 확정(Cloudflare Email Routing → Gmail)
 OPERATOR = ph("운영자 표시 이름")
 
 PAGES = [
