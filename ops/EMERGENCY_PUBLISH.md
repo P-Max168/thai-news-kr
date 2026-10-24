@@ -32,10 +32,18 @@ Claude 예약 작업이 이 문서를 그대로 따른다. 사람도 읽을 수 
 ## 3. 중국어판 (13:30)
 1. 판 id `YYYY-MM-DD-md`. 중국어판 저장소에서 `python3 tools/edition_claim.py take claude <판 id>` (중국어판은 지금 정기 담당이 없어 Claude 가 맡음).
 2. 후보: 한국어판 저장소의 `candidates` 브랜치(12:20 수집분)를 같은 방법으로 받는다 — 중국어판 폴더 안에서 `git fetch https://github.com/P-Max168/thai-news-kr +candidates:refs/remotes/kr/candidates` 후 `git show kr/candidates:candidates/latest.md > drafts/candidates/latest.md`.
+   - **수집이 낡았으면 먼저 깨운다(2026-10-24 추가):** GitHub 예약은 늦거나 빠진다(10-23·24 이틀 모두 12:20 수집 없음, 06:05 수집은 08:20 대에 돎). `git show kr/candidates:meta.json` 의 `collected_at` 이 2시간보다 오래됐으면 GitHub 도구(actions_run_trigger, workflow collect.yml, ref main)로 수집을 직접 실행하고 4분쯤 뒤 다시 받는다. 실패하면 있는 수집분으로 진행하고 coverage 에 적는다.
 3. 편집 기준은 중국어판 저장소의 `tools/TRANSLATION_RULES.zh.md`·`ROUTINE_MD.md` 2~3번(涉华·签证·治安 우선, 간체, 한글·태국 문자 금지, 금액 '350泰铢（约70元）' — 환율은 data/ticker.json 의 THB_CNY).
 4. 빌드: `TNK_TEST=1 bash tools/lang_build.sh build <판 id>` 가 'BUILD OK' 가 될 때까지.
 5. 배포: `TNK_PUBLISHER=claude TNK_LIVE_CHECK=pages bash tools/deploy.sh`.
 6. 기록: 한국어판 저장소 `collab/STATUS.md` 에 한 줄.
+
+## 3-1. 지난 실행에서 배운 것 (시간 아끼기, 2026-10-24)
+- **원문 열기:** 클라우드 세션은 뉴스 사이트에 직접 못 붙는다(curl 차단). WebFetch 는 대화에 나온 적 없는 URL 이면 승인을 기다리다 실패한다. 순서: ① WebSearch 로 기사 제목을 검색해 주소를 대화에 올린 뒤 WebFetch ② 매체 첫 화면(예: https://www.pattayamail.com/)을 열어 최신 기사 주소 목록을 받은 뒤 WebFetch. 후보 파일의 news.google.com 링크를 바로 열지 않는다.
+- **WebFetch 는 요약 답을 준다:** 숫자·이름·시각은 프롬프트에 "exact numbers, publish time" 을 꼭 넣어 받고, 애매하면 쓰지 않는다.
+- **RSS 요약문:** candidates json/md 의 `summary`(있으면)로 1차 판단 — 원문 확인을 대신하지는 않는다.
+- **편집 파일 검증에 자주 걸리는 것:** `related` 는 dict 목록(기사 id 문자열 아님, 모르면 `[]`) · `quick_replies` 는 3~4개 필수 · 제목·브리핑의 泰铢 금액에도 `（约N元）` · 이미 전 판에 실은 사건은 빼거나 update 로.
+- **배포 권한:** 예약 실행에서 deploy.sh 가 '실서비스 배포'로 거부되면, 예약 작업의 자동 승인(Automatically approve)이 꺼져 있는 것 — 편집·빌드까지 하고 STATUS 에 남긴 뒤 맥스님께 알린다.
 
 ## 4. 하지 않는 것
 - 질문·운영자 댓글 공개, 광고·검색·개인정보 설정 변경(맥스님 승인 필요).
