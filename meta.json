@@ -1,0 +1,8 @@
+{
+ "edition": "2026-10-24-pm",
+ "collected_at": "2026-10-24T16:36:50+07:00",
+ "run": "40082560318",
+ "items": 1639,
+ "sources_ok": 245,
+ "log_tail": " 남부               36건  매체  22곳  상위: HATYAI FOCUS 7, TradingView 3, The Phuket News 3, Daily News 2\n  poleco    정치·경제           264건  매체  58곳  상위: Siam Rath 29, Matichon 26, Bangkok Biz News(กรุงเทพธุรกิจ) 16, Khaosod 14\n  society   사회·사건사고         203건  매체  62곳  상위: Siam Rath 19, Matichon 15, Daily News 13, Khaosod 11\n  visa      외국인·비자           35건  매체  29곳  상위: Chiang Rai Times 3, The Thaiger 2, Thansettakij 2, Thai PBS World 2\n  life      생활·물가·부동산       114건  매체  46곳  상위: Hfocus 10, Bangkok Biz News(กรุงเทพธุรกิจ) 10, สำนักข่าวอินโฟเควสท์ 6, Siam Rath 5\n  travel    여행·맛집            77건  매체  43곳  상위: MICHELIN Guide 17, Siam Rath 4, Manager Online(MGR) 4, INN News 3\n  ent       연예·스포츠·SNS      401건  매체  51곳  상위: Siamsport 80, Daily News 70, TrueID 35, Khaosod 27\n  weather   날씨·교통           164건  매체  52곳  상위: The Standard 13, Siam Rath 11, Bangkok Biz News(กรุงเทพธุรกิจ) 9, Daily News 8\n  other     미분류             536건  매체  98곳  상위: Siam Rath 41, Matichon 34, Bangkok Biz News(กรุงเทพธุรกิจ) 31, อมรินทร์ทีวี ช่อง 34 29\n실패(건너뜀): Thairath(HTTP 403); Thairath 연예(HTTP 403); Thairath 스포츠(HTTP 403); Thairath 라이프(HTTP 403); Thairath Money(HTTP 403); Thai Post(ReadTimeout); Ballthai(HTTP 403); The Pattaya News(태국어)(HTTP 403); 파타야 시청(Pattaya City)(SSLError); GN: สัตหีบ(항목 0개); Ch3Plus 뉴스(HTTP 403); Gold Traders Association 금값(HTTP 403); Michelin Guide Thailand(HTTP 202); GN: เยาวราช OR สำเพ็ง(항목 0개); GN: Bangkok traffic·flood(항목 0개); Samui Times 홈(HTTP 403); JS100 홈(ConnectionError)\n"
+}
