@@ -1,0 +1,406 @@
+{
+ "id": "2026-10-24-pm",
+ "date": "2026-10-24",
+ "edition": "pm",
+ "edition_label": "저녁판",
+ "weekday": "토",
+ "timezone": "Asia/Bangkok (UTC+7)",
+ "fx": {
+  "THB_KRW": 39.251,
+  "note": "독립 ticker 10월 24일 14:35 조회, 환율 기준 10월 24일 07:02 BKK.",
+  "source": "ExchangeRate-API"
+ },
+ "coverage": "Claude 비상 발행(18:30 확인 시 판·담당 표시 없음). 16:35 자동 수집 245/262, 최근 14시간 후보 1,639건과 Google News 레이더 195항목 검토. 웹 읽기 도구로 원문 확인 9건. 출국세 보류·홍수 피해 집계·꼬팡안 이스라엘 여성 비자 취소는 전판 중복으로 제외. 파타야 중국인 추락사는 민감 정보로 제외. 직접 열지 못한 태국어 매체 기사(파타야 새벽 폭우 등)는 쓰지 않음.",
+ "previous": "2026-10-24-am",
+ "briefing": [
+  {
+   "topic": "weather",
+   "text": "태국 기상청, 방콕 **26~27일 강한 비** 예보",
+   "story_id": "wt1"
+  },
+  {
+   "topic": "bangkok",
+   "text": "방콕 홍수 지원금 **이르면 오늘 오후 지급**",
+   "story_id": "bk1"
+  },
+  {
+   "topic": "bangkok",
+   "text": "방콕 3개 구 **초미세먼지 주황색 경보**",
+   "story_id": "bk2"
+  },
+  {
+   "topic": "visa",
+   "text": "이스라엘 남성 **2,095일 불법 체류**·마약 검거",
+   "story_id": "vi1"
+  },
+  {
+   "topic": "east",
+   "text": "좀티엔 해변 픽업트럭 **밀물에 갇혀 견인**",
+   "story_id": "ea1"
+  },
+  {
+   "topic": "east",
+   "text": "우돈타니~우타파오 **주 4회 복원**",
+   "story_id": "ea2"
+  },
+  {
+   "topic": "south",
+   "text": "꼬팡안 미국인 **1,300만 바트(약 5억1,026만 원)어치 마약**",
+   "story_id": "st1"
+  }
+ ],
+ "highlights": [
+  "wt1",
+  "vi1",
+  "ea1"
+ ],
+ "stories": [
+  {
+   "id": "wt1",
+   "topic": "weather",
+   "secondary": [
+    "bangkok",
+    "south"
+   ],
+   "region": "방콕·태국 남부",
+   "headline": "태국 기상청 “방콕 26~27일 강한 비”…남부는 25일 매우 강한 비",
+   "summary": [
+    "태국 기상청이 24일 오전 5시 발표한 기상 주의보 2호에서 방콕과 주변 지역에 26~27일 강한 비를 예보했다. 남부 5개 주에는 25일 매우 강한 비가 예상됐다고 더 네이션이 전했다.",
+    "남부는 24~28일 누적 강수로 갑작스러운 침수와 급류, 저지대 침수 가능성이 있어 산기슭·물길 주변·저지대 주민의 주의가 필요하다. 25일 동북부, 26일 북부·중부·동부에도 강한 비가 예보됐다.",
+    "중국에서 내려오는 찬 공기의 영향으로 25~27일 상부 지역에는 뇌우와 돌풍이 예상된다. 태국만과 안다만해의 뇌우 구역에서는 파도가 2m를 넘을 수 있어 선박은 주의 운항해야 한다. 다음 주의보는 24일 오후 5시 발표 예정이었다."
+   ],
+   "context": "",
+   "update": "전날 저녁판의 24~28일 남부 폭우 경보 이후, 24일 아침 주의보에서 방콕 26~27일 강한 비가 새로 명시됐다.",
+   "source": "더 네이션 (The Nation)",
+   "url": "https://www.nationthailand.com/news/general/40072666",
+   "title_th": "TMD warns 5 southern provinces of very heavy rain on October 25",
+   "published": "2026-10-24T05:50:00+07:00",
+   "related": [],
+   "tags": [
+    "태국 기상청",
+    "방콕 26~27일 강한 비",
+    "남부 폭우",
+    "돌풍"
+   ],
+   "impact": [
+    "날씨·재해"
+   ],
+   "for_me": "다음 주 초 방콕에서 이동이나 약속이 있다면 26~27일 비 예보를 감안해 시간을 넉넉히 잡으세요. 남부 섬 여행자는 배편 운항 여부를 출발 전에 확인하세요.",
+   "also": [],
+   "issue": null,
+   "quick_replies": [
+    "26~27일 일정은 여유 있게 잡을게요",
+    "배편부터 확인하겠습니다",
+    "우산 챙기겠습니다"
+   ]
+  },
+  {
+   "id": "bk1",
+   "topic": "bangkok",
+   "secondary": [
+    "weather"
+   ],
+   "region": "방콕",
+   "headline": "방콕 홍수 지원금 지급 늦어진 이유…“방콕만 자체 예산 분담”",
+   "summary": [
+    "방콕시 타위다 까몬웻(Tawida Kamolwet) 부시장은 24일 돈므앙 구청을 찾아, 홍수 지원금 지급이 다른 주보다 늦어진 것은 내각 결의에 따라 방콕만 자체 예산을 함께 내야 하는 절차 때문이라고 설명했다. 재난방지청과의 갈등은 없다고 밝혔다고 더 스탠더드가 보도했다.",
+    "재난방지청은 23일 37개 주에 지원금을 보냈지만 방콕은 포함되지 않았다. 방콕시는 분담금을 승인해 정부저축은행 시스템으로 보냈으며, 시민은 이르면 24일 오후, 늦어도 1~2일 안에 돈을 받을 것으로 예상된다.",
+    "신청은 약 100만 건이며 이 가운데 10만 건 이상은 현장 확인이 필요하다. 방콕시는 엔지니어 약 500명을 투입해 2주 안에 점검을 마칠 계획이다. 신청 마감은 11월 30일이다."
+   ],
+   "context": "",
+   "source": "더 스탠더드 (The Standard)",
+   "url": "https://thestandard.co/bma-flood-relief-payment-update/",
+   "title_th": "กทม. แจงเหตุจ่ายเยียวยาน้ำท่วมช้า ยันไร้รอยร้าว ปภ. เตรียมโอนเงินบ่ายนี้",
+   "published": "2026-10-24T13:23:00+07:00",
+   "related": [],
+   "tags": [
+    "방콕 홍수 지원금",
+    "타위다 부시장",
+    "재난방지청",
+    "11월 30일 마감"
+   ],
+   "impact": [
+    "날씨·재해"
+   ],
+   "for_me": "태국인 직원이나 이웃이 방콕 홍수 지원금을 기다리고 있다면 이르면 24일 오후부터 지급이 시작된다는 소식을 전해 줄 만합니다.",
+   "also": [],
+   "issue": {
+    "id": "2026-floods-relief",
+    "title": "홍수 구호금·재난보험"
+   },
+   "quick_replies": [
+    "주변 태국인 직원도 기다리고 있었어요",
+    "현장 점검이 빨리 끝나면 좋겠네요",
+    "지급이 늦어진 이유가 있었군요"
+   ]
+  },
+  {
+   "id": "bk2",
+   "topic": "bangkok",
+   "secondary": [
+    "life"
+   ],
+   "region": "방콕 방쿤티안·파시짜른·븡꿈",
+   "headline": "방콕 3개 구 초미세먼지 ‘주황색’ 경보…방쿤티안 43.4㎍",
+   "summary": [
+    "방콕 대기질정보센터는 24일 오전 5~7시 측정에서 3개 구의 초미세먼지(PM2.5)가 주황색 기준인 37.5㎍/㎥를 넘었다고 밝혔다. 방쿤티안 43.4, 파시짜른 38.6, 븡꿈 37.6㎍/㎥였다고 더 스타가 더 네이션을 인용해 전했다.",
+    "방콕 전체 평균은 28.9㎍/㎥였고, 측정값은 18.6~45.1㎍/㎥ 사이였다. 오전 7시 수치는 전날 같은 시각보다 높았으며 일부 지역에 비가 내렸지만 미세먼지를 흩어 놓지는 못했다.",
+    "당국은 외출 때 PM2.5 차단 마스크를 쓰고 격한 야외 활동을 줄이라고 권고했다. 어린이·노인·호흡기 질환자는 야외 활동을 피하고 기침이나 호흡 곤란이 있으면 바로 진료를 받으라고 당부했다. 수치는 AirBKK 앱과 airbkk.com 에서 확인할 수 있다."
+   ],
+   "context": "",
+   "source": "더 스타 (The Star·The Nation/ANN)",
+   "url": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/10/24/bangkok-issues-orange-level-pm25-alert-in-three-districts",
+   "title_th": "Bangkok issues orange-level PM2.5 alert in three districts",
+   "published": "2026-10-24T15:19:00+07:00",
+   "related": [],
+   "tags": [
+    "초미세먼지",
+    "PM2.5",
+    "방쿤티안",
+    "AirBKK"
+   ],
+   "impact": [
+    "날씨·재해"
+   ],
+   "for_me": "방콕 서남부(방쿤티안·파시짜른)나 븡꿈에 산다면 아침 외출과 아이 야외 활동 전에 AirBKK 수치를 확인하세요.",
+   "also": [],
+   "issue": null,
+   "quick_replies": [
+    "마스크 다시 챙겨야겠네요",
+    "AirBKK 앱 확인해 볼게요",
+    "벌써 미세먼지 철인가요"
+   ]
+  },
+  {
+   "id": "vi1",
+   "topic": "visa",
+   "secondary": [
+    "bangkok",
+    "society"
+   ],
+   "region": "방콕 후아이꽝",
+   "headline": "방콕 콘도서 54세 이스라엘 남성 검거…체류기한 2,095일 넘겨",
+   "summary": [
+    "방콕 후아이꽝 구의 한 콘도에서 23일 54세 이스라엘 남성이 체류 허가 기간을 2,095일 넘긴 채 머물다 체포됐다. 함께 있던 44세 태국 여성도 마약 소지·사용 혐의로 붙잡혔다고 더 파타야 뉴스가 24일 보도했다.",
+    "경찰은 1386 신고 전화 제보를 받고 수도경찰청 마약 단속팀과 이민국 수사4과가 함께 수색해 아이스(필로폰) 15g, 포장용 빈 봉지 50개, 전자저울, 마약이 든 것으로 의심되는 케이크 등을 압수했다. 남성은 데이트 앱으로 여성을 불러 몰래 촬영한 혐의도 받고 있다.",
+    "남성에게는 마약 공동 소지, 불법 체류, 마약 검사 거부 혐의가 적용됐다. 그는 고위 인사가 사건을 해결해 줄 것이라며 수사팀 전원을 전출시키겠다고 위협한 것으로 전해졌다. 두 사람 모두 혐의를 부인했으며, 형사 절차 뒤 추방과 입국 금지 조치가 예상된다."
+   ],
+   "context": "",
+   "source": "더 파타야 뉴스 (The Pattaya News)",
+   "url": "https://thepattayanews.com/2026/10/24/israeli-man-arrested-in-bangkok-condo-with-meth-after-overstay-of-more-than-2000-days/",
+   "title_th": "Israeli Man Arrested in Bangkok Condo With Meth After Overstay of More Than 2,000 Days",
+   "published": "2026-10-24T12:20:07+07:00",
+   "related": [],
+   "tags": [
+    "불법 체류",
+    "오버스테이",
+    "이민국",
+    "후아이꽝"
+   ],
+   "impact": [
+    "비자·체류",
+    "치안"
+   ],
+   "for_me": "체류 기한 초과는 마약 등 다른 혐의와 겹치면 추방·입국 금지로 이어질 수 있습니다. 본인 비자 만료일과 연장 일정을 미리 확인해 두세요.",
+   "also": [],
+   "issue": null,
+   "quick_replies": [
+    "5년 넘게 오버스테이라니 놀랍네요",
+    "비자 만료일 다시 확인해 볼게요",
+    "데이트 앱 만남은 조심해야겠어요"
+   ]
+  },
+  {
+   "id": "ea1",
+   "topic": "east",
+   "secondary": [
+    "society"
+   ],
+   "region": "파타야 좀티엔 해변",
+   "headline": "좀티엔 해변에 픽업트럭 몰고 들어간 그리스인…밀물에 바퀴 빠져 견인",
+   "summary": [
+    "24일 새벽 3시 36분쯤 파타야 좀티엔 해변 동딴 커브 부근에서 58세 그리스 남성이 몰던 픽업트럭이 모래에 빠졌다는 신고가 들어왔다고 더 파타야 뉴스가 보도했다.",
+    "남성은 최근 중고로 산 2륜구동 미쓰비시 트라이톤이 제트스키를 바다에서 끌어낼 수 있는지 시험하려고 해변에 들어갔다가, 밀물이 차오르면서 바퀴가 모래에 박혔다. 바닷물이 뒷바퀴 가까이까지 올라왔다.",
+    "출동한 파타야시 단속 요원이 빼내지 못해 민간 견인차를 불렀고, 30분 넘게 걸려 차를 꺼냈다. 다친 사람은 없었다. 남성은 해변에 차를 몰고 들어간 데 대해 벌금을 물 수 있으며 경위 설명을 요구받을 예정이다."
+   ],
+   "context": "",
+   "source": "더 파타야 뉴스 (The Pattaya News)",
+   "url": "https://thepattayanews.com/2026/10/24/greek-man-gets-pickup-truck-stuck-on-jomtien-beach-while-testing-its-ability-to-tow-a-jet-ski/",
+   "title_th": "Greek Man Gets Pickup Truck Stuck on Jomtien Beach While Testing Its Ability to Tow a Jet Ski",
+   "published": "2026-10-24T11:20:00+07:00",
+   "related": [],
+   "tags": [
+    "좀티엔 해변",
+    "픽업트럭",
+    "제트스키",
+    "벌금"
+   ],
+   "impact": [
+    "교통·사고"
+   ],
+   "for_me": "파타야 해변 모래사장에 차를 몰고 들어가면 벌금 대상이 될 수 있습니다. 특히 밀물 때는 차가 빠질 위험이 큽니다.",
+   "also": [],
+   "issue": null,
+   "quick_replies": [
+    "밀물 시간엔 정말 위험하죠",
+    "2륜구동으로 해변은 무리네요",
+    "다친 사람이 없어 다행입니다"
+   ]
+  },
+  {
+   "id": "ea2",
+   "topic": "east",
+   "secondary": [
+    "travel"
+   ],
+   "region": "우타파오 공항(라용·파타야)",
+   "headline": "타이라이온에어, 우돈타니~우타파오 노선 주 4회로 복원",
+   "summary": [
+    "타이라이온에어가 주 2회로 줄였던 우돈타니~우타파오(파타야·라용) 노선을 주 4회로 되돌렸다고 타이거가 24일 보도했다. 운항일은 월·수·금·일요일이다.",
+    "우돈타니발은 오전 11시 출발해 낮 12시 20분 우타파오에 도착하고, 우타파오발은 오후 1시 15분 출발해 2시 35분 우돈타니에 도착한다. 요금은 공개되지 않았으며 일정이 바뀔 수 있어 항공사에서 확인해야 한다.",
+    "우돈타니에서는 11월 1일부터 3월 14일까지 원예 엑스포가 열린다. 우돈타니 공항은 9월 국제공항 지위를 받았다."
+   ],
+   "context": "",
+   "source": "타이거 (The Thaiger)",
+   "url": "https://thethaiger.com/news/world/aviation/thai-lion-air-restores-udon-thani-to-pattaya-flights-to-four-days-a-week",
+   "title_th": "Thai Lion Air restores Udon Thani to Pattaya flights to four days a week",
+   "published": "2026-10-24T14:30:00+07:00",
+   "related": [
+    {
+     "source": "파타야 메일 (Pattaya Mail)",
+     "title": "Udon Thani–U-Tapao direct flights resume four days a week",
+     "url": "https://www.pattayamail.com/latestnews/news/udon-thani-u-tapao-direct-flights-resume-four-days-a-week-569214"
+    }
+   ],
+   "tags": [
+    "타이라이온에어",
+    "우타파오 공항",
+    "우돈타니",
+    "주 4회"
+   ],
+   "impact": [
+    "교통·사고"
+   ],
+   "for_me": "파타야에서 이산(동북부) 지역으로 갈 계획이라면 방콕을 거치지 않는 우타파오 직항을 월·수·금·일요일에 이용할 수 있습니다.",
+   "also": [],
+   "issue": null,
+   "quick_replies": [
+    "우타파오 직항이 늘어 반갑네요",
+    "우돈타니 엑스포 가 보고 싶어요",
+    "요금은 항공사에서 확인할게요"
+   ]
+  },
+  {
+   "id": "st1",
+   "topic": "south",
+   "secondary": [
+    "society"
+   ],
+   "region": "수랏타니 꼬팡안",
+   "headline": "꼬팡안서 7년 산 미국인 검거…소파 팔걸이에 코카인·케타민 숨겨",
+   "summary": [
+    "수랏타니 이민경찰이 21일 오후 4시 10분쯤 꼬팡안 핫야오 도로에서 34세 미국인 남성을 붙잡았다고 타이거가 24일 보도했다. 그는 섬에서 약 7년 동안 살았으며, 경찰은 그가 주로 외국인 관광객과 파티 참가자에게 마약을 팔았다고 보고 있다.",
+    "집에서는 코카인 1.6kg, 케타민 결정 1.4kg, 케타민 알약 340정, 엑스터시 2,540정, MDMA 349g 등이 나왔다. 대부분 소파 팔걸이 안 비밀 칸에 숨겨져 있었으며, 시가는 약 1,300만 바트(약 5억1,026만 원)다.",
+    "그는 마약 판매·판매 목적 소지와 코카인 사용 혐의를 받고 있다. 이번 수사는 5월 브라질인·이스라엘인 판매책 검거에서 자금 흐름을 추적해 이어졌으며, 경찰은 마약 출처와 공범을 계속 쫓고 있다."
+   ],
+   "context": "",
+   "source": "타이거 (The Thaiger)",
+   "url": "https://thethaiger.com/hot-news/crime/american-dealer-held-on-koh-phangan-with-13-million-baht-of-drugs-in-a-sofa",
+   "title_th": "American dealer held on Koh Phangan with 13 million baht worth of drugs in a sofa",
+   "published": "2026-10-24T13:30:00+07:00",
+   "related": [],
+   "tags": [
+    "꼬팡안",
+    "마약 단속",
+    "이민경찰",
+    "파티 관광"
+   ],
+   "impact": [
+    "치안"
+   ],
+   "for_me": "꼬팡안 파티에 간다면 처음 보는 사람이 건네는 약물이나 음료는 받지 마세요. 태국은 마약 소지·사용만으로도 처벌이 무겁습니다.",
+   "also": [],
+   "issue": null,
+   "quick_replies": [
+    "팡안 파티 갈 때 조심해야겠네요",
+    "소파에 숨겼다니 놀랍네요",
+    "출처까지 꼭 밝혀지길"
+   ]
+  },
+  {
+   "id": "so1",
+   "topic": "society",
+   "secondary": [
+    "bangkok",
+    "visa"
+   ],
+   "region": "방콕 끌롱떠이",
+   "headline": "중국서 거액 세관 사기 혐의로 수배된 중국인 여성, 방콕 콘도서 검거",
+   "summary": [
+    "태국 이민경찰이 중국 당국에 약 5억 바트(약 196억2,550만 원) 규모의 사기 혐의로 수배된 중국인 사업가 여성을 방콕 끌롱떠이 구의 한 콘도에서 수요일에 붙잡았다고 타이PBS 월드가 23일 보도했다.",
+    "중국 세관 당국은 그와 동료들이 원단·의류 수출입 회사를 운영하며 다른 사업을 하고 공문서를 위조해 세금 환급을 받고, 회사 인감을 없앤 혐의가 있다고 보고 있다. 그는 중국에서 체포영장이 나온 뒤 태국으로 도피한 것으로 전해졌다.",
+    "체포는 주태국 중국대사관의 정보 제공에 따라 이뤄졌다. 태국 이민국 관계자는 그가 혐의 조사를 받도록 중국으로 추방될 것이라고 밝혔다."
+   ],
+   "context": "",
+   "source": "타이PBS 월드 (Thai PBS World)",
+   "url": "https://www.thaipbsworld.com/crime/571547",
+   "title_th": "Chinese businesswoman wanted over alleged fraud arrested in Bangkok",
+   "published": "2026-10-23T16:43:51+07:00",
+   "related": [],
+   "tags": [
+    "중국인 수배자",
+    "끌롱떠이",
+    "세관 사기",
+    "추방"
+   ],
+   "impact": [
+    "치안"
+   ],
+   "for_me": "",
+   "also": [],
+   "issue": null,
+   "quick_replies": [
+    "방콕이 도피처로 많이 쓰이네요",
+    "추방 후 처리도 궁금합니다",
+    "이민국 단속이 계속되네요"
+   ]
+  },
+  {
+   "id": "pe1",
+   "topic": "poleco",
+   "secondary": [
+    "bangkok"
+   ],
+   "region": "방콕 원방콕",
+   "headline": "아고다, 방콕을 세계 최대 사무소로…직원 4,500명 넘어",
+   "summary": [
+    "여행 예약 플랫폼 아고다가 방콕 원방콕(One Bangkok)의 사무소가 직원 4,500명 이상으로 전 세계 최대 거점이 됐다고 24일 보도자료에서 밝혔다. 이는 25개 시장에서 일하는 전체 직원 8,000여 명의 약 절반이다.",
+    "방콕 직원의 절반 이상은 태국인이며, 80여 개국 출신 외국인 전문가 약 2,000명이 함께 일한다. 소프트웨어 개발, 데이터 과학, AI, 제품 관리, 마케팅 등을 맡고 있으며 방콕 사무소는 회사의 글로벌 기술·운영 허브 역할을 한다.",
+    "아고다는 국제사업센터 활동으로 태국 투자청(BOI)의 투자 장려 혜택을 받았다. 나릿 투자청 사무총장은 태국에 데이터 분석·IT 분야 숙련 인력이 풍부하다고 말했다."
+   ],
+   "context": "",
+   "source": "미디어 아웃리치 보도자료 (Live News 게재)",
+   "url": "https://livenews.co.nz/2026/10/24/agoda-makes-bangkok-its-largest-office-worldwide-with-more-than-4500-staff/",
+   "title_th": "Agoda Makes Bangkok Its Largest Office Worldwide, with More Than 4,500 Staff",
+   "published": "2026-10-24T14:30:00+07:00",
+   "related": [],
+   "tags": [
+    "아고다",
+    "원방콕",
+    "태국 투자청",
+    "IT 일자리"
+   ],
+   "impact": [],
+   "for_me": "방콕에서 IT·데이터 분야 일자리를 찾는 외국인이라면 아고다처럼 투자청 혜택을 받은 기업의 채용이 이어지고 있다는 점을 참고할 만합니다.",
+   "also": [],
+   "issue": null,
+   "quick_replies": [
+    "방콕이 IT 허브가 되어 가네요",
+    "외국인 2,000명이라니 많네요",
+    "원방콕 가 보면 실감나겠어요"
+   ]
+  }
+ ],
+ "korea_top": [],
+ "generated": "2026-10-24T18:48:56+07:00"
+}
