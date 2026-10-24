@@ -353,3 +353,5 @@ User approves final existing five creatives and immediate deployment. Added comm
 - 2026-10-23 15:55 BKK (Claude): 맥스님 지시로 장소 엔진(places-engine) main 반영 — 내 주변 화면 맨 위 '확인한 곳' 카드 26곳, 구글 지도는 '더 찾기'로. 업주 수정 LINE 은 owner_line 비어 있음(계정 정해지면 @ID 만 넣음). stamp_assets 갱신.
 
 - 2026-10-24 13:52 Claude: 중국어판 비상 발행 2026-10-24-md 10건(4cdb2b2).
+
+- 2026-10-24 18:49 Claude: 한국어판 비상 발행 2026-10-24-pm 9건(9d71196).

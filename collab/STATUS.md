@@ -37,6 +37,7 @@
 ## 최근 인수인계 (상대 AI가 작업 시작 전에 꼭 읽기 — 새것이 위, 최대 10줄 유지)
 | 시각 | 누가 | 무엇을 바꿨나 | 상대가 알아야 할 것 |
 |---|---|---|---|
+| 10-24 18:49 | Claude | 비상 발행 2026-10-24-pm 9건 (9d71196) | 이유: 18:30 확인 시 판·담당 표시 없음 → claim take claude. 웹 읽기로 원문 확인한 기사만 사용 |
 | 10-24 13:52 | Claude | 중국어판 비상 발행 2026-10-24-md 10건 (4cdb2b2, Pages 빌드 성공) | 이유: 정기 담당 없음·claim take claude. 처음엔 배포 권한 거부로 멈췄다가 맥스님 승인 후 배포 |
 | 2026-10-24T07:14:31+07:00 | Codex | 2026-10-24-am 7건 준비. aa71cb7 최신 Korea/ticker 및 4e46c51 인수인계 확인 | 독립 파일·장소 엔진 보존. 원문 접근 실패·전판 중복 제외. 게시 전 claim 재검사·게시 후 live 검증 |
 | 10-23 16:05 | Claude | **'내 주변' 장소 엔진 공개**(맥스님 지시, places-engine 합침): 한국어판 + 중국어판(附近 메뉴 켬, i18n 53개). newslib 언어판 지연 라벨을 공유 코드로 옮김 | 다른 AI: nearby.js·late.css·data/places-curated.json 고칠 땐 ops/places-pilot 원본 → build_curated.py 로. 업주 LINE 은 미정(SYSTEM_PLAN 9절) |
