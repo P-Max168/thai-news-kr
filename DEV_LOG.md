@@ -351,3 +351,5 @@ User approves final existing five creatives and immediate deployment. Added comm
 - 2026-10-23 06:00 BKK (Claude): 장소 엔진 화면을 브랜치 places-engine 에 준비(main 미반영). nearby.js 확인한 곳 카드 + late.css 카드 모양 + data/places-curated.json + tools/places/build_curated.py. 10-26 12:45 뒤 합침.
 
 - 2026-10-23 15:55 BKK (Claude): 맥스님 지시로 장소 엔진(places-engine) main 반영 — 내 주변 화면 맨 위 '확인한 곳' 카드 26곳, 구글 지도는 '더 찾기'로. 업주 수정 LINE 은 owner_line 비어 있음(계정 정해지면 @ID 만 넣음). stamp_assets 갱신.
+
+- 2026-10-24 13:52 Claude: 중국어판 비상 발행 2026-10-24-md 10건(4cdb2b2).
