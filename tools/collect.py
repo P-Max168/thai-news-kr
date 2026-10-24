@@ -98,6 +98,22 @@ def parse_dt(s):
     return d if d.tzinfo else d.replace(tzinfo=timezone.utc)
 
 
+SUM_MAX = 300   # RSS 요약문 보존 길이(2026-10-24): 원문을 다시 열지 않고 1차 확인용. 본문 전문은 공개 브랜치에 두지 않으므로 짧은 발췌만
+
+
+def rss_summary(e, title):
+    """피드가 이미 준 요약(summary/description, 없으면 content:encoded)을 태그 벗겨 앞 SUM_MAX 자. 제목 반복·빈 값은 ''."""
+    raw = e.get("summary") or ""
+    if not raw and e.get("content"):
+        raw = e["content"][0].get("value", "")
+    t = re.sub(r"<[^>]+>", " ", raw)
+    t = re.sub(r"\s+", " ", html.unescape(t)).strip()
+    t = re.sub(r"\s*(?:The post .*? appeared first on .*|\[(?:…|\.\.\.)\]|Continue reading.*)$", "", t).strip()
+    if len(t) < 20 or norm(t) == norm(title) or norm(t).startswith(norm(title)) and len(t) < len(title) + 20:
+        return ""
+    return t if len(t) <= SUM_MAX else t[:SUM_MAX].rstrip() + "…"
+
+
 def items_rss(src, body):
     out = []
     for e in feedparser.parse(body).entries:
@@ -113,7 +129,8 @@ def items_rss(src, body):
             title = re.sub(r"\s+-\s+[^-]{2,60}$", "", title)
         if src["type"] != "gnews":
             outlet = CANON.get(domain(e.get("link", "")), outlet)
-        out.append(dict(title=title, url=e.get("link", ""), published=dt, outlet=outlet))
+        summ = rss_summary(e, title) if src["type"] != "gnews" else ""   # Google News 요약 칸은 제목 링크뿐
+        out.append(dict(title=title, url=e.get("link", ""), published=dt, outlet=outlet, summary=summ))
     return out
 
 
@@ -128,7 +145,7 @@ def items_sitemap(src, body):
         loc = re.search(r"<loc>\s*(.*?)\s*</loc>", x, re.S)
         out.append(dict(title=html.unescape(html.unescape(t.group(1))).strip(), url=loc.group(1) if loc else "",
                         published=parse_dt(d.group(1)) if d else None,
-                        outlet=CANON.get(domain(loc.group(1) if loc else ""), src["name"])))
+                        outlet=CANON.get(domain(loc.group(1) if loc else ""), src["name"]), summary=""))
     return out
 
 
@@ -267,6 +284,8 @@ def main():
                 dup = k
                 break
         if dup:
+            if not dup.get("summary") and it.get("summary"):
+                dup["summary"] = it["summary"]
             if it["outlet"] != dup["outlet"] and it["outlet"] not in [x["outlet"] for x in dup["also"]]:
                 dup["also"].append(dict(outlet=it["outlet"], url=it["url"], title=it["title"]))
             ts = set(dup["topics"]) | set(it["topics"])
@@ -294,7 +313,7 @@ def main():
         return dict(title=i["title"], outlet=i["outlet"], url=i["url"], via=i["src"], type=i["type"], lang=i["lang"],
                     published=i["published"].astimezone(BKK).isoformat(timespec="minutes"),
                     date_note="Google News 날짜 — 원문 게재 시각 확인" if i["type"] == "gnews" else "",
-                    topics=i["topics"], also=i["also"])
+                    summary=i.get("summary", ""), topics=i["topics"], also=i["also"])
     data = dict(generated=stamp.isoformat(timespec="seconds"), hours=a.hours,
                 sources_total=len(srcs), sources_ok=len(srcs) - len(fails), failed=[dict(name=n, error=e) for n, e in fails],
                 candidates=len(keep),
@@ -314,6 +333,9 @@ def main():
             also = (" (+%d: %s)" % (len(i["also"]), ", ".join(x["outlet"] for x in i["also"][:4]))) if i["also"] else ""
             lines.append("- %s | %s | %s%s  \n  %s" % (i["published"].astimezone(BKK).strftime("%m-%d %H:%M"), i["outlet"],
                                                       i["title"], also, i["url"]))
+            if i.get("summary"):   # md 는 짧게(전체 300자는 json)
+                sm = i["summary"]
+                lines.append("  > " + (sm if len(sm) <= 140 else sm[:140].rstrip() + "…"))
         if len(L) > 60:
             lines.append("- … %d건 더(json 참고)" % (len(L) - 60))
         lines.append("")
