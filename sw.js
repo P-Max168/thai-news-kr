@@ -9,12 +9,12 @@
  * - Google 로그인·Firestore(firebase / googleapis / gstatic SDK / firebaseapp.com / google.com 계정 창)는
  *   절대 가로채거나 캐시하지 않는다(그냥 브라우저가 직접 요청). 글꼴(fonts.googleapis/gstatic)만 예외로 캐시.
  */
-var VERSION = "tnk-cf1d3660e5";
+var VERSION = "tnk-09cf8df0f9";
 var SHELL = "shell-" + VERSION, DATA = "data-v1", EXT = "ext-v1";
 var SHELL_FILES = [
   "assets/ads/campaign.js?v=cfd703ed",
   "./", "index.html", "manifest.json", "offline.html", "assets/g-pages.css?v=1",
-  "assets/style.css?v=06aee89a", "assets/topics.js?v=709c8886", "assets/prefs.js?v=589d5ced", "assets/taste.js?v=788775b8", "assets/adsafe.js?v=f83c8d3e", "assets/app.js?v=4507384c", "assets/social.js?v=65281a00", "assets/ticker.js?v=17fd6ad7",
+  "assets/style.css?v=06aee89a", "assets/topics.js?v=709c8886", "assets/prefs.js?v=589d5ced", "assets/taste.js?v=788775b8", "assets/adsafe.js?v=f83c8d3e", "assets/app.js?v=4507384c", "assets/social.js?v=c0beb5da", "assets/ticker.js?v=17fd6ad7",
   "assets/nearby.css?v=411a136f", "assets/late.css?v=5bdd4232", "assets/nearby.js?v=31624c97", "assets/pages.js?v=b2893f9a", "assets/places.js?v=31ead31a", "assets/jobs.js?v=7177ec43",
   "assets/ads/massage/dragon-ad.css?v=c79f816c", "assets/ads/massage/dragon-ad.js?v=3f37924f", "assets/ads/massage/dragon.svg",
   "assets/modern.css?v=62ff3b52", "assets/modern.js?v=6c2f923e", "assets/g.css?v=1d2d67e7",
@@ -115,6 +115,7 @@ self.addEventListener("fetch", function (e) {
   if (/^data\/(korea|ticker)\.(json|js)$/.test(path)) { e.respondWith(networkFirst(req, DATA, dataKey(req.url), "no-store")); return; }
   if (/^data\//.test(path)) { e.respondWith(networkFirst(req, DATA, dataKey(req.url))); return; }
   if (path === "sw.js") return;
-  if (/^__\//.test(path)) return;   // (혹시 쓰게 될) Firebase 예약 경로 /__/auth 등은 가로채지 않음
+  if (/^__\//.test(path)) return;
+  if (/^auth\//.test(path)) return;   // 로그인(언어판 Worker /auth/line/*): 언제나 네트워크 — 상태(/status)를 캐시하면 켜진 뒤에도 버튼이 안 나옴   // (혹시 쓰게 될) Firebase 예약 경로 /__/auth 등은 가로채지 않음
   e.respondWith(cacheFirst(req));
 });
