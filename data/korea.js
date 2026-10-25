@@ -1,48 +1,36 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-26T00:05:44+07:00",
+ "updated_at": "2026-10-26T04:14:10+07:00",
  "items": [
   {
-   "title": "오세훈, ‘유죄’서 ‘무죄’로…‘명태균 진술 신빙성’에 뒤집혔다",
-   "source": "경향신문",
-   "time": "2026-10-25T19:30:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610252130035"
-  },
-  {
-   "title": "[내일날씨] 월요일 전국 흐림… ‘태풍 영향’ 제주·남해안에 많은 비",
-   "source": "천지일보",
-   "time": "2026-10-25T18:20:00+07:00",
-   "url": "https://www.newscj.com/news/articleView.html?idxno=3442968"
-  },
-  {
-   "title": "떠난 줄 알았던 ‘부캉이’... 이틀째 부산항 여객터미널서 포착 - 조선비즈",
-   "source": "Chosunbiz",
-   "time": "2026-10-25T16:46:00+07:00",
-   "url": "https://biz.chosun.com/topics/topics_social/2026/10/25/K3TLCSJWK5AXPGZWRS6IXLEUF4/"
-  },
-  {
-   "title": "김정은 ‘전례 없는’ 방중…시진핑 대신 서열 4위·차 타고 당일치기",
+   "title": "사법리스크 턴 오세훈 광폭행보…보수 ‘주도권 경쟁’ 격화",
    "source": "한겨레",
-   "time": "2026-10-25T20:11:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1284087.html"
+   "time": "2026-10-25T19:47:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/politics_general/1284089.html"
+  },
+  {
+   "title": "[뉴스9 날씨] 태풍 ‘참피’ 영향, 내일 아침까지 남부·제주 비바람",
+   "source": "KBS 뉴스",
+   "time": "2026-10-25T19:26:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8694599"
+  },
+  {
+   "title": "트럼프, 러 알래스카 LNG 투자 질문에 \"전쟁 끝나면 러와도 거래\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-25T11:58:18+07:00",
+   "url": "https://imnews.imbc.com/news/2026/world/article/6860544_36925.html"
+  },
+  {
+   "title": "김정은, 중국 단둥 전격 방문…북중 “전략적 협력 강화”",
+   "source": "VOA 한국어 홈페이지",
+   "time": "2026-10-25T21:35:55+07:00",
+   "url": "https://www.voakorea.com/a/8215017.html"
   },
   {
    "title": "'역삼 연쇄 방화' 프로파일러 투입...'살해 고의' 입증 주력",
    "source": "YTN",
-   "time": "2026-10-25T19:07:00+07:00",
-   "url": "https://www.ytn.co.kr/_ln/0103_202610252107576753"
-  },
-  {
-   "title": "국힘 주진우 \"지난 총선 개표 상황표·개표 결괏값 다른 투표소 41곳\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-25T12:03:04+07:00",
-   "url": "https://imnews.imbc.com/news/2026/politics/article/6860545_36911.html"
-  },
-  {
-   "title": "명품도 털렸는데…시위대 공격 피한 초콜릿 가게, 알고보니",
-   "source": "한국경제",
-   "time": "2026-10-25T19:22:45+07:00",
-   "url": "https://www.hankyung.com/article/2026102537537"
+   "time": "2026-10-25T21:16:00+07:00",
+   "url": "https://www.ytn.co.kr/_ln/0103_202610252316427049"
   },
   {
    "title": "법무장관에 ‘이재명의 변호사’ 박균택·양부남 검토 중",
@@ -51,16 +39,28 @@ window.KOREA_NEWS = {
    "url": "https://www.khan.co.kr/article/202610252201005"
   },
   {
-   "title": "한민수, 김민석에 \"신천지 근거 밝혀라\"… 정청래 \"덮는 자가 범인\"",
-   "source": "조선일보",
-   "time": "2026-10-25T14:18:18+07:00",
-   "url": "https://www.chosun.com/politics/assembly/2026/10/25/3BMMOIXIRNBCFMG7LCRSZAMKCM/"
+   "title": "與, 국힘 '조희대 국조' 비판에 \"재판지연 책임에도 사퇴 거부\"",
+   "source": "연합뉴스",
+   "time": "2026-10-25T15:07:13+07:00",
+   "url": "https://www.yna.co.kr/view/AKR20261025037600001"
   },
   {
-   "title": "또 ‘관계성 범죄’…옛 연인 스토킹·살해한 40대 남성 체포",
-   "source": "경향신문",
-   "time": "2026-10-25T19:30:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610252130045"
+   "title": "김정은 전격 방중으로 ‘사망설’ 또 허위 판명",
+   "source": "동아일보",
+   "time": "2026-10-26T02:30:00+07:00",
+   "url": "https://www.donga.com/news/Inter/article/all/20261026/134906043/2"
+  },
+  {
+   "title": "국수본→중수청→국수본… ‘금융권 AI 해킹’ 3주간 핑퐁",
+   "source": "조선일보",
+   "time": "2026-10-25T22:42:00+07:00",
+   "url": "https://www.chosun.com/national/national_general/2026/10/26/5CORCEUSIZBSNDWGRJM4OWMOVM/"
+  },
+  {
+   "title": "트럼프·오바마, 중간선거 막판 충돌‥\"네가 무능한 대통령\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-25T22:09:51+07:00",
+   "url": "https://imnews.imbc.com/news/2026/world/article/6860618_36925.html"
   }
  ]
 };
