@@ -160,7 +160,7 @@
     var st = mine ? statusTag(j.vis, j.exp) : "";
     return '<article class="bj-card"><div class="bj-top"><span class="bj-tag">' + esc(lab(KINDS, j.job)) + '</span><span class="bj-ok">✓ ' + esc(T("bjobs.verified", "확인된 회사")) + "</span>" + st + "</div>" +
       '<h3 class="bj-t">' + esc(j.title) + '</h3><p class="bj-sub">' + esc(j.co) + " · 📍 " + esc(provLab(j.prov)) + "</p>" +
-      '<dl class="bj-info"><div><dt>' + esc(T("bjobs.f_salary", "급여")) + "</dt><dd><b>" + esc(payText(j)) + "</b></dd></div>" +
+      '<dl class="bj-info"><div class="bj-wide"><dt>' + esc(T("bjobs.f_salary", "급여")) + "</dt><dd><b>" + esc(payText(j)) + "</b></dd></div>" +
       "<div><dt>" + esc(T("bjobs.f_type", "고용 형태")) + "</dt><dd>" + esc(lab(TYPES, j.type)) + "</dd></div>" +
       "<div><dt>" + esc(T("bjobs.f_koreq", "한국어")) + "</dt><dd>" + esc(koReq(j.ko)) + "</dd></div>" +
       "<div><dt>" + esc(T("bjobs.f_deadline", "마감")) + "</dt><dd>" + esc(dShort(j.dl)) + "</dd></div></dl>" +
@@ -282,7 +282,7 @@
       return '<article class="bj-card"><h3 class="bj-t">' + esc(e.name) + '</h3><dl class="bj-info bj-info--1">' +
         "<div><dt>DBD</dt><dd><code>" + esc(e.dbd) + "</code> " + (dbdOk(e.dbd) ? "✓" : "⚠") + "</dd></div>" +
         "<div><dt>" + esc(T("bjobs.f_person", "담당자")) + "</dt><dd>" + esc(e.person) + "</dd></div><div><dt>" + esc(T("bjobs.f_ccontact", "연락처")) + "</dt><dd>" + esc(e.contact) + "</dd></div>" +
-        "<div><dt>" + esc(T("bjobs.f_prov", "근무지")) + "</dt><dd>" + esc(provLab(e.prov)) + "</dd></div><div><dt>Web</dt><dd>" + esc(e.web || "-") + "</dd></div></dl>" +
+        "<div><dt>" + esc(T("bjobs.f_cprov", "회사 주소(도)")) + "</dt><dd>" + esc(provLab(e.prov)) + "</dd></div><div><dt>Web</dt><dd>" + esc(e.web || "-") + "</dd></div></dl>" +
         '<p class="bj-small"><a href="https://datawarehouse.dbd.go.th/" target="_blank" rel="noopener">' + esc(T("bjobs.dbd_check", "DBD 에서 사업자 확인 ↗")) + "</a></p>" +
         '<div class="bj-acts">' + admBtn("e-ok", e.id, T("bjobs.approve", "승인"), 1) + admBtn("e-no", e.id, T("bjobs.reject", "거절")) + "</div></article>";
     }).join("");
@@ -557,7 +557,7 @@
     ".bj-t{margin:0 0 2px;font-size:1.0625rem;line-height:1.4;font-weight:600}" +
     ".bj-sub{margin:0 0 8px;color:var(--bj-mut);font-size:.875rem}" +
     ".bj-info{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;margin:0 0 8px}.bj-info--1{grid-template-columns:1fr}" +
-    ".bj-info div{min-width:0}.bj-info dt{font-size:.75rem;color:var(--bj-mut)}.bj-info dd{margin:0;font-size:.875rem}" +
+    ".bj-info div{min-width:0}.bj-info .bj-wide{grid-column:1/-1}.bj-info dt{font-size:.75rem;color:var(--bj-mut)}.bj-info dd{margin:0;font-size:.875rem}" +
     ".bj-desc{margin:6px 0;font-size:.9062rem;line-height:1.6;white-space:pre-wrap}.bj-apply{margin:6px 0;font-size:.875rem;white-space:pre-wrap}" +
     ".bj-more summary{cursor:pointer;color:var(--bj-ac);font-size:.875rem;font-weight:600;min-height:32px;display:flex;align-items:center}" +
     ".bj-safe{margin:8px 0 0;padding:8px 10px;border-radius:10px;background:#fff4e6;color:#7a3e00;font-size:.8125rem}" +
