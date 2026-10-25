@@ -63,7 +63,8 @@
   }
   function evRow(e) {
     var k = KIND[e.k] || KIND.other, names = (e.a || []).map(function (id) { return BY[id] ? esc(BY[id].n) : ""; }).filter(Boolean).join(", ");
-    var title = e.bday ? T("fan.bday_of", "{n} 생일").replace("{n}", names) : esc(e.t || names);
+    var grp = e.bday && BY[(e.a || [])[0]] && (BY[e.a[0]].g || [])[0] && BY[BY[e.a[0]].g[0]] ? " (" + esc(BY[BY[e.a[0]].g[0]].n) + ")" : "";   // 생일: 활동명 (그룹)
+    var title = e.bday ? T("fan.bday_of", "{n} 생일").replace("{n}", names + grp) : esc(e.t || names);
     return '<li class="kf-ev' + (e.c === "TH" ? " kf-ev--th" : "") + '"><span class="kf-ev__k" aria-hidden="true">' + k[0] + '</span><div class="kf-ev__b"><b>' + title + "</b>" +
       '<small>' + esc(k[1]) + (e.tm ? " · " + esc(e.tm) : "") + (e.p ? " · " + esc(e.p) : "") + (e.c === "TH" ? ' · <em class="kf-th">' + esc(T("fan.in_th", "태국")) + "</em>" : "") + (e.official ? ' · <em class="kf-off">✔ ' + esc(T("fan.official", "공식 일정")) + "</em>" : "") +
       (names && !e.bday && e.t ? " · " + names : "") + "</small>" +
