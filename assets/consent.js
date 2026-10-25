@@ -55,5 +55,5 @@
   var v = get();
   // 고르기 전: 맞춤이 아닌 광고만(통계는 안 씀). 고르면 그대로 바뀜
   apply(v || "min");
-  if (!v) window.addEventListener("load", function () { setTimeout(open, 1200); });
+  if (!v || /[?&]consent=1(&|$)/.test(location.search)) window.addEventListener("load", function () { setTimeout(open, v ? 300 : 1200); });   // ?consent=1 = 다시 고르기(개인정보 쪽 링크)
 })();
