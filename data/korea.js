@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-25T19:37:28+07:00",
+ "updated_at": "2026-10-25T23:49:01+07:00",
  "items": [
   {
-   "title": "오세훈 2심 무죄에 정치 격랑…장동혁·한동훈은 뜨뜻미지근",
-   "source": "한겨레",
-   "time": "2026-10-25T16:54:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1283974.html"
-  },
-  {
-   "title": "오세훈 무죄로 거세지는 ‘조희대 탄핵론’에…김민석 “국정조사 포함 차근차근 진행”",
+   "title": "오세훈, ‘유죄’서 ‘무죄’로…‘명태균 진술 신빙성’에 뒤집혔다",
    "source": "경향신문",
-   "time": "2026-10-25T16:06:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610251806001"
+   "time": "2026-10-25T19:30:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610252130035"
   },
   {
-   "title": "'항상 사퇴 위기' 장동혁…국힘 최장수 당대표 신기록",
-   "source": "한국경제",
-   "time": "2026-10-25T16:39:06+07:00",
-   "url": "https://www.hankyung.com/article/2026102535621"
+   "title": "[내일날씨] 월요일 전국 흐림… ‘태풍 영향’ 제주·남해안에 많은 비",
+   "source": "천지일보",
+   "time": "2026-10-25T18:20:00+07:00",
+   "url": "https://www.newscj.com/news/articleView.html?idxno=3442968"
   },
   {
-   "title": "’부캉이’ 찍으려 항만 보안구역까지…30대 유튜버 해경 적발",
-   "source": "연합뉴스TV",
-   "time": "2026-10-25T16:04:00+07:00",
-   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261025180410tmM"
+   "title": "상어 '부캉이' 이틀 연속 부산항 국제여객터미널 인근서 관측",
+   "source": "연합뉴스",
+   "time": "2026-10-25T12:47:31+07:00",
+   "url": "https://www.yna.co.kr/view/AKR20261025029900051"
   },
   {
-   "title": "남해 바깥먼바다도 ’태풍경보’…역대 가장 늦은 태풍",
-   "source": "연합뉴스TV",
-   "time": "2026-10-25T13:45:00+07:00",
-   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261025154537EDO"
-  },
-  {
-   "title": "수로 떠난 ‘부캉이’, 부산항 국제여객터미널서 이틀 연속 관측",
-   "source": "조선일보",
-   "time": "2026-10-25T11:55:56+07:00",
-   "url": "https://www.chosun.com/national/regional/2026/10/25/FTYQQ4HF4VAAJGL6G253MRD7WE/"
-  },
-  {
-   "title": "“스마트워치까지 받았다가 반납”…스토킹 신고 여성, 10개월 뒤 참변",
-   "source": "매일경제",
-   "time": "2026-10-25T12:36:47+07:00",
-   "url": "https://www.mk.co.kr/news/society/12185049"
-  },
-  {
-   "title": "北 최고지도자 신변이상설 최소 5번째…김정은 방중으로 일단락",
-   "source": "동아일보",
-   "time": "2026-10-25T14:23:00+07:00",
-   "url": "https://www.donga.com/news/Politics/article/all/20261025/134903780/1"
-  },
-  {
-   "title": "김정은, 신압록강대교 건너 깜짝 단둥 방문…‘북-중 혈맹’ 강조 위한 행보",
+   "title": "김정은 ‘전례 없는’ 방중…시진핑 대신 서열 4위·차 타고 당일치기",
    "source": "한겨레",
-   "time": "2026-10-25T17:38:00+07:00",
+   "time": "2026-10-25T20:11:00+07:00",
    "url": "https://www.hani.co.kr/arti/politics/politics_general/1284087.html"
   },
   {
-   "title": "잠수교, 내일부터 차량 통행 중단…개통 50년 만에 ‘보행전용교’로",
-   "source": "한겨레",
-   "time": "2026-10-25T17:50:00+07:00",
-   "url": "https://www.hani.co.kr/arti/area/area_general/1284038.html"
+   "title": "국힘 주진우 \"지난 총선 개표 상황표·개표 결괏값 다른 투표소 41곳\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-25T12:03:04+07:00",
+   "url": "https://imnews.imbc.com/news/2026/politics/article/6860545_36911.html"
+  },
+  {
+   "title": "또 ‘관계성 범죄’…옛 연인 스토킹·살해한 40대 남성 체포",
+   "source": "경향신문",
+   "time": "2026-10-25T19:30:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610252130045"
+  },
+  {
+   "title": "법무장관에 ‘이재명의 변호사’ 박균택·양부남 검토 중",
+   "source": "경향신문",
+   "time": "2026-10-25T20:01:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610252201005"
+  },
+  {
+   "title": "명품도 털렸는데…시위대 공격 피한 초콜릿 가게, 알고보니",
+   "source": "한국경제",
+   "time": "2026-10-25T19:22:45+07:00",
+   "url": "https://www.hankyung.com/article/2026102537537"
+  },
+  {
+   "title": "한민수, 김민석에 \"신천지 근거 밝혀라\"… 정청래 \"덮는 자가 범인\"",
+   "source": "조선일보",
+   "time": "2026-10-25T14:18:18+07:00",
+   "url": "https://www.chosun.com/politics/assembly/2026/10/25/3BMMOIXIRNBCFMG7LCRSZAMKCM/"
+  },
+  {
+   "title": "여당 강경파 거센 ‘조희대 탄핵론’에…김민석 “국정조사부터”",
+   "source": "경향신문",
+   "time": "2026-10-25T19:40:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610252140005"
   }
  ]
 };
