@@ -202,7 +202,7 @@ def _fix_text(t, rate, kind):
 def fix_money(data):
     cur = SITE.get("currency", {})
     kind = {"krw_check": "krw", "cny_check": "cny", "vnd_check": "vnd", "thb_check": "thb"}.get(cur.get("check", "krw_check"), "krw")
-    pair = cur.get("pair", "THB_KRW")
+    pair = cur.get("money_pair") or cur.get("pair", "THB_KRW")   # money_pair: 시세 칩과 기사 금액 환산 쌍이 다를 때(태국어판 = 칩 THB_KRW · 기사 KRW_THB)
     rate = (data.get("fx") or {}).get(pair)
     for s in data["stories"]:
         for k in newslib.KO_FIELDS:
@@ -227,7 +227,7 @@ def to_bkk(iso):
 
 def fx_now():
     cur = SITE.get("currency", {})
-    pair = cur.get("pair", "THB_KRW")
+    pair = cur.get("money_pair") or cur.get("pair", "THB_KRW")   # money_pair: 시세 칩과 기사 금액 환산 쌍이 다를 때(태국어판 = 칩 THB_KRW · 기사 KRW_THB)
     try:
         t = json.loads((ROOT / "data" / "ticker.json").read_text(encoding="utf-8"))
         a, b = pair.split("_")
@@ -361,7 +361,8 @@ def main():
         print("기사 4건 미만 — 판 안 만듦"); return 3
     fx = fx_now()
     cur = SITE.get("currency", {})
-    fx_line = ("판 환율: %s = %s" % (cur.get("pair", "THB_KRW"), fx[cur.get("pair", "THB_KRW")])) if fx else ""
+    _mp = cur.get("money_pair") or cur.get("pair", "THB_KRW")
+    fx_line = ("판 환율: %s = %s" % (_mp, fx[_mp])) if fx else ""
     prompt = build_prompt(a.eid, items, fx_line, a.select)
     if a.dry:
         print("DRY — 지시문 %d자(제미나이 안 부름)" % len(prompt)); return 0

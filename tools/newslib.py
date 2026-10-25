@@ -56,7 +56,7 @@ _BL = None
 #   issue         : {id, title} — 이어지는 이슈(tools/issues.json 등록부의 id 만)   quick_replies[] : 추천 댓글 3~4개
 IMPACTS = ["비자·체류", "환율·물가", "교통·사고", "치안", "날씨·재해"]
 if LANG != "ko":
-    IMPACTS = list(SITE.get("impacts") or IMPACTS)
+    IMPACTS = list(SITE["impacts"]) if SITE.get("impacts") is not None else IMPACTS   # 빈 목록 = 영향 태그 안 씀(태국어판 kstar)
 ISSUES_FILE = ROOT / "tools" / "issues.json"
 ISSUE_ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{2,60}$")
 THAI_RE = re.compile(r"[\u0E00-\u0E7F]")
