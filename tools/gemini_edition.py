@@ -85,6 +85,36 @@ KO_WORD = "ko_word" in (SITE.get("story_extras") or [])
 KO_WORD_SCHEMA = ',"ko_word":{"ko":"한국어 낱말(한글)","th":"그 낱말의 한국어 발음을 화면 언어 글자로","mean":"화면 언어로 뜻 한 줄"}'
 KO_WORD_RULE = ("- ko_word: 그 기사와 관련된 한국어 낱말·짧은 표현 하나(한글 12자 이하). 연예 용어·팬덤 표현 우선(예: 컴백, 음방, 직캠, 팬미팅, 최애). "
                 "th 에는 한국어 발음을 화면 언어 글자로(한글 금지), mean 에는 화면 언어로 뜻(한글 금지). 마땅한 낱말이 없으면 ko 를 빈 문자열로.\n")
+# 일정 뽑기(2026-10-25, KSTAR 일정 캘린더): story_extras 에 "events" 인 판만. 기사에 날짜가 분명히 적힌 앞으로의 일정만
+EVENTS = "events" in (SITE.get("story_extras") or [])
+EVENT_KINDS = ("concert", "fanmeet", "ticket", "comeback", "release", "award", "tv", "drama", "other")
+EVENTS_SCHEMA = (',"events":[{"date":"YYYY-MM-DD","time":"HH:MM 또는 빈 값","kind":"%s","artists":["영문 이름"],'
+                 '"title":"화면 언어로 짧은 제목","place":"장소(없으면 빈 값)","country":"TH|KR|JP|… 두 글자"}]' % "|".join(EVENT_KINDS))
+EVENTS_RULE = ("- events: 기사 원문에 날짜가 분명히 적힌 앞으로의 일정만(공연·팬미팅·티켓 오픈·컴백·발매·시상식·방송·드라마 공개). "
+               "날짜를 짐작하거나 지난 일을 넣지 않는다. 연도가 없으면 판 날짜 기준 가장 가까운 앞날. 없으면 빈 배열.\n")
+DATE_RE = re.compile(r"^20\d\d-[01]\d-[0-3]\d$")
+
+
+def events_of(v, eid):
+    out = []
+    for e in (v if isinstance(v, list) else [])[:5]:
+        if not isinstance(e, dict):
+            continue
+        d, k = str(e.get("date") or ""), str(e.get("kind") or "other")
+        if not DATE_RE.match(d) or d < eid[:10] or k not in EVENT_KINDS:
+            continue
+        tm = str(e.get("time") or "")
+        title = str(e.get("title") or "").strip()[:80]
+        if not title or newslib.HANGUL_RE.search(title):
+            continue
+        out.append(dict(d=d, tm=tm if re.match(r"^[0-2]\d:[0-5]\d$", tm) else "", k=k, an=[str(x).strip()[:40] for x in (e.get("artists") or []) if str(x).strip()][:6],
+                        t=title, p=str(e.get("place") or "").strip()[:60], c=str(e.get("country") or "").upper()[:2]))
+    return out
+
+
+# 아티스트 이름표(2026-10-25, KSTAR): 판 설정 fan 이 있고 data/artists.json 등록부가 있으면 기사마다 artists=[{id,n}]
+import fanlib  # noqa: E402
+FAN_REG = fanlib.load_registry(ROOT) if SITE.get("fan") else None
 HANGUL_ONLY_RE = re.compile(r"^[\uAC00-\uD7AF0-9 ·\-]{1,12}$")
 
 
@@ -122,9 +152,11 @@ def build_prompt(eid, items, fx_line, select=0):
         "- briefing 4~6줄, 각 줄은 서로 다른 기사. highlights 는 가장 중요한 기사 3개(keep=true 인 것).\n"
         "- 원문 본문이 비어 있으면 memo 와 제목에 있는 사실만 쓰고, 그것도 부족하면 keep=false.\n"
         % (reader, lang_name, eid, fx_line, rules_text(), topics_text(), " / ".join(newslib.IMPACTS)))
-    head = head.replace('"]%s}],', '"]' + (KO_WORD_SCHEMA if KO_WORD else "") + '}],', 1)
+    head = head.replace('"]%s}],', '"]' + (KO_WORD_SCHEMA if KO_WORD else "") + (EVENTS_SCHEMA if EVENTS else "") + '}],', 1)
     if KO_WORD:
         head += KO_WORD_RULE
+    if EVENTS:
+        head += EVENTS_RULE
     if select:
         head += ("- [고르기] 아래 후보 %d건 중 독자에게 뉴스 가치가 가장 높은 %d~%d건을 keep=true(좋은 기사가 그만큼 없을 때만 줄임. 사건·사고·정책·경제·비자·생활 정보·한국 관련 우선, "
                  "연성·홍보성 기사는 뒤로, 한 매체에 몰리지 않게). 나머지는 keep=false, drop_reason=\"선택 안 함\".\n" % (len(items), max(4, select - 2), select))
@@ -285,6 +317,12 @@ def assemble(eid, items, out):
             kw = ko_word(s.get("ko_word"))
             if kw:
                 st["ko_word"] = kw
+        if EVENTS:
+            ev = events_of(s.get("events"), eid)
+            if ev:
+                st["events"] = ev
+        if FAN_REG:
+            fanlib.tag_story(st, FAN_REG)
         if len(st["quick_replies"]) < 3:
             st["quick_replies"] = []
         if len(st["tags"]) < 2:
