@@ -96,7 +96,12 @@
     if ($("drawerAcct")) renderAccountBox($("drawerAcct"));
     var n = $("storeNote"); if (n) n.textContent = user ? (viaLine() ? TNI("login.note_line", "LINE 계정에 저장돼 다른 기기에서도 이어져요.") : TNI("social.k28dd65e", "구글 계정에 저장돼 다른 기기에서도 이어져요."))
       : lineOn ? TNI("login.note_out", "설정과 취향은 이 기기(브라우저)에만 저장돼요. 구글이나 LINE으로 로그인하면 다른 기기에서도 이어져요(선택).") : TNI("social.k4b1291b", "설정과 취향은 이 기기(브라우저)에만 저장돼요. 구글로 로그인하면 다른 기기에서도 이어져요(선택).");
-    if ($("acctMenu")) $("acctMenu").innerHTML = menuHTML();
+    var am = $("acctMenu");   // 로그인 방법 고르기 창(로그아웃 상태)과 내 계정 메뉴(로그인 상태)가 같은 자리를 씀
+    if (am) {
+      var chooser = am.classList.contains("acct-menu--login");
+      if (user && !chooser) am.innerHTML = menuHTML();
+      else if (user || !chooser || !lineOn) closeMenu();   // 로그인됨·로그아웃된 계정 메뉴·LINE 꺼짐 → 닫기, 로그아웃 상태 고르기 창은 그대로
+    }
     document.querySelectorAll("[data-cmts].is-mounted").forEach(function (c) { renderComments(c); });
     if (window.TNPages && /^(admin|approve)$/.test(TNPages.current() || "")) TNPages.refresh();
   }
@@ -138,6 +143,7 @@
   function lineGo() {
     closeMenu();
     toast(TNI("login.line_wait", "LINE 로그인 화면으로 이동 중…"), 2000);
+    try { sessionStorage.setItem("tnk.line.back", /^#(line=|lerr=)/.test(location.hash) ? "" : location.hash); } catch (e) {}   // 돌아오면 보던 기사·페이지로
     location.href = LINE_START + "?r=" + encodeURIComponent(location.pathname + location.search);
   }
   function lineFinish() {
@@ -500,7 +506,11 @@
   // LINE 에서 돌아옴: #line=1(성공) 또는 #lerr=…(취소·실패) — 주소에서 바로 지움
   var lh = LINE_START ? location.hash : "";
   if (lh === "#line=1" || /^#lerr=\w+$/.test(lh)) {
-    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+    var back = ""; try { back = sessionStorage.getItem("tnk.line.back") || ""; sessionStorage.removeItem("tnk.line.back"); } catch (e) {}
+    if (!/^#[\w\/-]*$/.test(back)) back = "";
+    try { history.replaceState(null, "", location.pathname + location.search + back); } catch (e) {}   // 기사(#id)·페이지(#jobs 등)는 app.js·pages.js 가 이 주소로 다시 엶
+    // 판이 이미 그려졌으면(app.js 가 #line=1 을 본 뒤) 기사를 직접 다시 엶. 아직이면 app.js 가 그릴 때 이 주소로 엶. 페이지(#jobs 등)는 pages.js 가 등록할 때 엶
+    if (back) setTimeout(function () { var id = back.slice(1); if (window.TNApp && TNApp.edId && TNApp.edId() && !(window.TNPages && TNPages.has(id))) TNApp.openStory(id); }, 0);
     if (lh === "#line=1") lineFinish();
     else setTimeout(function () { toast(lineErr(lh.slice(6)), 4000); }, 600);
   }
