@@ -33,6 +33,35 @@ PR #2(디자인) 병합 대기: 기본 라일락(B) + 휴대폰 다크 모드면
    - [AI추천 안전 규칙 — 맥스님 확인 필요] 한국 현지 근무 공고 금지(태국인 불법 취업·인신매매 피해가 실제로 많음), '해외 고수입·마사지·유흥' 류 차단, 급여 미표기 금지, 신고 버튼, 의심 공고는 운영자 확인 전 숨김. 게시판 범위는 '한국 관련 일자리(한국 회사·통역·K-뷰티 매장 등)'로 한정 추천.
 3. 이용약관·개인정보 쪽에 게시판·로그인 내용 추가(태국 PDPA: 수집 목적·보관 기간·삭제 요청).
 
+## 10-25 16:00~ KSTAR 기획·개발 (새 대화방, Claude) — 다음 Claude 는 여기부터
+맥스님 결정(15:55): "할 수 있는 건 바로, 승인 필요한 것만 기다림. 나머지는 AI 추천으로 먼저 개발 → 실물 보고 이야기. 제미나이 딥리서치 결과가 오면 빼고 더함."
+(15:37 '기획 확정 전 동결' 지시는 15:55 지시로 풀림.) 기획 52개 항목은 대화방에 있음. 확정: 앱은 '준비되는 대로', 주소는 베타 동안 kstar.pmaxone.com → 정식 때 전용 도메인,
+애드센스 붙이기, 미디어킷(17), 측정(19), 공식 계정 가입(맥스님), 팬클럽 생일 프로젝트(24), 최애·아티스트·일정(27~29 + '공식 일정 모으기'), 한국어 한마디(30),
+유튜브 공식 영상·공식 SNS 번갈아(32), 하단 탭바(35), 구인구직 기본 세팅(37~), 앱 준비안.
+
+### PR 줄(병합 순서대로, 전부 맥스님 승인 필요 — 이 세션은 main 병합·배포가 자동 판정에 막힘)
+- tnews(thai-news-kr): PR #5 `claude/line-login`(LINE 로그인 공유 코드) → `claude/kstar-features`(아래 기능, 아직 PR 안 만듦)
+- kstar-th: PR #2 `claude/kstar-skin`(디자인 + 머리글 폭 고침) → PR #3 `claude/line-login`(PR #2 위) → `claude/kstar-features`(PR #3 위, 아직 PR 안 만듦)
+- 구인구직은 별도 작업자가 `claude/kstar-jobs`(두 저장소, features 위)에서 진행 중이었음 — 결과 확인 후 features 에 합칠 것
+
+### 만든 것(공유 코드는 전부 판 설정 스위치 — 한국판 화면·프롬프트 그대로 확인함)
+- LINE 로그인: tools/cloudflare/line_auth.mjs(Worker /auth/line/*), Worker 비밀값 3개 들어가면 자동으로 버튼 켜짐(/auth/line/status)
+- date_order·date_long(태국식 날짜), tabbar(assets/tabbar.js), story_extras ko_word·events(gemini_edition), 공식 영상·SNS 미리보기(app.js mediaHTML, s.media),
+  consent.js(쿠키 동의 + GA4 + 애드센스, 판 설정 ga4·adsense.pub 있을 때만), kfan.js(최애·아티스트·일정), tools/fanlib.py(이름표)
+- KSTAR: site/fan.th.json(첫 50팀, AI 선택), pipeline/refresh_artists.py(위키데이터 7일 1회), pipeline/build_fan.py(data/artists.json·schedule.json), ops/APP_PLAN.md
+- 아직: s.media 채우기(유튜브 공식 채널 RSS → 기사 아티스트와 맞춤, 출처 조사 결과 기다림), 팬클럽 생일 프로젝트 등록(Firestore — 구인구직 작업의 fb.js 함수와 합친 뒤),
+  미디어킷 페이지·공식 계정 준비물(별도 작업자 결과 → kstar 에 넣기), ads.txt(애드센스 주소 규칙 확인 뒤)
+
+### 맥스님 몫(로그인·결제) — PC 앞에 앉으면 로그인만, 클릭은 Claude 가 브라우저로
+1. 애드센스 신청 → pub-ID / 2. GA4 속성 → G-ID / 3. 공식 계정 가입(X·LINE OA·Facebook·TikTok)
+4. LINE Developers 채널(콜백 https://kstar.pmaxone.com/auth/line/callback, 공개 상태로) + Firebase 서비스 계정 키 → Cloudflare kstar-th Worker 비밀값 LINE_CHANNEL_ID·LINE_CHANNEL_SECRET·FIREBASE_SA_JSON
+5. Firebase: 승인된 도메인 kstar.pmaxone.com, firestore.rules 게시, config/admins_ks / 6. 앱: 전용 도메인, D-U-N-S, 개발자 등록(ops/APP_PLAN.md)
+
+### 실패 기록(반복 금지)
+- KSTAR 머리글이 휴대폰에서 486px(긴 태국어 날짜 nowrap) → skin 에서 줄바꿈. 새 화면은 언제나 390px 폭 검사.
+- 이 샌드박스는 gstatic·위키데이터·유튜브에 못 붙음 → 로그인은 가짜 응답으로, 위키데이터는 브랜치 워크플로(verify=true, deploy=false)로 시험.
+- AskUserQuestion 은 답 올 때까지 멈춤 → 질문은 일반 메시지 + 추천안으로 진행(10-25 규칙).
+
 ## 남은 것 (순서대로)
 1. ~~**KSTAR(`P-Max168/kstar-th`) 재구축**~~ (위: PR #1 병합 대기) — 베트남판과 같은 방식. 맥스님 승인(10-25): 같이 고침, 파타야 전용 내용은 틀만 두고 숨김, 발행은 코드+제미나이 자동 유지.
    - 다른 점: 화면 언어가 **태국어**. `i18n/th.json` 을 새로 만들어야 함(중국어판 `i18n/zh.json` 범위와 같게 약 630개 문구 — jobs·places·관리자 pages 는 숨김이라 제외 가능).
