@@ -86,6 +86,9 @@ def patch_index(t, c, i18n):
     t = re.sub(r'<script type="application/ld\+json" id="tn-ld">.*?</script>(<!--.*?-->)?',
                lambda _: '<script type="application/ld+json" id="tn-ld">%s</script>' % ldj, t, count=1, flags=re.S)
     t = re.sub(r'(<h1 class="sr-only" id="tn-h1">).*?(</h1>)', lambda m: m.group(1) + html.escape(seo.get("h1") or title, quote=False) + m.group(2), t, count=1, flags=re.S)
+    # 검색 차단 판(site/<lang>.json noindex=true, 2026-10-25 Claude — 베트남판·kstar 공개 승인 전): robots 메타를 noindex 로
+    if c.get("noindex"):
+        t = re.sub(r'<meta name="robots" content="[^"]*">', '<meta name="robots" content="noindex, nofollow, noarchive">', t)
     # data/site.js — 앱 코드보다 먼저(topics.js 가 TN_SITE 를 읽음). 한 번만
     if 'src="data/site.js"' not in t:
         t = t.replace('<script src="data/index.js"></script>', '<script src="data/site.js"></script>\n<script src="data/index.js"></script>', 1)
