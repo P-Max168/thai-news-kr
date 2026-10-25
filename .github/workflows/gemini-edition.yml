@@ -48,6 +48,10 @@ jobs:
           else id=$(git diff --name-only HEAD~1 HEAD -- 'ops/picks/*.json' | tail -1 | sed -E 's#ops/picks/(.*)\.json#\1#'); fi
           [ -n "$id" ] && [ -f "ops/picks/$id.json" ] || { echo "picks 파일 없음: $id"; exit 1; }
           echo "id=$id" >> "$GITHUB_OUTPUT"; echo "판: $id"
+      - name: 담당 표시(그록) — Claude 가 이미 비상 발행을 시작했으면 HOLD 로 멈춤(중복 방지)
+        run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 tools/edition_claim.py claim grok "${{ steps.ed.outputs.id }}"
       - name: 후보 목록(candidates 브랜치) — 그록이 주소만 적어도 제목·매체·시각을 채우는 데 씀
         continue-on-error: true
         run: |

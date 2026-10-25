@@ -37,7 +37,7 @@
 | 추가 언어 번역 | 처음엔 그록이 같이. 측정 결과 보고 GPT로 나눌지 결정 |
 | 한국·베트남 출처 판 | GPT 후보(그 판을 열 때 결정) |
 | Claude | 모든 판 비상 발행 + 개발 |
-| 제미니 | 자동 흐름 제외(예약 작업은 결과 저장 불가, 10-23 확인) → **10-25 맥스님 결정: 모든 채널 번역을 Gemini API(코드에서 호출)로. 구현 전. ops/GROK_HANDOFF.md** |
+| 제미니 | **10-25 맥스님 결정: 모든 채널 번역을 Gemini API(코드에서 호출)로.** 구현 완료(10-25 Claude): `tools/gemini_edition.py` + `.github/workflows/gemini-edition.yml`(그록이 `ops/picks/<판 id>.json` 을 올리면 원고·검증·배포). 베트남판은 코드가 고르고 제미나이가 원고(완전 자동). 키: 저장소 Secret `GEMINI_API_KEY` |
 | 맥스님 | 승인과 결정 |
 
 - 고르기와 첫 언어 원고는 같은 AI가 한다(둘 다 원문을 읽어야 함 → 나누면 원문을 두 번 읽어 토큰 2배).
@@ -84,7 +84,8 @@
 ### 4단계: 한국 출처 판(태국어·베트남어) / 5단계: 베트남 출처 판
 
 ## 7. 맥스님 결정 대기
-- 2026-10-25 결정: 모든 채널 발행을 새 그록봇(SuperGrok 새 계정)에 넘김, 번역은 전부 Gemini API. 인수인계 문서 `ops/GROK_HANDOFF.md`. 남은 것: Gemini 번역 단계 구현(Claude), GEMINI_API_KEY 등록(맥스님), 새 그록 실행 능력 점검.
+- 2026-10-25 결정: 모든 채널 발행을 새 그록봇(SuperGrok 새 계정)에 넘김, 번역은 전부 Gemini API. 인수인계 문서 `ops/GROK_HANDOFF.md`(v2: 그록은 고르기+picks 파일만). 남은 것: **GEMINI_API_KEY 를 thai-news-kr·thai-news-zh Secret 에 등록(맥스님)**, 새 그록 점검(파일 올리기·예약 작업).
+- 2026-10-25 맥스님: 베트남판·kstar 는 tnews 와 디자인·기능이 같아야 함(내용만 변경) → 베트남판을 tnews 엔진(sync_core + site/vn.json)으로 재구축(Claude). 파타야 전용 메뉴(내 주변·구인·렌트)·광고는 틀은 두고 숨김. 베트남판·kstar 발행은 코드+제미나이 자동 유지, 그록은 감시만. kstar 재구축은 다음 차례(Claude).
 - 2026-10-24 사전 승인·Claude 작업지시서: vn·kstar는 임시로 별도 저장소(P-Max168/vn-news-kr, P-Max168/kstar-th), 템플릿화 때 합침. Gemini API로 요약·번역, 검색 공개 승인 전 noindex 유지. 기존 tnews 발행·담당 전환은 변경하지 않음.
 - (2단계) 판별 주소와 Cloudflare 이전
 

@@ -79,7 +79,7 @@ def topics_text():
     return "\n".join("- %s: %s" % (k, v) for k, v in newslib.TOPICS.items())
 
 
-def build_prompt(eid, items, fx_line):
+def build_prompt(eid, items, fx_line, select=0):
     lang_name = {"ko": "한국어", "vn": "한국어", "zh": "简体中文", "th": "ภาษาไทย"}.get(LANG, "한국어")
     reader = SITE.get("reader") or {"ko": "태국(파타야 등)에 사는 한국인", "vn": "베트남(호치민·하노이 등)에 사는 한국인",
                                      "zh": "在泰国生活的中国人", "th": "คนไทย"}.get(LANG, "")
@@ -98,10 +98,13 @@ def build_prompt(eid, items, fx_line):
         '"highlights":["key","key","key"]}\n'
         "- keep=false: 원문에서 확인 안 되는 기사, 성인·선정적 내용, 같은 사건 중복이면 false 와 drop_reason.\n"
         "- summary 2~4문단. 원문 문장을 그대로 옮기지 말고 다시 쓴다. 원문에 없는 사실·숫자·인용·반응을 만들지 않는다.\n"
-        "- 금액은 현지 통화로 쓰고(원문 숫자 그대로, 반올림 정수) 원화 환산은 쓰지 마라 — 코드가 판 환율로 붙인다.\n"
+        "- 금액은 현지 통화로 쓰고(원문 숫자 그대로, 반올림 정수) 독자 통화 환산(원·위안)은 쓰지 마라 — 코드가 판 환율로 붙인다.\n"
         "- briefing 4~6줄, 각 줄은 서로 다른 기사. highlights 는 가장 중요한 기사 3개(keep=true 인 것).\n"
         "- 원문 본문이 비어 있으면 memo 와 제목에 있는 사실만 쓰고, 그것도 부족하면 keep=false.\n"
         % (reader, lang_name, eid, fx_line, rules_text(), topics_text(), " / ".join(newslib.IMPACTS)))
+    if select:
+        head += ("- [고르기] 아래 후보 %d건 중 독자에게 뉴스 가치가 가장 높은 최대 %d건만 keep=true(사건·사고·정책·경제·비자·한국 관련 우선, "
+                 "연성·홍보성 기사는 뒤로, 한 매체에 몰리지 않게). 나머지는 keep=false, drop_reason=\"선택 안 함\".\n" % (len(items), select))
     body = json.dumps([{k: v for k, v in it.items() if k in ("key", "source", "title", "published", "memo", "text")} for it in items],
                       ensure_ascii=False)
     return head + "\n[기사들]\n" + body
@@ -306,6 +309,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("eid"); ap.add_argument("picks"); ap.add_argument("--dry", action="store_true"); ap.add_argument("--model", default=MODEL)
     ap.add_argument("--candidates", default=str(ROOT / "drafts" / "candidates" / "latest.json"))
+    ap.add_argument("--select", type=int, default=0, help="후보가 많을 때 제미나이가 최대 N건만 고르게(베트남판 자동 발행용). 그록이 고른 판은 0")
     a = ap.parse_args()
     assert newslib.ID_RE.match(a.eid), "판 id 형식: YYYY-MM-DD-am|pm|md"
     if (ROOT / "data" / (a.eid + ".json")).exists():
@@ -348,7 +352,7 @@ def main():
     fx = fx_now()
     cur = SITE.get("currency", {})
     fx_line = ("판 환율: %s = %s" % (cur.get("pair", "THB_KRW"), fx[cur.get("pair", "THB_KRW")])) if fx else ""
-    prompt = build_prompt(a.eid, items, fx_line)
+    prompt = build_prompt(a.eid, items, fx_line, a.select)
     if a.dry:
         print("DRY — 지시문 %d자(제미나이 안 부름)" % len(prompt)); return 0
     key = os.environ.get("GEMINI_API_KEY", "").strip()
