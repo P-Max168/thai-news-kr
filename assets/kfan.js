@@ -65,7 +65,7 @@
     var k = KIND[e.k] || KIND.other, names = (e.a || []).map(function (id) { return BY[id] ? esc(BY[id].n) : ""; }).filter(Boolean).join(", ");
     var title = e.bday ? T("fan.bday_of", "{n} 생일").replace("{n}", names) : esc(e.t || names);
     return '<li class="kf-ev' + (e.c === "TH" ? " kf-ev--th" : "") + '"><span class="kf-ev__k" aria-hidden="true">' + k[0] + '</span><div class="kf-ev__b"><b>' + title + "</b>" +
-      '<small>' + esc(k[1]) + (e.tm ? " · " + esc(e.tm) : "") + (e.p ? " · " + esc(e.p) : "") + (e.c === "TH" ? ' · <em class="kf-th">' + esc(T("fan.in_th", "태국")) + "</em>" : "") +
+      '<small>' + esc(k[1]) + (e.tm ? " · " + esc(e.tm) : "") + (e.p ? " · " + esc(e.p) : "") + (e.c === "TH" ? ' · <em class="kf-th">' + esc(T("fan.in_th", "태국")) + "</em>" : "") + (e.official ? ' · <em class="kf-off">✔ ' + esc(T("fan.official", "공식 일정")) + "</em>" : "") +
       (names && !e.bday && e.t ? " · " + names : "") + "</small>" +
       (e.u && /^https:\/\//.test(e.u) ? '<a class="kf-ev__src" href="' + esc(e.u) + '" target="_blank" rel="noopener">' + esc(T("fan.source", "출처")) + " ↗</a>" : "") + "</div></li>";
   }
@@ -151,7 +151,7 @@
     ".kf-day{margin:16px 0 6px;font-size:.8125rem;color:var(--kac,#0b2a4a)}" +
     ".kf-ev{display:flex;gap:10px;padding:10px 12px;margin-bottom:6px;border-radius:12px;background:var(--kcard,#fff);border:1px solid var(--kline,#eee)}" +
     ".kf-ev--th{border-color:var(--kac,#0b2a4a)}.kf-ev__k{font-size:1.25rem;line-height:1.3}.kf-ev__b{min-width:0;display:flex;flex-direction:column;gap:2px}" +
-    ".kf-ev__b small{color:var(--kmuted,#6b7280)}.kf-th{font-style:normal;font-weight:700;color:var(--kac,#0b2a4a)}.kf-ev__src{font-size:.75rem;color:var(--kac,#0b2a4a)}" +
+    ".kf-ev__b small{color:var(--kmuted,#6b7280)}.kf-th,.kf-off{font-style:normal;font-weight:700;color:var(--kac,#0b2a4a)}.kf-ev__src{font-size:.75rem;color:var(--kac,#0b2a4a)}" +
     ".kf-back{border:0;background:none;color:var(--kac,#0b2a4a);font:inherit;font-weight:700;padding:4px 0;cursor:pointer}" +
     ".kf-hero{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin:8px 0}.kf-hero h3{margin:0;font-size:1.375rem}.kf-ko,.kf-meta{margin:4px 0 0;color:var(--kmuted,#6b7280)}" +
     ".kf-chips{display:flex;flex-wrap:wrap;gap:6px}.kf-chip{border:1px solid var(--kline,#d0d5dd);background:var(--kchip,#f3f4f6);color:var(--kink,#111);border-radius:999px;padding:5px 12px;font:inherit;font-size:.8125rem;cursor:pointer}" +
