@@ -133,6 +133,8 @@ def patch_index(t, c, i18n):
     t = re.sub(r'<(\w+)\b[^>]*\sdata-i18n-aria="([\w.]+)"[^>]*>', repa, t)
     # aria-label 의 브랜드
     t = t.replace('aria-label="태국 뉴스 한눈에 홈"', 'aria-label="%s"' % _attr(f.get("brand_home", c["brand"])))
+    # 한국판 '지난 뉴스판' 링크 묶음(tools/seo.py home_edition_links)은 언어판에선 비움 — 한국판 판 목록·한국어 글이 따라오지 않게(2026-10-25)
+    t = re.sub(r"(<!-- edition-links:start -->).*?(<!-- edition-links:end -->)", r"\1\2", t, count=1, flags=re.S)
     return t
 
 
