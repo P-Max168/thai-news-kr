@@ -59,6 +59,9 @@ def _attr(s):
     return html.escape(s, quote=True)
 
 
+ROOT_FOR_SKIN = []
+
+
 def patch_index(t, c, i18n):
     f = flat(i18n)
     seo = c.get("seo") or {}
@@ -133,6 +136,14 @@ def patch_index(t, c, i18n):
     t = re.sub(r'<(\w+)\b[^>]*\sdata-i18n-aria="([\w.]+)"[^>]*>', repa, t)
     # aria-label 의 브랜드
     t = t.replace('aria-label="태국 뉴스 한눈에 홈"', 'aria-label="%s"' % _attr(f.get("brand_home", c["brand"])))
+    # 판 전용 겉모습(skin, 2026-10-25 — KSTAR): site/<lang>.json skin_css 가 있으면 배포본 assets/skin.css 를 맨 뒤에 연결(엔진·기능은 그대로, 색·글꼴만)
+    sk = c.get("skin_css")
+    t = re.sub(r'\n?<link rel="stylesheet" href="assets/skin\.css[^"]*" id="tn-skin">', "", t)
+    if sk:
+        import hashlib
+        sp = ROOT_FOR_SKIN[0] / sk if ROOT_FOR_SKIN else None
+        v = hashlib.sha256(sp.read_bytes()).hexdigest()[:8] if sp and sp.exists() else "1"
+        t = t.replace("</body>", '<link rel="stylesheet" href="assets/skin.css?v=%s" id="tn-skin">\n</body>' % v, 1)
     # 한국판 '지난 뉴스판' 링크 묶음(tools/seo.py home_edition_links)은 언어판에선 비움 — 한국판 판 목록·한국어 글이 따라오지 않게(2026-10-25)
     t = re.sub(r"(<!-- edition-links:start -->).*?(<!-- edition-links:end -->)", r"\1\2", t, count=1, flags=re.S)
     return t
@@ -154,6 +165,7 @@ def main():
     ap.add_argument("--check", action="store_true", help="파일을 쓰지 않고 바뀔지만 출력")
     a = ap.parse_args()
     root = pathlib.Path(a.root).resolve()
+    ROOT_FOR_SKIN[:] = [root]
     lg = siteconf.lang(root)
     if lg == "ko":
         print("site_build: 한국판(ko) — 건너뜀(화면은 index.html 그대로)")
