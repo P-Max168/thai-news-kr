@@ -1,0 +1,25 @@
+{
+ "_about": "뉴스 채널 목록(2026-10-24). 현황판(ops/status.html)과 운영 문서가 읽는다. 새 채널 = 여기 한 줄 + 채널 저장소(site/<lang>.json). 시각은 방콕. due = 이 시각까지 판이 없으면 '늦음'.",
+ "channels": [
+  {
+   "id": "kr", "name": "태국 뉴스 한눈에 (한국어)", "site": "https://tnews.pmaxone.com", "repo": "P-Max168/thai-news-kr",
+   "status": "live", "publisher": "그록(정기) · Claude(비상)",
+   "editions": [ {"slot": "am", "due": "08:38"}, {"slot": "pm", "due": "19:38"} ],
+   "candidates": {"repo": "P-Max168/thai-news-kr", "branch": "candidates", "max_age_h": 14}
+  },
+  {
+   "id": "zh", "name": "泰国新闻速览 (중국어)", "site": "https://zh.pmaxone.com", "repo": "P-Max168/thai-news-zh",
+   "status": "live", "publisher": "Claude(정기 담당 없음)",
+   "editions": [ {"slot": "md", "due": "14:30"} ],
+   "candidates": {"repo": "P-Max168/thai-news-zh", "branch": "candidates", "max_age_h": 26, "fallback": {"repo": "P-Max168/thai-news-kr", "branch": "candidates"}}
+  },
+  {
+   "id": "vn", "name": "베트남 뉴스 (한국어)", "site": "https://vn.pmaxone.com", "repo": "",
+   "status": "planned", "publisher": "미정", "editions": []
+  },
+  {
+   "id": "kstar", "name": "한국 연예 (태국어)", "site": "https://kstar.pmaxone.com", "repo": "",
+   "status": "planned", "publisher": "미정", "editions": []
+  }
+ ]
+}

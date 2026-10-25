@@ -7,5 +7,6 @@ Disallow: /backups/
 Disallow: /screenshots/
 Disallow: /tools/
 Disallow: /collab/
+Disallow: /ops/
 
 Sitemap: https://tnews.pmaxone.com/sitemap.xml
