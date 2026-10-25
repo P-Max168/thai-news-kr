@@ -1,0 +1,73 @@
+# ✍️ 제미나이 판 만들기(2026-10-25 Claude, 맥스님 결정 '발행은 그록, 번역은 전부 Gemini API').
+# 그록은 기사를 '고르기'만 해서 ops/picks/<판 id>.json 을 main 에 올린다(ops/GROK_HANDOFF.md 4절) → 이 워크플로가 바로 돈다:
+#   후보 목록 받기 → tools/gemini_edition.py(원문 본문 + 제미나이 1회 호출 → 검증·저장) → share_kit(공유 카드) → tools/deploy.sh(담당 확인·커밋·push·Pages 확인)
+# 키: 저장소 Secret GEMINI_API_KEY(맥스님 등록). 없으면 판을 만들지 않고 실패로 끝남 → Claude 비상 발행이 30분 뒤 이어받음.
+# 손으로 다시 돌리기: Actions → gemini-edition → Run workflow → 판 id.
+name: gemini-edition
+
+on:
+  push:
+    branches: [main]
+    paths: ["ops/picks/*.json"]
+  workflow_dispatch:
+    inputs:
+      edition:
+        description: "판 id (예: 2026-10-26-am) — ops/picks/<id>.json 이 있어야 함"
+        required: true
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: gemini-edition
+  cancel-in-progress: false
+
+jobs:
+  edition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TZ: Asia/Bangkok
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: 의존성
+        run: pip install --quiet requests beautifulsoup4 playwright==1.55.0
+      - name: 공유 카드용 브라우저(실패해도 판은 나감)
+        continue-on-error: true
+        run: python -m playwright install --with-deps chromium
+      - name: 판 id 찾기
+        id: ed
+        run: |
+          if [ -n "${{ inputs.edition }}" ]; then id="${{ inputs.edition }}"
+          else id=$(git diff --name-only HEAD~1 HEAD -- 'ops/picks/*.json' | tail -1 | sed -E 's#ops/picks/(.*)\.json#\1#'); fi
+          [ -n "$id" ] && [ -f "ops/picks/$id.json" ] || { echo "picks 파일 없음: $id"; exit 1; }
+          echo "id=$id" >> "$GITHUB_OUTPUT"; echo "판: $id"
+      - name: 후보 목록(candidates 브랜치) — 그록이 주소만 적어도 제목·매체·시각을 채우는 데 씀
+        continue-on-error: true
+        run: |
+          mkdir -p drafts/candidates
+          git fetch -q origin +candidates:refs/remotes/origin/candidates && git show origin/candidates:candidates/latest.json > drafts/candidates/latest.json
+      - name: 제미나이 원고 → 검증·저장
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PICKER: 그록
+        run: python3 tools/gemini_edition.py "${{ steps.ed.outputs.id }}" "ops/picks/${{ steps.ed.outputs.id }}.json"
+      - name: 공유 카드
+        continue-on-error: true
+        run: python3 tools/share_kit.py "${{ steps.ed.outputs.id }}"
+      - name: 배포(담당 확인·커밋·push·Pages 빌드 확인)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TNK_PUBLISHER: grok
+          TNK_LIVE_CHECK: pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ops/gemini-usage.jsonl 2>/dev/null || true
+          bash tools/deploy.sh

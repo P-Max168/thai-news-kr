@@ -17,6 +17,8 @@ picks.json 형식(그록이 쓰는 파일 — 짧게):
       "memo": "그록이 원문에서 확인한 핵심 사실·숫자(선택, 한두 줄)", "also": [{"source": "다른 매체", "url": "https://…"}],
       "text": "(선택) 원문 본문 — 없으면 코드가 url 에서 가져옴"}
    ]}
+  ※ 그록 토큰 절약: 후보 목록(candidates 브랜치의 candidates/latest.json)에 있는 기사는 {"url": …, "memo": …} 만 써도 됨 —
+    제목·매체·시각은 코드가 후보 목록에서 채움(--candidates 경로, 기본 drafts/candidates/latest.json). Google News 주소는 원문 주소로 바꿔 적을 것.
 결과: data/<id>.json·.js·index 갱신 + ops/gemini-usage.jsonl 에 호출 수·토큰 수 한 줄.
 실패 기사는 빼고 나머지로 판을 만든다(4건 미만이면 판을 만들지 않고 exit 3 — Claude 비상 발행이 이어받음).
 """
@@ -169,10 +171,17 @@ def _fix_text(t, rate, kind):
         for m in newslib.CNY_BAHT_RE.finditer(t):
             if newslib.CNY_AFTER_RE.match(t, m.end()):
                 continue
-            num = re.sub(r"[^\d.万亿]", "", m.group(1))
-            v = float(re.sub(r"[万亿]", "", num) or 0) * (1e4 if "万" in num else 1e8 if "亿" in num else 1) * rate
-            yuan = ("%s万" % format(round(v / 1e4, 1), "g")) if v >= 1e4 else "{:,}".format(int(round(v)))
-            out.append(t[pos:m.end()] + "（约%s元）" % yuan)
+            def cn(x):   # '5万' → 50000, '1,200' → 1200
+                x = x.replace(",", "").strip()
+                mm = re.match(r"([\d.]+)\s*([万亿]?)", x)
+                return float(mm.group(1)) * {"万": 1e4, "亿": 1e8}.get(mm.group(2), 1) if mm else 0
+            def yuan(v):
+                return ("%s亿" % format(round(v / 1e8, 1), "g")) if v >= 1e8 else ("%s万" % format(round(v / 1e4, 1), "g")) if v >= 1e4 else "{:,}".format(int(round(v)))
+            parts = re.split(r"\s*[~\-–至]\s*", m.group(0)[:-2])
+            vals = [cn(x) for x in parts if re.search(r"\d", x)]
+            if len(vals) == 2 and re.search(r"[万亿]\s*$", parts[1]) and not re.search(r"[万亿]", parts[0]):
+                vals[0] *= {"万": 1e4, "亿": 1e8}[re.search(r"([万亿])\s*$", parts[1]).group(1)]
+            out.append(t[pos:m.end()] + "（约%s元）" % "~".join(yuan(v * rate) for v in vals))
             pos = m.end()
         return "".join(out) + t[pos:]
     return t
@@ -261,7 +270,8 @@ def assemble(eid, items, out):
     idx = json.loads((ROOT / "data" / "index.json").read_text(encoding="utf-8")) if (ROOT / "data" / "index.json").exists() else {}
     return dict(id=eid, date=eid[:10], edition=eid[11:], edition_label=newslib.EDITION_LABEL[eid[11:]],
                 weekday=("星期" + "一二三四五六日"[d0.weekday()]) if LANG == "zh" else WEEKDAY[d0.weekday()], timezone="Asia/Bangkok (UTC+7)",
-                coverage="코드 수집 + 고르기(%s) + 제미나이 원고(%s)" % (os.environ.get("PICKER", "그록"), MODEL),
+                coverage=("代码收集候选 + %s 选稿 + Gemini 撰稿（%s）" % ("Grok" if os.environ.get("PICKER", "그록") == "그록" else "代码", MODEL)) if LANG == "zh"
+                else "코드 수집 + 고르기(%s) + 제미나이 원고(%s)" % (os.environ.get("PICKER", "그록"), MODEL),
                 previous=idx.get("latest", ""), briefing=briefing[:7], highlights=hl, stories=stories)
 
 
@@ -295,14 +305,31 @@ def save_with_drop(data):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("eid"); ap.add_argument("picks"); ap.add_argument("--dry", action="store_true"); ap.add_argument("--model", default=MODEL)
+    ap.add_argument("--candidates", default=str(ROOT / "drafts" / "candidates" / "latest.json"))
     a = ap.parse_args()
     assert newslib.ID_RE.match(a.eid), "판 id 형식: YYYY-MM-DD-am|pm|md"
     if (ROOT / "data" / (a.eid + ".json")).exists():
         print("이미 있음:", a.eid); return 0
     pk = json.loads(pathlib.Path(a.picks).read_text(encoding="utf-8"))
     picks = pk.get("picks") if isinstance(pk, dict) else pk
+    cand = {}
+    try:   # 후보 목록: {"topics": {id: {"items": [...]}}} — url → 항목
+        cj = json.loads(pathlib.Path(a.candidates).read_text(encoding="utf-8"))
+        for tv in (cj.get("topics") or {}).values():
+            for x in (tv.get("items") if isinstance(tv, dict) else tv) or []:
+                cand.setdefault(x.get("url"), x)
+                for al in x.get("also") or []:
+                    if isinstance(al, dict) and al.get("url"):
+                        cand.setdefault(al["url"], dict(x, url=al["url"], outlet=al.get("outlet") or al.get("source") or x.get("outlet")))
+    except Exception:
+        pass
     items = []
     for i, p in enumerate(picks or []):
+        if isinstance(p, str):
+            p = {"url": p}
+        c = cand.get(p.get("url")) or {}
+        p = dict(p, title=p.get("title") or c.get("title"), source=p.get("source") or c.get("outlet") or c.get("source"),
+                 published=p.get("published") or c.get("published"))
         u = str(p.get("url", ""))
         pub = to_bkk(p.get("published"))
         if not u.startswith("http") or not pub or not p.get("title") or not p.get("source"):
