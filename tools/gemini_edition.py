@@ -326,6 +326,11 @@ def main():
         print("이미 있음:", a.eid); return 0
     pk = json.loads(pathlib.Path(a.picks).read_text(encoding="utf-8"))
     picks = pk.get("picks") if isinstance(pk, dict) else pk
+    if isinstance(pk, dict) and pk.get("picker") == "code":   # tools/code_picks.py 가 만든 후보 → 제미나이가 그중 최대 select 건 고름(2026-10-25 구조 통일)
+        a.select = a.select or int(pk.get("select") or 10)
+        os.environ.setdefault("PICKER", "코드(자동)")
+        if os.environ.get("PICKER") == "그록":
+            os.environ["PICKER"] = "코드(자동)"
     cand = {}
     try:   # 후보 목록: {"topics": {id: {"items": [...]}}} — url → 항목
         cj = json.loads(pathlib.Path(a.candidates).read_text(encoding="utf-8"))
