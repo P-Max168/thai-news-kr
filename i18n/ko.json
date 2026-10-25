@@ -321,6 +321,12 @@
   "saved_line": "✓ LINE 계정에 저장됨",
   "short": "로그인"
  },
+ "media": {
+  "ig_open": "공식 인스타그램 게시물 보기",
+  "play": "공식 영상 재생",
+  "x_open": "공식 X 게시물 보기",
+  "yt_cap": "공식 영상"
+ },
  "nav": {
   "all_tab": "📰 전체 보기",
   "myfeed_tab": "⭐ 내 피드"
