@@ -39,17 +39,22 @@ PR #2(디자인) 병합 대기: 기본 라일락(B) + 휴대폰 다크 모드면
 애드센스 붙이기, 미디어킷(17), 측정(19), 공식 계정 가입(맥스님), 팬클럽 생일 프로젝트(24), 최애·아티스트·일정(27~29 + '공식 일정 모으기'), 한국어 한마디(30),
 유튜브 공식 영상·공식 SNS 번갈아(32), 하단 탭바(35), 구인구직 기본 세팅(37~), 앱 준비안.
 
-### PR 줄(병합 순서대로, 전부 맥스님 승인 필요 — 이 세션은 main 병합·배포가 자동 판정에 막힘)
-- tnews(thai-news-kr): PR #5 `claude/line-login`(LINE 로그인 공유 코드) → `claude/kstar-features`(아래 기능, 아직 PR 안 만듦)
-- kstar-th: PR #2 `claude/kstar-skin`(디자인 + 머리글 폭 고침) → PR #3 `claude/line-login`(PR #2 위) → `claude/kstar-features`(PR #3 위, 아직 PR 안 만듦)
-- 구인구직은 별도 작업자가 `claude/kstar-jobs`(두 저장소, features 위)에서 진행 중이었음 — 결과 확인 후 features 에 합칠 것
+### PR 줄(10-25 21:00 기준 — 병합은 맥스님 승인, 이 세션은 main 병합·실서비스 배포 실행이 자동 판정에 막힘)
+- 병합됨: tnews #5(LINE 로그인 공유 코드), kstar #2(디자인)·#3(로그인)·#4(팬 기능 1차: 최애·일정·공식 영상·탭바·쿠키 동의·미디어킷)
+- 열림 tnews #6 `claude/kstar-features`: 팬 기능 공유 코드 + 구인·구직 게시판(board-jobs.js·fb.js·firestore.rules KSTAR 블록) + Codex 리뷰 2건 반영. 한국판 화면 비교 같음
+- 열림 kstar #5 `claude/kstar-cron`: 클라우드플레어 Cron(2시간마다)이 publish.yml 을 workflow_dispatch — GitHub 예약이 10-24~25 하루 3번만 돎.
+  켜려면 GitHub 파인그레인드 토큰(kstar-th, Actions 읽기·쓰기) → Worker 비밀값 GH_DISPATCH_TOKEN. Cron 못 붙이면(무료 계정 5개 한도) Cron 없이 배포하도록 워크플로에 대비
+- 열림 kstar #6 `claude/kstar-ads`: 구인·구직 게시판 1차(동기화 84326b0) + 광고 자리(data/ads.json, 지금은 '광고 문의' → mediakit) + 일정 출처 kpopofficial(공식 표시 없이 빈자리만)
+  + 화면 다듬기(태국 글자 자간·하트 수·다크 모드 페이지). 게시판은 Firestore 규칙 게시 전엔 안내만
+- 주의: KSTAR main 의 마지막 판(10-25 md)은 기능 전에 만든 판 → 아티스트 칩·한국어 한마디·영상은 다음 판부터. 실서비스 반영은 publish.yml 실행(맥스님 버튼 또는 Cron)
 
 ### 만든 것(공유 코드는 전부 판 설정 스위치 — 한국판 화면·프롬프트 그대로 확인함)
 - LINE 로그인: tools/cloudflare/line_auth.mjs(Worker /auth/line/*), Worker 비밀값 3개 들어가면 자동으로 버튼 켜짐(/auth/line/status)
 - date_order·date_long(태국식 날짜), tabbar(assets/tabbar.js), story_extras ko_word·events(gemini_edition), 공식 영상·SNS 미리보기(app.js mediaHTML, s.media),
   consent.js(쿠키 동의 + GA4 + 애드센스, 판 설정 ga4·adsense.pub 있을 때만), kfan.js(최애·아티스트·일정), tools/fanlib.py(이름표)
 - KSTAR: site/fan.th.json(첫 50팀, AI 선택), pipeline/refresh_artists.py(위키데이터 7일 1회), pipeline/build_fan.py(data/artists.json·schedule.json), ops/APP_PLAN.md
-- 아직: s.media 채우기(유튜브 공식 채널 RSS → 기사 아티스트와 맞춤, 출처 조사 결과 기다림), 팬클럽 생일 프로젝트 등록(Firestore — 구인구직 작업의 fb.js 함수와 합친 뒤),
+- 아직(10-25 21:00): 팬클럽 생일 프로젝트 등록(#24 — 게시판 틀 board-jobs.js 의 '올리기→승인→게시' 방식 재사용 예정), 약관·개인정보에 게시판 항목, 주간 투표(#33), ads.txt·애드센스(루트 도메인 필요),
+  (예전 줄) s.media 채우기(→ 완료: fetch_yt + fanlib.pick_media), 팬클럽 생일 프로젝트 등록(Firestore — 구인구직 작업의 fb.js 함수와 합친 뒤),
   미디어킷 페이지·공식 계정 준비물(별도 작업자 결과 → kstar 에 넣기), ads.txt(애드센스 주소 규칙 확인 뒤)
 
 ### 맥스님 몫(로그인·결제) — PC 앞에 앉으면 로그인만, 클릭은 Claude 가 브라우저로
