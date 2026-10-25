@@ -1,11 +1,11 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-25T12:17:48+07:00",
+ "updated_at": "2026-10-25T13:14:46+07:00",
  "items": [
   {
    "title": "조국 “오세훈 판결은 사법정치의 반격…무기력한 민주당, 위기 만들어”",
    "source": "한겨레",
-   "time": "2026-10-25T08:44:00+07:00",
+   "time": "2026-10-25T11:29:00+07:00",
    "url": "https://www.hani.co.kr/arti/politics/politics_general/1283980.html"
   },
   {
@@ -27,10 +27,10 @@ window.KOREA_NEWS = {
    "url": "https://www.khan.co.kr/article/202610251330001"
   },
   {
-   "title": "한동훈 \"오세훈, 보수 승리 위해 함께 가야…손 놓은 적 없어\"",
-   "source": "연합뉴스TV",
-   "time": "2026-10-25T08:40:00+07:00",
-   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261025104026Kv1"
+   "title": "한동훈 \"오세훈과 손 놓은 적 없어…보수 승리 위해 함께 가야\"",
+   "source": "조선일보",
+   "time": "2026-10-25T09:51:00+07:00",
+   "url": "https://www.chosun.com/politics/assembly/2026/10/25/W22PSDMDAVBDNNWMEDBDVQCHLM/"
   },
   {
    "title": "억울하다고 불부터 질렀다니…‘콜하스 증후군’에 빠져 늙어가는 방화범들",
@@ -39,10 +39,16 @@ window.KOREA_NEWS = {
    "url": "https://www.mk.co.kr/news/society/12184943"
   },
   {
-   "title": "트럼프, 러 알래스카 LNG 투자 질문에 \"전쟁끝나면 러와도 거래\"",
-   "source": "연합뉴스",
-   "time": "2026-10-25T06:11:25+07:00",
-   "url": "https://www.yna.co.kr/view/AKR20261025007700071"
+   "title": "제주·남부 비 내일 아침 그쳐…낮 기온 온화",
+   "source": "KBS 뉴스",
+   "time": "2026-10-25T12:03:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8694505"
+  },
+  {
+   "title": "오바마 \"트럼프 2년은 혼란·부패·무능\"...트럼프 \"형편없는 오바마\"",
+   "source": "조선일보",
+   "time": "2026-10-25T08:19:00+07:00",
+   "url": "https://www.chosun.com/international/international_general/2026/10/25/TEU43WHVI5DONELKXI7HQU7NNE/"
   },
   {
    "title": "[뉴스분석] '사망설' 일축하고 북중 혈맹 과시…\"中에 북미회담 중재 요청 가능성\"",
@@ -51,16 +57,10 @@ window.KOREA_NEWS = {
    "url": "https://www.newspim.com/news/view/20261025000040"
   },
   {
-   "title": "예산 삭감에 쪼그라든 순직 소방관 추모식···‘소방 빨대’ 사과한 추미애 “처우 개선 약속”",
-   "source": "경향신문",
-   "time": "2026-10-24T12:37:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610241437001"
-  },
-  {
-   "title": "제주·남부 비 내일 아침 그쳐…낮 기온 온화",
-   "source": "KBS 뉴스",
-   "time": "2026-10-25T12:03:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8694505"
+   "title": "\"아버지와 다투다 홧김에\"… 60대 부친 흉기로 찌른 30대 딸 구속",
+   "source": "한국일보",
+   "time": "2026-10-25T08:29:00+07:00",
+   "url": "https://www.hankookilbo.com/news/article/A2026102508420000128"
   }
  ]
 };
