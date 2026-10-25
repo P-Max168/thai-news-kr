@@ -17,6 +17,8 @@
     sriracha: { name: TNI("ticker.ka7ba72f", "시라차"), lat: 13.1682, lon: 100.9310 },
     bangkok:  { name: TNI("ticker.k4dc2c29", "방콕"),   lat: 13.7563, lon: 100.5018 }
   };
+  // 판 설정(data/site.js wx_coords)으로 같은 지역 키의 좌표만 바꿈 — 예: 베트남판 pattaya=호치민·bangkok=하노이·sriracha=다낭(이름은 i18n). 한국판·중국어판은 설정 없음 = 위 값 그대로(2026-10-25 Claude)
+  (function (wc) { if (!wc) return; Object.keys(wc).forEach(function (k) { if (REGIONS[k]) { REGIONS[k].lat = wc[k].lat; REGIONS[k].lon = wc[k].lon; } }); })(window.TN_SITE && window.TN_SITE.wx_coords);
   var LS_REGION = "tnk.wxRegion", LS_WX = "tnk.wx.v1", LS_AQ = "tnk.aq.v1";
   var WX_TTL = 30 * 60e3, AQ_TTL = 60 * 60e3;
   var st = { tk: null, wx: null, aq: null };
@@ -33,6 +35,7 @@
   function ms(iso) { var t = iso ? new Date(iso).getTime() : NaN; return isFinite(t) ? t : 0; }
   function fresh(iso, max) { var t = ms(iso); return t > 0 && Date.now() - t <= max && t - Date.now() < 36e5; }
   function n0(x) { return Math.round(x).toLocaleString("ko-KR"); }
+  function n1(x) { return x >= 1000 ? n0(x) : x.toFixed(1); }   // 1,000 넘는 현지 값(동·달러당 동)은 소수점 없이 쉼표로(2026-10-25)
   // 휘발유 '전날 값' 날짜(방콕): feed_date 하루 전 → 'M/D ' (모르면 '전날 ')
   function prevDay(iso) {
     var t = ms(iso); if (!t) return TNI("ticker.kf20644d", "전날 ");
@@ -108,6 +111,8 @@
   }
   // 언어판 통화(R-zh-3, 2026-10-18): 한국판 THB_KRW·'원'(기본값), zh = THB_CNY·'元' (data/site.js currency.pair·unit). 헤더 ฿ 는 그대로
   var CUR = (window.TN_SITE && window.TN_SITE.currency) || {}, PAIR = CUR.pair || "THB_KRW", UNIT = CUR.unit || TNI("ticker.k21ba070", "원"), I = window.TNI || function (k, d) { return d; };
+  // 현지 통화(2026-10-25 Claude, 베트남판): local=현지 통화 코드(기본 THB), per=칩에 보일 현지 금액 단위(기본 1, 베트남판 10000 = '1만 동'), header_symbol=칩의 작은 기호(기본 ฿). hide_price=금·휘발유 칸 숨김
+  var LOC = CUR.local || "THB", PER = CUR.per || 1, SYM = CUR.header_symbol || "฿", USDK = "USD_" + LOC, USDTK = "USDT_" + LOC, KRWK = LOC + "_KRW";
   function fxOK() { var f = st.tk && st.tk.fx; return f && f[PAIR] > 0 && fresh(f.fetched_at, DAY) && fresh(f.rate_time, 2 * DAY) ? f : null; }
   function goldOK() { var g = st.tk && st.tk.gold; return g && g.bar_sell > 0 && fresh(g.fetched_at, DAY) && fresh(g.announced_at, 4 * DAY) ? g : null; }
   // 날씨·미세먼지: 브라우저에서 직접 받은 Open-Meteo 값 우선, 실패하면 data/ticker.json 의 서버 값(Actions 가 2시간마다) — 둘 다 3시간 안의 것만
@@ -127,7 +132,7 @@
   }
 
   function fuelOK() { var o = st.tk && st.tk.fuel; return o && o.gasohol95 > 0 && fresh(o.fetched_at, DAY) && fresh(o.feed_date, 2 * DAY) ? o : null; }
-  function usdtOK() { var u = st.tk && st.tk.usdt; return u && u.USDT_THB > 0 && fresh(u.fetched_at, DAY) && (!u.price_time || fresh(u.price_time, 2 * DAY)) ? u : null; }
+  function usdtOK() { var u = st.tk && st.tk.usdt; return u && u[USDTK] > 0 && fresh(u.fetched_at, DAY) && (!u.price_time || fresh(u.price_time, 2 * DAY)) ? u : null; }
   // 조회 시각(방콕): 언제나 'M/D HH:MM'(2026-10-04 실제 날짜 표시) — 상자 안 항목 중 가장 오래된 것
   function clock(list) {
     var t = list.filter(function (x) { return x > 0; }); if (!t.length) return "";
@@ -167,13 +172,13 @@
     if (!window.__tnLate && window.TNAfterFirst) { if (!renderLater) { renderLater = true; window.TNAfterFirst(function () { renderLater = false; render(); }); } return; }
     var f = fxOK(), u = usdtOK(), w = wxOK(), g = goldOK(), a = aqOK(), o = fuelOK(), h = [];
     h.push(tile("fx", [
-      f && [I("ticker.one_baht", "1바트 ") + f[PAIR].toFixed(PAIR === "THB_KRW" ? 1 : 3) + UNIT, I("ticker.one_baht_s", "1바트") + "<i class=\"tk-eq\"> =</i> <b>" + f[PAIR].toFixed(PAIR === "THB_KRW" ? 1 : 3) + UNIT + "</b>" + chg(dif(f[PAIR], f["prev_" + PAIR]), PAIR === "THB_KRW" ? 2 : 4)],
-      f && f.USD_THB > 0 && [I("ticker.one_usd", "1달러 ") + f.USD_THB.toFixed(1) + I("ticker.baht", "바트"), I("ticker.one_usd_s", "1달러") + "<i class=\"tk-eq\"> =</i> <b>" + f.USD_THB.toFixed(1) + '<small class="tk-u">฿</small></b>' + chg(dif(f.USD_THB, f.prev_USD_THB), 2)]
+      f && [I("ticker.one_baht", "1바트 ") + (f[PAIR] * PER).toFixed(PAIR === "THB_KRW" || PER > 1 ? 1 : 3) + UNIT, I("ticker.one_baht_s", "1바트") + "<i class=\"tk-eq\"> =</i> <b>" + (f[PAIR] * PER).toFixed(PAIR === "THB_KRW" || PER > 1 ? 1 : 3) + UNIT + "</b>" + chg(dif(f[PAIR] * PER, f["prev_" + PAIR] * PER), PAIR === "THB_KRW" || PER > 1 ? 2 : 4)],
+      f && f[USDK] > 0 && [I("ticker.one_usd", "1달러 ") + n1(f[USDK]) + I("ticker.baht", "바트"), I("ticker.one_usd_s", "1달러") + "<i class=\"tk-eq\"> =</i> <b>" + n1(f[USDK]) + '<small class="tk-u">' + SYM + '</small></b>' + chg(dif(f[USDK], f["prev_" + USDK]), f[USDK] >= 1000 ? 0 : 2)]
     ], ft([f && ms(f.fetched_at)])));
     // v5(운영자 요청 10-03 10:25): 테더는 환율 바로 옆 자기 상자 — '1USDT' / 큰 글자 '33.5฿' / 조회 시각
     h.push(tile("usdt", [
       u && ["1USDT", '<span class="tk-l">1USDT</span>'],
-      u && [TNI("ticker.kb8e2599", "테더(USDT) 1개 ") + u.USDT_THB.toFixed(1) + TNI("ticker.k891f841", "바트"), '<b class="tk-big">' + u.USDT_THB.toFixed(1) + '<small class="tk-u">฿</small></b>' + chg(u.change, 2)]
+      u && [TNI("ticker.kb8e2599", "테더(USDT) 1개 ") + n1(u[USDTK]) + TNI("ticker.k891f841", "바트"), '<b class="tk-big">' + n1(u[USDTK]) + '<small class="tk-u">' + SYM + '</small></b>' + chg(u.change, u[USDTK] >= 1000 ? 0 : 2)]
     ].filter(function (x, i, a) { return a[1]; }), ft([u && ms(u.fetched_at)])));
     var ic = w && wmo(w.code, w.day), lv = a && pmLevel(a.pm);
     h.push(tile("env", [
@@ -185,7 +190,7 @@
       var c = clock([w && w.at, a && a.at]), rk = (w || a || {}).rg || region(), rn = I("ticker.rg_" + rk, REGIONS[rk].name);
       return c ? [rn + " " + c + TNI("ticker.k6b5c246", " 조회"), '<span class="tk-rg">' + rn + "</span>" + clockHTML([w && w.at, a && a.at])] : null;
     })()));
-    h.push(tile("price", [
+    if (!CUR.hide_price) h.push(tile("price", [
       g && [TNI("ticker.kaf13ee1", "금시세 금괴 1바트 ") + n0(g.bar_sell) + TNI("ticker.k891f841", "바트"), '<span class="tk-l">' + I("ticker.gold_s", "금") + '</span><b>' + n0(g.bar_sell) + '<small class="tk-u">฿</small></b>' + chg(g.change, 0)],
       o && [TNI("ticker.k8216c3d", "휘발유(95) 리터당 ") + n2(o.gasohol95) + TNI("ticker.k891f841", "바트"), '<span class="tk-l">' + I("ticker.fuel_s", "휘발유") + '<span class="tk-95">(95)</span></span><b>' + n2(o.gasohol95) + '<small class="tk-u">฿</small></b>' + chg(dif(o.gasohol95, o.yesterday), 2)]
     ], ft([g && ms(g.fetched_at), o && ms(o.fetched_at)])));
@@ -225,12 +230,12 @@
   }
   function part(k) {
     var f = fxOK(), u = usdtOK(), w = wxOK(), g = goldOK(), a = aqOK(), o = fuelOK();
-    if (k === "fx" && f) return TNI("ticker.k991b0d1", "<b class=\"tk-pop__t\">환율</b><p>1바트 = <b>") + f.THB_KRW.toFixed(2) + TNI("ticker.k87d45c9", "원</b> · 1만 바트 ≈ ") + n0(f.THB_KRW * 1e4) + TNI("ticker.k21ba070", "원") +
-      (f.USD_THB > 0 ? TNI("ticker.kcb3385f", "<br>1달러 = <b>") + f.USD_THB.toFixed(2) + TNI("ticker.k0db85f2", "바트</b>") + (f.USD_KRW > 0 ? TNI("ticker.ka7b02f2", " · 1달러 = ") + n0(f.USD_KRW) + TNI("ticker.k21ba070", "원") : "") : "") + "</p>" +
+    if (k === "fx" && f) return TNI("ticker.k991b0d1", "<b class=\"tk-pop__t\">환율</b><p>1바트 = <b>") + (PER > 1 ? n1(f[KRWK] * PER) : f[KRWK].toFixed(2)) + TNI("ticker.k87d45c9", "원</b> · 1만 바트 ≈ ") + n0(f[KRWK] * 1e4 * (PER > 1 ? 10 : 1)) + TNI("ticker.k21ba070", "원") +
+      (f[USDK] > 0 ? TNI("ticker.kcb3385f", "<br>1달러 = <b>") + (f[USDK] >= 1000 ? n0(f[USDK]) : f[USDK].toFixed(2)) + TNI("ticker.k0db85f2", "바트</b>") + (f.USD_KRW > 0 ? TNI("ticker.ka7b02f2", " · 1달러 = ") + n0(f.USD_KRW) + TNI("ticker.k21ba070", "원") : "") : "") + "</p>" +
       src(f.source, f.url, [TNI("ticker.ka76bfe8", "기준 시각 ") + when(f.rate_time) + TNI("ticker.k9964196", " (방콕)"), TNI("ticker.kf59c814", "받아 온 시각 ") + when(f.fetched_at) + TNI("ticker.kf2a797f", " · 참고용(은행·환전소 실제 환율과 다름)")]);
     if (k === "usdt" && u) {
-      var ukrw = f ? Math.round(u.USDT_THB * f.THB_KRW) : null, chg = typeof u.change_pct === "number" ? u.change_pct : null;
-      return TNI("ticker.k0b40892", "<b class=\"tk-pop__t\">테더(USDT) 시세</b><p>1테더 = <b>") + u.USDT_THB.toFixed(2) + TNI("ticker.k0db85f2", "바트</b>") + (ukrw ? TNI("ticker.kf8cbc8d", " (약 ") + n0(ukrw) + TNI("ticker.k92a170b", "원)") : "") +
+      var ukrw = f ? Math.round(u[USDTK] * f[KRWK]) : null, chg = typeof u.change_pct === "number" ? u.change_pct : null;
+      return TNI("ticker.k0b40892", "<b class=\"tk-pop__t\">테더(USDT) 시세</b><p>1테더 = <b>") + (u[USDTK] >= 1000 ? n0(u[USDTK]) : u[USDTK].toFixed(2)) + TNI("ticker.k0db85f2", "바트</b>") + (ukrw ? TNI("ticker.kf8cbc8d", " (약 ") + n0(ukrw) + TNI("ticker.k92a170b", "원)") : "") +
         (chg ? " · " + (u.google ? TNI("ticker.k8fc1e4a", "전일 대비 ") : TNI("ticker.k6962d18", "24시간 ")) + (chg > 0 ? "▲" : "▼") + Math.abs(chg).toFixed(2) + "%" : "") + "</p>" +
         src(u.google ? TNI("ticker.kd2d043b", "구글 파이낸스 (Google Finance)") : u.source, u.url, [
           u.google ? TNI("ticker.k4503d77", "구글 기준 · 시세 시각 ") + when(u.price_time) + TNI("ticker.k9964196", " (방콕)")
