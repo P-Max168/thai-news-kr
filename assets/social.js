@@ -6,7 +6,7 @@
  */
 (function () {
   "use strict";
-  var FB_URL = "assets/fb.js?v=2b3801f4";       // tools/stamp_assets.py 가 ?v= 갱신
+  var FB_URL = "assets/fb.js?v=dcf351ea";       // tools/stamp_assets.py 가 ?v= 갱신
   var AUTH_KEY = "tnk.auth.v1";                  // 이 기기: {uid, linked:[uid…]} (계정 정보는 저장 안 함)
   var S = window.TNStore, L = window.TNTaste;
   var live = /^https?:$/.test(location.protocol);
@@ -30,6 +30,21 @@
 
   /* ---------- 헤더 계정 버튼 ---------- */
   var G = '<svg class="g" viewBox="0 0 48 48" width="16" height="16" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>';
+  // LINE 로그인(2026-10-25): 판 설정 login.line(예: "/auth/line/start")이 있고, 그 판 Worker 가 준비됐다고(/status) 답할 때만 버튼이 나옴.
+  //   한국판·중국어판은 설정이 없어 화면이 예전과 똑같다. 서버 쪽은 tools/cloudflare/line_auth.mjs
+  var PERSON = '<svg class="g" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="#6b7280"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" fill="#6b7280"/></svg>';
+  var LINE_START = (window.TN_SITE && window.TN_SITE.login && window.TN_SITE.login.line) || "";
+  var LINE_BASE = LINE_START.replace(/\/start$/, "");
+  var lineOn = false;
+  try { lineOn = !!LINE_START && sessionStorage.getItem("tnk.line.on") === "1"; } catch (e) {}
+  function viaLine() { return !!(user && (!user.providerData || !user.providerData.length)); }   // 맞춤 토큰 로그인 = 연결된 구글 계정 없음
+  function lineBtn(light) {
+    return '<button type="button" class="gbtn gbtn--line' + (light ? " gbtn--light" : "") + '" data-login="line"><span class="gbtn__t">' + TNI("login.line", "LINE으로 로그인") + '</span><span class="gbtn__s">LINE</span></button>';
+  }
+  function loginBtns(light) {
+    var g = '<button type="button" class="gbtn' + (light ? " gbtn--light" : "") + '" data-login="google">' + G + "<span>" + TNI("login.google", "구글로 로그인") + "</span></button>";
+    return '<span class="login-btns">' + g + lineBtn(light) + "</span>";
+  }
   function avatar(cls) {
     var p = user && user.photoURL;
     return p ? '<img class="' + cls + '" src="' + esc(p) + '" alt="" referrerpolicy="no-referrer" width="30" height="30">' : '<span class="' + cls + ' ' + cls + '--none" aria-hidden="true">🙂</span>';
@@ -39,14 +54,16 @@
     if (!live || (failed && !user)) { el.hidden = true; return; }
     el.hidden = false;
     if (user) el.innerHTML = TNI("social.kabfc72c", "<button type=\"button\" class=\"acct__me\" data-acct-menu aria-haspopup=\"true\" aria-label=\"내 계정\">") + avatar("acct__av") + "</button>";
+    else if (lineOn) el.innerHTML = '<button type="button" class="gbtn" data-login="pick" aria-haspopup="true">' + PERSON + '<span class="gbtn__t">' + TNI("login.short", "로그인") + "</span></button>";
     else el.innerHTML = '<button type="button" class="gbtn" data-login>' + G + '<span class="gbtn__t">' + (window.TNI ? TNI("login.google", "구글로 로그인") : TNI("social.k90ec74c", "구글로 로그인")) + '</span><span class="gbtn__s">' + (window.TNI ? TNI("login.short", "로그인") : TNI("social.ke225a6f", "로그인")) + '</span></button>';
   }
   function statusText() {
-    return syncState === "error" ? TNI("social.kf09bd1c", "⚠️ 동기화 오류 — 잠시 뒤 다시 시도해요") : syncState === "saving" ? TNI("social.k9f67850", "저장 중…") : TNI("social.k9d64095", "✓ 구글 계정에 저장됨");
+    return syncState === "error" ? TNI("social.kf09bd1c", "⚠️ 동기화 오류 — 잠시 뒤 다시 시도해요") : syncState === "saving" ? TNI("social.k9f67850", "저장 중…") : viaLine() ? TNI("login.saved_line", "✓ LINE 계정에 저장됨") : TNI("social.k9d64095", "✓ 구글 계정에 저장됨");
   }
+  function signedAs() { return viaLine() ? TNI("login.in_line", "LINE 계정으로 로그인됨") : TNI("social.kf57cfb1", "구글 계정으로 로그인됨"); }
   function menuHTML() {
     return '<div class="acct-menu__in">' +
-      '<div class="acct-menu__top">' + avatar("acct-menu__av") + '<div><b>' + (profile ? esc(profile.nickname) : TNI("social.kf57cfb1", "구글 계정으로 로그인됨")) + "</b>" + (admin ? TNI("social.k16541d6", " <span class=\"badge-op\">운영자</span>") : "") +
+      '<div class="acct-menu__top">' + avatar("acct-menu__av") + '<div><b>' + (profile ? esc(profile.nickname) : signedAs()) + "</b>" + (admin ? TNI("social.k16541d6", " <span class=\"badge-op\">운영자</span>") : "") +
       '<small class="acct-sync">' + statusText() + "</small></div></div>" +
       TNI("social.k1bbad39", "<p class=\"acct-menu__note\">내 주제·취향이 다른 기기에서도 이어져요. 댓글에는 닉네임만 보여요.</p>") +
       (profile ? TNI("social.k6322b85", "<button type=\"button\" class=\"setbtn setbtn--sm\" data-nick-edit>닉네임 바꾸기</button>") : "") +
@@ -64,8 +81,12 @@
     if (!el) return;
     if (!live || (failed && !user)) { el.hidden = true; return; }
     el.hidden = false;
+    if (!user && lineOn) {
+      el.innerHTML = '<div class="acct-box__row acct-box__row--2"><span><b>' + TNI("login.box_t", "다른 기기에서도 이어 보기") + "</b><small>" + TNI("login.box_s", "로그인은 선택이에요. 안 해도 모든 기능을 쓸 수 있어요.") + "</small></span>" + loginBtns(true) + "</div>";
+      return;
+    }
     el.innerHTML = user
-      ? '<div class="acct-box__row">' + avatar("acct__av") + TNI("social.kdc7d532", "<span><b>구글 계정으로 로그인됨</b><small>") + statusText() + TNI("social.k315e602", "</small></span><button type=\"button\" class=\"btn btn--sm acct-out\" data-logout>로그아웃</button></div>") +
+      ? '<div class="acct-box__row">' + avatar("acct__av") + (viaLine() ? "<span><b>" + esc(signedAs()) + "</b><small>" : TNI("social.kdc7d532", "<span><b>구글 계정으로 로그인됨</b><small>")) + statusText() + TNI("social.k315e602", "</small></span><button type=\"button\" class=\"btn btn--sm acct-out\" data-logout>로그아웃</button></div>") +
         (admin ? TNI("social.kf708e4a", "<div class=\"adm-links\"><button type=\"button\" class=\"adm-link\" data-page=\"admin\">📊 반응 통계</button>") + (window.TNPages && TNPages.has("approve") ? TNI("social.kc4c1c54", "<button type=\"button\" class=\"adm-link\" data-page=\"approve\">✅ 승인함</button>") : "") + '</div>' : "")
       : TNI("social.kec77ebb", "<div class=\"acct-box__row\"><span><b>다른 기기에서도 이어 보기</b><small>로그인은 선택이에요. 안 해도 모든 기능을 쓸 수 있어요.</small></span><button type=\"button\" class=\"gbtn gbtn--light\" data-login>") + G + TNI("social.k4314815", "<span>구글로 로그인</span></button></div>");
   }
@@ -73,8 +94,14 @@
     renderHeader();
     if ($("acctBox")) renderAccountBox($("acctBox"));
     if ($("drawerAcct")) renderAccountBox($("drawerAcct"));
-    var n = $("storeNote"); if (n) n.textContent = user ? TNI("social.k28dd65e", "구글 계정에 저장돼 다른 기기에서도 이어져요.") : TNI("social.k4b1291b", "설정과 취향은 이 기기(브라우저)에만 저장돼요. 구글로 로그인하면 다른 기기에서도 이어져요(선택).");
-    if ($("acctMenu")) $("acctMenu").innerHTML = menuHTML();
+    var n = $("storeNote"); if (n) n.textContent = user ? (viaLine() ? TNI("login.note_line", "LINE 계정에 저장돼 다른 기기에서도 이어져요.") : TNI("social.k28dd65e", "구글 계정에 저장돼 다른 기기에서도 이어져요."))
+      : lineOn ? TNI("login.note_out", "설정과 취향은 이 기기(브라우저)에만 저장돼요. 구글이나 LINE으로 로그인하면 다른 기기에서도 이어져요(선택).") : TNI("social.k4b1291b", "설정과 취향은 이 기기(브라우저)에만 저장돼요. 구글로 로그인하면 다른 기기에서도 이어져요(선택).");
+    var am = $("acctMenu");   // 로그인 방법 고르기 창(로그아웃 상태)과 내 계정 메뉴(로그인 상태)가 같은 자리를 씀
+    if (am) {
+      var chooser = am.classList.contains("acct-menu--login");
+      if (user && !chooser) am.innerHTML = menuHTML();
+      else if (user || !chooser || !lineOn) closeMenu();   // 로그인됨·로그아웃된 계정 메뉴·LINE 꺼짐 → 닫기, 로그아웃 상태 고르기 창은 그대로
+    }
     document.querySelectorAll("[data-cmts].is-mounted").forEach(function (c) { renderComments(c); });
     if (window.TNPages && /^(admin|approve)$/.test(TNPages.current() || "")) TNPages.refresh();
   }
@@ -105,7 +132,40 @@
       if (r && r.failed && !m.currentUser()) toast(TNI("social.k1158d8a", "로그인이 끝나지 않았어요. Safari(또는 Chrome) 브라우저에서 열어 다시 시도해 주세요."), 5000);
     });
   }
-  function login() {
+  /* LINE 로그인: Worker(/auth/line/start)로 갔다가 r#line=1 로 돌아오면 Worker 쿠키의 맞춤 토큰을 한 번 받아 로그인 */
+  function openChooser() {
+    closeMenu();
+    var m = document.createElement("div"); m.id = "acctMenu"; m.className = "acct-menu acct-menu--login"; m.setAttribute("role", "dialog"); m.setAttribute("aria-label", TNI("login.choose", "로그인 방법 선택"));
+    m.innerHTML = '<div class="acct-menu__in"><b class="acct-menu__h">' + TNI("login.choose", "로그인 방법 선택") + "</b>" + loginBtns(true) +
+      '<p class="acct-menu__note">' + TNI("login.box_s", "로그인은 선택이에요. 안 해도 모든 기능을 쓸 수 있어요.") + "</p></div>";
+    document.body.appendChild(m);
+  }
+  function lineGo() {
+    closeMenu();
+    toast(TNI("login.line_wait", "LINE 로그인 화면으로 이동 중…"), 2000);
+    try { sessionStorage.setItem("tnk.line.back", /^#(line=|lerr=)/.test(location.hash) ? "" : location.hash); } catch (e) {}   // 돌아오면 보던 기사·페이지로
+    location.href = LINE_START + "?r=" + encodeURIComponent(location.pathname + location.search);
+  }
+  function lineFinish() {
+    load().then(function (m) {
+      start(m);
+      return fetch(LINE_BASE + "/token", { method: "POST", credentials: "same-origin" })
+        .then(function (r) { if (!r.ok) throw new Error("token " + r.status); return r.json(); })
+        .then(function (j) { return m.signInWithToken(j.t); });
+    }).then(function () { toast(TNI("social.kb20c7e6", "로그인했어요. 내 주제·취향을 계정에 저장할게요 🙂")); })
+      .catch(function (e) { console.warn("[LINE]", e); toast(TNI("login.line_fail", "LINE 로그인을 마치지 못했어요. 잠시 뒤 다시 시도해 주세요."), 4000); });
+  }
+  function lineErr(code) {
+    return code === "cancel" ? TNI("login.line_cancel", "LINE 로그인을 취소했어요.")
+      : code === "off" ? TNI("login.line_off", "LINE 로그인은 아직 준비 중이에요. 구글로 로그인해 주세요.")
+      : code === "expired" ? TNI("login.line_expired", "로그인 시간이 지났어요. 다시 시도해 주세요.")
+      : TNI("login.line_fail", "LINE 로그인을 마치지 못했어요. 잠시 뒤 다시 시도해 주세요.");
+  }
+  // prov: "line" | "google" | "pick"(방법 고르기) | ""(예전 버튼 — LINE 이 꺼진 판은 구글 그대로)
+  function login(prov) {
+    if (prov === "line" && LINE_START) return lineGo();
+    if (lineOn && prov !== "google") return openChooser();
+    closeMenu();
     toast(TNI("social.kddd5ea0", "구글 로그인 창을 여는 중…"), 1500);
     load().then(function (m) { start(m); return m.signIn(); }).then(function (u) {
       if (u) toast(TNI("social.kb20c7e6", "로그인했어요. 내 주제·취향을 계정에 저장할게요 🙂"));
@@ -218,6 +278,7 @@
   function formHTML(el) {
     if (!fb && !fbP) return "";
     var qr = chipsHTML(el && el._qr);
+    if (!user && lineOn) return qr + '<div class="cform cform--out"><span>' + TNI("login.cmt", "댓글을 쓰려면 로그인해 주세요.") + " <small>" + TNI("login.cmt_s", "(댓글엔 닉네임만 보여요)") + "</small></span>" + loginBtns(true) + "</div>";
     if (!user) return qr + TNI("social.kb5aa1c5", "<div class=\"cform cform--out\"><span>댓글을 쓰려면 로그인해 주세요. <small>(댓글엔 닉네임만 보여요)</small></span><button type=\"button\" class=\"gbtn gbtn--light\" data-login>") + G + TNI("social.k4314815", "<span>구글로 로그인</span></button></div>");
     if (!profile) return TNI("social.k2117828", "<div class=\"cform cform--nick\"><label><b>댓글에 쓸 닉네임을 정해 주세요</b><small>2~12자 · 구글 이름·이메일은 보이지 않아요</small>") +
       '<input type="text" maxlength="12" data-nick-input value="' + esc(defaultNick()) + TNI("social.kfa0ddd3", "\"></label><p class=\"cform__msg\" data-c-msg></p><button type=\"button\" class=\"btn btn--primary btn--sm\" data-nick-save>이 닉네임으로 시작</button></div>");
@@ -262,7 +323,7 @@
     if (box) fillBox(box, text);
   }
   function openReply(el, parent) {
-    if (!user) { toast(TNI("social.k6846ce8", "답글을 쓰려면 구글로 로그인해 주세요. (댓글엔 닉네임만 보여요)"), 3000); el._replyTo = parent; login(); return; }
+    if (!user) { toast(lineOn ? TNI("login.reply", "답글을 쓰려면 로그인해 주세요. (댓글엔 닉네임만 보여요)") : TNI("social.k6846ce8", "답글을 쓰려면 구글로 로그인해 주세요. (댓글엔 닉네임만 보여요)"), 3000); el._replyTo = parent; login(); return; }
     if (!profile) { toast(TNI("social.k258225d", "먼저 아래에서 댓글에 쓸 닉네임을 정해 주세요.")); var ni = el.querySelector("[data-nick-input]"); if (ni) ni.focus(); return; }
     el._replyTo = el._replyTo === parent ? null : parent;
     renderComments(el);
@@ -319,7 +380,7 @@
 
   document.addEventListener("click", function (e) {
     var t = e.target, el;
-    if (t.closest("[data-login]")) { login(); return; }
+    if (t.closest("[data-login]")) { login(t.closest("[data-login]").getAttribute("data-login") || ""); return; }
     if (t.closest("[data-acct-menu]")) { if ($("acctMenu")) closeMenu(); else openMenu(); return; }
     if (t.closest("[data-logout]")) { logout(); return; }
     if (t.closest("[data-nick-edit]")) { closeMenu(); var nn = window.prompt(TNI("social.k14cec3d", "새 닉네임(2~12자)"), profile ? profile.nickname : ""); if (nn == null) return; var bad = nickOk(nn.trim()); if (bad) { toast(bad); return; } fb.saveProfile(user.uid, nn.trim()).then(function (p) { profile = p; refreshUI(); toast(TNI("social.kb88017d", "닉네임을 바꿨어요(새 댓글부터 적용)")); }); return; }
@@ -435,6 +496,24 @@
 
   renderHeader();
   if (!live) return;
+  // LINE: 판 Worker 가 준비됐는지(비밀값이 다 있는지) 물어 버튼을 켬. 한 번 알면 이 탭에서는 기억
+  if (LINE_START) {
+    fetch(LINE_BASE + "/status", { credentials: "omit" }).then(function (r) { return r.ok ? r.json() : { on: false }; }).then(function (j) {
+      var on = !!(j && j.on); try { sessionStorage.setItem("tnk.line.on", on ? "1" : "0"); } catch (e) {}
+      if (on !== lineOn) { lineOn = on; refreshUI(); }
+    }).catch(function () {});
+  }
+  // LINE 에서 돌아옴: #line=1(성공) 또는 #lerr=…(취소·실패) — 주소에서 바로 지움
+  var lh = LINE_START ? location.hash : "";
+  if (lh === "#line=1" || /^#lerr=\w+$/.test(lh)) {
+    var back = ""; try { back = sessionStorage.getItem("tnk.line.back") || ""; sessionStorage.removeItem("tnk.line.back"); } catch (e) {}
+    if (!/^#[\w\/-]*$/.test(back)) back = "";
+    try { history.replaceState(null, "", location.pathname + location.search + back); } catch (e) {}   // 기사(#id)·페이지(#jobs 등)는 app.js·pages.js 가 이 주소로 다시 엶
+    // 판이 이미 그려졌으면(app.js 가 #line=1 을 본 뒤) 기사를 직접 다시 엶. 아직이면 app.js 가 그릴 때 이 주소로 엶. 페이지(#jobs 등)는 pages.js 가 등록할 때 엶
+    if (back) setTimeout(function () { var id = back.slice(1); if (window.TNApp && TNApp.edId && TNApp.edId() && !(window.TNPages && TNPages.has(id))) TNApp.openStory(id); }, 0);
+    if (lh === "#line=1") lineFinish();
+    else setTimeout(function () { toast(lineErr(lh.slice(6)), 4000); }, 600);
+  }
   // 로그인한 적이 있거나 리디렉션 로그인에서 돌아온 경우: 바로 불러와 세션 복원. 아니면 쉬는 시간에 미리 받기만
   var a = rd(), pending = false;
   try { pending = !!localStorage.getItem("tnk.auth.pending"); } catch (e) {}

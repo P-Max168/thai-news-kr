@@ -62,6 +62,8 @@ export async function signIn() {
     throw e;
   }
 }
+// LINE 로그인(언어판 Worker 가 있는 판만 — tools/cloudflare/line_auth.mjs): Worker 가 만든 Firebase 맞춤 토큰으로 로그인
+export async function signInWithToken(t) { return (await A.signInWithCustomToken(auth, t)).user; }
 export function signOutNow() { stopSync(); return A.signOut(auth); }
 
 /* ---------- 설정·취향 동기화: users/{uid} ---------- */
