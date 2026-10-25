@@ -250,3 +250,42 @@ export async function setPlaceFlag(id, n, st) {
   await F.setDoc(F.doc(db, "placeflags", String(id)), { id: String(id), n: Math.max(0, Math.min(9999, n | 0)), st: st === "closed" ? "closed" : "", at: F.serverTimestamp() });
   return true;
 }
+
+/* ---------- 🧑‍💼 구인·구직 게시판(2026-10-25 Claude — 판 설정 board.jobs 인 판만 assets/board-jobs.js 가 씀, 한국판은 안 부름) ----------
+ * 컬렉션 이름은 판 접두사가 붙음(KSTAR = ks_resumes·ks_resume_contacts·ks_employers·ks_jobs). 규칙 = firestore.rules 의 KSTAR 게시판 부분.
+ * 값 {__ts:1} = 서버 시각, {__ms:숫자} = 그 시각(Timestamp). 읽은 Timestamp 는 밀리초 숫자로 돌려줌 */
+function bVal(v) { if (v && v.__ts) return F.serverTimestamp(); if (v && v.__ms != null) return F.Timestamp.fromMillis(v.__ms); return v; }
+function bIn(d) { const o = {}; Object.keys(d).forEach(function (k) { o[k] = bVal(d[k]); }); return o; }
+function bOut(s) { const x = s.data(), o = { id: s.id }; Object.keys(x).forEach(function (k) { const v = x[k]; o[k] = v && v.toMillis ? v.toMillis() : v; }); return o; }
+export async function boardList(col, field, op, val, max) {
+  await fs();
+  const q = F.query(F.collection(db, C(col)), F.where(field, op, val), F.limit(max || 200));
+  return (await F.getDocs(q)).docs.map(bOut);
+}
+export async function boardGet(col, id) { await fs(); const s = await F.getDoc(F.doc(db, C(col), id)); return s.exists() ? bOut(s) : null; }
+/* ops = [{col, id?, data?, upd?:true, del?:true}] — 한 번에(전부 되거나 전부 안 됨). 새 문서 id 목록을 돌려줌 */
+export async function boardWrite(ops) {
+  await fs();
+  const b = F.writeBatch(db), ids = [];
+  ops.forEach(function (o) {
+    const ref = o.id ? F.doc(db, C(o.col), o.id) : F.doc(F.collection(db, C(o.col)));
+    ids.push(ref.id);
+    if (o.del) b.delete(ref); else if (o.upd) b.update(ref, bIn(o.data)); else b.set(ref, bIn(o.data));
+  });
+  await b.commit();
+  return ids;
+}
+/* 신고: 로그인한 다른 사람이 1번만. 3번 쌓이면 vis='reported'(목록에서 숨김, 게시판 운영자 칸으로) — 댓글 신고와 같은 방식 */
+export async function boardReport(col, id) {
+  await fs();
+  const u = auth.currentUser; if (!u) throw new Error("not-signed-in");
+  const ref = F.doc(db, C(col), id);
+  return F.runTransaction(db, async function (tx) {
+    const s = await tx.get(ref); if (!s.exists()) return "gone";
+    const d = s.data(), rs = d.reporters || [];
+    if (rs.includes(u.uid)) return "already";
+    const n = (d.reports || 0) + 1, hide = n >= 3;
+    tx.update(ref, { reports: n, reporters: rs.concat([u.uid]), vis: hide ? "reported" : d.vis });
+    return hide ? "hidden" : "ok";
+  });
+}
