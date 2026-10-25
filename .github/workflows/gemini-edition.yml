@@ -54,11 +54,16 @@ jobs:
           git fetch -q origin +candidates:refs/remotes/origin/candidates && git show origin/candidates:candidates/latest.json > drafts/candidates/latest.json
       - name: 판 id 찾기
         id: ed
+        env:
+          HAS_KEY: ${{ secrets.GEMINI_API_KEY != '' }}
         run: |
           if [ -n "${{ inputs.edition }}" ]; then id="${{ inputs.edition }}"
           elif [ "${{ github.event_name }}" = "schedule" ]; then
             id="$(date +%F)-$( [ "$(date +%H)" -lt 12 ] && echo am || echo pm )"
             if [ -f "data/$id.json" ]; then echo "이미 있음: $id — 할 일 없음"; echo "skip=1" >> "$GITHUB_OUTPUT"; exit 0; fi
+            # 키가 없거나(맥스님 등록 전) 임시 발행 담당(ops/publisher.json, 예: Codex ~10-26 12:45)이 있으면 담당 표시를 하지 않고 비켜 줌 — 다른 발행자를 막지 않게
+            if [ "$HAS_KEY" != "true" ]; then echo "::notice::GEMINI_API_KEY 없음 — 자동 판 건너뜀(비상 발행이 메움)"; echo "skip=1" >> "$GITHUB_OUTPUT"; exit 0; fi
+            TNK_PUBLISHER=grok python3 tools/publisher_guard.py || { echo "::notice::임시 발행 담당 기간 — 자동 판 건너뜀"; echo "skip=1" >> "$GITHUB_OUTPUT"; exit 0; }
             [ -f "ops/picks/$id.json" ] || python3 tools/code_picks.py "$id" || { echo "코드 고르기 실패(후보 부족) — 비상 발행이 이어받음"; exit 3; }
           else id=$(git diff --name-only HEAD~1 HEAD -- 'ops/picks/*.json' | tail -1 | sed -E 's#ops/picks/(.*)\.json#\1#'); fi
           [ -n "$id" ] && [ -f "ops/picks/$id.json" ] || { echo "picks 파일 없음: $id"; exit 1; }
