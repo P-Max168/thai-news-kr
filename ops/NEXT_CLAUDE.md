@@ -11,8 +11,15 @@
 - 공유 코드 확장(한국판·중국어판 동작은 그대로): 시세 칩 현지 통화(`currency.local/per/header_symbol/hide_price`), 날씨 좌표(`wx_coords`), `noindex`, 현지 국기(`local_flag`), 공유 카드 국기(`share.text.mark_bg`), JSON-LD `area`.
 - `firestore.rules` 에 vn_ 블록 추가(게시 전).
 
+## 10-25 15:30 Claude 추가 — 끝난 것
+- KSTAR 재구축 완료(브랜치 `claude/kstar-tnews-engine`, PR #1 — **main 병합 대기**: 이 세션에서 kstar main 직접 push·배포가 자동 판정에 막혀 맥스님 승인 필요).
+  브랜치 시험: 수집처 점검(Newsis 99·Star News 38, 본문 OK), 실제 판 2026-10-25-md 8건 검증 통과(한글 0, 원→바트). 병합 뒤 `gh api …/dispatches -f ref=main -F inputs[deploy]=true` 로 배포.
+  공유 코드: siteconf.forbids()·thb_check·origin_hide_rx·money_pair·빈 impacts 허용·언어판 지난 판 링크 비움(한국판·중국어판 검증 그대로 통과 확인).
+- 한국어판·중국어판 고르기도 코드+제미나이(맥스님 14:44 "모든 뉴스판 구조 동일하게"): tools/code_picks.py + gemini-edition.yml 예약(ko 06:40·17:40, zh 12:50). 키 없거나 임시 발행 담당(Codex ~10-26 12:45) 기간이면 담당 표시 없이 건너뜀. GROK_HANDOFF v3(그록 감시만). 모음 페이지 담당 표시도 바꿈.
+- 알려진 한계: 태국어판 날짜 조각이 공유 코드 순서상 '10/25'(월/일)로 보임 — 고치려면 app.js·ticker.js·pages.js 날짜 조립을 언어 설정으로.
+
 ## 남은 것 (순서대로)
-1. **KSTAR(`P-Max168/kstar-th`) 재구축** — 베트남판과 같은 방식. 맥스님 승인(10-25): 같이 고침, 파타야 전용 내용은 틀만 두고 숨김, 발행은 코드+제미나이 자동 유지.
+1. ~~**KSTAR(`P-Max168/kstar-th`) 재구축**~~ (위: PR #1 병합 대기) — 베트남판과 같은 방식. 맥스님 승인(10-25): 같이 고침, 파타야 전용 내용은 틀만 두고 숨김, 발행은 코드+제미나이 자동 유지.
    - 다른 점: 화면 언어가 **태국어**. `i18n/th.json` 을 새로 만들어야 함(중국어판 `i18n/zh.json` 범위와 같게 약 630개 문구 — jobs·places·관리자 pages 는 숨김이라 제외 가능).
    - 공유 코드에 태국 글자 금지 검사가 여러 곳 있음 → 언어판 설정으로 끄게 바꿔야 함: `tools/site_build.py`(태국 글자 들어가면 중단), `tools/newslib.py` 의 `thai_check`·`validate_extras`(for_me·quick_replies·issue.title 의 THAI_RE), `tools/dev/lang_check.py`. 기준: `site/th.json validate.forbid_scripts` 에 "thai" 가 없으면 허용.
    - 시세 칩: 독자가 태국 거주 태국인 → tnews 의 `data/ticker.*` 를 그대로 복사해 쓰면 됨(바트·금·휘발유·날씨 모두 맞음). 단위 문구만 태국어(i18n).
