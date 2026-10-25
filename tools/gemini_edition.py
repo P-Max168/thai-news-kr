@@ -139,7 +139,7 @@ def call_gemini(prompt, key, model):
 
 
 # ---------------------------------------------------------------- 금액 환산 자동 보정
-VND_RE = re.compile(r"(?<![\d,.])(%s)(?:\s*[~\-–]\s*(%s))?\s*동(?![가-힣])" % (newslib._AMT, newslib._AMT))
+VND_RE = re.compile(r"(?<![\d,.])(%s)(?:\s*[~\-–]\s*(%s))?\s*동(?!네|부|안|시|북|남|서|쪽|행|료|생|기|물|작|맹|원|아)" % (newslib._AMT, newslib._AMT))   # 숫자+동 뒤 조사(이·을·의…)는 허용
 
 
 def _fix_text(t, rate, kind):

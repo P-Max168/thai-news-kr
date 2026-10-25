@@ -27,6 +27,11 @@ FLAGS = {  # 홈 나라 국기(index.html 의 data-site-flag 자리) — 한국�
           '<circle cx="10" cy="2" r=".9"/><circle cx="12" cy="4" r=".9"/><circle cx="12" cy="7" r=".9"/><circle cx="10" cy="9" r=".9"/></g></svg>',
 }
 
+LOCAL_FLAGS = {  # 현지 나라 국기(index.html 맨 앞 태국 국기 자리)
+    "vn": '<svg class="flag" viewBox="0 0 30 20" width="30" height="20" role="img" aria-label="베트남 국기" data-i18n-aria="a11y.flag_th">'
+          '<rect width="30" height="20" fill="#DA251D"/><polygon fill="#FFFF00" points="15,4 16.18,7.64 20,7.64 16.91,9.88 18.09,13.52 15,11.27 11.91,13.52 13.09,9.88 10,7.64 13.82,7.64"/></svg>',
+}
+
 
 def flat(d, pre=""):
     out = {}
@@ -104,6 +109,10 @@ def patch_index(t, c, i18n):
     t = re.sub(r'<style id="tn-site-hide">.*?</style>\n?', "", t, flags=re.S)
     if css:
         t = t.replace("</head>", '<style id="tn-site-hide">%s</style>\n</head>' % "".join(css), 1)
+    # 현지 나라 국기(맨 앞 태국 국기 자리, 2026-10-25 Claude — 베트남판 local_flag=vn)
+    lf = LOCAL_FLAGS.get(c.get("local_flag", ""))
+    if lf:
+        t = re.sub(r'<svg class="flag" viewBox="0 0 30 20"[^>]*data-i18n-aria="a11y.flag_th">.*?</svg>', lambda _: lf, t, count=1, flags=re.S)
     # 홈 나라 국기
     fl = FLAGS.get((c.get("home_section") or {}).get("flag", ""))
     if fl:

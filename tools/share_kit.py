@@ -261,6 +261,9 @@ def brief_li(s, tp, show_go=True):
             % (e(t[0]), e(a), rest, ('<span class="go">%s</span>' % icon("chevron-right")) if show_go else ""))
 
 
+if TX.get("mark_bg"):   # 머리 국기 그림(언어판 share.text.mark_bg — 예: 베트남판 국기). 한국판·중국어판은 없음 = 태국 국기 그대로(2026-10-25 Claude)
+    BASE_CSS = re.sub(r"(\.mark\{flex:0 0 auto;border-radius:calc\(var\(--u\)\*8px\);\s*)background:[^;]*;",
+                      lambda m: m.group(1) + "background:" + TX["mark_bg"].replace("%", "%%") + ";", BASE_CSS, count=1)
 FIT_JS = """
 async () => {
   await document.fonts.ready;
