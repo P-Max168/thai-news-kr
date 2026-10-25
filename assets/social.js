@@ -6,7 +6,7 @@
  */
 (function () {
   "use strict";
-  var FB_URL = "assets/fb.js?v=dcf351ea";       // tools/stamp_assets.py 가 ?v= 갱신
+  var FB_URL = "assets/fb.js?v=9cda2f88";       // tools/stamp_assets.py 가 ?v= 갱신
   var AUTH_KEY = "tnk.auth.v1";                  // 이 기기: {uid, linked:[uid…]} (계정 정보는 저장 안 함)
   var S = window.TNStore, L = window.TNTaste;
   var live = /^https?:$/.test(location.protocol);
@@ -99,6 +99,7 @@
     if ($("acctMenu")) $("acctMenu").innerHTML = menuHTML();
     document.querySelectorAll("[data-cmts].is-mounted").forEach(function (c) { renderComments(c); });
     if (window.TNPages && /^(admin|approve)$/.test(TNPages.current() || "")) TNPages.refresh();
+    try { document.dispatchEvent(new CustomEvent("tn-auth")); } catch (e) {}   // 로그인 상태 바뀜 알림(구인·구직 게시판 등 — 듣는 쪽 없으면 아무 일 없음)
   }
 
   /* ---------- 로그인 · 동기화 ---------- */
@@ -486,7 +487,10 @@
   // 🚫 가게 폐업 신고 숫자(공개 placeflags) — 운영자 승인함에서만 씀(규칙: 운영자만 쓰기)
   function adminPlaceFlag(id, n, st) { return load().then(function (m) { start(m); if (!m.setPlaceFlag) throw new Error("old fb.js"); return m.setPlaceFlag(id, n, st); }); }
 
-  window.TNSocial = { react: react, report: report, adClickOn: function () { return AD_CLICK_ON; }, adminAdClicks: adminAdClicks, adminReports: adminReports, adminPlaceFlag: adminPlaceFlag, isAdmin: function () { return !!(user && admin); }, adminStats: adminStats, warm: function () { if (live && !fbP && !failed) load().then(start).catch(function () {}); }, mountComments: mountComments, renderAccountBox: renderAccountBox, signedIn: function () { return !!user; }, _filter: badText, _nick: nickOk, _replyChips: replyChips };
+  window.TNSocial = { react: react, report: report, adClickOn: function () { return AD_CLICK_ON; }, adminAdClicks: adminAdClicks, adminReports: adminReports, adminPlaceFlag: adminPlaceFlag, isAdmin: function () { return !!(user && admin); }, adminStats: adminStats, warm: function () { if (live && !fbP && !failed) load().then(start).catch(function () {}); }, mountComments: mountComments, renderAccountBox: renderAccountBox, signedIn: function () { return !!user; }, _filter: badText, _nick: nickOk, _replyChips: replyChips,
+    // 구인·구직 게시판(assets/board-jobs.js, 판 설정 board.jobs 인 판만 씀 — 2026-10-25): Firebase 모듈·로그인 정보
+    fb: function () { if (!live || failed) return Promise.reject(new Error("off")); return load().then(function (m) { start(m); return m; }); },
+    uid: function () { return user ? user.uid : ""; }, nick: function () { return profile ? profile.nickname : ""; }, login: login };
 
   renderHeader();
   if (!live) return;

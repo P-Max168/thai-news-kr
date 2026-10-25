@@ -438,6 +438,108 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    // ================= 🧑‍💼 KSTAR 구인·구직 게시판(2026-10-25 Claude · ⏳ 게시 전) — 화면 assets/board-jobs.js(판 설정 board.jobs) =================
+    // ks_resumes/{uid}        : 구직 글(회원 1명당 1개, 문서 id = 내 uid). 로그인 회원만 읽기(게시 중·기간 안), 본인 쓰기·지우기, 30일(exp) 뒤 숨김
+    // ks_resume_contacts/{uid}: LINE ID(본인이 고를 때만) — 본인·운영자·승인된 회사만 읽기
+    // ks_employers/{uid}      : 회사 확인 신청 — 본인·운영자만 읽기. 만들 때 st='pending' 만, st 를 'ok'/'no' 로 바꾸는 건 운영자만(= 공고 쓰기 허가)
+    // ks_jobs/{id}            : 구인 공고 — 누구나 읽기(게시 중·마감 전), 승인된 회사만 만들기. 금지 낱말이 있으면 vis='pending'(운영자 확인)만 허용
+    // 신고: 로그인한 다른 사람이 글마다 1번, 3번이면 vis='reported'(숨김). 운영자 = config/admins_ks. 한국판·다른 판 규칙은 그대로
+    function ksEmpPath(uid) { return /databases/$(database)/documents/ks_employers/$(uid); }
+    function ksEmpOk() { return signedIn() && exists(ksEmpPath(request.auth.uid)) && get(ksEmpPath(request.auth.uid)).data.st == 'ok'; }
+    function ksKinds() { return ['interp', 'tour', 'beauty', 'office', 'content', 'other']; }
+    function ksKo() { return ['none', 'daily', 't1', 't2', 't3', 't4', 't5', 't6']; }
+    function ksProv() { return ['bangkok', 'amnatcharoen', 'angthong', 'buengkan', 'buriram', 'chachoengsao', 'chainat', 'chaiyaphum', 'chanthaburi', 'chiangmai', 'chiangrai', 'chonburi', 'chumphon', 'kalasin', 'kamphaengphet', 'kanchanaburi', 'khonkaen', 'krabi', 'lampang', 'lamphun', 'loei', 'lopburi', 'maehongson', 'mahasarakham', 'mukdahan', 'nakhonnayok', 'nakhonpathom', 'nakhonphanom', 'nakhonratchasima', 'nakhonsawan', 'nakhonsithammarat', 'nan', 'narathiwat', 'nongbualamphu', 'nongkhai', 'nonthaburi', 'pathumthani', 'pattani', 'phangnga', 'phatthalung', 'phayao', 'phetchabun', 'phetchaburi', 'phichit', 'phitsanulok', 'ayutthaya', 'phrae', 'phuket', 'prachinburi', 'prachuapkhirikhan', 'ranong', 'ratchaburi', 'rayong', 'roiet', 'sakaeo', 'sakonnakhon', 'samutprakan', 'samutsakhon', 'samutsongkhram', 'saraburi', 'satun', 'singburi', 'sisaket', 'songkhla', 'sukhothai', 'suphanburi', 'suratthani', 'surin', 'tak', 'trang', 'trat', 'ubonratchathani', 'udonthani', 'uthaithani', 'uttaradit', 'yala', 'yasothon']; }
+    // 금지 낱말 — assets/board-jobs.js 의 BANNED 와 같은 목록(바꾸면 두 곳 같이)
+    function ksBanned(t) { return t.lower().matches('(?s).*(ไปทำงาน.{0,12}(เกาหลี|ต่างประเทศ|ญี่ปุ่น|ไต้หวัน|ดูไบ|ยุโรป|อเมริกา|ออสเตรเลีย)|ทำงาน(ที่|ใน)?(ประเทศ)?เกาหลี|ทำงานต่างประเทศ|แรงงานเกาหลี|ผีน้อย|บินไปทำงาน|work(ing)? (in|at) korea|work abroad|overseas (job|work)|korea(n)? (work )?visa|\\be-?9\\b|한국\\s*(현지\\s*)?(근무|취업)|한국에서\\s*(근무|일)|해외\\s*(취업|근무)|불법\\s*체류|รายได้สูง|รายได้ดีมาก|รายได้หลักแสน|งานง่าย.{0,6}รายได้|high income|easy money|고수입|고소득|นวด|อาบอบนวด|คาราโอเกะ|บาร์|ผับ|โฮสต์|ไซด์ไลน์|นั่งดริงค์|นั่งดริ้ง|งานเอ็น|เด็กเอ็น|เอ็นเตอร์เทนลูกค้า|พริตตี้|เซ็กซี่|massage|karaoke|\\bbar\\b|\\bpub\\b|\\bhost(ess)?\\b|escort|sideline|night ?life|sexy|마사지|유흥|노래방|가라오케|에스코트|도우미|룸살롱|ทำวีซ่า|จัดหาวีซ่า|รับทำวีซ่า|ดำเนินการวีซ่า|visa (service|agent|arrang)|비자\\s*(대행|발급)|ค่าสมัคร|ค่าดำเนินการ|ค่าเอกสาร|มัดจำ|ค่าหัว|ค่านายหน้า|เงินประกัน|โอนเงินก่อน|โอนค่า|deposit|\\bfee\\b|보증금|수수료|선입금).*'); }
+    function ksStr(d, k, lo, hi) { return d[k] is string && d[k].size() >= lo && d[k].size() <= hi; }
+    function ksBoardReport() {
+      let r = request.resource.data;
+      let o = resource.data;
+      return r.diff(o).affectedKeys().hasOnly(['reports', 'reporters', 'vis'])
+        && o.uid != request.auth.uid && !(request.auth.uid in o.reporters)
+        && r.reporters == o.reporters.concat([request.auth.uid]) && r.reports == o.reports + 1
+        && r.vis == (r.reports >= 3 ? 'reported' : o.vis) && r.reporters.size() <= 50;
+    }
+    function validResumeKs(d, uid) {
+      return d.keys().hasOnly(['uid', 'nick', 'job', 'area', 'ko', 'sum', 'from', 'contact', 'adult', 'vis', 'at', 'exp', 'reports', 'reporters'])
+        && d.keys().hasAll(['uid', 'nick', 'job', 'area', 'ko', 'sum', 'from', 'contact', 'adult', 'vis', 'at', 'exp', 'reports', 'reporters'])
+        && d.uid == uid && ksStr(d, 'nick', 2, 20) && !d.nick.matches('(?i).*(admin|official|운영자|관리자|ผู้ดูแล).*')
+        && d.job in ksKinds() && (d.area in ksProv() || d.area == 'online') && d.ko in ksKo()
+        && ksStr(d, 'sum', 10, 300) && !ksBanned(d.nick + ' ' + d.sum)
+        && !d.sum.replace('[ .()+-]', '').matches('(?s).*[0-9]{9,}.*')
+        && d.from is string && d.from.matches('^20[0-9]{2}-[01][0-9]-[0-3][0-9]$')
+        && d.contact in ['none', 'line'] && d.adult == true
+        && d.at == request.time && d.exp is timestamp && d.exp > request.time && d.exp <= request.time + duration.value(31, 'd')
+        && d.reporters is list;
+    }
+    match /ks_resumes/{uid} {
+      allow get: if (signedIn() && resource.data.vis == 'open' && resource.data.exp > request.time) || isOwner(uid) || isAdminKs();
+      allow list: if (signedIn() && resource.data.vis == 'open') || (signedIn() && resource.data.uid == request.auth.uid) || isAdminKs();
+      allow create: if isOwner(uid) && validResumeKs(request.resource.data, uid)
+        && request.resource.data.vis == 'open' && request.resource.data.reports == 0 && request.resource.data.reporters == [];
+      allow update: if signedIn() && (
+        (isOwner(uid) && validResumeKs(request.resource.data, uid)
+          && resource.data.vis in ['open', 'hidden'] && request.resource.data.vis in ['open', 'hidden']
+          && request.resource.data.reports == resource.data.reports && request.resource.data.reporters == resource.data.reporters)
+        || ksBoardReport()
+        || (isAdminKs() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['vis']) && request.resource.data.vis in ['open', 'hidden'])
+      );
+      allow delete: if isOwner(uid) || isAdminKs();
+    }
+    match /ks_resume_contacts/{uid} {
+      allow get: if isOwner(uid) || isAdminKs() || ksEmpOk();
+      allow list: if isAdminKs();
+      allow create, update: if isOwner(uid) && request.resource.data.keys().hasOnly(['line', 'at']) && request.resource.data.keys().hasAll(['line', 'at'])
+        && request.resource.data.line is string && request.resource.data.line.matches('^@?[A-Za-z0-9._-]{2,40}$')
+        && request.resource.data.at == request.time;
+      allow delete: if isOwner(uid) || isAdminKs();
+    }
+    function validEmpKs(d, uid) {
+      return d.keys().hasOnly(['uid', 'name', 'dbd', 'person', 'contact', 'prov', 'web', 'st', 'at', 'note'])
+        && d.keys().hasAll(['uid', 'name', 'dbd', 'person', 'contact', 'prov', 'st', 'at'])
+        && d.uid == uid && ksStr(d, 'name', 2, 80) && d.dbd is string && d.dbd.matches('^0[0-9]{12}$')
+        && ksStr(d, 'person', 2, 40) && ksStr(d, 'contact', 3, 80) && d.prov in ksProv()
+        && (!('web' in d) || d.web == '' || (d.web is string && d.web.size() <= 120 && d.web.matches('^https?://[^ ]+$')))
+        && (!('note' in d) || (d.note is string && d.note.size() <= 120));
+    }
+    match /ks_employers/{uid} {
+      allow get: if isOwner(uid) || isAdminKs();
+      allow list: if isAdminKs();
+      allow create: if isOwner(uid) && validEmpKs(request.resource.data, uid) && request.resource.data.st == 'pending'
+        && request.resource.data.at == request.time && !('note' in request.resource.data);
+      allow update: if (isOwner(uid) && resource.data.st in ['pending', 'no'] && validEmpKs(request.resource.data, uid)
+          && request.resource.data.st == 'pending' && request.resource.data.at == request.time
+          && request.resource.data.get('note', '') == resource.data.get('note', ''))
+        || (isAdminKs() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['st', 'note'])
+          && request.resource.data.st in ['pending', 'ok', 'no']
+          && request.resource.data.get('note', '') is string && request.resource.data.get('note', '').size() <= 120);
+      allow delete: if isOwner(uid) || isAdminKs();
+    }
+    function validJobKs(d) {
+      return d.keys().hasOnly(['uid', 'co', 'title', 'job', 'prov', 'type', 'pay', 'smin', 'smax', 'ko', 'desc', 'apply', 'dl', 'vis', 'at', 'exp', 'reports', 'reporters'])
+        && d.keys().hasAll(['uid', 'co', 'title', 'job', 'prov', 'type', 'pay', 'smin', 'smax', 'ko', 'desc', 'apply', 'dl', 'vis', 'at', 'exp', 'reports', 'reporters'])
+        && d.uid == request.auth.uid && d.co == get(ksEmpPath(request.auth.uid)).data.name
+        && ksStr(d, 'title', 4, 80) && d.job in ksKinds() && d.prov in ksProv()
+        && d.type in ['full', 'part', 'contract', 'freelance', 'intern'] && d.pay in ['month', 'day', 'hour']
+        && d.smin is int && d.smax is int && d.smin >= 1 && d.smin <= d.smax && d.smax <= 1000000
+        && d.ko in ksKo() && ksStr(d, 'desc', 10, 800) && ksStr(d, 'apply', 3, 200)
+        && d.dl is timestamp && d.dl > request.time && d.dl <= request.time + duration.value(61, 'd') && d.exp == d.dl
+        && d.at == request.time && d.reports == 0 && d.reporters == []
+        && (d.vis == 'pending' || (d.vis == 'open' && !ksBanned(d.title + ' ' + d.desc + ' ' + d.apply)));
+    }
+    match /ks_jobs/{id} {
+      allow get: if (resource.data.vis == 'open' && resource.data.exp > request.time) || (signedIn() && resource.data.uid == request.auth.uid) || isAdminKs();
+      allow list: if resource.data.vis == 'open' || (signedIn() && resource.data.uid == request.auth.uid) || isAdminKs();
+      allow create: if ksEmpOk() && validJobKs(request.resource.data);
+      allow update: if signedIn() && (
+        ksBoardReport()
+        || (resource.data.uid == request.auth.uid && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['vis'])
+          && resource.data.vis in ['open', 'hidden'] && request.resource.data.vis in ['open', 'hidden'])
+        || (isAdminKs() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['vis']) && request.resource.data.vis in ['open', 'hidden', 'no'])
+      );
+      allow delete: if signedIn() && (resource.data.uid == request.auth.uid || isAdminKs());
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

@@ -8,7 +8,7 @@ i18n/ko.json(= 한국판 기본 문구, 코드에서 자동 생성 — 손으로
 import html, argparse, json, pathlib, re, sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-JS = ["app.js", "topics.js", "ticker.js", "social.js", "pages.js", "places.js", "prefs.js", "taste.js", "report.js", "nearby.js", "jobs.js", "modern.js", "fb.js", "tabbar.js"]
+JS = ["app.js", "topics.js", "ticker.js", "social.js", "pages.js", "places.js", "prefs.js", "taste.js", "report.js", "nearby.js", "jobs.js", "modern.js", "fb.js", "tabbar.js", "board-jobs.js"]
 TNI_RE = re.compile(r'\b(?:TNI|I|T)\(\s*"([\w.]+)"\s*,\s*"((?:[^"\\]|\\.)*)"\s*\)')
 ATTR_RE = re.compile(r'<(\w+)\b[^>]*\sdata-i18n(?:-html)?="([\w.]+)"[^>]*>(.*?)</\1>', re.S)
 ARIA_RE = re.compile(r'<\w+\b(?=[^>]*\sdata-i18n-aria="([\w.]+)")(?=[^>]*\saria-label="([^"]*)")[^>]*>')
