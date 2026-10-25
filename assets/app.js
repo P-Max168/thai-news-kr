@@ -392,6 +392,8 @@
     impacts(s).forEach(function (k) { var m = impOf(k); chips += '<span class="chip chip--imp" style="--ic:' + m.c + '" title="' + TNI("card.impact_title", "한인 영향: ") + esc(k) + '"><span aria-hidden="true">' + m.e + "</span>" + esc(k) + "</span>"; });
     var forMe = (typeof s.for_me === "string" && s.for_me.trim()) ? '<p class="forme"><b class="forme__h">' + TNI("card.for_me_h", "🙋 그래서 나는?") + '</b><span class="forme__t">' + esc(s.for_me.trim()) + "</span></p>" : "";
     var media = mediaHTML(s);
+    // 아티스트 칩(2026-10-25, KSTAR 수집기가 s.artists=[{id,n}] 를 붙임) → kfan.js 아티스트 화면
+    var achips = Array.isArray(s.artists) && s.artists.length ? '<div class="kf-achips">' + s.artists.slice(0, 6).map(function (a) { return '<button type="button" class="kf-achip" data-artist="' + esc(a.id) + '">🤍 ' + esc(a.n) + "</button>"; }).join("") + "</div>" : "";
     // 오늘의 한국어 한마디(2026-10-25, 판 설정 story_extras ko_word — 지금 KSTAR). 한글 낱말은 lang="ko"(화면 언어 점검에서 뺌)
     var kw = s.ko_word && s.ko_word.ko ? '<p class="koword"><b class="koword__h">' + TNI("card.ko_word_h", "🇰🇷 오늘의 한국어") + '</b><span class="koword__ko" lang="ko">' + esc(s.ko_word.ko) +
       '</span><span class="koword__th">' + esc(s.ko_word.th || "") + '</span><span class="koword__m">' + esc(s.ko_word.mean || "") + "</span></p>" : "";
@@ -414,7 +416,7 @@
         '<p class="card__lead">' + esc(s.summary[0]) + "</p>" +
         '<div class="card__foot">' + metaHTML(s) + '<span class="more"><span class="more__t">' + TNI("card.more", "자세히") + '</span> <i>▾</i></span></div>' +
       "</button>" + toolsHTML(s) +
-      '<div class="card__body" id="body-' + esc(s.id) + '">' + upd + paras + ctx + media + kw +
+      '<div class="card__body" id="body-' + esc(s.id) + '">' + upd + achips + paras + ctx + media + kw +
         '<div class="origin">' + originTitle(s.title_th) +
         '<a class="btn" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.source.replace(/\s*\(.*\)$/, "")) + TNI("card.source_btn", " 원문 보기 ↗") + "</a>" + rel + tags + "</div>" +
         '<div class="rep-row">' + repBtn("article", edId() + "/" + s.id) + "</div>" +

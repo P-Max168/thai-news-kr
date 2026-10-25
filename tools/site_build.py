@@ -47,7 +47,7 @@ def flat(d, pre=""):
 
 def site_js(c, i18n):
     keep = {k: c.get(k) for k in ("lang", "htmlLang", "brand", "brand_sub", "site_url", "currency", "home_section", "hidden_sections",
-                                  "firestore_prefix", "admins_doc", "slots", "edition_label", "share", "wx_coords", "origin_hide_rx", "login", "date_order", "date_long", "tabbar", "ga4", "adsense") if k in c}
+                                  "firestore_prefix", "admins_doc", "slots", "edition_label", "share", "wx_coords", "origin_hide_rx", "login", "date_order", "date_long", "tabbar", "ga4", "adsense", "fan") if k in c}
     keep["i18n"] = i18n
     keep["topics"] = {k: v for k, v in (c.get("topics") or {}).items() if not k.startswith("_") and k != "REGION_PATTERNS"}
     keep["impacts_ui"] = [{"k": k, "e": IMPACT_UI[i % 5][0], "c": IMPACT_UI[i % 5][1]} for i, k in enumerate(c.get("impacts") or [])]
@@ -151,6 +151,13 @@ def patch_index(t, c, i18n):
         tp = ROOT_FOR_SKIN[0] / "assets" / "tabbar.js" if ROOT_FOR_SKIN else None
         tv = hashlib.sha256(tp.read_bytes()).hexdigest()[:8] if tp and tp.exists() else "1"
         t = t.replace("</body>", '<script src="assets/tabbar.js?v=%s" defer id="tn-tabbar"></script>\n</body>' % tv, 1)
+    # 팬 기능(최애·아티스트·일정, 2026-10-25 — KSTAR): site/<lang>.json fan 이 있으면 그 판에만 assets/kfan.js
+    t = re.sub(r'\n?<script src="assets/kfan\.js[^"]*" defer id="tn-kfan"></script>', "", t)
+    if c.get("fan"):
+        import hashlib
+        fp = ROOT_FOR_SKIN[0] / "assets" / "kfan.js" if ROOT_FOR_SKIN else None
+        fv = hashlib.sha256(fp.read_bytes()).hexdigest()[:8] if fp and fp.exists() else "1"
+        t = t.replace("</body>", '<script src="assets/kfan.js?v=%s" defer id="tn-kfan"></script>\n</body>' % fv, 1)
     # 쿠키 동의 + GA4 + 애드센스(2026-10-25 — KSTAR): site/<lang>.json ga4 / adsense.pub 가 있으면 그 판에만 assets/consent.js·애드센스 확인 메타
     t = re.sub(r'\n?<script src="assets/consent\.js[^"]*" defer id="tn-consent"></script>', "", t)
     t = re.sub(r'\n?<meta name="google-adsense-account" content="[^"]*">', "", t)
