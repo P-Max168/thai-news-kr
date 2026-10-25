@@ -9,7 +9,7 @@
 
 읽는 것(언어판 저장소): site/<lang>.json · site/topics.<lang>.json · i18n/<lang>.json
 만드는 것/고치는 것(언어판 저장소 안에서만):
-  data/site.js   window.TN_SITE = {lang, brand, i18n, topics, currency, home_section, hidden_sections, firestore_prefix, admins_doc, impacts_ui}
+  data/site.js   window.TN_SITE = {lang, brand, i18n, topics, currency, home_section, hidden_sections, firestore_prefix, admins_doc, impacts_ui, login(LINE 로그인 경로)}
   index.html     <html lang>, <title>·description·og·canonical·앱 이름, data/site.js 넣기, data-i18n 글자, 홈 나라 국기, 숨길 코너 CSS
   manifest.json  name·short_name·lang·description
 같은 파일에 여러 번 돌려도 결과가 같음(멱등). sync_core.sh 가 한국판 index.html 을 덮어쓴 뒤 → 이 스크립트 → deploy.
@@ -47,7 +47,7 @@ def flat(d, pre=""):
 
 def site_js(c, i18n):
     keep = {k: c.get(k) for k in ("lang", "htmlLang", "brand", "brand_sub", "site_url", "currency", "home_section", "hidden_sections",
-                                  "firestore_prefix", "admins_doc", "slots", "edition_label", "share", "wx_coords", "origin_hide_rx") if k in c}
+                                  "firestore_prefix", "admins_doc", "slots", "edition_label", "share", "wx_coords", "origin_hide_rx", "login") if k in c}
     keep["i18n"] = i18n
     keep["topics"] = {k: v for k, v in (c.get("topics") or {}).items() if not k.startswith("_") and k != "REGION_PATTERNS"}
     keep["impacts_ui"] = [{"k": k, "e": IMPACT_UI[i % 5][0], "c": IMPACT_UI[i % 5][1]} for i, k in enumerate(c.get("impacts") or [])]
