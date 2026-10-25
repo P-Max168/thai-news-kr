@@ -47,7 +47,7 @@ def flat(d, pre=""):
 
 def site_js(c, i18n):
     keep = {k: c.get(k) for k in ("lang", "htmlLang", "brand", "brand_sub", "site_url", "currency", "home_section", "hidden_sections",
-                                  "firestore_prefix", "admins_doc", "slots", "edition_label", "share", "wx_coords", "origin_hide_rx", "login") if k in c}
+                                  "firestore_prefix", "admins_doc", "slots", "edition_label", "share", "wx_coords", "origin_hide_rx", "login", "date_order", "date_long", "tabbar") if k in c}
     keep["i18n"] = i18n
     keep["topics"] = {k: v for k, v in (c.get("topics") or {}).items() if not k.startswith("_") and k != "REGION_PATTERNS"}
     keep["impacts_ui"] = [{"k": k, "e": IMPACT_UI[i % 5][0], "c": IMPACT_UI[i % 5][1]} for i, k in enumerate(c.get("impacts") or [])]
@@ -144,6 +144,13 @@ def patch_index(t, c, i18n):
         sp = ROOT_FOR_SKIN[0] / sk if ROOT_FOR_SKIN else None
         v = hashlib.sha256(sp.read_bytes()).hexdigest()[:8] if sp and sp.exists() else "1"
         t = t.replace("</body>", '<link rel="stylesheet" href="assets/skin.css?v=%s" id="tn-skin">\n</body>' % v, 1)
+    # 하단 탭바(2026-10-25 — KSTAR): site/<lang>.json tabbar 가 있으면 assets/tabbar.js 를 그 판에만 연결(한국판 index.html 은 그대로)
+    t = re.sub(r'\n?<script src="assets/tabbar\.js[^"]*" defer id="tn-tabbar"></script>', "", t)
+    if c.get("tabbar"):
+        import hashlib
+        tp = ROOT_FOR_SKIN[0] / "assets" / "tabbar.js" if ROOT_FOR_SKIN else None
+        tv = hashlib.sha256(tp.read_bytes()).hexdigest()[:8] if tp and tp.exists() else "1"
+        t = t.replace("</body>", '<script src="assets/tabbar.js?v=%s" defer id="tn-tabbar"></script>\n</body>' % tv, 1)
     # 한국판 '지난 뉴스판' 링크 묶음(tools/seo.py home_edition_links)은 언어판에선 비움 — 한국판 판 목록·한국어 글이 따라오지 않게(2026-10-25)
     t = re.sub(r"(<!-- edition-links:start -->).*?(<!-- edition-links:end -->)", r"\1\2", t, count=1, flags=re.S)
     return t

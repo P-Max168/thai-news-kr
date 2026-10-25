@@ -959,3 +959,9 @@ html .gbtn.gbtn--line:hover,html.th-modern .gbtn.gbtn--line:hover{background:#05
 .acct-menu__h{display:block;margin:0 0 10px}
 .acct-menu--login .login-btns{display:flex;flex-direction:column;align-items:stretch}
 .acct-menu--login .gbtn{justify-content:center;padding:10px 14px;font-size:.9375rem}
+/* 오늘의 한국어 한마디(2026-10-25) — story_extras ko_word 판만 데이터가 있음 */
+.koword{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:12px 0;padding:10px 12px;border-radius:12px;background:var(--kchip,#f3f4f6);border:1px solid var(--kline,#e5e7eb)}
+.koword__h{flex:0 0 100%;font-size:.75rem;color:var(--kmuted,#6b7280)}
+.koword__ko{font-size:1.125rem;font-weight:700;color:var(--kac,#0b2a4a)}
+.koword__th{font-weight:600}
+.koword__m{flex:1 1 100%;font-size:.875rem;color:var(--kink,#1f2937)}

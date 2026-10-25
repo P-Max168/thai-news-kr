@@ -16,7 +16,7 @@ _C = siteconf.load()
 BAD = "".join((["가-힣"] if _C.get("htmlLang", _C["lang"]) != "ko" else []) + (["\\u0E00-\\u0E3E\\u0E40-\\u0E7F"] if siteconf.forbids("thai", _C) else [])) or "\\uFFFF"
 SCAN = r"""()=>{const bad=/[__BAD__]/;const out=new Set();const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;
 while(n=w.nextNode()){const t=n.nodeValue.trim();if(!bad.test(t))continue;const e=n.parentElement;if(!e)continue;const r=e.getBoundingClientRect(),s=getComputedStyle(e);
- if(!r.width||!r.height||s.visibility==='hidden'||s.display==='none'||e.closest('[hidden],[aria-hidden=true]'))continue;out.add(t.slice(0,60))}
+ if(!r.width||!r.height||s.visibility==='hidden'||s.display==='none'||e.closest('[hidden],[aria-hidden=true],[lang=ko]'))continue;out.add(t.slice(0,60))}
 document.querySelectorAll('[aria-label],[placeholder]').forEach(e=>['aria-label','placeholder'].forEach(a=>{const v=e.getAttribute(a);if(v&&bad.test(v)&&e.getClientRects().length&&!e.closest('[aria-hidden=true]'))out.add('@'+a+'='+v.slice(0,60))}));return [...out]}"""
 SCAN = SCAN.replace("__BAD__", BAD)
 STEPS = [("feed", None), ("settings", "document.querySelector('[data-open-settings]')&&document.querySelector('[data-open-settings]').click()"),

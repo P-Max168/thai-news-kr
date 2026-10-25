@@ -10,6 +10,7 @@
  */
 (function () {
   "use strict";
+  var TNmd = window.TNmd || function (o) { return o.month + "/" + o.day; };   // 짧은 날짜 순서(topics.js, 판 설정 date_order)
   var TZ = "Asia/Bangkok", DAY = 864e5, $ = function (id) { return document.getElementById(id); };
   var box = $("ticker"); if (!box) return;
   var REGIONS = {
@@ -40,7 +41,7 @@
   function prevDay(iso) {
     var t = ms(iso); if (!t) return TNI("ticker.kf20644d", "전날 ");
     var o = {}; new Intl.DateTimeFormat("en-US", { timeZone: TZ, month: "numeric", day: "numeric" }).formatToParts(new Date(t - 864e5)).forEach(function (p) { o[p.type] = p.value; });
-    return o.month + "/" + o.day + " ";
+    return TNmd(o) + " ";
   }
   function when(iso) {
     var o = {}; new Intl.DateTimeFormat("ko-KR", { timeZone: TZ, month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false })
@@ -137,7 +138,7 @@
   function clock(list) {
     var t = list.filter(function (x) { return x > 0; }); if (!t.length) return "";
     var o = {}, f = function (v) { new Intl.DateTimeFormat("en-US", { timeZone: TZ, month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false })
-      .formatToParts(new Date(v)).forEach(function (p) { o[p.type] = p.value; }); return o.month + "/" + o.day; };
+      .formatToParts(new Date(v)).forEach(function (p) { o[p.type] = p.value; }); return TNmd(o); };
     var d = f(Math.min.apply(null, t));
     return d + " " + o.hour.replace(/^24$/, "00") + ":" + o.minute;
   }
@@ -146,7 +147,7 @@
     var c = clock(list); if (!c) return "";
     var o = {}; new Intl.DateTimeFormat("en-US", { timeZone: TZ, month: "numeric", day: "numeric" }).formatToParts(new Date()).forEach(function (p) { o[p.type] = p.value; });
     var i = c.indexOf(" "), d = c.slice(0, i);
-    return '<span class="tk-d' + (d === o.month + "/" + o.day ? " tk-d--today" : "") + '">' + d + " </span>" + c.slice(i + 1);
+    return '<span class="tk-d' + (d === TNmd(o) ? " tk-d--today" : "") + '">' + d + " </span>" + c.slice(i + 1);
   }
   function n2(x) { return Number(x).toLocaleString("ko-KR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 

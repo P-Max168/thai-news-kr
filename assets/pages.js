@@ -4,6 +4,7 @@
  * 모양은 📍 내 주변 페이지(nearby.css .nb-page*)와 같음 — 휴대폰은 화면 전체, 데스크톱은 가운데 카드. 떠 있는 상자 없음. */
 (function () {
   "use strict";
+  var TNmd = window.TNmd || function (o) { return o.month + "/" + o.day; };   // 짧은 날짜 순서(topics.js, 판 설정 date_order)
   var pages = {}, root = null, cur = null, pushed = false, lastFocus = null;
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function $(id) { return document.getElementById(id); }
@@ -268,7 +269,7 @@
       .replace(/(backups\/[\w.\-]+\/[\w.\-]+\.jpg)/g, function (m, u) { return '<a class="ap-photo" href="' + u + '" target="_blank" rel="noopener">📷 ' + u.split("/").pop().replace(/\.jpg$/, "") + "</a>"; });
   }
   // 시각은 실제 날짜와 함께 'M/D HH:MM'(방콕) — 2026-10-04 실제 날짜 표시
-  function hm(ms) { var o = {}; new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Bangkok", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(new Date(ms)).forEach(function (p) { o[p.type] = p.value; }); return o.month + "/" + o.day + " " + o.hour.replace(/^24$/, "00") + ":" + o.minute; }
+  function hm(ms) { var o = {}; new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Bangkok", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(new Date(ms)).forEach(function (p) { o[p.type] = p.value; }); return TNmd(o) + " " + o.hour.replace(/^24$/, "00") + ":" + o.minute; }
   function apText(items, dec) {
     var ok = [], hold = [];
     items.forEach(function (x) { var d = dec[x.id]; if (d && d.d === "ok") ok.push("#" + x.no); else if (d && d.d === "hold") hold.push("#" + x.no); });

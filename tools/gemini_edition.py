@@ -80,6 +80,25 @@ def topics_text():
     return "\n".join("- %s: %s" % (k, v) for k, v in newslib.TOPICS.items())
 
 
+# 오늘의 한국어 한마디(2026-10-25, KSTAR): site/<lang>.json "story_extras": ["ko_word"] 인 판만. 화면은 app.js ko_word 상자
+KO_WORD = "ko_word" in (SITE.get("story_extras") or [])
+KO_WORD_SCHEMA = ',"ko_word":{"ko":"한국어 낱말(한글)","th":"그 낱말의 한국어 발음을 화면 언어 글자로","mean":"화면 언어로 뜻 한 줄"}'
+KO_WORD_RULE = ("- ko_word: 그 기사와 관련된 한국어 낱말·짧은 표현 하나(한글 12자 이하). 연예 용어·팬덤 표현 우선(예: 컴백, 음방, 직캠, 팬미팅, 최애). "
+                "th 에는 한국어 발음을 화면 언어 글자로(한글 금지), mean 에는 화면 언어로 뜻(한글 금지). 마땅한 낱말이 없으면 ko 를 빈 문자열로.\n")
+HANGUL_ONLY_RE = re.compile(r"^[\uAC00-\uD7AF0-9 ·\-]{1,12}$")
+
+
+def ko_word(v):
+    if not isinstance(v, dict):
+        return None
+    ko, th, mean = (str(v.get(k) or "").strip() for k in ("ko", "th", "mean"))
+    if not (HANGUL_ONLY_RE.match(ko) and re.search(r"[\uAC00-\uD7AF]", ko) and th and mean):
+        return None
+    if newslib.HANGUL_RE.search(th) or newslib.HANGUL_RE.search(mean):
+        return None
+    return dict(ko=ko, th=th[:40], mean=mean[:80])
+
+
 def build_prompt(eid, items, fx_line, select=0):
     lang_name = {"ko": "한국어", "vn": "한국어", "zh": "简体中文", "th": "ภาษาไทย"}.get(LANG, "한국어")
     reader = SITE.get("reader") or {"ko": "태국(파타야 등)에 사는 한국인", "vn": "베트남(호치민·하노이 등)에 사는 한국인",
@@ -94,7 +113,7 @@ def build_prompt(eid, items, fx_line, select=0):
         '{"stories":[{"key":"입력 key 그대로","keep":true,"drop_reason":"","topic":"id","secondary":["id"],"region":"지명(없으면 \\"\\")",'
         '"headline":"제목","summary":["문단1","문단2"],"context":"배경 한두 문장(원문에 있는 내용만, 없으면 \\"\\")",'
         '"tags":["키워드",…2~6개, # 없이],"impact":[],"for_me":"독자에게 무슨 뜻인지 한 문장(원문 사실만, 없으면 \\"\\")",'
-        '"quick_replies":["추천 댓글 3개, 각 40자 이하, 경험을 지어내지 말 것, 링크 금지"]}],'
+        '"quick_replies":["추천 댓글 3개, 각 40자 이하, 경험을 지어내지 말 것, 링크 금지"]%%s}],'
         '"briefing":[{"topic":"id","text":"한 줄 요약 120자 이하, 핵심어나 숫자 한 곳을 **굵게**","story_key":"key"}],'
         '"highlights":["key","key","key"]}\n'
         "- keep=false: 원문에서 확인 안 되는 기사, 성인·선정적 내용, 같은 사건 중복이면 false 와 drop_reason.\n"
@@ -103,6 +122,9 @@ def build_prompt(eid, items, fx_line, select=0):
         "- briefing 4~6줄, 각 줄은 서로 다른 기사. highlights 는 가장 중요한 기사 3개(keep=true 인 것).\n"
         "- 원문 본문이 비어 있으면 memo 와 제목에 있는 사실만 쓰고, 그것도 부족하면 keep=false.\n"
         % (reader, lang_name, eid, fx_line, rules_text(), topics_text(), " / ".join(newslib.IMPACTS)))
+    head = head.replace('"]%s}],', '"]' + (KO_WORD_SCHEMA if KO_WORD else "") + '}],', 1)
+    if KO_WORD:
+        head += KO_WORD_RULE
     if select:
         head += ("- [고르기] 아래 후보 %d건 중 독자에게 뉴스 가치가 가장 높은 %d~%d건을 keep=true(좋은 기사가 그만큼 없을 때만 줄임. 사건·사고·정책·경제·비자·생활 정보·한국 관련 우선, "
                  "연성·홍보성 기사는 뒤로, 한 매체에 몰리지 않게). 나머지는 keep=false, drop_reason=\"선택 안 함\".\n" % (len(items), max(4, select - 2), select))
@@ -259,6 +281,10 @@ def assemble(eid, items, out):
                   issue=None, quick_replies=[str(q).strip()[:40] for q in (s.get("quick_replies") or []) if 2 <= len(str(q).strip())][:4])
         if not st["context"]:
             st.pop("context")
+        if KO_WORD:
+            kw = ko_word(s.get("ko_word"))
+            if kw:
+                st["ko_word"] = kw
         if len(st["quick_replies"]) < 3:
             st["quick_replies"] = []
         if len(st["tags"]) < 2:

@@ -3,6 +3,7 @@
  */
 (function () {
   "use strict";
+  var TNmd = window.TNmd || function (o) { return o.month + "/" + o.day; };   // 짧은 날짜 순서(topics.js, 판 설정 date_order)
   var T = window.TNTopics, S = window.TNStore, L = window.TNTaste;
   var TZ = "Asia/Bangkok";
   var MAX = T.MAX_TOPICS;
@@ -40,7 +41,7 @@
   function fmtTime(iso) {
     var parts = new Intl.DateTimeFormat("ko-KR", { timeZone: TZ, month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(new Date(iso));
     var o = {}; parts.forEach(function (p) { o[p.type] = p.value; });
-    return o.month + "/" + o.day + " " + o.hour + ":" + o.minute;
+    return TNmd(o) + " " + o.hour + ":" + o.minute;
   }
   function fmtDay(iso) {
     var p = new Intl.DateTimeFormat(TNI("_locale", "ko-KR"), { timeZone: TZ, month: "numeric", day: "numeric", weekday: "short" }).formatToParts(new Date(iso));
@@ -128,7 +129,9 @@
   function render(data) {
     state.data = data;
     var d = new Date(data.date + "T12:00:00+07:00");
-    var longDate = new Intl.DateTimeFormat(TNI("_locale", "ko-KR"), { timeZone: TZ, year: "numeric", month: "long", day: "numeric", weekday: "long" }).format(d);
+    // 판 설정 date_long(예: 태국어판 {weekday:"short", day:"numeric", month:"short"} → อา. 25 ต.ค.) — 없으면 한국판 그대로
+    var LD = (window.TN_SITE && window.TN_SITE.date_long) || { year: "numeric", month: "long", day: "numeric", weekday: "long" };
+    var longDate = new Intl.DateTimeFormat(TNI("_locale", "ko-KR"), Object.assign({ timeZone: TZ }, LD)).format(d);
     var ed = state.edition || {};
     var edName = (window.TN_SITE && ed.edition && TNI("edition." + ed.edition, "")) || (ed.label ? ed.label.replace(/^\d+월 \d+일 /, "") : "");
     $("dateline").innerHTML = esc(longDate) + "<span>" + (edName ? '<b class="edtag">' + esc(edName) + "</b> · " : "") + TNI("dateline.tz", "방콕 시간 (UTC+7) 기준") + "</span>";
@@ -388,6 +391,9 @@
     if (s.update) chips += '<span class="chip chip--new">' + TNI("card.followup", "후속") + '</span>';
     impacts(s).forEach(function (k) { var m = impOf(k); chips += '<span class="chip chip--imp" style="--ic:' + m.c + '" title="' + TNI("card.impact_title", "한인 영향: ") + esc(k) + '"><span aria-hidden="true">' + m.e + "</span>" + esc(k) + "</span>"; });
     var forMe = (typeof s.for_me === "string" && s.for_me.trim()) ? '<p class="forme"><b class="forme__h">' + TNI("card.for_me_h", "🙋 그래서 나는?") + '</b><span class="forme__t">' + esc(s.for_me.trim()) + "</span></p>" : "";
+    // 오늘의 한국어 한마디(2026-10-25, 판 설정 story_extras ko_word — 지금 KSTAR). 한글 낱말은 lang="ko"(화면 언어 점검에서 뺌)
+    var kw = s.ko_word && s.ko_word.ko ? '<p class="koword"><b class="koword__h">' + TNI("card.ko_word_h", "🇰🇷 오늘의 한국어") + '</b><span class="koword__ko" lang="ko">' + esc(s.ko_word.ko) +
+      '</span><span class="koword__th">' + esc(s.ko_word.th || "") + '</span><span class="koword__m">' + esc(s.ko_word.mean || "") + "</span></p>" : "";
     var paras = s.summary.map(function (p) { return '<p class="para">' + esc(p) + "</p>"; }).join("");
     var ctx = s.context ? '<div class="context"><b>' + TNI("card.background_h", "💡 배경 설명") + '</b>' + esc(s.context) + "</div>" : "";
     var upd = s.update ? '<div class="update"><b>' + TNI("card.update_h", "🆕 이전 판 이후 새로 나온 내용") + '</b>' + esc(s.update) + "</div>" : "";
@@ -407,7 +413,7 @@
         '<p class="card__lead">' + esc(s.summary[0]) + "</p>" +
         '<div class="card__foot">' + metaHTML(s) + '<span class="more"><span class="more__t">' + TNI("card.more", "자세히") + '</span> <i>▾</i></span></div>' +
       "</button>" + toolsHTML(s) +
-      '<div class="card__body" id="body-' + esc(s.id) + '">' + upd + paras + ctx +
+      '<div class="card__body" id="body-' + esc(s.id) + '">' + upd + paras + ctx + kw +
         '<div class="origin">' + originTitle(s.title_th) +
         '<a class="btn" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.source.replace(/\s*\(.*\)$/, "")) + TNI("card.source_btn", " 원문 보기 ↗") + "</a>" + rel + tags + "</div>" +
         '<div class="rep-row">' + repBtn("article", edId() + "/" + s.id) + "</div>" +
