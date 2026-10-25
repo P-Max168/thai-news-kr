@@ -103,8 +103,8 @@ def build_prompt(eid, items, fx_line, select=0):
         "- 원문 본문이 비어 있으면 memo 와 제목에 있는 사실만 쓰고, 그것도 부족하면 keep=false.\n"
         % (reader, lang_name, eid, fx_line, rules_text(), topics_text(), " / ".join(newslib.IMPACTS)))
     if select:
-        head += ("- [고르기] 아래 후보 %d건 중 독자에게 뉴스 가치가 가장 높은 최대 %d건만 keep=true(사건·사고·정책·경제·비자·한국 관련 우선, "
-                 "연성·홍보성 기사는 뒤로, 한 매체에 몰리지 않게). 나머지는 keep=false, drop_reason=\"선택 안 함\".\n" % (len(items), select))
+        head += ("- [고르기] 아래 후보 %d건 중 독자에게 뉴스 가치가 가장 높은 %d~%d건을 keep=true(좋은 기사가 그만큼 없을 때만 줄임. 사건·사고·정책·경제·비자·생활 정보·한국 관련 우선, "
+                 "연성·홍보성 기사는 뒤로, 한 매체에 몰리지 않게). 나머지는 keep=false, drop_reason=\"선택 안 함\".\n" % (len(items), max(4, select - 2), select))
     body = json.dumps([{k: v for k, v in it.items() if k in ("key", "source", "title", "published", "memo", "text")} for it in items],
                       ensure_ascii=False)
     return head + "\n[기사들]\n" + body
@@ -365,7 +365,10 @@ def main():
         data["fx"] = fx
     fix_money(data)
     ok = len(data["stories"]) >= 4 and save_with_drop(data)
-    rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), edition=a.eid, model=a.model, picks=len(items), body=got,
+    kept = sum(1 for s in out.get("stories") or [] if s.get("keep") is not False)
+    drops = [dict(key=s.get("key"), why=str(s.get("drop_reason") or "")[:40]) for s in out.get("stories") or [] if s.get("keep") is False][:30]
+    rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), edition=a.eid, model=a.model, picks=len(items), body=got, kept_by_model=kept,
+               model_drops=drops, after_check=len(data["stories"]),
                published=len(data["stories"]) if ok else 0, seconds=round(time.time() - t0, 1), **USAGE)
     (ROOT / "ops").mkdir(exist_ok=True)
     with open(ROOT / "ops" / "gemini-usage.jsonl", "a", encoding="utf-8") as f:
