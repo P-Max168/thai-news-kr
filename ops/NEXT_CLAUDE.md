@@ -24,6 +24,14 @@
 4. Firebase 규칙 게시(맥스님, LOGIN_TODO) + 승인된 도메인에 `vn.pmaxone.com` 추가 + `config/admins_vn` — 그 전까지 베트남판 댓글·로그인은 안 됨.
 5. 베트남판 '민감 기사' 기준(자살·성범죄·아동 학대만 자동 제외 — Claude 판단) 맥스님 확인.
 
+## 맥스님이 '맥미니에 앉았을 때' 결정하기로 미룬 것 (10-25 14:20 맥스님)
+> 그 전에는 묻지 않는다. 맥스님이 맥미니 접속을 알리면 이 목록을 한 번에 꺼내 결정받는다.
+1. GEMINI_API_KEY 를 thai-news-kr·thai-news-zh Secret 에 등록(맥스님 로그인·키 붙여넣기). 등록 전엔 그록 판이 제미나이 단계에서 실패 → Claude 비상 발행이 메움.
+2. 새 그록이 저장소에 파일을 올릴 수 없을 때 GitHub 토큰을 줄지.
+3. Firebase 규칙 게시 + 승인된 도메인 vn.pmaxone.com + config/admins_vn (베트남판 댓글·로그인).
+4. 베트남판 민감 기사 기준(자살·성범죄·아동 학대만 자동 제외 — Claude 판단) 그대로 둘지.
+5. 10-25 보고서의 'AI 가 스스로 정한 것'(구글 API=제미나이 해석, 베트남판 주제 이름, 자동 고르기 20건→8~10건, picks 때 담당 표시 대리) 확인.
+
 ## 실패 기록 (반복 금지)
 - 10-24 Claude 가 vn·kstar 작업지시서에 "tnews 디자인 단순화판"이라고 적어 GPT 가 다른 사이트를 만듦 → 맥스님 원칙 위반. **새 판은 언제나 sync_core + 판 설정으로만.**
 - 이 클라우드에서는 GitHub Actions 로그·Secret 목록·Pages API 를 못 읽음(프록시 403). 실행 결과는 커밋되는 `ops/last-run.json`·`ops/gemini-usage.jsonl` 로 확인. 실행 목록(`gh run list`)·작업 단계 결과(`gh api …/runs/<id>/jobs`)는 읽힘.
