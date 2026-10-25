@@ -17,6 +17,9 @@
     document.head.appendChild(s); return s;
   }
   function apply(v) {
+    // 통계: '모두 허용'일 때만. 허용했다가 '필수만'으로 바꾸면 이미 불러온 GA 도 바로 멈춤(ga-disable + 동의 상태 갱신 — Codex 리뷰 10-25)
+    if (GA) window["ga-disable-" + GA] = v !== "all";
+    if (loaded.ga && window.gtag) window.gtag("consent", "update", { analytics_storage: v === "all" ? "granted" : "denied" });
     if (GA && v === "all" && !loaded.ga && /^G-[A-Z0-9]+$/.test(GA)) {
       loaded.ga = true;
       window.dataLayer = window.dataLayer || [];
