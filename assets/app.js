@@ -20,7 +20,7 @@
   function impOf(k) { for (var i = 0; i < IMPACT.length; i++) if (IMPACT[i].k === k) return IMPACT[i]; return null; }
   function impacts(s) { return (Array.isArray(s.impact) ? s.impact : []).filter(impOf); }
   var $ = function (id) { return document.getElementById(id); };
-  var TH_RX = /[\u0E00-\u0E3E\u0E40-\u0E7F]/;   // 태국 문자(฿ U+0E3F 제외)
+  var TH_RX = (window.TN_SITE && TN_SITE.origin_hide_rx) ? new RegExp(TN_SITE.origin_hide_rx) : /[\u0E00-\u0E3E\u0E40-\u0E7F]/;   // 독자가 못 읽는 원문 글자(기본 태국 문자, ฿ U+0E3F 제외 · 태국어판 kstar = 한글 — site/<lang>.json origin_hide_rx)
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {

@@ -54,6 +54,17 @@ def is_ko(c=None):
     return (c or load())["lang"] == "ko"
 
 
+def forbids(script, c=None):
+    """이 언어판 화면 글에 금지된 문자인지(site/<lang>.json validate.forbid_scripts — thai·cjk·hangul).
+    한국판·중국어판·베트남판은 'thai' 를 넣어 두어 지금 동작 그대로, 태국어판(kstar)은 'thai' 를 빼고 'hangul' 을 넣음(2026-10-25 Claude)."""
+    return script in (c or load()).get("validate", {}).get("forbid_scripts", ["thai", "cjk"])
+
+
+def forbids_symbol(sym, c=None):
+    """판 글에 금지된 기호인지(validate.forbid_body_symbols — 한국판·중국어판·베트남판 '฿')."""
+    return sym in (c or load()).get("validate", {}).get("forbid_body_symbols", ["฿"])
+
+
 def topic_ids(c=None):
     """언어판 topics 파일이 있으면 그 id 목록, 없으면 None(= 한국판 기본 TOPICS)."""
     c = c or load()

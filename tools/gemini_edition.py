@@ -41,6 +41,7 @@ UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/1
 ABBR = {"east": "ea", "bangkok": "bk", "north": "no", "south": "st", "poleco": "pe", "society": "so", "visa": "vi",
         "life": "lf", "travel": "tr", "ent": "en", "weather": "wt", "cn": "cn", "kr": "kr"}
 WEEKDAY = "월화수목금토일"
+WEEKDAY_TH = ["จันทร์", "อังคาร", "พุธ", "พฤหัสบดี", "ศุกร์", "เสาร์", "อาทิตย์"]
 
 
 # ---------------------------------------------------------------- 원문 본문
@@ -169,6 +170,14 @@ def _fix_text(t, rate, kind):
             out.append(t[pos:m.end()] + "(" + newslib.krw_for(amt, rate) + ")")
             pos = m.end()
         return "".join(out) + t[pos:]
+    if kind == "thb":   # 원(วอน) → (ประมาณ N บาท) — 태국어판 kstar
+        out, pos = [], 0
+        for m in newslib.THB_WON_RE.finditer(t):
+            if newslib.THB_AFTER_RE.match(t, m.end()):
+                continue
+            out.append(t[pos:m.end()] + " (" + newslib.thb_for(m.group(0)[:-3], rate) + ")")
+            pos = m.end()
+        return "".join(out) + t[pos:]
     if kind == "cny":   # 泰铢 → （约N元）
         out, pos = [], 0
         for m in newslib.CNY_BAHT_RE.finditer(t):
@@ -192,7 +201,7 @@ def _fix_text(t, rate, kind):
 
 def fix_money(data):
     cur = SITE.get("currency", {})
-    kind = {"krw_check": "krw", "cny_check": "cny", "vnd_check": "vnd"}.get(cur.get("check", "krw_check"), "krw")
+    kind = {"krw_check": "krw", "cny_check": "cny", "vnd_check": "vnd", "thb_check": "thb"}.get(cur.get("check", "krw_check"), "krw")
     pair = cur.get("pair", "THB_KRW")
     rate = (data.get("fx") or {}).get(pair)
     for s in data["stories"]:
@@ -221,7 +230,8 @@ def fx_now():
     pair = cur.get("pair", "THB_KRW")
     try:
         t = json.loads((ROOT / "data" / "ticker.json").read_text(encoding="utf-8"))
-        rate = t["fx"][pair]
+        a, b = pair.split("_")
+        rate = t["fx"][pair] if pair in t["fx"] else 1.0 / t["fx"]["%s_%s" % (b, a)]   # 거꾸로만 있으면 역수(KRW_THB = 1/THB_KRW)
         return {pair: round(rate, 6), "source": t["fx"].get("source", ""), "note": "%s %s (data/ticker.json)" % (pair, t["fx"].get("rate_time", ""))}
     except Exception:
         return None
@@ -272,8 +282,8 @@ def assemble(eid, items, out):
     d0 = datetime.strptime(eid[:10], "%Y-%m-%d")
     idx = json.loads((ROOT / "data" / "index.json").read_text(encoding="utf-8")) if (ROOT / "data" / "index.json").exists() else {}
     return dict(id=eid, date=eid[:10], edition=eid[11:], edition_label=newslib.EDITION_LABEL[eid[11:]],
-                weekday=("星期" + "一二三四五六日"[d0.weekday()]) if LANG == "zh" else WEEKDAY[d0.weekday()], timezone="Asia/Bangkok (UTC+7)",
-                coverage=("代码收集候选 + %s 选稿 + Gemini 撰稿（%s）" % ("Grok" if os.environ.get("PICKER", "그록") == "그록" else "代码", MODEL)) if LANG == "zh"
+                weekday=("星期" + "一二三四五六日"[d0.weekday()]) if LANG == "zh" else WEEKDAY_TH[d0.weekday()] if LANG == "th" else WEEKDAY[d0.weekday()], timezone="Asia/Bangkok (UTC+7)",
+                coverage=("รวบรวมข่าวด้วยโค้ด + คัดเลือกและเรียบเรียงโดย Gemini (%s)" % MODEL) if LANG == "th" else ("代码收集候选 + %s 选稿 + Gemini 撰稿（%s）" % ("Grok" if os.environ.get("PICKER", "그록") == "그록" else "代码", MODEL)) if LANG == "zh"
                 else "코드 수집 + 고르기(%s) + 제미나이 원고(%s)" % (os.environ.get("PICKER", "그록"), MODEL),
                 previous=idx.get("latest", ""), briefing=briefing[:7], highlights=hl, stories=stories)
 

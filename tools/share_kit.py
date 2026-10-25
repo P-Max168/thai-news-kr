@@ -542,11 +542,12 @@ def main():
     _texts = {"카드": card_html(data, meta, chosen, tp), "OG": og_html(data, meta, chosen, tp),
               "카톡 문구": message(data, meta, chosen, tp, ed_url, not a.no_main_link),
               "판 미리보기": edition_page(data, meta, chosen, tp, ed_url, img_url)[0]}
-    _bad = [k for k, v in _texts.items() if "฿" in v]
+    import siteconf as _sc
+    _bad = [k for k, v in _texts.items() if "฿" in v] if _sc.forbids_symbol("฿") else []
     if _bad:
         sys.exit("'฿' 금지(%s) — 글에서는 '바트'로(TRANSLATION_RULES)" % ", ".join(_bad))
     # 태국 글자(฿ 말고 U+0E00–U+0E7F) 도 카드·OG·카톡 문구·판 미리보기에 없어야 함(화면 규칙과 같음)
-    _thai = [k for k, v in _texts.items() if re.search(r"[\u0E00-\u0E3E\u0E40-\u0E7F]", v)]
+    _thai = [k for k, v in _texts.items() if re.search(r"[\u0E00-\u0E3E\u0E40-\u0E7F]", v)] if _sc.forbids("thai") else []   # 태국어판은 허용
     if _thai:
         sys.exit("태국 글자 금지(%s) — 한국어·영어 약칭·로마자로(TRANSLATION_RULES)" % ", ".join(_thai))
     ch, oh = share / (eid + "-card.html"), share / (eid + "-og.html")

@@ -119,7 +119,9 @@ li{margin:6px 0;color:#333D4B}footer{color:#5F6B7A;font-size:14px;padding:10px 2
 """ % {"lang": lang, "title": e(title), "desc": e(desc), "canon": canonical_tag(url), "og": og_block, "botrx": BOT_RX,
        "target_js": json.dumps(target), "target": e(target), "brand": e(brand), "label": e(label or meta.get("label", eid)),
        "brief": brief_html, "arts": "\n".join(arts), "ld": ld_html}
-    if "฿" in page or _THAI.search(page):
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    import siteconf as _sc
+    if (_sc.forbids_symbol("฿") and "฿" in page) or (_sc.forbids("thai") and _THAI.search(page)):   # 태국어판(kstar)은 둘 다 허용
         raise SystemExit("e/%s: '฿' 또는 태국 글자가 들어감 — 데이터 문구 확인(TRANSLATION_RULES)" % eid)
     return page
 

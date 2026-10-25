@@ -37,6 +37,7 @@
 ## 최근 인수인계 (상대 AI가 작업 시작 전에 꼭 읽기 — 새것이 위, 최대 10줄 유지)
 | 시각 | 누가 | 무엇을 바꿨나 | 상대가 알아야 할 것 |
 |---|---|---|---|
+| 10-25 15:00 | Claude | 공유 코드: 태국어판(kstar) 허용 — 태국 글자 검사를 site/<lang>.json validate.forbid_scripts 로('thai' 있으면 지금처럼 막음 = 한국판·중국어판·베트남판 그대로), 원→바트 환산(thb_check), 원문 제목 숨김 글자 설정(origin_hide_rx), 한글 금지 검사에 키워드·매체 이름 추가 | 한국판·중국어판 최근 판 검증 그대로 통과 확인. 다음: kstar 를 sync_core 로 재구축, 이어서 한국어판·중국어판 고르기도 코드+제미나이로 통일(맥스님 14:44 승인 — 그록은 감시만) |
 | 10-25 14:20 | Claude | 번역=제미나이 구현: tools/gemini_edition.py·gemini-edition.yml(picks 파일 → 원고·검증·배포). 공유 코드: 시세 칩 현지 통화·날씨 좌표·noindex·현지 국기 설정(한국판 동작 그대로). ops/GROK_HANDOFF.md v2 | **그록은 이제 원고를 안 씀 — ops/picks/<판 id>.json 만.** GEMINI_API_KEY Secret 등록 전엔 gemini-edition 이 실패 → 비상 발행이 메움 |
 | 10-25 13:52 | Claude | 비상 발행 중국어판 2026-10-25-md 8건 (zh eed3d36) | 이유: 중국어판 정기 담당 없음. 후보 10-25 07:54 수집분, Google News 링크 디코더 403 → 원문 확인된 8건만 |
 | 10-25 10:15 | Claude | 새 그록봇 인수인계 문서 ops/GROK_HANDOFF.md 작성(맥스님 결정: 모든 채널 발행=새 그록, 번역=Gemini API) | Gemini 번역 코드 아직 없음·새 그록 실행 능력(셸·push·예약) 미확인. 판 절차는 기존 그대로 |

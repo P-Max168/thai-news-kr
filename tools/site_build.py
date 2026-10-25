@@ -47,7 +47,7 @@ def flat(d, pre=""):
 
 def site_js(c, i18n):
     keep = {k: c.get(k) for k in ("lang", "htmlLang", "brand", "brand_sub", "site_url", "currency", "home_section", "hidden_sections",
-                                  "firestore_prefix", "admins_doc", "slots", "edition_label", "share", "wx_coords") if k in c}
+                                  "firestore_prefix", "admins_doc", "slots", "edition_label", "share", "wx_coords", "origin_hide_rx") if k in c}
     keep["i18n"] = i18n
     keep["topics"] = {k: v for k, v in (c.get("topics") or {}).items() if not k.startswith("_") and k != "REGION_PATTERNS"}
     keep["impacts_ui"] = [{"k": k, "e": IMPACT_UI[i % 5][0], "c": IMPACT_UI[i % 5][1]} for i, k in enumerate(c.get("impacts") or [])]
@@ -165,7 +165,7 @@ def main():
     mf = root / "manifest.json"
     if mf.exists():
         outs[mf] = patch_manifest(mf.read_text(encoding="utf-8"), c)
-    bad = [p.name for p, v in outs.items() if re.search(r"[\u0E00-\u0E3E\u0E40-\u0E7F]", v)]
+    bad = [p.name for p, v in outs.items() if re.search(r"[\u0E00-\u0E3E\u0E40-\u0E7F]", v)] if "thai" in (c.get("validate") or {}).get("forbid_scripts", ["thai", "cjk"]) else []   # 태국어판은 화면 글이 태국어
     if bad:
         sys.exit("site_build: 태국 글자 들어감 — %s" % ", ".join(bad))
     for p, v in outs.items():
