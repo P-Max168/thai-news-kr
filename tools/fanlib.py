@@ -9,6 +9,12 @@ tag_story(story, reg) → story["artists"] = [{"id", "n"}] (최대 6). 기사 �
 """
 import json, pathlib, re
 
+NONLATIN_RE = re.compile(r"[\u0E00-\u0E7F\u1100-\u11FF\u3130-\u318F\uAC00-\uD7AF\u3040-\u30FF\u4E00-\u9FFF]")
+
+
+def is_latin(s):
+    return bool(s) and not NONLATIN_RE.search(s) and bool(re.search(r"[A-Za-z\u00C0-\u024F]", s))
+
 
 def load_registry(root):
     p = pathlib.Path(root) / "data" / "artists.json"
@@ -29,7 +35,7 @@ def _patterns(reg):
             nm = (nm or "").strip()
             if not nm:
                 continue
-            if re.fullmatch(r"[\x00-\x7f]+", nm):
+            if is_latin(nm):
                 if len(nm) <= 3:
                     rx = re.compile(r"(?<![A-Za-z0-9])" + re.escape(nm) + r"(?![A-Za-z0-9])")
                 else:
@@ -73,3 +79,45 @@ def tag_story(s, reg, limit=6):
     if found:
         s["artists"] = found
     return s
+
+
+# 공식 유튜브 영상 붙이기(2026-10-25): data/yt.json(언어판 수집기가 공식 채널 RSS 로 만듦) = {"videos":[{"id","t"(제목),"ch"(채널 이름),"p"(게시 ISO)}]}
+# 기사 아티스트(영문 이름·다른 이름) 가 영상 제목에 있고 14일 안에 올라온 것 중 가장 새것. 판 하나에 최대 3개, 같은 영상은 한 번만.
+def _no_hangul(t):   # 태국어판 화면엔 한글이 보이면 안 됨 → 영상 제목의 한글 낱말만 뺌('IVE 아이브 'XOXZ' MV' → 'IVE 'XOXZ' MV')
+    t = re.sub(r"[\u1100-\u11FF\u3130-\u318F\uAC00-\uD7AF]+", "", str(t or ""))
+    t = re.sub(r"\(\s*\)|\[\s*\]", "", t)
+    return re.sub(r"\s{2,}", " ", t).strip(" -·|")
+
+
+def load_videos(root):
+    p = pathlib.Path(root) / "data" / "yt.json"
+    try:
+        d = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+    except ValueError:
+        return []
+    return [v for v in d.get("videos", []) if re.fullmatch(r"[\w-]{11}", str(v.get("id", "")))]
+
+
+def pick_media(stories, reg, videos, eid, limit=3, days=14):
+    if not (reg and videos):
+        return 0
+    from datetime import datetime, timedelta
+    cut = (datetime.fromisoformat(eid[:10]) - timedelta(days=days)).strftime("%Y-%m-%d")
+    by = {a["id"]: a for a in reg.get("artists", [])}
+    vids = sorted([v for v in videos if str(v.get("p", ""))[:10] >= cut], key=lambda v: v.get("p", ""), reverse=True)
+    used, n = set(), 0
+    for s in stories:
+        if n >= limit or s.get("media"):
+            continue
+        for a in s.get("artists") or []:
+            e = by.get(a.get("id"))
+            if not e:
+                continue
+            names = [x for x in [e.get("n")] + list(e.get("al") or []) if is_latin(x)]
+            rxs = [re.compile(r"(?<![A-Za-z0-9])" + re.escape(x) + r"(?![A-Za-z0-9])", 0 if len(x) <= 3 else re.I) for x in names]
+            hit = next((v for v in vids if v["id"] not in used and any(r.search(v.get("t", "")) for r in rxs)), None)
+            if hit:
+                s["media"] = dict(yt=hit["id"], yt_title=_no_hangul(hit.get("t", ""))[:90], yt_ch=_no_hangul(hit.get("ch", ""))[:40])
+                used.add(hit["id"]); n += 1
+                break
+    return n

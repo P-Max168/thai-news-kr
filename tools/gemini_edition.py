@@ -90,8 +90,9 @@ EVENTS = "events" in (SITE.get("story_extras") or [])
 EVENT_KINDS = ("concert", "fanmeet", "ticket", "comeback", "release", "award", "tv", "drama", "other")
 EVENTS_SCHEMA = (',"events":[{"date":"YYYY-MM-DD","time":"HH:MM 또는 빈 값","kind":"%s","artists":["영문 이름"],'
                  '"title":"화면 언어로 짧은 제목","place":"장소(없으면 빈 값)","country":"TH|KR|JP|… 두 글자"}]' % "|".join(EVENT_KINDS))
-EVENTS_RULE = ("- events: 기사 원문에 날짜가 분명히 적힌 앞으로의 일정만(공연·팬미팅·티켓 오픈·컴백·발매·시상식·방송·드라마 공개). "
-               "날짜를 짐작하거나 지난 일을 넣지 않는다. 연도가 없으면 판 날짜 기준 가장 가까운 앞날. 없으면 빈 배열.\n")
+EVENTS_RULE = ("- events: 기사 원문에 날짜가 분명히 적힌 앞으로의 '확정' 일정만(공연·팬미팅·티켓 오픈·컴백·발매·시상식·방송·드라마 공개). "
+               "'추진 중·논의 중·예정이라는 소문'·'오는 15일'처럼 날짜가 불분명한 것, 지난 일은 넣지 않는다. 연도가 없으면 판 날짜 기준 가장 가까운 앞날. "
+               "time 은 공연지 현지 시각(한국 시각만 있고 태국 공연이면 2시간 빼서), 선예매·일반예매는 각각 따로 ticket. 없으면 빈 배열.\n")
 DATE_RE = re.compile(r"^20\d\d-[01]\d-[0-3]\d$")
 
 
@@ -115,6 +116,7 @@ def events_of(v, eid):
 # 아티스트 이름표(2026-10-25, KSTAR): 판 설정 fan 이 있고 data/artists.json 등록부가 있으면 기사마다 artists=[{id,n}]
 import fanlib  # noqa: E402
 FAN_REG = fanlib.load_registry(ROOT) if SITE.get("fan") else None
+FAN_VIDEOS = fanlib.load_videos(ROOT) if FAN_REG else []
 HANGUL_ONLY_RE = re.compile(r"^[\uAC00-\uD7AF0-9 ·\-]{1,12}$")
 
 
@@ -328,6 +330,8 @@ def assemble(eid, items, out):
         if len(st["tags"]) < 2:
             st["tags"] = (st["tags"] + [st["region"] or newslib.TOPICS[st["topic"]], newslib.TOPICS[st["topic"]]])[:2]
         stories.append(st)
+    if FAN_REG and FAN_VIDEOS:   # 공식 유튜브 영상(아티스트 이름이 제목에 있는 14일 안 영상, 판당 최대 3개)
+        fanlib.pick_media(stories, FAN_REG, FAN_VIDEOS, eid)
     ids = [s["id"] for s in stories]
     briefing = []
     used = set()
