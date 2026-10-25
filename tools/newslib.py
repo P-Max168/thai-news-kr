@@ -568,10 +568,10 @@ def coverage_report(data):
         warn.append("기사 %d건 (목표 %d~%d건, 실제 뉴스가 없으면 적어도 됨)" % (len(st), lo, hi))
     any_ = lambda t: sum(1 for s in st if t in topics_of(s))
     v = any_("visa"); lo, hi = TARGETS["visa"]
-    if v < lo or v > 8:
+    if "visa" in TOPICS and (v < lo or v > 8):
         warn.append("외국인·비자 %d건 (목표 %d~%d, 최대 8)" % (v, lo, hi))
     for t in TARGETS["places"] + TARGETS["want"]:
-        if not any_(t):
+        if t in TOPICS and not any_(t):   # 이 언어판에 없는 주제는 건너뜀(태국어판 kstar = 연예 주제만)
             warn.append("%s 기사 0건 — 실제 뉴스가 있으면 1건 이상" % TOPICS[t])
     return warn
 
