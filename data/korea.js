@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-26T13:22:44+07:00",
+ "updated_at": "2026-10-26T20:34:20+07:00",
  "items": [
   {
-   "title": "법원행정처장, 오세훈 2심 무죄에 “조희대 사법부가 어떻게 했다는 말 적절하지 않아”",
-   "source": "경향신문",
-   "time": "2026-10-26T11:02:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610261302001"
+   "title": "중수청장 국무회의 배석 공방…국힘 \"부적절\"·與 \"긍정 기능도\"",
+   "source": "연합뉴스",
+   "time": "2026-10-26T16:31:17+07:00",
+   "url": "https://www.yna.co.kr/view/AKR20261026119451001"
   },
   {
-   "title": "김지용 중수청장 “한동훈 딸 의혹 진상규명 필요…일부는 암장으로 보여”",
-   "source": "경향신문",
-   "time": "2026-10-26T12:11:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610261411001"
+   "title": "여야 전작권 공방...\"독자선언\" vs \"조건 변해\"",
+   "source": "YTN",
+   "time": "2026-10-26T16:11:00+07:00",
+   "url": "https://www.ytn.co.kr/_ln/0101_202610261811354590"
   },
   {
-   "title": "이 대통령, 농어민 만나 “CPTPP 연내 가입 신청 안 해”",
+   "title": "주진우 “김혜경 여사 ‘황제 골프’”…지목된 골퍼 “사실 아냐”",
    "source": "한겨레",
-   "time": "2026-10-26T12:35:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/bluehouse/1284158.html"
+   "time": "2026-10-26T16:29:00+07:00",
+   "url": "https://www.hani.co.kr/arti/society/society_general/1284212.html"
   },
   {
-   "title": "최길수 \"법 위반해 감찰하면 제가 처벌받아\"...김현지 감찰에 선 그어",
-   "source": "조선일보",
-   "time": "2026-10-26T08:50:00+07:00",
-   "url": "https://www.chosun.com/politics/politics_general/2026/10/26/INCCSX4WNNFXFL3IIIJE36PIQE/"
+   "title": "‘오세훈 중심’ 보수 통합론에 한동훈 포함 놓고 ‘동상이몽’",
+   "source": "경향신문",
+   "time": "2026-10-26T19:42:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610262142015"
   },
   {
-   "title": "靑, '김혜경 여사 골프' 보도에 \"'따옴표 보도'는 언론 책임 방기\"",
+   "title": "이 대통령 \"농지조사, 땅 빼앗으려는 것 아냐‥부동산 공화국 벗어나야\"",
    "source": "MBC 뉴스",
-   "time": "2026-10-26T11:25:54+07:00",
-   "url": "https://imnews.imbc.com/news/2026/politics/article/6860734_36911.html"
+   "time": "2026-10-26T15:12:01+07:00",
+   "url": "https://imnews.imbc.com/news/2026/politics/article/6860812_36911.html"
   },
   {
-   "title": "조국, '조희대 엄정 판결 기대' 김민석 직격‥\"가능한 얘기냐\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-26T08:26:23+07:00",
-   "url": "https://imnews.imbc.com/news/2026/politics/article/6860702_36911.html"
-  },
-  {
-   "title": "역삼 연쇄방화범 “나도 피해자” 주장 지속…살인미수 적용 가닥",
-   "source": "KBS 뉴스",
-   "time": "2026-10-26T09:32:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8695074"
-  },
-  {
-   "title": "남쪽으로 포구 향한 北 122mm ’자주포’ 포착…전진 배치로 ’무력 시위’",
-   "source": "연합뉴스TV",
-   "time": "2026-10-25T17:58:00+07:00",
-   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261025195828jJ9"
-  },
-  {
-   "title": "통일부 “김정은 단둥 방문, 한반도 주변국 대화 재개에 기여하길”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-26T09:50:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8695114"
-  },
-  {
-   "title": "월요일 낮 최고 25도, 곳곳 비…내일 오후부터 기온 뚝",
+   "title": "국힘, 박균택·양부남 법무장관 거론에 “‘이재명 공소취소’ 로펌 만드나”",
    "source": "한겨레",
-   "time": "2026-10-26T09:59:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/environment/1284107.html"
+   "time": "2026-10-26T16:31:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/politics_general/1284188.html"
+  },
+  {
+   "title": "“지뢰 폭발은 자작극” 안보리에 서한…접경지엔 자주포",
+   "source": "KBS 뉴스",
+   "time": "2026-10-26T15:05:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8695275"
+  },
+  {
+   "title": "“사람들 갇혀 있어요, 깨야 해요”…‘역삼 화재’ 녹취에 담긴 필사의 탈출",
+   "source": "KBS 뉴스",
+   "time": "2026-10-26T16:11:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8695319"
+  },
+  {
+   "title": "“1년 전 스토킹 신고했지만 살해”…경찰 전수 조사에서도 빠졌다",
+   "source": "KBS 뉴스",
+   "time": "2026-10-26T19:29:00+07:00",
+   "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8695605"
+  },
+  {
+   "title": "김정은 방중 이미 알고 있었다…정부·국회 함구한 이유",
+   "source": "한국경제",
+   "time": "2026-10-26T13:08:32+07:00",
+   "url": "https://www.hankyung.com/article/2026102654527"
   }
  ]
 };
