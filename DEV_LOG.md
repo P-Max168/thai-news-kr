@@ -357,3 +357,4 @@ User approves final existing five creatives and immediate deployment. Added comm
 - 2026-10-24 18:49 Claude: 한국어판 비상 발행 2026-10-24-pm 9건(9d71196).
 - 2026-10-25 07:46 Claude: 한국어판 비상 발행 2026-10-25-am 8건(2e28327). 06:05 candidates 수집분 없음.
 - 2026-10-25 18:45 Claude: 한국어판 비상 발행 2026-10-25-pm 11건(3d68d6c). 18:30 확인 시 판·담당 표시 없음.
+- 2026-10-26 07:50 Claude: 한국어판 비상 발행 2026-10-26-am 9건(f758fb4). 06:05 candidates 수집분 없음, 직접 수집도 클라우드 프록시 차단 → 웹 읽기로 원문 확인.
