@@ -320,3 +320,21 @@
   if (window.TNStore && window.TNStore.subscribe) window.TNStore.subscribe(function () { if (region() !== lastRg) { lastRg = region(); st.wx = st.aq = null; loadWx(); } });
   window.TNTicker = { reload: loadAll, state: st, pmLevel: pmLevel };
 })();
+
+/* 2026-10-26 Claude: 폰 화면 헤더 접기 — 아래로 스크롤하면 둘째·셋째 줄(환율 패널·내 주변)을 잘라 숨기고, 위로 스크롤하거나 맨 위면 다시 보임. CSS: style.css 맨 끝 */
+(function () {
+  var mh = document.querySelector(".masthead"); if (!mh) return;
+  var root = document.documentElement, lastY = window.pageYOffset, ticking = false;
+  function tuckH() { var r1 = mh.querySelector(".masthead__inner"); return r1 ? Math.max(0, mh.offsetHeight - r1.offsetHeight - (r1.offsetTop || 0)) : 0; }
+  function on() { return window.innerWidth <= 900 && mh.offsetHeight > window.innerHeight * 0.22; }
+  function upd() {
+    ticking = false;
+    var y = window.pageYOffset, d = y - lastY;
+    if (!on() || y < 40 || document.body.classList.contains("drawer-open")) { root.classList.remove("mh-tuck"); lastY = y; return; }
+    if (d > 6) { root.style.setProperty("--mh-tuck", tuckH() + "px"); root.classList.add("mh-tuck"); lastY = y; }
+    else if (d < -6) { root.classList.remove("mh-tuck"); lastY = y; }
+  }
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+  window.addEventListener("resize", function () { if (root.classList.contains("mh-tuck")) root.style.setProperty("--mh-tuck", tuckH() + "px"); });
+  window.TNMastTuck = { show: function () { root.classList.remove("mh-tuck"); } };
+})();

@@ -364,3 +364,5 @@ User approves final existing five creatives and immediate deployment. Added comm
 - 2026-10-26 15:05 BKK (Claude): preflight 담당 표시가 언어판(zh-md-build) 이름에서 안 걸리던 것 고침 → 그록 중국어판 정기 발행 때 claim 이 남아 13:30 Claude 확인과 겹치지 않게.
 
 - 2026-10-26 15:25 BKK (Claude): 2안(그록 고르기 + 제미나이 원고) — gemini-edition.yml 예약을 대비용 07:05·18:05 로, push 실행 때 이미 있는 판은 건너뜀. 중국어판 같은 변경(13:05).
+
+- 2026-10-26 18:20 BKK (Claude): 폰에서 스크롤하면 큰 헤더(환율 패널+내 주변 줄, 화면의 약 40%)가 상단 배너를 덮어 배너가 잘려 보이던 문제. 아래로 스크롤하면 둘째·셋째 줄을 clip-path 로 숨기고(제목 줄만 고정) 위로 스크롤하면 다시 보이게(style.css 끝·ticker.js 끝). 실패: 처음 transform 으로 위로 밀었더니 제목 줄이 숨고 내 주변 줄이 남음 → clip-path 로 바꿈. 배너 데이터·판 변경 없음.
