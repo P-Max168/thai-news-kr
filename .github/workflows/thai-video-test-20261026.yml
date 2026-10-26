@@ -1,0 +1,42 @@
+name: thai-video-test-20261026-once
+on:
+  push:
+    branches: [codex/thai-video-test-20261026-once]
+    paths:
+      - '.github/workflows/thai-video-test-20261026.yml'
+      - 'ops/video-test-20261026/**'
+permissions:
+  contents: read
+concurrency:
+  group: thai-video-test-20261026-once
+  cancel-in-progress: false
+jobs:
+  tts:
+    if: github.run_attempt == 1 && github.event.head_commit.message == 'one-off Thai news TTS 2026-10-26'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Enforce one-off date
+        shell: bash
+        run: test "$(date -u +%F)" = '2026-10-26'
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Verify local invariants without API calls
+        run: python3 -m unittest discover -s ops/video-test-20261026 -p 'test_tts_once.py'
+      - name: Generate bounded calibration and episode audio
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 ops/video-test-20261026/tts_once.py --script ops/video-test-20261026/script_reviewed.json --out generated-thai-video-audio
+      - name: Upload generated audio and numeric usage only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thai-news-20261026-tts-${{ github.run_id }}
+          path: |
+            generated-thai-video-audio/*.wav
+            generated-thai-video-audio/usage.json
+          if-no-files-found: warn
+          retention-days: 1
+          include-hidden-files: false

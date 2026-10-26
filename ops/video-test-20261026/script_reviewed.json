@@ -1,0 +1,358 @@
+{
+  "segments": [
+    {
+      "id": "opening",
+      "kind": "opening",
+      "edition": "",
+      "article_id": "",
+      "title": "2026년 10월 26일 간추린 태국뉴스",
+      "body": [
+        "환율: 10.26 07:02 BKK · 1바트 약 39.22원",
+        "날씨: 10.26 13:15 BKK 자료 · 실시간 아님"
+      ],
+      "narration": "시청자 여러분 안녕하십니까. 2026년 10월 26일 간추린 태국뉴스입니다. 먼저 환율과 날씨입니다. 환율 자료는 10월 26일 오전 7시 2분, 방콕 시간 기준으로 1바트에 약 39.22원입니다. 날씨는 같은 날 오후 1시 15분 방콕 시간 기준 자료이며, 실시간 날씨가 아닙니다. 기온은 파타야 30.7도, 시라차 31도, 방콕 32도입니다. 기준시각부터 6시간 동안의 최대 강수확률은 파타야 98퍼센트, 시라차와 방콕은 각각 88퍼센트입니다. 이어서 주요 소식 전해드립니다.",
+      "subtitles": [
+        "시청자 여러분 안녕하십니까.",
+        "2026년 10월 26일 간추린 태국뉴스입니다.",
+        "먼저 환율과 날씨입니다.",
+        "환율 자료는 10월 26일 오전 7시 2분, 방콕 시간 기준으로 1바트에 약 39.22원입니다.",
+        "날씨는 같은 날 오후 1시 15분 방콕 시간 기준 자료이며, 실시간 날씨가 아닙니다.",
+        "기온은 파타야 30.7도, 시라차 31도, 방콕 32도입니다.",
+        "기준시각부터 6시간 동안의 최대 강수확률은 파타야 98퍼센트, 시라차와 방콕은 각각\n88퍼센트입니다.",
+        "이어서 주요 소식 전해드립니다."
+      ],
+      "subtitle_timing": "untimed text chunks; regenerate or align after audio is available",
+      "sources": [
+        {
+          "name": "ExchangeRate-API (open.er-api.com)",
+          "url": "https://www.exchangerate-api.com/",
+          "data_time": "2026-10-26T07:02:31+07:00"
+        },
+        {
+          "name": "Open-Meteo",
+          "url": "https://open-meteo.com/",
+          "data_time": "2026-10-26T13:15:00+07:00",
+          "rain_definition": "maximum precipitation probability in six hours from reference time"
+        }
+      ]
+    },
+    {
+      "id": "news01",
+      "kind": "article",
+      "edition": "2026-10-26-pm",
+      "article_id": "vi1",
+      "title": "태국 이민국, 불법체류자 1만 명 일제 단속",
+      "body": [
+        "태국 경찰청·이민국, 불법체류 외국인 전국 검거 작전",
+        "방콕 사기단 적발·마약 단속 강화에 이어 지시"
+      ],
+      "narration": "타이 이그재미너 보도에 따르면 태국 경찰청과 이민국이 비자 만료 후 불법체류 중인 외국인 1만여 명을 겨냥해 전국적인 일제 검거 작전에 돌입했습니다. 이번 단속은 방콕의 고급 주택을 거점으로 한국인을 상대로 사기 행각을 벌인 한국인과 중국인 일당 적발과 마약 단속 강화에 이어 지시됐습니다. 태국 경찰은 해외 도피 사범과 장기 불법체류자를 추적해 추방할 방침입니다. 태국 정부는 지난 8월 추방 규정을 강화했으며, 2025년 10월 이후 8만 1,000명 이상의 외국인 입국을 거부한 바 있습니다.",
+      "subtitles": [
+        "타이 이그재미너 보도에 따르면 태국 경찰청과 이민국이 비자 만료 후 불법체류 중인\n외국인 1만여 명을 겨냥해 전국적인 일제 검거 작전에 돌입했습니다.",
+        "이번 단속은 방콕의 고급 주택을 거점으로 한국인을 상대로 사기 행각을 벌인 한국인과\n중국인 일당 적발과 마약 단속 강화에 이어 지시됐습니다.",
+        "태국 경찰은 해외 도피 사범과 장기 불법체류자를 추적해 추방할 방침입니다.",
+        "태국 정부는 지난 8월 추방 규정을 강화했으며, 2025년 10월 이후 8만 1,000명 이상의\n외국인 입국을 거부한 바 있습니다."
+      ],
+      "subtitle_timing": "untimed text chunks; regenerate or align after audio is available",
+      "source": "Thai Examiner",
+      "source_url": "https://www.thaiexaminer.com/thai-news-foreigners/2026/10/26/knock-on-the-door-coming-for-over-10k-visa-overstayers-now-in-thailand-as-police-launch-new-crackdown/",
+      "site_url": "https://tnews.pmaxone.com/?ed=2026-10-26-pm#vi1",
+      "region": "방콕",
+      "source_published": "2026-10-26T13:38:44+07:00"
+    },
+    {
+      "id": "news02",
+      "kind": "article",
+      "edition": "2026-10-26-am",
+      "article_id": "wt1",
+      "title": "태국 재난청 “27~31일 만조 주의”",
+      "body": [
+        "남부 28일까지 비 지속…돌발 홍수·급류 우려",
+        "방콕·동부 27일까지 뇌우…뇌우 해역 파도 2m 초과 가능"
+      ],
+      "narration": "더 네이션 보도에 따르면 태국 재난방지청은 25일 남부에 강한 비가 이어져 돌발 홍수와 산에서 빠르게 흘러내리는 물이 우려된다고 경고했습니다. 따친강은 수판부리와 나콘빠톰에서 강둑 수위를 넘어 제방 바깥 저지대와 강변에 영향을 주고 있습니다. 전국 대형·중형 저수지 저수율은 84퍼센트이고, 시나카린 댐 등 5곳은 만수위에 가까우며 농쁠라라이 댐은 저장 한계에 이르렀습니다. 태국 재난청은 27일부터 31일까지 만조로 배수가 막힐 수 있다며 방류 시점을 조수에 맞추라고 지시했습니다. 태국 기상청은 28일까지 남부에 비가 이어지고, 27일까지 방콕을 포함한 중부와 동부 등에 뇌우와 돌풍이 불 것으로 예보했습니다. 뇌우가 치는 안다만해와 타이만 해역에서는 파도가 2미터를 넘을 수 있으며, 29일부터 31일에는 전국적으로 비가 줄어들 전망입니다.",
+      "subtitles": [
+        "더 네이션 보도에 따르면 태국 재난방지청은 25일 남부에 강한 비가 이어져 돌발 홍수와\n산에서 빠르게 흘러내리는 물이 우려된다고 경고했습니다.",
+        "따친강은 수판부리와 나콘빠톰에서 강둑 수위를 넘어 제방 바깥 저지대와 강변에 영향을\n주고 있습니다.",
+        "전국 대형·중형 저수지 저수율은 84퍼센트이고, 시나카린 댐 등 5곳은 만수위에\n가까우며 농쁠라라이 댐은 저장 한계에 이르렀습니다.",
+        "태국 재난청은 27일부터 31일까지 만조로 배수가 막힐 수 있다며 방류 시점을 조수에\n맞추라고 지시했습니다.",
+        "태국 기상청은 28일까지 남부에 비가 이어지고, 27일까지 방콕을 포함한 중부와 동부\n등에 뇌우와 돌풍이 불 것으로 예보했습니다.",
+        "뇌우가 치는 안다만해와 타이만 해역에서는 파도가 2미터를 넘을 수 있으며, 29일부터\n31일에는 전국적으로 비가 줄어들 전망입니다."
+      ],
+      "subtitle_timing": "untimed text chunks; regenerate or align after audio is available",
+      "source": "The Nation (더 네이션)",
+      "source_url": "https://www.nationthailand.com/news/general/40072721",
+      "site_url": "https://tnews.pmaxone.com/?ed=2026-10-26-am#wt1",
+      "region": "태국 전국",
+      "source_published": "2026-10-25T14:24:00+07:00"
+    },
+    {
+      "id": "news03",
+      "kind": "article",
+      "edition": "2026-10-26-pm",
+      "article_id": "st1",
+      "title": "푸껫 빠똥 돌발 홍수…토사 밀려 상가 파손",
+      "body": [
+        "26일 새벽 빠똥 폭우…도로·주택가에 암석과 토사 유입",
+        "나나이 로드 침수·차량 파손…인명 피해 보고 없어"
+      ],
+      "narration": "카오솟 잉글리시 보도에 따르면 26일 새벽 푸껫 빠똥 지역에 밤새 내린 폭우로 돌발 홍수가 발생해 토사와 암석이 도로와 주택가로 쏟아져 내렸습니다. 나나이 로드 일대의 주택과 상점이 침수되고 주차된 차량이 파손됐으나 인명 피해는 보고되지 않았습니다. 당국은 이 일대를 재난 지역으로 선포하고 중장비를 동원해 도로 복구 작업을 진행하고 있습니다. 푸껫 주정부는 군 인력과 자원봉사자를 투입해 잔해물 제거에 나섰으며, 추가 폭우가 없으면 화요일까지 정상화될 것으로 내다봤습니다.",
+      "subtitles": [
+        "카오솟 잉글리시 보도에 따르면 26일 새벽 푸껫 빠똥 지역에 밤새 내린 폭우로 돌발\n홍수가 발생해 토사와 암석이 도로와 주택가로 쏟아져 내렸습니다.",
+        "나나이 로드 일대의 주택과 상점이 침수되고 주차된 차량이 파손됐으나 인명 피해는\n보고되지 않았습니다.",
+        "당국은 이 일대를 재난 지역으로 선포하고 중장비를 동원해 도로 복구 작업을 진행하고\n있습니다.",
+        "푸껫 주정부는 군 인력과 자원봉사자를 투입해 잔해물 제거에 나섰으며, 추가 폭우가\n없으면 화요일까지 정상화될 것으로 내다봤습니다."
+      ],
+      "subtitle_timing": "untimed text chunks; regenerate or align after audio is available",
+      "source": "Khaosod English",
+      "source_url": "https://www.khaosodenglish.com/featured/2026/10/26/flash-floods-send-rocks-and-mud-through-phukets-patong/",
+      "site_url": "https://tnews.pmaxone.com/?ed=2026-10-26-pm#st1",
+      "region": "푸껫",
+      "source_published": "2026-10-26T14:00:48+07:00"
+    },
+    {
+      "id": "news04",
+      "kind": "article",
+      "edition": "2026-10-26-pm",
+      "article_id": "ea1",
+      "title": "램차방 항구서 야생동물 부산물 3.1톤 이상 적발",
+      "body": [
+        "목재에 숨긴 상아·코끼리 꼬리 털 등 압수",
+        "총가치 1억5,500만 바트(약 60억7,986만 원)"
+      ],
+      "narration": "더 파타야 뉴스 보도에 따르면 촌부리 램차방 항구에서 아프리카 잠비아로부터 반입된 목재 속에 숨겨져 있던 상아와 코끼리 꼬리 털 등 야생동물 부산물 3.1톤 이상이 태국 당국에 적발됐습니다. 압수품 총가치는 1억5,500만 바트(약 60억7,986만 원)에 달합니다. 태국 관세청과 특별수사국 등 합동 조사팀은 화물 컨테이너를 정밀 수색해 홈을 파 개조한 목재 32개 안에서 상아 469점과 파편 1,038점 등을 찾아냈습니다. 이번 압수는 유엔마약범죄사무소 등 국제기구와의 정보 공조로 이뤄졌습니다. 태국 당국은 배후 밀매 조직을 추적하고, DNA 검사로 원산지를 규명하고 있습니다.",
+      "subtitles": [
+        "더 파타야 뉴스 보도에 따르면 촌부리 램차방 항구에서 아프리카 잠비아로부터 반입된\n목재 속에 숨겨져 있던 상아와 코끼리 꼬리 털 등 야생동물 부산물 3.1톤 이상이 태국",
+        "당국에 적발됐습니다.",
+        "압수품 총가치는 1억5,500만 바트(약 60억7,986만 원)에 달합니다.",
+        "태국 관세청과 특별수사국 등 합동 조사팀은 화물 컨테이너를 정밀 수색해 홈을 파 개조한\n목재 32개 안에서 상아 469점과 파편 1,038점 등을 찾아냈습니다.",
+        "이번 압수는 유엔마약범죄사무소 등 국제기구와의 정보 공조로 이뤄졌습니다.",
+        "태국 당국은 배후 밀매 조직을 추적하고, DNA 검사로 원산지를 규명하고 있습니다."
+      ],
+      "subtitle_timing": "untimed text chunks; regenerate or align after audio is available",
+      "source": "The Pattaya News",
+      "source_url": "https://thepattayanews.com/2026/10/26/thai-customs-seizes-more-than-3-1-tonnes-of-elephant-ivory-worth-more-than-155-million-baht-hidden-inside-timber-at-laem-chabang-port/",
+      "site_url": "https://tnews.pmaxone.com/?ed=2026-10-26-pm#ea1",
+      "region": "램차방",
+      "source_published": "2026-10-26T14:16:08+07:00"
+    },
+    {
+      "id": "news05",
+      "kind": "article",
+      "edition": "2026-10-26-am",
+      "article_id": "ea1",
+      "title": "파타야 수배 중국인 검거…허위 출생신고 적발",
+      "body": [
+        "15억 바트(약 588억3,735만 원) 규모 도박 조직 운영 혐의",
+        "허위 태국인 부친 등록…아동 국적 박탈 여부 검토"
+      ],
+      "narration": "타이거가 24일 보도한 내용에 따르면 태국 이민국이 파타야의 한 주택에서 중국 당국이 인터폴을 통해 수배한 37세 중국인 남성을 체포했습니다. 이 남성은 15억 바트(약 588억3,735만 원) 규모의 도박 조직을 운영한 혐의를 받고 있습니다. 같은 집은 2025년 4월에도 단속을 받았습니다. 당시 중국인 여성은 태국 국적 아이를 부양한다는 이유로 임시 비자를 받아 머물고 있었습니다. 아이의 출생증명서에는 태국인 남성이 아버지로 기재돼 있었지만 DNA 검사에서 친자 관계가 아닌 것으로 나타났고, 이번에 체포된 남성이 친아버지였습니다. 태국 경찰은 증거를 파타야 등록사무소에 넘겼으며, 사무소는 아이의 태국 국적 박탈 여부를 검토하고 있습니다.",
+      "subtitles": [
+        "타이거가 24일 보도한 내용에 따르면 태국 이민국이 파타야의 한 주택에서 중국 당국이\n인터폴을 통해 수배한 37세 중국인 남성을 체포했습니다.",
+        "이 남성은 15억 바트(약 588억3,735만 원) 규모의 도박 조직을 운영한 혐의를 받고\n있습니다.",
+        "같은 집은 2025년 4월에도 단속을 받았습니다.",
+        "당시 중국인 여성은 태국 국적 아이를 부양한다는 이유로 임시 비자를 받아 머물고\n있었습니다.",
+        "아이의 출생증명서에는 태국인 남성이 아버지로 기재돼 있었지만 DNA 검사에서 친자\n관계가 아닌 것으로 나타났고, 이번에 체포된 남성이 친아버지였습니다.",
+        "태국 경찰은 증거를 파타야 등록사무소에 넘겼으며, 사무소는 아이의 태국 국적 박탈\n여부를 검토하고 있습니다."
+      ],
+      "subtitle_timing": "untimed text chunks; regenerate or align after audio is available",
+      "source": "Thaiger (타이거)",
+      "source_url": "https://thethaiger.com/news/pattaya/chinese-fugitive-held-in-pattaya-and-a-child-may-lose-thai-nationality",
+      "site_url": "https://tnews.pmaxone.com/?ed=2026-10-26-am#ea1",
+      "region": "파타야",
+      "source_published": "2026-10-24T15:00:00+07:00"
+    },
+    {
+      "id": "news06",
+      "kind": "article",
+      "edition": "2026-10-26-pm",
+      "article_id": "ea2",
+      "title": "파타야 교차로 충돌…차량 전복 뒤 화재",
+      "body": [
+        "수쿰윗 교차로서 MG·혼다 충돌…탑승자 부상",
+        "목격자 신호위반 진술…태국 경찰 사고 경위 조사"
+      ],
+      "narration": "타이거 보도에 따르면 26일 새벽 2시경 파타야 남부 수쿰윗 도로 교차로에서 영국인이 탑승한 MG 승용차가 혼다 차량과 충돌한 뒤 전복되며 불길이 치솟았습니다. 혼다 차량 운전자는 팔 골절상 등을 입었고, MG 탑승객도 가슴 통증과 찰과상을 입었습니다. 인근 주민들은 유리창을 깨고 탑승자들을 구조한 뒤 자체 진화에 나섰습니다. 목격자들은 MG 차량이 신호를 위반하고 교차로에 진입했다고 진술했으며, 태국 경찰은 신호위반 여부를 포함해 정확한 사고 경위를 조사하고 있습니다.",
+      "subtitles": [
+        "타이거 보도에 따르면 26일 새벽 2시경 파타야 남부 수쿰윗 도로 교차로에서 영국인이\n탑승한 MG 승용차가 혼다 차량과 충돌한 뒤 전복되며 불길이 치솟았습니다.",
+        "혼다 차량 운전자는 팔 골절상 등을 입었고, MG 탑승객도 가슴 통증과 찰과상을\n입었습니다.",
+        "인근 주민들은 유리창을 깨고 탑승자들을 구조한 뒤 자체 진화에 나섰습니다.",
+        "목격자들은 MG 차량이 신호를 위반하고 교차로에 진입했다고 진술했으며, 태국 경찰은\n신호위반 여부를 포함해 정확한 사고 경위를 조사하고 있습니다."
+      ],
+      "subtitle_timing": "untimed text chunks; regenerate or align after audio is available",
+      "source": "The Thaiger",
+      "source_url": "https://thethaiger.com/news/pattaya/brit-in-pattaya-crash-as-car-catches-fire-red-light-run-alleged",
+      "site_url": "https://tnews.pmaxone.com/?ed=2026-10-26-pm#ea2",
+      "region": "파타야",
+      "source_published": "2026-10-26T11:26:05+07:00"
+    },
+    {
+      "id": "news07",
+      "kind": "article",
+      "edition": "2026-10-26-pm",
+      "article_id": "lf1",
+      "title": "11월부터 태국 대상 SNS 유료광고 신원 확인 의무",
+      "body": [
+        "해외 광고주도 신분증·사업자 서류 등으로 신원 입증",
+        "광고주 정보 최소 90일 보관…위반 시 연대 책임 가능"
+      ],
+      "narration": "타이거 보도에 따르면 태국 정부가 온라인 사기 범죄를 차단하기 위해 11월 1일부터 페이스북, 인스타그램, 틱톡 등 주요 소셜 미디어의 태국 대상 유료 광고에 신원 확인을 의무화합니다. 해외 광고주라도 신분증이나 사업자 등록 서류를 통해 신원을 입증해야 하며, 일반 개인 게시물은 적용 대상에서 제외됩니다. 플랫폼 사업자는 광고주 정보를 최소 90일간 보관해야 합니다. 규정을 위반하면 사기 피해에 대한 연대 책임을 질 수 있습니다.",
+      "subtitles": [
+        "타이거 보도에 따르면 태국 정부가 온라인 사기 범죄를 차단하기 위해 11월 1일부터\n페이스북, 인스타그램, 틱톡 등 주요 소셜 미디어의 태국 대상 유료 광고에 신원 확인을",
+        "의무화합니다.",
+        "해외 광고주라도 신분증이나 사업자 등록 서류를 통해 신원을 입증해야 하며, 일반 개인\n게시물은 적용 대상에서 제외됩니다.",
+        "플랫폼 사업자는 광고주 정보를 최소 90일간 보관해야 합니다.",
+        "규정을 위반하면 사기 피해에 대한 연대 책임을 질 수 있습니다."
+      ],
+      "subtitle_timing": "untimed text chunks; regenerate or align after audio is available",
+      "source": "The Thaiger",
+      "source_url": "https://thethaiger.com/news/business/thailand-to-require-id-for-paid-social-media-ads-from-november",
+      "site_url": "https://tnews.pmaxone.com/?ed=2026-10-26-pm#lf1",
+      "region": "",
+      "source_published": "2026-10-26T13:20:09+07:00"
+    },
+    {
+      "id": "news08",
+      "kind": "article",
+      "edition": "2026-10-26-pm",
+      "article_id": "bk1",
+      "title": "수완나품 공항서 미신고 외환 밀반입 적발",
+      "body": [
+        "뭄바이발 입국 남성…파운드화·달러화 현금 발견",
+        "총 257만8,690바트(약 1억115만 원) 상당"
+      ],
+      "narration": "더 네이션 보도에 따르면 인도 뭄바이에서 방콕 수완나품 공항으로 입국하던 인도 국적 남성이 미신고 외환을 소지하고 들어오려다 태국 관세청에 체포됐습니다. 세관 검색 결과 5만 파운드와 1만 달러 등 총 257만8,690바트(약 1억115만 원) 상당의 현금이 발견됐습니다. 태국 당국은 외환관리법 및 관세법 위반 혐의로 입건했습니다. 보도는 태국 법률상 기준액을 초과하는 외환을 신고 없이 소지하고 입출국하는 행위가 금지된다고 전했습니다.",
+      "subtitles": [
+        "더 네이션 보도에 따르면 인도 뭄바이에서 방콕 수완나품 공항으로 입국하던 인도 국적\n남성이 미신고 외환을 소지하고 들어오려다 태국 관세청에 체포됐습니다.",
+        "세관 검색 결과 5만 파운드와 1만 달러 등 총 257만8,690바트(약 1억115만 원) 상당의\n현금이 발견됐습니다.",
+        "태국 당국은 외환관리법 및 관세법 위반 혐의로 입건했습니다.",
+        "보도는 태국 법률상 기준액을 초과하는 외환을 신고 없이 소지하고 입출국하는 행위가\n금지된다고 전했습니다."
+      ],
+      "subtitle_timing": "untimed text chunks; regenerate or align after audio is available",
+      "source": "The Nation",
+      "source_url": "https://www.nationthailand.com/news/general/40072755",
+      "site_url": "https://tnews.pmaxone.com/?ed=2026-10-26-pm#bk1",
+      "region": "방콕",
+      "source_published": "2026-10-26T16:38:00+07:00"
+    },
+    {
+      "id": "news09",
+      "kind": "article",
+      "edition": "2026-10-26-am",
+      "article_id": "vi1",
+      "title": "태국 세관 “24일간 대마 반출 40명 적발”",
+      "body": [
+        "수완나품 공항서 대마초 꽃 577kg 압수…대부분 외국인",
+        "허가 없는 반출…1kg당 3만 바트(약 117만6,747원) 벌금 가능"
+      ],
+      "narration": "타이거가 25일 보도한 내용에 따르면 태국 세관이 10월 1일부터 24일까지 수완나품 공항에서 대마초 꽃을 허가 없이 해외로 가지고 나가려던 40명을 체포하고 대마초 꽃 577킬로그램을 압수했습니다. 압수품 가치는 약 580만 바트(약 2억2,750만 원)이며, 체포된 사람 대부분은 외국인이었습니다. 국적별로는 인도인 11명, 중국인 7명, 영국인 5명이었습니다. 태국 세관은 출국 승객과 짐 검사를 강화하고, 태국 공항공사와 함께 무작위 검사를 늘리고 있습니다. 보도에 따르면 대마초 꽃은 의료용으로만 허용되며, 허가 없이 반출하면 1킬로그램당 3만 바트(약 117만6,747원)의 벌금을 물 수 있습니다.",
+      "subtitles": [
+        "타이거가 25일 보도한 내용에 따르면 태국 세관이 10월 1일부터 24일까지 수완나품\n공항에서 대마초 꽃을 허가 없이 해외로 가지고 나가려던 40명을 체포하고 대마초 꽃",
+        "577킬로그램을 압수했습니다.",
+        "압수품 가치는 약 580만 바트(약 2억2,750만 원)이며, 체포된 사람 대부분은\n외국인이었습니다.",
+        "국적별로는 인도인 11명, 중국인 7명, 영국인 5명이었습니다.",
+        "태국 세관은 출국 승객과 짐 검사를 강화하고, 태국 공항공사와 함께 무작위 검사를\n늘리고 있습니다.",
+        "보도에 따르면 대마초 꽃은 의료용으로만 허용되며, 허가 없이 반출하면 1킬로그램당 3만\n바트(약 117만6,747원)의 벌금을 물 수 있습니다."
+      ],
+      "subtitle_timing": "untimed text chunks; regenerate or align after audio is available",
+      "source": "Thaiger (타이거)",
+      "source_url": "https://thethaiger.com/hot-news/crime/customs-cannabis-arrests-24-days-indians-suvarnabhumi",
+      "site_url": "https://tnews.pmaxone.com/?ed=2026-10-26-am#vi1",
+      "region": "수완나품 공항",
+      "source_published": "2026-10-25T14:26:00+07:00"
+    },
+    {
+      "id": "news10",
+      "kind": "article",
+      "edition": "2026-10-26-pm",
+      "article_id": "no1",
+      "title": "태국군, 미얀마 유탄에 4대 대응 지침",
+      "body": [
+        "낙탄 시 경고 연막탄…의도적 사격 확인되면 응사",
+        "외교적 항의·대피 벙커 점검·피난민 보호 및 검문"
+      ],
+      "narration": "카오솟 잉글리시 보도에 따르면 태국군 나레수안 부대는 미얀마 국경 충돌 과정에서 총탄이나 포탄이 태국 영토로 넘어올 경우 비례적 군사 대응을 포함한 4대 대응 지침을 가동한다고 밝혔습니다. 지침에 따라 낙탄 시 경고 연막탄을 발사하고, 의도적인 사격이 확인되면 즉각 응사할 방침입니다. 외교적 항의와 접경 주민 대피 벙커 점검, 피난민 임시 보호 및 검문 조치도 병행됩니다. 탁주 매솟 국경 지역은 미얀마 군부와 소수민족 무장단체 간 교전으로 유탄 피해 우려가 꾸준히 제기돼 왔습니다.",
+      "subtitles": [
+        "카오솟 잉글리시 보도에 따르면 태국군 나레수안 부대는 미얀마 국경 충돌 과정에서\n총탄이나 포탄이 태국 영토로 넘어올 경우 비례적 군사 대응을 포함한 4대 대응 지침을",
+        "가동한다고 밝혔습니다.",
+        "지침에 따라 낙탄 시 경고 연막탄을 발사하고, 의도적인 사격이 확인되면 즉각 응사할\n방침입니다.",
+        "외교적 항의와 접경 주민 대피 벙커 점검, 피난민 임시 보호 및 검문 조치도 병행됩니다.",
+        "탁주 매솟 국경 지역은 미얀마 군부와 소수민족 무장단체 간 교전으로 유탄 피해 우려가\n꾸준히 제기돼 왔습니다."
+      ],
+      "subtitle_timing": "untimed text chunks; regenerate or align after audio is available",
+      "source": "Khaosod English",
+      "source_url": "https://www.khaosodenglish.com/news/2026/10/26/thai-army-ready-to-respond-if-myanmar-fire-damages-thai-lives-or-property/",
+      "site_url": "https://tnews.pmaxone.com/?ed=2026-10-26-pm#no1",
+      "region": "매솟",
+      "source_published": "2026-10-26T16:25:36+07:00"
+    },
+    {
+      "id": "news11",
+      "kind": "article",
+      "edition": "2026-10-26-am",
+      "article_id": "ea2",
+      "title": "파타야 국제 불꽃축제 11월 27~28일",
+      "body": [
+        "파타야 해변서 오후 5시~자정…첫 불꽃은 오후 8시",
+        "비치로드 오후 3시부터 차량 통제…교통 공지 확인"
+      ],
+      "narration": "파타야 메일 보도에 따르면 파타야 국제 불꽃축제 2026이 11월 27일과 28일 이틀간 파타야 해변에서 열립니다. 행사는 오후 5시부터 자정까지 이어지며, 해변을 따라 공연과 먹거리 부스가 마련됩니다. 첫 불꽃은 오후 8시에 오릅니다. 행사 당일 비치로드는 오후 3시부터 차량 통행이 막힙니다. 매체는 비치로드와 파타야 중심가가 붐빌 수 있다며 이동 시간을 넉넉히 잡고, 해변에서 떨어진 곳에 주차한 뒤 걸어갈 것을 권했습니다. 주차와 공연 일정, 관람 구역은 날짜가 가까워지면 파타야시 공지를 확인하면 됩니다.",
+      "subtitles": [
+        "파타야 메일 보도에 따르면 파타야 국제 불꽃축제 2026이 11월 27일과 28일 이틀간\n파타야 해변에서 열립니다.",
+        "행사는 오후 5시부터 자정까지 이어지며, 해변을 따라 공연과 먹거리 부스가 마련됩니다.",
+        "첫 불꽃은 오후 8시에 오릅니다.",
+        "행사 당일 비치로드는 오후 3시부터 차량 통행이 막힙니다.",
+        "매체는 비치로드와 파타야 중심가가 붐빌 수 있다며 이동 시간을 넉넉히 잡고, 해변에서\n떨어진 곳에 주차한 뒤 걸어갈 것을 권했습니다.",
+        "주차와 공연 일정, 관람 구역은 날짜가 가까워지면 파타야시 공지를 확인하면 됩니다."
+      ],
+      "subtitle_timing": "untimed text chunks; regenerate or align after audio is available",
+      "source": "파타야 메일 (Pattaya Mail)",
+      "source_url": "https://www.pattayamail.com/latestnews/news/pattaya-fireworks-festival-puts-hotel-rooms-traffic-and-beach-spots-in-focus-569438",
+      "site_url": "https://tnews.pmaxone.com/?ed=2026-10-26-am#ea2",
+      "region": "파타야 해변",
+      "source_published": "2026-10-23T03:52:00+07:00"
+    },
+    {
+      "id": "closing",
+      "kind": "closing",
+      "edition": "",
+      "article_id": "",
+      "title": "태국 뉴스 한눈에",
+      "body": [
+        "태국 현지 뉴스 · tnews.pmaxone.com",
+        "간추린 태국뉴스를 마칩니다. 시청해 주셔서 감사합니다."
+      ],
+      "narration": "마지막으로 주요 소식 세 가지를 다시 짚어보겠습니다. 첫째, 태국 경찰청과 이민국이 불법체류 외국인 1만여 명을 대상으로 전국 단속에 나섰다는 보도입니다. 둘째, 홍수와 만조 관련 소식입니다. 재난예방완화국의 발표 시점과 각 지역의 경보 기간을 구분해 확인해야 합니다. 셋째, 푸껫 빠통의 침수 소식입니다. 복구 전망은 추가 비가 내리지 않는다는 조건이 붙어 있습니다. 태국 뉴스 한눈에, 티뉴스에서 전해드렸습니다. 오늘 소식의 자세한 내용과 기사 출처는 tnews.pmaxone.com에서 확인하실 수 있습니다. 간추린 태국뉴스를 마칩니다. 시청해 주셔서 감사합니다.",
+      "subtitles": [
+        "마지막으로 주요 소식 세 가지를 다시 짚어보겠습니다.",
+        "첫째, 태국 경찰청과 이민국이 불법체류 외국인 1만여 명을 대상으로 전국 단속에 나섰다는 보도입니다.",
+        "둘째, 홍수와 만조 관련 소식입니다. 재난예방완화국의 발표 시점과 각 지역의 경보 기간을 구분해 확인해야 합니다.",
+        "셋째, 푸껫 빠통의 침수 소식입니다. 복구 전망은 추가 비가 내리지 않는다는 조건이 붙어 있습니다.",
+        "태국 뉴스 한눈에, 티뉴스에서 전해드렸습니다.",
+        "오늘 소식의 자세한 내용과 기사 출처는 tnews.pmaxone.com에서 확인하실 수\n있습니다.",
+        "간추린 태국뉴스를 마칩니다.",
+        "시청해 주셔서 감사합니다."
+      ],
+      "subtitle_timing": "untimed text chunks; regenerate or align after audio is available",
+      "site_url": "https://tnews.pmaxone.com/"
+    }
+  ],
+  "review": {
+    "status": "snapshot-fidelity-reviewed; audio not yet produced",
+    "basis": "/workspace/shared/thai_video_inputs_20261026/read_only_inputs.json",
+    "basis_commit": "2d7e4346a0082c5835016e18dc3e9aaf5396aaba",
+    "original_draft_sha256": "ea7862b82162b1f758d3fb0a0e6b4b7e4ded36c71344bb3dcf777416fb52e423",
+    "review_date": "2026-10-26",
+    "fx_thb_krw": "39.2249",
+    "fx_rate_time": "2026-10-26T07:02:31+07:00",
+    "currency_rounding": "Large approximate KRW values rounded to nearest 10,000 won; 30,000-baht fine rounded to nearest won. Source baht values preserved.",
+    "independent_live_source_verification": false,
+    "review_method": "Compared title, body and every narration claim against selected source summaries/context in provided snapshot. No remote fetches.",
+    "fixed_sections_v1": {
+      "method": "deterministic fixed recap of selected first three articles",
+      "yesterday_fx_comparison": "omitted: no verified previous-day data",
+      "additional_script_api_calls": 0,
+      "tts_of_fixed_sections": "included in TTS cost, not free"
+    }
+  }
+}
