@@ -124,3 +124,31 @@ html.th-modern.th-g .ticker .tk-tile[data-tk="env"] .tk-ln:first-child{border-le
 html.th-modern.th-g .ticker .tk-tile[data-tk="env"] .tk-ft{border-left:1px solid var(--g-gline)}}
 html.th-modern.th-g .brief-text{display:table;width:100%}
 html.th-modern.th-g .brief-text .bchip{display:table-footer-group}
+/* 2026-10-26 Claude: 라이브 바(헤더 첫 줄 빈칸) — 로직 assets/ticker.js 끝. G 테마에서만 보임. 하트 칸이 22px 로 눌려 깨지던 것도 같이 고침 */
+
+html.th-modern.th-g .masthead__row2 .mbox{width:auto;align-items:center}
+html.th-modern.th-g .masthead__row2 .mbox .heart-btn{flex:0 0 auto;min-width:46px;padding:0 9px;white-space:nowrap}
+html.th-modern.th-g .lb{display:flex;align-items:center;gap:6px;flex:1 1 auto;min-width:0;height:30px}
+html.th-modern.th-g .lb__run{flex:1 1 auto;min-width:0;height:100%;overflow:hidden;position:relative;-webkit-mask:linear-gradient(90deg,transparent,#000 10px,#000 calc(100% - 14px),transparent);mask:linear-gradient(90deg,transparent,#000 10px,#000 calc(100% - 14px),transparent)}
+html.th-modern.th-g .lb__track{display:flex;width:max-content;height:100%;animation:lbrun var(--lb-dur,30s) linear infinite}
+html.th-modern.th-g .lb__run:hover .lb__track,html.th-modern.th-g .lb__run:focus-within .lb__track{animation-play-state:paused}
+html.th-modern.th-g .lb__seg{display:flex;align-items:center;padding-right:18px;white-space:nowrap}
+html.th-modern.th-g .lb__it{background:none;border:0;padding:0 2px;margin:0;color:#E9ECEF;font:inherit;font-size:0.8125rem;font-weight:600;line-height:30px;cursor:pointer;white-space:nowrap}
+html.th-modern.th-g .lb__it:hover{color:#fff;text-decoration:underline}
+html.th-modern.th-g .lb__it:focus-visible,html.th-modern.th-g .lb__alert:focus-visible{outline:2px solid #74c0fc;outline-offset:-2px}
+html.th-modern.th-g .lb__dot{color:var(--g-gsub);padding:0 8px}
+@keyframes lbrun{to{transform:translateX(-50%)}}
+html.th-modern.th-g .lb--alert .lb__run{-webkit-mask:none;mask:none}
+html.th-modern.th-g .lb__alert{display:flex;align-items:center;gap:5px;width:100%;height:100%;min-width:0;padding:0 8px;border:0;border-radius:4px;background:#C92A2A;color:#fff;font:inherit;font-size:0.8125rem;line-height:1;cursor:pointer;text-align:left}
+html.th-modern.th-g .lb__alert b{flex:0 0 auto;font-weight:800}
+html.th-modern.th-g .lb__ic{flex:0 0 auto;font-size:0.875rem}
+html.th-modern.th-g .lb__t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+html.th-modern.th-g .lb__more{flex:0 0 auto;font-size:0.6875rem;font-weight:800;background:rgba(255,255,255,.22);border-radius:3px;padding:2px 4px}
+html.th-modern.th-g .lb__next{flex:0 0 auto;display:inline-flex;align-items:center;height:22px;padding:0 7px;border-radius:4px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px var(--g-gline);color:var(--g-gsub);font-size:0.6875rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+html.th-modern.th-g .lb__next b{color:#E9ECEF;font-weight:700}
+html.th-modern.th-g .lb__nl{margin-right:4px}html.th-modern.th-g .lb__left{margin-left:3px;white-space:pre}
+html.th-modern.th-g .lb__next--soon{color:#FFD43B}
+html.th-modern.th-g .lb__next--live{color:#8CE99A}
+@media (max-width:420px){html.th-modern.th-g .lb__nl,html.th-modern.th-g .lb__sfx{display:none}html.th-modern.th-g .lb__next{padding:0 6px}}
+@media (max-width:360px){html.th-modern.th-g .lb__left{display:none}}
+@media (prefers-reduced-motion:reduce){html.th-modern.th-g .lb__track{animation:none}html.th-modern.th-g .lb__seg[aria-hidden]{display:none}html.th-modern.th-g .lb__run{overflow-x:auto;scrollbar-width:none}html.th-modern.th-g .lb__run::-webkit-scrollbar{display:none}}

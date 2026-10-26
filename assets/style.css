@@ -963,3 +963,5 @@ html .gbtn.gbtn--line:hover,html.th-modern .gbtn.gbtn--line:hover{background:#05
 .masthead{transition:clip-path .22s ease,box-shadow .22s ease;clip-path:inset(0 0 0 0)}
 html.mh-tuck .masthead{clip-path:inset(0 0 var(--mh-tuck,0px) 0);box-shadow:none}
 @media (prefers-reduced-motion:reduce){.masthead{transition:none}}
+/* 라이브 바(ticker.js 끝)는 G 테마(g.css)에서만 보임 */
+.lb{display:none}

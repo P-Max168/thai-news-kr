@@ -366,3 +366,5 @@ User approves final existing five creatives and immediate deployment. Added comm
 - 2026-10-26 15:25 BKK (Claude): 2안(그록 고르기 + 제미나이 원고) — gemini-edition.yml 예약을 대비용 07:05·18:05 로, push 실행 때 이미 있는 판은 건너뜀. 중국어판 같은 변경(13:05).
 
 - 2026-10-26 18:20 BKK (Claude): 폰에서 스크롤하면 큰 헤더(환율 패널+내 주변 줄, 화면의 약 40%)가 상단 배너를 덮어 배너가 잘려 보이던 문제. 아래로 스크롤하면 둘째·셋째 줄을 clip-path 로 숨기고(제목 줄만 고정) 위로 스크롤하면 다시 보이게(style.css 끝·ticker.js 끝). 실패: 처음 transform 으로 위로 밀었더니 제목 줄이 숨고 내 주변 줄이 남음 → clip-path 로 바꿈. 배너 데이터·판 변경 없음.
+- 2026-10-26 18:30 BKK (Claude): 맥스님 요청 — G 테마 헤더 첫 줄(☰·♡ 오른쪽 빈칸)에 라이브 바(ticker.js 끝·g.css 끝·style.css .lb 숨김·i18n/ko.json livebar). 이번 판 highlights→기사 순 최대 6건 흐름(누르면 data-open), 경보 기사면 빨간 한 줄, 오른쪽 다음 판 시각·남은 시간(ko 06:40·17:40, zh 13:00), 시작 뒤 45분 안 새 판 없으면 "새 판 준비 중". 하트 칸이 G 테마에서 flex 22px 로 눌려 깨지던 것도 고침. 경보 기준은 ticker.js 주석. 실패: 처음 기준(날씨+홍수 낱말)으로는 푸껫 돌발 홍수 기사가 파타야 독자에게 경보로 떠 → 날씨는 경보·예보 같은 앞으로 말 또는 동부·방콕 기사일 때만으로 좁힘.
+- 2026-10-26 18:30 BKK (Claude): deploy.sh pages 확인 — push 직후 Pages 실행이 목록에 없을 때 grep 빈 결과가 set -e·pipefail 로 exit 1(10-26 pm Actions 40310376950) → || true 로 기다렸다 다시 보게 고침(재현 시험 확인).
