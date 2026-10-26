@@ -327,7 +327,7 @@ def main():
     pk = json.loads(pathlib.Path(a.picks).read_text(encoding="utf-8"))
     picks = pk.get("picks") if isinstance(pk, dict) else pk
     if isinstance(pk, dict) and pk.get("picker") == "code":   # tools/code_picks.py 가 만든 후보 → 제미나이가 그중 최대 select 건 고름(2026-10-25 구조 통일)
-        a.select = a.select or int(pk.get("select") or 10)
+        a.select = a.select or int(pk.get("select") or 20)
         os.environ.setdefault("PICKER", "코드(자동)")
         if os.environ.get("PICKER") == "그록":
             os.environ["PICKER"] = "코드(자동)"
