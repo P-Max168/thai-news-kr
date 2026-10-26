@@ -21,7 +21,7 @@ Claude 예약 작업이 이 문서를 그대로 따른다. 사람도 읽을 수 
 
 ## 2. 비상 발행 (한국어판)
 1. 담당 표시: 07:00·18:00 이면 `python3 tools/edition_claim.py claim claude <판 id>`, 07:30·18:30 이면 `take`. HOLD 면 끝.
-2. 후보: `bash tools/fetch_candidates.sh <판 id>` (am 은 06:05, pm 은 17:05 수집분). exit 3 이면 `bash tools/fetch_candidates.sh` (판 id 없이 — 가장 최근 수집분) 로 받고 coverage 에 적는다.
+2. 후보: `bash tools/fetch_candidates.sh <판 id>` (am 은 03:37~05:37, pm 은 14:37~16:37 수집분 — GitHub 예약이 늦을 수 있음). exit 3 이면 `bash tools/fetch_candidates.sh` (판 id 없이 — 가장 최근 수집분) 로 받고 coverage 에 적는다.
 3. 기사 고르기: `drafts/candidates/latest.md` 와 `drafts/gnews/latest.md` 에서 **8~12건**(비상판은 적어도 됨). README '고르는 규칙'·`tools/TRANSLATION_RULES.md` 를 따른다. 동부(파타야)·외국인·비자·치안·날씨 우선.
 4. 원문 확인: 사이트에 직접 붙지 못하므로 **웹 읽기 도구(WebFetch)** 로 원문을 열어 사실·숫자·게재 시각을 확인한다. Google News 링크는 원 매체 페이지를 검색해 찾는다. 확인 못 한 기사는 빼다.
 5. 편집 파일: `tools/editions/_template.py` 를 복사해 `tools/editions/<판 id>.py`. highlights 3개, briefing 4~7줄 필수. 금액은 "바트(약 N원)" — 환율은 `data/ticker.json` 의 fx.THB_KRW 하나.
