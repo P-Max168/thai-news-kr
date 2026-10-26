@@ -1,0 +1,43 @@
+name: thai-video-resume-20261026-once
+on:
+  push:
+    branches: [codex/thai-video-test-20261026-once]
+    paths:
+      - '.github/workflows/thai-video-resume-20261026.yml'
+      - 'ops/video-test-20261026/resume_once.py'
+      - 'ops/video-test-20261026/test_resume_once.py'
+permissions:
+  contents: read
+concurrency:
+  group: thai-video-test-20261026-once
+  cancel-in-progress: false
+jobs:
+  tts:
+    if: github.run_attempt == 1 && github.event.head_commit.message == 'resume remaining Thai news once 2026-10-26'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Enforce one-off date
+        shell: bash
+        run: test "$(date -u +%F)" = '2026-10-26'
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Verify local invariants without API calls
+        run: python3 -m unittest discover -s ops/video-test-20261026 -p 'test_*.py'
+      - name: Generate exactly one combined remaining audio request
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 ops/video-test-20261026/resume_once.py --script ops/video-test-20261026/script_reviewed.json --out generated-thai-video-remaining
+      - name: Upload generated audio and numeric usage only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thai-news-20261026-remaining-${{ github.run_id }}
+          path: |
+            generated-thai-video-remaining/*.wav
+            generated-thai-video-remaining/usage.json
+          if-no-files-found: warn
+          retention-days: 1
+          include-hidden-files: false
