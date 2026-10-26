@@ -47,7 +47,7 @@ def flat(d, pre=""):
 
 def site_js(c, i18n):
     keep = {k: c.get(k) for k in ("lang", "htmlLang", "brand", "brand_sub", "site_url", "currency", "home_section", "hidden_sections",
-                                  "firestore_prefix", "admins_doc", "slots", "edition_label", "share", "wx_coords", "origin_hide_rx", "login", "date_order", "date_long", "tabbar", "ga4", "adsense", "fan", "board") if k in c}
+                                  "firestore_prefix", "admins_doc", "slots", "edition_label", "share", "wx_coords", "origin_hide_rx", "login", "date_order", "date_long", "tabbar", "tablinks", "ga4", "adsense", "fan", "board") if k in c}
     keep["i18n"] = i18n
     keep["topics"] = {k: v for k, v in (c.get("topics") or {}).items() if not k.startswith("_") and k != "REGION_PATTERNS"}
     keep["impacts_ui"] = [{"k": k, "e": IMPACT_UI[i % 5][0], "c": IMPACT_UI[i % 5][1]} for i, k in enumerate(c.get("impacts") or [])]
