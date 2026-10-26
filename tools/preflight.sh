@@ -58,8 +58,8 @@ if ! python3 tools/publisher_guard.py; then
 fi
 # 판 담당 표시(2026-10-23): am-build·pm-build·md-build 면 원격에 claim/<판 id>/<누구> 를 남김 → Claude 비상 발행 확인(07:00·18:00)이 봄.
 #   다른 담당(특히 Claude 비상 발행)이 이미 맡았으면 여기서 멈춤(exit 4). 표시 실패는 판을 막지 않음(CLAIM WARN).
-if [[ "$JOB" =~ ^(am|pm|md)-build$ ]]; then
-  ED="$(TZ=Asia/Bangkok date +%F)-${BASH_REMATCH[1]}"
+if [[ "$JOB" =~ ^([a-z][a-z]-)?(am|pm|md)-build$ ]]; then   # 언어판 lang_build 는 zh-md-build 처럼 언어가 붙음(10-26 고침)
+  ED="$(TZ=Asia/Bangkok date +%F)-${BASH_REMATCH[2]}"
   if ! python3 tools/edition_claim.py claim "${TNK_PUBLISHER:-grok}" "$ED"; then
     jlog "HOLD  $JOB claim $ED"; exit 4
   fi
