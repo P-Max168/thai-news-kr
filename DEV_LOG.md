@@ -362,3 +362,5 @@ User approves final existing five creatives and immediate deployment. Added comm
 - 2026-10-26 13:05 BKK (Claude): collect.yml 예약을 판마다 1시간 간격 여러 번으로(아침 03:37·04:37·05:37, 점심 11:17·12:17, 저녁 14:37·15:37·16:37). GitHub 예약이 2~4시간 늦게 돌아 10-26 아침 비상 발행 때 후보가 없었음. 판 id 경계 md→pm 16시→14시.
 
 - 2026-10-26 15:05 BKK (Claude): preflight 담당 표시가 언어판(zh-md-build) 이름에서 안 걸리던 것 고침 → 그록 중국어판 정기 발행 때 claim 이 남아 13:30 Claude 확인과 겹치지 않게.
+
+- 2026-10-26 15:25 BKK (Claude): 2안(그록 고르기 + 제미나이 원고) — gemini-edition.yml 예약을 대비용 07:05·18:05 로, push 실행 때 이미 있는 판은 건너뜀. 중국어판 같은 변경(13:05).
