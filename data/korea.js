@@ -1,42 +1,42 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-26T12:17:58+07:00",
+ "updated_at": "2026-10-26T13:22:44+07:00",
  "items": [
   {
-   "title": "윤상현 “오세훈, 강력한 대선주자…장동혁과 결 달라”",
-   "source": "한겨레",
-   "time": "2026-10-26T09:41:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1284123.html"
-  },
-  {
-   "title": "월요일 낮 최고 25도, 곳곳 비…내일 오후부터 기온 뚝",
-   "source": "한겨레",
-   "time": "2026-10-26T09:59:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/environment/1284107.html"
-  },
-  {
-   "title": "태풍 ‘참피’ 온대저기압으로 약화…제주 강풍·풍랑 주의",
+   "title": "법원행정처장, 오세훈 2심 무죄에 “조희대 사법부가 어떻게 했다는 말 적절하지 않아”",
    "source": "경향신문",
-   "time": "2026-10-26T06:16:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610260816001"
+   "time": "2026-10-26T11:02:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610261302001"
   },
   {
-   "title": "이준석, 한동훈 겨냥 “민주당 주장에 부화뇌동…안에 수류탄 까넣어”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-26T08:39:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8694964"
+   "title": "김지용 중수청장 “한동훈 딸 의혹 진상규명 필요…일부는 암장으로 보여”",
+   "source": "경향신문",
+   "time": "2026-10-26T12:11:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610261411001"
   },
   {
-   "title": "최길수 특별감찰관 “정치적 중립·독립성 견지…두 눈 부릅뜨고 감시”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-26T10:04:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8695125"
+   "title": "이 대통령, 농어민 만나 “CPTPP 연내 가입 신청 안 해”",
+   "source": "한겨레",
+   "time": "2026-10-26T12:35:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/bluehouse/1284158.html"
   },
   {
-   "title": "[리얼미터] 李 지지율 소폭 하락 35.3%‥국힘, 민주 오차 밖 우세",
+   "title": "최길수 \"법 위반해 감찰하면 제가 처벌받아\"...김현지 감찰에 선 그어",
+   "source": "조선일보",
+   "time": "2026-10-26T08:50:00+07:00",
+   "url": "https://www.chosun.com/politics/politics_general/2026/10/26/INCCSX4WNNFXFL3IIIJE36PIQE/"
+  },
+  {
+   "title": "靑, '김혜경 여사 골프' 보도에 \"'따옴표 보도'는 언론 책임 방기\"",
    "source": "MBC 뉴스",
-   "time": "2026-10-26T07:50:52+07:00",
-   "url": "https://imnews.imbc.com/news/2026/politics/article/6860687_36911.html"
+   "time": "2026-10-26T11:25:54+07:00",
+   "url": "https://imnews.imbc.com/news/2026/politics/article/6860734_36911.html"
+  },
+  {
+   "title": "조국, '조희대 엄정 판결 기대' 김민석 직격‥\"가능한 얘기냐\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-26T08:26:23+07:00",
+   "url": "https://imnews.imbc.com/news/2026/politics/article/6860702_36911.html"
   },
   {
    "title": "역삼 연쇄방화범 “나도 피해자” 주장 지속…살인미수 적용 가닥",
@@ -45,10 +45,10 @@ window.KOREA_NEWS = {
    "url": "https://news.kbs.co.kr/news/view.do?ncd=8695074"
   },
   {
-   "title": "김지용 중수청장 “이 대통령이 특정 사건 질문해도 대답 안 해…큰 부류 사건은 국정운영 따라야”",
-   "source": "경향신문",
-   "time": "2026-10-26T11:50:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610261350001"
+   "title": "남쪽으로 포구 향한 北 122mm ’자주포’ 포착…전진 배치로 ’무력 시위’",
+   "source": "연합뉴스TV",
+   "time": "2026-10-25T17:58:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261025195828jJ9"
   },
   {
    "title": "통일부 “김정은 단둥 방문, 한반도 주변국 대화 재개에 기여하길”",
@@ -57,10 +57,10 @@ window.KOREA_NEWS = {
    "url": "https://news.kbs.co.kr/news/view.do?ncd=8695114"
   },
   {
-   "title": "군, 민통선 넘어 GOP 철책까지 접근한 30대 여성 신병 확보",
-   "source": "연합뉴스TV",
-   "time": "2026-10-26T08:38:00+07:00",
-   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261026103827VLS"
+   "title": "월요일 낮 최고 25도, 곳곳 비…내일 오후부터 기온 뚝",
+   "source": "한겨레",
+   "time": "2026-10-26T09:59:00+07:00",
+   "url": "https://www.hani.co.kr/arti/society/environment/1284107.html"
   }
  ]
 };
