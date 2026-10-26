@@ -4,7 +4,7 @@
 등록부(언어판 data/artists.json, 수집기가 만듦): {"artists": [{"id", "n"(영문), "th", "ko", "al":[다른 이름], "t":"g|p|a", "g":[그룹 id], "m":[멤버 id]}]}
 tag_story(story, reg) → story["artists"] = [{"id", "n"}] (최대 6). 기사 제목·요약·키워드·원문 제목(한국어)에서 이름을 찾는다.
 - 영문 이름: 단어 경계, 3글자 이하(IVE·TWS·V 등)는 대소문자까지 같아야 함
-- 한국어 이름: 2글자 이상, 원문 제목·본문 쪽에서. 태국어 이름: 3글자 이상
+- 한국어 이름: 2글자 이상, 원문 제목·본문 쪽에서(3글자 이하는 앞에 한글이 붙으면 아님). 태국어 이름: 3글자 이상, 음절 경계에서만(10-25 저녁판 오탐)
 - 긴 이름부터 찾아 겹침(예: 'NCT 127' 과 'NCT')은 긴 쪽만
 """
 import json, pathlib, re
@@ -43,11 +43,17 @@ def _patterns(reg):
             elif re.search(r"[가-힯]", nm):
                 if len(nm) < 2:
                     continue
-                rx = re.compile(re.escape(nm))
+                # 짧은 한국어 이름(멤버 이름 '윤아'·'리사' 등)은 앞에 한글이 붙어 있으면 다른 사람(성+이름 '임윤아' = 소녀시대 윤아 ≠ ILLIT 윤아, 10-25 저녁판)
+                rx = re.compile((r"(?<![가-힯])" if len(nm) <= 3 else "") + re.escape(nm))
             else:
                 if len(nm) < 3:
                     continue
-                rx = re.compile(re.escape(nm))
+                # 태국어는 띄어쓰기가 없어 낱말 속에 이름이 숨어 있음('สนใจอย่าง' 안의 'จอย', 10-25 저녁판) → 음절 경계만:
+                # 앞 글자가 앞모음(เแโใไ)이면 안 되고, 뒤 글자가 붙는 모음·성조 기호면 안 됨. 3글자 이하는 앞뒤에 태국 자음도 안 됨
+                pre, post = r"(?<![\u0E40-\u0E44])", r"(?![\u0E30-\u0E3A\u0E45\u0E47-\u0E4E])"
+                if len(nm) <= 3:
+                    pre, post = r"(?<![\u0E01-\u0E2E\u0E40-\u0E44])", r"(?![\u0E01-\u0E3A\u0E45\u0E47-\u0E4E])"
+                rx = re.compile(pre + re.escape(nm) + post)
             out.append((len(nm), rx, a))
     out.sort(key=lambda x: -x[0])
     return out
