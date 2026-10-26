@@ -67,6 +67,16 @@ PR #2(디자인) 병합 대기: 기본 라일락(B) + 휴대폰 다크 모드면
 - 이 샌드박스는 gstatic·위키데이터·유튜브에 못 붙음 → 로그인은 가짜 응답으로, 위키데이터는 브랜치 워크플로(verify=true, deploy=false)로 시험.
 - AskUserQuestion 은 답 올 때까지 멈춤 → 질문은 일반 메시지 + 추천안으로 진행(10-25 규칙).
 
+## 10-26 11:30 Claude — KSTAR 설문·구인구직 숨김 (새 대화방은 여기부터)
+맥스님 지시: 구인구직 숨기기(나중에 다시 열기), 사이트 안 설문 페이지 운영, 지인에게 돌림. 이벤트는 Claude 추천안 채택 —
+'도움 된 의견 3명 선정'(추첨 아님) · 한국 화장품 세트 · 만 20세 이상 · 추천인은 가산점(설문 칸에 추천인 이름).
+- kstar PR #11 `claude/kstar-survey`(main 기준): tabbar jobs→survey 링크 탭, survey.html, cloudflare/survey.mjs(/api/survey), wrangler.json D1 연결,
+  publish.yml 배포 실패 시 D1 없이 재배포. **병합·배포는 맥스님 승인 필요.**
+- tnews PR #7 `claude/kstar-survey`(→ claude/kstar-features): 공유 tabbar.js 링크 탭(tablinks). kstar 는 74350c8 로 동기화됨.
+  PR #6(구인구직)과 합칠 때 kstar 의 site/th.json tabbar 에 jobs 를 다시 넣지 말 것.
+- D1 `kstar-survey-db`(cb68571f-bf97-40ad-b882-ba368e3adec4): responses·images 표. 결과는 Cloudflare MCP d1_database_query 로 읽어 맥스님께 보고.
+- 아직 모름: 저장소 CLOUDFLARE_API_TOKEN 에 D1 권한이 있는지(없으면 설문은 LINE 복사 방식으로 자동 전환).
+
 ## 남은 것 (순서대로)
 1. ~~**KSTAR(`P-Max168/kstar-th`) 재구축**~~ (위: PR #1 병합 대기) — 베트남판과 같은 방식. 맥스님 승인(10-25): 같이 고침, 파타야 전용 내용은 틀만 두고 숨김, 발행은 코드+제미나이 자동 유지.
    - 다른 점: 화면 언어가 **태국어**. `i18n/th.json` 을 새로 만들어야 함(중국어판 `i18n/zh.json` 범위와 같게 약 630개 문구 — jobs·places·관리자 pages 는 숨김이라 제외 가능).
