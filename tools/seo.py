@@ -2,6 +2,8 @@
 """검색 노출(SEO) 공용 도구 — 2026-10-18 Grok(민구님 승인: 한국어판 검색 노출, Claude 요청 R-seo-1~4 대행).
 
     python3 tools/seo.py sitemap        # sitemap.xml 다시 만들기(data/index.json + e/<판>/ 있는 것)
+    python3 tools/seo.py rss            # feed.xml RSS 갱신(네이버 등)
+    python3 tools/seo.py indexnow       # IndexNow 키 보장 + 현재 URL 제출
     python3 tools/seo.py regen-e        # 기존 e/<판>/index.html 전부를 '판 기사 전체 정적 HTML'로 다시 만들기
                                         #   (제목·설명·OG 태그는 기존 파일 것을 그대로 유지 → og 이미지·카톡 미리보기 안 바뀜)
     python3 tools/seo.py all            # 둘 다
@@ -219,9 +221,138 @@ def regen_e(root=ROOT):
     return n
 
 
+
+def rss(root=ROOT, limit=30):
+    """RSS 2.0 feed.xml — 네이버 서치어드바이저·구독기용. 판마다 sitemap과 같이 갱신."""
+    site, brand, lang = _site()
+    idx = json.loads((root / "data/index.json").read_text(encoding="utf-8"))
+    eds = sorted(idx.get("editions", []), key=lambda x: x["id"], reverse=True)
+    items = []
+    for meta in eds:
+        eid = meta["id"]
+        if not (root / "e" / eid / "index.html").exists():
+            continue
+        link = "%se/%s/" % (site, eid)
+        title = e(meta.get("label") or eid)
+        desc = e("%s · %s" % (brand, meta.get("label") or eid))
+        # pubDate: RFC 822 from generated ISO if present
+        gen = meta.get("generated") or ""
+        pub = ""
+        if gen:
+            try:
+                from datetime import datetime
+                dt = datetime.fromisoformat(gen)
+                pub = dt.strftime("%a, %d %b %Y %H:%M:%S +0700")
+            except Exception:
+                pub = ""
+        items.append(
+            "  <item>\n"
+            "    <title>%s</title>\n"
+            "    <link>%s</link>\n"
+            "    <guid isPermaLink=\"true\">%s</guid>\n"
+            "%s"
+            "    <description>%s</description>\n"
+            "  </item>" % (title, link, link, ("    <pubDate>%s</pubDate>\n" % pub) if pub else "", desc)
+        )
+        if len(items) >= limit:
+            break
+    channel = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
+        "<channel>",
+        "  <title>%s</title>" % e(brand),
+        "  <link>%s</link>" % e(site),
+        "  <description>%s</description>" % e(brand),
+        "  <language>%s</language>" % e(lang),
+        '  <atom:link href="%sfeed.xml" rel="self" type="application/rss+xml"/>' % e(site),
+    ] + items + ["</channel>", "</rss>", ""]
+    (root / "feed.xml").write_text("\n".join(channel), encoding="utf-8")
+    _ensure_rss_link(root, site)
+    return len(items)
+
+
+def _ensure_rss_link(root, site):
+    """홈 index.html <head>에 RSS alternate 링크가 없으면 넣음(멱등)."""
+    path = root / "index.html"
+    if not path.exists():
+        return
+    t = path.read_text(encoding="utf-8")
+    if 'type="application/rss+xml"' in t or "type='application/rss+xml'" in t:
+        return
+    tag = '<link rel="alternate" type="application/rss+xml" title="RSS" href="%sfeed.xml">' % e(site)
+    if "</title>" in t:
+        t = t.replace("</title>", "</title>\n" + tag, 1)
+        path.write_text(t, encoding="utf-8")
+
+
+def indexnow_key(root=ROOT):
+    """사이트 루트 IndexNow 키 파일 보장. 반환: (key, key_file_name). 공개 값(비밀 아님)."""
+    import secrets
+    marker = root / "ops" / "indexnow-key"
+    marker.parent.mkdir(parents=True, exist_ok=True)
+    key = None
+    if marker.exists():
+        key = marker.read_text(encoding="utf-8").strip()
+        if not (8 <= len(key) <= 128) or any(c not in "0123456789abcdefABCDEF-" for c in key):
+            key = None
+    if not key:
+        key = secrets.token_hex(16)
+        marker.write_text(key + "\n", encoding="utf-8")
+    key_file = root / ("%s.txt" % key)
+    if not key_file.exists() or key_file.read_text(encoding="utf-8").strip() != key:
+        key_file.write_text(key + "\n", encoding="utf-8")
+    # 예전 키 파일 정리(같은 마커 기준이 아닌 *.txt 는 건드리지 않음 — 마커에 적힌 키만 유지)
+    return key, key_file.name
+
+
+def indexnow_submit(root=ROOT, urls=None, limit=40):
+    """현재 사이트 URL을 IndexNow API에 제출. urls 없으면 sitemap 최근 항목. 반환: HTTP 상태 코드(또는 -1)."""
+    import urllib.request, urllib.error
+    site, _, _ = _site()
+    host = site.split("//", 1)[-1].rstrip("/").split("/")[0]
+    key, key_name = indexnow_key(root)
+    if urls is None:
+        sm = root / "sitemap.xml"
+        if not sm.exists():
+            return -1, []
+        locs = re.findall(r"<loc>([^<]+)</loc>", sm.read_text(encoding="utf-8"))
+        urls = locs[:limit]
+    if not urls:
+        return -1, []
+    body = json.dumps({
+        "host": host,
+        "key": key,
+        "keyLocation": "%s%s" % (site if site.endswith("/") else site + "/", key_name),
+        "urlList": urls,
+    }).encode("utf-8")
+    req = urllib.request.Request(
+        "https://api.indexnow.org/indexnow",
+        data=body,
+        headers={"Content-Type": "application/json; charset=utf-8"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            code = resp.getcode()
+            return code, urls
+    except urllib.error.HTTPError as ex:
+        return ex.code, urls
+    except Exception as ex:
+        print("indexnow submit error:", ex, file=sys.stderr)
+        return -1, urls
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "all"
     if cmd in ("regen-e", "all"):
         print("e 쪽 다시 만듦:", regen_e())
     if cmd in ("sitemap", "all"):
-        print("sitemap.xml: 판 쪽 %d개 포함" % sitemap())
+        n = sitemap()
+        print("sitemap.xml: 판 쪽 %d개 포함" % n)
+        print("feed.xml: 항목 %d개" % rss())
+    if cmd == "rss":
+        print("feed.xml: 항목 %d개" % rss())
+    if cmd == "indexnow":
+        key, name = indexnow_key()
+        print("indexnow key file:", name)
+        code, urls = indexnow_submit()
+        print("indexnow HTTP", code, "urls", len(urls))

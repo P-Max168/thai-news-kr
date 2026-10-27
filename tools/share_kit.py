@@ -575,6 +575,7 @@ def main():
         print("saved e/%s/index.html" % eid)
         import seo   # 2026-10-18 R-seo-2: 판마다 sitemap.xml 갱신(deploy.sh 도 커밋 전에 한 번 더)
         print("sitemap.xml: 판 쪽 %d개" % seo.sitemap())
+        print("feed.xml: 항목 %d개" % seo.rss())
 
     print("\n기사:", ", ".join("%s(%s)" % (s["id"], tp[s["id"]]["topic"]) for s in chosen))
     print("\n----- %s/%s.txt (%d자) -----\n%s" % (_rel(share), eid, len(msg.rstrip("\n")), msg))
