@@ -35,7 +35,11 @@ import siteconf  # noqa: E402
 BKK = timezone(timedelta(hours=7))
 SITE = siteconf.load()
 LANG = SITE["lang"]
+
 MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
+# 2026-10-27 맥스님: 주 모델 재시도 소진(503/500/타임아웃) 시 라이트 폴백(품질 테스트 통과·폴백만).
+FALLBACK_MODEL = os.environ.get("GEMINI_FALLBACK_MODEL", "gemini-3.5-flash-lite")
+ACTIVE_MODEL = MODEL  # 실제 성공한 모델(usage·coverage 기록용)
 API = "https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent"
 UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36"}
 ABBR = {"east": "ea", "bangkok": "bk", "north": "no", "south": "st", "poleco": "pe", "society": "so", "visa": "vi",
@@ -142,20 +146,25 @@ def _write_edition_fail(edition=None, error="", **extra):
         pass
 
 
-def call_gemini(prompt, key, model, meta=None):
-    """성공 시 JSON dict. 실패 시 usage 기록 후 SystemExit.
+def call_gemini(prompt, key, model, meta=None, allow_fallback=True):
+    """성공 시 JSON dict. 주 모델이 503/500/429/타임아웃으로 재시도 소진하면 FALLBACK_MODEL 한 번 더.
+    그래도 실패하거나 비재시도 HTTP면 usage·edition-fail 기록 후 SystemExit.
     meta: 실패 로그에 붙일 판 id·picks 수 등(dict|None)."""
+    global ACTIVE_MODEL
     import requests
-    payload = {"contents": [{"parts": [{"text": prompt}]}],
-               "generationConfig": {"responseMimeType": "application/json", "temperature": 0.3, "maxOutputTokens": 16000,
-                                    "thinkingConfig": {"thinkingLevel": "low"}}}
+    gen = {"responseMimeType": "application/json", "temperature": 0.3, "maxOutputTokens": 16000,
+           "thinkingConfig": {"thinkingLevel": "low"}}
+    # lite 계열은 thinking 미지원일 수 있어 빼고 보냄(품질 테스트에선 둘 다 JSON OK)
+    if "lite" in (model or "").lower():
+        gen = {k: v for k, v in gen.items() if k != "thinkingConfig"}
+    payload = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": gen}
     last = None
     t0 = time.time()
     for attempt in range(len(BACKOFF_S) + 1):
         USAGE["calls"] += 1
         try:
             r = requests.post(API % model, headers={"x-goog-api-key": key, "Content-Type": "application/json"}, json=payload, timeout=180)
-        except Exception as ex:  # 네트워크
+        except Exception as ex:  # 네트워크·타임아웃
             last = "transport_" + type(ex).__name__
             if attempt < len(BACKOFF_S):
                 time.sleep(BACKOFF_S[attempt]); continue
@@ -182,12 +191,24 @@ def call_gemini(prompt, key, model, meta=None):
         c = (d.get("candidates") or [{}])[0]
         body = "".join(p.get("text", "") for p in (c.get("content") or {}).get("parts", []) if not p.get("thought"))
         try:
+            ACTIVE_MODEL = model
             return json.loads(body)
         except ValueError:
             last = "invalid_json(%s)" % c.get("finishReason")
             if attempt < len(BACKOFF_S):
                 time.sleep(min(30, BACKOFF_S[attempt])); continue
             break
+    # 재시도 가능한 실패 → 라이트 폴백(한 번)
+    fb = (FALLBACK_MODEL or "").strip()
+    if allow_fallback and fb and fb != model and last and (
+            last.startswith("http_429") or last.startswith("http_500") or last.startswith("http_503") or last.startswith("transport_")):
+        print("주 모델 실패(%s · %s) → 폴백 %s" % (model, last, fb), flush=True)
+        rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), model=model, error="primary_exhausted:%s" % last,
+                   fallback=fb, seconds=round(time.time() - t0, 1), **USAGE)
+        if meta:
+            rec.update(meta)
+        _log_usage(rec)
+        return call_gemini(prompt, key, fb, meta=dict(meta or {}, fallback_from=model, primary_error=last), allow_fallback=False)
     msg = "gemini 실패: %s" % last
     rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), model=model, error=msg,
                seconds=round(time.time() - t0, 1), **USAGE)
@@ -347,9 +368,10 @@ def assemble(eid, items, out):
     idx = json.loads((ROOT / "data" / "index.json").read_text(encoding="utf-8")) if (ROOT / "data" / "index.json").exists() else {}
     return dict(id=eid, date=eid[:10], edition=eid[11:], edition_label=newslib.EDITION_LABEL[eid[11:]],
                 weekday=("星期" + "一二三四五六日"[d0.weekday()]) if LANG == "zh" else WEEKDAY_TH[d0.weekday()] if LANG == "th" else WEEKDAY[d0.weekday()], timezone="Asia/Bangkok (UTC+7)",
-                coverage=("รวบรวมข่าวด้วยโค้ด + คัดเลือกและเรียบเรียงโดย Gemini (%s)" % MODEL) if LANG == "th" else ("代码收集候选 + %s 选稿 + Gemini 撰稿（%s）" % ("Grok" if os.environ.get("PICKER", "그록") == "그록" else "代码", MODEL)) if LANG == "zh"
-                else "코드 수집 + 고르기(%s) + 제미나이 원고(%s)" % (os.environ.get("PICKER", "그록"), MODEL),
-                previous=idx.get("latest", ""), briefing=briefing[:7], highlights=hl, stories=stories)
+                coverage=("รวบรวมข่าวด้วยโค้ด + คัดเลือกและเรียบเรียงโดย Gemini (%s)" % ACTIVE_MODEL) if LANG == "th" else ("代码收集候选 + %s 选稿 + Gemini 撰稿（%s）" % ("Grok" if os.environ.get("PICKER", "그록") == "그록" else "代码", ACTIVE_MODEL)) if LANG == "zh"
+                else "코드 수집 + 고르기(%s) + 제미나이 원고(%s)" % (os.environ.get("PICKER", "그록"), ACTIVE_MODEL),
+                previous=idx.get("latest", ""), briefing=briefing[:7], highlights=hl, stories=stories,
+                gemini_model=ACTIVE_MODEL)
 
 
 def save_with_drop(data):
@@ -460,7 +482,7 @@ def main():
     ok = len(data["stories"]) >= 4 and save_with_drop(data)
     kept = sum(1 for s in out.get("stories") or [] if s.get("keep") is not False)
     drops = [dict(key=s.get("key"), why=str(s.get("drop_reason") or "")[:40]) for s in out.get("stories") or [] if s.get("keep") is False][:30]
-    rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), edition=a.eid, model=a.model, picks=len(items), body=got, kept_by_model=kept,
+    rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), edition=a.eid, model=ACTIVE_MODEL, primary_model=a.model, picks=len(items), body=got, kept_by_model=kept,
                model_drops=drops, after_check=len(data["stories"]), chunks=len(chunks),
                published=len(data["stories"]) if ok else 0, seconds=round(time.time() - t0, 1), **USAGE)
     _log_usage(rec)
