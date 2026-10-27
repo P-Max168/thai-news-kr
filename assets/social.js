@@ -228,6 +228,56 @@
   }
   function cKey(el) { return el.getAttribute("data-ed") + "/" + el.getAttribute("data-cmts"); }
 
+  /* ---------- 정적 운영자 답글(data/op_replies.json, Firestore 아님) ----------
+   * tools/comment_replies.py apply 로 승인분만 저장. 키=부모 독자 댓글 id.
+   * 화면에 '운영자' 배지로 부모 댓글 아래 표시. Firestore 쓰기·관리자 로그인 없음. */
+  var opReplies = null, opRepliesP = null;
+  function loadOpReplies() {
+    if (!live) return Promise.resolve({});
+    if (opReplies) return Promise.resolve(opReplies);
+    if (!opRepliesP) {
+      opRepliesP = fetch("data/op_replies.json?_=" + Date.now())
+        .then(function (r) { return r.ok ? r.json() : {}; })
+        .catch(function () { return {}; })
+        .then(function (d) {
+          opReplies = (d && typeof d === "object" && !Array.isArray(d)) ? d : {};
+          opRepliesP = null;
+          return opReplies;
+        });
+    }
+    return opRepliesP;
+  }
+  function staticOpReply(parentId, ed, aid) {
+    var x = opReplies && opReplies[parentId];
+    if (!x || x.approved !== true) return null;
+    if (x.edition && ed && x.edition !== ed) return null;
+    if (x.articleId && aid && x.articleId !== aid) return null;
+    var t = (x.text || "").trim();
+    if (!t) return null;
+    return {
+      id: "opstatic-" + parentId,
+      nickname: TNI("discussion.operator", "운영자"),
+      text: t,
+      isAdmin: true,
+      createdAt: x.applied_at || x.createdAt || null,
+      uid: "op-static",
+      articleId: (aid || "") + "~" + parentId,
+      _static: true
+    };
+  }
+  function mergeStaticReplies(el, bag) {
+    var ed = el.getAttribute("data-ed"), aid = el.getAttribute("data-cmts");
+    if (!bag.replies) bag.replies = {};
+    (bag.list || []).forEach(function (c) {
+      var s = staticOpReply(c.id, ed, aid);
+      if (!s) return;
+      var arr = bag.replies[c.id] || [];
+      if (arr.some(function (r) { return r.isAdmin || r._static; })) return; // Firestore 운영자 답글 있으면 정적 생략
+      bag.replies[c.id] = [s].concat(arr);
+    });
+  }
+
+
   function mountComments(el, edition, story) {
     if (!live || !story) return;
     el.setAttribute("data-ed", edition);
@@ -250,16 +300,20 @@
         var by = {};
         r.rs.forEach(function (c) { var p = String(c.articleId || "").split("~")[1]; if (p) (by[p] = by[p] || []).push(c); });
         cache[k] = { list: r.list, replies: by };
+        return loadOpReplies().then(function () { mergeStaticReplies(el, cache[k]); });
       })
       .catch(function (e) { console.warn(TNI("social.k2ee26dd", "[댓글]"), e); cache[k] = { err: true, denied: e && e.code === "permission-denied", list: [] }; })
       .then(function () { document.querySelectorAll('[data-cmts="' + el.getAttribute("data-cmts") + '"]').forEach(renderComments); });
   }
   function cHTML(c, reply) {
     var mine = user && c.uid === user.uid;
-    var acts = reply ? "" : '<button type="button" class="cbtn" data-c-reply="' + esc(c.id) + TNI("social.k1fa938f", "\">↳ 답글</button>");
-    if (user && (mine || admin)) acts += '<button type="button" class="cbtn" data-c-del="' + esc(c.id) + TNI("social.k42d1163", "\">삭제</button>");
-    if (user && admin && !mine) acts += '<button type="button" class="cbtn" data-c-hide="' + esc(c.id) + TNI("social.kffa6336", "\">숨기기</button>");
-    if (user && !mine) acts += '<button type="button" class="cbtn" data-c-report="' + esc(c.id) + TNI("social.kef7de27", "\">신고</button>");
+    var acts = "";
+    if (!c._static) {
+      acts = reply ? "" : '<button type="button" class="cbtn" data-c-reply="' + esc(c.id) + TNI("social.k1fa938f", "\">↳ 답글</button>");
+      if (user && (mine || admin)) acts += '<button type="button" class="cbtn" data-c-del="' + esc(c.id) + TNI("social.k42d1163", "\">삭제</button>");
+      if (user && admin && !mine) acts += '<button type="button" class="cbtn" data-c-hide="' + esc(c.id) + TNI("social.kffa6336", "\">숨기기</button>");
+      if (user && !mine) acts += '<button type="button" class="cbtn" data-c-report="' + esc(c.id) + TNI("social.kef7de27", "\">신고</button>");
+    }
     return '<div class="cmt' + (c.isAdmin ? " cmt--op" : "") + (reply ? " cmt--reply" : "") + '" data-cid="' + esc(c.id) + '"><div class="cmt__h"><b class="cmt__n">' + esc(c.nickname) + "</b>" + (c.isAdmin ? TNI("social.ked4421c", "<span class=\"badge-op\">운영자</span>") : "") +
       '<span class="cmt__d">' + esc(fmt(c.createdAt)) + "</span>" + (mine ? TNI("social.k135cf3f", "<span class=\"cmt__me\">내 댓글</span>") : "") + "</div>" +
       '<p class="cmt__t">' + esc(c.text) + "</p>" + (acts ? '<div class="cmt__a">' + acts + "</div>" : "") + "</div>";

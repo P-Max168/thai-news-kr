@@ -370,3 +370,4 @@ User approves final existing five creatives and immediate deployment. Added comm
 - 2026-10-26 18:30 BKK (Claude): deploy.sh pages 확인 — push 직후 Pages 실행이 목록에 없을 때 grep 빈 결과가 set -e·pipefail 로 exit 1(10-26 pm Actions 40310376950) → || true 로 기다렸다 다시 보게 고침(재현 시험 확인).
 - 2026-10-27 13:43 BKK (Claude): 중국어판 비상 발행 2026-10-27-md 7건 — gemini-edition 실행 실패로 take. 그록 picks 중 원문 확인된 것만 사용.
 - 2026-10-27 18:38 BKK (Claude): 한국어판 비상 발행 2026-10-27-pm 11건 — gemini-edition 실행 실패로 take. 그록 picks 중 원문 확인된 것만 사용.
+- 10-27 21:34 · ✅ [보통·기능] **운영자 답글 정적 게시 장치**(민구님 21:29 승인 '필요한 코드 직접 짜서 적용'). tools/comment_replies.py apply → data/op_replies.json(키=부모 댓글 id, approved:true만) + assets/social.js 가 부모 독자 댓글 아래 '운영자' 배지로 표시. Firestore 쓰기·관리자 로그인 없음. discussion.py(오늘의 질문)는 그대로. 첫 배포는 빈 op_replies.json. 사용법 /workspace/ops-handoff/opcomment_usage.md.
