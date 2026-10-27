@@ -116,6 +116,7 @@ self.addEventListener("fetch", function (e) {
   if (/^data\//.test(path)) { e.respondWith(networkFirst(req, DATA, dataKey(req.url))); return; }
   if (path === "sw.js") return;
   if (/^__\//.test(path)) return;
+  if (/^api\//.test(path)) return;   // 서버 API(KSTAR 설문 /api/survey* 등, 10-26): 언제나 네트워크 — 상태를 캐시하면 꺼짐/켜짐이 안 바뀜
   if (/^auth\//.test(path)) return;   // 로그인(언어판 Worker /auth/line/*): 언제나 네트워크 — 상태(/status)를 캐시하면 켜진 뒤에도 버튼이 안 나옴   // (혹시 쓰게 될) Firebase 예약 경로 /__/auth 등은 가로채지 않음
   e.respondWith(cacheFirst(req));
 });
