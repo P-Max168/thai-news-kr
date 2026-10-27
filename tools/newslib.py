@@ -80,7 +80,7 @@ def cjk_check(data):
     br = data.get("briefing")
     chk("briefing", [b.get("text") or "" for b in br] if isinstance(br, list) else (br or ""))
 # 화면에 보이는 글에 태국 문자 금지. title_th·원문 URL 처럼 화면에 안 나오는 필드는 검사 안 함.
-#   ฿(U+0E3F)도 판 글에서는 금지(2026-10-04 21:41 Max 승인) — ฿ 는 헤더 숫자 칸(assets/ticker.js .tk-u)에만, 글에서는 '350바트(약 14,068원)'.
+#   ฿(U+0E3F)도 판 글에서는 금지(2026-10-04 21:41 Max 승인) — ฿ 는 헤더 숫자 칸(assets/ticker.js .tk-u)에만, 글에서는 '350바트(약 1.41만 원)'.
 #   2026-10-04 저녁판 요약에 '이민국(สตม.)'·'재난방지국(ปภ.)'·키워드 'ปภ.' 가 들어가 라이브 화면에 태국 글자가 보였던 일 → 판 저장 때 막음
 THAI_SHOWN_RE = re.compile(r"[\u0E00-\u0E3E\u0E40-\u0E7F]+")
 
@@ -96,7 +96,7 @@ def thai_check(data):
             m = THAI_SHOWN_RE.search(t) if isinstance(t, str) else None
             assert not m, (where, "화면에 태국 문자 금지 — 한국어/로마자로 고칠 것(TRANSLATION_RULES)", t[max(0, m.start() - 12):m.end() + 8])
             i = t.find("฿") if isinstance(t, str) else -1
-            assert i < 0, (where, "'฿' 금지 — 글에서는 '바트'(예 350바트(약 14,068원)), ฿ 는 헤더 숫자 칸에만(TRANSLATION_RULES)", t[max(0, i - 12):i + 8])
+            assert i < 0, (where, "'฿' 금지 — 글에서는 '바트'(예 350바트(약 1.41만 원)), ฿ 는 헤더 숫자 칸에만(TRANSLATION_RULES)", t[max(0, i - 12):i + 8])
     for s in data.get("stories", []):
         # source(매체 이름)는 카드 아래·출처 목록에 그대로 보임 → 'MGR Online (매니저 온라인)' 처럼 (2026-10-04 추가)
         for k in KO_FIELDS + ("tags", "source"):
@@ -120,7 +120,7 @@ KRW_FROM = "2026-10-02-pm"   # fx.THB_KRW 가 판에 들어간 첫 판 — 이 �
 _NUM = r"\d[\d,]*(?:\.\d+)?"
 _AMT = r"(?=\d)(?:%s\s*[조억만]\s*)*(?:%s)?" % (_NUM, _NUM)
 BAHT_AMT_RE = re.compile(r"(?<![\d,.])(%s)(?:\s*[~\-–]\s*(%s))?\s*바트" % (_AMT, _AMT))
-# 금액 뒤 원화: '바트(약 4만190원)' · '바트(약 281억~401억 원)' · 괄호 안 금액이면 '바트, 약 587억8,631만 원)' · 굵게 '**110억 바트(약 …원)**'
+# 금액 뒤 원화: '바트(약 4.19만 원)' · '바트(약 281억~401억 원)' · 괄호 안 '바트, 약 588억 원)' · 굵게 '**110억 바트(약 …원)**' (2026-10-28: 3유효숫자)
 KRW_AFTER_RE = re.compile(r"\**\s*(?:\(\s*|,\s*)약\s*[\d조억만,.\s~\-–]*원")
 # 원 → 바트 역환산('1,000만 원(약 25만 바트)')은 이미 원화가 앞에 있으므로 통과
 KRW_BEFORE_RE = re.compile(r"원\s*\(\s*약\s*$")
@@ -138,28 +138,66 @@ def ko_amount(s):
 
 
 def _man(n):
-    """0~9999 → '4,190' 처럼 쉼표."""
+    """0~9999 → '4,190' 처럼 쉼표. (하위 호환·테스트용)"""
     return "{:,}".format(int(n))
 
 
+def _round_sig(n, sig=3):
+    """양수를 유효숫자 sig자리로 반올림한 정수. 0 이하면 0.
+    2026-10-28 Max: 환산 금액은 전체 규모에 맞게 뒷자리를 줄인다(약 3유효숫자)."""
+    from math import floor, log10
+    n = int(round(float(n)))
+    if n <= 0:
+        return 0
+    digits = floor(log10(n)) + 1
+    if digits <= sig:
+        return n
+    factor = 10 ** (digits - sig)
+    return int(round(n / factor) * factor)
+
+
+def _fmt_coef(n):
+    """단위 앞 계수: 123 / 12.3 / 1.23 (불필요 소수·Trailing 0 제거)."""
+    n = float(n)
+    if abs(n - round(n)) < 1e-9:
+        return "{:,}".format(int(round(n)))
+    s = ("{:.2f}".format(n)).rstrip("0").rstrip(".")
+    if "." in s:
+        a, b = s.split(".", 1)
+        return "{:,}".format(int(a)) + "." + b
+    return "{:,}".format(int(s))
+
+
 def krw_text(won):
-    """원 금액 → 판 표기(10-04·10-05 판과 같은 방식). 1조 이상 = 억 단위 반올림('1조208억 원'),
-    1억 이상 = 만 단위 반올림('587억8,631만 원'), 1억 미만 = 원 단위 반올림('401만9,000원' · '4만190원' · '8,038원')."""
-    w = int(round(won))
+    """원 금액 → 약 3유효숫자 + 한국 단위(만·억·조).
+    예: 588→590원, 1,234,567→123만 원, 12,345,678,900→123억 원.
+    (2026-10-28 Max: 환산 원화는 규모에 맞게 뒷자리 생략, 원문 통화 금액은 그대로)"""
+    w = _round_sig(abs(won), 3)
     if w >= 10 ** 12:
-        e = int(round(w / 10 ** 8)); jo, eok = divmod(e, 10 ** 4)
-        return "%d조%s원" % (jo, (_man(eok) + "억 ") if eok else " ")
+        return _fmt_coef(w / 10 ** 12) + "조 원"
     if w >= 10 ** 8:
-        m = int(round(w / 10 ** 4)); eok, man = divmod(m, 10 ** 4)
-        return "%s억%s원" % (_man(eok), (_man(man) + "만 ") if man else " ")
+        return _fmt_coef(w / 10 ** 8) + "억 원"
     if w >= 10 ** 4:
-        man, rest = divmod(w, 10 ** 4)
-        return "%s만%s원" % (_man(man), _man(rest) if rest else " ")
-    return "%s원" % _man(w)
+        return _fmt_coef(w / 10 ** 4) + "만 원"
+    if w >= 100:
+        w = int(round(w / 10.0) * 10)  # 원 단위 표기는 10원 자리로(588→590)
+    return "%s원" % "{:,}".format(w)
+
+
+def cny_text(yuan):
+    """인민폐 금액 → 약 3유효숫자 + 万/亿. 예: 70 / 1.23万 / 123亿 (뒤에 '元'은 호출측에서)."""
+    w = _round_sig(abs(yuan), 3)
+    if w >= 10 ** 8:
+        return _fmt_coef(w / 10 ** 8) + "亿"
+    if w >= 10 ** 4:
+        return _fmt_coef(w / 10 ** 4) + "万"
+    if w >= 100:
+        w = int(round(w / 10.0) * 10)
+    return "{:,}".format(w)
 
 
 def krw_for(amount_text, rate):
-    """'13억678만' + 40.19 → '약 525억1,949만 원'. 범위 '300~500' → '약 1만2,057~2만95원'."""
+    """'13억678만' + 40.19 → '약 526억 원'(3유효). 범위 '300~500' → '약 1.21만~2.01만 원'."""
     parts = re.split(r"\s*[~\-–]\s*", amount_text.strip())
     vals = [ko_amount(p) for p in parts]
     if len(vals) == 2 and re.search(r"[조억만]\s*$", parts[1]) and not re.search(r"[조억만]", parts[0]):
@@ -193,7 +231,8 @@ def krw_missing(data):
     for where, t in _shown_texts(data):
         for m in BAHT_AMT_RE.finditer(t):
             k = KRW_AFTER_RE.match(t, m.end())
-            if k and re.search(r"\d\.\d", k.group(0)):
+            # 소수점 '원'은 금지. 단 '1.41만 원'·'5.75억 원'처럼 만·억·조 앞 계수는 허용(2026-10-28 3유효숫자).
+            if k and re.search(r"\d\.\d", k.group(0)) and not re.search(r"\d\.\d+\s*[만억조]", k.group(0)):
                 out.append((where, m.group(0), "원화는 정수로(소수점 없이): " + krw_for(m.group(0)[:-2].strip(), rate) if rate else "원화는 정수로", k.group(0)))
                 continue
             if k or KRW_BEFORE_RE.search(t[:m.start()]):

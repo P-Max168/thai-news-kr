@@ -272,13 +272,11 @@ def _fix_text(t, rate, kind):
                 x = x.replace(",", "").strip()
                 mm = re.match(r"([\d.]+)\s*([万亿]?)", x)
                 return float(mm.group(1)) * {"万": 1e4, "亿": 1e8}.get(mm.group(2), 1) if mm else 0
-            def yuan(v):
-                return ("%s亿" % format(round(v / 1e8, 1), "g")) if v >= 1e8 else ("%s万" % format(round(v / 1e4, 1), "g")) if v >= 1e4 else "{:,}".format(int(round(v)))
             parts = re.split(r"\s*[~\-–至]\s*", m.group(0)[:-2])
             vals = [cn(x) for x in parts if re.search(r"\d", x)]
             if len(vals) == 2 and re.search(r"[万亿]\s*$", parts[1]) and not re.search(r"[万亿]", parts[0]):
                 vals[0] *= {"万": 1e4, "亿": 1e8}[re.search(r"([万亿])\s*$", parts[1]).group(1)]
-            out.append(t[pos:m.end()] + "（约%s元）" % "~".join(yuan(v * rate) for v in vals))
+            out.append(t[pos:m.end()] + "（约%s元）" % "~".join(newslib.cny_text(v * rate) for v in vals))
             pos = m.end()
         return "".join(out) + t[pos:]
     return t
