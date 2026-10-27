@@ -1,6 +1,6 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-28T05:36:59+07:00",
+ "updated_at": "2026-10-28T06:00:01+07:00",
  "items": [
   {
    "title": "서울 강남 구룡마을 화재에 부상 1명·이재민 107명…대응 1단계로 하향",
@@ -15,16 +15,16 @@ window.KOREA_NEWS = {
    "url": "https://www.hani.co.kr/arti/society/society_general/1284477.html"
   },
   {
-   "title": "[날씨] '올 가을 가장 추운 날' 아침 기온 뚝↓ ...강풍.한파특보 발효지역은?",
-   "source": "헤드라인제주",
-   "time": "2026-10-27T20:26:50+07:00",
-   "url": "https://www.headlinejeju.co.kr/news/articleView.html?idxno=601155"
-  },
-  {
    "title": "구로구 주택가 시신 유기한 남성 2명 체포…빌라주인 등",
    "source": "연합뉴스",
    "time": "2026-10-27T16:01:22+07:00",
    "url": "https://www.yna.co.kr/view/AKR20261027166451004"
+  },
+  {
+   "title": "박정하 “오세훈 무죄에 ‘반(反)장 비(非)한’ 결집할 것”",
+   "source": "강원일보",
+   "time": "2026-10-27T16:50:49+07:00",
+   "url": "https://www.kwnews.co.kr/article/20261027501634"
   },
   {
    "title": "여, 조희대 탄핵 즉각추진 역풍 우려 “확실한 근거부터 찾자”",
@@ -33,22 +33,16 @@ window.KOREA_NEWS = {
    "url": "https://www.hani.co.kr/arti/politics/politics_general/1284483.html"
   },
   {
-   "title": "\"미군 믿을 수 있나\"…국방장관 발언에 국방부 해명은?",
-   "source": "한국경제",
-   "time": "2026-10-27T13:31:23+07:00",
-   "url": "https://www.hankyung.com/article/202610277972H"
+   "title": "선관위 특검, 올림픽공원 보관 서류·CCTV 압수수색…\"현장 검증 전 자료 확보\"",
+   "source": "연합뉴스TV",
+   "time": "2026-10-27T08:24:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR202610271006478rV"
   },
   {
-   "title": "오세훈 축하연서 이준석 “‘오’뚝이처럼” 삼행시…윤상현 “비행기” 건배사",
-   "source": "한겨레",
-   "time": "2026-10-27T23:33:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1284314.html"
-  },
-  {
-   "title": "김포 카페서 북한 자주포 관망?…조작 이미지로 '공포감 조성'[뉴스럽다]",
-   "source": "노컷뉴스",
-   "time": "2026-10-27T15:43:01+07:00",
-   "url": "https://www.nocutnews.co.kr/news/6598018"
+   "title": "영하도 아닌데 한파주의보?…전주·대전은 발효, 서울은 빠진 이유",
+   "source": "뉴스1",
+   "time": "2026-10-27T15:00:33+07:00",
+   "url": "https://www.news1.kr/society/environment/6333650"
   },
   {
    "title": "\"모든 것의 끝 아냐\"... 김건희 추가 구속에 변호인이 남긴 말",
@@ -61,6 +55,12 @@ window.KOREA_NEWS = {
    "source": "VOA 한국어 홈페이지",
    "time": "2026-10-28T00:23:26+07:00",
    "url": "https://www.voakorea.com/a/experts-kju-102726/8215739.html"
+  },
+  {
+   "title": "트럼프, 또 대러제재 빗장 푸나…“’푸틴 비자금’ 지정해제 검토“",
+   "source": "연합뉴스TV",
+   "time": "2026-10-28T04:55:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261028065502sBF"
   }
  ]
 };
