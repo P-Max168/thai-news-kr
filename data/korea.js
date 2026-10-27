@@ -1,7 +1,25 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-27T07:41:32+07:00",
+ "updated_at": "2026-10-27T12:36:06+07:00",
  "items": [
+  {
+   "title": "선관위 특검, 올림픽공원 핸드볼경기장 압수수색…CCTV 영상 확보 주력",
+   "source": "한겨레",
+   "time": "2026-10-27T09:11:00+07:00",
+   "url": "https://www.hani.co.kr/arti/society/society_general/1284325.html"
+  },
+  {
+   "title": "‘해병순직 책임’ 임성근 전 사단장 대법서 징역 3년 확정",
+   "source": "KBS 뉴스",
+   "time": "2026-10-27T10:02:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8696255"
+  },
+  {
+   "title": "“밖에서 통화해”…아파트 도서관서 초등생 흉기로 위협한 20대 체포",
+   "source": "KBS 뉴스",
+   "time": "2026-10-27T08:31:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8696119"
+  },
   {
    "title": "보폭 넓히는 오세훈… 연이틀 野의원들과 만찬 회동",
    "source": "조선일보",
@@ -9,58 +27,40 @@ window.KOREA_NEWS = {
    "url": "https://www.chosun.com/politics/assembly/2026/10/27/ZWCDU7PBWRDBRFEXDKL2XJNENE/"
   },
   {
-   "title": "강신철 국방 장관 “브런슨에 ‘전작권 조건 변화’ 발언 우려 전달”",
-   "source": "경향신문",
-   "time": "2026-10-26T19:31:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610262131015"
-  },
-  {
-   "title": "‘구속 만료 D-4’ 김건희, 오늘 대법원서 추가 구속영장 심문",
-   "source": "KBS 뉴스",
-   "time": "2026-10-27T04:14:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8695870"
-  },
-  {
-   "title": "'선관위' 특검, 28일 올림픽공원서 투표지 검증",
-   "source": "MBC 뉴스",
-   "time": "2026-10-26T07:37:16+07:00",
-   "url": "https://imnews.imbc.com/news/2026/society/article/6860680_36918.html"
-  },
-  {
-   "title": "리디아 고, '영부인과 골프 라운드' 주장에 \"저와는 전혀 무관\"",
-   "source": "연합뉴스",
-   "time": "2026-10-26T14:16:24+07:00",
-   "url": "https://www.yna.co.kr/view/AKR20261026136400007"
-  },
-  {
-   "title": "법무장관 후보 박균택·양부남 압축… 둘다 검찰 출신 ‘공소 취소파’",
-   "source": "조선일보",
-   "time": "2026-10-25T22:51:58+07:00",
-   "url": "https://www.chosun.com/politics/politics_general/2026/10/26/CHNBUB3TZ5EY5NCVX6LZCCJE44/"
-  },
-  {
-   "title": "미 유권자 69% \"트럼프 행정부 부패·이해충돌 우려\"",
-   "source": "연합뉴스TV",
-   "time": "2026-10-26T09:28:00+07:00",
-   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261026112853F37"
-  },
-  {
-   "title": "서울성모병원 심뇌혈관병원, ‘뇌졸중의 날’ 건강강좌 개최",
-   "source": "MEDI:GATE NEWS",
-   "time": "2026-10-27T00:59:00+07:00",
-   "url": "https://www.medigatenews.com/news/1587150446"
-  },
-  {
-   "title": "오세훈, ‘법원 응원’ 야당 의원들과 만찬…“통합도 정치도 잘하자”",
+   "title": "리디아 고에 사과 거부한 주진우…‘골프 영상’ 슬쩍 편집하고 공지 없어",
    "source": "한겨레",
-   "time": "2026-10-26T23:21:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1284286.html"
+   "time": "2026-10-27T08:03:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/politics_general/1284306.html"
   },
   {
-   "title": "스위스 외무장관, 29일 방북…평양 외교사무소 개소식 참석",
+   "title": "‘구속 연장이냐 석방이냐’…김건희 여사 오늘 ‘운명의 날’",
+   "source": "경기일보",
+   "time": "2026-10-27T07:26:23+07:00",
+   "url": "https://www.kyeonggi.com/article/20261027580037"
+  },
+  {
+   "title": "어쩌면 올 가을 ‘마지막 여름’…강한 바람에 내일 아침 겨울이 실려온다",
+   "source": "한겨레",
+   "time": "2026-10-27T07:31:00+07:00",
+   "url": "https://www.hani.co.kr/arti/society/environment/1284303.html"
+  },
+  {
+   "title": "경찰, ‘역삼 연쇄방화’ 70대 신상 공개 이번주 중 결정",
    "source": "KBS 뉴스",
-   "time": "2026-10-27T02:10:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8695852"
+   "time": "2026-10-27T08:02:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8696093"
+  },
+  {
+   "title": "국가수사본부장 “우물 안 개구리 되는 것보다 국정상황 공유 장점” 국무회의 참석 옹호",
+   "source": "경향신문",
+   "time": "2026-10-27T11:27:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610271327001"
+  },
+  {
+   "title": "브라질 대법원, ’대선 패배’ 보우소나루에 출국 금지 조치",
+   "source": "연합뉴스TV",
+   "time": "2026-10-27T08:43:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR202610271043409pn"
   }
  ]
 };
