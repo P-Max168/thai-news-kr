@@ -126,6 +126,22 @@ def _log_usage(rec):
         f.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
 
+
+def _write_edition_fail(edition=None, error="", **extra):
+    """Claude 비상 발행이 보는 실패 기록. 배포 단계가 건너뛰어도 workflow failure 스텝이 push 함."""
+    try:
+        (ROOT / "ops").mkdir(exist_ok=True)
+        rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"),
+                   edition=edition, error=str(error)[:500])
+        for k, v in extra.items():
+            if v is not None:
+                rec[k] = v
+        (ROOT / "ops" / "edition-fail.json").write_text(
+            json.dumps(rec, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    except Exception:
+        pass
+
+
 def call_gemini(prompt, key, model, meta=None):
     """성공 시 JSON dict. 실패 시 usage 기록 후 SystemExit.
     meta: 실패 로그에 붙일 판 id·picks 수 등(dict|None)."""
@@ -157,6 +173,7 @@ def call_gemini(prompt, key, model, meta=None):
             if meta:
                 rec.update(meta)
             _log_usage(rec)
+            _write_edition_fail((meta or {}).get("edition"), msg, calls=USAGE.get("calls"), model=model)
             raise SystemExit(msg)
         d = r.json()
         u = d.get("usageMetadata") or {}
@@ -177,12 +194,7 @@ def call_gemini(prompt, key, model, meta=None):
     if meta:
         rec.update(meta)
     _log_usage(rec)
-    try:
-        (ROOT / "ops" / "edition-fail.json").write_text(
-            json.dumps(dict(at=rec["at"], edition=(meta or {}).get("edition"), error=msg, calls=USAGE["calls"]),
-                       ensure_ascii=False, indent=2), encoding="utf-8")
-    except Exception:
-        pass
+    _write_edition_fail((meta or {}).get("edition"), msg, calls=USAGE.get("calls"), model=model, seconds=rec.get("seconds"))
     raise SystemExit(msg)
 
 
@@ -415,6 +427,7 @@ def main():
     got = sum(1 for it in items if it["text"])
     print("고른 기사 %d건 · 본문 확보 %d건" % (len(items), got))
     if len(items) < 4:
+        _write_edition_fail(a.eid, "articles_lt_4", picks=len(items), body=got)
         print("기사 4건 미만 — 판 안 만듦"); return 3
     fx = fx_now()
     cur = SITE.get("currency", {})
@@ -426,6 +439,7 @@ def main():
         print("DRY — 지시문 %d자 · 기사 %d건 · 청크 %d(제미나이 안 부름)" % (len(prompt), len(items), nchunk)); return 0
     key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not key:
+        _write_edition_fail(a.eid, "missing_GEMINI_API_KEY")
         print("GEMINI_API_KEY 없음 — 판 안 만듦(저장소 Secret 등록 필요)"); return 4
     t0 = time.time()
     meta = dict(edition=a.eid, picks=len(items), body=got)
@@ -457,9 +471,23 @@ def main():
                 fail.unlink()
         except Exception:
             pass
+    else:
+        _write_edition_fail(a.eid, "stories_lt_4_or_validate_fail",
+                            after_check=len(data["stories"]), published=0, picks=len(items), model=a.model)
     print(json.dumps(rec, ensure_ascii=False))
     return 0 if ok else 3
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        raise SystemExit(main())
+    except SystemExit as ex:
+        # call_gemini 등에서 이미 edition-fail 을 쓴 뒤 raise 한 경우 그대로
+        # main() 이 int 로 끝난 비정상은 위에서 처리. 예외 메시지만 있는 SystemExit 보완
+        code = ex.code
+        if code not in (0, None) and not (ROOT / "ops" / "edition-fail.json").exists():
+            _write_edition_fail(error="system_exit:%s" % (code if not isinstance(code, int) else code))
+        raise
+    except Exception as ex:
+        _write_edition_fail(error="%s:%s" % (type(ex).__name__, ex))
+        raise

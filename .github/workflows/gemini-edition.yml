@@ -102,3 +102,29 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add ops/gemini-usage.jsonl 2>/dev/null || true
           bash tools/deploy.sh
+      - name: 실패 기록만 커밋(edition-fail·usage) — Claude 비상 발행용
+        if: failure() && steps.ed.outputs.skip != '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p ops
+          eid="${{ steps.ed.outputs.id }}"
+          if [ ! -f ops/edition-fail.json ]; then
+            printf '%s\n' "{\"at\":\"$(TZ=Asia/Bangkok date +%Y-%m-%dT%H:%M:%S+07:00)\",\"edition\":\"${eid}\",\"error\":\"workflow_failure_no_edition_fail_file\"}" > ops/edition-fail.json
+          fi
+          git add ops/edition-fail.json ops/gemini-usage.jsonl 2>/dev/null || true
+          if git diff --cached --quiet; then echo "커밋할 실패 기록 없음"; exit 0; fi
+          git commit -m "ops: edition-fail ${eid} (gemini 실패 기록)" || exit 0
+          git fetch -q origin main
+          ok=""
+          for i in 1 2 3 4; do
+            git pull --rebase --autostash -q origin main || { echo "rebase 재시도 $i"; sleep $((i * 3)); continue; }
+            if git push origin HEAD:main; then ok=1; break; fi
+            echo "fail-record push 재시도 $i"; sleep $((i * 5))
+          done
+          if [ -z "$ok" ]; then echo "::warning::edition-fail push 실패 — Actions 로그로 Claude가 확인 가능"; fi
+          exit 0
+
