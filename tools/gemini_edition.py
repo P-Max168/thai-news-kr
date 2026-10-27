@@ -35,7 +35,11 @@ import siteconf  # noqa: E402
 BKK = timezone(timedelta(hours=7))
 SITE = siteconf.load()
 LANG = SITE["lang"]
+
 MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
+# 2026-10-27 맥스님: 주 모델 재시도 소진(503/500/타임아웃) 시 라이트 폴백(품질 테스트 통과·폴백만).
+FALLBACK_MODEL = os.environ.get("GEMINI_FALLBACK_MODEL", "gemini-3.5-flash-lite")
+ACTIVE_MODEL = MODEL  # 실제 성공한 모델(usage·coverage 기록용)
 API = "https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent"
 UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36"}
 ABBR = {"east": "ea", "bangkok": "bk", "north": "no", "south": "st", "poleco": "pe", "society": "so", "visa": "vi",
@@ -144,7 +148,7 @@ def build_prompt(eid, items, fx_line, select=0):
         "[출력 — JSON 하나만]\n"
         '{"stories":[{"key":"입력 key 그대로","keep":true,"drop_reason":"","topic":"id","secondary":["id"],"region":"지명(없으면 \\"\\")",'
         '"headline":"제목","summary":["문단1","문단2"],"context":"배경 한두 문장(원문에 있는 내용만, 없으면 \\"\\")",'
-        '"tags":["키워드",…2~6개, # 없이],"impact":[],"for_me":"독자에게 무슨 뜻인지 한 문장(원문 사실만, 없으면 \\"\\")",'
+        '"tags":["키워드",…2~6개, # 없이],"impact":[],"for_me":"독자(누가 영향·뭘 하면/알면 되는지) 한 문장. 원문 사실만, 과장·추정 금지. 없으면 \"\"",'
         '"quick_replies":["추천 댓글 3개, 각 40자 이하, 경험을 지어내지 말 것, 링크 금지"]%%s}],'
         '"briefing":[{"topic":"id","text":"한 줄 요약 120자 이하, 핵심어나 숫자 한 곳을 **굵게**","story_key":"key"}],'
         '"highlights":["key","key","key"]}\n'
@@ -171,33 +175,114 @@ def build_prompt(eid, items, fx_line, select=0):
 USAGE = dict(calls=0, prompt=0, output=0, thinking=0, total=0)
 
 
-def call_gemini(prompt, key, model):
+# 재시도: 합계 대기 ~16분(20+40+80+120+180+240+300초). 2026-10-27 맥스님 승인(503 안정화).
+CHUNK = 15  # picks 가 이보다 크면 나눠 호출(고정 지시문 중복 비용 < 503 회피)
+BACKOFF_S = [20, 40, 80, 120, 180, 240, 300]
+
+
+def _log_usage(rec):
+    (ROOT / "ops").mkdir(exist_ok=True)
+    with open(ROOT / "ops" / "gemini-usage.jsonl", "a", encoding="utf-8") as f:
+        f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+
+
+
+def _write_edition_fail(edition=None, error="", **extra):
+    """Claude 비상 발행이 보는 실패 기록. 배포 단계가 건너뛰어도 workflow failure 스텝이 push 함."""
+    try:
+        (ROOT / "ops").mkdir(exist_ok=True)
+        rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"),
+                   edition=edition, error=str(error)[:500])
+        for k, v in extra.items():
+            if v is not None:
+                rec[k] = v
+        (ROOT / "ops" / "edition-fail.json").write_text(
+            json.dumps(rec, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    except Exception:
+        pass
+
+
+def call_gemini(prompt, key, model, meta=None, allow_fallback=True):
+    """성공 시 JSON dict. 주 모델이 503/500/429/타임아웃으로 재시도 소진하면 FALLBACK_MODEL 한 번 더.
+    그래도 실패하거나 비재시도 HTTP면 usage·edition-fail 기록 후 SystemExit.
+    meta: 실패 로그에 붙일 판 id·picks 수 등(dict|None)."""
+    global ACTIVE_MODEL
     import requests
-    payload = {"contents": [{"parts": [{"text": prompt}]}],
-               "generationConfig": {"responseMimeType": "application/json", "temperature": 0.3, "maxOutputTokens": 16000,
-                                    "thinkingConfig": {"thinkingLevel": "low"}}}
+    gen = {"responseMimeType": "application/json", "temperature": 0.3, "maxOutputTokens": 16000,
+           "thinkingConfig": {"thinkingLevel": "low"}}
+    # lite 계열은 thinking 미지원일 수 있어 빼고 보냄(품질 테스트에선 둘 다 JSON OK)
+    if "lite" in (model or "").lower():
+        gen = {k: v for k, v in gen.items() if k != "thinkingConfig"}
+    payload = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": gen}
     last = None
-    for attempt in range(3):
+    t0 = time.time()
+    for attempt in range(len(BACKOFF_S) + 1):
         USAGE["calls"] += 1
         try:
             r = requests.post(API % model, headers={"x-goog-api-key": key, "Content-Type": "application/json"}, json=payload, timeout=180)
-        except Exception as ex:  # 네트워크
-            last = "transport_" + type(ex).__name__; time.sleep(10); continue
+        except Exception as ex:  # 네트워크·타임아웃
+            last = "transport_" + type(ex).__name__
+            if attempt < len(BACKOFF_S):
+                time.sleep(BACKOFF_S[attempt]); continue
+            break
         if r.status_code in (429, 500, 503):
-            last = "http_%d" % r.status_code; time.sleep(30 * (attempt + 1)); continue
+            last = "http_%d" % r.status_code
+            if attempt < len(BACKOFF_S):
+                time.sleep(BACKOFF_S[attempt]); continue
+            break
         if r.status_code != 200:
-            raise SystemExit("gemini http %d — %s" % (r.status_code, r.text[:300].replace(key, "***")))
+            last = "http_%d" % r.status_code
+            msg = "gemini http %d — %s" % (r.status_code, r.text[:300].replace(key, "***"))
+            rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), model=model, error=msg,
+                       seconds=round(time.time() - t0, 1), **USAGE)
+            if meta:
+                rec.update(meta)
+            _log_usage(rec)
+            _write_edition_fail((meta or {}).get("edition"), msg, calls=USAGE.get("calls"), model=model)
+            raise SystemExit(msg)
         d = r.json()
         u = d.get("usageMetadata") or {}
         USAGE["prompt"] += int(u.get("promptTokenCount", 0)); USAGE["output"] += int(u.get("candidatesTokenCount", 0))
         USAGE["thinking"] += int(u.get("thoughtsTokenCount", 0)); USAGE["total"] += int(u.get("totalTokenCount", 0))
         c = (d.get("candidates") or [{}])[0]
-        text = "".join(p.get("text", "") for p in (c.get("content") or {}).get("parts", []) if not p.get("thought"))
+        body = "".join(p.get("text", "") for p in (c.get("content") or {}).get("parts", []) if not p.get("thought"))
         try:
-            return json.loads(text)
+            ACTIVE_MODEL = model
+            return json.loads(body)
         except ValueError:
-            last = "invalid_json(%s)" % c.get("finishReason"); continue
-    raise SystemExit("gemini 실패: %s" % last)
+            last = "invalid_json(%s)" % c.get("finishReason")
+            if attempt < len(BACKOFF_S):
+                time.sleep(min(30, BACKOFF_S[attempt])); continue
+            break
+    # 재시도 가능한 실패 → 라이트 폴백(한 번)
+    fb = (FALLBACK_MODEL or "").strip()
+    if allow_fallback and fb and fb != model and last and (
+            last.startswith("http_429") or last.startswith("http_500") or last.startswith("http_503") or last.startswith("transport_")):
+        print("주 모델 실패(%s · %s) → 폴백 %s" % (model, last, fb), flush=True)
+        rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), model=model, error="primary_exhausted:%s" % last,
+                   fallback=fb, seconds=round(time.time() - t0, 1), **USAGE)
+        if meta:
+            rec.update(meta)
+        _log_usage(rec)
+        return call_gemini(prompt, key, fb, meta=dict(meta or {}, fallback_from=model, primary_error=last), allow_fallback=False)
+    msg = "gemini 실패: %s" % last
+    rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), model=model, error=msg,
+               seconds=round(time.time() - t0, 1), **USAGE)
+    if meta:
+        rec.update(meta)
+    _log_usage(rec)
+    _write_edition_fail((meta or {}).get("edition"), msg, calls=USAGE.get("calls"), model=model, seconds=rec.get("seconds"))
+    raise SystemExit(msg)
+
+
+def merge_model_outs(outs):
+    """청크별 제미나이 JSON 합치기(stories·briefing·highlights)."""
+    stories, briefing, highlights = [], [], []
+    for o in outs:
+        stories.extend(o.get("stories") or [])
+        briefing.extend(o.get("briefing") or [])
+        highlights.extend(o.get("highlights") or [])
+    return dict(stories=stories, briefing=briefing, highlights=list(dict.fromkeys(highlights)))
 
 
 # ---------------------------------------------------------------- 금액 환산 자동 보정
@@ -351,9 +436,10 @@ def assemble(eid, items, out):
     idx = json.loads((ROOT / "data" / "index.json").read_text(encoding="utf-8")) if (ROOT / "data" / "index.json").exists() else {}
     return dict(id=eid, date=eid[:10], edition=eid[11:], edition_label=newslib.EDITION_LABEL[eid[11:]],
                 weekday=("星期" + "一二三四五六日"[d0.weekday()]) if LANG == "zh" else WEEKDAY_TH[d0.weekday()] if LANG == "th" else WEEKDAY[d0.weekday()], timezone="Asia/Bangkok (UTC+7)",
-                coverage=("รวบรวมข่าวด้วยโค้ด + คัดเลือกและเรียบเรียงโดย Gemini (%s)" % MODEL) if LANG == "th" else ("代码收集候选 + %s 选稿 + Gemini 撰稿（%s）" % ("Grok" if os.environ.get("PICKER", "그록") == "그록" else "代码", MODEL)) if LANG == "zh"
-                else "코드 수집 + 고르기(%s) + 제미나이 원고(%s)" % (os.environ.get("PICKER", "그록"), MODEL),
-                previous=idx.get("latest", ""), briefing=briefing[:7], highlights=hl, stories=stories)
+                coverage=("รวบรวมข่าวด้วยโค้ด + คัดเลือกและเรียบเรียงโดย Gemini (%s)" % ACTIVE_MODEL) if LANG == "th" else ("代码收集候选 + %s 选稿 + Gemini 撰稿（%s）" % ("Grok" if os.environ.get("PICKER", "그록") == "그록" else "代码", ACTIVE_MODEL)) if LANG == "zh"
+                else "코드 수집 + 고르기(%s) + 제미나이 원고(%s)" % (os.environ.get("PICKER", "그록"), ACTIVE_MODEL),
+                previous=idx.get("latest", ""), briefing=briefing[:7], highlights=hl, stories=stories,
+                gemini_model=ACTIVE_MODEL)
 
 
 def save_with_drop(data):
@@ -395,7 +481,7 @@ def main():
     pk = json.loads(pathlib.Path(a.picks).read_text(encoding="utf-8"))
     picks = pk.get("picks") if isinstance(pk, dict) else pk
     if isinstance(pk, dict) and pk.get("picker") == "code":   # tools/code_picks.py 가 만든 후보 → 제미나이가 그중 최대 select 건 고름(2026-10-25 구조 통일)
-        a.select = a.select or int(pk.get("select") or 10)
+        a.select = a.select or int(pk.get("select") or 20)
         os.environ.setdefault("PICKER", "코드(자동)")
         if os.environ.get("PICKER") == "그록":
             os.environ["PICKER"] = "코드(자동)"
@@ -431,19 +517,32 @@ def main():
     got = sum(1 for it in items if it["text"])
     print("고른 기사 %d건 · 본문 확보 %d건" % (len(items), got))
     if len(items) < 4:
+        _write_edition_fail(a.eid, "articles_lt_4", picks=len(items), body=got)
         print("기사 4건 미만 — 판 안 만듦"); return 3
     fx = fx_now()
     cur = SITE.get("currency", {})
     _mp = cur.get("money_pair") or cur.get("pair", "THB_KRW")
     fx_line = ("판 환율: %s = %s" % (_mp, fx[_mp])) if fx else ""
-    prompt = build_prompt(a.eid, items, fx_line, a.select)
     if a.dry:
-        print("DRY — 지시문 %d자(제미나이 안 부름)" % len(prompt)); return 0
+        prompt = build_prompt(a.eid, items, fx_line, a.select)
+        nchunk = 1 if len(items) <= CHUNK else (len(items) + CHUNK - 1) // CHUNK
+        print("DRY — 지시문 %d자 · 기사 %d건 · 청크 %d(제미나이 안 부름)" % (len(prompt), len(items), nchunk)); return 0
     key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not key:
+        _write_edition_fail(a.eid, "missing_GEMINI_API_KEY")
         print("GEMINI_API_KEY 없음 — 판 안 만듦(저장소 Secret 등록 필요)"); return 4
     t0 = time.time()
-    out = call_gemini(prompt, key, a.model)
+    meta = dict(edition=a.eid, picks=len(items), body=got)
+    chunks = [items[i:i + CHUNK] for i in range(0, len(items), CHUNK)] if len(items) > CHUNK else [items]
+    if len(chunks) > 1:
+        print("청크 %d개(각 ≤%d건)로 나눠 호출" % (len(chunks), CHUNK))
+    outs = []
+    for ci, ch in enumerate(chunks):
+        sel = 0 if len(chunks) > 1 else a.select
+        prompt = build_prompt(a.eid, ch, fx_line, sel)
+        print("제미나이 호출 %d/%d · 기사 %d건 · 지시문 %d자" % (ci + 1, len(chunks), len(ch), len(prompt)))
+        outs.append(call_gemini(prompt, key, a.model, meta=dict(meta, chunk="%d/%d" % (ci + 1, len(chunks)))))
+    out = merge_model_outs(outs) if len(outs) > 1 else outs[0]
     data = assemble(a.eid, items, out)
     if fx:
         data["fx"] = fx
@@ -451,15 +550,34 @@ def main():
     ok = len(data["stories"]) >= 4 and save_with_drop(data)
     kept = sum(1 for s in out.get("stories") or [] if s.get("keep") is not False)
     drops = [dict(key=s.get("key"), why=str(s.get("drop_reason") or "")[:40]) for s in out.get("stories") or [] if s.get("keep") is False][:30]
-    rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), edition=a.eid, model=a.model, picks=len(items), body=got, kept_by_model=kept,
-               model_drops=drops, after_check=len(data["stories"]),
+    rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), edition=a.eid, model=ACTIVE_MODEL, primary_model=a.model, picks=len(items), body=got, kept_by_model=kept,
+               model_drops=drops, after_check=len(data["stories"]), chunks=len(chunks),
                published=len(data["stories"]) if ok else 0, seconds=round(time.time() - t0, 1), **USAGE)
-    (ROOT / "ops").mkdir(exist_ok=True)
-    with open(ROOT / "ops" / "gemini-usage.jsonl", "a", encoding="utf-8") as f:
-        f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    _log_usage(rec)
+    if ok:
+        try:
+            fail = ROOT / "ops" / "edition-fail.json"
+            if fail.exists():
+                fail.unlink()
+        except Exception:
+            pass
+    else:
+        _write_edition_fail(a.eid, "stories_lt_4_or_validate_fail",
+                            after_check=len(data["stories"]), published=0, picks=len(items), model=a.model)
     print(json.dumps(rec, ensure_ascii=False))
     return 0 if ok else 3
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        raise SystemExit(main())
+    except SystemExit as ex:
+        # call_gemini 등에서 이미 edition-fail 을 쓴 뒤 raise 한 경우 그대로
+        # main() 이 int 로 끝난 비정상은 위에서 처리. 예외 메시지만 있는 SystemExit 보완
+        code = ex.code
+        if code not in (0, None) and not (ROOT / "ops" / "edition-fail.json").exists():
+            _write_edition_fail(error="system_exit:%s" % (code if not isinstance(code, int) else code))
+        raise
+    except Exception as ex:
+        _write_edition_fail(error="%s:%s" % (type(ex).__name__, ex))
+        raise

@@ -357,3 +357,17 @@ User approves final existing five creatives and immediate deployment. Added comm
 - 2026-10-24 18:49 Claude: 한국어판 비상 발행 2026-10-24-pm 9건(9d71196).
 - 2026-10-25 07:46 Claude: 한국어판 비상 발행 2026-10-25-am 8건(2e28327). 06:05 candidates 수집분 없음.
 - 2026-10-25 18:45 Claude: 한국어판 비상 발행 2026-10-25-pm 11건(3d68d6c). 18:30 확인 시 판·담당 표시 없음.
+- 2026-10-26 07:50 Claude: 한국어판 비상 발행 2026-10-26-am 9건(f758fb4). 06:05 candidates 수집분 없음, 직접 수집도 클라우드 프록시 차단 → 웹 읽기로 원문 확인.
+
+- 2026-10-26 13:05 BKK (Claude): collect.yml 예약을 판마다 1시간 간격 여러 번으로(아침 03:37·04:37·05:37, 점심 11:17·12:17, 저녁 14:37·15:37·16:37). GitHub 예약이 2~4시간 늦게 돌아 10-26 아침 비상 발행 때 후보가 없었음. 판 id 경계 md→pm 16시→14시.
+
+- 2026-10-26 15:05 BKK (Claude): preflight 담당 표시가 언어판(zh-md-build) 이름에서 안 걸리던 것 고침 → 그록 중국어판 정기 발행 때 claim 이 남아 13:30 Claude 확인과 겹치지 않게.
+
+- 2026-10-26 15:25 BKK (Claude): 2안(그록 고르기 + 제미나이 원고) — gemini-edition.yml 예약을 대비용 07:05·18:05 로, push 실행 때 이미 있는 판은 건너뜀. 중국어판 같은 변경(13:05).
+
+- 2026-10-26 18:20 BKK (Claude): 폰에서 스크롤하면 큰 헤더(환율 패널+내 주변 줄, 화면의 약 40%)가 상단 배너를 덮어 배너가 잘려 보이던 문제. 아래로 스크롤하면 둘째·셋째 줄을 clip-path 로 숨기고(제목 줄만 고정) 위로 스크롤하면 다시 보이게(style.css 끝·ticker.js 끝). 실패: 처음 transform 으로 위로 밀었더니 제목 줄이 숨고 내 주변 줄이 남음 → clip-path 로 바꿈. 배너 데이터·판 변경 없음.
+- 2026-10-26 18:30 BKK (Claude): 맥스님 요청 — G 테마 헤더 첫 줄(☰·♡ 오른쪽 빈칸)에 라이브 바(ticker.js 끝·g.css 끝·style.css .lb 숨김·i18n/ko.json livebar). 이번 판 highlights→기사 순 최대 6건 흐름(누르면 data-open), 경보 기사면 빨간 한 줄, 오른쪽 다음 판 시각·남은 시간(ko 06:40·17:40, zh 13:00), 시작 뒤 45분 안 새 판 없으면 "새 판 준비 중". 하트 칸이 G 테마에서 flex 22px 로 눌려 깨지던 것도 고침. 경보 기준은 ticker.js 주석. 실패: 처음 기준(날씨+홍수 낱말)으로는 푸껫 돌발 홍수 기사가 파타야 독자에게 경보로 떠 → 날씨는 경보·예보 같은 앞으로 말 또는 동부·방콕 기사일 때만으로 좁힘.
+- 2026-10-26 18:30 BKK (Claude): deploy.sh pages 확인 — push 직후 Pages 실행이 목록에 없을 때 grep 빈 결과가 set -e·pipefail 로 exit 1(10-26 pm Actions 40310376950) → || true 로 기다렸다 다시 보게 고침(재현 시험 확인).
+- 2026-10-27 13:43 BKK (Claude): 중국어판 비상 발행 2026-10-27-md 7건 — gemini-edition 실행 실패로 take. 그록 picks 중 원문 확인된 것만 사용.
+- 2026-10-27 18:38 BKK (Claude): 한국어판 비상 발행 2026-10-27-pm 11건 — gemini-edition 실행 실패로 take. 그록 picks 중 원문 확인된 것만 사용.
+- 10-27 21:34 · ✅ [보통·기능] **운영자 답글 정적 게시 장치**(민구님 21:29 승인 '필요한 코드 직접 짜서 적용'). tools/comment_replies.py apply → data/op_replies.json(키=부모 댓글 id, approved:true만) + assets/social.js 가 부모 독자 댓글 아래 '운영자' 배지로 표시. Firestore 쓰기·관리자 로그인 없음. discussion.py(오늘의 질문)는 그대로. 첫 배포는 빈 op_replies.json. 사용법 /workspace/ops-handoff/opcomment_usage.md.

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """코드 고르기(2026-10-25 Claude, 맥스님 14:44 결정 '모든 뉴스판 구조 통일 — 고르기도 코드+제미나이, 그록은 감시만').
 
-    python3 tools/code_picks.py <판 id> [--candidates drafts/candidates/latest.json] [--pool 20] [--select 10] [--out ops/picks/<판 id>.json]
+    python3 tools/code_picks.py <판 id> [--candidates drafts/candidates/latest.json] [--pool 30] [--select 20] [--out ops/picks/<판 id>.json]
 
 후보 목록(collect.py 가 만드는 candidates/latest.json)에서 제미나이에게 넘길 후보 pool 건을 코드로 고른다 — AI·토큰 0.
   1) Google News 중계 주소는 뺌(원문 주소가 아니라 제미나이 단계에서 어차피 빠짐)
@@ -39,7 +39,7 @@ def recent(n=6):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("eid"); ap.add_argument("--candidates", default=str(ROOT / "drafts" / "candidates" / "latest.json"))
-    ap.add_argument("--pool", type=int, default=20); ap.add_argument("--select", type=int, default=10); ap.add_argument("--out")
+    ap.add_argument("--pool", type=int, default=30); ap.add_argument("--select", type=int, default=20); ap.add_argument("--out")
     ap.add_argument("--hours", type=float, default=16, help="이보다 오래된 후보는 뺌(판 시각 기준)")
     a = ap.parse_args()
     cj = json.loads(pathlib.Path(a.candidates).read_text(encoding="utf-8"))

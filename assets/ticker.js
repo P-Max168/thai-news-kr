@@ -321,3 +321,106 @@
   if (window.TNStore && window.TNStore.subscribe) window.TNStore.subscribe(function () { if (region() !== lastRg) { lastRg = region(); st.wx = st.aq = null; loadWx(); } });
   window.TNTicker = { reload: loadAll, state: st, pmLevel: pmLevel };
 })();
+
+/* 2026-10-26 Claude: 폰 화면 헤더 접기 — 아래로 스크롤하면 둘째·셋째 줄(환율 패널·내 주변)을 잘라 숨기고, 위로 스크롤하거나 맨 위면 다시 보임. CSS: style.css 맨 끝 */
+(function () {
+  var mh = document.querySelector(".masthead"); if (!mh) return;
+  var root = document.documentElement, lastY = window.pageYOffset, ticking = false;
+  function tuckH() { var r1 = mh.querySelector(".masthead__inner"); return r1 ? Math.max(0, mh.offsetHeight - r1.offsetHeight - (r1.offsetTop || 0)) : 0; }
+  function on() { return window.innerWidth <= 900 && mh.offsetHeight > window.innerHeight * 0.22; }
+  function upd() {
+    ticking = false;
+    var y = window.pageYOffset, d = y - lastY;
+    if (!on() || y < 40 || document.body.classList.contains("drawer-open")) { root.classList.remove("mh-tuck"); lastY = y; return; }
+    if (d > 6) { root.style.setProperty("--mh-tuck", tuckH() + "px"); root.classList.add("mh-tuck"); lastY = y; }
+    else if (d < -6) { root.classList.remove("mh-tuck"); lastY = y; }
+  }
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+  window.addEventListener("resize", function () { if (root.classList.contains("mh-tuck")) root.style.setProperty("--mh-tuck", tuckH() + "px"); });
+  window.TNMastTuck = { show: function () { root.classList.remove("mh-tuck"); } };
+})();
+
+/* 2026-10-26 Claude: 라이브 바 — G 테마 헤더 첫 줄(☰ 메뉴·♡ 오른쪽 빈칸).
+ * 왼쪽: 이번 판 주요 기사 제목이 옆으로 흐름(누르면 그 기사, data-open → app.js). 생활 경보 기사가 있으면 빨간 경보 한 줄로 바뀜.
+ * 오른쪽: 다음 판 시각 + 남은 시간. 판 데이터 형식은 안 바꿈(화면에서만 판정). CSS: g.css 끝(.lb). 다른 테마에서는 숨김.
+ * 경보 판정(ALERT): ① 이슈 id 가 비 경보(2026-rain-warnings-*)·비자 규정 변경(visa-rule-changes) → 경보
+ *   ② 날씨(weather) 기사 + 제목에 경보·주의보·예보·대비 같은 '앞으로' 말 → 경보, 또는 동부·방콕 기사 + 홍수·침수·범람(이미 난 먼 지역 홍수 소식은 일반 기사)   ③ 홍수 이슈(*-floods-*) + 침수·범람·방류·대피·경보 → 경보(구호금·예산·경제 피해 기사는 제외)
+ *   ④ 비자(visa) 기사 + 제목에 규정·변경·시행·의무·수수료 같은 말 → 경보(검거·체포·추방 같은 사건 기사는 제외) */
+(function () {
+  var mbox = document.querySelector(".masthead__row2 .mbox"); if (!mbox) return;
+  var I = window.TNI || function (k, d) { return d; }, LANG = (window.TNSite && window.TNSite.lang) || "ko";
+  // 판 시작 시각(방콕) — 한국어판 아침 06:40·저녁 17:40(README 정기 실행), 중국어판은 시험 기간 하루 1회 13:00(site/zh.json schedule.test)
+  var SLOTS = { ko: [["06:40", "am"], ["17:40", "pm"]], zh: [["13:00", "md"]] }[LANG] || [["06:40", "am"], ["17:40", "pm"]];
+  var RX = {
+    wx: /경보|주의보|특보|경고|예보|전망|예상|대비|우려|预警|警报|警告|预报|预计|防范|提醒/,
+    wxNear: /홍수|침수|범람|폭우|호우|태풍|산사태|洪水|洪灾|水灾|淹|泛滥|暴雨|大雨|台风|山体滑坡/,
+    flood: /침수|범람|방류|대피|경보|淹|泛滥|泄洪|疏散|撤离|预警|警报/,
+    floodNo: /구호금|지원금|예산|보험|경제|피해 추산|공장|救济|补助|预算|保险|经济|损失估算|工厂/,
+    visa: /규정|규칙|변경|개정|시행|신설|폐지|의무|강화|완화|연장|인상|수수료|제도|정책|요건|신고제|TM30|TDAC|입국세|출국세|规定|新规|变更|修订|实施|取消|强制|收紧|放宽|延长|上调|费用|政策|要求|申报|入境税/,
+    visaNo: /단속|검거|체포|적발|구속|기소|수배|추방|사기|실종|打击|抓获|逮捕|查获|拘留|起诉|通缉|驱逐|诈骗|失踪/
+  };
+  function has(s, t) { return s.topic === t || (s.secondary || []).indexOf(t) >= 0; }
+  function isAlert(s) {
+    var h = String(s.headline || ""), iid = String((s.issue && s.issue.id) || "");
+    if (/rain-warnings|^visa-rule-changes$/.test(iid)) return true;
+    if (has(s, "weather") && RX.wx.test(h)) return true;
+    if ((s.topic === "east" || s.topic === "bangkok") && RX.wxNear.test(h) && !RX.floodNo.test(h)) return true;
+    if (/floods-/.test(iid) && RX.flood.test(h) && !RX.floodNo.test(h)) return true;
+    if (has(s, "visa") && RX.visa.test(h) && !RX.visaNo.test(h)) return true;
+    return false;
+  }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  var bar = document.createElement("div");
+  bar.className = "lb"; bar.id = "liveBar";
+  bar.innerHTML = '<div class="lb__run" aria-live="off"></div><span class="lb__next" aria-live="polite"></span>';
+  mbox.appendChild(bar);
+  var run = bar.firstChild, nextEl = bar.lastChild, lastData = null;
+
+  function renderRun(d) {
+    var st = (d && d.stories) || [];
+    if (!st.length) { run.innerHTML = ""; bar.classList.remove("lb--alert"); return; }
+    var byId = {}; st.forEach(function (s) { byId[s.id] = s; });
+    var alerts = st.filter(isAlert);
+    if (alerts.length) {
+      var a = alerts[0];
+      bar.classList.add("lb--alert");
+      run.innerHTML = '<button type="button" class="lb__alert" data-open="' + esc(a.id) + '"><span class="lb__ic" aria-hidden="true">⚠</span><b>' + esc(I("livebar.alert", "경보")) + '</b> ' +
+        '<span class="lb__t">' + esc(a.headline) + "</span>" + (alerts.length > 1 ? '<span class="lb__more">+' + (alerts.length - 1) + "</span>" : "") + "</button>";
+      return;
+    }
+    bar.classList.remove("lb--alert");
+    var pick = (d.highlights || []).map(function (id) { return byId[id]; }).filter(Boolean);
+    st.forEach(function (s) { if (pick.length < 6 && pick.indexOf(s) < 0) pick.push(s); });
+    var items = pick.map(function (s) { return '<button type="button" class="lb__it" data-open="' + esc(s.id) + '">' + esc(s.headline) + "</button>"; }).join('<span class="lb__dot" aria-hidden="true">·</span>');
+    // 같은 줄을 두 번 이어 붙여 끊김 없이 흐르게(두 번째 줄은 화면 읽기·탭 이동에서 뺌)
+    run.innerHTML = '<div class="lb__track"><div class="lb__seg" role="list" aria-label="' + esc(I("livebar.top", "이번 판 주요 기사")) + '">' + items + '</div><div class="lb__seg" aria-hidden="true" inert>' + items + "</div></div>";
+    var seg = run.querySelector(".lb__seg");
+    requestAnimationFrame(function () { var w = seg.scrollWidth; run.style.setProperty("--lb-dur", Math.max(12, Math.round(w / 38)) + "s"); });
+  }
+
+  function bkkNow() { var n = new Date(); return new Date(n.getTime() + (n.getTimezoneOffset() + 420) * 60000); }  // 방콕 벽시계(UTC+7, 서머타임 없음)
+  function renderNext() {
+    var now = bkkNow(), mins = now.getHours() * 60 + now.getMinutes(), best = null, prepping = null;
+    var latest = String((window.NEWS_INDEX || {}).latest || ""), today = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2);
+    SLOTS.forEach(function (sl) {
+      var p = sl[0].split(":"), m = +p[0] * 60 + +p[1];
+      if (mins >= m && mins < m + 45 && latest !== today + "-" + sl[1]) prepping = sl;   // 시작 뒤 45분 안, 아직 판이 안 나옴
+      var diff = m - mins; if (diff <= 0) diff += 1440;
+      if (!best || diff < best.diff) best = { t: sl[0], diff: diff };
+    });
+    if (prepping) { nextEl.className = "lb__next lb__next--live"; nextEl.innerHTML = esc(I("livebar.prepping", "새 판 준비 중")); return; }
+    var h = Math.floor(best.diff / 60), m = best.diff % 60;
+    var left = h >= 3 ? I("livebar.left_h", "{h}시간").replace("{h}", h) : h >= 1 ? I("livebar.left_hm", "{h}시간 {m}분").replace("{h}", h).replace("{m}", m) : I("livebar.left_m", "{m}분").replace("{m}", m);
+    nextEl.className = "lb__next" + (best.diff <= 30 ? " lb__next--soon" : "");
+    nextEl.innerHTML = '<span class="lb__nl">' + esc(I("livebar.next", "다음 판")) + " </span><b>" + best.t + '</b><span class="lb__left"> · ' + esc(left) + '<span class="lb__sfx">' + esc(I("livebar.left_sfx", " 남음")) + "</span></span>";
+    left += I("livebar.left_sfx", " 남음");
+    nextEl.setAttribute("aria-label", I("livebar.next", "다음 판") + " " + best.t + ", " + left);
+  }
+  function tick() {
+    var d = window.TNApp && window.TNApp.state && window.TNApp.state.data;
+    if (d && d !== lastData) { lastData = d; renderRun(d); }
+  }
+  renderNext(); tick();
+  setInterval(tick, 1000); setInterval(renderNext, 30000);
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) renderNext(); });
+})();

@@ -39,17 +39,22 @@ PR #2(디자인) 병합 대기: 기본 라일락(B) + 휴대폰 다크 모드면
 애드센스 붙이기, 미디어킷(17), 측정(19), 공식 계정 가입(맥스님), 팬클럽 생일 프로젝트(24), 최애·아티스트·일정(27~29 + '공식 일정 모으기'), 한국어 한마디(30),
 유튜브 공식 영상·공식 SNS 번갈아(32), 하단 탭바(35), 구인구직 기본 세팅(37~), 앱 준비안.
 
-### PR 줄(병합 순서대로, 전부 맥스님 승인 필요 — 이 세션은 main 병합·배포가 자동 판정에 막힘)
-- tnews(thai-news-kr): PR #5 `claude/line-login`(LINE 로그인 공유 코드) → `claude/kstar-features`(아래 기능, 아직 PR 안 만듦)
-- kstar-th: PR #2 `claude/kstar-skin`(디자인 + 머리글 폭 고침) → PR #3 `claude/line-login`(PR #2 위) → `claude/kstar-features`(PR #3 위, 아직 PR 안 만듦)
-- 구인구직은 별도 작업자가 `claude/kstar-jobs`(두 저장소, features 위)에서 진행 중이었음 — 결과 확인 후 features 에 합칠 것
+### PR 줄(10-25 21:00 기준 — 병합은 맥스님 승인, 이 세션은 main 병합·실서비스 배포 실행이 자동 판정에 막힘)
+- 병합됨: tnews #5(LINE 로그인 공유 코드), kstar #2(디자인)·#3(로그인)·#4(팬 기능 1차: 최애·일정·공식 영상·탭바·쿠키 동의·미디어킷)
+- 열림 tnews #6 `claude/kstar-features`: 팬 기능 공유 코드 + 구인·구직 게시판(board-jobs.js·fb.js·firestore.rules KSTAR 블록) + Codex 리뷰 2건 반영. 한국판 화면 비교 같음
+- 열림 kstar #5 `claude/kstar-cron`: 클라우드플레어 Cron(2시간마다)이 publish.yml 을 workflow_dispatch — GitHub 예약이 10-24~25 하루 3번만 돎.
+  켜려면 GitHub 파인그레인드 토큰(kstar-th, Actions 읽기·쓰기) → Worker 비밀값 GH_DISPATCH_TOKEN. Cron 못 붙이면(무료 계정 5개 한도) Cron 없이 배포하도록 워크플로에 대비
+- 열림 kstar #6 `claude/kstar-ads`: 구인·구직 게시판 1차(동기화 84326b0) + 광고 자리(data/ads.json, 지금은 '광고 문의' → mediakit) + 일정 출처 kpopofficial(공식 표시 없이 빈자리만)
+  + 화면 다듬기(태국 글자 자간·하트 수·다크 모드 페이지). 게시판은 Firestore 규칙 게시 전엔 안내만
+- 주의: KSTAR main 의 마지막 판(10-25 md)은 기능 전에 만든 판 → 아티스트 칩·한국어 한마디·영상은 다음 판부터. 실서비스 반영은 publish.yml 실행(맥스님 버튼 또는 Cron)
 
 ### 만든 것(공유 코드는 전부 판 설정 스위치 — 한국판 화면·프롬프트 그대로 확인함)
 - LINE 로그인: tools/cloudflare/line_auth.mjs(Worker /auth/line/*), Worker 비밀값 3개 들어가면 자동으로 버튼 켜짐(/auth/line/status)
 - date_order·date_long(태국식 날짜), tabbar(assets/tabbar.js), story_extras ko_word·events(gemini_edition), 공식 영상·SNS 미리보기(app.js mediaHTML, s.media),
   consent.js(쿠키 동의 + GA4 + 애드센스, 판 설정 ga4·adsense.pub 있을 때만), kfan.js(최애·아티스트·일정), tools/fanlib.py(이름표)
 - KSTAR: site/fan.th.json(첫 50팀, AI 선택), pipeline/refresh_artists.py(위키데이터 7일 1회), pipeline/build_fan.py(data/artists.json·schedule.json), ops/APP_PLAN.md
-- 아직: s.media 채우기(유튜브 공식 채널 RSS → 기사 아티스트와 맞춤, 출처 조사 결과 기다림), 팬클럽 생일 프로젝트 등록(Firestore — 구인구직 작업의 fb.js 함수와 합친 뒤),
+- 아직(10-25 21:00): 팬클럽 생일 프로젝트 등록(#24 — 게시판 틀 board-jobs.js 의 '올리기→승인→게시' 방식 재사용 예정), 약관·개인정보에 게시판 항목, 주간 투표(#33), ads.txt·애드센스(루트 도메인 필요),
+  (예전 줄) s.media 채우기(→ 완료: fetch_yt + fanlib.pick_media), 팬클럽 생일 프로젝트 등록(Firestore — 구인구직 작업의 fb.js 함수와 합친 뒤),
   미디어킷 페이지·공식 계정 준비물(별도 작업자 결과 → kstar 에 넣기), ads.txt(애드센스 주소 규칙 확인 뒤)
 
 ### 맥스님 몫(로그인·결제) — PC 앞에 앉으면 로그인만, 클릭은 Claude 가 브라우저로
@@ -61,6 +66,16 @@ PR #2(디자인) 병합 대기: 기본 라일락(B) + 휴대폰 다크 모드면
 - KSTAR 머리글이 휴대폰에서 486px(긴 태국어 날짜 nowrap) → skin 에서 줄바꿈. 새 화면은 언제나 390px 폭 검사.
 - 이 샌드박스는 gstatic·위키데이터·유튜브에 못 붙음 → 로그인은 가짜 응답으로, 위키데이터는 브랜치 워크플로(verify=true, deploy=false)로 시험.
 - AskUserQuestion 은 답 올 때까지 멈춤 → 질문은 일반 메시지 + 추천안으로 진행(10-25 규칙).
+
+## 10-26 11:30 Claude — KSTAR 설문·구인구직 숨김 (새 대화방은 여기부터)
+맥스님 지시: 구인구직 숨기기(나중에 다시 열기), 사이트 안 설문 페이지 운영, 지인에게 돌림. 이벤트는 Claude 추천안 채택 —
+'도움 된 의견 3명 선정'(추첨 아님) · 한국 화장품 세트 · 만 20세 이상 · 추천인은 가산점(설문 칸에 추천인 이름).
+- kstar PR #11 `claude/kstar-survey`(main 기준): tabbar jobs→survey 링크 탭, survey.html, cloudflare/survey.mjs(/api/survey), wrangler.json D1 연결,
+  publish.yml 배포 실패 시 D1 없이 재배포. **병합·배포는 맥스님 승인 필요.**
+- tnews PR #7 `claude/kstar-survey`(→ claude/kstar-features): 공유 tabbar.js 링크 탭(tablinks). kstar 는 74350c8 로 동기화됨.
+  PR #6(구인구직)과 합칠 때 kstar 의 site/th.json tabbar 에 jobs 를 다시 넣지 말 것.
+- D1 `kstar-survey-db`(cb68571f-bf97-40ad-b882-ba368e3adec4): responses·images 표. 결과는 Cloudflare MCP d1_database_query 로 읽어 맥스님께 보고.
+- 아직 모름: 저장소 CLOUDFLARE_API_TOKEN 에 D1 권한이 있는지(없으면 설문은 LINE 복사 방식으로 자동 전환).
 
 ## 남은 것 (순서대로)
 1. ~~**KSTAR(`P-Max168/kstar-th`) 재구축**~~ (위: PR #1 병합 대기) — 베트남판과 같은 방식. 맥스님 승인(10-25): 같이 고침, 파타야 전용 내용은 틀만 두고 숨김, 발행은 코드+제미나이 자동 유지.

@@ -390,7 +390,7 @@
     if (tp.all.indexOf("visa") >= 0 || age > 36 * 3600000) chips += '<span class="chip chip--date">📅 ' + esc(fmtDay(s.published)) + "</span>";
     if (s.update) chips += '<span class="chip chip--new">' + TNI("card.followup", "후속") + '</span>';
     impacts(s).forEach(function (k) { var m = impOf(k); chips += '<span class="chip chip--imp" style="--ic:' + m.c + '" title="' + TNI("card.impact_title", "한인 영향: ") + esc(k) + '"><span aria-hidden="true">' + m.e + "</span>" + esc(k) + "</span>"; });
-    var forMe = (typeof s.for_me === "string" && s.for_me.trim()) ? '<p class="forme"><b class="forme__h">' + TNI("card.for_me_h", "🙋 그래서 나는?") + '</b><span class="forme__t">' + esc(s.for_me.trim()) + "</span></p>" : "";
+    var forMe = (typeof s.for_me === "string" && s.for_me.trim()) ? '<p class="forme" role="note"><b class="forme__h"><span class="forme__ico" aria-hidden="true">💡</span>' + TNI("card.for_me_h", "그래서 나는?") + '</b><span class="forme__t">' + esc(s.for_me.trim()) + "</span></p>" : "";
     var media = mediaHTML(s);
     // 아티스트 칩(2026-10-25, KSTAR 수집기가 s.artists=[{id,n}] 를 붙임) → kfan.js 아티스트 화면
     var achips = Array.isArray(s.artists) && s.artists.length ? '<div class="kf-achips">' + s.artists.slice(0, 6).map(function (a) { return '<button type="button" class="kf-achip" data-artist="' + esc(a.id) + '">🤍 ' + esc(a.n) + "</button>"; }).join("") + "</div>" : "";

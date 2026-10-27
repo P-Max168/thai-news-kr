@@ -20,8 +20,9 @@ Claude 예약 작업이 이 문서를 그대로 따른다. 사람도 읽을 수 
 - 07:00·18:00 실행에서는 `ops/emergency.json` 을 먼저 본다. `act_at_start=false` 이거나, 지금(방콕)이 `act_at_start_from` 보다 이르면 끝(그 전엔 Codex 가 07:08·18:08 시작). 그록 예약은 10-23 에 06:40·17:40 으로 바뀜(일시 중지 상태, 10-26 재개).
 
 ## 2. 비상 발행 (한국어판)
-1. 담당 표시: 07:00·18:00 이면 `python3 tools/edition_claim.py claim claude <판 id>`, 07:30·18:30 이면 `take`. HOLD 면 끝.
-2. 후보: `bash tools/fetch_candidates.sh <판 id>` (am 은 06:05, pm 은 17:05 수집분). exit 3 이면 `bash tools/fetch_candidates.sh` (판 id 없이 — 가장 최근 수집분) 로 받고 coverage 에 적는다.
+0. (10-26 추가) 이어받기(take) 전에 제미나이 실행 확인: `gh run list -R P-Max168/thai-news-kr --workflow gemini-edition.yml -L 3 --json status,createdAt,headSha` (중국어판은 thai-news-zh). 오늘 이 판 회차에 queued·in_progress 실행이 있으면 take 하지 말고 1분 간격으로 최대 15분(07:45·13:45·18:45) 기다렸다가 판이 나왔는지 다시 본다. 실행이 실패로 끝났거나 15분이 지나도 판이 없을 때만 take.
+1. 담당 표시: 07:00·18:00 이면 `python3 tools/edition_claim.py claim claude <판 id>`, 07:30·18:30 이면 `take`(위 0번 확인 뒤). HOLD 면 끝.
+2. 후보: `bash tools/fetch_candidates.sh <판 id>` (am 은 03:37~05:37, pm 은 14:37~16:37 수집분 — GitHub 예약이 늦을 수 있음). exit 3 이면 `bash tools/fetch_candidates.sh` (판 id 없이 — 가장 최근 수집분) 로 받고 coverage 에 적는다.
 3. 기사 고르기: `drafts/candidates/latest.md` 와 `drafts/gnews/latest.md` 에서 **8~12건**(비상판은 적어도 됨). README '고르는 규칙'·`tools/TRANSLATION_RULES.md` 를 따른다. 동부(파타야)·외국인·비자·치안·날씨 우선.
 4. 원문 확인: 사이트에 직접 붙지 못하므로 **웹 읽기 도구(WebFetch)** 로 원문을 열어 사실·숫자·게재 시각을 확인한다. Google News 링크는 원 매체 페이지를 검색해 찾는다. 확인 못 한 기사는 빼다.
 5. 편집 파일: `tools/editions/_template.py` 를 복사해 `tools/editions/<판 id>.py`. highlights 3개, briefing 4~7줄 필수. 금액은 "바트(약 N원)" — 환율은 `data/ticker.json` 의 fx.THB_KRW 하나.
@@ -30,7 +31,7 @@ Claude 예약 작업이 이 문서를 그대로 따른다. 사람도 읽을 수 
 8. 기록: `collab/STATUS.md` '최근 인수인계' 표 맨 위에 한 줄 — `| 시각 | Claude | 비상 발행 <판 id> N건 | 이유: (담당 표시 없음 / 그록 멈춤 등) |`. `DEV_LOG.md` 맨 아래에 한 줄. 커밋·push(`git pull --rebase` 후 일반 push, force 금지).
 
 ## 3. 중국어판 (13:30)
-1. 판 id `YYYY-MM-DD-md`. 중국어판 저장소에서 `python3 tools/edition_claim.py take claude <판 id>` (중국어판은 지금 정기 담당이 없어 Claude 가 맡음).
+1. 판 id `YYYY-MM-DD-md`. 2절 0번처럼 thai-news-zh 의 gemini-edition 실행을 먼저 확인한 뒤 중국어판 저장소에서 `python3 tools/edition_claim.py take claude <판 id>` (10-26부터 정기 담당 = 새 그록봇 고르기 + 제미나이).
 2. 후보: 한국어판 저장소의 `candidates` 브랜치(12:20 수집분)를 같은 방법으로 받는다 — 중국어판 폴더 안에서 `git fetch https://github.com/P-Max168/thai-news-kr +candidates:refs/remotes/kr/candidates` 후 `git show kr/candidates:candidates/latest.md > drafts/candidates/latest.md`.
 3. 편집 기준은 중국어판 저장소의 `tools/TRANSLATION_RULES.zh.md`·`ROUTINE_MD.md` 2~3번(涉华·签证·治安 우선, 간체, 한글·태국 문자 금지, 금액 '350泰铢（约70元）' — 환율은 data/ticker.json 의 THB_CNY).
 4. 빌드: `TNK_TEST=1 bash tools/lang_build.sh build <판 id>` 가 'BUILD OK' 가 될 때까지.

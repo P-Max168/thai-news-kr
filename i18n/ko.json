@@ -458,7 +458,7 @@
   "background_h": "💡 배경 설명",
   "fold": "접기",
   "followup": "후속",
-  "for_me_h": "🙋 그래서 나는?",
+  "for_me_h": "그래서 나는?",
   "heart_off": "하트 취소",
   "heart_on": "하트 — 이런 뉴스 더 보기",
   "impact_title": "한인 영향: ",
@@ -624,6 +624,16 @@
   "kee82f22": "한국어 필요",
   "kfad694e": "사무·통역",
   "kfb2123b": "[사장님 입력]"
+ },
+ "livebar": {
+  "alert": "경보",
+  "left_h": "{h}시간",
+  "left_hm": "{h}시간 {m}분",
+  "left_m": "{m}분",
+  "left_sfx": " 남음",
+  "next": "다음 판",
+  "prepping": "새 판 준비 중",
+  "top": "이번 판 주요 기사"
  },
  "load": {
   "edition_fail": " 뉴스를 불러오지 못했어요."

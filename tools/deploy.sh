@@ -42,6 +42,8 @@ for f in $KOREA_FILES; do
 done
 # 검색 노출(2026-10-18 R-seo-2): sitemap.xml 을 data/index.json·e/ 에 맞춰 다시 만듦(share_kit 도 만들지만 한 번 더 — 실패해도 배포는 계속)
 python3 tools/seo.py sitemap || echo "경고: sitemap.xml 갱신 실패(배포는 계속)" >&2
+# IndexNow 키 파일만 보장(제출은 push 뒤)
+python3 -c "import sys; sys.path.insert(0,'tools'); import seo; print('indexnow', seo.indexnow_key())" || true
 # 홈 뉴스판 링크를 갱신한 뒤 앱 셸 버전을 계산해야 캐시에도 새 링크가 반영됨.
 python3 tools/stamp_assets.py
 # 측정 한 줄(2026-10-23): ops/metrics.jsonl — 실패해도 배포 계속
@@ -49,9 +51,15 @@ python3 tools/metrics.py "$LATEST" || true
 # 사이트 파일만 스테이징 (.gitignore 가 제외 대상 차단)
 # og/(링크 미리보기 이미지)·e/(판별 미리보기 페이지)는 tools/share_kit.py 가 만듦 — 있는 경로만 추가
 PATHS=""
-for p in index.html robots.txt sitemap.xml .nojekyll .gitignore README.md manifest.json sw.js firestore.rules assets data tools og e .github ops/metrics.jsonl; do
+for p in index.html robots.txt sitemap.xml feed.xml .nojekyll .gitignore README.md manifest.json sw.js firestore.rules assets data tools og e .github ops/metrics.jsonl; do
   [ -e "$p" ] && PATHS="$PATHS $p"
 done
+# IndexNow 공개 키 파일(ops/indexnow-key 내용 = 파일명)도 스테이징
+INDEXNOW_KEY_FILE=""
+if [ -f ops/indexnow-key ]; then
+  INDEXNOW_KEY_FILE="$(tr -d '[:space:]' < ops/indexnow-key).txt"
+  [ -f "$INDEXNOW_KEY_FILE" ] && PATHS="$PATHS $INDEXNOW_KEY_FILE ops/indexnow-key"
+fi
 git add -A -- $PATHS
 git reset -q -- $KOREA_FILES 2>/dev/null || true   # 혹시 스테이징됐어도 빼기
 if git diff --cached --quiet; then
@@ -70,6 +78,8 @@ for i in 1 2 3 4; do
 done
 [ -n "$ok" ] || { echo "push 실패" >&2; exit 3; }
 echo "push 완료: $(git rev-parse --short HEAD)"
+# IndexNow 제출(빙·네이버·얀덱스, 계정 불필요). 실패해도 배포 계속
+python3 -c "import sys; sys.path.insert(0,'tools'); import seo; c,u=seo.indexnow_submit(); print('IndexNow',c,len(u))" || echo "경고: IndexNow 제출 실패" >&2
 
 # 라이브 검증: index.js 에 최신 id 가 반영될 때까지 대기 후 헤드리스 브라우저로 렌더 확인
 deadline=$(( $(date +%s) + TIMEOUT ))
@@ -79,7 +89,8 @@ if [ "${TNK_LIVE_CHECK:-curl}" = "pages" ]; then
   while :; do
     # pages build and deployment 실행 중 이 커밋(또는 그 뒤 커밋)이 success 면 통과. 뒤 커밋이 덮으면 앞 실행은 cancelled 가 정상.
     st="$(gh api "repos/$REPO/actions/runs?event=dynamic&per_page=10" --jq '.workflow_runs[]|select(.name=="pages build and deployment")|.head_sha+" "+.status+" "+(.conclusion//"")' 2>/dev/null || true)"
-    mine="$(echo "$st" | grep "^$HEAD_SHA " | head -1)"
+    # (2026-10-26 Claude) push 직후엔 Pages 실행이 목록에 아직 없어 grep 결과가 빔 → set -e·pipefail 로 exit 1 되던 것(10-26 pm 판 Actions 40310376950). 빈 결과면 기다렸다 다시 봄
+    mine="$(echo "$st" | grep "^$HEAD_SHA " | head -1 || true)"
     if echo "$mine" | grep -q " completed success"; then echo "Pages 빌드 완료: ${HEAD_SHA:0:7} (사이트 직접 확인은 생략)"; echo "배포 완료: $LIVE_URL (판 $LATEST)"; exit 0; fi
     if echo "$mine" | grep -q " completed cancelled" && git merge-base --is-ancestor "$HEAD_SHA" "$(echo "$st" | grep ' completed success' | head -1 | cut -c1-40)" 2>/dev/null; then
       echo "Pages: 뒤 커밋 빌드가 성공(이 커밋 포함)"; echo "배포 완료: $LIVE_URL (판 $LATEST)"; exit 0; fi

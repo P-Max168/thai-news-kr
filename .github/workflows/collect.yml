@@ -2,15 +2,21 @@
 # 왜: ① 그록 토큰 절감(수집은 AI가 아니라 코드) ② Claude 비상 발행은 클라우드에서 뉴스 사이트에 직접 못 붙어서, 미리 모은 후보가 필요.
 # 결과: 브랜치 candidates 의 candidates/latest.{json,md}, gnews/latest.{json,md}, meta.json(수집 시각·판 id·성공 소스 수)
 #   main 은 건드리지 않음(Pages 재배포·push 금지 구간과 무관). 브랜치는 매번 커밋 1개로 덮어씀(저장소가 커지지 않게) — main 의 force push 금지 규칙과 별개.
-# 시각(방콕): 06:05 아침판 · 12:20 중국어 점심판 · 17:05 저녁판 (그록 시작 06:40·17:40 보다 앞). GitHub 예약은 늦을 수 있어 20~35분 여유.
+# 시각(방콕): 아침판 03:37·04:37·05:37 · 점심판 11:17·12:17 · 저녁판 14:37·15:37·16:37 (그록 시작 06:40·17:40 보다 앞). GitHub 예약이 몇 시간씩 늦어 여러 번 건다.
 # 판이 쓰는 법: git fetch origin candidates && git show origin/candidates:candidates/latest.md
 name: collect
 
 on:
   schedule:
-    - cron: "5 23 * * *"     # 06:05 BKK
-    - cron: "20 5 * * *"     # 12:20 BKK
-    - cron: "5 10 * * *"     # 17:05 BKK
+    # 10-26: GitHub 예약이 2~4시간씩 늦게 돌아서(06:05→08:03, 12:20→16:35) 판마다 1시간 간격으로 여러 번 건다. 늦게 돈 것도 최신으로 덮어써 손해 없음
+    - cron: "37 20 * * *"    # 03:37 BKK 아침판
+    - cron: "37 21 * * *"    # 04:37
+    - cron: "37 22 * * *"    # 05:37
+    - cron: "17 4 * * *"     # 11:17 BKK 점심판(중국어)
+    - cron: "17 5 * * *"     # 12:17
+    - cron: "37 7 * * *"     # 14:37 BKK 저녁판
+    - cron: "37 8 * * *"     # 15:37
+    - cron: "37 9 * * *"     # 16:37
   workflow_dispatch:
     inputs:
       hours:
@@ -41,7 +47,7 @@ jobs:
         id: ed
         run: |
           h=$(date +%H); d=$(date +%F)
-          if [ "$h" -lt 11 ]; then s=am; elif [ "$h" -lt 16 ]; then s=md; else s=pm; fi
+          if [ "$h" -lt 11 ]; then s=am; elif [ "$h" -lt 14 ]; then s=md; else s=pm; fi
           echo "id=$d-$s" >> "$GITHUB_OUTPUT"
       - name: 후보 수집(tools/collect.py)
         continue-on-error: true
