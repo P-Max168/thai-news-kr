@@ -7,19 +7,117 @@
  "domain": "tnews.pmaxone.com",
  "site_url": "https://tnews.pmaxone.com/",
  "repo": "P-Max168/thai-news-kr",
- "slots": ["early", "am", "pm"],
- "edition_label": {"early": "새벽판", "am": "아침판", "pm": "저녁판"},
+ "slots": [
+  "am",
+  "md",
+  "pm"
+ ],
+ "edition_label": {
+  "am": "아침판",
+  "md": "점심판",
+  "pm": "저녁판",
+  "early": "새벽판"
+ },
  "label_format": "{m}월 {d}일 {slot}",
- "schedule": {"full": [{"slot": "am", "build": "06:40"}, {"slot": "pm", "build": "17:40"}], "no_push_windows": ["06:40-08:10", "17:40-18:40"], "tz": "Asia/Bangkok"},
- "home_section": {"id": "korea", "key": "korea_top", "fetcher": "tools/fetch_korea.py --standalone", "data": "data/korea.json", "script": "data/korea.js", "global": "KOREA_NEWS", "cron": "17 */2 * * *"},
- "editorial": {"sources": "tools/sources.json", "translation_rules": "tools/TRANSLATION_RULES.md", "topics": "assets/topics.js(기본값)", "discussion_persona": "tools/TRANSLATION_RULES.md", "i18n": "i18n/ko.json(화면 기본값 목록 — 코드 안 기본 문구에서 뽑음)"},
- "currency": {"pair": "THB_KRW", "format": "{thb}바트(약 {krw}원)", "check": "krw_check", "header_symbol": "฿"},
- "validate": {"forbid_scripts": ["thai", "cjk"], "forbid_body_symbols": ["฿"]},
- "impacts": ["비자·체류", "환율·물가", "교통·사고", "치안", "날씨·재해"],
- "ticker": ["THB_KRW", "USD_THB", "GOLD", "USDT", "PM25"],
+ "schedule": {
+  "full": [
+   {
+    "slot": "am",
+    "build": "06:40"
+   },
+   {
+    "slot": "md",
+    "build": "11:40"
+   },
+   {
+    "slot": "pm",
+    "build": "17:40"
+   }
+  ],
+  "no_push_windows": [
+   "06:40-08:10",
+   "11:40-13:10",
+   "17:40-18:40"
+  ],
+  "tz": "Asia/Bangkok"
+ },
+ "home_section": {
+  "id": "korea",
+  "key": "korea_top",
+  "fetcher": "tools/fetch_korea.py --standalone",
+  "data": "data/korea.json",
+  "script": "data/korea.js",
+  "global": "KOREA_NEWS",
+  "cron": "17 */2 * * *"
+ },
+ "editorial": {
+  "sources": "tools/sources.json",
+  "translation_rules": "tools/TRANSLATION_RULES.md",
+  "topics": "assets/topics.js(기본값)",
+  "discussion_persona": "tools/TRANSLATION_RULES.md",
+  "i18n": "i18n/ko.json(화면 기본값 목록 — 코드 안 기본 문구에서 뽑음)"
+ },
+ "currency": {
+  "pair": "THB_KRW",
+  "format": "{thb}바트(약 {krw}원)",
+  "check": "krw_check",
+  "header_symbol": "฿"
+ },
+ "validate": {
+  "forbid_scripts": [
+   "thai",
+   "cjk"
+  ],
+  "forbid_body_symbols": [
+   "฿"
+  ]
+ },
+ "impacts": [
+  "비자·체류",
+  "환율·물가",
+  "교통·사고",
+  "치안",
+  "날씨·재해"
+ ],
+ "ticker": [
+  "THB_KRW",
+  "USD_THB",
+  "GOLD",
+  "USDT",
+  "PM25"
+ ],
  "firestore_prefix": "",
- "firestore_collections": ["comments", "rx", "reports", "adclicks"],
+ "firestore_collections": [
+  "comments",
+  "rx",
+  "reports",
+  "adclicks"
+ ],
  "admins_doc": "config/admins",
- "share": {"font": "Pretendard", "channels": ["kakao", "copy"]},
- "hidden_sections": []
+ "share": {
+  "font": "Pretendard",
+  "channels": [
+   "kakao",
+   "copy"
+  ]
+ },
+ "hidden_sections": [],
+ "watch_slots": [
+  [
+   "am",
+   6,
+   40
+  ],
+  [
+   "md",
+   11,
+   40
+  ],
+  [
+   "pm",
+   17,
+   40
+  ]
+ ],
+ "_schedule_note": "2026-10-27 맥스님: 운영 중·신규 채널 기본 = 하루 3판(am/md/pm)+속보 별도. early는 예비."
 }

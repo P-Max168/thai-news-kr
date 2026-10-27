@@ -20,7 +20,7 @@ from datetime import datetime
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
-EDITION_LABEL = {"am": "아침판", "pm": "저녁판", "early": "새벽판"}
+EDITION_LABEL = {"am": "아침판", "md": "점심판", "pm": "저녁판", "early": "새벽판"}
 # md = 점심판(중국어판 시험 13:00, 2026-10-18 R-zh-2). 순서 값만 늘림(early<am<md<pm) — 한국판 판 정렬·비교 결과는 그대로
 EDITION_ORDER = {"early": 0, "am": 1, "md": 2, "pm": 3}
 ID_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-(am|md|pm|early)$")

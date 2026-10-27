@@ -115,33 +115,85 @@ def build_prompt(eid, items, fx_line, select=0):
 USAGE = dict(calls=0, prompt=0, output=0, thinking=0, total=0)
 
 
-def call_gemini(prompt, key, model):
+# 재시도: 합계 대기 ~16분(20+40+80+120+180+240+300초). 2026-10-27 맥스님 승인(503 안정화).
+CHUNK = 15  # picks 가 이보다 크면 나눠 호출(고정 지시문 중복 비용 < 503 회피)
+BACKOFF_S = [20, 40, 80, 120, 180, 240, 300]
+
+
+def _log_usage(rec):
+    (ROOT / "ops").mkdir(exist_ok=True)
+    with open(ROOT / "ops" / "gemini-usage.jsonl", "a", encoding="utf-8") as f:
+        f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+
+
+def call_gemini(prompt, key, model, meta=None):
+    """성공 시 JSON dict. 실패 시 usage 기록 후 SystemExit.
+    meta: 실패 로그에 붙일 판 id·picks 수 등(dict|None)."""
     import requests
     payload = {"contents": [{"parts": [{"text": prompt}]}],
                "generationConfig": {"responseMimeType": "application/json", "temperature": 0.3, "maxOutputTokens": 16000,
                                     "thinkingConfig": {"thinkingLevel": "low"}}}
     last = None
-    for attempt in range(3):
+    t0 = time.time()
+    for attempt in range(len(BACKOFF_S) + 1):
         USAGE["calls"] += 1
         try:
             r = requests.post(API % model, headers={"x-goog-api-key": key, "Content-Type": "application/json"}, json=payload, timeout=180)
         except Exception as ex:  # 네트워크
-            last = "transport_" + type(ex).__name__; time.sleep(10); continue
+            last = "transport_" + type(ex).__name__
+            if attempt < len(BACKOFF_S):
+                time.sleep(BACKOFF_S[attempt]); continue
+            break
         if r.status_code in (429, 500, 503):
-            last = "http_%d" % r.status_code; time.sleep(30 * (attempt + 1)); continue
+            last = "http_%d" % r.status_code
+            if attempt < len(BACKOFF_S):
+                time.sleep(BACKOFF_S[attempt]); continue
+            break
         if r.status_code != 200:
-            raise SystemExit("gemini http %d — %s" % (r.status_code, r.text[:300].replace(key, "***")))
+            last = "http_%d" % r.status_code
+            msg = "gemini http %d — %s" % (r.status_code, r.text[:300].replace(key, "***"))
+            rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), model=model, error=msg,
+                       seconds=round(time.time() - t0, 1), **USAGE)
+            if meta:
+                rec.update(meta)
+            _log_usage(rec)
+            raise SystemExit(msg)
         d = r.json()
         u = d.get("usageMetadata") or {}
         USAGE["prompt"] += int(u.get("promptTokenCount", 0)); USAGE["output"] += int(u.get("candidatesTokenCount", 0))
         USAGE["thinking"] += int(u.get("thoughtsTokenCount", 0)); USAGE["total"] += int(u.get("totalTokenCount", 0))
         c = (d.get("candidates") or [{}])[0]
-        text = "".join(p.get("text", "") for p in (c.get("content") or {}).get("parts", []) if not p.get("thought"))
+        body = "".join(p.get("text", "") for p in (c.get("content") or {}).get("parts", []) if not p.get("thought"))
         try:
-            return json.loads(text)
+            return json.loads(body)
         except ValueError:
-            last = "invalid_json(%s)" % c.get("finishReason"); continue
-    raise SystemExit("gemini 실패: %s" % last)
+            last = "invalid_json(%s)" % c.get("finishReason")
+            if attempt < len(BACKOFF_S):
+                time.sleep(min(30, BACKOFF_S[attempt])); continue
+            break
+    msg = "gemini 실패: %s" % last
+    rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), model=model, error=msg,
+               seconds=round(time.time() - t0, 1), **USAGE)
+    if meta:
+        rec.update(meta)
+    _log_usage(rec)
+    try:
+        (ROOT / "ops" / "edition-fail.json").write_text(
+            json.dumps(dict(at=rec["at"], edition=(meta or {}).get("edition"), error=msg, calls=USAGE["calls"]),
+                       ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception:
+        pass
+    raise SystemExit(msg)
+
+
+def merge_model_outs(outs):
+    """청크별 제미나이 JSON 합치기(stories·briefing·highlights)."""
+    stories, briefing, highlights = [], [], []
+    for o in outs:
+        stories.extend(o.get("stories") or [])
+        briefing.extend(o.get("briefing") or [])
+        highlights.extend(o.get("highlights") or [])
+    return dict(stories=stories, briefing=briefing, highlights=list(dict.fromkeys(highlights)))
 
 
 # ---------------------------------------------------------------- 금액 환산 자동 보정
@@ -368,14 +420,25 @@ def main():
     cur = SITE.get("currency", {})
     _mp = cur.get("money_pair") or cur.get("pair", "THB_KRW")
     fx_line = ("판 환율: %s = %s" % (_mp, fx[_mp])) if fx else ""
-    prompt = build_prompt(a.eid, items, fx_line, a.select)
     if a.dry:
-        print("DRY — 지시문 %d자(제미나이 안 부름)" % len(prompt)); return 0
+        prompt = build_prompt(a.eid, items, fx_line, a.select)
+        nchunk = 1 if len(items) <= CHUNK else (len(items) + CHUNK - 1) // CHUNK
+        print("DRY — 지시문 %d자 · 기사 %d건 · 청크 %d(제미나이 안 부름)" % (len(prompt), len(items), nchunk)); return 0
     key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not key:
         print("GEMINI_API_KEY 없음 — 판 안 만듦(저장소 Secret 등록 필요)"); return 4
     t0 = time.time()
-    out = call_gemini(prompt, key, a.model)
+    meta = dict(edition=a.eid, picks=len(items), body=got)
+    chunks = [items[i:i + CHUNK] for i in range(0, len(items), CHUNK)] if len(items) > CHUNK else [items]
+    if len(chunks) > 1:
+        print("청크 %d개(각 ≤%d건)로 나눠 호출" % (len(chunks), CHUNK))
+    outs = []
+    for ci, ch in enumerate(chunks):
+        sel = 0 if len(chunks) > 1 else a.select
+        prompt = build_prompt(a.eid, ch, fx_line, sel)
+        print("제미나이 호출 %d/%d · 기사 %d건 · 지시문 %d자" % (ci + 1, len(chunks), len(ch), len(prompt)))
+        outs.append(call_gemini(prompt, key, a.model, meta=dict(meta, chunk="%d/%d" % (ci + 1, len(chunks)))))
+    out = merge_model_outs(outs) if len(outs) > 1 else outs[0]
     data = assemble(a.eid, items, out)
     if fx:
         data["fx"] = fx
@@ -384,11 +447,16 @@ def main():
     kept = sum(1 for s in out.get("stories") or [] if s.get("keep") is not False)
     drops = [dict(key=s.get("key"), why=str(s.get("drop_reason") or "")[:40]) for s in out.get("stories") or [] if s.get("keep") is False][:30]
     rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), edition=a.eid, model=a.model, picks=len(items), body=got, kept_by_model=kept,
-               model_drops=drops, after_check=len(data["stories"]),
+               model_drops=drops, after_check=len(data["stories"]), chunks=len(chunks),
                published=len(data["stories"]) if ok else 0, seconds=round(time.time() - t0, 1), **USAGE)
-    (ROOT / "ops").mkdir(exist_ok=True)
-    with open(ROOT / "ops" / "gemini-usage.jsonl", "a", encoding="utf-8") as f:
-        f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    _log_usage(rec)
+    if ok:
+        try:
+            fail = ROOT / "ops" / "edition-fail.json"
+            if fail.exists():
+                fail.unlink()
+        except Exception:
+            pass
     print(json.dumps(rec, ensure_ascii=False))
     return 0 if ok else 3
 

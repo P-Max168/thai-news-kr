@@ -8,9 +8,10 @@ name: gemini-edition
 
 on:
   schedule:
-    # 10-26 2안(맥스님): 그록이 06:40·17:40 에 고른 파일(ops/picks)을 올리면 아래 push 로 바로 돎. 예약은 그록이 못 올렸을 때의 대비(코드 고르기)
-    - cron: "5 0 * * *"     # 07:05 BKK 아침판 대비
-    - cron: "5 11 * * *"    # 18:05 BKK 저녁판 대비
+    # 2026-10-27 맥스님: 하루 3판. 그록 picks push 가 우선, 예약은 못 올렸을 때 대비(코드 고르기)
+    - cron: "5 0 * * *"     # 07:05 BKK 아침판(am) 대비 — picks 06:40
+    - cron: "5 5 * * *"     # 12:05 BKK 점심판(md) 대비 — picks 11:40
+    - cron: "5 11 * * *"    # 18:05 BKK 저녁판(pm) 대비 — picks 17:40
   push:
     branches: [main]
     paths: ["ops/picks/*.json"]
@@ -31,7 +32,7 @@ concurrency:
 jobs:
   edition:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     env:
       TZ: Asia/Bangkok
     steps:
@@ -60,7 +61,9 @@ jobs:
         run: |
           if [ -n "${{ inputs.edition }}" ]; then id="${{ inputs.edition }}"
           elif [ "${{ github.event_name }}" = "schedule" ]; then
-            id="$(date +%F)-$( [ "$(date +%H)" -lt 12 ] && echo am || echo pm )"
+            h=$((10#$(date +%H)))
+            if [ "$h" -lt 10 ]; then s=am; elif [ "$h" -lt 15 ]; then s=md; else s=pm; fi
+            id="$(date +%F)-$s"
             if [ -f "data/$id.json" ]; then echo "이미 있음: $id — 할 일 없음"; echo "skip=1" >> "$GITHUB_OUTPUT"; exit 0; fi
             # 키가 없거나(맥스님 등록 전) 임시 발행 담당(ops/publisher.json, 예: Codex ~10-26 12:45)이 있으면 담당 표시를 하지 않고 비켜 줌 — 다른 발행자를 막지 않게
             if [ "$HAS_KEY" != "true" ]; then echo "::notice::GEMINI_API_KEY 없음 — 자동 판 건너뜀(비상 발행이 메움)"; echo "skip=1" >> "$GITHUB_OUTPUT"; exit 0; fi
