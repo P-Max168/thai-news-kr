@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-27T13:23:59+07:00",
+ "updated_at": "2026-10-27T19:40:25+07:00",
  "items": [
   {
-   "title": "선관위 특검, 올림픽공원 핸드볼경기장 압수수색…CCTV 영상 확보 주력",
+   "title": "서울 강남 구룡마을 불 ‘소방 2단계’ 39명 대피…“확인된 인명피해 없어”",
    "source": "한겨레",
-   "time": "2026-10-27T09:40:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/society_general/1284325.html"
+   "time": "2026-10-27T17:09:00+07:00",
+   "url": "https://www.hani.co.kr/arti/society/society_general/1284451.html"
   },
   {
-   "title": "30대 여성에 GOP 철책 뚫린 군 부대···합참 “경계작전 전반 조사 중”",
-   "source": "경향신문",
-   "time": "2026-10-27T10:25:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610271225001"
-  },
-  {
-   "title": "민주 \"주진우, 무책임한 폭로 정치\"‥유튜버·소설가 전향 권유",
-   "source": "MBC 뉴스",
-   "time": "2026-10-27T10:07:02+07:00",
-   "url": "https://imnews.imbc.com/news/2026/politics/article/6861016_36911.html"
-  },
-  {
-   "title": "도서관서 떠든다고…초등생 2명 흉기로 위협한 20대",
-   "source": "동아일보",
-   "time": "2026-10-27T08:44:00+07:00",
-   "url": "https://www.donga.com/news/Society/article/all/20261027/134915440/2"
-  },
-  {
-   "title": "김건희, ‘구속 만료’ 나흘 앞…대법원 오늘 추가 구속영장 심문",
-   "source": "한겨레",
-   "time": "2026-10-27T10:06:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/society_general/1284340.html"
-  },
-  {
-   "title": "어쩌면 올 가을 ‘마지막 여름’…강한 바람에 내일 아침 겨울이 실려온다",
-   "source": "한겨레",
-   "time": "2026-10-27T10:37:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/environment/1284303.html"
-  },
-  {
-   "title": "“명태균, 과장은 좀 있지만... 오세훈, 운이 좋다” 김영선 전 의원 인터뷰",
-   "source": "뉴스타파",
-   "time": "2026-10-26T16:05:00+07:00",
-   "url": "https://newstapa.org/article/mtjF2"
-  },
-  {
-   "title": "李대통령 \"중수청장 국무회의 참석, 비정상의 정상화\"",
+   "title": "초유의 대법원장 국정조사... 민주당, 의총서 밀어붙였다",
    "source": "조선일보",
-   "time": "2026-10-27T08:37:00+07:00",
-   "url": "https://www.chosun.com/politics/blue_house/2026/10/27/HCGYL6TAE5CUPCYZLORRNK7E6Q/"
+   "time": "2026-10-27T15:01:00+07:00",
+   "url": "https://www.chosun.com/politics/politics_general/2026/10/27/NEBMJMT3VNDNNBHYUAKA6KR2YM/"
   },
   {
-   "title": "뒤집을 방법 없는 443만표차 대패…보우소나루, 하루 만에 ‘결과 승복’",
+   "title": "외신들 “리디아 고, 경기 앞두고 정치적 논란 휘말려” 보도",
    "source": "한겨레",
-   "time": "2026-10-27T10:06:00+07:00",
-   "url": "https://www.hani.co.kr/arti/international/america/1284342.html"
+   "time": "2026-10-27T15:57:00+07:00",
+   "url": "https://www.hani.co.kr/arti/society/society_general/1284391.html"
   },
   {
-   "title": "조현 \"북중 간 북미대화 관련 논의 가능성 있다고 봐\"",
-   "source": "연합뉴스",
-   "time": "2026-10-27T09:16:35+07:00",
-   "url": "https://www.yna.co.kr/view/AKR20261027085200504"
+   "title": "오세훈 무죄 축하 만찬서 윤상현 ‘비·행·기’ 건배사···이준석이 띄운 ‘오·세·훈’ 삼행시는?",
+   "source": "경향신문",
+   "time": "2026-10-27T13:11:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610271511001"
+  },
+  {
+   "title": "강신철 “北과 전쟁시 미군 믿을 수 있나” 전작권 전환 신중론 반박",
+   "source": "동아일보",
+   "time": "2026-10-27T02:30:00+07:00",
+   "url": "https://www.donga.com/news/Politics/article/all/20261027/134913552/2"
+  },
+  {
+   "title": "이태원 참사 배경엔 ‘총체적 부실’…“윤석열·이상민 직접 조사 추진” [지금뉴스]",
+   "source": "KBS 뉴스",
+   "time": "2026-10-27T15:03:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8696472"
+  },
+  {
+   "title": "[속보]대법원, 김건희 추가 구속영장 발부 “증거인멸·도주 염려”…최대 8개월 구속 연장 가능",
+   "source": "경향신문",
+   "time": "2026-10-27T16:35:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610271835001"
+  },
+  {
+   "title": "尹 \"계엄, '십자포화로 나를 말려라' 각오로 선포\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-27T14:33:13+07:00",
+   "url": "https://imnews.imbc.com/news/2026/society/article/6861097_36918.html"
+  },
+  {
+   "title": "유명 ‘픽스터’로 회원 유치…4,900억 원대 도박사이트 운영 일당 검거",
+   "source": "KBS 뉴스",
+   "time": "2026-10-27T15:14:00+07:00",
+   "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8696483"
+  },
+  {
+   "title": "영하도 아닌데 한파주의보?…전주·대전은 발효, 서울은 빠진 이유",
+   "source": "뉴스1",
+   "time": "2026-10-27T15:00:33+07:00",
+   "url": "https://www.news1.kr/society/environment/6333650"
   }
  ]
 };
