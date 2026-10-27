@@ -3,6 +3,7 @@
  */
 (function () {
   "use strict";
+  var TNmd = window.TNmd || function (o) { return o.month + "/" + o.day; };   // 짧은 날짜 순서(topics.js, 판 설정 date_order)
   var T = window.TNTopics, S = window.TNStore, L = window.TNTaste;
   var TZ = "Asia/Bangkok";
   var MAX = T.MAX_TOPICS;
@@ -40,7 +41,7 @@
   function fmtTime(iso) {
     var parts = new Intl.DateTimeFormat("ko-KR", { timeZone: TZ, month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(new Date(iso));
     var o = {}; parts.forEach(function (p) { o[p.type] = p.value; });
-    return o.month + "/" + o.day + " " + o.hour + ":" + o.minute;
+    return TNmd(o) + " " + o.hour + ":" + o.minute;
   }
   function fmtDay(iso) {
     var p = new Intl.DateTimeFormat(TNI("_locale", "ko-KR"), { timeZone: TZ, month: "numeric", day: "numeric", weekday: "short" }).formatToParts(new Date(iso));
@@ -128,7 +129,9 @@
   function render(data) {
     state.data = data;
     var d = new Date(data.date + "T12:00:00+07:00");
-    var longDate = new Intl.DateTimeFormat(TNI("_locale", "ko-KR"), { timeZone: TZ, year: "numeric", month: "long", day: "numeric", weekday: "long" }).format(d);
+    // 판 설정 date_long(예: 태국어판 {weekday:"short", day:"numeric", month:"short"} → อา. 25 ต.ค.) — 없으면 한국판 그대로
+    var LD = (window.TN_SITE && window.TN_SITE.date_long) || { year: "numeric", month: "long", day: "numeric", weekday: "long" };
+    var longDate = new Intl.DateTimeFormat(TNI("_locale", "ko-KR"), Object.assign({ timeZone: TZ }, LD)).format(d);
     var ed = state.edition || {};
     var edName = (window.TN_SITE && ed.edition && TNI("edition." + ed.edition, "")) || (ed.label ? ed.label.replace(/^\d+월 \d+일 /, "") : "");
     $("dateline").innerHTML = esc(longDate) + "<span>" + (edName ? '<b class="edtag">' + esc(edName) + "</b> · " : "") + TNI("dateline.tz", "방콕 시간 (UTC+7) 기준") + "</span>";
@@ -388,6 +391,12 @@
     if (s.update) chips += '<span class="chip chip--new">' + TNI("card.followup", "후속") + '</span>';
     impacts(s).forEach(function (k) { var m = impOf(k); chips += '<span class="chip chip--imp" style="--ic:' + m.c + '" title="' + TNI("card.impact_title", "한인 영향: ") + esc(k) + '"><span aria-hidden="true">' + m.e + "</span>" + esc(k) + "</span>"; });
     var forMe = (typeof s.for_me === "string" && s.for_me.trim()) ? '<p class="forme" role="note"><b class="forme__h"><span class="forme__ico" aria-hidden="true">💡</span>' + TNI("card.for_me_h", "그래서 나는?") + '</b><span class="forme__t">' + esc(s.for_me.trim()) + "</span></p>" : "";
+    var media = mediaHTML(s);
+    // 아티스트 칩(2026-10-25, KSTAR 수집기가 s.artists=[{id,n}] 를 붙임) → kfan.js 아티스트 화면
+    var achips = Array.isArray(s.artists) && s.artists.length ? '<div class="kf-achips">' + s.artists.slice(0, 6).map(function (a) { return '<button type="button" class="kf-achip" data-artist="' + esc(a.id) + '">🤍 ' + esc(a.n) + "</button>"; }).join("") + "</div>" : "";
+    // 오늘의 한국어 한마디(2026-10-25, 판 설정 story_extras ko_word — 지금 KSTAR). 한글 낱말은 lang="ko"(화면 언어 점검에서 뺌)
+    var kw = s.ko_word && s.ko_word.ko ? '<p class="koword"><b class="koword__h">' + TNI("card.ko_word_h", "🇰🇷 오늘의 한국어") + '</b><span class="koword__ko" lang="ko">' + esc(s.ko_word.ko) +
+      '</span><span class="koword__th">' + esc(s.ko_word.th || "") + '</span><span class="koword__m">' + esc(s.ko_word.mean || "") + "</span></p>" : "";
     var paras = s.summary.map(function (p) { return '<p class="para">' + esc(p) + "</p>"; }).join("");
     var ctx = s.context ? '<div class="context"><b>' + TNI("card.background_h", "💡 배경 설명") + '</b>' + esc(s.context) + "</div>" : "";
     var upd = s.update ? '<div class="update"><b>' + TNI("card.update_h", "🆕 이전 판 이후 새로 나온 내용") + '</b>' + esc(s.update) + "</div>" : "";
@@ -407,7 +416,7 @@
         '<p class="card__lead">' + esc(s.summary[0]) + "</p>" +
         '<div class="card__foot">' + metaHTML(s) + '<span class="more"><span class="more__t">' + TNI("card.more", "자세히") + '</span> <i>▾</i></span></div>' +
       "</button>" + toolsHTML(s) +
-      '<div class="card__body" id="body-' + esc(s.id) + '">' + upd + paras + ctx +
+      '<div class="card__body" id="body-' + esc(s.id) + '">' + upd + achips + paras + ctx + media + kw +
         '<div class="origin">' + originTitle(s.title_th) +
         '<a class="btn" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.source.replace(/\s*\(.*\)$/, "")) + TNI("card.source_btn", " 원문 보기 ↗") + "</a>" + rel + tags + "</div>" +
         '<div class="rep-row">' + repBtn("article", edId() + "/" + s.id) + "</div>" +
@@ -684,6 +693,35 @@
     renderAll();
     if (!keepScroll) window.scrollTo({ top: 0, behavior: "smooth" });
   }
+  /* 공식 영상·SNS(2026-10-25, KSTAR): s.media = {yt:"영상 id", yt_title, yt_ch} 또는 {post:{type:"x"|"ig", url}} — 수집기가 공식 채널·기사 속 공식 게시물만 붙임 */
+  function mediaHTML(s) {
+    var m = s.media; if (!m || typeof m !== "object") return "";
+    if (m.yt && /^[\w-]{11}$/.test(m.yt)) {
+      return '<div class="mlite mlite--yt" data-yt="' + m.yt + '"><img src="https://i.ytimg.com/vi/' + m.yt + '/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360">' +
+        '<button type="button" class="mlite__play" data-yt-play aria-label="' + esc(TNI("media.play", "공식 영상 재생")) + '"><span aria-hidden="true">▶</span></button>' +
+        '<span class="mlite__cap">' + esc(TNI("media.yt_cap", "공식 영상")) + (m.yt_ch ? " · " + esc(m.yt_ch) : "") + (m.yt_title ? " — " + esc(m.yt_title) : "") + "</span></div>";
+    }
+    var po = m.post;
+    if (po && /^(x|ig)$/.test(po.type) && /^https:\/\/(x\.com|twitter\.com|www\.instagram\.com)\//.test(po.url || "")) {
+      return '<div class="mlite mlite--post" data-post="' + esc(po.type) + '" data-url="' + esc(po.url) + '"><button type="button" class="mlite__open" data-post-open>' +
+        esc(po.type === "x" ? TNI("media.x_open", "공식 X 게시물 보기") : TNI("media.ig_open", "공식 인스타그램 게시물 보기")) + "</button></div>";
+    }
+    return "";
+  }
+  function loadOnce(id, src) { if (document.getElementById(id)) return; var sc = document.createElement("script"); sc.id = id; sc.async = true; sc.src = src; document.body.appendChild(sc); }
+  function playMedia(el) {
+    var box = el.closest("[data-yt],[data-post]"); if (!box) return;
+    if (box.hasAttribute("data-yt")) {
+      var id = box.getAttribute("data-yt"); if (!/^[\w-]{11}$/.test(id)) return;
+      box.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1" title="YouTube" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+      box.classList.add("is-on"); return;
+    }
+    var ty = box.getAttribute("data-post"), url = box.getAttribute("data-url");
+    if (ty === "x") { box.innerHTML = '<blockquote class="twitter-tweet" data-dnt="true"><a href="' + esc(url) + '"></a></blockquote>'; loadOnce("tnXw", "https://platform.twitter.com/widgets.js"); if (window.twttr && twttr.widgets) twttr.widgets.load(box); }
+    else { box.innerHTML = '<blockquote class="instagram-media" data-instgrm-permalink="' + esc(url) + '" data-instgrm-version="14"><a href="' + esc(url) + '"></a></blockquote>'; loadOnce("tnIgw", "https://www.instagram.com/embed.js"); if (window.instgrm && instgrm.Embeds) instgrm.Embeds.process(); }
+    box.classList.add("is-on");
+  }
+
   function toggleCard(card, force) {
     var open = force != null ? force : !card.classList.contains("is-open");
     card.classList.toggle("is-open", open);
@@ -752,6 +790,7 @@
   document.addEventListener("click", function (e) {
     var el;
     if ((el = e.target.closest("[data-heart]"))) { doHeart(el); return; }
+    if ((el = e.target.closest("[data-yt-play],[data-post-open]"))) { playMedia(el); return; }
     if ((el = e.target.closest("[data-vote]"))) { doVote(el); return; }
     if ((el = e.target.closest("[data-korea-item]"))) { var ki = +el.getAttribute("data-korea-item"); KOREA.open = KOREA.open === ki ? -1 : ki; renderKorea(); var nb = document.querySelector('[data-korea-item="' + ki + '"]'); if (nb) nb.focus({ preventScroll: true }); return; }
     if ((el = e.target.closest("[data-korea-toggle]"))) { S.update(function (d) { d.ui.koreaClosed = !d.ui.koreaClosed; }); renderKorea(); return; }

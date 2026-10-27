@@ -9,13 +9,13 @@
  * - Google 로그인·Firestore(firebase / googleapis / gstatic SDK / firebaseapp.com / google.com 계정 창)는
  *   절대 가로채거나 캐시하지 않는다(그냥 브라우저가 직접 요청). 글꼴(fonts.googleapis/gstatic)만 예외로 캐시.
  */
-var VERSION = "tnk-9e4b36a1c7";
+var VERSION = "tnk-0842b6864d";
 var SHELL = "shell-" + VERSION, DATA = "data-v1", EXT = "ext-v1";
 var SHELL_FILES = [
   "assets/ads/campaign.js?v=cfd703ed",
   "./", "index.html", "manifest.json", "offline.html", "assets/g-pages.css?v=1",
-  "assets/style.css?v=70469239", "assets/topics.js?v=7079e749", "assets/prefs.js?v=589d5ced", "assets/taste.js?v=788775b8", "assets/adsafe.js?v=f83c8d3e", "assets/app.js?v=6f1182e2", "assets/social.js?v=3ea27aba", "assets/ticker.js?v=101db80f",
-  "assets/nearby.css?v=411a136f", "assets/late.css?v=5bdd4232", "assets/nearby.js?v=31624c97", "assets/pages.js?v=404ed4a6", "assets/places.js?v=31ead31a", "assets/jobs.js?v=7177ec43",
+  "assets/style.css?v=60d5d1d6", "assets/topics.js?v=709c8886", "assets/prefs.js?v=589d5ced", "assets/taste.js?v=788775b8", "assets/adsafe.js?v=f83c8d3e", "assets/app.js?v=7074ab81", "assets/social.js?v=1bad1060", "assets/ticker.js?v=6290e2f2",
+  "assets/nearby.css?v=411a136f", "assets/late.css?v=5bdd4232", "assets/nearby.js?v=31624c97", "assets/pages.js?v=b2893f9a", "assets/places.js?v=31ead31a", "assets/jobs.js?v=7177ec43",
   "assets/ads/massage/dragon-ad.css?v=c79f816c", "assets/ads/massage/dragon-ad.js?v=3f37924f", "assets/ads/massage/dragon.svg",
   "assets/modern.css?v=75d5681e", "assets/modern.js?v=14a90118", "assets/g.css?v=cb5f95ae",
   "assets/icons/icon-192.png", "assets/icons/icon-512.png", "assets/icons/maskable-512.png",
@@ -116,6 +116,7 @@ self.addEventListener("fetch", function (e) {
   if (/^data\//.test(path)) { e.respondWith(networkFirst(req, DATA, dataKey(req.url))); return; }
   if (path === "sw.js") return;
   if (/^__\//.test(path)) return;
+  if (/^api\//.test(path)) return;   // 서버 API(KSTAR 설문 /api/survey* 등, 10-26): 언제나 네트워크 — 상태를 캐시하면 꺼짐/켜짐이 안 바뀜
   if (/^auth\//.test(path)) return;   // 로그인(언어판 Worker /auth/line/*): 언제나 네트워크 — 상태(/status)를 캐시하면 켜진 뒤에도 버튼이 안 나옴   // (혹시 쓰게 될) Firebase 예약 경로 /__/auth 등은 가로채지 않음
   e.respondWith(cacheFirst(req));
 });

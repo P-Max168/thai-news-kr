@@ -16,6 +16,8 @@
     for (var i = 0; i < ks.length && v != null; i++) v = v[ks[i]];
     return typeof v === "string" ? v : def;
   };
+  // 짧은 날짜 순서(2026-10-25): 판 설정 date_order "dm" 이면 '25/10'(태국식), 없으면 '10/25'(한국판 그대로). o = formatToParts 결과 {month, day}
+  root.TNmd = function (o) { return SITE && SITE.date_order === "dm" ? o.day + "/" + o.month : o.month + "/" + o.day; };
   root.TNSite = { lang: (SITE && SITE.lang) || "ko", conf: SITE || {}, hidden: function (sec) { return !!(SITE && (SITE.hidden_sections || []).indexOf(sec) >= 0); } };
   // 숨길 코너(R-zh-9): 언어판 hidden_sections → <html class="tn-hide-places …"> (CSS 는 언어판 index.html 에 tools/site_build.py 가 넣음). 한국판은 빈 목록
   try { ((SITE && SITE.hidden_sections) || []).forEach(function (s) { document.documentElement.classList.add("tn-hide-" + s); }); } catch (e) {}

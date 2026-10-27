@@ -8,7 +8,8 @@ import hashlib, pathlib, re
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 ASSETS = ["assets/ads/campaign.js", "assets/style.css", "assets/topics.js", "assets/prefs.js", "assets/taste.js", "assets/adsafe.js", "assets/app.js", "assets/social.js", "assets/ticker.js", "assets/nearby.css", "assets/late.css", "assets/nearby.js", "assets/pages.js", "assets/places.js", "assets/jobs.js", "assets/ads/massage/dragon-ad.css", "assets/ads/massage/dragon-ad.js", "assets/modern.css", "assets/modern.js", "assets/g.css"]
 # social.js 가 import() 하는 모듈(index.html 에 직접 없음): social.js 안의 FB_URL ?v= 를 먼저 갱신
-MODULES = {"assets/fb.js": "assets/social.js", "assets/report.js": "assets/app.js", "assets/modern-icons.svg": "assets/modern.js"}   # modern.js 안의 아이콘 묶음 ?v=
+MODULES = {"assets/fb.js": "assets/social.js", "assets/report.js": "assets/app.js", "assets/modern-icons.svg": "assets/modern.js",   # modern.js 안의 아이콘 묶음 ?v=
+           "assets/board-jobs.js": "index.html"}   # 구인·구직 게시판(판 설정 board.jobs 인 판만 index.html TNJobs 가 받음, 2026-10-25)
 EXTRA = ["manifest.json", "offline.html", "assets/ads/massage/dragon.svg"] + sorted(str(p.relative_to(ROOT)) for p in (ROOT / "assets/icons").glob("*.png"))
 
 EXTRA += sorted(str(p.relative_to(ROOT)) for p in (ROOT / "assets/ads/partners").glob("*") if p.is_file())
@@ -23,7 +24,6 @@ def h(paths):
 
 def main():
     html_p, sw_p = ROOT / "index.html", ROOT / "sw.js"
-    html = html_p.read_text(encoding="utf-8")
     sw = sw_p.read_text(encoding="utf-8")
     changed = False
     for mod, host in MODULES.items():
@@ -32,6 +32,7 @@ def main():
         new_src = re.sub(r'(%s)\?v=[0-9a-zA-Z]+' % re.escape(mod), r"\1?v=" + h([mod])[:8], src)
         if new_src != src:
             hp.write_text(new_src, encoding="utf-8"); changed = True
+    html = html_p.read_text(encoding="utf-8")   # 모듈 ?v= 를 index.html 에 쓴 뒤에 읽음(2026-10-25 — board-jobs.js 의 집이 index.html)
     new_html = html
     for a in ASSETS:
         v = h([a])[:8]

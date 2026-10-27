@@ -47,7 +47,7 @@ def flat(d, pre=""):
 
 def site_js(c, i18n):
     keep = {k: c.get(k) for k in ("lang", "htmlLang", "brand", "brand_sub", "site_url", "currency", "home_section", "hidden_sections",
-                                  "firestore_prefix", "admins_doc", "slots", "edition_label", "share", "wx_coords", "origin_hide_rx", "login") if k in c}
+                                  "firestore_prefix", "admins_doc", "slots", "edition_label", "share", "wx_coords", "origin_hide_rx", "login", "date_order", "date_long", "tabbar", "tablinks", "ga4", "adsense", "fan", "board") if k in c}
     keep["i18n"] = i18n
     keep["topics"] = {k: v for k, v in (c.get("topics") or {}).items() if not k.startswith("_") and k != "REGION_PATTERNS"}
     keep["impacts_ui"] = [{"k": k, "e": IMPACT_UI[i % 5][0], "c": IMPACT_UI[i % 5][1]} for i, k in enumerate(c.get("impacts") or [])]
@@ -144,6 +144,31 @@ def patch_index(t, c, i18n):
         sp = ROOT_FOR_SKIN[0] / sk if ROOT_FOR_SKIN else None
         v = hashlib.sha256(sp.read_bytes()).hexdigest()[:8] if sp and sp.exists() else "1"
         t = t.replace("</body>", '<link rel="stylesheet" href="assets/skin.css?v=%s" id="tn-skin">\n</body>' % v, 1)
+    # 하단 탭바(2026-10-25 — KSTAR): site/<lang>.json tabbar 가 있으면 assets/tabbar.js 를 그 판에만 연결(한국판 index.html 은 그대로)
+    t = re.sub(r'\n?<script src="assets/tabbar\.js[^"]*" defer id="tn-tabbar"></script>', "", t)
+    if c.get("tabbar"):
+        import hashlib
+        tp = ROOT_FOR_SKIN[0] / "assets" / "tabbar.js" if ROOT_FOR_SKIN else None
+        tv = hashlib.sha256(tp.read_bytes()).hexdigest()[:8] if tp and tp.exists() else "1"
+        t = t.replace("</body>", '<script src="assets/tabbar.js?v=%s" defer id="tn-tabbar"></script>\n</body>' % tv, 1)
+    # 팬 기능(최애·아티스트·일정, 2026-10-25 — KSTAR): site/<lang>.json fan 이 있으면 그 판에만 assets/kfan.js
+    t = re.sub(r'\n?<script src="assets/kfan\.js[^"]*" defer id="tn-kfan"></script>', "", t)
+    if c.get("fan"):
+        import hashlib
+        fp = ROOT_FOR_SKIN[0] / "assets" / "kfan.js" if ROOT_FOR_SKIN else None
+        fv = hashlib.sha256(fp.read_bytes()).hexdigest()[:8] if fp and fp.exists() else "1"
+        t = t.replace("</body>", '<script src="assets/kfan.js?v=%s" defer id="tn-kfan"></script>\n</body>' % fv, 1)
+    # 쿠키 동의 + GA4 + 애드센스(2026-10-25 — KSTAR): site/<lang>.json ga4 / adsense.pub 가 있으면 그 판에만 assets/consent.js·애드센스 확인 메타
+    t = re.sub(r'\n?<script src="assets/consent\.js[^"]*" defer id="tn-consent"></script>', "", t)
+    t = re.sub(r'\n?<meta name="google-adsense-account" content="[^"]*">', "", t)
+    pub = (c.get("adsense") or {}).get("pub") or ""
+    if pub:
+        t = t.replace("</head>", '<meta name="google-adsense-account" content="%s">\n</head>' % _attr(pub), 1)
+    if c.get("ga4") or pub:
+        import hashlib
+        cp = ROOT_FOR_SKIN[0] / "assets" / "consent.js" if ROOT_FOR_SKIN else None
+        cv = hashlib.sha256(cp.read_bytes()).hexdigest()[:8] if cp and cp.exists() else "1"
+        t = t.replace("</body>", '<script src="assets/consent.js?v=%s" defer id="tn-consent"></script>\n</body>' % cv, 1)
     # 한국판 '지난 뉴스판' 링크 묶음(tools/seo.py home_edition_links)은 언어판에선 비움 — 한국판 판 목록·한국어 글이 따라오지 않게(2026-10-25)
     t = re.sub(r"(<!-- edition-links:start -->).*?(<!-- edition-links:end -->)", r"\1\2", t, count=1, flags=re.S)
     return t
