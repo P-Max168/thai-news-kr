@@ -97,7 +97,7 @@ def build_prompt(eid, items, fx_line, select=0):
         "[출력 — JSON 하나만]\n"
         '{"stories":[{"key":"입력 key 그대로","keep":true,"drop_reason":"","topic":"id","secondary":["id"],"region":"지명(없으면 \\"\\")",'
         '"headline":"제목","summary":["문단1","문단2"],"context":"배경 한두 문장(원문에 있는 내용만, 없으면 \\"\\")",'
-        '"tags":["키워드",…2~6개, # 없이],"impact":[],"for_me":"독자에게 무슨 뜻인지 한 문장(원문 사실만, 없으면 \\"\\")",'
+        '"tags":["키워드",…2~6개, # 없이],"impact":[],"for_me":"독자(누가 영향·뭘 하면/알면 되는지) 한 문장. 원문 사실만, 과장·추정 금지. 없으면 \"\"",'
         '"quick_replies":["추천 댓글 3개, 각 40자 이하, 경험을 지어내지 말 것, 링크 금지"]}],'
         '"briefing":[{"topic":"id","text":"한 줄 요약 120자 이하, 핵심어나 숫자 한 곳을 **굵게**","story_key":"key"}],'
         '"highlights":["key","key","key"]}\n'

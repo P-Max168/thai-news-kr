@@ -387,7 +387,7 @@
     if (tp.all.indexOf("visa") >= 0 || age > 36 * 3600000) chips += '<span class="chip chip--date">📅 ' + esc(fmtDay(s.published)) + "</span>";
     if (s.update) chips += '<span class="chip chip--new">' + TNI("card.followup", "후속") + '</span>';
     impacts(s).forEach(function (k) { var m = impOf(k); chips += '<span class="chip chip--imp" style="--ic:' + m.c + '" title="' + TNI("card.impact_title", "한인 영향: ") + esc(k) + '"><span aria-hidden="true">' + m.e + "</span>" + esc(k) + "</span>"; });
-    var forMe = (typeof s.for_me === "string" && s.for_me.trim()) ? '<p class="forme"><b class="forme__h">' + TNI("card.for_me_h", "🙋 그래서 나는?") + '</b><span class="forme__t">' + esc(s.for_me.trim()) + "</span></p>" : "";
+    var forMe = (typeof s.for_me === "string" && s.for_me.trim()) ? '<p class="forme" role="note"><b class="forme__h"><span class="forme__ico" aria-hidden="true">💡</span>' + TNI("card.for_me_h", "그래서 나는?") + '</b><span class="forme__t">' + esc(s.for_me.trim()) + "</span></p>" : "";
     var paras = s.summary.map(function (p) { return '<p class="para">' + esc(p) + "</p>"; }).join("");
     var ctx = s.context ? '<div class="context"><b>' + TNI("card.background_h", "💡 배경 설명") + '</b>' + esc(s.context) + "</div>" : "";
     var upd = s.update ? '<div class="update"><b>' + TNI("card.update_h", "🆕 이전 판 이후 새로 나온 내용") + '</b>' + esc(s.update) + "</div>" : "";

@@ -173,9 +173,11 @@ button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
 .card-heart .mic{width:1.5rem;height:1.5rem;stroke-width:1.8}
 .card.flash{animation:m-flash .9s ease}
 @keyframes m-flash{0%{box-shadow:0 0 0 3px rgba(27,100,218,.4)}100%{box-shadow:0 1px 2px rgba(0,27,55,.04)}}
-.forme{background:var(--m-box);border:0;border-radius:14px;color:#333D4B;padding:12px 14px}
-.forme__h{color:var(--m-t1);font-weight:800}
-.forme__h .mic{color:var(--m-ac)}
+.forme{background:var(--m-tint);border:0;border-left:5px solid var(--m-ac);border-radius:14px;color:var(--m-t1);padding:14px 16px 14px 14px;box-shadow:inset 0 0 0 1px rgba(27,100,218,.14)}
+.forme__h{display:flex;align-items:center;gap:6px;color:var(--m-acd);font-weight:800;font-size:.875rem;margin-bottom:5px}
+.forme__h .mic,.forme__ico .mic{display:inline-block;color:var(--m-ac);width:1.15em;height:1.15em;vertical-align:-.15em}
+.forme__ico{flex:0 0 auto;line-height:1;font-size:1.1em}
+.forme__t{display:block;font-weight:700;color:#333D4B;font-size:1.02em}
 .context{background:var(--m-box);border:0;border-radius:14px;color:var(--m-t2);padding:14px 16px}
 .context b{color:var(--m-t1)}
 .context b .mic{color:var(--m-t3)}
@@ -415,8 +417,9 @@ button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
 .footer{border-top:1px solid var(--m-bd)}
 
 /* ===== 이모지·아이콘 더 줄이기(2026-10-05): 글자가 이미 말해 주는 곳의 장식 아이콘은 숨김 =====
-   남기는 곳 = 글자 없는 버튼(하트·닫기), 헤더 칸(날씨·비), 내 주변 업종 줄, 서랍 바로가기 2개, 📍지역·📅날짜, 광고 버튼, 바깥 링크 ↗ */
-.forme__h .mic,.vote .mic,.tool .mic,.dm-target .mic,.drawer .tab .mic,.dr-item .mic,.pin__h .mic,.section-title .mic,.fsec__h .mic,
+   남기는 곳 = 글자 없는 버튼(하트·닫기), 헤더 칸(날씨·비), 내 주변 업종 줄, 서랍 바로가기 2개, 📍지역·📅날짜, 광고 버튼, 바깥 링크 ↗, '그래서 나는?'(.forme) 아이콘 */
+/* .forme__h 아이콘은 차별점(그래서 나는?)이라 숨기지 않음 — Max 2026-10-27 */
+.vote .mic,.tool .mic,.dm-target .mic,.drawer .tab .mic,.dr-item .mic,.pin__h .mic,.section-title .mic,.fsec__h .mic,
 .linkbtn .mic,.context > b .mic,.feed-intro .mic,.update > b .mic,.edition-note .mic,.cmts__h .mic,.korea__more .mic,.more-btn .mic,.qr__l .mic,
 .nb-sec .mic,.nb-note .mic,.pc-intro b .mic,.jb-warn .mic,.pc-src .mic,.tk-pop__t .mic,.sheet__kicker .mic{display:none}
 
