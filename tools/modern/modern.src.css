@@ -3,7 +3,7 @@
    모든 규칙 앞에 html.th-modern → index.html 의 한 줄 스위치(window.TN_THEME)가 "modern" 일 때만 적용.
    색: 배경 #F2F4F6 · 카드 #FFFFFF · 강조색 하나(#1B64DA 토스 계열 파랑 — #3182F6 은 흰 글자 대비 3.7:1 이라 사이트 기준 4.5:1 에 못 미쳐 한 단계 진한 것, 고른 상태·주요 버튼에만)
    · 글자 회색 단계(#191F28 제목 / #4E5968 본문 / #5F6B7A 날짜·출처 같은 보조, #8B95A1 은 아이콘에만 — 회색 칸 위에서도 4.5:1)
-   글자 크기는 기존보다 작게 하지 않음(키우기만). 테두리·그라데이션·여러 색 칩 없앰, 줄 대신 간격으로 나눔 */
+   글자 크기는 기존보다 작게 하지 않음(키우기만). 2026-10-28: 내 주변·투표·칩에 얇은 테두리·틴트(가독성, Max 승인 E=A+C). 여러 색 칩·그라데이션은 여전히 없음 */
 :root{
   --m-ac:#1B64DA; --m-acd:#1957C2; --m-tint:#E8F3FF; --m-ic:#8B95A1;
   --m-t1:#191F28; --m-t2:#4E5968; --m-t3:#5F6B7A; --m-t4:#5F6B7A; --m-t5:#B0B8C1;
@@ -18,7 +18,7 @@ body{background:var(--m-bg);color:var(--m-t1)}
 [style*="--tc"],[style*="--ic"]{--tc:#4E5968!important;--ic:#4E5968!important}
 
 /* ---------- 선 아이콘(assets/modern.js 가 이모지 자리에 넣음) ---------- */
-.mic{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.mic{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:2.35;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
 .mic--l{margin-right:.32em}
 .mic--fill{fill:currentColor}
 .mic--dot{width:.9em;height:.9em;vertical-align:-.08em}
@@ -55,10 +55,11 @@ body{background:var(--m-bg);color:var(--m-t1)}
 .tk-pop__src a{color:var(--m-ac)}
 .subbar,.subbar.subbar--nearby{background:#fff;border-top:0}
 .nb-lab{color:var(--m-t1)}
-.nb-lab .mic{color:var(--m-ac)}
-.nb-cat{background:var(--m-pill);border:0;color:var(--m-t1)}
-.nb-cat:hover,.nb-cat[aria-current]{background:var(--m-press)}
-.nb-cat .mic{width:1.2em;height:1.2em;color:var(--m-t2)}
+.nb-lab .mic{color:var(--m-ac);stroke-width:2.4}
+.nb-cat{background:var(--m-tint);border:1.5px solid var(--m-ac);color:var(--m-t1);border-radius:14px;box-shadow:none}
+.nb-cat:hover,.nb-cat[aria-current]{background:var(--m-press);border-color:var(--m-acd)}
+.nb-cat .mic{width:1.38em;height:1.38em;color:var(--m-ac);stroke-width:2.5}
+.nb-cat__t{font-weight:800;color:var(--m-acd)}
 .nearby.nearby--scroll:not(.nearby--end)::after{background:linear-gradient(90deg,rgba(255,255,255,0),#fff 85%)}
 
 /* ---------- ☰ 서랍 ---------- */
@@ -121,13 +122,13 @@ body{background:var(--m-bg);color:var(--m-t1)}
 .brief-line{padding:10px 2px;border-radius:10px}
 button.brief-line:hover{background:var(--m-box)}
 button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
-.bchip,.bchip--none{background:var(--m-pill);border:0;color:var(--m-t2);font-weight:700;padding:1px 8px}
+.bchip,.bchip--none{background:#F3F6F9;border:1px solid rgba(61,106,142,.28);color:var(--m-acd);font-weight:700;padding:1px 8px}
 .brief-text{color:var(--m-t2)}
 .brief-text b{background:none;color:var(--m-t1)}
 .brief-go{color:var(--m-t5)}
 
 /* ---------- 칩: 모두 회색 알약(강조색은 고른 상태만) ---------- */
-.chip,.chip--topic,.chip--sec,.chip--region,.chip--date,.chip--imp,.top-card .chip{background:var(--m-pill);color:var(--m-t2);border:0;font-weight:600}
+.chip,.chip--topic,.chip--sec,.chip--region,.chip--date,.chip--imp,.top-card .chip{background:#F3F6F9;color:var(--m-acd);border:1px solid rgba(61,106,142,.28);font-weight:700}
 .chip--sec{padding:3px 9px}
 .chip .mic{width:1.05em;height:1.05em;color:var(--m-ic)}
 .chip--new{background:var(--m-tint);color:var(--m-acd)}
@@ -136,7 +137,7 @@ button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
 .meta{color:var(--m-t3)}
 .meta .src{color:var(--m-t2);font-weight:600}
 .meta .dot::before{color:var(--m-t5)}
-.tags span{background:var(--m-pill);color:var(--m-t3);border-radius:999px;padding:3px 10px}
+.tags span{background:#F3F6F9;color:var(--m-acd);border:1px solid rgba(61,106,142,.28);border-radius:999px;padding:3px 10px;font-weight:700}
 .edtag{color:var(--m-ac)}
 
 /* ---------- 오늘의 주요 뉴스(위 3장): 진한 그라데이션·물결 장식 없앰 → 흰 카드 ---------- */
@@ -188,11 +189,13 @@ button.brief-line:focus-visible{outline:2px solid var(--m-ac)}
 .btn--primary{background:var(--m-ac)}
 .related li{border-top:0}
 .related a{color:var(--m-t2)}
-.vote{border:0;background:var(--m-pill);color:var(--m-t2)}
+.vote{border:1.5px solid #C5CDD6;background:#fff;color:var(--m-t1);font-weight:800}
 .vote:hover{background:var(--m-press)}
-.vote--up[aria-pressed="true"]{background:var(--m-tint);color:var(--m-acd);box-shadow:none}
-.vote--down[aria-pressed="true"]{background:var(--m-press);color:var(--m-t1);box-shadow:none}
-.vote-q{color:var(--m-t3)}
+.vote--up{border-color:#7BA8C9;color:var(--m-acd);background:var(--m-tint)}
+.vote--down{border-color:#C5CDD6;color:#3A4048;background:#F7F8FA}
+.vote--up[aria-pressed="true"]{background:var(--m-ac);border-color:var(--m-ac);color:#fff;box-shadow:none}
+.vote--down[aria-pressed="true"]{background:#F0F2F4;border-color:#8A929C;color:var(--m-t1);box-shadow:none}
+.vote-q{color:#3A4048;font-weight:700}
 .tool{border:0;background:var(--m-pill);color:var(--m-t2)}
 .tool b{color:var(--m-t1)}
 .tool.is-on{background:var(--m-tint);color:var(--m-acd)}

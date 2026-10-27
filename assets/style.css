@@ -99,7 +99,9 @@ button.brief-line:focus-visible{outline:2px solid var(--gold)}
 .card__head{display:block;width:100%;text-align:left;background:none;border:0;font:inherit;color:inherit;cursor:pointer;padding:18px 20px 16px;border-left:4px solid transparent}
 .card .card__head{border-left-color:var(--tc,transparent)}
 .card__acts{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:0 16px 12px 20px;border-left:4px solid var(--tc,transparent)}
-.vote{border:1px solid var(--line);background:#fff;color:var(--ink-2);font:inherit;font-size:.7812rem;font-weight:700;padding:4px 10px;border-radius:999px;cursor:pointer;line-height:1.4}
+.vote{border:1.5px solid #C5CDD6;background:#fff;color:var(--ink,#16181d);font:inherit;font-size:.7812rem;font-weight:800;padding:4px 10px;border-radius:999px;cursor:pointer;line-height:1.4}
+.vote--up{border-color:#7BA8C9;color:#1864ab;background:#EAF1F6}
+.vote--down{border-color:#C5CDD6;color:#3A4048;background:#F7F8FA}
 .vote:hover{background:#f6f7f9}
 .vote--up[aria-pressed="true"]{background:#e7f5ff;border-color:#74c0fc;color:#1864ab}
 .vote--down[aria-pressed="true"]{background:#fff5f5;border-color:#ffa8a8;color:#c92a2a}

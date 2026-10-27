@@ -4,7 +4,7 @@
 .nb-lab{flex:0 0 auto;display:inline-flex;align-items:center;gap:3px;font-size:min(.8125rem,14.3px);font-weight:800;color:#ffe08a;white-space:nowrap;letter-spacing:-.2px;cursor:default;user-select:none}
 .nb-cats{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:6px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 .nb-cats::-webkit-scrollbar{display:none}
-.nb-cat{flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;height:34px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.12);color:#fff;font-size:min(.8438rem,14.85px);font-weight:700;line-height:1;white-space:nowrap;text-decoration:none;-webkit-tap-highlight-color:transparent;transition:background .15s}
+.nb-cat{flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;height:34px;padding:0 12px;border-radius:12px;border:1.5px solid rgba(255,255,255,.5);background:rgba(255,255,255,.18);color:#fff;font-size:min(.8438rem,14.85px);font-weight:800;line-height:1;white-space:nowrap;text-decoration:none;-webkit-tap-highlight-color:transparent;transition:background .15s}
 .nb-cat:hover,.nb-cat[aria-current]{background:rgba(255,255,255,.24)}
 .nb-cat:active{transform:scale(.97)}
 .nb-cat:focus-visible{outline:2px solid #74c0fc;outline-offset:1px}

@@ -35,7 +35,7 @@ body{background:var(--m-bg);color:var(--m-t1);font-variant-numeric:tabular-nums}
 /* 칸·카드: 그림자 대신 얇은 선, 작은 모서리 */
 .card,.korea,.briefing,.top-card,.widget,.nb-cat,.ad-slot{box-shadow:none;border:1px solid var(--g-line)}
 .card.is-open{box-shadow:0 6px 24px rgba(28,31,36,.06);border-color:#CDD2D8}
-.nb-cat{background:#fff;border-radius:4px}
+.nb-cat{background:#EAF1F6;border-radius:12px;border-color:var(--m-ac)}
 .nb-cat[aria-current]{background:var(--g-gr);color:#fff;border-color:var(--g-gr)}
 .nb-cat[aria-current] .mic{color:#fff}
 .top-card .rank,.briefing__badge{border-radius:3px;font-family:var(--g-num);letter-spacing:.04em}
@@ -109,11 +109,20 @@ body{background:var(--m-bg);color:var(--m-t1);font-variant-numeric:tabular-nums}
 .brief-text{display:flex;flex-direction:column;font-weight:600;color:var(--m-t1);line-height:1.5}
 .brief-text .bchip{order:2;background:none;padding:0;margin:6px 0 0;font-size:0.7188rem;font-weight:500;color:var(--m-t3);box-shadow:none;align-self:flex-start}
 .briefing__badge{font-size:0.6875rem;letter-spacing:.16em}
-/* 내 주변: 칸 나눈 표(선으로 이어 붙임) */
-.nearby .nb-cats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:1px solid var(--g-line);border-radius:4px;background:#fff;overflow:hidden}
-.nearby .nb-cat{border:0;border-left:1px solid var(--g-line);border-radius:0;background:#fff;min-width:0;padding:8px 2px;justify-content:center}
-.nearby .nb-cat:first-child{border-left:0}
+/* 내 주변: E(A+C) — 개별 타일(강조색 테두리 + 연한 틴트), 표 합침 해제(2026-10-28 Max) */
+.nearby .nb-cats{display:flex;gap:6px;border:0;background:transparent;overflow:visible}
+.nearby .nb-cat{border:1.5px solid var(--m-ac);border-radius:12px;background:#EAF1F6;color:#2F5677;min-width:0;padding:8px 2px;justify-content:center;flex:1 1 0}
+.nearby .nb-cat .mic{color:var(--m-ac);stroke-width:2.5}
+.nearby .nb-cat__t{color:#2F5677;font-weight:800}
+.nearby .nb-cat[aria-current]{background:var(--g-gr);color:#fff;border-color:var(--g-gr)}
+.nearby .nb-cat[aria-current] .mic,.nearby .nb-cat[aria-current] .nb-cat__t{color:#fff}
 .nearby .nb-lab__t{font-size:0.6875rem;letter-spacing:.06em;color:var(--m-ac);font-weight:700}
+.vote{border:1.5px solid #C5CDD6;background:#fff;color:var(--m-t1);font-weight:800}
+.vote--up{border-color:#7BA8C9;color:#2F5677;background:#EAF1F6}
+.vote--down{border-color:#C5CDD6;color:#3A4048;background:#F7F8FA}
+.vote--up[aria-pressed="true"]{background:var(--m-ac);border-color:var(--m-ac);color:#fff}
+.vote--down[aria-pressed="true"]{background:#F0F2F4;border-color:#8A929C;color:#1C1F24}
+.vote-q{color:#3A4048;font-weight:700}
 .brand__text strong{white-space:nowrap}
 .masthead__row2 .menu-btn__t{display:inline;font-size:0.75rem}
 .tk-tile .tk-l{display:block}

@@ -371,3 +371,4 @@ User approves final existing five creatives and immediate deployment. Added comm
 - 2026-10-27 13:43 BKK (Claude): 중국어판 비상 발행 2026-10-27-md 7건 — gemini-edition 실행 실패로 take. 그록 picks 중 원문 확인된 것만 사용.
 - 2026-10-27 18:38 BKK (Claude): 한국어판 비상 발행 2026-10-27-pm 11건 — gemini-edition 실행 실패로 take. 그록 picks 중 원문 확인된 것만 사용.
 - 10-27 21:34 · ✅ [보통·기능] **운영자 답글 정적 게시 장치**(민구님 21:29 승인 '필요한 코드 직접 짜서 적용'). tools/comment_replies.py apply → data/op_replies.json(키=부모 댓글 id, approved:true만) + assets/social.js 가 부모 독자 댓글 아래 '운영자' 배지로 표시. Firestore 쓰기·관리자 로그인 없음. discussion.py(오늘의 질문)는 그대로. 첫 배포는 빈 op_replies.json. 사용법 /workspace/ops-handoff/opcomment_usage.md.
+- 10-28 04:28 · ✅ [보통·UI] **가독성 테두리 E(A+C)**(민구님 04:xx 승인 '응 이렇게 모두변경해줘'). 내 주변 카테고리=강조색 테두리+연한 틴트+굵은 아이콘 선, 더/덜 보여줘=실선 테두리+틴트, 칩도 약한 테두리. modern.src·g.src·style·nearby. 백업 backup-20261028-0426-border-e-ac.
