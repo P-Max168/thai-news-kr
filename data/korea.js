@@ -1,6 +1,6 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-27T19:40:25+07:00",
+ "updated_at": "2026-10-27T20:20:43+07:00",
  "items": [
   {
    "title": "서울 강남 구룡마을 불 ‘소방 2단계’ 39명 대피…“확인된 인명피해 없어”",
@@ -9,10 +9,16 @@ window.KOREA_NEWS = {
    "url": "https://www.hani.co.kr/arti/society/society_general/1284451.html"
   },
   {
-   "title": "초유의 대법원장 국정조사... 민주당, 의총서 밀어붙였다",
-   "source": "조선일보",
-   "time": "2026-10-27T15:01:00+07:00",
-   "url": "https://www.chosun.com/politics/politics_general/2026/10/27/NEBMJMT3VNDNNBHYUAKA6KR2YM/"
+   "title": "‘조희대 국정조사’ 결의한 민주당…국민의힘, ‘장외 투쟁’ 카드 만지작",
+   "source": "KBS 뉴스",
+   "time": "2026-10-27T19:14:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8696766"
+  },
+  {
+   "title": "책임 회피·관리 부실·수습 혼선…4년 전 재난대응은 ‘총체적 실패’",
+   "source": "경향신문",
+   "time": "2026-10-27T19:23:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610272123035"
   },
   {
    "title": "외신들 “리디아 고, 경기 앞두고 정치적 논란 휘말려” 보도",
@@ -21,34 +27,28 @@ window.KOREA_NEWS = {
    "url": "https://www.hani.co.kr/arti/society/society_general/1284391.html"
   },
   {
-   "title": "오세훈 무죄 축하 만찬서 윤상현 ‘비·행·기’ 건배사···이준석이 띄운 ‘오·세·훈’ 삼행시는?",
-   "source": "경향신문",
-   "time": "2026-10-27T13:11:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610271511001"
-  },
-  {
    "title": "강신철 “北과 전쟁시 미군 믿을 수 있나” 전작권 전환 신중론 반박",
    "source": "동아일보",
    "time": "2026-10-27T02:30:00+07:00",
    "url": "https://www.donga.com/news/Politics/article/all/20261027/134913552/2"
   },
   {
-   "title": "이태원 참사 배경엔 ‘총체적 부실’…“윤석열·이상민 직접 조사 추진” [지금뉴스]",
-   "source": "KBS 뉴스",
-   "time": "2026-10-27T15:03:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8696472"
+   "title": "오세훈 축하연서 이준석 “‘오’뚝이처럼” 삼행시…윤상현 “비행기” 건배사",
+   "source": "한겨레",
+   "time": "2026-10-27T13:16:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/politics_general/1284314.html"
   },
   {
-   "title": "[속보]대법원, 김건희 추가 구속영장 발부 “증거인멸·도주 염려”…최대 8개월 구속 연장 가능",
-   "source": "경향신문",
-   "time": "2026-10-27T16:35:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610271835001"
+   "title": "구로구 주택가 시신 유기한 남성 2명 체포…빌라주인 등",
+   "source": "연합뉴스",
+   "time": "2026-10-27T16:01:22+07:00",
+   "url": "https://www.yna.co.kr/view/AKR20261027166451004"
   },
   {
-   "title": "尹 \"계엄, '십자포화로 나를 말려라' 각오로 선포\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-27T14:33:13+07:00",
-   "url": "https://imnews.imbc.com/news/2026/society/article/6861097_36918.html"
+   "title": "김건희, 구속 심문서 \"尹 깨끗한 사람, 내게 인사 맡기겠나\" 15분간 직접 발언",
+   "source": "조선일보",
+   "time": "2026-10-27T17:19:21+07:00",
+   "url": "https://www.chosun.com/national/court_law/2026/10/27/SRKYEKJ2U5EDLL5PI5BLITOW5M/"
   },
   {
    "title": "유명 ‘픽스터’로 회원 유치…4,900억 원대 도박사이트 운영 일당 검거",
