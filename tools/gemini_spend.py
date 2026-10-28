@@ -275,6 +275,9 @@ def spent_from_usage_jsonl(path, day=None, repo="local", usd_thb=None):
         # 최종 판 요약 줄(edition+published 또는 edition+after_check)만 채택.
         if not rec.get("edition"):
             continue
+        # 오늘 판만(다른 날 판을 오늘 재시도한 실패 줄 제외)
+        if not str(rec.get("edition")).startswith(day):
+            continue
         if "published" not in rec and "after_check" not in rec and not rec.get("error"):
             continue
         # 중간 chunk 실패 줄은 prompt 가 있을 수 있으나 edition 요약과 이중 계산됨.
@@ -285,7 +288,7 @@ def spent_from_usage_jsonl(path, day=None, repo="local", usd_thb=None):
         cu = cost_usd(model, prompt, output, thinking)
         ct = cu * (USD_THB if usd_thb is None else float(usd_thb))
         entries.append({
-            "id": "usage:%s:%s:%s" % (repo, rec.get("edition"), at),
+            "id": "usage:%s:%s" % (repo, rec.get("edition")),  # 판당 1줄(마지막·최대 토큰이 남음)
             "at": at,
             "day": day,
             "repo": repo,
@@ -297,7 +300,20 @@ def spent_from_usage_jsonl(path, day=None, repo="local", usd_thb=None):
             "cost_usd": round(cu, 8),
             "cost_thb": round(ct, 6),
             "source": "usage_jsonl",
+            "_total": prompt + output + thinking,
         })
+    # 같은 판이 여러 요약 줄이면 토큰 합이 큰 쪽(보통 최종 누적)만
+    best = {}
+    for e in entries:
+        k = e["id"]
+        prev = best.get(k)
+        if prev is None or e.get("_total", 0) >= prev.get("_total", 0):
+            best[k] = e
+    entries = []
+    for e in best.values():
+        e = dict(e)
+        e.pop("_total", None)
+        entries.append(e)
     return _recompute(dict(empty_tally(day), entries=entries))
 
 
@@ -308,6 +324,30 @@ def hub_token():
 
 def this_repo():
     return os.environ.get("GITHUB_REPOSITORY") or ""
+
+
+def _fetch_usage_jsonl(repo, token=None, day=None):
+    """동료 저장소 ops/gemini-usage.jsonl 을 Contents API로 읽어 오늘 비용 바닥값 구성."""
+    day = day or today_bkk()
+    url = "https://api.github.com/repos/%s/contents/ops/gemini-usage.jsonl" % repo
+    code, j = _http_json(url + "?ref=main", token=token)
+    if code != 200 or not j.get("content"):
+        return None
+    import base64, tempfile
+    try:
+        text = base64.b64decode(j["content"]).decode("utf-8")
+    except Exception:
+        return None
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".jsonl", delete=False) as f:
+        f.write(text)
+        path = f.name
+    try:
+        return spent_from_usage_jsonl(path, day=day, repo=repo)
+    finally:
+        try:
+            pathlib.Path(path).unlink()
+        except Exception:
+            pass
 
 
 def load_shared(root, day=None, token=None):
@@ -322,15 +362,19 @@ def load_shared(root, day=None, token=None):
     hub = fetch_repo_spend(HUB_REPO, HUB_PATH, token=token or None, day=day)
     if hub:
         parts.append(hub)
-    # 동료(공개 저장소는 토큰 없이 읽힐 수 있음)
+    # 동료 spend + usage.jsonl(허브 반영 전 바닥값)
     for repo in PEER_REPOS:
-        if repo == HUB_REPO and hub:
-            continue
         if repo == this_repo():
             continue
-        peer = fetch_repo_spend(repo, HUB_PATH, token=token or None, day=day)
-        if peer:
-            parts.append(peer)
+        if not (repo == HUB_REPO and hub):
+            peer = fetch_repo_spend(repo, HUB_PATH, token=token or None, day=day)
+            if peer:
+                parts.append(peer)
+        usage_peer = fetch_repo_spend(repo, "ops/gemini-usage.jsonl", token=token or None, day=day)
+        # usage.jsonl 은 JSON 배열이 아니라서 Contents API로 받은 디코드가 실패 → 전용 헬퍼
+        peer_usage = _fetch_usage_jsonl(repo, token=token or None, day=day)
+        if peer_usage:
+            parts.append(peer_usage)
     merged = merge_tallies(*parts, day=day)
     # 세션 추가분
     if _SESSION_ENTRIES:
