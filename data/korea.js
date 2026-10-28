@@ -1,30 +1,30 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-28T21:05:34+07:00",
+ "updated_at": "2026-10-28T23:49:40+07:00",
  "items": [
   {
-   "title": "靑 사회수석 \"이 대통령 노동존중, 국적 가리지 않아\"",
-   "source": "연합뉴스TV",
-   "time": "2026-10-28T18:39:00+07:00",
-   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261028203931gjm"
+   "title": "이 대통령 ‘외국인 노동자 발언’ 비판 확산…“언론 탓 전에 사과 먼저”",
+   "source": "한겨레",
+   "time": "2026-10-28T20:13:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/politics_general/1284701.html"
   },
   {
-   "title": "박범계 \"조희대 국조, 유연하고 나이스하게 몰아가야...우격다짐으로 갔다간 반동\"",
-   "source": "YTN",
-   "time": "2026-10-28T16:57:00+07:00",
-   "url": "https://www.ytn.co.kr/_ln/0101_202610281857452040"
+   "title": "국힘 요구에 방송사 2곳 녹화 허용…“참관인은 손대지 마시오”",
+   "source": "경향신문",
+   "time": "2026-10-28T18:59:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610282059005"
   },
   {
-   "title": "송파 247만 장 검증, 신분확인·촬영요구로 시작부터 차질",
-   "source": "국제신문",
-   "time": "2026-10-28T17:26:00+07:00",
-   "url": "https://www.kookje.co.kr/news2011/asp/newsbody.asp?code=0100&key=20261029.22005008501&kid="
+   "title": "김민석 “민생이 첫째”…‘조희대 국조’ 공식화 뒤 눈치 살피기",
+   "source": "경향신문",
+   "time": "2026-10-28T19:21:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610282121005"
   },
   {
-   "title": "가스폭발 현장 달려가 밸브 잠근 시민…알고보니 배우",
-   "source": "연합뉴스",
-   "time": "2026-10-28T14:00:09+07:00",
-   "url": "https://www.yna.co.kr/view/AKR20261028149100065"
+   "title": "‘범죄도시’ 배우 윤대열, 가스 폭발 현장 달려가 LPG 밸브 잠그고 신고···“추가 피해 막아”",
+   "source": "경향신문",
+   "time": "2026-10-28T17:05:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610281905001"
   },
   {
    "title": "진성준 국방위원장 美 비자 발급 거부…\"강력한 유감\"",
@@ -33,34 +33,34 @@ window.KOREA_NEWS = {
    "url": "https://www.yonhapnewstv.co.kr/news/AKR20261028182345KoK"
   },
   {
-   "title": "비판 언론에 “까대기식 보도”…논란 키우는 ‘대통령 SNS’",
-   "source": "경향신문",
-   "time": "2026-10-28T19:26:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610282126005"
+   "title": "유시민, 이 대통령 향해 “윤석열처럼 자기 집 해체하고 있다”",
+   "source": "한겨레",
+   "time": "2026-10-28T20:42:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/politics_general/1284708.html"
   },
   {
-   "title": "경찰, 초등학교 인근서 흉기 들고 위협한 50대 여성 체포",
-   "source": "MBC 뉴스",
-   "time": "2026-10-28T11:55:43+07:00",
-   "url": "https://imnews.imbc.com/news/2026/society/article/6861326_36918.html"
+   "title": "전철 원당역서 동료에게 흉기 휘두른 역무원 검거",
+   "source": "연합뉴스",
+   "time": "2026-10-28T12:55:32+07:00",
+   "url": "https://www.yna.co.kr/view/AKR20261028128700060"
   },
   {
-   "title": "공소청, ‘탈북 어민 강제 북송’ 정의용·서훈·김연철 무죄 부분 상고 포기",
-   "source": "조선일보",
-   "time": "2026-10-28T17:44:00+07:00",
-   "url": "https://www.chosun.com/national/court_law/2026/10/28/FGPXXZVXIZELRPODREP2BFKEIU/"
+   "title": "이 대통령 “당의 말과 행동, 국민 눈높이 맞는 책임 보여야\"",
+   "source": "한겨레",
+   "time": "2026-10-28T22:19:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/bluehouse/1284707.html"
   },
   {
-   "title": "보우소나루, 미국 아닌 아르헨 거쳐 에콰도르행···선거캠프조차 출국 몰랐다",
-   "source": "경향신문",
-   "time": "2026-10-28T16:44:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610281844001"
+   "title": "李대통령 \"자기만 개혁주체인 양 동지 공격…무책임한 극단주의\"",
+   "source": "연합뉴스",
+   "time": "2026-10-28T15:20:24+07:00",
+   "url": "https://www.yna.co.kr/view/AKR20261028147500371"
   },
   {
-   "title": "이 대통령, 민주당 5선 이상 중진과 만찬…“당청 긴밀히 소통·협력해야”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-28T19:14:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8697915"
+   "title": "스페인 고속열차 충돌로 최소 64명 사망…한국인 6명 경상",
+   "source": "연합뉴스TV",
+   "time": "2026-10-28T21:17:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR202610282317136yv"
   }
  ]
 };
