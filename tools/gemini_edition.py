@@ -36,9 +36,9 @@ BKK = timezone(timedelta(hours=7))
 SITE = siteconf.load()
 LANG = SITE["lang"]
 
-MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
-# 2026-10-27 맥스님: 주 모델 재시도 소진(503/500/타임아웃) 시 라이트 폴백(품질 테스트 통과·폴백만).
-FALLBACK_MODEL = os.environ.get("GEMINI_FALLBACK_MODEL", "gemini-3.5-flash-lite")
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash-lite")
+# 2026-10-28 맥스님: 무료 RPD(3.8≈20/일) 때문에 lite를 주 모델. 3.8은 폴백 1회만(긴 대기 없음).
+FALLBACK_MODEL = os.environ.get("GEMINI_FALLBACK_MODEL", "gemini-3.8-flash")
 ACTIVE_MODEL = MODEL  # 실제 성공한 모델(usage·coverage 기록용)
 API = "https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent"
 UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36"}
@@ -125,7 +125,7 @@ USAGE = dict(calls=0, prompt=0, output=0, thinking=0, total=0)
 CHUNK = 15  # picks 가 이보다 크면 나눠 호출(고정 지시문 중복 비용 < 503 회피)
 PRIMARY_BACKOFF_S = [20, 60, 120]   # 주 모델: 최대 3회 대기(~3.3분) 후 폴백
 PRIMARY_BUDGET_S = 300             # 주 모델 벽시계 예산(초). 넘으면 즉시 폴백
-FALLBACK_BACKOFF_S = [20, 40, 80]   # 라이트 폴백 재시도
+FALLBACK_BACKOFF_S = []              # 폴백(3.8) 1회만 — RPD 절약(2026-10-28 Max)
 BACKOFF_S = PRIMARY_BACKOFF_S      # 하위 호환(테스트·외부 참조)
 PRIMARY_EXHAUSTED = False          # 이번 실행에서 주 모델이 한 번 소진되면 다음 청크는 바로 폴백
 PRIMARY_PHASE_T0 = None            # main 에서 설정 — 주 모델 단계 벽시계 시작(전체 ~5분)

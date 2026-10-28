@@ -86,6 +86,9 @@ jobs:
         if: steps.ed.outputs.skip != '1'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # 2026-10-28 Max: lite 주 모델(RPD≈500). 3.8은 폴백 1회. 되돌리기: 두 줄을 지우거나 3.8/lite로 맞바꾸기.
+          GEMINI_MODEL: gemini-3.5-flash-lite
+          GEMINI_FALLBACK_MODEL: gemini-3.8-flash
         run: python3 tools/gemini_edition.py "${{ steps.ed.outputs.id }}" "ops/picks/${{ steps.ed.outputs.id }}.json"
       - name: 공유 카드
         if: steps.ed.outputs.skip != '1'

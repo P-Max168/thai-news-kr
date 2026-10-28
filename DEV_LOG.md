@@ -1,3 +1,4 @@
+| 10-28 08:25 | Grok | gemini lite 주모델 | 주 모델 gemini-3.5-flash-lite·폴백 3.8 1회(RPD). workflow env+기본값. 격리 테스트 복구. Max t342u. |
 ## 2026-10-28T08:14:25+07:00 · Grok · GA4 방문 통계 + 개인정보 안내
 - 맥스님 승인(붙이고 안내문도 추가). HTML 공개 페이지·e/*/index.html·tools/seo.py 에 gtag(주소별 측정 ID, Google Signals·맞춤 광고 끔). privacy.html 외부서비스/방문통계에 GA4 한 줄 + Google partner-sites 링크. legal_pages.py 동기화. 백업 태그 backup-20261028-0813-ga4-pre.
 
