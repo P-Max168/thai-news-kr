@@ -1,0 +1,109 @@
+# GPT lane auto-merge (Max 2026-10-28)
+# Security: ONLY schedule + workflow_dispatch — GitHub always runs the workflow
+# file from the default branch (main). Never use `on: push` here; that would run
+# the copy from the gpt/* branch and could be weakened.
+# Guard script: tools/gpt_lane_check.py (also from main checkout below).
+name: gpt-lane
+
+on:
+  schedule:
+    # every 15 minutes; cheap no-op when no gpt/* branches
+    - cron: "3,18,33,48 * * * *"
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Optional single branch (e.g. gpt/tags-2026-10-28). Empty = all gpt/*"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gpt-lane
+  cancel-in-progress: false
+
+jobs:
+  merge-safe-gpt-branches:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      TZ: Asia/Bangkok
+    steps:
+      - name: Checkout main (authoritative guard + merge base)
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+          path: main
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Find gpt/* branches and validate/merge
+        working-directory: main
+        env:
+          ONLY: ${{ inputs.branch }}
+        run: |
+          set -euo pipefail
+          git config user.name "gpt-lane[bot]"
+          git config user.email "gpt-lane[bot]@users.noreply.github.com"
+          git fetch origin --prune
+
+          mapfile -t BRANCHES < <(
+            if [ -n "${ONLY:-}" ]; then
+              echo "${ONLY#refs/heads/}"
+            else
+              git ls-remote --heads origin 'gpt/*' | awk '{print $2}' | sed 's#^refs/heads/##'
+            fi
+          )
+
+          if [ "${#BRANCHES[@]}" -eq 0 ] || [ -z "${BRANCHES[0]:-}" ]; then
+            echo "No gpt/* branches to process"
+            exit 0
+          fi
+
+          fail=0
+          for b in "${BRANCHES[@]}"; do
+            echo "::group::branch $b"
+            case "$b" in
+              gpt/*) ;;
+              *) echo "skip (not gpt/*): $b"; echo "::endgroup::"; continue ;;
+            esac
+            # never touch claim/ or shadow/
+            case "$b" in
+              claim/*|shadow/*) echo "skip reserved: $b"; echo "::endgroup::"; continue ;;
+            esac
+
+            rm -rf /tmp/gpt-work
+            git worktree remove /tmp/gpt-work --force 2>/dev/null || true
+            git fetch origin "refs/heads/$b:refs/remotes/origin/$b"
+            git worktree add /tmp/gpt-work "origin/$b"
+
+            if ! python3 tools/gpt_lane_check.py --work /tmp/gpt-work --base origin/main; then
+              echo "::error::REJECT $b (left on remote, not merged)"
+              fail=1
+              git worktree remove /tmp/gpt-work --force
+              echo "::endgroup::"
+              continue
+            fi
+
+            # Merge into main (no force). Use merge commit for clear history.
+            git checkout main
+            git pull --ff-only origin main
+            if git merge --no-ff --no-edit "origin/$b" -m "merge: $b (gpt-lane auto)"; then
+              git push origin main
+              echo "MERGED $b -> main"
+              # delete remote branch after successful merge (optional cleanup)
+              git push origin --delete "$b" || echo "note: could not delete $b (ok)"
+            else
+              echo "::error::merge conflict on $b — abort, not pushed"
+              git merge --abort || true
+              fail=1
+            fi
+            git worktree remove /tmp/gpt-work --force 2>/dev/null || true
+            echo "::endgroup::"
+          done
+          exit "$fail"
