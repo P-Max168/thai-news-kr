@@ -23,6 +23,7 @@ picks.json 형식(그록이 쓰는 파일 — 짧게):
 실패 기사는 빼고 나머지로 판을 만든다(4건 미만이면 판을 만들지 않고 exit 3 — Claude 비상 발행이 이어받음).
 """
 import argparse, html, json, os, pathlib, re, sys, time
+import gemini_spend  # noqa: E402  # 일일 비용 상한(2026-10-28)
 from datetime import datetime, timezone, timedelta
 from urllib.parse import urlparse
 
@@ -192,6 +193,16 @@ def call_gemini(prompt, key, model, meta=None, allow_fallback=True):
             last = last or "primary_budget"
             print("주 모델 단계 예산 %ds 소진(전체) → 폴백 준비" % PRIMARY_BUDGET_S, flush=True)
             break
+        # 일일 비용 상한: 다음 호출 예상분이 남으면 유료 호출 안 함 → Claude 비상 발행이 이어받음
+        try:
+            gemini_spend.guard_or_raise(ROOT, model, prompt, meta=meta, write_fail=_write_edition_fail)
+        except gemini_spend.SpendCapExceeded as ex:
+            rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), model=model,
+                       error=str(ex), seconds=round(time.time() - t0, 1), **USAGE)
+            if meta:
+                rec.update(meta)
+            _log_usage(rec)
+            raise SystemExit(str(ex))
         USAGE["calls"] += 1
         try:
             r = requests.post(API % model, headers={"x-goog-api-key": key, "Content-Type": "application/json"}, json=payload, timeout=180)
@@ -219,6 +230,10 @@ def call_gemini(prompt, key, model, meta=None, allow_fallback=True):
         u = d.get("usageMetadata") or {}
         USAGE["prompt"] += int(u.get("promptTokenCount", 0)); USAGE["output"] += int(u.get("candidatesTokenCount", 0))
         USAGE["thinking"] += int(u.get("thoughtsTokenCount", 0)); USAGE["total"] += int(u.get("totalTokenCount", 0))
+        try:
+            gemini_spend.record_usage(ROOT, model, u, meta=meta, call_i=USAGE["calls"])
+        except Exception as _sx:
+            print("spend 기록 실패(판은 계속): %s" % type(_sx).__name__, flush=True)
         c = (d.get("candidates") or [{}])[0]
         body = "".join(p.get("text", "") for p in (c.get("content") or {}).get("parts", []) if not p.get("thought"))
         try:
@@ -415,6 +430,11 @@ def call_gemini_once(prompt, key, model, timeout=RETRANSLATE_TIMEOUT_S, meta=Non
     if "lite" in (model or "").lower():
         gen = {k: v for k, v in gen.items() if k != "thinkingConfig"}
     payload = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": gen}
+    try:
+        gemini_spend.guard_or_raise(ROOT, model, prompt, meta=meta, write_fail=_write_edition_fail)
+    except gemini_spend.SpendCapExceeded as ex:
+        print(str(ex), flush=True)
+        return None
     USAGE["calls"] += 1
     t0 = time.time()
     try:
@@ -430,6 +450,10 @@ def call_gemini_once(prompt, key, model, timeout=RETRANSLATE_TIMEOUT_S, meta=Non
     u = d.get("usageMetadata") or {}
     USAGE["prompt"] += int(u.get("promptTokenCount", 0)); USAGE["output"] += int(u.get("candidatesTokenCount", 0))
     USAGE["thinking"] += int(u.get("thoughtsTokenCount", 0)); USAGE["total"] += int(u.get("totalTokenCount", 0))
+    try:
+        gemini_spend.record_usage(ROOT, model, u, meta=meta, call_i=USAGE["calls"])
+    except Exception as _sx:
+        print("spend 기록 실패(재번역 계속): %s" % type(_sx).__name__, flush=True)
     c = (d.get("candidates") or [{}])[0]
     body = "".join(p.get("text", "") for p in (c.get("content") or {}).get("parts", []) if not p.get("thought"))
     try:
