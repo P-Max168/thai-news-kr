@@ -1,3 +1,6 @@
+## 2026-10-28T08:14:25+07:00 · Grok · GA4 방문 통계 + 개인정보 안내
+- 맥스님 승인(붙이고 안내문도 추가). HTML 공개 페이지·e/*/index.html·tools/seo.py 에 gtag(주소별 측정 ID, Google Signals·맞춤 광고 끔). privacy.html 외부서비스/방문통계에 GA4 한 줄 + Google partner-sites 링크. legal_pages.py 동기화. 백업 태그 backup-20261028-0813-ga4-pre.
+
 | 10-28 07:45 | Grok | gemini_edition 격리+재번역+503 | 결함 기사 주모델 재번역 1회(75s) 후 격리·주모델 20/60/120+전체 5분 예산 후 폴백·청크 소진 재사용. 테스트 test_gemini_edition_quarantine.py. 아침판 재발행 안 함. |
 # 개발 기록 (DEV_LOG)
 
