@@ -65,7 +65,11 @@ jobs:
             exit 0
           fi
 
-          fail=0
+          # reject_count: allowlist/schema failures (leave branch, do not fail the job —
+          # otherwise a leftover bad gpt/* branch makes every 15m schedule red forever).
+          # hard_fail: merge/push infrastructure errors only.
+          reject_count=0
+          hard_fail=0
           for b in "${BRANCHES[@]}"; do
             echo "::group::branch $b"
             case "$b" in
@@ -83,8 +87,8 @@ jobs:
             git worktree add /tmp/gpt-work "origin/$b"
 
             if ! python3 tools/gpt_lane_check.py --work /tmp/gpt-work --base origin/main; then
-              echo "::error::REJECT $b (left on remote, not merged)"
-              fail=1
+              echo "::warning::REJECT $b (left on remote, not merged)"
+              reject_count=$((reject_count + 1))
               git worktree remove /tmp/gpt-work --force
               echo "::endgroup::"
               continue
@@ -101,9 +105,10 @@ jobs:
             else
               echo "::error::merge conflict on $b — abort, not pushed"
               git merge --abort || true
-              fail=1
+              hard_fail=1
             fi
             git worktree remove /tmp/gpt-work --force 2>/dev/null || true
             echo "::endgroup::"
           done
-          exit "$fail"
+          echo "summary: rejected=$reject_count hard_fail=$hard_fail"
+          exit "$hard_fail"
