@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-28T07:29:54+07:00",
+  "edition": "2026-10-28-am",
+  "error": "stories_lt_4_or_validate_fail",
+  "after_check": 23,
+  "published": 0,
+  "picks": 24,
+  "model": "gemini-3.8-flash"
+}
