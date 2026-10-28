@@ -48,6 +48,10 @@ python3 -c "import sys; sys.path.insert(0,'tools'); import seo; print('indexnow'
 python3 tools/stamp_assets.py
 # 측정 한 줄(2026-10-23): ops/metrics.jsonl — 실패해도 배포 계속
 python3 tools/metrics.py "$LATEST" || true
+# YouTube Tower 입력(2026-10-28): md 판이면 ops/video/<date>.json 생성(실패해도 배포 계속)
+if [[ "$LATEST" == *-md ]]; then
+  python3 tools/video_picks.py --date "${LATEST%-md}" || echo "경고: video_picks 실패(배포는 계속)" >&2
+fi
 # 사이트 파일만 스테이징 (.gitignore 가 제외 대상 차단)
 # og/(링크 미리보기 이미지)·e/(판별 미리보기 페이지)는 tools/share_kit.py 가 만듦 — 있는 경로만 추가
 PATHS=""
@@ -60,6 +64,8 @@ if [ -f ops/indexnow-key ]; then
   INDEXNOW_KEY_FILE="$(tr -d '[:space:]' < ops/indexnow-key).txt"
   [ -f "$INDEXNOW_KEY_FILE" ] && PATHS="$PATHS $INDEXNOW_KEY_FILE ops/indexnow-key"
 fi
+# YouTube Tower ops/video (md 판에서 생성). 디렉터리가 있을 때만 스테이징
+[ -d ops/video ] && PATHS="$PATHS ops/video"
 git add -A -- $PATHS
 git reset -q -- $KOREA_FILES 2>/dev/null || true   # 혹시 스테이징됐어도 빼기
 if git diff --cached --quiet; then
