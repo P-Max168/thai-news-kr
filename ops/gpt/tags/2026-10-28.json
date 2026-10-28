@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-28",
+  "articles": [
+    {
+      "id": "lane-test-ok",
+      "tags": ["test"],
+      "category": "test",
+      "related": []
+    }
+  ]
+}
