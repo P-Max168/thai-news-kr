@@ -7,6 +7,13 @@
   <language>ko</language>
   <atom:link href="https://tnews.pmaxone.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>10월 28일 점심판</title>
+    <link>https://tnews.pmaxone.com/e/2026-10-28-md/</link>
+    <guid isPermaLink="true">https://tnews.pmaxone.com/e/2026-10-28-md/</guid>
+    <pubDate>Wed, 28 Oct 2026 12:16:47 +0700</pubDate>
+    <description>태국 뉴스 한눈에 · 10월 28일 점심판</description>
+  </item>
+  <item>
     <title>10월 27일 아침판</title>
     <link>https://tnews.pmaxone.com/e/2026-10-27-am/</link>
     <guid isPermaLink="true">https://tnews.pmaxone.com/e/2026-10-27-am/</guid>
@@ -208,13 +215,6 @@
     <guid isPermaLink="true">https://tnews.pmaxone.com/e/2026-10-11-pm/</guid>
     <pubDate>Sun, 11 Oct 2026 18:20:47 +0700</pubDate>
     <description>태국 뉴스 한눈에 · 10월 11일 저녁판</description>
-  </item>
-  <item>
-    <title>10월 11일 아침판 · 지연 발행</title>
-    <link>https://tnews.pmaxone.com/e/2026-10-11-am/</link>
-    <guid isPermaLink="true">https://tnews.pmaxone.com/e/2026-10-11-am/</guid>
-    <pubDate>Sun, 11 Oct 2026 07:46:20 +0700</pubDate>
-    <description>태국 뉴스 한눈에 · 10월 11일 아침판 · 지연 발행</description>
   </item>
 </channel>
 </rss>

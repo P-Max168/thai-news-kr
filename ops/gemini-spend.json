@@ -15,8 +15,8 @@
       "output": 3.75
     }
   },
-  "spent_thb": 5.019808,
-  "spent_usd": 0.1476414,
+  "spent_thb": 7.339315,
+  "spent_usd": 0.2158622,
   "entries": [
     {
       "id": "usage:P-Max168/thai-news-kr:2026-10-28-am",
@@ -59,6 +59,66 @@
       "cost_usd": 0.0642134,
       "cost_thb": 2.183256,
       "source": "usage_jsonl"
+    },
+    {
+      "id": "P-Max168/thai-news-kr|2026-10-28-md|2026-10-28T12:14:55+07:00|1",
+      "at": "2026-10-28T12:14:55+07:00",
+      "day": "2026-10-28",
+      "repo": "P-Max168/thai-news-kr",
+      "edition": "2026-10-28-md",
+      "chunk": "1/2",
+      "model": "gemini-3.5-flash-lite",
+      "prompt": 14031,
+      "output": 4738,
+      "thinking": 0,
+      "cost_usd": 0.0160543,
+      "cost_thb": 0.545846,
+      "source": "live"
+    },
+    {
+      "id": "P-Max168/thai-news-kr|2026-10-28-md|2026-10-28T12:15:43+07:00|2",
+      "at": "2026-10-28T12:15:43+07:00",
+      "day": "2026-10-28",
+      "repo": "P-Max168/thai-news-kr",
+      "edition": "2026-10-28-md",
+      "chunk": "1/2",
+      "model": "gemini-3.5-flash-lite",
+      "prompt": 14031,
+      "output": 7885,
+      "thinking": 0,
+      "cost_usd": 0.0239218,
+      "cost_thb": 0.813341,
+      "source": "live"
+    },
+    {
+      "id": "P-Max168/thai-news-kr|2026-10-28-md|2026-10-28T12:16:33+07:00|3",
+      "at": "2026-10-28T12:16:33+07:00",
+      "day": "2026-10-28",
+      "repo": "P-Max168/thai-news-kr",
+      "edition": "2026-10-28-md",
+      "chunk": "1/2",
+      "model": "gemini-3.5-flash-lite",
+      "prompt": 14031,
+      "output": 4946,
+      "thinking": 0,
+      "cost_usd": 0.0165743,
+      "cost_thb": 0.563526,
+      "source": "live"
+    },
+    {
+      "id": "P-Max168/thai-news-kr|2026-10-28-md|2026-10-28T12:16:46+07:00|4",
+      "at": "2026-10-28T12:16:46+07:00",
+      "day": "2026-10-28",
+      "repo": "P-Max168/thai-news-kr",
+      "edition": "2026-10-28-md",
+      "chunk": "2/2",
+      "model": "gemini-3.5-flash-lite",
+      "prompt": 8893,
+      "output": 3601,
+      "thinking": 0,
+      "cost_usd": 0.0116704,
+      "cost_thb": 0.396794,
+      "source": "live"
     }
   ]
 }
