@@ -42,7 +42,7 @@ Max 승인(2026-10-28): GPT가 내 검수 없이 올릴 수 있는 **유일한**
   이 두 트리거는 GitHub가 **항상 default branch(main)의 워크플로 파일**을 실행한다.
   (`push` 트리거를 쓰지 않음 — push면 브랜치에 실린 워크플로가 실행되어 약화될 수 있음.)
 - 검사는 main에 있는 `tools/gpt_lane_check.py` 로 한다.
-- 통과하면 해당 `gpt/*` 브랜치를 main에 merge(강제 push 없음). 실패면 브랜치만 남김.
+- 통과하면 해당 `gpt/*` 브랜치를 main에 merge(강제 push 없음). 경로/스키마 실패면 브랜치만 남기고 Actions **경고**(스케줄이 계속 빨갛게 되지 않게). merge 충돌만 job 실패.
 - main 브랜치 보호/규칙셋은 **넣지 않음**(판 발행 파이프라인이 main에 직접 push).
 
 ## 되돌리기
