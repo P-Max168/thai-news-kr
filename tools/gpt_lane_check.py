@@ -24,14 +24,20 @@ ALLOWED_PREFIXES = (
     "ops/gpt/tags/",
     "ops/gpt/newsletter/",
     "ops/gpt/schema/",
+    "ops/gpt/research/youtube/",
+    "ops/gpt/research/marketing/",
 )
 ALLOWED_EXACT = {
     "ops/gpt/README.md",
     "ops/gpt/tags/README.md",
     "ops/gpt/newsletter/README.md",
+    "ops/gpt/research/README.md",
+    "ops/gpt/research/youtube/README.md",
+    "ops/gpt/research/marketing/README.md",
 }
 
 DATE_FILE = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}\.(json|md)$")
+DATE_STEM_MD = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}_.+\.md$")  # research: YYYY-MM-DD_*.md
 DATE_VAL = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
 
 
@@ -158,6 +164,20 @@ def check_file_contents(work: Path, files: list[str], schema_hint: Path) -> None
                 if re.search(r"(api[_-]?key|secret|password|token)\s*[:=]", ln, re.I):
                     errs.append(f"{rel}: looks like a secret assignment — remove it")
                     break
+        elif rel.startswith("ops/gpt/research/youtube/") or rel.startswith("ops/gpt/research/marketing/"):
+            name = Path(rel).name
+            if name == "README.md":
+                pass
+            elif not name.endswith(".md") or not DATE_STEM_MD.match(name):
+                errs.append(f"{rel}: research file must be markdown named YYYY-MM-DD_*.md")
+            else:
+                text = p.read_text(encoding="utf-8", errors="replace")
+                if len(text.encode("utf-8")) > 400_000:
+                    errs.append(f"{rel}: research markdown too large (>400KB)")
+                for ln in text.splitlines():
+                    if re.search(r"(api[_-]?key|secret|password|token)\s*[:=]", ln, re.I):
+                        errs.append(f"{rel}: looks like a secret assignment — remove it")
+                        break
         elif rel.startswith("ops/gpt/schema/") and rel.endswith(".json"):
             try:
                 json.loads(p.read_text(encoding="utf-8"))
@@ -223,7 +243,7 @@ def main() -> None:
     bad = [f for f in files if not path_allowed(f)]
     if bad:
         die(
-            "path allowlist failed — only ops/gpt/tags|newsletter|schema (+README) allowed:\n  - "
+            "path allowlist failed — only ops/gpt/tags|newsletter|schema|research/youtube|research/marketing (+README) allowed:\n  - "
             + "\n  - ".join(bad)
         )
     ok(f"path allowlist passed ({len(files)} files)")
