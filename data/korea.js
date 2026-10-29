@@ -1,6 +1,6 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-30T02:51:44+07:00",
+ "updated_at": "2026-10-30T06:22:14+07:00",
  "items": [
   {
    "title": "‘이주민 배제’ 자극한 대통령의 말…멀어진 ‘건강한 공론장’",
@@ -15,28 +15,34 @@ window.KOREA_NEWS = {
    "url": "https://www.khan.co.kr/article/202610292130015"
   },
   {
-   "title": "청년 광장서 극우 무대로…부정선거론이 삼킨 ‘올공 시위’ 147일",
-   "source": "한겨레",
-   "time": "2026-10-29T20:51:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/society_general/1284902.html"
+   "title": "경기 버스 노사, 11시간 만에 협상 타결‥총파업 철회",
+   "source": "MBC 뉴스",
+   "time": "2026-10-30T00:38:22+07:00",
+   "url": "https://imnews.imbc.com/news/2026/society/article/6861815_36918.html"
   },
   {
-   "title": "‘수사반장’ 최불암 별세, 향년 86…초록우산 어린이재단장 엄수",
+   "title": "‘국민 아버지’ 배우 최불암 별세…‘파하’ 웃음 남기고 하늘로 떠났다",
    "source": "한겨레",
    "time": "2026-10-29T23:51:00+07:00",
    "url": "https://www.hani.co.kr/arti/society/internalmove/1284921.html"
   },
   {
-   "title": "주진우 \"李 가족, 황제 골프 후 헬기 이동\"…추가 의혹 제기",
-   "source": "한국경제",
-   "time": "2026-10-29T13:45:38+07:00",
-   "url": "https://www.hankyung.com/article/202610293724H"
+   "title": "與 박지원 \"조희대 탄핵 실익 없어\" 김영진도 \"국조 실효성 의문\"",
+   "source": "조선일보",
+   "time": "2026-10-29T08:52:37+07:00",
+   "url": "https://www.chosun.com/politics/assembly/2026/10/29/CRAHRTTRUVBHZLE7QSA4SY7MT4/"
   },
   {
-   "title": "경기 버스 노사, 11시간 만에 협상 타결..총파업 철회",
-   "source": "MBC 뉴스",
-   "time": "2026-10-30T00:38:22+07:00",
-   "url": "https://imnews.imbc.com/news/2026/society/article/6861815_36918.html"
+   "title": "146일만에 투표함 떠난 올림픽공원…시위대도 해산 수순",
+   "source": "연합뉴스",
+   "time": "2026-10-29T07:16:27+07:00",
+   "url": "https://www.yna.co.kr/view/AKR20261029039900004"
+  },
+  {
+   "title": "조현 “국회의원 미국 비자 지연 바람직하지 않아…신속발급 요청”",
+   "source": "한겨레",
+   "time": "2026-10-29T11:47:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/politics_general/1284789.html"
   },
   {
    "title": "유시민 “임기 못 채울 수도”…민주 “같은 내무반에 수류탄 던지냐”",
@@ -45,22 +51,16 @@ window.KOREA_NEWS = {
    "url": "https://www.hani.co.kr/arti/politics/politics_general/1284872.html"
   },
   {
-   "title": "이 대통령, 사우디 왕세자와 통화…\"중동전쟁 피해 깊은 위로\"",
-   "source": "연합뉴스TV",
-   "time": "2026-10-29T20:13:00+07:00",
-   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261029221300HAH"
-  },
-  {
    "title": "국정원 \"김정은, 방중 때 북미 대화 의중 전달 가능성\"",
    "source": "조선일보",
    "time": "2026-10-29T16:01:51+07:00",
    "url": "https://www.chosun.com/politics/assembly/2026/10/29/LMC3JXV2ZVEKHE2VFG3NY54IK4/"
   },
   {
-   "title": "[이스라엘 총선 현장을 가다]“팔레스타인 문제는 관심조차 없어…선거 끝나도 네타냐후의 시간”",
-   "source": "경향신문",
-   "time": "2026-10-29T19:25:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610292125005"
+   "title": "알래스카 '동명이인 후보영입' 의혹, 美중간선거 판세 뒤집을까",
+   "source": "연합뉴스",
+   "time": "2026-10-30T04:37:14+07:00",
+   "url": "https://www.yna.co.kr/view/AKR20261030010400071"
   }
  ]
 };
