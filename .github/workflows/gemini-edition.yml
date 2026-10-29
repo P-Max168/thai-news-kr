@@ -61,8 +61,13 @@ jobs:
         run: |
           if [ -n "${{ inputs.edition }}" ]; then id="${{ inputs.edition }}"
           elif [ "${{ github.event_name }}" = "schedule" ]; then
-            h=$((10#$(date +%H)))
-            if [ "$h" -lt 10 ]; then s=am; elif [ "$h" -lt 15 ]; then s=md; else s=pm; fi
+            # 2026-10-29: 판 이름은 슬롯 하한(BKK) 이후에만. hour<10→am 때문에 자정·새벽 늦은 예약이 아침판을 선점함.
+            #   하한 KR 06:40/11:40/17:40. 하한 전이면 건너뜀(그록 picks·비상 발행이 메움).
+            nowm=$((10#$(date +%H)*60 + 10#$(date +%M)))
+            if [ "$nowm" -lt $((6*60+40)) ]; then echo "::notice::하한 전(지금 $(date +%H:%M) BKK) — 판 고르기 건너뜀"; echo "skip=1" >> "$GITHUB_OUTPUT"; exit 0
+            elif [ "$nowm" -lt $((11*60+40)) ]; then s=am
+            elif [ "$nowm" -lt $((17*60+40)) ]; then s=md
+            else s=pm; fi
             id="$(date +%F)-$s"
             if [ -f "data/$id.json" ]; then echo "이미 있음: $id — 할 일 없음"; echo "skip=1" >> "$GITHUB_OUTPUT"; exit 0; fi
             # 키가 없거나(맥스님 등록 전) 임시 발행 담당(ops/publisher.json, 예: Codex ~10-26 12:45)이 있으면 담당 표시를 하지 않고 비켜 줌 — 다른 발행자를 막지 않게
@@ -106,8 +111,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ops/gemini-usage.jsonl ops/gemini-spend.json 2>/dev/null || true
+          # hub CAS 원장이 권위 — ops/gemini-spend.json 은 커밋하지 않음(미러 충돌 방지)
+          git add ops/gemini-usage.jsonl 2>/dev/null || true
           bash tools/deploy.sh
+          # 발행 성공 뒤 grok 담당 표시 삭제 → Claude 비상 예약이 막히지 않게
+          python3 tools/edition_claim.py release grok "${{ steps.ed.outputs.id }}" || true
       - name: 실패 기록만 커밋(edition-fail·usage) — Claude 비상 발행용
         if: failure() && steps.ed.outputs.skip != '1'
         env:
@@ -121,16 +129,36 @@ jobs:
           if [ ! -f ops/edition-fail.json ]; then
             printf '%s\n' "{\"at\":\"$(TZ=Asia/Bangkok date +%Y-%m-%dT%H:%M:%S+07:00)\",\"edition\":\"${eid}\",\"error\":\"workflow_failure_no_edition_fail_file\"}" > ops/edition-fail.json
           fi
-          git add ops/edition-fail.json ops/gemini-usage.jsonl ops/gemini-spend.json 2>/dev/null || true
-          if git diff --cached --quiet; then echo "커밋할 실패 기록 없음"; exit 0; fi
-          git commit -m "ops: edition-fail ${eid} (gemini 실패 기록)" || exit 0
+          # hub CAS 원장이 권위 — spend 미러는 커밋하지 않음
+          git add ops/edition-fail.json ops/gemini-usage.jsonl 2>/dev/null || true
+          if git diff --cached --quiet; then echo "커밋할 실패 기록 없음"; python3 tools/edition_claim.py release grok "$eid" || true; exit 0; fi
+          git commit -m "ops: edition-fail ${eid} (gemini 실패 기록)" || { python3 tools/edition_claim.py release grok "$eid" || true; exit 0; }
           git fetch -q origin main
+          # deploy.sh 와 같은 _pull_rebase: spend 충돌이면 main 채택
+          _pull_rebase() {
+            if git pull --rebase --autostash -q origin main; then return 0; fi
+            if git ls-files -u | grep -qE '(^|[[:space:]])ops/gemini-spend\.json$'; then
+              echo "rebase 충돌: ops/gemini-spend.json → main(ours) 채택" >&2
+              git checkout --ours -- ops/gemini-spend.json
+              git add -- ops/gemini-spend.json
+              if git diff --name-only --diff-filter=U | grep -q .; then
+                git rebase --abort 2>/dev/null || true; return 1
+              fi
+              if ! GIT_EDITOR=true git rebase --continue; then
+                git rebase --abort 2>/dev/null || true; return 1
+              fi
+              return 0
+            fi
+            git rebase --abort 2>/dev/null || true; return 1
+          }
           ok=""
           for i in 1 2 3 4; do
-            git pull --rebase --autostash -q origin main || { echo "rebase 재시도 $i"; sleep $((i * 3)); continue; }
+            _pull_rebase || { echo "rebase 재시도 $i"; sleep $((i * 3)); continue; }
             if git push origin HEAD:main; then ok=1; break; fi
             echo "fail-record push 재시도 $i"; sleep $((i * 5))
           done
           if [ -z "$ok" ]; then echo "::warning::edition-fail push 실패 — Actions 로그로 Claude가 확인 가능"; fi
+          # 최종 실패 뒤에도 grok claim 해제 → Claude 비상 차단 방지
+          python3 tools/edition_claim.py release grok "$eid" || true
           exit 0
 

@@ -262,6 +262,12 @@ def merge_tallies(*tallies, day=None):
 
 
 def local_path(root):
+    # Actions: hub CAS is authoritative. Never write ops/gemini-spend.json into the
+    # git worktree (that mirror caused rebase conflicts on deploy/fail push).
+    if os.environ.get("GITHUB_ACTIONS") == "true" or os.environ.get("GEMINI_SPEND_LOCAL_TMP") == "1":
+        base = pathlib.Path(os.environ.get("TMPDIR") or "/tmp")
+        repo = (this_repo() or "local").replace("/", "_")
+        return base / ("gemini-spend-%s.json" % repo)
     return pathlib.Path(root) / "ops" / "gemini-spend.json"
 
 
