@@ -193,10 +193,11 @@ def call_gemini(prompt, key, model, meta=None, allow_fallback=True):
             last = last or "primary_budget"
             print("주 모델 단계 예산 %ds 소진(전체) → 폴백 준비" % PRIMARY_BUDGET_S, flush=True)
             break
-        # 일일 비용 상한: 다음 호출 예상분이 남으면 유료 호출 안 함 → Claude 비상 발행이 이어받음
+        # 일일 비용 상한: 호출 전 허브에 예상비용 예약(CAS). 실패·원장 불가 = 유료 호출 금지 → Claude 비상 발행
+        rsv = None
         try:
-            gemini_spend.guard_or_raise(ROOT, model, prompt, meta=meta, write_fail=_write_edition_fail)
-        except gemini_spend.SpendCapExceeded as ex:
+            rsv = gemini_spend.guard_or_raise(ROOT, model, prompt, meta=meta, write_fail=_write_edition_fail)
+        except (gemini_spend.SpendCapExceeded, gemini_spend.LedgerUnavailable) as ex:
             rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), model=model,
                        error=str(ex), seconds=round(time.time() - t0, 1), **USAGE)
             if meta:
@@ -206,18 +207,31 @@ def call_gemini(prompt, key, model, meta=None, allow_fallback=True):
         USAGE["calls"] += 1
         try:
             r = requests.post(API % model, headers={"x-goog-api-key": key, "Content-Type": "application/json"}, json=payload, timeout=180)
-        except Exception as ex:  # 네트워크·타임아웃
+        except Exception as ex:  # 네트워크·타임아웃 — 과금 전일 수 있어 예약 해제
             last = "transport_" + type(ex).__name__
+            try:
+                gemini_spend.release(ROOT, rsv, reason=last)
+            except Exception:
+                pass
             if attempt < len(backoff):
                 time.sleep(backoff[attempt]); continue
             break
         if r.status_code in (429, 500, 503):
             last = "http_%d" % r.status_code
+            # 429/5xx 는 보통 과금 없음 → 예약 해제 후 재시도
+            try:
+                gemini_spend.release(ROOT, rsv, reason=last)
+            except Exception:
+                pass
             if attempt < len(backoff):
                 time.sleep(backoff[attempt]); continue
             break
         if r.status_code != 200:
             last = "http_%d" % r.status_code
+            try:
+                gemini_spend.release(ROOT, rsv, reason=last)
+            except Exception:
+                pass
             msg = "gemini http %d — %s" % (r.status_code, r.text[:300].replace(key, "***"))
             rec = dict(at=datetime.now(BKK).isoformat(timespec="seconds"), model=model, error=msg,
                        seconds=round(time.time() - t0, 1), **USAGE)
@@ -230,10 +244,12 @@ def call_gemini(prompt, key, model, meta=None, allow_fallback=True):
         u = d.get("usageMetadata") or {}
         USAGE["prompt"] += int(u.get("promptTokenCount", 0)); USAGE["output"] += int(u.get("candidatesTokenCount", 0))
         USAGE["thinking"] += int(u.get("thoughtsTokenCount", 0)); USAGE["total"] += int(u.get("totalTokenCount", 0))
+        # HTTP 200 이면 토큰 과금됐을 수 있음 → JSON 실패여도 예약 정산
         try:
-            gemini_spend.record_usage(ROOT, model, u, meta=meta, call_i=USAGE["calls"])
+            gemini_spend.record_usage(ROOT, model, u, meta=meta, call_i=USAGE["calls"], reservation=rsv)
+            rsv = None
         except Exception as _sx:
-            print("spend 기록 실패(판은 계속): %s" % type(_sx).__name__, flush=True)
+            print("spend 기록 실패(판은 계속·예약 TTL 확정): %s" % type(_sx).__name__, flush=True)
         c = (d.get("candidates") or [{}])[0]
         body = "".join(p.get("text", "") for p in (c.get("content") or {}).get("parts", []) if not p.get("thought"))
         try:
@@ -430,9 +446,10 @@ def call_gemini_once(prompt, key, model, timeout=RETRANSLATE_TIMEOUT_S, meta=Non
     if "lite" in (model or "").lower():
         gen = {k: v for k, v in gen.items() if k != "thinkingConfig"}
     payload = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": gen}
+    rsv = None
     try:
-        gemini_spend.guard_or_raise(ROOT, model, prompt, meta=meta, write_fail=_write_edition_fail)
-    except gemini_spend.SpendCapExceeded as ex:
+        rsv = gemini_spend.guard_or_raise(ROOT, model, prompt, meta=meta, write_fail=_write_edition_fail)
+    except (gemini_spend.SpendCapExceeded, gemini_spend.LedgerUnavailable) as ex:
         print(str(ex), flush=True)
         return None
     USAGE["calls"] += 1
@@ -441,9 +458,17 @@ def call_gemini_once(prompt, key, model, timeout=RETRANSLATE_TIMEOUT_S, meta=Non
         r = requests.post(API % model, headers={"x-goog-api-key": key, "Content-Type": "application/json"},
                           json=payload, timeout=timeout)
     except Exception as ex:
+        try:
+            gemini_spend.release(ROOT, rsv, reason="transport_" + type(ex).__name__)
+        except Exception:
+            pass
         print("재번역 호출 실패(transport): %s" % type(ex).__name__, flush=True)
         return None
     if r.status_code != 200:
+        try:
+            gemini_spend.release(ROOT, rsv, reason="http_%d" % r.status_code)
+        except Exception:
+            pass
         print("재번역 호출 실패(http_%d)" % r.status_code, flush=True)
         return None
     d = r.json()
@@ -451,9 +476,10 @@ def call_gemini_once(prompt, key, model, timeout=RETRANSLATE_TIMEOUT_S, meta=Non
     USAGE["prompt"] += int(u.get("promptTokenCount", 0)); USAGE["output"] += int(u.get("candidatesTokenCount", 0))
     USAGE["thinking"] += int(u.get("thoughtsTokenCount", 0)); USAGE["total"] += int(u.get("totalTokenCount", 0))
     try:
-        gemini_spend.record_usage(ROOT, model, u, meta=meta, call_i=USAGE["calls"])
+        gemini_spend.record_usage(ROOT, model, u, meta=meta, call_i=USAGE["calls"], reservation=rsv)
+        rsv = None
     except Exception as _sx:
-        print("spend 기록 실패(재번역 계속): %s" % type(_sx).__name__, flush=True)
+        print("spend 기록 실패(재번역 계속·예약 TTL 확정): %s" % type(_sx).__name__, flush=True)
     c = (d.get("candidates") or [{}])[0]
     body = "".join(p.get("text", "") for p in (c.get("content") or {}).get("parts", []) if not p.get("thought"))
     try:

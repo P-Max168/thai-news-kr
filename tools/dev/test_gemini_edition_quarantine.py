@@ -2,8 +2,15 @@
 """gemini_edition 격리·재번역·503/5분 예산 단위 검사(2026-10-28).
 실행: python3 tools/dev/test_gemini_edition_quarantine.py
 """
-import pathlib, sys, types, time
+import os, pathlib, sys, tempfile, types, time
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+# 예약 원장: 시험은 로컬 파일 CAS (허브 토큰 불필요)
+_td = tempfile.mkdtemp(prefix="spend-test-")
+os.environ["GEMINI_SPEND_BACKEND"] = "local"
+os.environ["GEMINI_SPEND_LOCAL_PATH"] = str(pathlib.Path(_td) / "ledger.json")
+import gemini_spend as _gs
+_gs.SPEND_BACKEND = "local"
+_gs.LOCAL_LEDGER_PATH = os.environ["GEMINI_SPEND_LOCAL_PATH"]
 import gemini_edition as g
 
 FAIL = 0
