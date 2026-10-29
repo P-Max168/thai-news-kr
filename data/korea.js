@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-29T21:28:18+07:00",
+ "updated_at": "2026-10-30T02:51:44+07:00",
  "items": [
   {
    "title": "‘이주민 배제’ 자극한 대통령의 말…멀어진 ‘건강한 공론장’",
    "source": "한겨레",
-   "time": "2026-10-29T18:27:00+07:00",
+   "time": "2026-10-29T21:19:00+07:00",
    "url": "https://www.hani.co.kr/arti/society/society_general/1284894.html"
   },
   {
-   "title": "윤석열 2심 사형 구형에···변호인단 “내란이라는 판타지 소설 써”",
+   "title": "한·독일, ‘강화된 전략적 동반자 관계’ 격상…“첨단산업·방산 협력 강화”",
    "source": "경향신문",
-   "time": "2026-10-29T15:17:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610291717001"
+   "time": "2026-10-29T19:30:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610292130015"
   },
   {
-   "title": "247만장 밤샘 공개 검증 끝 투표함 반출에도…부정선거론 여전",
-   "source": "경향신문",
-   "time": "2026-10-29T19:29:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610292129005"
+   "title": "청년 광장서 극우 무대로…부정선거론이 삼킨 ‘올공 시위’ 147일",
+   "source": "한겨레",
+   "time": "2026-10-29T20:51:00+07:00",
+   "url": "https://www.hani.co.kr/arti/society/society_general/1284902.html"
   },
   {
-   "title": "오세훈 \"소방 재정, 버겁긴 하지만 어차피 국민 세금‥소명으로 받아들여\"",
-   "source": "MBC 뉴스",
-   "time": "2026-10-29T14:49:18+07:00",
-   "url": "https://imnews.imbc.com/news/2026/society/article/6861704_36918.html"
+   "title": "‘수사반장’ 최불암 별세, 향년 86…초록우산 어린이재단장 엄수",
+   "source": "한겨레",
+   "time": "2026-10-29T23:51:00+07:00",
+   "url": "https://www.hani.co.kr/arti/society/internalmove/1284921.html"
   },
   {
    "title": "주진우 \"李 가족, 황제 골프 후 헬기 이동\"…추가 의혹 제기",
    "source": "한국경제",
-   "time": "2026-10-29T18:08:00+07:00",
+   "time": "2026-10-29T13:45:38+07:00",
    "url": "https://www.hankyung.com/article/202610293724H"
   },
   {
-   "title": "“한국 사랑한 아들 앞에 펼쳐져 있던 삶 기억해달라”…이태원참사 4주기",
-   "source": "한겨레",
-   "time": "2026-10-29T18:05:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/society_general/1284804.html"
-  },
-  {
-   "title": "'구로 시신유기' 피의자 2명 구속 심사‥\"인형인 줄 알았다\"",
+   "title": "경기 버스 노사, 11시간 만에 협상 타결..총파업 철회",
    "source": "MBC 뉴스",
-   "time": "2026-10-29T12:19:55+07:00",
-   "url": "https://imnews.imbc.com/news/2026/society/article/6861660_36918.html"
+   "time": "2026-10-30T00:38:22+07:00",
+   "url": "https://imnews.imbc.com/news/2026/society/article/6861815_36918.html"
   },
   {
-   "title": "유시민 “임기 못 채울 수도”…김민석 “논평 불필요” 무시 속 의원들은 격앙",
+   "title": "유시민 “임기 못 채울 수도”…민주 “같은 내무반에 수류탄 던지냐”",
    "source": "한겨레",
-   "time": "2026-10-29T18:13:00+07:00",
+   "time": "2026-10-29T20:34:00+07:00",
    "url": "https://www.hani.co.kr/arti/politics/politics_general/1284872.html"
   },
   {
-   "title": "북한, 또 단거리 탄도미사일 발사…강신철, 거듭 대화 촉구",
-   "source": "경향신문",
-   "time": "2026-10-29T19:35:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610292135025"
+   "title": "이 대통령, 사우디 왕세자와 통화…\"중동전쟁 피해 깊은 위로\"",
+   "source": "연합뉴스TV",
+   "time": "2026-10-29T20:13:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261029221300HAH"
   },
   {
    "title": "국정원 \"김정은, 방중 때 북미 대화 의중 전달 가능성\"",
    "source": "조선일보",
    "time": "2026-10-29T16:01:51+07:00",
    "url": "https://www.chosun.com/politics/assembly/2026/10/29/LMC3JXV2ZVEKHE2VFG3NY54IK4/"
+  },
+  {
+   "title": "[이스라엘 총선 현장을 가다]“팔레스타인 문제는 관심조차 없어…선거 끝나도 네타냐후의 시간”",
+   "source": "경향신문",
+   "time": "2026-10-29T19:25:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610292125005"
   }
  ]
 };
