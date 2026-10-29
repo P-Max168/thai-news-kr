@@ -15,7 +15,7 @@ import datetime as dt, json, os, random, re, sys, urllib.request
 BKK = dt.timezone(dt.timedelta(hours=7))
 SITE = os.environ.get("TNK_SITE", "https://tnews.pmaxone.com/")
 LOG = os.path.join(os.environ.get("TNK_LOGDIR", "/workspace/logs") if os.environ.get("TNK_TEST") == "1" else "/workspace/logs", "edition-stale.txt")   # 덮어쓰기는 TNK_TEST=1 일 때만(2026-10-05)
-SLOTS = [("am", 7, 0), ("pm", 18, 0)]   # 2026-10-23: 게시 목표 07:00·18:00(시작 06:40·17:40)
+SLOTS = [("am", 7, 0), ("md", 12, 0), ("pm", 18, 0)]   # 2026-10-29: 점심판(md) 추가. 게시 목표 07:00·12:00·18:00(시작 06:40·11:40·17:40)
 GRACE = 30
 GAPS = os.path.join(os.path.dirname(LOG), "edition-gaps.txt")
 
@@ -35,17 +35,14 @@ def expected(now):
 
 def slot_list(after, upto):
     """after(제외) 다음부터 upto(포함)까지 예정 판 id 목록(최대 60일). after 를 못 읽으면 None"""
-    m = re.match(r"(\d{4}-\d{2}-\d{2})-(am|pm)$", after or "")
-    u = re.match(r"(\d{4}-\d{2}-\d{2})-(am|pm)$", upto)
+    m = re.match(r"(\d{4}-\d{2}-\d{2})-(am|md|pm)$", after or "")
+    u = re.match(r"(\d{4}-\d{2}-\d{2})-(am|md|pm)$", upto)
     if not m or not u:
         return None
     d, slot = dt.date.fromisoformat(m.group(1)), m.group(2)
     out = []
     for _ in range(120):
-        if slot == "am":
-            slot = "pm"
-        else:
-            slot, d = "am", d + dt.timedelta(days=1)
+        slot, d = _after(slot, d)
         ed = "%s-%s" % (d.isoformat(), slot)
         if ed > upto:
             break
@@ -53,11 +50,21 @@ def slot_list(after, upto):
     return out
 
 
+ORDER = [x[0] for x in SLOTS]   # 2026-10-29: 점심판(md) 포함, 판 id 는 am < md < pm 글자순과 같음
+
+
+def _after(slot, d):
+    """판 순서에서 다음 (slot, date). SLOTS 에 없는 옛 판(예: md 없던 날)은 같은 날 그 뒤 첫 판"""
+    later = [x for x in ORDER if x > slot]
+    if later:
+        return later[0], d
+    return ORDER[0], d + dt.timedelta(days=1)
+
+
 def next_slot(ed):
     d, slot = ed.rsplit("-", 1)
-    if slot == "am":
-        return d + "-pm"
-    return (dt.date.fromisoformat(d) + dt.timedelta(days=1)).isoformat() + "-am"
+    ns, nd = _after(slot, dt.date.fromisoformat(d))
+    return "%s-%s" % (nd.isoformat(), ns)
 
 
 def live_latest():
