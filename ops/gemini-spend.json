@@ -414,6 +414,19 @@
       "reservation_id": "rsv:P-Max168/thai-news-zh:2026-10-29-md:e2082fca008e"
     }
   ],
-  "reserved_thb": 0,
-  "reservations": []
+  "reserved_thb": 2.400226,
+  "reservations": [
+    {
+      "id": "rsv:P-Max168/vn-news-kr:2026-10-29-md:b8c1c31be632",
+      "at": "2026-10-29T13:25:36+07:00",
+      "day": "2026-10-29",
+      "repo": "P-Max168/vn-news-kr",
+      "edition": "2026-10-29-md",
+      "model": "gemini-3.5-flash-lite",
+      "est_thb": 2.400226,
+      "status": "open",
+      "priced_as": "gemini-3.8-flash",
+      "margin": 1.5
+    }
+  ]
 }
