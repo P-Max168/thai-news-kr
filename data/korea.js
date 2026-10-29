@@ -1,66 +1,66 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-29T06:18:23+07:00",
+ "updated_at": "2026-10-29T13:27:43+07:00",
  "items": [
   {
-   "title": "장동혁 “선관위·특검이 투표함을 야반도주하듯 들고 사라져”",
-   "source": "경향신문",
-   "time": "2026-10-29T05:58:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610290758001"
+   "title": "경기도 6곳 그린벨트 풀어... 신규 택지 7만6700가구 공급",
+   "source": "조선일보",
+   "time": "2026-10-29T08:01:00+07:00",
+   "url": "https://www.chosun.com/economy/real_estate/2026/10/29/KIPBMLGA2ZFHLNMCLCGJDU5M6Q/"
   },
   {
-   "title": "이 대통령 ‘외국인 노동자 발언’ 비판 확산…“언론 탓 전에 사과 먼저”",
+   "title": "[속보]특검, 윤석열 ‘내란 우두머리’ 2심도 사형 구형",
+   "source": "동아일보",
+   "time": "2026-10-29T10:25:00+07:00",
+   "url": "https://www.donga.com/news/Politics/article/all/20261029/134931247/1"
+  },
+  {
+   "title": "조희대 대법원장 탄핵 찬성 34%-반대 45%‥진보·보수 엇갈려 [NBS]",
+   "source": "MBC 뉴스",
+   "time": "2026-10-29T09:41:41+07:00",
+   "url": "https://imnews.imbc.com/news/2026/politics/article/6861609_36911.html"
+  },
+  {
+   "title": "장동혁, 올공서 ‘밤샘 농성’…간다던 이태원 참사 기억식엔 불참",
    "source": "한겨레",
-   "time": "2026-10-28T22:20:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1284701.html"
+   "time": "2026-10-29T09:10:00+07:00",
+   "url": "https://www.hani.co.kr/arti/politics/assembly/1284768.html"
   },
   {
-   "title": "[율곡로] 우리 軍은 믿을 수 있나",
-   "source": "연합뉴스",
-   "time": "2026-10-29T05:58:00+07:00",
-   "url": "https://www.yna.co.kr/view/AKR20261028162500546"
+   "title": "이 대통령 \"SNS 속 국민과 직접 소통, 포기하면 안 될 중요한 책무\"",
+   "source": "연합뉴스TV",
+   "time": "2026-10-29T12:28:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261029142828lN6"
   },
   {
-   "title": "[라인W 날씨] 내일 아침도 추워요…오후부터 중부 비 시작",
+   "title": "서울에서도 첫서리 관측…아침 내륙 곳곳 영하권",
    "source": "KBS 뉴스",
-   "time": "2026-10-28T21:34:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8698101"
+   "time": "2026-10-29T08:32:06+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8698451"
   },
   {
-   "title": "유시민, 이 대통령 향해 “윤석열처럼 자기 집 해체하고 있다”",
-   "source": "한겨레",
-   "time": "2026-10-28T22:19:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1284708.html"
+   "title": "합참 \"北, 동해상 탄도미사일 10여발 발사\"",
+   "source": "조선일보",
+   "time": "2026-10-29T10:47:00+07:00",
+   "url": "https://www.chosun.com/politics/diplomacy-defense/2026/10/29/FGGKHNCLUNDLTG4XDJLYZOEA4U/"
   },
   {
-   "title": "장윤기 부친 “아들, 그런 일 저질렀다니 납득 안 돼···미안합니다”",
-   "source": "경향신문",
-   "time": "2026-10-28T18:46:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610282046001"
+   "title": "진보정당, 이 대통령 이주노동자 발언 비판‥\"명백히 부적절\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-28T12:18:54+07:00",
+   "url": "https://imnews.imbc.com/news/2026/politics/article/6861332_36911.html"
   },
   {
-   "title": "‘내란 우두머리’ 윤석열 항소심…오늘 특검 사형 구형하나",
-   "source": "KBS 뉴스",
-   "time": "2026-10-28T23:01:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8698114"
+   "title": "취재진에게 “조용히 해!“…’역삼 연쇄 방화범’ 살인미수 혐의 적용해 송치",
+   "source": "연합뉴스TV",
+   "time": "2026-10-29T06:24:00+07:00",
+   "url": "https://www.yonhapnewstv.co.kr/news/AKR20261029075940tXx"
   },
   {
-   "title": "“상대 후보와 이름 똑같은 사람 찾아라”…민주당의 은밀한 선거 작전 [특파원 리포트]",
-   "source": "KBS 뉴스",
-   "time": "2026-10-29T03:36:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8698127"
-  },
-  {
-   "title": "민주당 ‘조작기소 특검’ 재추진 시사…“정치 검찰 책임 물어야 할 시간”",
-   "source": "KBS 뉴스",
-   "time": "2026-10-28T15:48:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8697637"
-  },
-  {
-   "title": "오세훈 2심 재판부의 의도된 오류? [유레카]",
-   "source": "한겨레",
-   "time": "2026-10-28T22:31:00+07:00",
-   "url": "https://www.hani.co.kr/arti/opinion/column/1284613.html"
+   "title": "네타냐후당, '킹메이커' 떠오른 아랍계에 부정선거 주장",
+   "source": "MBC 뉴스",
+   "time": "2026-10-29T08:49:22+07:00",
+   "url": "https://imnews.imbc.com/news/2026/world/article/6861595_36925.html"
   }
  ]
 };
