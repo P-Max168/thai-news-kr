@@ -526,6 +526,19 @@
       "reservation_id": "rsv:P-Max168/vn-news-kr:2026-10-29-md:e73b0d7d9f95"
     }
   ],
-  "reserved_thb": 0,
-  "reservations": []
+  "reserved_thb": 2.475617,
+  "reservations": [
+    {
+      "id": "rsv:P-Max168/vn-news-kr:2026-10-29-md:c3f14cf3d1e3",
+      "at": "2026-10-29T13:31:26+07:00",
+      "day": "2026-10-29",
+      "repo": "P-Max168/vn-news-kr",
+      "edition": "2026-10-29-md",
+      "model": "gemini-3.5-flash-lite",
+      "est_thb": 2.475617,
+      "status": "open",
+      "priced_as": "gemini-3.8-flash",
+      "margin": 1.5
+    }
+  ]
 }
