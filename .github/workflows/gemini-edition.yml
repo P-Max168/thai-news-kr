@@ -39,6 +39,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 2
+          ref: ${{ github.ref_name }}  # 대기열 재시도가 최신 main을 받게(이미 있는 판 중복 생성 방지)
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
