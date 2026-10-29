@@ -76,9 +76,35 @@ else
 fi
 
 # push (force 금지). 먼저 원격(Actions 의 korea.json 커밋 등)을 rebase 로 받은 뒤 일반 push, 거부되면 최대 4번 재시도.
+# spend 원장(ops/gemini-spend.json)이 실행 중 main에 갱신되면 rebase 충돌이 난다.
+# 원장은 main이 권위이므로, 그 파일만 충돌이면 rebase 중 ours(=onto/main)를 채택하고 계속한다.
+_pull_rebase() {
+  if git pull --rebase --autostash -q origin main; then
+    return 0
+  fi
+  if git ls-files -u | grep -qE '(^|[[:space:]])ops/gemini-spend\.json$'; then
+    echo "rebase 충돌: ops/gemini-spend.json → main(ours) 채택" >&2
+    git checkout --ours -- ops/gemini-spend.json
+    git add -- ops/gemini-spend.json
+    if git diff --name-only --diff-filter=U | grep -q .; then
+      echo "git pull --rebase 실패(다른 파일 충돌) — 수동 확인 필요" >&2
+      git rebase --abort 2>/dev/null || true
+      return 1
+    fi
+    if ! GIT_EDITOR=true git rebase --continue; then
+      echo "git pull --rebase 실패(continue) — 수동 확인 필요" >&2
+      git rebase --abort 2>/dev/null || true
+      return 1
+    fi
+    return 0
+  fi
+  echo "git pull --rebase 실패(충돌?) — 수동 확인 필요" >&2
+  git rebase --abort 2>/dev/null || true
+  return 1
+}
 ok=""
 for i in 1 2 3 4; do
-  git pull --rebase --autostash -q origin main || { echo "git pull --rebase 실패(충돌?) — 수동 확인 필요" >&2; git rebase --abort 2>/dev/null || true; exit 3; }
+  _pull_rebase || { exit 3; }
   if git push -q origin main; then ok=1; break; fi
   echo "push 거부($i) → 잠시 뒤 pull --rebase 후 재시도"; sleep $((i * 5))
 done
