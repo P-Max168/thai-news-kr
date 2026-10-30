@@ -17,7 +17,7 @@
   },
   "spent_thb": 8.48243,
   "spent_usd": 0.2494832,
-  "reserved_thb": 0,
+  "reserved_thb": 2.105433,
   "entries": [
     {
       "id": "P-Max168/thai-news-zh|2026-10-30-am|2026-10-30T07:37:25+07:00|1",
@@ -356,5 +356,18 @@
       "reservation_id": "rsv:P-Max168/thai-news-zh:2026-10-30-md:a2443beff704"
     }
   ],
-  "reservations": []
+  "reservations": [
+    {
+      "id": "rsv:P-Max168/thai-news-zh:2026-10-30-md:459be0a02550",
+      "at": "2026-10-30T12:31:20+07:00",
+      "day": "2026-10-30",
+      "repo": "P-Max168/thai-news-zh",
+      "edition": "2026-10-30-md",
+      "model": "gemini-3.8-flash",
+      "est_thb": 2.105433,
+      "status": "open",
+      "priced_as": "gemini-3.8-flash",
+      "margin": 1.5
+    }
+  ]
 }
