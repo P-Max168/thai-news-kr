@@ -32,6 +32,7 @@ BKK = timezone(timedelta(hours=7))
 
 # --- 설정(환경 변수로 덮어쓰기 가능) ---
 DAILY_CAP_THB = float(os.environ.get("GEMINI_DAILY_CAP_THB", "200"))
+CAP_FROM_ENV = "GEMINI_DAILY_CAP_THB" in os.environ   # 2026-10-29: 환경변수로 준 상한이 원장에 저장된 cap 보다 우선(시험 저장소 30바트)
 USD_THB = float(os.environ.get("GEMINI_USD_THB", "34.0"))
 HUB_REPO = os.environ.get("GEMINI_SPEND_HUB_REPO", "P-Max168/thai-news-kr")
 HUB_PATH = os.environ.get("GEMINI_SPEND_HUB_PATH", "ops/gemini-spend.json")
@@ -56,8 +57,9 @@ ESTIMATE_FLOOR_MODEL = os.environ.get("GEMINI_ESTIMATE_FLOOR_MODEL", "gemini-3.8
 CHARS_PER_TOKEN = 4
 # 예약 TTL(초). 만료 시 예상비용을 확정 지출로 올려 과소계상을 막음.
 RESERVATION_TTL_S = int(os.environ.get("GEMINI_RESERVATION_TTL_S", "2700"))
-# hub = GitHub Contents API / local = 파일 CAS(시험용)
+# hub = GitHub Contents API(옛 방식, 원장이 git 파일) / d1 = news.pmaxone.com D1 원장(2026-10-29 S1, GitHub OIDC 인증, 토큰 없음) / local = 파일 CAS(시험용)
 SPEND_BACKEND = (os.environ.get("GEMINI_SPEND_BACKEND") or "hub").strip().lower()
+D1_HUB_URL = os.environ.get("GEMINI_SPEND_D1_URL", "https://news.pmaxone.com").rstrip("/")
 LOCAL_LEDGER_PATH = os.environ.get("GEMINI_SPEND_LOCAL_PATH", "")
 
 # 이번 프로세스에서 아직 허브에 안 올라간 추가분(감사용)
@@ -230,7 +232,7 @@ def _recompute(tally):
     out.update(
         day=day,
         tz="Asia/Bangkok",
-        cap_thb=float(tally.get("cap_thb") or DAILY_CAP_THB),
+        cap_thb=(DAILY_CAP_THB if CAP_FROM_ENV else float(tally.get("cap_thb") or DAILY_CAP_THB)),
         usd_thb=float(tally.get("usd_thb") or USD_THB),
         pricing_source=tally.get("pricing_source") or PRICING_SOURCE,
         pricing_read=tally.get("pricing_read") or PRICING_READ,
@@ -336,9 +338,11 @@ def this_repo():
 
 
 def can_write_hub():
-    """허브에 CAS 쓸 수 있는지. 교차 저장소는 SPEND_HUB_TOKEN 필수."""
+    """허브에 CAS 쓸 수 있는지. 교차 저장소는 SPEND_HUB_TOKEN 필수. d1 은 Actions OIDC 만 있으면 됨(토큰 없음)."""
     if SPEND_BACKEND == "local":
         return True
+    if SPEND_BACKEND == "d1":
+        return bool(os.environ.get("ACTIONS_ID_TOKEN_REQUEST_URL"))
     if os.environ.get("SPEND_HUB_TOKEN", "").strip():
         return True
     if this_repo() == HUB_REPO and os.environ.get("GITHUB_TOKEN", "").strip():
@@ -552,10 +556,90 @@ def _hub_cas(mutator, token=None, day=None, max_tries=10):
     raise LedgerUnavailable("hub_cas_exhausted:%s" % last_reason)
 
 
+# ---------- d1 백엔드(S1): news.pmaxone.com /api/spend/tally — 같은 tally JSON 을 (day, env) 마다 하나, ver 로 CAS ----------
+_OIDC_CACHE = {}
+
+
+def oidc_token(audience="news-hub"):
+    """GitHub Actions OIDC 토큰(id-token: write). 비밀값 아님·저장 안 함. Actions 밖이면 빈 문자열."""
+    url, req = os.environ.get("ACTIONS_ID_TOKEN_REQUEST_URL"), os.environ.get("ACTIONS_ID_TOKEN_REQUEST_TOKEN")
+    if not (url and req):
+        return ""
+    if _OIDC_CACHE.get("t") and time.time() - _OIDC_CACHE.get("at", 0) < 240:
+        return _OIDC_CACHE["t"]
+    try:
+        r = urllib.request.Request(url + "&audience=" + audience, headers={"Authorization": "bearer " + req})
+        with urllib.request.urlopen(r, timeout=20) as f:
+            tok = json.load(f).get("value") or ""
+        _OIDC_CACHE.update(t=tok, at=time.time())
+        return tok
+    except Exception:
+        return ""
+
+
+def _d1_http(path, method="GET", data=None, tok=None):
+    body = json.dumps(data).encode("utf-8") if data is not None else None
+    req = urllib.request.Request(D1_HUB_URL + path, data=body, method=method,
+                                 headers={"Authorization": "Bearer " + (tok or ""), "Content-Type": "application/json", "User-Agent": "gemini_spend/d1"})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as f:
+            return f.getcode(), json.load(f)
+    except urllib.error.HTTPError as ex:
+        try:
+            return ex.code, json.load(ex)
+        except Exception:
+            return ex.code, {"error": str(ex)[:120]}
+    except Exception as ex:
+        return 0, {"error": "%s:%s" % (type(ex).__name__, str(ex)[:120])}
+
+
+def _d1_cas(mutator, day=None, max_tries=10):
+    tok = oidc_token()
+    if not tok:
+        raise LedgerUnavailable("no_oidc_token(d1 원장은 Actions 안에서만 씀)")
+    day = day or today_bkk()
+    last = ""
+    for attempt in range(max_tries):
+        code, cur = _d1_http("/api/spend/tally?day=" + day, tok=tok)
+        if code != 200:
+            last = "get_%s:%s" % (code, str(cur.get("error") or "")[:120]); time.sleep(0.5 + 0.3 * attempt); continue
+        ver = int(cur.get("ver") or 0)
+        remote = cur.get("body") or empty_tally(day)
+        if (remote.get("day") or "") != day:
+            remote = empty_tally(day)
+        remote = _expire_stale(_recompute(remote))
+        try:
+            new = mutator(remote)
+        except SpendCapExceeded:
+            raise
+        new = _recompute(new)
+        code, res = _d1_http("/api/spend/tally", method="PUT", data={"day": day, "ver": ver, "body": new}, tok=tok)
+        if code == 200 and res.get("ok"):
+            return new
+        last = "put_%s:%s" % (code, str(res.get("error") or "")[:120])
+        if code == 409:
+            time.sleep(0.2 + 0.15 * attempt); continue
+        time.sleep(0.5 + 0.3 * attempt)
+    raise LedgerUnavailable("d1_cas_exhausted:%s" % last)
+
+
+def _d1_fetch(day):
+    tok = oidc_token()
+    if not tok:
+        raise LedgerUnavailable("no_oidc_token")
+    code, cur = _d1_http("/api/spend/tally?day=" + day, tok=tok)
+    if code != 200:
+        raise LedgerUnavailable("d1_get_%s" % code)
+    t = cur.get("body") or empty_tally(day)
+    return _expire_stale(_recompute(t if (t.get("day") or "") == day else empty_tally(day)))
+
+
 def cas_update(mutator, day=None, token=None):
-    """백엔드에 따라 local 또는 hub CAS."""
+    """백엔드에 따라 local / d1 / hub CAS."""
     if SPEND_BACKEND == "local":
         return _local_cas(mutator, day=day)
+    if SPEND_BACKEND == "d1":
+        return _d1_cas(mutator, day=day)
     if not can_write_hub():
         raise LedgerUnavailable("cannot_write_hub:need_SPEND_HUB_TOKEN_or_hub_repo_GITHUB_TOKEN")
     return _hub_cas(mutator, token=token, day=day)
@@ -567,6 +651,13 @@ def load_shared(root, day=None, token=None, require_hub=True):
     허브가 단일 진실. 로컬은 보조 표시용."""
     day = day or today_bkk()
     token = token if token is not None else hub_token()
+    if SPEND_BACKEND == "d1":
+        try:
+            return _d1_fetch(day)
+        except LedgerUnavailable:
+            if require_hub:
+                raise
+            return empty_tally(day)
     if SPEND_BACKEND == "local":
         path = _local_ledger_file()
         if path.exists():
@@ -609,7 +700,7 @@ def check_can_call(root, model, prompt_text, assumed_output=None, day=None, toke
     spent = float(tally.get("spent_thb") or 0)
     reserved = float(tally.get("reserved_thb") or 0)
     est = estimate_next_thb(model, prompt_text, assumed_output=assumed_output)
-    cap = float(tally.get("cap_thb") or DAILY_CAP_THB)
+    cap = (DAILY_CAP_THB if CAP_FROM_ENV else float(tally.get("cap_thb") or DAILY_CAP_THB))
     if spent + reserved + est > cap + 1e-9:
         raise SpendCapExceeded(spent, est, cap, day, reserved_thb=reserved)
     return True, spent, est, cap, tally
@@ -672,7 +763,7 @@ def reserve_or_raise(root, model, prompt_text, meta=None, assumed_output=None, w
     def mutator(tally):
         spent = float(tally.get("spent_thb") or 0)
         reserved = float(tally.get("reserved_thb") or 0)
-        cap = float(tally.get("cap_thb") or DAILY_CAP_THB)
+        cap = (DAILY_CAP_THB if CAP_FROM_ENV else float(tally.get("cap_thb") or DAILY_CAP_THB))
         if spent + reserved + est > cap + 1e-9:
             raise SpendCapExceeded(spent, est, cap, day, reserved_thb=reserved)
         reservations = list(tally.get("reservations") or [])

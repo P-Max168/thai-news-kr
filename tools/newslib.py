@@ -186,7 +186,11 @@ def krw_text(won):
 
 def cny_text(yuan):
     """인민폐 금액 → 약 3유효숫자 + 万/亿. 예: 70 / 1.23万 / 123亿 (뒤에 '元'은 호출측에서)."""
-    w = _round_sig(abs(yuan), 3)
+    a = abs(yuan)
+    if a < 1:   # 2026-10-29: 1元 미만을 정수로 반올림하면 '约0元' — 소수로 쓴다(0.2 / 0.04)
+        t = ("%.1f" % a) if round(a, 1) >= 0.1 else ("%.2f" % max(a, 0.01))
+        return t[:-2] if t.endswith(".0") else t
+    w = _round_sig(a, 3)
     if w >= 10 ** 8:
         return _fmt_coef(w / 10 ** 8) + "亿"
     if w >= 10 ** 4:
@@ -345,6 +349,19 @@ def money_ok(text):
 
 
 HANGUL_RE = re.compile(r"[\u1100-\u11FF\u3130-\u318F\uAC00-\uD7AF]")
+
+
+def source_label(name, fallback=""):
+    """매체 이름 표시용(2026-10-30). 화면에 태국 글자가 금지된 언어판이면 태국어 부분(괄호 안 원어 이름 등)을 뺀다.
+    'Bangkok Biz News(กรุงเทพธุรกิจ)' → 'Bangkok Biz News', 전부 태국어면 fallback.
+    (also[].source 에 태국 글자가 남아 판 미리보기(e/<판>/)를 못 만들고 404 가 나던 것 — thai_check 는 source·related.source 만 봤음)"""
+    s = str(name or "").strip()
+    if not thai_bad(s):
+        return s
+    s = re.sub(r"[(\[（［][^)\]）］]*[\u0E00-\u0E7F][^)\]）］]*[)\]）］]", "", s)   # 괄호 안에 태국 글자 → 괄호째
+    s = THAI_RE.sub("", s)
+    s = re.sub(r"\s{2,}", " ", s).strip(" -–·/|,:")
+    return s or fallback
 
 
 def thai_bad(text):
