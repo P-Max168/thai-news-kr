@@ -6,6 +6,7 @@ on:
   schedule:
     # CORE-PULL-KEEP: 아래 cron 줄은 사이트 고유 — core-pull 이 덮어쓰지 않음
     - cron: "9 */2 * * *"
+    - cron: "17 1-23/6 * * *"
   workflow_dispatch:
     inputs:
       force:
