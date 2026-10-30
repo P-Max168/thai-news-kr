@@ -61,7 +61,8 @@
   "pair": "THB_KRW",
   "format": "{thb}바트(약 {krw}원)",
   "check": "krw_check",
-  "header_symbol": "฿"
+  "header_symbol": "฿",
+  "fx_update_bkk": "07:02"
  },
  "validate": {
   "forbid_scripts": [
@@ -119,5 +120,31 @@
    40
   ]
  ],
- "_schedule_note": "2026-10-27 맥스님: 운영 중·신규 채널 기본 = 하루 3판(am/md/pm)+속보 별도. early는 예비."
+ "_schedule_note": "2026-10-27 맥스님: 운영 중·신규 채널 기본 = 하루 3판(am/md/pm)+속보 별도. early는 예비.",
+ "edition": {
+  "picker": "grok_file",
+  "pool": 30,
+  "select": 0,
+  "claim": true,
+  "deploy": "pages",
+  "live_check": "pages",
+  "video_feed": true,
+  "candidates_from": "own"
+ },
+ "side": {
+  "cmds": [
+   "python3 tools/fetch_korea.py --standalone {force}",
+   "python3 tools/fetch_ticker.py"
+  ],
+  "files": [
+   "data/korea.json",
+   "data/korea.js",
+   "data/ticker.json",
+   "data/ticker.js"
+  ],
+  "label": "korea: 한국 주요 뉴스·시세",
+  "pip": [
+   "googlenewsdecoder"
+  ]
+ }
 }

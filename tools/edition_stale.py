@@ -13,9 +13,26 @@
 import datetime as dt, json, os, random, re, sys, urllib.request
 
 BKK = dt.timezone(dt.timedelta(hours=7))
-SITE = os.environ.get("TNK_SITE", "https://tnews.pmaxone.com/")
+# (2026-10-29 공통화 Claude) 사이트 주소·판 목표 시각은 site/<lang>.json 에서: site_url, edition.stale_slots([["am",7,0],…] 없으면 watch_slots+20분)
+try:
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import siteconf as _sc
+    _C = _sc.load()
+except Exception:
+    _C = {}
+SITE = os.environ.get("TNK_SITE") or _C.get("site_url") or "https://tnews.pmaxone.com/"
 LOG = os.path.join(os.environ.get("TNK_LOGDIR", "/workspace/logs") if os.environ.get("TNK_TEST") == "1" else "/workspace/logs", "edition-stale.txt")   # 덮어쓰기는 TNK_TEST=1 일 때만(2026-10-05)
-SLOTS = [("am", 7, 0), ("md", 12, 0), ("pm", 18, 0)]   # 2026-10-29: 점심판(md) 추가. 게시 목표 07:00·12:00·18:00(시작 06:40·11:40·17:40)
+def _slots():
+    e = (_C.get("edition") or {}).get("stale_slots")
+    if e:
+        return [(str(a), int(b), int(c)) for a, b, c in e]
+    ws = _C.get("watch_slots") or [["am", 6, 40], ["md", 11, 40], ["pm", 17, 40]]
+    out = []
+    for a, b, c in ws:   # 게시 목표 = 시작(하한) + 20분
+        m = int(b) * 60 + int(c) + 20
+        out.append((str(a), m // 60, m % 60))
+    return out
+SLOTS = _slots()   # 예: KR [("am",7,0),("md",12,0),("pm",18,0)] / ZH 07:40… / VN 07:30…(stale_slots 로 지정)
 GRACE = 30
 GAPS = os.path.join(os.path.dirname(LOG), "edition-gaps.txt")
 
@@ -72,7 +89,7 @@ def live_latest():
     last = None
     for i in range(3):   # 일시 실패면 다시(2초·4초)
         try:
-            with urllib.request.urlopen(urllib.request.Request(url, headers={"Cache-Control": "no-cache"}), timeout=15) as r:
+            with urllib.request.urlopen(urllib.request.Request(url, headers={"Cache-Control": "no-cache", "User-Agent": "Mozilla/5.0 (edition_stale check)"}), timeout=15) as r:
                 txt = r.read().decode("utf-8", "replace")
             m = re.search(r'"latest"\s*:\s*"([^"]+)"', txt)
             if m:

@@ -37,9 +37,17 @@ git checkout -q main
 # 🇰🇷 data/korea.json|js · 💱 data/ticker.json|js(헤더 시세 칩)는 GitHub Actions(.github/workflows/korea.yml)가 2시간마다 갱신·커밋하는 파일
 # → 이 스크립트는 절대 올리지 않는다. 로컬 사본(오래됐을 수 있음)은 버리고 원격 것을 받는다(pull 때 충돌·덮어쓰기 방지).
 KOREA_FILES="data/korea.json data/korea.js data/ticker.json data/ticker.js"
-for f in $KOREA_FILES; do
-  if git ls-files --error-unmatch "$f" >/dev/null 2>&1; then git checkout -q -- "$f"; else rm -f "$f"; fi
-done
+# (2026-10-30 공통화) 곁 데이터 파일 목록은 site/<lang>.json side.files(side-data.yml 이 갱신). 없으면 옛 기본값
+SIDE_FILES="$(python3 -c 'import sys;sys.path.insert(0,"tools");import siteconf;print(" ".join((siteconf.load().get("side") or {}).get("files") or []))' 2>/dev/null || true)"
+[ -z "$SIDE_FILES" ] || KOREA_FILES="$SIDE_FILES"
+# 그 파일을 따로 갱신하는 워크플로(side-data.yml, 옛 korea.yml·china.yml)가 있는 채널만 제외. 판 실행 안(pre_cmd)에서만 갱신하는 채널은 같이 커밋
+if [ -f .github/workflows/side-data.yml ] || [ -f .github/workflows/korea.yml ] || [ -f .github/workflows/china.yml ]; then
+  for f in $KOREA_FILES; do
+    if git ls-files --error-unmatch "$f" >/dev/null 2>&1; then git checkout -q -- "$f"; else rm -f "$f"; fi
+  done
+else
+  KOREA_FILES=""
+fi
 # 검색 노출(2026-10-18 R-seo-2): sitemap.xml 을 data/index.json·e/ 에 맞춰 다시 만듦(share_kit 도 만들지만 한 번 더 — 실패해도 배포는 계속)
 python3 tools/seo.py sitemap || echo "경고: sitemap.xml 갱신 실패(배포는 계속)" >&2
 # IndexNow 키 파일만 보장(제출은 push 뒤)
@@ -48,14 +56,15 @@ python3 -c "import sys; sys.path.insert(0,'tools'); import seo; print('indexnow'
 python3 tools/stamp_assets.py
 # 측정 한 줄(2026-10-23): ops/metrics.jsonl — 실패해도 배포 계속
 python3 tools/metrics.py "$LATEST" || true
-# YouTube Tower 입력(2026-10-28): md 판이면 ops/video/<date>.json 생성(실패해도 배포 계속)
-if [[ "$LATEST" == *-md ]]; then
+# YouTube Tower 입력(2026-10-28): md 판이면 ops/video/<date>.json 생성(실패해도 배포 계속). 2026-10-29 공통화: site/<lang>.json edition.video_feed 가 true 인 채널만
+VIDEO_FEED="$(python3 -c 'import sys;sys.path.insert(0,"tools");import siteconf;print("1" if (siteconf.load().get("edition") or {}).get("video_feed") else "")' 2>/dev/null || true)"
+if [ -n "$VIDEO_FEED" ] && [[ "$LATEST" == *-md ]]; then
   python3 tools/video_picks.py --date "${LATEST%-md}" || echo "경고: video_picks 실패(배포는 계속)" >&2
 fi
 # 사이트 파일만 스테이징 (.gitignore 가 제외 대상 차단)
 # og/(링크 미리보기 이미지)·e/(판별 미리보기 페이지)는 tools/share_kit.py 가 만듦 — 있는 경로만 추가
 PATHS=""
-for p in index.html robots.txt sitemap.xml feed.xml .nojekyll .gitignore README.md manifest.json sw.js firestore.rules assets data tools og e .github ops/metrics.jsonl; do
+for p in index.html robots.txt sitemap.xml feed.xml .nojekyll .gitignore README.md manifest.json sw.js firestore.rules assets data tools og e .github ops/metrics.jsonl ops/last-run.json ops/published.json ops/source-verify.json ops/picks ops/gemini-usage.jsonl ops/edition-fail.json; do   # edition-fail.json: 성공하면 지운 것도 커밋돼야 옛 실패가 안 남음(2026-10-29)
   [ -e "$p" ] && PATHS="$PATHS $p"
 done
 # IndexNow 공개 키 파일(ops/indexnow-key 내용 = 파일명)도 스테이징
@@ -67,7 +76,9 @@ fi
 # YouTube Tower ops/video (md 판에서 생성). 디렉터리가 있을 때만 스테이징
 [ -d ops/video ] && PATHS="$PATHS ops/video"
 git add -A -- $PATHS
-git reset -q -- $KOREA_FILES 2>/dev/null || true   # 혹시 스테이징됐어도 빼기
+# 성공한 판은 ops/edition-fail.json 을 지운다(gemini_edition). 지워진 파일은 위 루프(-e)에 안 잡히므로 삭제를 따로 스테이징(2026-10-29)
+if [ ! -e ops/edition-fail.json ] && git ls-files --error-unmatch ops/edition-fail.json >/dev/null 2>&1; then git rm -q --cached ops/edition-fail.json; fi
+[ -n "$KOREA_FILES" ] && { git reset -q -- $KOREA_FILES 2>/dev/null || true; }   # 혹시 스테이징됐어도 빼기
 if git diff --cached --quiet; then
   echo "변경 없음 — 커밋 생략"
 else
@@ -113,6 +124,8 @@ echo "push 완료: $(git rev-parse --short HEAD)"
 # IndexNow 제출(빙·네이버·얀덱스, 계정 불필요). 실패해도 배포 계속
 python3 -c "import sys; sys.path.insert(0,'tools'); import seo; c,u=seo.indexnow_submit(); print('IndexNow',c,len(u))" || echo "경고: IndexNow 제출 실패" >&2
 
+# (2026-10-29 공통화) TNK_LIVE_CHECK=none: 저장(push)까지만. Cloudflare 배포 채널은 tools/run_edition.py 가 이어서 배포·라이브 대조
+if [ "${TNK_LIVE_CHECK:-curl}" = "none" ]; then echo "저장 완료(배포·검증은 호출자가): $(git rev-parse --short HEAD) (판 $LATEST)"; exit 0; fi
 # 라이브 검증: index.js 에 최신 id 가 반영될 때까지 대기 후 헤드리스 브라우저로 렌더 확인
 deadline=$(( $(date +%s) + TIMEOUT ))
 # (2026-10-23) TNK_LIVE_CHECK=pages: 사이트에 직접 못 붙는 곳(Claude 클라우드 비상 발행)에서는 GitHub Pages 빌드 결과로 확인
