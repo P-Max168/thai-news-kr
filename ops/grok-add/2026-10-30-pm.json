@@ -1,0 +1,30 @@
+{
+  "edition": "2026-10-30-pm",
+  "by": "grok",
+  "at": "2026-10-30T17:08:00+07:00",
+  "big_event": null,
+  "add": [
+    {
+      "url": "https://www.khaosod.co.th/politics/news_10455722",
+      "source": "Khaosod",
+      "title": "สรรเพชญ บินด่วนภูเก็ต เร่งแก้น้ำท่วม ดินสไลด์ สั่งปรับปรุงระบบระบายน้ำงทะเล ตั้งงบไม่เกิน 50 ล้าน",
+      "published": "2026-10-30T16:51:52+07:00",
+      "topic": "재해",
+      "why": "X에서 Thai PBS News가 남부 3개 주(춘폰·사뚠·푸껫) 홍수 현황을 올려 퍼지는 중, 오후 정부 대응(푸껫 배수 개선·예산 5천만 밧)은 Khaosod 기사로 확인",
+      "angle": ""
+    },
+    {
+      "url": "https://www.matichon.co.th/politics/news_5954252",
+      "source": "Matichon",
+      "title": "ปภ.โอนเพิ่มแล้ว เงินเยียวยาน้ำท่วมกทม. และ 16 จว. กว่า 284.8 ล้านบาท เช็กที่บัญชีได้เลย",
+      "published": "2026-10-30T12:49:32+07:00",
+      "topic": "정부 발표",
+      "why": "X에서 Thai PBS News가 오늘 홍수 보상금 이체(방콕+16개 주, 38,194가구) 소식을 해시태그와 함께 올림, Matichon 기사로 확인",
+      "angle": ""
+    }
+  ],
+  "boost": [
+    { "url": "https://thestandard.co/phuket-karon-disaster-zone-flood-landslide/", "why": "X에서 남부·푸껫 홍수 현황이 계속 공유되는 중" }
+  ],
+  "none_reason": ""
+}
