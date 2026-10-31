@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://tnews.pmaxone.com/</loc><lastmod>2026-10-31T11:58:07+07:00</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://tnews.pmaxone.com/</loc><lastmod>2026-10-31T17:52:21+07:00</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
   <url><loc>https://tnews.pmaxone.com/about.html</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
   <url><loc>https://tnews.pmaxone.com/contact.html</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
   <url><loc>https://tnews.pmaxone.com/privacy.html</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
   <url><loc>https://tnews.pmaxone.com/terms.html</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://tnews.pmaxone.com/e/2026-10-31-pm/</loc><lastmod>2026-10-31T17:52:21+07:00</lastmod><changefreq>never</changefreq><priority>0.6</priority></url>
   <url><loc>https://tnews.pmaxone.com/e/2026-10-31-md/</loc><lastmod>2026-10-31T11:58:07+07:00</lastmod><changefreq>never</changefreq><priority>0.6</priority></url>
   <url><loc>https://tnews.pmaxone.com/e/2026-10-31-am/</loc><lastmod>2026-10-31T06:50:34+07:00</lastmod><changefreq>never</changefreq><priority>0.6</priority></url>
   <url><loc>https://tnews.pmaxone.com/e/2026-10-30-pm/</loc><lastmod>2026-10-30T17:57:17+07:00</lastmod><changefreq>never</changefreq><priority>0.6</priority></url>
