@@ -379,3 +379,4 @@ User approves final existing five creatives and immediate deployment. Added comm
 - 10-28 04:28 · ✅ [보통·UI] **가독성 테두리 E(A+C)**(민구님 04:xx 승인 '응 이렇게 모두변경해줘'). 내 주변 카테고리=강조색 테두리+연한 틴트+굵은 아이콘 선, 더/덜 보여줘=실선 테두리+틴트, 칩도 약한 테두리. modern.src·g.src·style·nearby. 백업 backup-20261028-0426-border-e-ac.
 - 2026-10-28 07:49 BKK (Claude): 한국어판 비상 발행 2026-10-28-am 10건 — gemini-edition 실행 실패로 take. 그록 picks 중 원문 확인된 것만 사용.
 - 2026-10-31 07:27 BKK · 💬 discussion 2026-10-31-am 9/18건 승인 반영(민구님 10-30 19:03 상시 지시 '사전 검토 없이 약 60% 게시·후보고', 동결 예외 — 댓글 데이터만, 코드 변경 없음). 게시 so2 so3 so4 so6 st1 so11 so12 lf1 pe2. 제외(기사 자체 오류) so1 so7 so8 so9 so10 so13 tr1 tr2 wt1.
+- 2026-10-31 18:28 BKK · 💬 discussion 2026-10-31-pm 10/16건 승인 반영(민구님 10-30 19:03 상시 지시 '사전 검토 없이 약 60% 게시·후보고', 동결 예외 — 댓글 데이터만, 코드 변경 없음). 게시 ea1 ea2 ea3 tr1 tr2 so3 so5 so7 so9 lf1. 제외(기사 자체 오류) so1 so2 vi1 tr3 so8 en1.
