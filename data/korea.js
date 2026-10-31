@@ -1,12 +1,30 @@
 /* tools/fetch_korea.py --standalone 이 만듦 — 직접 고치지 말 것 */
 window.KOREA_NEWS = {
- "updated_at": "2026-10-31T14:04:13+07:00",
+ "updated_at": "2026-10-31T20:03:39+07:00",
  "items": [
   {
-   "title": "진성준 뒤늦은 미국 비자 발급에…국힘 “외교적 망신” 민주 “비굴한 사대주의”",
+   "title": "국힘 \"진성준 비자, 외교 참사\"‥민주 \"비굴한 사대주의\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-31T11:42:09+07:00",
+   "url": "https://imnews.imbc.com/news/2026/politics/article/6862185_36911.html"
+  },
+  {
+   "title": "이 대통령, ‘서울 집값 하락 전망’ 공유하며 “지금은 견디는 중”",
+   "source": "KBS 뉴스",
+   "time": "2026-10-31T14:56:00+07:00",
+   "url": "https://news.kbs.co.kr/news/view.do?ncd=8700524"
+  },
+  {
+   "title": "장동혁, 이 대통령 향해 “링거 맞고 코피? 일본 가서 총리랑 드럼 치며 놀다 와”",
    "source": "경향신문",
-   "time": "2026-10-31T12:50:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610311450001"
+   "time": "2026-10-31T15:57:00+07:00",
+   "url": "https://www.khan.co.kr/article/202610311757001"
+  },
+  {
+   "title": "이 대통령, 경북 영양·청송 찾아 “농어촌 기본소득 집행 실태 점검”",
+   "source": "한겨레",
+   "time": "2026-10-31T13:09:00+07:00",
+   "url": "https://www.hani.co.kr/arti/economy/economy_general/1285134.html"
   },
   {
    "title": "이 대통령 \"PC주의, 진영주의 반감 이유 생각해 봐야\"",
@@ -15,52 +33,34 @@ window.KOREA_NEWS = {
    "url": "https://imnews.imbc.com/news/2026/politics/article/6862171_36911.html"
   },
   {
-   "title": "민주당 “장동혁 부정선거 선동, 정치생명 연장용” 국민의힘 “올공 투표지 전체 증거 보전해야”",
-   "source": "경향신문",
-   "time": "2026-10-31T13:32:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610311532001"
+   "title": "160만명 홀린 부산 명물 ‘부캉이’ 어디 갔나…닷새째 감감무소식",
+   "source": "매일경제",
+   "time": "2026-10-31T13:49:22+07:00",
+   "url": "https://www.mk.co.kr/news/society/12192440"
   },
   {
-   "title": "내일은 비, 밤부터 전국에",
-   "source": "KBS 뉴스",
-   "time": "2026-10-31T12:08:00+07:00",
-   "url": "https://news.kbs.co.kr/news/view.do?ncd=8700512"
+   "title": "정청래, '유시민 발언' 평가 유보‥\"독립운동도 노선 다수\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-31T16:49:01+07:00",
+   "url": "https://imnews.imbc.com/news/2026/politics/article/6862208_36911.html"
   },
   {
-   "title": "전작권 환수 늦추는 ‘미=천조국’ 해묵은 믿음…“함께 싸우는 동맹이 돼야”",
+   "title": "'올공 투표지' 여야 공방‥\"장동혁 생명 연장용\"·\"전체 보전해야\"",
+   "source": "MBC 뉴스",
+   "time": "2026-10-31T11:30:48+07:00",
+   "url": "https://imnews.imbc.com/news/2026/politics/article/6862182_36911.html"
+  },
+  {
+   "title": "구속영장 반려 50일 만에 소환된 김병기 “말로는 다 못 할 불이익”",
    "source": "한겨레",
-   "time": "2026-10-30T23:45:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/polibar/1285043.html"
+   "time": "2026-10-31T15:55:00+07:00",
+   "url": "https://www.hani.co.kr/arti/society/society_general/1285129.html"
   },
   {
-   "title": "‘8차 소환’ 김병기 “악의와 거짓으로 점철된 고발…수사 신속히 마무리해달라”",
-   "source": "경향신문",
-   "time": "2026-10-31T09:11:00+07:00",
-   "url": "https://www.khan.co.kr/article/202610311111001"
-  },
-  {
-   "title": "문 앞까지 마약 배송…수도권 곳곳에 뿌려진 ‘골판지 마약’ [마약택배]①",
-   "source": "KBS 뉴스",
-   "time": "2026-10-31T06:02:00+07:00",
-   "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8700454"
-  },
-  {
-   "title": "[단독] 미라 상태로 버려진 주검, 유기한 집주인 소유 ‘무허가 쪽방 거주자’였다",
-   "source": "한겨레",
-   "time": "2026-10-31T09:35:00+07:00",
-   "url": "https://www.hani.co.kr/arti/society/society_general/1285108.html"
-  },
-  {
-   "title": "[속보]선거법 수사받던 양산시장 최측근, 야산서 숨진 채 발견",
-   "source": "문화일보",
-   "time": "2026-10-31T09:47:18+07:00",
-   "url": "https://www.munhwa.com/article/11627722"
-  },
-  {
-   "title": "‘잦은 해외순방’ 비판에…이 대통령 “돼지 눈엔 돼지만 보여”",
-   "source": "한겨레",
-   "time": "2026-10-31T12:09:00+07:00",
-   "url": "https://www.hani.co.kr/arti/politics/politics_general/1285130.html"
+   "title": "삼성 사장단 만난 올트먼‥'AI 키보드' 선물도",
+   "source": "MBC 뉴스",
+   "time": "2026-10-31T14:53:12+07:00",
+   "url": "https://imnews.imbc.com/news/2026/econo/article/6862205_36932.html"
   }
  ]
 };
